@@ -1,4 +1,4 @@
 package de.prog2.dungeontop.model.entities;
 
-public enum EntityType {
+public enum EntityClass {
 }

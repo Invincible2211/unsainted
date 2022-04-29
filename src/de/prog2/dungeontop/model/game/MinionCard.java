@@ -1,4 +1,4 @@
 package de.prog2.dungeontop.model.game;
 
-public abstract class Card {
+public class MinionCard extends Card{
 }
