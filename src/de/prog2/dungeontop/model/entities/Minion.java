@@ -2,16 +2,33 @@ package de.prog2.dungeontop.model.entities;
 
 import de.prog2.dungeontop.model.skills.ActiveSkill;
 
+import javax.json.bind.annotation.JsonbProperty;
 import java.util.ArrayList;
 
 public class Minion extends Entity {
 
+    @JsonbProperty("attackValue")
     private int attackValue = 0;
+
+    @JsonbProperty("hitpoints")
     private int hitpoints = 0;
+
+    @JsonbProperty("name")
     private String name = "";
+
+    @JsonbProperty("perks")
     private ArrayList<EntityClass> perks = null;
+
+    @JsonbProperty("possibleAttacksPersRound")
     private int possibleAttacksPerRound = 0;
+
+    @JsonbProperty("activeSkill")
     private ActiveSkill activeSkill= null;
+
+    public Minion ()
+    {
+
+    }
 
     public Minion (int attackValue, int hitpoints, String name,
                    ArrayList<EntityClass> perks, int possibleAttacksPerRound,
