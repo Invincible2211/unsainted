@@ -2,23 +2,18 @@ package de.prog2.dungeontop.model.spells;
 
 public abstract class Spell
 {
-    protected String name;
+    private String name;
+    private int mana_cost;
+    private int num; //number for damage,heal,cards drawn, etc
 
-    protected int mana_cost;
-
-    // definitely incomplete, maybe damage and heal = changes in health instead?
-    protected int damage;
-    protected int heal;
-    protected int draw_card;
-
-
-    protected abstract void effekt();
-
-    public Spell (String name, int mana_cost)
+    public Spell (String name, int mana_cost, int num)
     {
         this.name = name;
         this.mana_cost = mana_cost;
+        this.num = num;
     }
+
+    protected abstract void effekt();
 
     //Set- and Getters
     public String getName()
@@ -38,6 +33,16 @@ public abstract class Spell
     public void setMC(int mana_cost)
     {
         this.mana_cost = mana_cost;
+    }
+
+    public int getNum()
+    {
+        return num;
+    }
+
+    public void setNum(int num)
+    {
+        this.num = num;
     }
 
 }
