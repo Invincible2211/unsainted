@@ -1,8 +1,8 @@
 package de.prog2.dungeontop.utils;
 
 import com.sun.tools.javac.Main;
-import de.prog2.dungeontop.model.exceptions.costumexceptions.FileTypeNotSupportedException;
-import de.prog2.dungeontop.model.exceptions.costumexceptions.InvalidKeyException;
+import de.prog2.dungeontop.model.exceptions.customexceptions.FileTypeNotSupportedException;
+import de.prog2.dungeontop.model.exceptions.customexceptions.InvalidKeyException;
 import de.prog2.dungeontop.model.defaultvalues.StringValues;
 
 import java.io.IOException;
