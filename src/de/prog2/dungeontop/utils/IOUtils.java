@@ -3,7 +3,7 @@ package de.prog2.dungeontop.utils;
 import de.prog2.dungeontop.model.defaultvalues.ColorKeys;
 import de.prog2.dungeontop.model.defaultvalues.DefaultValuesFallback;
 import de.prog2.dungeontop.model.defaultvalues.PropertiesFilePaths;
-import de.prog2.dungeontop.model.exceptions.costumexceptions.InvalidKeyException;
+import de.prog2.dungeontop.model.exceptions.customexceptions.InvalidKeyException;
 
 import java.util.Scanner;
 

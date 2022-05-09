@@ -1,7 +1,7 @@
 package de.prog2.dungeontop.model.world;
 
 /**
- * Holds X and Y values for Fields
+ * Dient als Container für den X- und Y-Wert eines Fields
  */
 public class Coordinate
 {
@@ -14,7 +14,7 @@ public class Coordinate
         this.y = y;
     }
 
-    /******************************************* Getter & Setter ******************************************************/
+    /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getX()
     {
         return x;
