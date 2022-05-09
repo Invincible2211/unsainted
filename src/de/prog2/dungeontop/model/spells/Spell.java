@@ -25,12 +25,12 @@ public abstract class Spell
         this.name = name;
     }
 
-    public int getMC()
+    public int getMana_cost()
     {
         return mana_cost;
     }
 
-    public void setMC(int mana_cost)
+    public void setMana_cost(int mana_cost)
     {
         this.mana_cost = mana_cost;
     }
