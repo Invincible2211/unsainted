@@ -1,37 +1,42 @@
 package de.prog2.dungeontop.model.world;
 
-public class Field
+public class Cell
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private Coordinate coordinate;
-    private FieldAction action = new DefaultFieldAction();
+    private HellComponent hellComponent;
     private boolean isVisible = false;
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Field(Coordinate coordinate)
+    public Cell(Coordinate coordinate)
     {
         this.coordinate = coordinate;
     }
-    public Field(Coordinate coordinate, FieldAction action)
+    public Cell(Coordinate coordinate, HellComponent hellComponent)
     {
         this(coordinate);
-        this.action = action;
+        this.hellComponent = hellComponent;
     }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public Coordinate getCoordinate()
     {
         return coordinate;
     }
-    public FieldAction getAction()
-    {
-        return this.action;
-    }
     public boolean isVisible()
     {
         return isVisible;
     }
-
     public void setVisible(boolean visible)
     {
         isVisible = visible;
+    }
+
+    public HellComponent getHellComponent()
+    {
+        return hellComponent;
+    }
+
+    public void setHellComponent(HellComponent hellComponent)
+    {
+        this.hellComponent = hellComponent;
     }
 }

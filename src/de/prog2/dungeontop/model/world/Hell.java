@@ -3,14 +3,14 @@ package de.prog2.dungeontop.model.world;
 import java.util.HashMap;
 import java.util.List;
 
-public class Level
+public class Hell
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private final int width, height;
-    private HashMap<Coordinate, LevelComponent> levelComponentHashMap;
-    private Field[][] fields;
+    private HashMap<Coordinate, HellComponent> levelComponentHashMap;
+    private Cell[][] cells;
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Level (int width, int height, List<LevelComponent> levelComponents)
+    public Hell(int width, int height, List<HellComponent> hellComponents)
     {
         this.width = width;
         this.height = height;
@@ -18,17 +18,17 @@ public class Level
     }
     private void generateFields (int width, int height)
     {
-        this.fields = new Field[width][height];
+        this.cells = new Cell[width][height];
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                this.fields[x][y] = new Field(new Coordinate(x, y));
+                this.cells[x][y] = new Cell(new Coordinate(x, y));
             }
         }
     }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
-    public LevelComponent getLevelComponent(Coordinate coordinate)
+    public HellComponent getLevelComponent(Coordinate coordinate)
     {
         return levelComponentHashMap.get(coordinate);
     }

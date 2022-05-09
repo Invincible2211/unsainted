@@ -1,6 +1,6 @@
 package de.prog2.dungeontop.model.world;
 
-public class DefaultFieldAction implements FieldAction
+public class DefaultAction implements Action
 {
     @Override
     public <T> boolean execute(T... args)

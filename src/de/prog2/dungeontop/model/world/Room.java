@@ -1,9 +1,17 @@
 package de.prog2.dungeontop.model.world;
 
-public class Room extends LevelComponent
+public abstract class Room extends HellComponent
 {
-    public Room()
+    private Action action = new DefaultAction();
+
+    public Room(){}
+    public Room(Action action)
     {
-        super(3,3);
+        this.action = action;
+    }
+
+    public <T> boolean executeAction(T... args)
+    {
+        return this.action.execute(args);
     }
 }

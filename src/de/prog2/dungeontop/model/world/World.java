@@ -1,26 +1,26 @@
 package de.prog2.dungeontop.model.world;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-public class Map
+public class World
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
-    private int levelCount;
-    private List<Level> levels;
+    private int hellCount;
+    private List<Hell> hells;
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Map(int levelCount)
+    public World(int hellCount)
     {
-        this.levelCount = levelCount;
+        this.hellCount = hellCount;
     }
     private void generateLevels(int levelCount)
     {
-        List<LevelComponent> levelComponents = Arrays.asList(new Room(), new Path());
+        List<HellComponent> hellComponents = Arrays.asList(new Wall(), new Wall(),
+                new Wall(),new Wall(),new Wall(),new Wall());
 
         for (int i = 0; i < levelCount; i++)
         {
-            levels.add(new Level(200, 200, levelComponents));
+            hells.add(new Hell(200, 200, hellComponents));
         }
     }
 }
