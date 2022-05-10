@@ -1,6 +1,6 @@
 package de.prog2.dungeontop.control.userinput;
 
-import de.prog2.dungeontop.model.defaultvalues.LoggerStringValues;
+import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;

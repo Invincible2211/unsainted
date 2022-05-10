@@ -1,7 +1,7 @@
 package de.prog2.dungeontop.model.exceptions;
 
 
-import de.prog2.dungeontop.model.defaultvalues.PropertiesFilePaths;
+import de.prog2.dungeontop.resources.PropertiesFilePaths;
 import de.prog2.dungeontop.utils.PropertiesFileUtils;
 
 public class CustomException extends Exception{

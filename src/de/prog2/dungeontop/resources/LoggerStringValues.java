@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.model.defaultvalues;
+package de.prog2.dungeontop.resources;
 
 public interface LoggerStringValues {
     String CARD_RANK_INCREASED = "Rank of a Card increased.";

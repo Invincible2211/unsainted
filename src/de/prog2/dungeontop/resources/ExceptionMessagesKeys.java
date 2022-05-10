@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.model.defaultvalues;
+package de.prog2.dungeontop.resources;
 
 public interface ExceptionMessagesKeys
 {

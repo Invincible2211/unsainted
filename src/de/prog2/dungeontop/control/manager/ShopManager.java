@@ -1,6 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
-import de.prog2.dungeontop.model.defaultvalues.LoggerStringValues;
+import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.model.exceptions.customexceptions.CardAlreadyUnlockedException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotEnoughGoldException;
 import de.prog2.dungeontop.model.game.Card;

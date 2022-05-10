@@ -1,7 +1,7 @@
 package de.prog2.dungeontop.control.controller;
 
 import de.prog2.dungeontop.control.manager.PlayerManager;
-import de.prog2.dungeontop.model.defaultvalues.LoggerStringValues;
+import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.model.exceptions.customexceptions.CardAlreadyMaxRankException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.CardNotFoundException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.ItemNotFoundException;
