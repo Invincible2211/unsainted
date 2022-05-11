@@ -41,6 +41,16 @@ public class MinionHandler
     }
 
     /**
+     * Saves Deck of minions
+     */
+    public void saveMinions (Minion[] miniondeck) {
+        for (Minion minion :miniondeck)
+        {
+            saveMinion(minion);
+        }
+    }
+    
+    /**
      * Gets a minionInstance from a UUID
      * @param uuid
      * @return minion Instance
@@ -99,21 +109,27 @@ public class MinionHandler
      * Will create file andOr path if either doesnt exist
      *
      * @param minion minion to be written in file
-     * @param filename filename or path
      * @throws IOException if current user does not have permission to write in that directory.
      */
-    public void saveMinion (Minion minion, String filename) throws IOException
+    public void saveMinion (Minion minion)
     {
+
         String minionjson = minionToJson(minion);
-        File file = new File(filename);
+        File file = new File(outPath);
         file.getParentFile().mkdirs(); // Will create parent directories if not exists
-        file.createNewFile(); // Will create File if it does not exist
-        FileOutputStream fileOutputStream = new FileOutputStream(file,true); //will append on end of file
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file)); // Writer to write in said file
-        writer.write(minionjson);
-        writer.flush();
-        writer.close();
-        fileOutputStream.close();
+
+        try {
+            file.createNewFile(); // Will create File if it does not exist
+            FileOutputStream fileOutputStream = new FileOutputStream(file, true); //will append on end of file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file)); // Writer to write in said file
+            writer.write(minionjson);
+            writer.flush();
+            writer.close();
+            fileOutputStream.close();
+        } catch(IOException e) {
+            e.printStackTrace(); //TODO THIS BETTER
+        }
+
     }
 
 }
