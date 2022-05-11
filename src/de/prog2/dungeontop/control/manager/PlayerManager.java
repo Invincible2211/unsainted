@@ -47,4 +47,8 @@ public class PlayerManager {
         return player;
     }
 
+    public void loadDeck(){
+
+    }
+
 }

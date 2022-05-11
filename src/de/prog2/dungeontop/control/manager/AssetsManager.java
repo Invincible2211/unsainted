@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
+import java.io.File;
 import java.util.HashMap;
 
 public class AssetsManager {
@@ -14,7 +15,7 @@ public class AssetsManager {
 
     }
 
-    public Object getAsset(int id){
+    public static File getAsset(int id){
 
     }
 
