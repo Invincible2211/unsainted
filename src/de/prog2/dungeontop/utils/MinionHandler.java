@@ -5,11 +5,7 @@ import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.UUID;
-import java.util.logging.Logger;
+import java.util.*;
 
 
 public class MinionHandler
@@ -49,7 +45,7 @@ public class MinionHandler
             saveMinion(minion);
         }
     }
-    
+
     /**
      * Gets a minionInstance from a UUID
      * @param uuid
@@ -59,15 +55,13 @@ public class MinionHandler
     public Minion getMinionFromID(UUID uuid)
     {
         GsonBuilder gsonBuilder = new GsonBuilder();
-    ArrayList<Minion> minionList = (ArrayList<Minion>) Arrays.stream(gsonBuilder.create().fromJson(getAllMinions(), Minion[].class)).toList();
+    List<Minion> minionList = Arrays.stream(gsonBuilder.create().fromJson(getAllMinions(), Minion[].class)).toList();
         for (Minion minion : minionList) {
             if (minion.getUuid() == uuid) {return minion;}
         }
         System.out.println(ExceptionMessagesKeys.MINION_UUID_NOT_FOUND_EXCEPTION);
         return null;
     }
-
-    //TODO Properties use instad of magic numbers
 
     /**
      * hilfsmethode um txt mit allen minionJSON zu String zu lesen
@@ -103,7 +97,7 @@ public class MinionHandler
         return gsonBuilder.create().toJson(minion);
     }
 
-//TODO Shall not throw exception but catch it itself
+
     /**
      * Useses minionToJson to create a JSON format and write that String to outpath.
      * Will create file andOr path if either doesnt exist
