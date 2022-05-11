@@ -15,4 +15,8 @@ public interface ExceptionMessagesKeys
     String CARD_NOT_FOUND_EXCEPTION = "cardnotfound";
 
     String ITEM_NOT_FOUND_EXCEPTION = "itemnotfound";
+
+    String MINION_UUID_NOT_FOUND_EXCEPTION = "minionUUIDnotfound";
+
+    String CAN_NOT_LOAD_FILE = "cannotloadfile";
 }
