@@ -48,18 +48,18 @@ public class MinionHandler
 
     /**
      * Gets a minionInstance from a UUID
-     * @param uuid
+     * @param name name of minion
      * @return minion Instance
      */
     //TODO Exception oder logger einbinden
-    public Minion getMinionFromID(UUID uuid)
+    public Minion getMinionFromName(String name)
     {
         GsonBuilder gsonBuilder = new GsonBuilder();
     List<Minion> minionList = Arrays.stream(gsonBuilder.create().fromJson(getAllMinions(), Minion[].class)).toList();
         for (Minion minion : minionList) {
-            if (minion.getUuid() == uuid) {return minion;}
+            if (minion.getName() == name) {return minion;}
         }
-        System.out.println(ExceptionMessagesKeys.MINION_UUID_NOT_FOUND_EXCEPTION);
+        System.out.println(ExceptionMessagesKeys.MINION_NAME_NOT_FOUND_EXCEPTION);
         return null;
     }
 

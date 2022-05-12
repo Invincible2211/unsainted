@@ -19,8 +19,6 @@ public class Minion extends Entity {
 
     private ActiveSkill activeSkill= null;
 
-    private UUID uuid = null;
-
     public Minion ()
     {
 
@@ -45,7 +43,6 @@ public class Minion extends Entity {
         this.perks = perks;
         this.possibleAttacksPerRound = possibleAttacksPerRound;
         this.activeSkill = activeSkill;
-        this.uuid = UUID.randomUUID();
     }
 
     /**
@@ -65,7 +62,6 @@ public class Minion extends Entity {
         this.perks = perks;
         this.possibleAttacksPerRound = possibleAttacksPerRound;
         this.activeSkill = activeSkill;
-        this.uuid = uuid;
     }
 
     /****************************************** Getter and Setter *******************************/
@@ -129,7 +125,4 @@ public class Minion extends Entity {
         this.activeSkill = activeSkill;
     }
 
-    public UUID getUuid() {
-        return uuid;
-    }
 }

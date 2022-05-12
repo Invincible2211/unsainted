@@ -16,7 +16,7 @@ public interface ExceptionMessagesKeys
 
     String ITEM_NOT_FOUND_EXCEPTION = "itemnotfound";
 
-    String MINION_UUID_NOT_FOUND_EXCEPTION = "minionUUIDnotfound";
+    String MINION_NAME_NOT_FOUND_EXCEPTION = "minionnamenotfound";
 
     String CAN_NOT_LOAD_FILE = "cannotloadfile";
 }
