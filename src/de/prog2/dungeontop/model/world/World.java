@@ -1,26 +1,28 @@
 package de.prog2.dungeontop.model.world;
 
-import java.util.Arrays;
+import de.prog2.dungeontop.control.controller.HellController;
+import de.prog2.dungeontop.resources.WorldConstants;
+
 import java.util.List;
 
 public class World
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
-    private int hellCount;
+    private final int hellCount;
     private List<Hell> hells;
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
     public World(int hellCount)
     {
         this.hellCount = hellCount;
+        generateLevels(hellCount);
     }
-    private void generateLevels(int levelCount)
+    private void generateLevels(int hellCount)
     {
-        List<HellComponent> hellComponents = Arrays.asList(new Wall(), new Wall(),
-                new Wall(),new Wall(),new Wall(),new Wall());
-
-        for (int i = 0; i < levelCount; i++)
+        for (int i = 0; i < hellCount; i++)
         {
-            hells.add(new Hell(200, 200, hellComponents));
+            var hell = new Hell(WorldConstants.HELL_SIZE,WorldConstants.HELL_SIZE);
+            HellController.generateHell(hell);
+            hells.add(hell);
         }
     }
 }
