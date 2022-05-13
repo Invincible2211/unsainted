@@ -2,21 +2,20 @@ package de.prog2.dungeontop.model.world.arena;
 
 public class Arena
 {
-    private String[] player_deck;
-    public static char[][] default_board;
+    ArenaComponent[][] default_board;
     public Arena(int h, int b)
     {
-           default_board = new char[h][b];
+           default_board = new ArenaComponent[h][b];
     }
 
     //Set- and Getters
-    public String[] getPlayer_deck()
+    public ArenaComponent[][] getDefault_board()
     {
-        return player_deck;
+        return default_board;
+    }
+    public void setDefault_board(ArenaComponent[][] default_board)
+    {
+        this.default_board = default_board;
     }
 
-    public void setPlayer_deck(String[] player_deck)
-    {
-        this.player_deck = player_deck;
-    }
 }
