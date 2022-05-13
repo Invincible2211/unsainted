@@ -21,7 +21,7 @@ public class World
         for (int i = 0; i < hellCount; i++)
         {
             var hell = new Hell(WorldConstants.HELL_SIZE,WorldConstants.HELL_SIZE);
-            HellController.generateHell(hell);
+            HellController.initHell(hell);
             hells.add(hell);
         }
     }

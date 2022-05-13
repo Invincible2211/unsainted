@@ -2,7 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.model.exceptions.customexceptions.CardAlreadyUnlockedException;
-import de.prog2.dungeontop.model.exceptions.customexceptions.NotEnoughGoldException;
+import de.prog2.dungeontop.model.exceptions.customexceptions.NotEnoughSoulsException;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -36,23 +36,23 @@ public class ShopManager {
      * @param toUnlock Card which shall be unlocked.
      * @param price Price of the Card which shall be unlocked.
      * @throws CardAlreadyUnlockedException Thrown if the card has already been unlocked or doesn't exist.
-     * @throws NotEnoughGoldException Thrown if the Player doesn't own enough gold to unlock the card.
+     * @throws NotEnoughSoulsException Thrown if the Player doesn't own enough souls to unlock the card.
      */
-    public void unlockCard (Card toUnlock, int price) throws CardAlreadyUnlockedException, NotEnoughGoldException {
+    public void unlockCard (Card toUnlock, int price) throws CardAlreadyUnlockedException, NotEnoughSoulsException {
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 
         if(this.lockedCards.contains(toUnlock)){
-            if(player.getGoldValue() >= price){
+            if(player.getSouls() >= price){
                 PlayerManager.addUnlockedCard(toUnlock);
-                playerManager.removeGold(price);
+                playerManager.removeSouls(price);
                 this.lockedCards.remove(toUnlock);
 
                 GlobalLogger.log(LoggerStringValues.CARD_UNLOCKED);
 
                 return;
             }
-            throw new NotEnoughGoldException();
+            throw new NotEnoughSoulsException();
         }
         throw new CardAlreadyUnlockedException();
     }
