@@ -389,7 +389,8 @@ public class HellController
         for (var entry : hell.getRoomHashMap().entrySet())
         {
             // get coordinates
-            Coordinate coordCenter = new Coordinate(entry.getKey().getX() * 3 + 1, entry.getKey().getY() * 3 + 1);
+            Coordinate coordCenter = new Coordinate(entry.getKey().getX() * WorldConstants.ROOM_SIZE + 1,
+                    entry.getKey().getY() * WorldConstants.ROOM_SIZE + 1);
 
             Coordinate coordTopLeft = CoordinateDirections.getLeftTop(coordCenter);
             Coordinate coordTopRight = CoordinateDirections.getRightTop(coordCenter);
