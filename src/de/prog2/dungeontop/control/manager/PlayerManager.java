@@ -15,16 +15,16 @@ public class PlayerManager {
         initPlayerData();
     }
 
-    public void addMoney(int amount){
-        player.setMoney(player.getMoney() + amount);
+    public void addSouls(int amount){
+        player.setSouls(player.getSouls() + amount);
     }
 
-    public void removeMoney(int amount){
-        player.setMoney(player.getMoney() - amount);
+    public void removeSouls(int amount){
+        player.setSouls(player.getSouls() - amount);
     }
 
-    public int getPlayerMoneyAmount(){
-        return player.getMoney();
+    public int getPlayerSouls(){
+        return player.getSouls();
     }
 
     private void playerDied(){

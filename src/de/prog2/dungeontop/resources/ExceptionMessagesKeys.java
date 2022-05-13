@@ -8,7 +8,7 @@ public interface ExceptionMessagesKeys
 
     String CARD_ALREADY_UNLOCKED_EXCEPTION = "cardalreadyunlocked";
 
-    String NOT_ENOUGH_GOLD_EXCEPTION = "notenoughgold";
+    String NOT_ENOUGH_SOULS_EXCEPTION = "notenoughsouls";
 
     String CARD_ALREADY_MAX_RANK_EXCEPTION = "cardalreadymaxrank";
 
