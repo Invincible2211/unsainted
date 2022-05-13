@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.resources;
 
+import de.prog2.dungeontop.model.world.Rotation;
+
 import java.util.UUID;
 
 public interface WorldConstants
@@ -18,5 +20,16 @@ public interface WorldConstants
         UUID WALL_CORNER_ASSET_ID = UUID.randomUUID();
         UUID PASSAGE_ASSET_ID = UUID.randomUUID();
         UUID ROOM_CENTER_ASSET_ID = UUID.randomUUID();
+    }
+    public interface HellComponentRotations
+    {
+        // Passage and Walls
+        Rotation HORIZONTAL = Rotation.UP;
+        Rotation VERTICAL = Rotation.LEFT;
+
+        Rotation TOP_LEFT = Rotation.UP;
+        Rotation TOP_RIGHT = Rotation.RIGHT;
+        Rotation BOTTOM_LEFT = Rotation.LEFT;
+        Rotation BOTTOM_RIGHT = Rotation.DOWN;
     }
 }
