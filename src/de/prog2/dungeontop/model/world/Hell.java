@@ -1,37 +1,42 @@
 package de.prog2.dungeontop.model.world;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class Hell
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private final int width, height;
-    private HashMap<Coordinate, HellComponent> levelComponentHashMap;
-    private Cell[][] cells;
+    private HashMap<Coordinate, Room> roomHashMap;
+    private HashMap<Coordinate, HellComponent> hellComponentHashMap;
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Hell(int width, int height, List<HellComponent> hellComponents)
+    public Hell(int width, int height)
     {
         this.width = width;
         this.height = height;
-        generateFields(width, height);
-    }
-    private void generateFields (int width, int height)
-    {
-        this.cells = new Cell[width][height];
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                this.cells[x][y] = new Cell(new Coordinate(x, y));
-            }
-        }
     }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
-    public HellComponent getLevelComponent(Coordinate coordinate)
+    public Room getRoomByCoordinate(Coordinate coordinate)
     {
-        return levelComponentHashMap.get(coordinate);
+        return roomHashMap.get(coordinate);
     }
+    public void insertRoom(Coordinate coordinate, Room room)
+    {
+        roomHashMap.put(coordinate, room);
+    }
+    public HashMap<Coordinate, Room> getRoomHashMap()
+    {
+        return this.roomHashMap;
+    }
+
+    public HellComponent getHellComponentByCoordinate(Coordinate coordinate)
+    {
+        return hellComponentHashMap.get(coordinate);
+    }
+    public void insertHellComponent(Coordinate coordinate, HellComponent hellComponent)
+    {
+        this.hellComponentHashMap.put(coordinate, hellComponent);
+    }
+
     public int getWidth()
     {
         return width;
