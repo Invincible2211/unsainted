@@ -3,13 +3,13 @@ package de.prog2.dungeontop.model.spells;
 public abstract class Spell
 {
     private String name;
-    private int mana_cost;
+    private int ego_points;
     private int num; //number for damage,heal,cards drawn, etc
 
-    public Spell (String name, int mana_cost, int num)
+    public Spell (String name, int ego_points, int num)
     {
         this.name = name;
-        this.mana_cost = mana_cost;
+        this.ego_points = ego_points;
         this.num = num;
     }
 
@@ -27,12 +27,12 @@ public abstract class Spell
 
     public int getMana_cost()
     {
-        return mana_cost;
+        return ego_points;
     }
 
     public void setMana_cost(int mana_cost)
     {
-        this.mana_cost = mana_cost;
+        this.ego_points = mana_cost;
     }
 
     public int getNum()
