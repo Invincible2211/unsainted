@@ -8,6 +8,7 @@ import de.prog2.dungeontop.resources.LoggerStringValues;
 public class Player
 {
     private int souls;
+    private int ego_points;
     private Room currentRoom;
 
     public Player (){
@@ -34,5 +35,14 @@ public class Player
     public void setCurrentRoom(Room currentRoom)
     {
         this.currentRoom = currentRoom;
+    }
+
+    public int getEgo_points()
+    {
+        return ego_points;
+    }
+    public void setEgo_points(int ego_points)
+    {
+        this.ego_points = ego_points;
     }
 }
