@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.world.arena;
 
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
 
 import java.util.HashMap;
@@ -51,7 +52,8 @@ public class Arena
         this.width = width;
     }
 
-    public Minion[] getAllMinions ()
+    public Entity[] getAllMinions ()
     {
+        return null;
     }
 }
