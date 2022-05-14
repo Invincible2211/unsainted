@@ -9,6 +9,7 @@ public class Player
 {
     private int souls;
     private int ego_points;
+    private Deck deck;
     private Room currentRoom;
 
     public Player (){
@@ -44,5 +45,15 @@ public class Player
     public void setEgo_points(int ego_points)
     {
         this.ego_points = ego_points;
+    }
+
+    public Deck getDeck()
+    {
+        return deck;
+    }
+
+    public void setDeck(Deck deck)
+    {
+        this.deck = deck;
     }
 }
