@@ -4,17 +4,23 @@ import de.prog2.dungeontop.model.entities.Entity;
 
 public class ArenaComponent
 {
-    private Entity Occupant;
-    public ArenaComponent(Entity Occupant)
+    private Entity occupant;
+    public ArenaComponent(Entity occupant)
     {
-        this.Occupant = Occupant;
+        this.occupant = occupant;
     }
+
     //Set- and Getters
-    public boolean isOccupied() {
-        return Occupant != null;
+    public boolean isOccupied()
+    {
+        return occupant != null;
+    }
+    public Entity getOccupant()
+    {
+        return occupant;
     }
     public void setOccupant(Entity occupant)
     {
-        Entity Occupant = occupant;
+         this.occupant = occupant;
     }
 }
