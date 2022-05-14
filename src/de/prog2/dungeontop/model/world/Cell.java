@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.world;
 
+@Deprecated
 public class Cell
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
