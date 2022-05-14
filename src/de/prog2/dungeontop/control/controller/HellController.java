@@ -384,12 +384,18 @@ public class HellController
         return true;
     }
 
+    /**
+     * Inserts the correct HellComponents given the roomHashMap into hell
+     * @param hell hell that contains the rooms and gets the hellComponents
+     */
     public static void initHellComponentHashMap(Hell hell)
     {
+        GlobalLogger.log(LoggerStringValues.INIT_HELL_COMPONENT_HASH_MAP_START);
         for (var entry : hell.getRoomHashMap().entrySet())
         {
             // get coordinates
-            Coordinate coordCenter = new Coordinate(entry.getKey().getX() * 3 + 1, entry.getKey().getY() * 3 + 1);
+            Coordinate coordCenter = new Coordinate(entry.getKey().getX() * WorldConstants.ROOM_SIZE + 1,
+                    entry.getKey().getY() * WorldConstants.ROOM_SIZE + 1);
 
             Coordinate coordTopLeft = CoordinateDirections.getLeftTop(coordCenter);
             Coordinate coordTopRight = CoordinateDirections.getRightTop(coordCenter);
@@ -432,5 +438,6 @@ public class HellController
             else
                 hell.insertHellComponent(coordRight, new Wall(WorldConstants.HellComponentRotations.VERTICAL));
         }
+        GlobalLogger.log(LoggerStringValues.INIT_HELL_COMPONENT_HASH_MAP_END);
     }
 }

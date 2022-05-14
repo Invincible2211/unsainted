@@ -13,6 +13,7 @@ public interface LoggerStringValues {
     String PLAYERSOULS_GET = "Playersouls abgefragt.";
     String SET = " gesetzt.";
     String PLAYERSOULS_SET = "Playersouls wurden auf ";
+
     String ADD_ROOM_ERROR = "ERROR: Out of bounds or overlapping with an already existing room.";
     String ADDED_ROOM_TO_GRID = "Added room to hellgrid.";
     String ADDED_TOP_ROOM = "Added new top side room to the current room.";
@@ -39,4 +40,9 @@ public interface LoggerStringValues {
     String RIGHT_ROOM_RECURSION_ENDED = "Right room Rekursion hat geendet.";
     String START_ROOM_CREATED = "Starting room wurde erstellt und dem Raumgrid hinzugefuegt.";
     String START_ROOM_NEIGHBORS = "Starting room neighbors wurden gesetzt.";
+
+    String INIT_HELL_COMPONENT_HASH_MAP_START = "Starting to convert RoomHashMap to HellComponentHashMap.";
+    String INIT_HELL_COMPONENT_HASH_MAP_END = "Finished converting RoomHashMap to HellComponentHashMap.";
+
+    String ADDED_HELL_TO_WORLD = "Created Hell Nr ";
 }

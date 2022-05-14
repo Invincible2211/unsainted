@@ -1,5 +1,8 @@
 package de.prog2.dungeontop.model.world;
 
+/**
+ * This Action should open an arena dialog
+ */
 public class OpenArenaAction implements Action
 {
     @Override
