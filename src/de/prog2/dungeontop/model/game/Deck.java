@@ -1,7 +1,7 @@
 package de.prog2.dungeontop.model.game;
 
-
 import java.util.LinkedList;
+import java.util.Collections;
 
 public class Deck {
     LinkedList<Card> deck;
@@ -24,6 +24,11 @@ public class Deck {
     public boolean containsCard(Card card)
     {
         return this.deck.contains(card);
+    }
+
+    public void shuffleDeck(LinkedList<Card> deck)
+    {
+        Collections.shuffle(deck);
     }
 
     //Set- and Getters
