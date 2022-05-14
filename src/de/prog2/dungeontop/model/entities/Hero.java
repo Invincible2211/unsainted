@@ -8,6 +8,17 @@ public class Hero extends Entity {
     private Talent talent = null;
     private LinkedList<Talent> talents;
 
+    public void addTalents(Talent neu)
+    {
+        talents.add(neu);
+    }
+
+    public void removeTalents(Talent delete)
+    {
+        talents.remove(delete);
+    }
+
+    //Set- and Getters
     public Talent getTalent ()
     {
         return talent;
@@ -23,13 +34,8 @@ public class Hero extends Entity {
         return talents;
     }
 
-    public void addTalents(Talent neu)
+    public void setTalents(LinkedList<Talent> talents)
     {
-        talents.add(neu);
-    }
-
-    public void removeTalents(Talent delete)
-    {
-        talents.remove(delete);
+        this.talents = talents;
     }
 }
