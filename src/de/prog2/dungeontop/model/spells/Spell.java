@@ -25,12 +25,12 @@ public abstract class Spell
         this.name = name;
     }
 
-    public int getMana_cost()
+    public int getEgo_points()
     {
         return ego_points;
     }
 
-    public void setMana_cost(int mana_cost)
+    public void setEgo_points(int mana_cost)
     {
         this.ego_points = mana_cost;
     }
