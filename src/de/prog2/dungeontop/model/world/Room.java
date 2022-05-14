@@ -38,7 +38,7 @@ public class Room
         return bottomRoom;
     }
 
-    public Room getLeft()
+    public Room getLeftRoom()
     {
         return leftRoom;
     }

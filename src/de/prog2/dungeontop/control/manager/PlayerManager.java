@@ -19,7 +19,8 @@ public class PlayerManager {
         player.setSouls(player.getSouls() + amount);
     }
 
-    public void removeSouls(int amount){
+    public void removeSouls(int amount)
+    {
         player.setSouls(player.getSouls() - amount);
     }
 
@@ -27,15 +28,31 @@ public class PlayerManager {
         return player.getSouls();
     }
 
-    private void playerDied(){
+    public void addEgoPoints(int amount)
+    {
+        player.setEgo_points(player.getEgo_points() + amount);
+    }
+    public void removeEgoPoints(int amount)
+    {
+        player.setEgo_points(player.getEgo_points() - amount);
+    }
+    public int getPlayerEgoPoints()
+    {
+        return player.getEgo_points();
+    }
+
+    private void playerDied()
+    {
 
     }
 
-    private void savePlayerDataToFile(){
+    private void savePlayerDataToFile()
+    {
 
     }
 
-    private void initPlayerData(){
+    private void initPlayerData()
+    {
         HashMap<String,String> playerData = GameSaveFileReader.getSaveFile().getPlayerData();
     }
 
@@ -47,7 +64,8 @@ public class PlayerManager {
         return player;
     }
 
-    public void loadDeck(){
+    public void loadDeck()
+    {
 
     }
 

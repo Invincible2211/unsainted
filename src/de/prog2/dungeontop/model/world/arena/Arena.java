@@ -1,23 +1,54 @@
 package de.prog2.dungeontop.model.world.arena;
 
-import de.prog2.dungeontop.model.entities.Minion;
+import de.prog2.dungeontop.model.world.Coordinate;
+
+import java.util.HashMap;
 
 public class Arena
 {
-    ArenaComponent[][] default_board;
-    public Arena(int h, int b)
+    private int height;
+    private int width;
+    private HashMap<Coordinate, ArenaComponent> arenaHashmap;
+    public Arena(int height, int width)
     {
-           default_board = new ArenaComponent[h][b];
+        this.height = height;
+        this.width = width;
+    }
+
+    public HashMap<Coordinate, ArenaComponent> getArenaHashmap()
+    {
+        return arenaHashmap;
+    }
+
+    public ArenaComponent getCoordinate (Coordinate coordinate)
+    {
+        return arenaHashmap.get(coordinate);
+    }
+
+    public void insertComponent (Coordinate coordinate, ArenaComponent arenaComponent)
+    {
+        this.arenaHashmap.put(coordinate, arenaComponent);
     }
 
     //Set- and Getters
-    public ArenaComponent[][] getDefault_board()
+    public int getHeight()
     {
-        return default_board;
+        return height;
     }
-    public void setDefault_board(ArenaComponent[][] default_board)
+
+    public void setHeight(int height)
     {
-        this.default_board = default_board;
+        this.height = height;
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public void setWidth(int width)
+    {
+        this.width = width;
     }
 
     public Minion[] getAllMinions ()

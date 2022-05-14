@@ -1,15 +1,26 @@
 package de.prog2.dungeontop.model.world.arena;
 
-public abstract class ArenaComponent
+import de.prog2.dungeontop.model.entities.Entity;
+
+public class ArenaComponent
 {
-    private boolean isOccupied = false;
+    private Entity occupant;
+    public ArenaComponent(Entity occupant)
+    {
+        this.occupant = occupant;
+    }
+
     //Set- and Getters
     public boolean isOccupied()
     {
-        return isOccupied;
+        return occupant != null;
     }
-    public void setOccupied(boolean occupied)
+    public Entity getOccupant()
     {
-        isOccupied = occupied;
+        return occupant;
+    }
+    public void setOccupant(Entity occupant)
+    {
+         this.occupant = occupant;
     }
 }

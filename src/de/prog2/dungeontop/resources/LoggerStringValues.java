@@ -50,4 +50,13 @@ public interface LoggerStringValues {
     String START_BATTLE = "Starting an arenaBattle";
     String PLAYER_CAN_CHOOSE_WHO_IS_FIRST = "Der Spieler darf aussuchen wer zuerst im duell Zieht";
     String DM_CAN_CHOOSE_WHO_IS_FIRST = "Der DM darf aussucher wer zuerst im duell Zieht";
+
+    String MOVE_UP_SUCCESS = "Player moved into the room above.";
+    String MOVE_UP_FAIL = "Player couldn't move into the room above.";
+    String MOVE_DOWN_SUCCESS = "Player moved into the room below.";
+    String MOVE_DOWN_FAIL = "Player couldn't move into the room below.";
+    String MOVE_LEFT_SUCCESS = "Player moved into the room on the left.";
+    String MOVE_LEFT_FAIL = "Player couldn't move into the room on the left.";
+    String MOVE_RIGHT_SUCCESS = "Player moved into the room on the right.";
+    String MOVE_RIGHT_FAIL = "Player couldn't move into the room on the right.";
 }

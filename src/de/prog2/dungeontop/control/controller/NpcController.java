@@ -53,7 +53,7 @@ public class NpcController {
         Player player = playerManager.getPlayer();
 
         if(player.getSouls() >= price){
-            playerManager.removeCard(card);
+            player.getDeck().removeCard(card);
             playerManager.removeSouls(price);
 
             GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_DECK);
@@ -74,10 +74,11 @@ public class NpcController {
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 
-        if(item instanceof Card){
-            if(player.getDeck().contains(item)){
-                playerManager.addSouls(item.getValue());
-                playerManager.removeCard(item);
+        if(item instanceof Card)
+        {
+            if(player.getDeck().containsCard((Card) item)){
+                playerManager.addSouls(((Card) item).getPrice());
+                player.getDeck().removeCard((Card) item);
 
                 GlobalLogger.log(LoggerStringValues.CARD_FROM_DECK_SOLD);
 
