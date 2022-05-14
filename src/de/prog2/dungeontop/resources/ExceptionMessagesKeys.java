@@ -19,6 +19,11 @@ public interface ExceptionMessagesKeys
     String MINION_NAME_NOT_FOUND_EXCEPTION = "minionnamenotfound";
 
     String CAN_NOT_LOAD_FILE = "cannotloadfile";
+
     String CAN_NOT_FIND_FILE_EXCEPTION = "cannotfindfile";
+
     String NO_ID_FOUND_EXCEPTION = "noidfound";
+
+    String CAN_NOT_FIND_BATTLESTATE = "cantfindbattlephase";
+
 }

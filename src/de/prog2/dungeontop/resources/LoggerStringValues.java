@@ -45,4 +45,9 @@ public interface LoggerStringValues {
     String INIT_HELL_COMPONENT_HASH_MAP_END = "Finished converting RoomHashMap to HellComponentHashMap.";
 
     String ADDED_HELL_TO_WORLD = "Created Hell Nr ";
+    String GOT_NEXT_BATTLEPHASE = "Battlemanager got new phase";
+    String TRY_TO_GET_PHASE_AFTER_END = "battlemanager tried to get battlephase after end";
+    String START_BATTLE = "Starting an arenaBattle";
+    String PLAYER_CAN_CHOOSE_WHO_IS_FIRST = "Der Spieler darf aussuchen wer zuerst im duell Zieht";
+    String DM_CAN_CHOOSE_WHO_IS_FIRST = "Der DM darf aussucher wer zuerst im duell Zieht";
 }

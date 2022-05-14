@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.model.world.arena;
 
+import de.prog2.dungeontop.model.entities.Minion;
+
 public class Arena
 {
     ArenaComponent[][] default_board;
@@ -18,4 +20,7 @@ public class Arena
         this.default_board = default_board;
     }
 
+    public Minion[] getAllMinions ()
+    {
+    }
 }
