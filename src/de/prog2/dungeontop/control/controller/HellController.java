@@ -412,22 +412,22 @@ public class HellController
 
             // add passages and walls
             // top
-            if(entry.getValue().getTopRoom() != null)
+            if(entry.getValue().hasTopRoom())
                 hell.insertHellComponent(coordTop, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL));
             else
                 hell.insertHellComponent(coordTop, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL));
             // bottom
-            if(entry.getValue().getBottomRoom() != null)
+            if(entry.getValue().hasBottomRoom())
                 hell.insertHellComponent(coordBottom, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL));
             else
                 hell.insertHellComponent(coordBottom, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL));
             // left
-            if(entry.getValue().getLeft() != null)
+            if(entry.getValue().hasLeftRoom())
                 hell.insertHellComponent(coordLeft, new Passage(WorldConstants.HellComponentRotations.VERTICAL));
             else
                 hell.insertHellComponent(coordLeft, new Wall(WorldConstants.HellComponentRotations.VERTICAL));
             // right
-            if(entry.getValue().getRightRoom() != null)
+            if(entry.getValue().hasRightRoom())
                 hell.insertHellComponent(coordRight, new Passage(WorldConstants.HellComponentRotations.VERTICAL));
             else
                 hell.insertHellComponent(coordRight, new Wall(WorldConstants.HellComponentRotations.VERTICAL));
