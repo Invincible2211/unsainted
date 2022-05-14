@@ -1,8 +1,12 @@
 package de.prog2.dungeontop.model.world.arena;
 
-public abstract class ArenaComponent
+public class ArenaComponent
 {
-    private boolean isOccupied = false;
+    private boolean isOccupied;
+    public ArenaComponent(boolean isOccupied)
+    {
+        this.isOccupied = isOccupied;
+    }
     //Set- and Getters
     public boolean isOccupied()
     {
@@ -12,4 +16,5 @@ public abstract class ArenaComponent
     {
         isOccupied = occupied;
     }
+
 }
