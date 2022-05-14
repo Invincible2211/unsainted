@@ -27,4 +27,8 @@ public class Deck {
     {
         deck.remove(card);
     }
+    public boolean containsCard(Card card)
+    {
+        return this.deck.contains(card);
+    }
 }
