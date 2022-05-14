@@ -11,6 +11,7 @@ public class Hell
     private final int width, height;
     private HashMap<Coordinate, Room> roomHashMap;
     private HashMap<Coordinate, HellComponent> hellComponentHashMap;
+    private Room startingRoom, bossRoom;
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
     public Hell(int width, int height)
     {
@@ -48,4 +49,8 @@ public class Hell
     {
         return height;
     }
+    public void setStartingRoom (Room room) { this.startingRoom = room; }
+    public void setBossRoom (ArenaRoom room) { this.bossRoom = room; }
+    public Room getStartingRoom () { return this.startingRoom; }
+    public Room getBossRoom () { return this.bossRoom; }
 }

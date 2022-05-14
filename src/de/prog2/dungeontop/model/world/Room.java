@@ -7,11 +7,12 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 /**
  * Represents all the different Rooms.
  */
-public class Room
+public abstract class Room
 {
     private Room topRoom, bottomRoom, leftRoom, rightRoom;
     private Coordinate coordinate;
     private boolean processed = false;
+    private int distanceFromStart = 0;
 
     private Action action = new DefaultAction();
 
@@ -52,6 +53,8 @@ public class Room
 
     public boolean getProcessed () {return this.processed; }
 
+    public int getDistanceFromStart () { return this.distanceFromStart; }
+
     public void setTopRoom(Room topRoom)
     {
         this.topRoom = topRoom;
@@ -76,108 +79,8 @@ public class Room
 
     public void setProcessed () { this.processed = true; }
 
-    /*-------------------------------ADDING TOP, BOTTOM, LEFT, RIGHT ROOMS--------------------------------------------*/
-
-    /**
-     * Method to add a new room on the top side.
-     *
-     * @param hell hell in which the current room is contained
-     */
-    public void addTopRoom (Hell hell)
+    public void setDistanceFromStart (int distance)
     {
-        Room top = new Room (new Coordinate( this.getCoordinate().getX(), this.getCoordinate().getY() + 1 ));
-        top.setBottomRoom(this);
-        this.setTopRoom(top);
-        HellController.addRoomToGrid(hell, top);
-        GlobalLogger.log(LoggerStringValues.ADDED_TOP_ROOM);
+        this.distanceFromStart = distance;
     }
-
-    /**
-     * Method to add a new room on the bottom side.
-     *
-     * @param hell hell in which the current room is contained
-     */
-    public void addBottomRoom(Hell hell)
-    {
-        Room bot = new Room (new Coordinate( this.getCoordinate().getX(), this.getCoordinate().getY() - 1 ));
-        bot.setTopRoom(this);
-        this.setBottomRoom(bot);
-        HellController.addRoomToGrid(hell, bot);
-        GlobalLogger.log(LoggerStringValues.ADDED_BOTTOM_ROOM);
-    }
-
-    /**
-     * Method to add a new room on the left side.
-     *
-     * @param hell hell in which the current room is contained
-     */
-    public void addLeftRoom (Hell hell)
-    {
-        Room left = new Room (new Coordinate( this.getCoordinate().getX() - 1, this.getCoordinate().getY() ));
-        left.setRightRoom(this);
-        this.setLeftRoom(left);
-        HellController.addRoomToGrid(hell, left);
-        GlobalLogger.log(LoggerStringValues.ADDED_LEFT_ROOM);
-    }
-
-    /**
-     * Method to add a new room on the right side.
-     *
-     * @param hell hell in which the current room is contained
-     */
-    public void addRightRoom (Hell hell)
-    {
-        Room right = new Room (new Coordinate( this.getCoordinate().getX() + 1, this.getCoordinate().getY() ));
-        right.setLeftRoom(this);
-        this.setRightRoom(right);
-        HellController.addRoomToGrid(hell, right);
-        GlobalLogger.log(LoggerStringValues.ADDED_RIGHT_ROOM);
-    }
-
-    /*----------------------QUERYING IF THE ROOM HAS A TOP, BOTTOM, LEFT, RIGHT ROOM----------------------------------*/
-
-    /**
-     * Method to query if a room has a top side neighbor room.
-     *
-     * @return true if there is a top side neighbor, false otherwise
-     */
-    public boolean hasTopRoom ()
-    {
-        GlobalLogger.log(LoggerStringValues.HAS_TOP_ROOM);
-        return this.topRoom != null;
-    }
-
-    /**
-     * Method to query if a room has a bottom side neighbor room.
-     *
-     * @return true if there is a bottom side neighbor, false otherwise
-     */
-    public boolean hasBottomRoom ()
-    {
-        GlobalLogger.log(LoggerStringValues.HAS_BOTTOM_ROOM);
-        return this.bottomRoom != null;
-    }
-
-    /**
-     * Method to query if a room has a left side neighbor room.
-     *
-     * @return true if there is a left side neighbor, false otherwise
-     */
-    public boolean hasLeftRoom ()
-    {
-        GlobalLogger.log(LoggerStringValues.HAS_LEFT_ROOM);
-        return this.leftRoom != null;
-    }
-
-    /**
-     * Method to query if a room has a right side neighbor room.
-     *
-     * @return true if there is a right side neighbor, false otherwise
-     */
-    public boolean hasRightRoom ()
-    {
-        GlobalLogger.log(LoggerStringValues.HAS_RIGHT_ROOM);
-        return this.rightRoom != null;
-    }
-
 }

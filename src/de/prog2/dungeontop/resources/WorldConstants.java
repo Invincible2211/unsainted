@@ -13,6 +13,10 @@ public interface WorldConstants
     int HELL_SIZE = 7;
     int LOWEST_COORDINATE = 0;
     int RANDOMIZER_LIMIT = 6;
+    int MONSTER_ROOM_RATIO = 60;
+    int ONE_HUNDRED = 100;
+    int MINIMUM_ROOM_COUNT = 25;
+    int MAXIMUM_ROOM_COUNT = MINIMUM_ROOM_COUNT + 5;
 
     /**
      * Holds alle the AssetIds for the HellComponents

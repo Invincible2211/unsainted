@@ -40,11 +40,30 @@ public interface LoggerStringValues {
     String RIGHT_ROOM_RECURSION_ENDED = "Right room Rekursion hat geendet.";
     String START_ROOM_CREATED = "Starting room wurde erstellt und dem Raumgrid hinzugefuegt.";
     String START_ROOM_NEIGHBORS = "Starting room neighbors wurden gesetzt.";
-
     String INIT_HELL_COMPONENT_HASH_MAP_START = "Starting to convert RoomHashMap to HellComponentHashMap.";
     String INIT_HELL_COMPONENT_HASH_MAP_END = "Finished converting RoomHashMap to HellComponentHashMap.";
-
     String ADDED_HELL_TO_WORLD = "Created Hell Nr ";
+    String TOP_ROOM_REPLACED = "Top room wurde durch einen neuen Raum ersetzt.";
+    String BOTTOM_ROOM_REPLACED = "Bottom room wurde durch einen neuen Raum ersetzt.";
+    String LEFT_ROOM_REPLACED = "Left room wurde durch einen neuen Raum ersetzt.";
+    String RIGHT_ROOM_REPLACED = "Right room wurde durch einen neuen Raum ersetzt.";
+    String NEIGHBORS_QUERIED = "Nachbar rooms wurden abgefragt.";
+    String TOP_NEIGHBOR_ADDED = "Top Nachbar wurde hinzugefuegt.";
+    String BOTTOM_NEIGHBOR_ADDED = "Bottom Nachbar wurde hinzugefuegt.";
+    String LEFT_NEIGHBOR_ADDED = "Left Nachbar wurde hinzugefuegt.";
+    String RIGHT_NEIGHBOR_ADDED = "Right Nachbar wurde hinzugefuegt.";
+    String NEIGHBOR_CONTAINS_NPC_START = "Abfrage zum pruefen ob ein Nachbar room ein NPC room ist gestartet. ";
+    String NEIGHBOR_CONTAINS_NPC = "NPC room in einem Nachbar room gefunden!";
+    String NEIGHBORS_NO_NPC = "Kein NPC room als Nachbar room gefunden!";
+    String NO_VALID_ROOMTYPE = "Es wurde kein gueltiger Raumtyp uebergeben.";
+    String FORGE_ROOM_ADDED = "Neuer Forge room hinzugefuegt.";
+    String LAVA_POND_ROOM_ADDED = "Neuer Lava Pond room hinzugefuegt.";
+    String BOSS_ROOM_ADDED = "Neuer Bossraum wurde hinzugefuegt.";
+    String MONSTER_ROOM_ADDED = "Neuer Monsterraum wurde hinzugefuegt.";
+    String RANDOM_EVENT_ROOM_ADDED = "Neuer random event Raum wurde hinzugefuegt.";
+    String ROOM_COUNT_OUT_OF_RANGE = "Keine passende Anzahl an Raeumen, RoomMap wurde zurueckgesetzt.";
+    String SUITABLE_HELL = "Passende Hell wurde generiert.";
+    String HELL_GENERATION_START = "Generieren einer Hell startet.";
     String GOT_NEXT_BATTLEPHASE = "Battlemanager got new phase";
     String TRY_TO_GET_PHASE_AFTER_END = "battlemanager tried to get battlephase after end";
     String START_BATTLE = "Starting an arenaBattle";
