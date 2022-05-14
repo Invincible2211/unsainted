@@ -2,11 +2,11 @@ package de.prog2.dungeontop.model.entities;
 
 import de.prog2.dungeontop.model.talents.Talent;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Hero extends Entity {
     private Talent talent = null;
-    private ArrayList<Talent> talents = new ArrayList<>(10);
+    private LinkedList<Talent> talents;
 
     public Talent getTalent ()
     {
@@ -18,7 +18,7 @@ public class Hero extends Entity {
         this.talent = talent;
     }
 
-    public ArrayList<Talent> getTalents()
+    public LinkedList<Talent> getTalents()
     {
         return talents;
     }

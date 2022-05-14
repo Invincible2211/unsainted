@@ -1,20 +1,21 @@
 package de.prog2.dungeontop.model.game;
 
-import java.util.ArrayList;
+
+import java.util.LinkedList;
 
 public class Deck {
-    ArrayList<Card> deck;
+    LinkedList<Card> deck;
 
-    public Deck(ArrayList<Card> deck)
+    public Deck(LinkedList<Card> deck)
     {
         this.deck = deck;
     }
 
-    public ArrayList<Card> getDeck()
+    public LinkedList<Card> getDeck()
     {
         return deck;
     }
-    public void setDeck(ArrayList<Card> deck)
+    public void setDeck(LinkedList<Card> deck)
     {
         this.deck = deck;
     }
@@ -22,7 +23,6 @@ public class Deck {
     {
         deck.add(card);
     }
-
     public void removeCard(Card card)
     {
         deck.remove(card);
