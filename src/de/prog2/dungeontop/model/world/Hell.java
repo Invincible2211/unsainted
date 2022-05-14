@@ -2,6 +2,9 @@ package de.prog2.dungeontop.model.world;
 
 import java.util.HashMap;
 
+/**
+ * The Hell represents a level with rooms.
+ */
 public class Hell
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/

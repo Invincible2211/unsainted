@@ -4,6 +4,9 @@ import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+/**
+ * Represents all the different Rooms.
+ */
 public class Room
 {
     private Room topRoom, bottomRoom, leftRoom, rightRoom;

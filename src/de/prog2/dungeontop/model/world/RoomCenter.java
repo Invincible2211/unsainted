@@ -2,12 +2,23 @@ package de.prog2.dungeontop.model.world;
 
 import de.prog2.dungeontop.resources.WorldConstants;
 
+/**
+ * Represents the center of a room.
+ */
 public class RoomCenter extends HellComponent
 {
-    private Room room;
+    private final Room room;
+    /**
+     * Creates a center of a room.
+     */
     public RoomCenter(Room room)
     {
-        super(WorldConstants.RoomAssetIds.ROOM_CENTER_ASSET_ID);
+        super(WorldConstants.HellComponentAssetIds.ROOM_CENTER_ASSET_ID);
         this.room = room;
+    }
+
+    public Room getRoom()
+    {
+        return room;
     }
 }

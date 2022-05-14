@@ -14,14 +14,21 @@ public interface WorldConstants
     int LOWEST_COORDINATE = 0;
     int RANDOMIZER_LIMIT = 6;
 
-    public interface RoomAssetIds
+    /**
+     * Holds alle the AssetIds for the HellComponents
+     */
+    interface HellComponentAssetIds
     {
         UUID WALL_ASSET_ID = UUID.randomUUID();
         UUID WALL_CORNER_ASSET_ID = UUID.randomUUID();
         UUID PASSAGE_ASSET_ID = UUID.randomUUID();
         UUID ROOM_CENTER_ASSET_ID = UUID.randomUUID();
     }
-    public interface HellComponentRotations
+
+    /**
+     * Holds all the different Rotations for the HellComponents
+     */
+    interface HellComponentRotations
     {
         // Passage and Walls
         Rotation HORIZONTAL = Rotation.UP;
