@@ -46,14 +46,14 @@ public class HellController
         // based on the pseudo-randomly generated number and the relative position of the predecessor room
         // we will decide the number and position of passages of the current room
         Random randomizer = new Random();
-        int roomRNG = randomizer.nextInt(WorldConstants.RANDOMIZER_LIMIT);
-        GlobalLogger.log(LoggerStringValues.ROOM_RNG_ROLL + roomRNG);
+        int randomRoomNumber = randomizer.nextInt(WorldConstants.RANDOMIZER_LIMIT);
+        GlobalLogger.log(LoggerStringValues.ROOM_RNG_ROLL + randomRoomNumber);
 
 
         // Legend for the following abbreviations:
         // T - Top, B - Bottom, R - Right, L - Left
         // e.g.: TRL is a room that has passages on the top side, right side and left side
-        switch (roomRNG)
+        switch (randomRoomNumber)
         {
             // DEAD END == only one passage
             case 0:
@@ -276,7 +276,7 @@ public class HellController
             GlobalLogger.log(LoggerStringValues.BOTTOM_ROOM_RECURSION_ENDED);
         }
 
-        if (currentRoom.hasRightRoom() && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX() + 1, coordinate.getY())).getProcessed());
+        if (currentRoom.hasRightRoom() && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX() + 1, coordinate.getY())).getProcessed())
         {
             GlobalLogger.log(LoggerStringValues.RIGHT_ROOM_RECURSION_BEGUN);
             initNeighbors(hell, new Coordinate(coordinate.getX() + 1, coordinate.getY()));
@@ -300,20 +300,22 @@ public class HellController
     public static void addRoomToGrid (Hell hell, Room room)
     {
         // room has to be within the bounds of the hell and cannot overlap an already existing room
-        if (room.getCoordinate().getX() > WorldConstants.LOWEST_COORDINATE &&
-            room.getCoordinate().getX() <= hell.getWidth() &&
-            room.getCoordinate().getY() > WorldConstants.LOWEST_COORDINATE &&
-            room.getCoordinate().getY() <= hell.getHeight() &&
-            !hell.getRoomHashMap().containsKey(room.getCoordinate()))
-        {
-            hell.insertRoom(room.getCoordinate(), room);
-            GlobalLogger.log(LoggerStringValues.ADDED_ROOM_TO_GRID);
-        }
-        else
+        if (!roomIsInsideHellBounds(hell, room) || hell.getRoomHashMap().containsKey(room.getCoordinate()))
         {
             // TODO: Add an exception
             GlobalLogger.warning(LoggerStringValues.ADD_ROOM_ERROR);
+            return;
         }
+        hell.insertRoom(room.getCoordinate(), room);
+        GlobalLogger.log(LoggerStringValues.ADDED_ROOM_TO_GRID);
+    }
+
+    public static boolean roomIsInsideHellBounds(Hell hell, Room room)
+    {
+        return room.getCoordinate().getX() > WorldConstants.LOWEST_COORDINATE &&
+                room.getCoordinate().getX() <= hell.getWidth() &&
+                room.getCoordinate().getY() > WorldConstants.LOWEST_COORDINATE &&
+                room.getCoordinate().getY() <= hell.getHeight();
     }
 
     /**
@@ -328,9 +330,7 @@ public class HellController
         GlobalLogger.log(LoggerStringValues.TOP_AVAILABLE);
         if (coordinate.getY() + 1 > hell.getHeight())
             return false;
-        if (hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX(), coordinate.getY() + 1)))
-            return false;
-        return true;
+        return !hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX(), coordinate.getY() + 1));
     }
 
     /**
@@ -345,9 +345,7 @@ public class HellController
         GlobalLogger.log(LoggerStringValues.BOTTOM_AVAILABLE);
         if (coordinate.getY() - 1 < WorldConstants.LOWEST_COORDINATE)
             return false;
-        if (hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX(), coordinate.getY() - 1)))
-            return false;
-        return true;
+        return !hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX(), coordinate.getY() - 1));
     }
 
     /**
@@ -362,9 +360,7 @@ public class HellController
         GlobalLogger.log((LoggerStringValues.LEFT_AVAILABLE));
         if (coordinate.getX() - 1 < WorldConstants.LOWEST_COORDINATE)
             return false;
-        if (hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX() - 1, coordinate.getY())))
-            return false;
-        return true;
+        return !hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX() - 1, coordinate.getY()));
     }
 
     /**
@@ -379,17 +375,21 @@ public class HellController
         GlobalLogger.log(LoggerStringValues.RIGHT_AVAILABLE);
         if (coordinate.getX() + 1 > hell.getWidth())
             return false;
-        if (hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX() + 1, coordinate.getY())))
-            return false;
-        return true;
+        return !hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX() + 1, coordinate.getY()));
     }
 
+    /**
+     * Inserts the correct HellComponents given the roomHashMap into hell
+     * @param hell hell that contains the rooms and gets the hellComponents
+     */
     public static void initHellComponentHashMap(Hell hell)
     {
+        GlobalLogger.log(LoggerStringValues.INIT_HELL_COMPONENT_HASH_MAP_START);
         for (var entry : hell.getRoomHashMap().entrySet())
         {
             // get coordinates
-            Coordinate coordCenter = new Coordinate(entry.getKey().getX() * 3 + 1, entry.getKey().getY() * 3 + 1);
+            Coordinate coordCenter = new Coordinate(entry.getKey().getX() * WorldConstants.ROOM_SIZE + 1,
+                    entry.getKey().getY() * WorldConstants.ROOM_SIZE + 1);
 
             Coordinate coordTopLeft = CoordinateDirections.getLeftTop(coordCenter);
             Coordinate coordTopRight = CoordinateDirections.getRightTop(coordCenter);
@@ -412,25 +412,26 @@ public class HellController
 
             // add passages and walls
             // top
-            if(entry.getValue().getTopRoom() != null)
+            if(entry.getValue().hasTopRoom())
                 hell.insertHellComponent(coordTop, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL));
             else
                 hell.insertHellComponent(coordTop, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL));
             // bottom
-            if(entry.getValue().getBottomRoom() != null)
+            if(entry.getValue().hasBottomRoom())
                 hell.insertHellComponent(coordBottom, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL));
             else
                 hell.insertHellComponent(coordBottom, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL));
             // left
-            if(entry.getValue().getLeft() != null)
+            if(entry.getValue().hasLeftRoom())
                 hell.insertHellComponent(coordLeft, new Passage(WorldConstants.HellComponentRotations.VERTICAL));
             else
                 hell.insertHellComponent(coordLeft, new Wall(WorldConstants.HellComponentRotations.VERTICAL));
             // right
-            if(entry.getValue().getRightRoom() != null)
+            if(entry.getValue().hasRightRoom())
                 hell.insertHellComponent(coordRight, new Passage(WorldConstants.HellComponentRotations.VERTICAL));
             else
                 hell.insertHellComponent(coordRight, new Wall(WorldConstants.HellComponentRotations.VERTICAL));
         }
+        GlobalLogger.log(LoggerStringValues.INIT_HELL_COMPONENT_HASH_MAP_END);
     }
 }

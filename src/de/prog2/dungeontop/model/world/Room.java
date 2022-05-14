@@ -4,6 +4,9 @@ import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+/**
+ * Represents all the different Rooms.
+ */
 public class Room
 {
     private Room topRoom, bottomRoom, leftRoom, rightRoom;
@@ -126,7 +129,7 @@ public class Room
     {
         Room right = new Room (new Coordinate( this.getCoordinate().getX() + 1, this.getCoordinate().getY() ));
         right.setLeftRoom(this);
-        this.setTopRoom(right);
+        this.setRightRoom(right);
         HellController.addRoomToGrid(hell, right);
         GlobalLogger.log(LoggerStringValues.ADDED_RIGHT_ROOM);
     }
@@ -141,7 +144,7 @@ public class Room
     public boolean hasTopRoom ()
     {
         GlobalLogger.log(LoggerStringValues.HAS_TOP_ROOM);
-        return this.topRoom != null ? true : false;
+        return this.topRoom != null;
     }
 
     /**
@@ -152,7 +155,7 @@ public class Room
     public boolean hasBottomRoom ()
     {
         GlobalLogger.log(LoggerStringValues.HAS_BOTTOM_ROOM);
-        return this.bottomRoom != null ? true : false;
+        return this.bottomRoom != null;
     }
 
     /**
@@ -163,7 +166,7 @@ public class Room
     public boolean hasLeftRoom ()
     {
         GlobalLogger.log(LoggerStringValues.HAS_LEFT_ROOM);
-        return this.leftRoom != null ? true : false;
+        return this.leftRoom != null;
     }
 
     /**
@@ -174,7 +177,7 @@ public class Room
     public boolean hasRightRoom ()
     {
         GlobalLogger.log(LoggerStringValues.HAS_RIGHT_ROOM);
-        return this.rightRoom != null ? true : false;
+        return this.rightRoom != null;
     }
 
 }

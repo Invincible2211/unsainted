@@ -5,11 +5,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AudioManager {
 
-    public static void playSound(int soundID) {
-        File soundFile = AssetsManager.getAsset(soundID);
+    public static void playSound(UUID soundID) {
+        File soundFile = (File) AssetsManager.getAssetById(soundID);
         try {
             final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();

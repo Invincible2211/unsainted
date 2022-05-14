@@ -2,6 +2,10 @@ package de.prog2.dungeontop.model.world;
 
 import de.prog2.dungeontop.resources.RotationAngles;
 
+/**
+ * Represents the rotation of a HellComponent
+ * Also holds the rotation-angle
+ */
 public enum Rotation
 {
     UP(RotationAngles.UP),
