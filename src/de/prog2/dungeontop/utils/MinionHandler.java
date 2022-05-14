@@ -13,9 +13,6 @@ public class MinionHandler
 
     private String inPath = "";
     private String outPath = "";
-    private BufferedReader bufferedReader = new BufferedReader(
-            new InputStreamReader(MinionHandler.class.getResourceAsStream(
-                    inPath)));
 
 
     public MinionHandler (String path, String outPath)
@@ -42,7 +39,7 @@ public class MinionHandler
     public void saveMinions (Minion[] miniondeck) {
         for (Minion minion :miniondeck)
         {
-            saveMinion(minion);
+            saveObject(minion);
         }
     }
 
@@ -59,7 +56,7 @@ public class MinionHandler
         for (Minion minion : minionList) {
             if (minion.getName() == name) {return minion;}
         }
-        System.out.println(ExceptionMessagesKeys.MINION_NAME_NOT_FOUND_EXCEPTION);
+        GlobalLogger.warning(ExceptionMessagesKeys.MINION_NAME_NOT_FOUND_EXCEPTION);
         return null;
     }
 
@@ -75,13 +72,15 @@ public class MinionHandler
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println(ExceptionMessagesKeys.CAN_NOT_LOAD_FILE);
+            GlobalLogger.warning(ExceptionMessagesKeys.CAN_NOT_LOAD_FILE);
             e.printStackTrace();
         }
+
 
         while (sc.hasNextLine()) {
             sb.append(sc.nextLine());
         }
+        sc.close();
         return sb.toString();
     }
 
@@ -102,16 +101,16 @@ public class MinionHandler
      * Useses minionToJson to create a JSON format and write that String to outpath.
      * Will create file andOr path if either doesnt exist
      *
-     * @param minion minion to be written in file
+     * @param objectisntance minion to be written in file
      * @throws IOException if current user does not have permission to write in that directory.
      */
-    public void saveMinion (Minion minion)
+    public void saveObject (Object objectisntance)
     {
 
-        String minionjson = minionToJson(minion);
+        String minionjson = objectToJson(objectisntance);
         File file = new File(outPath);
         file.getParentFile().mkdirs(); // Will create parent directories if not exists
-
+        //TODO instantiate before try and close finally
         try {
             file.createNewFile(); // Will create File if it does not exist
             FileOutputStream fileOutputStream = new FileOutputStream(file, true); //will append on end of file
@@ -121,9 +120,15 @@ public class MinionHandler
             writer.close();
             fileOutputStream.close();
         } catch(IOException e) {
-            e.printStackTrace(); //TODO THIS BETTER
+            GlobalLogger.warning(e.getMessage());
         }
 
+    }
+
+    private String objectToJson (Object objectisntance)
+    {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        return gsonBuilder.create().toJson(objectisntance);
     }
 
 }
