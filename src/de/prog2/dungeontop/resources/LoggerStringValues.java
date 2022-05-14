@@ -45,4 +45,13 @@ public interface LoggerStringValues {
     String INIT_HELL_COMPONENT_HASH_MAP_END = "Finished converting RoomHashMap to HellComponentHashMap.";
 
     String ADDED_HELL_TO_WORLD = "Created Hell Nr ";
+
+    String MOVE_UP_SUCCESS = "Player moved into the room above.";
+    String MOVE_UP_FAIL = "Player couldn't move into the room above.";
+    String MOVE_DOWN_SUCCESS = "Player moved into the room below.";
+    String MOVE_DOWN_FAIL = "Player couldn't move into the room below.";
+    String MOVE_LEFT_SUCCESS = "Player moved into the room on the left.";
+    String MOVE_LEFT_FAIL = "Player couldn't move into the room on the left.";
+    String MOVE_RIGHT_SUCCESS = "Player moved into the room on the right.";
+    String MOVE_RIGHT_FAIL = "Player couldn't move into the room on the right.";
 }

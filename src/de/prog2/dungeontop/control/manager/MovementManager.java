@@ -2,12 +2,20 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
 
+/**
+ * This is a Singleton that handles the Player-Movement.
+ */
 public class MovementManager
 {
-    //prüfen laufen, movent smooth
-    public static final MovementManager instance = new MovementManager();
+    private static final MovementManager instance = new MovementManager();
 
+    /**
+     * Initiates the movement towards the selected direction
+     * @return returns if the move was successful
+     */
     public boolean moveTowards(MoveDirection direction)
     {
         return switch (direction)
@@ -19,44 +27,64 @@ public class MovementManager
         };
     }
 
+    /**
+     * @return returns if the move was successful
+     */
     private boolean moveUp()
     {
         Player player = PlayerManager.getInstance().getPlayer();
         if(player.getCurrentRoom().hasTopRoom())
         {
             player.setCurrentRoom(player.getCurrentRoom().getTopRoom());
+            GlobalLogger.log(LoggerStringValues.MOVE_UP_SUCCESS);
             return true;
         }
+        GlobalLogger.log(LoggerStringValues.MOVE_UP_FAIL);
         return false;
     }
+    /**
+     * @return returns if the move was successful
+     */
     private boolean moveDown()
     {
         Player player = PlayerManager.getInstance().getPlayer();
         if(player.getCurrentRoom().hasBottomRoom())
         {
             player.setCurrentRoom(player.getCurrentRoom().getBottomRoom());
+            GlobalLogger.log(LoggerStringValues.MOVE_DOWN_SUCCESS);
             return true;
         }
+        GlobalLogger.log(LoggerStringValues.MOVE_DOWN_FAIL);
         return false;
     }
+    /**
+     * @return returns if the move was successful
+     */
     private boolean moveLeft()
     {
         Player player = PlayerManager.getInstance().getPlayer();
         if(player.getCurrentRoom().hasLeftRoom())
         {
             player.setCurrentRoom(player.getCurrentRoom().getLeftRoom());
+            GlobalLogger.log(LoggerStringValues.MOVE_LEFT_SUCCESS);
             return true;
         }
+        GlobalLogger.log(LoggerStringValues.MOVE_LEFT_FAIL);
         return false;
     }
+    /**
+     * @return returns if the move was successful
+     */
     private boolean moveRight()
     {
         Player player = PlayerManager.getInstance().getPlayer();
         if(player.getCurrentRoom().hasRightRoom())
         {
             player.setCurrentRoom(player.getCurrentRoom().getRightRoom());
+            GlobalLogger.log(LoggerStringValues.MOVE_RIGHT_SUCCESS);
             return true;
         }
+        GlobalLogger.log(LoggerStringValues.MOVE_RIGHT_FAIL);
         return false;
     }
 
