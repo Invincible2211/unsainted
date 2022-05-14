@@ -9,7 +9,9 @@ public class DungeonMaster
     {
 
     }
-    
+
+
+
     //Set- and Getters
     public int getEgo_points()
     {
