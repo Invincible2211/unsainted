@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public class AudioManager {
 
-    public static void playSound(UUID soundID) {
-        File soundFile = (File) AssetsManager.getAssetById(soundID);
+    public static void playSound(int soundID) {
+        File soundFile = AssetsManager.getAssetById(soundID);
         try {
             final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();

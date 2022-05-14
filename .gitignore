@@ -7,6 +7,9 @@
 /dataSources/
 /dataSources.local.xml
 /.idea
+/gradlew
+/gradlew.bat
+/gradle
 
 # Compiled class file
 *.class

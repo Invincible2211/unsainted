@@ -1,38 +1,38 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.control.file.AssetsFileReader;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import java.io.File;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class AssetsManager
 {
 
-    private final static HashMap<UUID, Object> ASSETS = new HashMap<>();
+    private final static HashMap<Integer, File> ASSETS = new HashMap<>();
 
-    public static Object getAssetById (UUID key)
+    public static File getAssetById (int id)
     {
-        return ASSETS.get(key);
+        if (ASSETS.containsKey(id)){
+            return ASSETS.get(id);
+        } else {
+            File asset = AssetsFileReader.getInstance().getAssetFile(id);
+            ASSETS.put(id, asset);
+            return  asset;
+        }
     }
 
-    public static UUID getIdFromObject (Object object)
+    public static int getIdFromAsset (File asset)
     {
-        for (UUID key :
+        for (Integer key :
                 ASSETS.keySet()) {
-            if (ASSETS.get(key) == object) {
+            if (ASSETS.get(key) == asset) {
                 return key;
             }
         }
         GlobalLogger.warning(ExceptionMessagesKeys.NO_ID_FOUND_EXCEPTION);
-        return null;
-    }
-
-
-    public static void saveAsset (UUID uuid, Object object)
-    {
-        ASSETS.put(uuid, object);
-
+        return -1;
     }
 
 }
