@@ -53,6 +53,8 @@ public abstract class Room
 
     public boolean getProcessed () {return this.processed; }
 
+    public int getDistanceFromStart () { return this.distanceFromStart; }
+
     public void setTopRoom(Room topRoom)
     {
         this.topRoom = topRoom;
@@ -76,4 +78,9 @@ public abstract class Room
     public void setCoordinate (Coordinate coordinate) { this.coordinate = coordinate; }
 
     public void setProcessed () { this.processed = true; }
+
+    public void setDistanceFromStart (int distance)
+    {
+        this.distanceFromStart = distance;
+    }
 }

@@ -6,10 +6,17 @@ import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.CoordinateDirections;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import javax.swing.*;
+import java.nio.file.LinkOption;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class HellController
 {
+    private enum RoomType { FORGE_ROOM, LAVA_POND_ROOM, RANDOM_EVENT_ROOM, ARENA_ROOM }
+
     /**
      * Method to initialize a hell.
      *
@@ -17,20 +24,38 @@ public class HellController
      */
     public static void initHell(Hell hell)
     {
-        Room startingRoom = new EmptyRoom (new Coordinate(hell.getWidth()/2, hell.getHeight()/2));
-        addRoomToGrid(hell, startingRoom);
-        GlobalLogger.log(LoggerStringValues.START_ROOM_CREATED);
+        // generate new maps until one is created which has a suitable room count
+        while (true)
+        {
+            GlobalLogger.log(LoggerStringValues.HELL_GENERATION_START);
 
-        // The start room will have four passages
-        // Generating the neighbors of the starting room:
-        RoomController.addTopRoom(hell, startingRoom);
-        RoomController.addBottomRoom(hell, startingRoom);
-        RoomController.addRightRoom(hell, startingRoom);
-        RoomController.addLeftRoom(hell, startingRoom);
-        GlobalLogger.log(LoggerStringValues.START_ROOM_NEIGHBORS);
+            Room startingRoom = new EmptyRoom (new Coordinate(hell.getWidth()/2, hell.getHeight()/2));
+            addRoomToGrid(hell, startingRoom);
+            GlobalLogger.log(LoggerStringValues.START_ROOM_CREATED);
 
-        initNeighbors(hell, startingRoom.getCoordinate());
+            // The start room will have four passages
+            // Generating the neighbors of the starting room:
+            RoomController.addTopRoom(hell, startingRoom);
+            RoomController.addBottomRoom(hell, startingRoom);
+            RoomController.addRightRoom(hell, startingRoom);
+            RoomController.addLeftRoom(hell, startingRoom);
+            GlobalLogger.log(LoggerStringValues.START_ROOM_NEIGHBORS);
 
+            initNeighbors(hell, startingRoom.getCoordinate());
+            // regenerate if the hell doesn't have the defined room count
+            if (getRoomList(hell).size() < WorldConstants.MINIMUM_ROOM_COUNT ||
+                    getRoomList(hell).size() > WorldConstants.MAXIMUM_ROOM_COUNT)
+            {
+                hell.getRoomHashMap().clear();
+                GlobalLogger.log(LoggerStringValues.ROOM_COUNT_OUT_OF_RANGE);
+            }
+            else
+            {
+                GlobalLogger.log(LoggerStringValues.SUITABLE_HELL);
+                break;
+            }
+        }
+        randomizeRoomTypes(hell);
         initHellComponentHashMap(hell);
     }
 
@@ -388,6 +413,19 @@ public class HellController
      */
     public static void randomizeRoomTypes (Hell hell)
     {
+        // add boss room
+        addBossRoom(hell);
+
+        // add NPC rooms
+        // Forge
+        addNpcRoom(hell, RoomType.FORGE_ROOM);
+        // Lava Pond
+        addNpcRoom(hell, RoomType.LAVA_POND_ROOM);
+
+        // add monster and random event rooms
+        int numberOfRndMobRooms = getRoomList(hell).size()/2;
+        int mobRooms = numberOfRndMobRooms * WorldConstants.MONSTER_ROOM_RATIO / WorldConstants.ONE_HUNDRED;
+        int randomEventRooms = numberOfRndMobRooms - mobRooms;
 
     }
 
@@ -433,6 +471,144 @@ public class HellController
             newRoom.setLeftRoom(oldRoom.getLeftRoom());
             GlobalLogger.log(LoggerStringValues.LEFT_ROOM_REPLACED);
         }
+        addRoomToGrid(hell, newRoom);
+    }
+
+    /**
+     * Adds a Boss to the room that has the longest distance from the starting room.
+     *
+     * @param hell hell that should get the new boss room
+     */
+    public static void addBossRoom (Hell hell)
+    {
+        List<Room> roomList = getRoomList(hell);
+        Room currRoom = null;
+
+        for (Room room : roomList)
+        {
+            if (currRoom==null || room.getDistanceFromStart() > currRoom.getDistanceFromStart())
+            {
+                currRoom = room;
+            }
+        }
+        ArenaRoom bossRoom = new ArenaRoom();
+        bossRoom.setCoordinate(currRoom.getCoordinate());
+        replaceRoom(hell, currRoom, bossRoom);
+        roomList.remove(currRoom);
+        roomList.add(bossRoom);
+        hell.setBossRoom(bossRoom);
+
+        GlobalLogger.log(LoggerStringValues.BOSS_ROOM_ADDED);
+    }
+
+    /**
+     * Replaces a pseudo-random room by a new npc room of the given type.
+     *
+     * @param hell hell that should contain the new room
+     * @param roomType type of the room that shall be added
+     */
+    public static void addNpcRoom (Hell hell, RoomType roomType)
+    {
+        List<Room> roomList = getRoomList(hell);
+        int currIndex = -1;
+        Random randomizer = new Random();
+        Room currRoom = null;
+        Room newRoom = null;
+
+        while (true)
+        {
+            currIndex = randomizer.nextInt(roomList.size() - 1);
+            currRoom = roomList.get(currIndex);
+            if (currRoom.getDistanceFromStart() > 1 && currRoom instanceof EmptyRoom &&
+                    RoomController.neighborsContainNPC(currRoom))
+            {
+                switch(roomType)
+                {
+                    case FORGE_ROOM:
+                        newRoom = new ForgeRoom ();
+                        newRoom.setCoordinate(currRoom.getCoordinate());
+                        GlobalLogger.log(LoggerStringValues.FORGE_ROOM_ADDED);
+                        break;
+
+                    case LAVA_POND_ROOM:
+                        newRoom = new LavaPondRoom();
+                        newRoom.setCoordinate(currRoom.getCoordinate());
+                        GlobalLogger.log(LoggerStringValues.LAVA_POND_ROOM_ADDED);
+                        break;
+
+                    default:
+                        // TODO: Add Exception ?
+                        GlobalLogger.log(LoggerStringValues.NO_VALID_ROOMTYPE);
+                        break;
+                }
+                roomList.remove(currRoom);
+                roomList.add(newRoom);
+
+                break;
+            }
+        }
+    }
+
+    /**
+     * Replaces a pseudo-random room by a new monster or random event room
+     *
+     * @param hell hell that should contain the new room
+     * @param count how many of the room should be added
+     * @param type type of the new room that should be added
+     */
+    public void addRndOrMobRoom (Hell hell, int count, RoomType type)
+    {
+        int currIndex = -1;
+        Random randomizer = new Random();
+        Room currRoom = null;
+        List<Room> roomList = getRoomList(hell);
+
+        while (count > 0)
+        {
+            currIndex = randomizer.nextInt(roomList.size() - 1);
+            currRoom = roomList.get(currIndex);
+
+            if (currRoom.getDistanceFromStart() > 1 && currRoom instanceof EmptyRoom)
+            {
+                switch(type)
+                {
+                    case ARENA_ROOM:
+                        ArenaRoom arenaRoom = new ArenaRoom();
+                        arenaRoom.setCoordinate(currRoom.getCoordinate());
+                        replaceRoom(hell, currRoom, arenaRoom);
+                        roomList.remove(currRoom);
+                        roomList.add(arenaRoom);
+                        GlobalLogger.log(LoggerStringValues.MONSTER_ROOM_ADDED);
+                        break;
+
+                    case RANDOM_EVENT_ROOM:
+                        RandomEventRoom eventRoom = new RandomEventRoom();
+                        eventRoom.setCoordinate(currRoom.getCoordinate());
+                        replaceRoom(hell, currRoom, eventRoom);
+                        roomList.remove(currRoom);
+                        roomList.add(eventRoom);
+                        GlobalLogger.log((LoggerStringValues.RANDOM_EVENT_ROOM_ADDED));
+                        break;
+                }
+                count--;
+            }
+        }
+    }
+
+    /**
+     * Method to get a list representation of all the rooms in the given hell.
+     *
+     * @param hell hell for which the room list has to be created
+     * @return list representation of all the rooms in the given hell
+     */
+    public static List<Room> getRoomList (Hell hell)
+    {
+        LinkedList<Room> roomList = new LinkedList<>();
+        for (var room : hell.getRoomHashMap().entrySet())
+        {
+            roomList.add(room.getValue());
+        }
+        return roomList;
     }
 
     /**

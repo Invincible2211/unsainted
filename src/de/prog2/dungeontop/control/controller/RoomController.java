@@ -1,11 +1,11 @@
 package de.prog2.dungeontop.control.controller;
 
-import de.prog2.dungeontop.model.world.Coordinate;
-import de.prog2.dungeontop.model.world.EmptyRoom;
-import de.prog2.dungeontop.model.world.Hell;
-import de.prog2.dungeontop.model.world.Room;
+import de.prog2.dungeontop.model.world.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class RoomController
 {
@@ -119,5 +119,69 @@ public class RoomController
     {
         GlobalLogger.log(LoggerStringValues.HAS_RIGHT_ROOM);
         return room.getRightRoom() != null;
+    }
+
+    /*------------------------------GETTING INFORMATION ABOUT NEIGHBOR ROOMS------------------------------------------*/
+
+    /**
+     *  Method to get a list of neighbors for a given room.
+     *
+     * @param room room for which the neighbors shall be gotten
+     * @return list representation of the adjacent rooms
+     */
+    public static List<Room> getNeighbors (Room room)
+    {
+        GlobalLogger.log(LoggerStringValues.NEIGHBORS_QUERIED);
+        List<Room> neighbors = new LinkedList<>();
+
+        // adding top side neighbor
+        if (hasTopRoom(room))
+        {
+            neighbors.add(room.getTopRoom());
+            GlobalLogger.log(LoggerStringValues.TOP_NEIGHBOR_ADDED);
+        }
+        // adding bottom side neighbor
+        if (hasBottomRoom(room))
+        {
+            neighbors.add(room.getBottomRoom());
+            GlobalLogger.log(LoggerStringValues.BOTTOM_NEIGHBOR_ADDED);
+        }
+        // adding right side neighbor
+        if (hasRightRoom(room))
+        {
+            neighbors.add(room.getRightRoom());
+            GlobalLogger.log(LoggerStringValues.RIGHT_NEIGHBOR_ADDED);
+        }
+        // adding left side neighbor
+        if (hasLeftRoom(room))
+        {
+            neighbors.add(room.getLeftRoom());
+            GlobalLogger.log(LoggerStringValues.LEFT_NEIGHBOR_ADDED);
+        }
+
+        return neighbors;
+    }
+
+    /**
+     * Tells you for a given room if there is a neighbor in an adjacent room.
+     *
+     * @param room room that has to be checked for NPC neighbors
+     * @return true if there is a NPC in an adjacent room
+     */
+    public static boolean neighborsContainNPC (Room room)
+    {
+        GlobalLogger.log(LoggerStringValues.NEIGHBOR_CONTAINS_NPC_START);
+        List<Room> neighbors = getNeighbors(room);
+
+        for (Room neighbor : neighbors)
+        {
+            if (room instanceof NPCRoom)
+            {
+                GlobalLogger.log(LoggerStringValues.NEIGHBOR_CONTAINS_NPC);
+                return true;
+            }
+        }
+        GlobalLogger.log(LoggerStringValues.NEIGHBORS_NO_NPC);
+        return false;
     }
 }
