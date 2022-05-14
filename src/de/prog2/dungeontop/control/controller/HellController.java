@@ -17,17 +17,19 @@ public class HellController
      */
     public static void initHell(Hell hell)
     {
-        Room startingRoom = new Room (new Coordinate(hell.getWidth()/2, hell.getHeight()/2));
+        Room startingRoom = new EmptyRoom (new Coordinate(hell.getWidth()/2, hell.getHeight()/2));
         addRoomToGrid(hell, startingRoom);
         GlobalLogger.log(LoggerStringValues.START_ROOM_CREATED);
 
         // The start room will have four passages
         // Generating the neighbors of the starting room:
-        startingRoom.addTopRoom(hell);
-        startingRoom.addBottomRoom(hell);
-        startingRoom.addRightRoom(hell);
-        startingRoom.addLeftRoom(hell);
+        RoomController.addTopRoom(hell, startingRoom);
+        RoomController.addBottomRoom(hell, startingRoom);
+        RoomController.addRightRoom(hell, startingRoom);
+        RoomController.addLeftRoom(hell, startingRoom);
         GlobalLogger.log(LoggerStringValues.START_ROOM_NEIGHBORS);
+
+        initNeighbors(hell, startingRoom.getCoordinate());
 
         initHellComponentHashMap(hell);
     }
@@ -67,17 +69,18 @@ public class HellController
                 right room  = hasLeftRoom   = TL -> add left room
             */
             case 1:
-                if ((currentRoom.hasBottomRoom() || currentRoom.hasTopRoom()) && rightSideIsAvailable(hell, coordinate))
+                if ((RoomController.hasBottomRoom(currentRoom) || RoomController.hasTopRoom(currentRoom)) &&
+                        rightSideIsAvailable(hell, coordinate))
                 {
-                    currentRoom.addRightRoom(hell);
+                    RoomController.addRightRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasRightRoom() && topSideIsAvailable(hell, coordinate))
+                else if (RoomController.hasRightRoom(currentRoom) && topSideIsAvailable(hell, coordinate))
                 {
-                    currentRoom.addTopRoom(hell);
+                    RoomController.addTopRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasLeftRoom() && leftSideIsAvailable(hell, coordinate))
+                else if (RoomController.hasLeftRoom(currentRoom) && leftSideIsAvailable(hell, coordinate))
                 {
-                    currentRoom.addLeftRoom(hell);
+                    RoomController.addLeftRoom(hell, currentRoom);
                 }
                 break;
 
@@ -88,14 +91,14 @@ public class HellController
                 right room  = hasLeftRoom   = RL -> add right room
             */
             case 2:
-                if ((currentRoom.hasBottomRoom() || currentRoom.hasTopRoom() || currentRoom.hasRightRoom()) &&
-                        leftSideIsAvailable(hell, coordinate))
+                if ((RoomController.hasBottomRoom(currentRoom) || RoomController.hasTopRoom(currentRoom) ||
+                        RoomController.hasRightRoom(currentRoom)) && leftSideIsAvailable(hell, coordinate))
                 {
-                    currentRoom.addLeftRoom(hell);
+                    RoomController.addLeftRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasLeftRoom() && rightSideIsAvailable(hell, coordinate))
+                else if (RoomController.hasLeftRoom(currentRoom) && rightSideIsAvailable(hell, coordinate))
                 {
-                    currentRoom.addRightRoom(hell);
+                    RoomController.addRightRoom(hell, currentRoom);
                 }
                 break;
 
@@ -106,14 +109,14 @@ public class HellController
                 right room  = hasLeftRoom   = LB -> add bottom room
             */
             case 3:
-                if ((currentRoom.hasTopRoom() || currentRoom.hasRightRoom() || currentRoom.hasLeftRoom()) &&
-                bottomSideIsAvailable(hell, coordinate))
+                if ((RoomController.hasTopRoom(currentRoom) || RoomController.hasRightRoom(currentRoom) ||
+                        RoomController.hasLeftRoom(currentRoom)) && bottomSideIsAvailable(hell, coordinate))
                 {
-                    currentRoom.addBottomRoom(hell);
+                    RoomController.addBottomRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasBottomRoom() && topSideIsAvailable(hell, coordinate))
+                else if (RoomController.hasBottomRoom(currentRoom) && topSideIsAvailable(hell, coordinate))
                 {
-                    currentRoom.addTopRoom(hell);
+                    RoomController.addTopRoom(hell, currentRoom);
                 }
                 break;
 
@@ -126,26 +129,26 @@ public class HellController
                 right room  = hasLeftRoom   = TLB -> add top and bottom room
             */
             case 4:
-                if (currentRoom.hasTopRoom())
+                if (RoomController.hasTopRoom(currentRoom))
                 {
                     if (rightSideIsAvailable(hell, coordinate))
-                        currentRoom.addRightRoom(hell);
+                        RoomController.addRightRoom(hell, currentRoom);
                     if (bottomSideIsAvailable(hell, coordinate))
-                        currentRoom.addBottomRoom(hell);
+                        RoomController.addBottomRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasBottomRoom())
+                else if (RoomController.hasBottomRoom(currentRoom))
                 {
                     if (rightSideIsAvailable(hell, coordinate))
-                        currentRoom.addRightRoom(hell);
+                        RoomController.addRightRoom(hell, currentRoom);
                     if (topSideIsAvailable(hell, coordinate))
-                        currentRoom.addTopRoom(hell);
+                        RoomController.addTopRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasRightRoom() || currentRoom.hasLeftRoom())
+                else if (RoomController.hasRightRoom(currentRoom) || RoomController.hasLeftRoom(currentRoom))
                 {
                     if (topSideIsAvailable(hell, coordinate))
-                        currentRoom.addTopRoom(hell);
+                        RoomController.addTopRoom(hell, currentRoom);
                     if (bottomSideIsAvailable(hell, coordinate))
-                        currentRoom.addBottomRoom(hell);
+                        RoomController.addBottomRoom(hell, currentRoom);
                 }
                 break;
 
@@ -156,26 +159,26 @@ public class HellController
                 right room  = hasLeftRoom   = RLB -> add right and bottom room
             */
             case 5:
-                if (currentRoom.hasTopRoom() || currentRoom.hasBottomRoom())
+                if (RoomController.hasTopRoom(currentRoom) || RoomController.hasBottomRoom(currentRoom))
                 {
                     if (rightSideIsAvailable(hell, coordinate))
-                        currentRoom.addRightRoom(hell);
+                        RoomController.addRightRoom(hell, currentRoom);
                     if (leftSideIsAvailable(hell, coordinate))
-                        currentRoom.addLeftRoom(hell);
+                        RoomController.addLeftRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasRightRoom())
+                else if (RoomController.hasRightRoom(currentRoom))
                 {
                     if (leftSideIsAvailable(hell, coordinate))
-                        currentRoom.addLeftRoom(hell);
+                        RoomController.addLeftRoom(hell, currentRoom);
                     if (bottomSideIsAvailable(hell, coordinate))
-                        currentRoom.addBottomRoom(hell);
+                        RoomController.addBottomRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasLeftRoom())
+                else if (RoomController.hasLeftRoom(currentRoom))
                 {
                     if (rightSideIsAvailable(hell, coordinate))
-                        currentRoom.addRightRoom(hell);
+                        RoomController.addRightRoom(hell, currentRoom);
                     if (bottomSideIsAvailable(hell, coordinate))
-                        currentRoom.addBottomRoom(hell);
+                        RoomController.addBottomRoom(hell, currentRoom);
                 }
                 break;
 
@@ -186,26 +189,26 @@ public class HellController
                 right room  = hasLeftRoom   = TRL -> add top and right room
              */
             case 6:
-                if (currentRoom.hasTopRoom())
+                if (RoomController.hasTopRoom(currentRoom))
                 {
                     if (leftSideIsAvailable(hell, coordinate))
-                        currentRoom.addLeftRoom(hell);
+                        RoomController.addLeftRoom(hell, currentRoom);
                     if (bottomSideIsAvailable(hell, coordinate))
-                        currentRoom.addBottomRoom(hell);
+                        RoomController.addBottomRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasBottomRoom() || currentRoom.hasRightRoom())
+                else if (RoomController.hasBottomRoom(currentRoom) || RoomController.hasRightRoom(currentRoom))
                 {
                     if (topSideIsAvailable(hell, coordinate))
-                        currentRoom.addTopRoom(hell);
+                        RoomController.addTopRoom(hell, currentRoom);
                     if (leftSideIsAvailable(hell, coordinate))
-                        currentRoom.addLeftRoom(hell);
+                        RoomController.addLeftRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasLeftRoom())
+                else if (RoomController.hasLeftRoom(currentRoom))
                 {
                     if (topSideIsAvailable(hell, coordinate))
-                        currentRoom.addTopRoom(hell);
+                        RoomController.addTopRoom(hell, currentRoom);
                     if (rightSideIsAvailable(hell, coordinate))
-                        currentRoom.addRightRoom(hell);
+                        RoomController.addRightRoom(hell, currentRoom);
                 }
                 break;
 
@@ -217,41 +220,41 @@ public class HellController
                 right room  = hasLeftRoom   = TRLB -> add top, right and bottom room
              */
             case 7:
-                if (currentRoom.hasTopRoom())
+                if (RoomController.hasTopRoom(currentRoom))
                 {
                     if (rightSideIsAvailable(hell, coordinate))
-                        currentRoom.addRightRoom(hell);
+                        RoomController.addRightRoom(hell, currentRoom);
                     if (leftSideIsAvailable(hell, coordinate))
-                        currentRoom.addLeftRoom(hell);
+                        RoomController.addLeftRoom(hell, currentRoom);
                     if (bottomSideIsAvailable(hell, coordinate))
-                        currentRoom.addBottomRoom(hell);
+                        RoomController.addBottomRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasBottomRoom())
+                else if (RoomController.hasBottomRoom(currentRoom))
                 {
                     if (topSideIsAvailable(hell, coordinate))
-                        currentRoom.addTopRoom(hell);
+                        RoomController.addTopRoom(hell, currentRoom);
                     if (rightSideIsAvailable(hell, coordinate))
-                        currentRoom.addRightRoom(hell);
+                        RoomController.addRightRoom(hell, currentRoom);
                     if (leftSideIsAvailable(hell, coordinate))
-                        currentRoom.addLeftRoom(hell);
+                        RoomController.addLeftRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasRightRoom())
+                else if (RoomController.hasRightRoom(currentRoom))
                 {
                     if (topSideIsAvailable(hell, coordinate))
-                        currentRoom.addTopRoom(hell);
+                        RoomController.addTopRoom(hell, currentRoom);
                     if (leftSideIsAvailable(hell, coordinate))
-                        currentRoom.addLeftRoom(hell);
+                        RoomController.addLeftRoom(hell, currentRoom);
                     if (bottomSideIsAvailable(hell, coordinate))
-                        currentRoom.addBottomRoom(hell);
+                        RoomController.addBottomRoom(hell, currentRoom);
                 }
-                else if (currentRoom.hasLeftRoom())
+                else if (RoomController.hasLeftRoom(currentRoom))
                 {
                     if (topSideIsAvailable(hell, coordinate))
-                        currentRoom.addTopRoom(hell);
+                        RoomController.addTopRoom(hell, currentRoom);
                     if (rightSideIsAvailable(hell, coordinate))
-                        currentRoom.addRightRoom(hell);
+                        RoomController.addRightRoom(hell, currentRoom);
                     if (bottomSideIsAvailable(hell, coordinate))
-                        currentRoom.addBottomRoom(hell);
+                        RoomController.addBottomRoom(hell, currentRoom);
                 }
                 break;
 
@@ -262,28 +265,28 @@ public class HellController
         }
 
         // Recursion: for all neighbor rooms which haven't been processed yet run this method
-        if (currentRoom.hasTopRoom() && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX(), coordinate.getY() + 1)).getProcessed())
+        if (RoomController.hasTopRoom(currentRoom) && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX(), coordinate.getY() + 1)).getProcessed())
         {
             GlobalLogger.log(LoggerStringValues.TOP_ROOM_RECURSION_BEGUN);
             initNeighbors(hell, new Coordinate(coordinate.getX(), coordinate.getY() + 1));
             GlobalLogger.log(LoggerStringValues.TOP_ROOM_RECURSION_ENDED);
         }
 
-        if (currentRoom.hasBottomRoom() && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX(), coordinate.getY() - 1)).getProcessed())
+        if (RoomController.hasBottomRoom(currentRoom) && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX(), coordinate.getY() - 1)).getProcessed())
         {
             GlobalLogger.log(LoggerStringValues.BOTTOM_ROOM_RECURSION_BEGUN);
             initNeighbors(hell, new Coordinate(coordinate.getX(), coordinate.getY() - 1));
             GlobalLogger.log(LoggerStringValues.BOTTOM_ROOM_RECURSION_ENDED);
         }
 
-        if (currentRoom.hasRightRoom() && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX() + 1, coordinate.getY())).getProcessed())
+        if (RoomController.hasRightRoom(currentRoom) && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX() + 1, coordinate.getY())).getProcessed())
         {
             GlobalLogger.log(LoggerStringValues.RIGHT_ROOM_RECURSION_BEGUN);
             initNeighbors(hell, new Coordinate(coordinate.getX() + 1, coordinate.getY()));
             GlobalLogger.log(LoggerStringValues.RIGHT_ROOM_RECURSION_ENDED);
         }
 
-        if (currentRoom.hasLeftRoom() && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX() - 1, coordinate.getY())).getProcessed())
+        if (RoomController.hasLeftRoom(currentRoom) && !hell.getRoomByCoordinate(new Coordinate(coordinate.getX() - 1, coordinate.getY())).getProcessed())
         {
             GlobalLogger.log(LoggerStringValues.LEFT_ROOM_RECURSION_BEGUN);
             initNeighbors(hell, new Coordinate(coordinate.getX() - 1, coordinate.getY()));
@@ -379,6 +382,60 @@ public class HellController
     }
 
     /**
+     * Pseudo-randomizes the different types of rooms in this hell
+     *
+     * @param hell hell which contains the rooms that have to be randomized
+     */
+    public static void randomizeRoomTypes (Hell hell)
+    {
+
+    }
+
+    /**
+     * Replaces a room in a hell by another room.
+     *
+     * @param hell hell which contains the old room which shall be replaced by the new room
+     * @param oldRoom room that has to be replaced
+     * @param newRoom room that replaces the old room
+     */
+    public static void replaceRoom (Hell hell, Room oldRoom, Room newRoom)
+    {
+        newRoom.setCoordinate(oldRoom.getCoordinate());
+
+        // check for top side room
+        if (RoomController.hasTopRoom(oldRoom))
+        {
+            oldRoom.getTopRoom().setBottomRoom(newRoom);
+            newRoom.setTopRoom(oldRoom.getTopRoom());
+            GlobalLogger.log(LoggerStringValues.TOP_ROOM_REPLACED);
+        }
+
+        // check for botttom side room
+        if (RoomController.hasBottomRoom(oldRoom))
+        {
+            oldRoom.getBottomRoom().setTopRoom(newRoom);
+            newRoom.setBottomRoom(oldRoom.getBottomRoom());
+            GlobalLogger.log(LoggerStringValues.BOTTOM_ROOM_REPLACED);
+        }
+
+        // check right side room
+        if (RoomController.hasRightRoom(oldRoom))
+        {
+            oldRoom.getRightRoom().setLeftRoom(newRoom);
+            newRoom.setRightRoom(oldRoom.getRightRoom());
+            GlobalLogger.log(LoggerStringValues.RIGHT_ROOM_REPLACED);
+        }
+
+        // check for left room
+        if (RoomController.hasLeftRoom(oldRoom))
+        {
+            oldRoom.getLeftRoom().setRightRoom(newRoom);
+            newRoom.setLeftRoom(oldRoom.getLeftRoom());
+            GlobalLogger.log(LoggerStringValues.LEFT_ROOM_REPLACED);
+        }
+    }
+
+    /**
      * Inserts the correct HellComponents given the roomHashMap into hell
      * @param hell hell that contains the rooms and gets the hellComponents
      */
@@ -412,22 +469,22 @@ public class HellController
 
             // add passages and walls
             // top
-            if(entry.getValue().hasTopRoom())
+            if(RoomController.hasTopRoom(entry.getValue()))
                 hell.insertHellComponent(coordTop, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL));
             else
                 hell.insertHellComponent(coordTop, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL));
             // bottom
-            if(entry.getValue().hasBottomRoom())
+            if(RoomController.hasBottomRoom(entry.getValue()))
                 hell.insertHellComponent(coordBottom, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL));
             else
                 hell.insertHellComponent(coordBottom, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL));
             // left
-            if(entry.getValue().hasLeftRoom())
+            if(RoomController.hasLeftRoom(entry.getValue()))
                 hell.insertHellComponent(coordLeft, new Passage(WorldConstants.HellComponentRotations.VERTICAL));
             else
                 hell.insertHellComponent(coordLeft, new Wall(WorldConstants.HellComponentRotations.VERTICAL));
             // right
-            if(entry.getValue().hasRightRoom())
+            if(RoomController.hasRightRoom(entry.getValue()))
                 hell.insertHellComponent(coordRight, new Passage(WorldConstants.HellComponentRotations.VERTICAL));
             else
                 hell.insertHellComponent(coordRight, new Wall(WorldConstants.HellComponentRotations.VERTICAL));

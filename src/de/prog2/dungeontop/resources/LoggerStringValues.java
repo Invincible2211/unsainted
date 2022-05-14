@@ -40,9 +40,11 @@ public interface LoggerStringValues {
     String RIGHT_ROOM_RECURSION_ENDED = "Right room Rekursion hat geendet.";
     String START_ROOM_CREATED = "Starting room wurde erstellt und dem Raumgrid hinzugefuegt.";
     String START_ROOM_NEIGHBORS = "Starting room neighbors wurden gesetzt.";
-
     String INIT_HELL_COMPONENT_HASH_MAP_START = "Starting to convert RoomHashMap to HellComponentHashMap.";
     String INIT_HELL_COMPONENT_HASH_MAP_END = "Finished converting RoomHashMap to HellComponentHashMap.";
-
     String ADDED_HELL_TO_WORLD = "Created Hell Nr ";
+    String TOP_ROOM_REPLACED = "Top room wurde durch einen neuen Raum ersetzt.";
+    String BOTTOM_ROOM_REPLACED = "Bottom room wurde durch einen neuen Raum ersetzt.";
+    String LEFT_ROOM_REPLACED = "Left room wurde durch einen neuen Raum ersetzt.";
+    String RIGHT_ROOM_REPLACED = "Right room wurde durch einen neuen Raum ersetzt.";
 }
