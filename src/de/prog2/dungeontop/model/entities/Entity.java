@@ -1,11 +1,14 @@
 package de.prog2.dungeontop.model.entities;
 
+import de.prog2.dungeontop.model.world.Coordinate;
+
 public abstract class Entity
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private int hp = 0;
     private int attackDamage = 0;
     private int movement = 0;
+    private Coordinate position;
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
     public Entity(int hp, int attackDamage, int movement)
@@ -44,5 +47,15 @@ public abstract class Entity
     public void setMovement(int movement)
     {
         this.movement = movement;
+    }
+
+    public Coordinate getPosition()
+    {
+        return position;
+    }
+
+    public void setPosition(Coordinate position)
+    {
+        this.position = position;
     }
 }

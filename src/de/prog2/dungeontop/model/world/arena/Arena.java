@@ -21,7 +21,7 @@ public class Arena
         return arenaHashmap;
     }
 
-    public ArenaComponent getCoordinate (Coordinate coordinate)
+    public ArenaComponent getArenaComponent(Coordinate coordinate)
     {
         return arenaHashmap.get(coordinate);
     }

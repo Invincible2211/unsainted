@@ -15,6 +15,10 @@ public class ArenaComponent
     {
         return occupant != null;
     }
+    public void deleteOccupant()
+    {
+        this.occupant = null;
+    }
     public Entity getOccupant()
     {
         return occupant;
