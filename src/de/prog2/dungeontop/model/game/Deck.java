@@ -26,11 +26,6 @@ public class Deck {
         return this.deck.contains(card);
     }
 
-    public void shuffleDeck(LinkedList<Card> deck)
-    {
-        Collections.shuffle(deck);
-    }
-
     //Set- and Getters
     public LinkedList<Card> getDeck()
     {
