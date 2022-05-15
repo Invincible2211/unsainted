@@ -15,11 +15,22 @@ public class GameSaveFileReader {
 
     private final static GameSaveFileReader instance = new GameSaveFileReader();
 
-    private GameSaveData gameSaveData = null;
-    private PlayerSaveData playerSaveData = null;
+    private GameSaveData gameSaveData;
+    private PlayerSaveData playerSaveData;
 
     private GameSaveFileReader(){
-        readSaveFile();
+        if (this.saveFileExists()){
+            this.readSaveFile();
+        } else {
+            this.initSaveFile();
+        }
+    }
+
+    private boolean saveFileExists(){
+        return false; //TODO
+    }
+    private void initSaveFile(){
+
     }
 
     private void readSaveFile(){

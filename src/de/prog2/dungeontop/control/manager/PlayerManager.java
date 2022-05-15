@@ -63,7 +63,7 @@ public class PlayerManager {
 
     private void initPlayerData()
     {
-        HashMap<String,String> playerData = GameSaveFileReader.getSaveFile().getPlayerData();
+        //HashMap<String,String> playerData = GameSaveFileReader.getSaveFile().getPlayerData();
     }
 
     public static PlayerManager getInstance() {

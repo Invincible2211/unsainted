@@ -1,5 +1,12 @@
 package de.prog2.dungeontop.model.game;
 
-@Deprecated
-public class DungeonMasterCard extends Card{
+/**
+ * This is just for displaying on hover in arena
+ */
+public class DungeonMasterCard extends Card
+{
+    public DungeonMasterCard(int maxRank, int price)
+    {
+        super(maxRank, price);
+    }
 }

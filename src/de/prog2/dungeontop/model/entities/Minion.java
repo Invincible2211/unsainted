@@ -19,11 +19,12 @@ public class Minion extends Entity {
 
     private ActiveSkill activeSkill= null;
 
-    public Minion ()
+    public Minion (int hp, int attackDamage, int movement)
     {
-
+        super(hp, attackDamage, movement);
     }
 
+    // TODO: Jason oder Fynn 1 fixt das
     /**
      * Constructor for creating new instance of Minion
      * @param attackValue
@@ -33,17 +34,17 @@ public class Minion extends Entity {
      * @param possibleAttacksPerRound
      * @param activeSkill
      */
-    public Minion (int attackValue, int hitpoints, String name,
-                   ArrayList<EntityClass> perks, int possibleAttacksPerRound,
-                   ActiveSkill activeSkill)
-    {
-        this.attackValue = attackValue;
-        this.hitpoints = hitpoints;
-        this.name = name;
-        this.perks = perks;
-        this.possibleAttacksPerRound = possibleAttacksPerRound;
-        this.activeSkill = activeSkill;
-    }
+//    public Minion (int attackValue, int hitpoints, String name,
+//                   ArrayList<EntityClass> perks, int possibleAttacksPerRound,
+//                   ActiveSkill activeSkill)
+//    {
+//        this.attackValue = attackValue;
+//        this.hitpoints = hitpoints;
+//        this.name = name;
+//        this.perks = perks;
+//        this.possibleAttacksPerRound = possibleAttacksPerRound;
+//        this.activeSkill = activeSkill;
+//    }
 
     /**
      * Constructer for the fileHandler where UUID is already given
@@ -55,14 +56,14 @@ public class Minion extends Entity {
      * @param activeSkill
      * @param uuid
      */
-    public Minion(int attackValue, int hitpoints, String name, ArrayList<EntityClass> perks, int possibleAttacksPerRound, ActiveSkill activeSkill, UUID uuid) {
-        this.attackValue = attackValue;
-        this.hitpoints = hitpoints;
-        this.name = name;
-        this.perks = perks;
-        this.possibleAttacksPerRound = possibleAttacksPerRound;
-        this.activeSkill = activeSkill;
-    }
+//    public Minion(int attackValue, int hitpoints, String name, ArrayList<EntityClass> perks, int possibleAttacksPerRound, ActiveSkill activeSkill, UUID uuid) {
+//        this.attackValue = attackValue;
+//        this.hitpoints = hitpoints;
+//        this.name = name;
+//        this.perks = perks;
+//        this.possibleAttacksPerRound = possibleAttacksPerRound;
+//        this.activeSkill = activeSkill;
+//    }
 
     /****************************************** Getter and Setter *******************************/
     public int getAttackValue ()

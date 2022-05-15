@@ -1,6 +1,6 @@
 package de.prog2.dungeontop.model.game;
 
-import de.prog2.dungeontop.model.inventory.Inventory;
+import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.world.Room;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
