@@ -79,4 +79,16 @@ public interface LoggerStringValues {
     String MOVE_RIGHT_SUCCESS = "Player moved into the room on the right.";
     String MOVE_RIGHT_FAIL = "Player couldn't move into the room on the right.";
     String CARD_MANAGER_CREATED = "CardManager wurde erstellt.";
+
+    String LOADING_CARDS = "";
+    String INIT_ASSET_FILE_READER = "Die Assets werden geladen.";
+    String INIT_FILE_READER_FINISHED = "Alle Assets wurden geladen.";
+    String ASSET_FILE_NAME = "Die Datei %s wurde geladen.";
+    String CARDS_LOADING = "Die Karten werden geladen.";
+    String LOAD_CARD = "Die Karte %s wurde geladen.";
+    String CARDS_LOADED = "Alle Karten wurden geladen.";
+    String LOAD_CONFIG = "Die Config-Datei wird geladen.";
+    String CONFIG_LOADED = "Die Config-Datei wurde geladen";
+    String CONFIG_LOAD_ERROR = "Die Config-Datei konnte nicht geladen werden.";
+    String CONFIG_KEY_DOES_NOT_EXISTS = "Die Config-Datei beinhaltet einen solchen Key nicht";
 }
