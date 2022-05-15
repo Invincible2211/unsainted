@@ -1,6 +1,6 @@
 package de.prog2.dungeontop.model.game;
 
-public class DungeonMaster
+public class DungeonMaster extends Player
 {
     private int ego_points;
     private Deck deck;

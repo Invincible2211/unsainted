@@ -122,7 +122,6 @@ public class MinionHandler
         } catch(IOException e) {
             GlobalLogger.warning(e.getMessage());
         }
-
     }
 
     private String objectToJson (Object objectisntance)
