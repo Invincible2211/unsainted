@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.control.controller.RoomController;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.LoggerStringValues;
@@ -33,7 +34,7 @@ public class MovementManager
     private boolean moveUp()
     {
         Player player = PlayerManager.getInstance().getPlayer();
-        if(player.getCurrentRoom().hasTopRoom())
+        if(RoomController.hasTopRoom(player.getCurrentRoom()))
         {
             player.setCurrentRoom(player.getCurrentRoom().getTopRoom());
             GlobalLogger.log(LoggerStringValues.MOVE_UP_SUCCESS);
@@ -48,7 +49,7 @@ public class MovementManager
     private boolean moveDown()
     {
         Player player = PlayerManager.getInstance().getPlayer();
-        if(player.getCurrentRoom().hasBottomRoom())
+        if(RoomController.hasBottomRoom(player.getCurrentRoom()))
         {
             player.setCurrentRoom(player.getCurrentRoom().getBottomRoom());
             GlobalLogger.log(LoggerStringValues.MOVE_DOWN_SUCCESS);
@@ -63,7 +64,7 @@ public class MovementManager
     private boolean moveLeft()
     {
         Player player = PlayerManager.getInstance().getPlayer();
-        if(player.getCurrentRoom().hasLeftRoom())
+        if(RoomController.hasLeftRoom(player.getCurrentRoom()))
         {
             player.setCurrentRoom(player.getCurrentRoom().getLeftRoom());
             GlobalLogger.log(LoggerStringValues.MOVE_LEFT_SUCCESS);
@@ -78,7 +79,7 @@ public class MovementManager
     private boolean moveRight()
     {
         Player player = PlayerManager.getInstance().getPlayer();
-        if(player.getCurrentRoom().hasRightRoom())
+        if(RoomController.hasRightRoom(player.getCurrentRoom()))
         {
             player.setCurrentRoom(player.getCurrentRoom().getRightRoom());
             GlobalLogger.log(LoggerStringValues.MOVE_RIGHT_SUCCESS);

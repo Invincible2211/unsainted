@@ -3,7 +3,7 @@ package de.prog2.dungeontop.model.game;
 public abstract class Card
 {
     private int rank = 1;
-    private int price;
+    private final int price;
     private final int maxRank;
 
     public Card(int maxRank, int price)

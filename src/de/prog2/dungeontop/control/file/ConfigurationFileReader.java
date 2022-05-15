@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.control.file;
 
-import de.prog2.dungeontop.model.exceptions.customexceptions.InvalidKeyException;
 import de.prog2.dungeontop.resources.FilePaths;
 
 import java.io.File;
@@ -22,11 +21,15 @@ public class ConfigurationFileReader {
         }
     }
 
-    public String getConfigurationValue(String key) throws InvalidKeyException {
-        String result = properties.getProperty(key);
-        if (result == null) throw new InvalidKeyException(key);
-        return result;
-    }
+   public String getConfigurationValue(String key)
+   {
+       String result = properties.getProperty(key);
+       if (result == null)
+       {
+           // TODO: Fynn2 mach sachen
+       }
+       return result;
+   }
 
     public static ConfigurationFileReader getInstance() {
         return instance;
