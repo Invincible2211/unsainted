@@ -2,8 +2,6 @@ package de.prog2.dungeontop.utils;
 
 import de.prog2.dungeontop.model.world.Coordinate;
 
-import java.util.ArrayList;
-
 public class CoordinateDirections
 {
     public static Coordinate getLeftTop(Coordinate coordinate)
@@ -38,33 +36,4 @@ public class CoordinateDirections
     {
         return new Coordinate(coordinate.getX() + 1, coordinate.getY());
     }
-    public static Coordinate[] getiAlleightNeighbours (Coordinate coordinate){
-        ArrayList<Coordinate> neighbours = new ArrayList<>();
-        neighbours.add(getLeftTop(coordinate));
-        neighbours.add(getTop(coordinate));
-        neighbours.add(getRightTop(coordinate));
-        neighbours.add(getLeft(coordinate));
-        neighbours.add(getRight(coordinate));
-        neighbours.add(getLeftBottom(coordinate));
-        neighbours.add(getBottom(coordinate));
-        neighbours.add(getRightBottom(coordinate));
-
-        Coordinate[] arr = new Coordinate[neighbours.size()];
-        arr = neighbours.toArray(arr);
-        return arr;
-    }
-
-    public static Coordinate[] getStraightNeighbours (Coordinate coordinate){
-        ArrayList<Coordinate> neighbours = new ArrayList<>();
-
-        neighbours.add(getTop(coordinate));
-        neighbours.add(getLeft(coordinate));
-        neighbours.add(getRight(coordinate));
-        neighbours.add(getBottom(coordinate));
-
-        Coordinate[] arr = new Coordinate[neighbours.size()];
-        arr = neighbours.toArray(arr);
-        return arr;
-    }
-
 }

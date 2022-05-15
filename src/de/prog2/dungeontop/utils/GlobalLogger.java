@@ -8,7 +8,7 @@ public class GlobalLogger {
     private static final Logger LOGGER = Logger.getGlobal();
 
     public static void log(String message){
-        LOGGER.log(Level.ALL, message);
+        LOGGER.log(Level.INFO, message);
     }
 
     public static void warning(String message){
