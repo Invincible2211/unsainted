@@ -92,7 +92,7 @@ public class RoomController
     public static void addRightRoom (Hell hell, Room room)
     {
         Room right = new EmptyRoom (new Coordinate( room.getCoordinate().getX() + 1, room.getCoordinate().getY() ));
-        right.setDistanceFromStart(room.getDistanceFromStart());
+        right.setDistanceFromStart(room.getDistanceFromStart() + 1);
         right.setLeftRoom(room);
         room.setRightRoom(right);
         try

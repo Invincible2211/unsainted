@@ -41,6 +41,7 @@ public class HellController
             {
                 GlobalLogger.warning(ex.getMessage());
             }
+            hell.setStartingRoom(startingRoom);
 
             GlobalLogger.log(LoggerStringValues.START_ROOM_CREATED);
 

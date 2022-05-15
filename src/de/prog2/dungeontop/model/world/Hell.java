@@ -60,34 +60,69 @@ public class Hell
     public void setBossRoom (ArenaRoom room) { this.bossRoom = room; }
     public Room getStartingRoom () { return this.startingRoom; }
     public Room getBossRoom () { return this.bossRoom; }
+
+    /**
+     * Custom toString-Method that builds a String that represents the stage layout of the hell
+     *
+     * @return String representation of the hell
+     */
     @Override
     public String toString ()
     {
-        String res = "";
+        StringBuilder res = new StringBuilder();
 
-        for (int i = 0; WorldConstants.HELL_SIZE < i; i++)
+        for (int i = WorldConstants.HELL_SIZE - 1; i >= WorldConstants.LOWEST_COORDINATE; i--)
         {
             for (int k = 0; k<3; k++)
             {
-                for (int j = 0; WorldConstants.HELL_SIZE < j; j++)
+                for (int j = 0; WorldConstants.HELL_SIZE > j; j++)
                 {
+                    Coordinate currCoordinate = new Coordinate(j, i);
                     switch(k)
                     {
                         case 0:
-                            //res += "┌" + (RoomController.hasTopRoom(this.getRoomByCoordinate(new Coordinate(i, j))) ? "   " : "───") + "┐";
+                            if (this.getRoomHashMap().containsKey(currCoordinate))
+                            {
+                                res.append("┌");
+                                res.append(RoomController.hasTopRoom(
+                                        this.getRoomByCoordinate(currCoordinate)) ? "   " : "───");
+                                res.append("┐");
+                                break;
+                            }
+                            res.append("     ");
                             break;
                         case 1:
+
+                            if (this.getRoomHashMap().containsKey(currCoordinate))
+                            {
+                                res.append(RoomController.hasLeftRoom(
+                                        this.getRoomByCoordinate(currCoordinate)) ? " " : "│");
+                                res.append("   ");
+                                res.append(RoomController.hasRightRoom(
+                                        this.getRoomByCoordinate(currCoordinate)) ? " " : "│");
+                                break;
+                            }
+                            res.append("     ");
                             break;
                         case 2:
+                            if (this.getRoomHashMap().containsKey(currCoordinate))
+                            {
+                                res.append("└");
+                                res.append(RoomController.hasBottomRoom(
+                                        this.getRoomByCoordinate(currCoordinate)) ? "   " : "───");
+                                res.append("┘");
+                                break;
+                            }
+                            res.append("     ");
                             break;
                         default:
                             GlobalLogger.warning(LoggerStringValues.INDEX_OUT_OF_BOUND);
                             break;
                     }
                 }
+                res.append("\n");
             }
         }
-
-        return res;
+        return res.toString();
     }
 }
