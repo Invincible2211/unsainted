@@ -79,8 +79,16 @@ public interface LoggerStringValues {
     String MOVE_RIGHT_SUCCESS = "Player moved into the room on the right.";
     String MOVE_RIGHT_FAIL = "Player couldn't move into the room on the right.";
     String CARD_MANAGER_CREATED = "CardManager wurde erstellt.";
+    String ENTITY_HAS_RANGE_TO_ATTACK = "Attacking entity can attack target!";
+    String ENTIT_DOES_NOT_HAVE_TARGET_IN_RANGE = "Target is not in Range!";
+    String ENTITY_CAN_MOVE = "This Entity can move this round!";
+    String ENTITY_CANT_MOVE = "This Entity cant move this round!";
+    String PLAYER_GOES_FIRST = "Player goes first";
+    String DM_GOES_FIRST = "DM goes first";
+    String DUELL_HAS_ENDED_IN_DEFEAT = "Player lost Battle";
+    String DUELL_HAS_ENDED_VICTORIOUS = "Player won Battle";
 
-    String LOADING_CARDS = "";
+    String LOADING_CARDS = "Die Karten werden geladen";
     String INIT_ASSET_FILE_READER = "Die Assets werden geladen.";
     String INIT_FILE_READER_FINISHED = "Alle Assets wurden geladen.";
     String ASSET_FILE_NAME = "Die Datei %s wurde geladen.";
