@@ -1,24 +1,32 @@
 package de.prog2.dungeontop.model.game;
 
-import java.util.LinkedList;
-import java.util.Collections;
+import java.util.Stack;
 
-public class Deck {
-    LinkedList<Card> deck;
+public class Deck
+{
+    Stack<Card> deck;
 
-    public Deck(LinkedList<Card> deck)
+    public Deck()
+    {
+        this.deck = new Stack<>();
+    }
+    public Deck(Stack<Card> deck)
     {
         this.deck = deck;
     }
 
-    public void addCard(Card card)
+    public void pushCard(Card card)
     {
-        deck.add(card);
+        deck.push(card);
     }
 
     public void removeCard(Card card)
     {
         deck.remove(card);
+    }
+    public Card popCard()
+    {
+        return deck.pop();
     }
 
     public boolean containsCard(Card card)
@@ -26,20 +34,9 @@ public class Deck {
         return this.deck.contains(card);
     }
 
-    public void shuffleDeck(LinkedList<Card> deck)
-    {
-        Collections.shuffle(deck);
-    }
-
     //Set- and Getters
-    public LinkedList<Card> getDeck()
+    public Stack<Card> getDeck()
     {
         return deck;
     }
-
-    public void setDeck(LinkedList<Card> deck)
-    {
-        this.deck = deck;
-    }
-
 }
