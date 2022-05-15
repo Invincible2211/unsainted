@@ -4,9 +4,15 @@ import de.prog2.dungeontop.model.talents.Talent;
 
 import java.util.LinkedList;
 
-public class Hero extends Entity {
+public class Hero extends Entity
+{
     private Talent talent = null;
     private LinkedList<Talent> talents;
+
+    public Hero(int hp, int attackDamage, int movement)
+    {
+        super(hp, attackDamage, movement);
+    }
 
     public void addTalents(Talent talent)
     {
