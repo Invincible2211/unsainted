@@ -1,14 +1,13 @@
 package de.prog2.dungeontop.model.game;
 
 import java.util.LinkedList;
-import java.util.Collections;
 
 public class Deck {
     LinkedList<Card> deck;
 
-    public Deck(LinkedList<Card> deck)
+    public Deck()
     {
-        this.deck = deck;
+        this.deck = new LinkedList<>();
     }
 
     public void addCard(Card card)
@@ -31,10 +30,4 @@ public class Deck {
     {
         return deck;
     }
-
-    public void setDeck(LinkedList<Card> deck)
-    {
-        this.deck = deck;
-    }
-
 }

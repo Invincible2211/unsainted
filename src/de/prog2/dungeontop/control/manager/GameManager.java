@@ -4,7 +4,7 @@ import de.prog2.dungeontop.model.game.GameState;
 
 public class GameManager {
 
-    private GameState currentState = GameState.MAIN_MENUE;
+    private GameState currentState = GameState.MAIN_MENU;
 
     public void startGame(){
         this.currentState = GameState.RUNNING;
