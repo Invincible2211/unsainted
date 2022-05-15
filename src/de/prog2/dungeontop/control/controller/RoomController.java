@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.controller;
 
+import de.prog2.dungeontop.model.exceptions.customexceptions.SpotAlreadyOccupiedException;
 import de.prog2.dungeontop.model.world.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -22,8 +23,15 @@ public class RoomController
         Room top = new EmptyRoom(new Coordinate( room.getCoordinate().getX(), room.getCoordinate().getY() + 1 ));
         top.setBottomRoom(room);
         room.setTopRoom(top);
-        HellController.addRoomToGrid(hell, top);
-        GlobalLogger.log(LoggerStringValues.ADDED_TOP_ROOM);
+        try
+        {
+            HellController.addRoomToGrid(hell, top);
+            GlobalLogger.log(LoggerStringValues.ADDED_TOP_ROOM);
+        }
+        catch (SpotAlreadyOccupiedException ex)
+        {
+            GlobalLogger.warning(ex.getMessage());
+        }
     }
 
     /**
@@ -37,8 +45,16 @@ public class RoomController
         Room bot = new EmptyRoom (new Coordinate( room.getCoordinate().getX(), room.getCoordinate().getY() - 1 ));
         bot.setTopRoom(room);
         room.setBottomRoom(bot);
-        HellController.addRoomToGrid(hell, bot);
-        GlobalLogger.log(LoggerStringValues.ADDED_BOTTOM_ROOM);
+        try
+        {
+            HellController.addRoomToGrid(hell, bot);
+            GlobalLogger.log(LoggerStringValues.ADDED_BOTTOM_ROOM);
+        }
+        catch (SpotAlreadyOccupiedException ex)
+        {
+            GlobalLogger.warning(ex.getMessage());
+        }
+
     }
 
     /**
@@ -52,8 +68,16 @@ public class RoomController
         Room left = new EmptyRoom (new Coordinate( room.getCoordinate().getX() - 1, room.getCoordinate().getY() ));
         left.setRightRoom(room);
         room.setLeftRoom(left);
-        HellController.addRoomToGrid(hell, left);
-        GlobalLogger.log(LoggerStringValues.ADDED_LEFT_ROOM);
+        try
+        {
+            HellController.addRoomToGrid(hell, left);
+            GlobalLogger.log(LoggerStringValues.ADDED_LEFT_ROOM);
+        }
+        catch (SpotAlreadyOccupiedException ex)
+        {
+            GlobalLogger.warning(ex.getMessage());
+        }
+
     }
 
     /**
@@ -67,8 +91,15 @@ public class RoomController
         Room right = new EmptyRoom (new Coordinate( room.getCoordinate().getX() + 1, room.getCoordinate().getY() ));
         right.setLeftRoom(room);
         room.setRightRoom(right);
-        HellController.addRoomToGrid(hell, right);
-        GlobalLogger.log(LoggerStringValues.ADDED_RIGHT_ROOM);
+        try
+        {
+            HellController.addRoomToGrid(hell, right);
+            GlobalLogger.log(LoggerStringValues.ADDED_RIGHT_ROOM);
+        }
+        catch (SpotAlreadyOccupiedException ex)
+        {
+            GlobalLogger.warning(ex.getMessage());
+        }
     }
 
     /*----------------------QUERYING IF THE ROOM HAS A TOP, BOTTOM, LEFT, RIGHT ROOM----------------------------------*/

@@ -86,8 +86,8 @@ public class NpcController {
             }
             throw new CardNotFoundException();
         } else if (item instanceof Item) {
-            if(player.getItems().contains(item)){
-                playerManager.addSouls(item.getValue());
+            if(PlayerManager.getItems().contains(item)){
+                playerManager.addSouls(((Item) item).getPrice());
                 playerManager.removeItem(item);
 
                 GlobalLogger.log(LoggerStringValues.ITEM_SOLD);

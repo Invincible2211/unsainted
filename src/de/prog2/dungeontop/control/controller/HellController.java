@@ -1,5 +1,8 @@
 package de.prog2.dungeontop.control.controller;
 
+import de.prog2.dungeontop.model.exceptions.customexceptions.NotAValidRoomtypeException;
+import de.prog2.dungeontop.model.exceptions.customexceptions.NotValidRngRollException;
+import de.prog2.dungeontop.model.exceptions.customexceptions.SpotAlreadyOccupiedException;
 import de.prog2.dungeontop.model.world.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
@@ -30,7 +33,15 @@ public class HellController
             GlobalLogger.log(LoggerStringValues.HELL_GENERATION_START);
 
             Room startingRoom = new EmptyRoom (new Coordinate(hell.getWidth()/2, hell.getHeight()/2));
-            addRoomToGrid(hell, startingRoom);
+            try
+            {
+                addRoomToGrid(hell, startingRoom);
+            }
+            catch (SpotAlreadyOccupiedException ex)
+            {
+                GlobalLogger.warning(ex.getMessage());
+            }
+
             GlobalLogger.log(LoggerStringValues.START_ROOM_CREATED);
 
             // The start room will have four passages
@@ -41,7 +52,14 @@ public class HellController
             RoomController.addLeftRoom(hell, startingRoom);
             GlobalLogger.log(LoggerStringValues.START_ROOM_NEIGHBORS);
 
-            initNeighbors(hell, startingRoom.getCoordinate());
+            try
+            {
+                initNeighbors(hell, startingRoom.getCoordinate());
+            }
+            catch (NotValidRngRollException ex)
+            {
+                GlobalLogger.warning(ex.getMessage());
+            }
             // regenerate if the hell doesn't have the defined room count
             if (getRoomList(hell).size() < WorldConstants.MINIMUM_ROOM_COUNT ||
                     getRoomList(hell).size() > WorldConstants.MAXIMUM_ROOM_COUNT)
@@ -63,8 +81,9 @@ public class HellController
      * Recursive Method which generates the Hell by generating the neighbors for each individual room.
      *
      * @param coordinate Coordinate of the room for which the neighbor rooms shall be created
+     * @throws NotValidRngRollException thrown if the pseudo-randomly generated number lies outside the defined value range
      */
-    private static void initNeighbors (Hell hell, Coordinate coordinate)
+    private static void initNeighbors (Hell hell, Coordinate coordinate) throws NotValidRngRollException
     {
         // flag the current room as processed, to prevent endless recursion
         Room currentRoom = hell.getRoomByCoordinate(coordinate);
@@ -284,9 +303,8 @@ public class HellController
                 break;
 
             default:
-                // TODO: throw an exception
                 GlobalLogger.warning(LoggerStringValues.ROOM_RNG_FAILURE);
-                break;
+                throw new NotValidRngRollException();
         }
 
         // Recursion: for all neighbor rooms which haven't been processed yet run this method
@@ -324,15 +342,15 @@ public class HellController
      *
      * @param hell hell for which the room shall be added
      * @param room room which shall be added
+     * @throws SpotAlreadyOccupiedException thrown if the method tries to place a room on a spot that is already occupied by another room
      */
-    public static void addRoomToGrid (Hell hell, Room room)
+    public static void addRoomToGrid (Hell hell, Room room) throws SpotAlreadyOccupiedException
     {
         // room has to be within the bounds of the hell and cannot overlap an already existing room
         if (!roomIsInsideHellBounds(hell, room) || hell.getRoomHashMap().containsKey(room.getCoordinate()))
         {
-            // TODO: Add an exception
             GlobalLogger.warning(LoggerStringValues.ADD_ROOM_ERROR);
-            return;
+            throw new SpotAlreadyOccupiedException();
         }
         hell.insertRoom(room.getCoordinate(), room);
         GlobalLogger.log(LoggerStringValues.ADDED_ROOM_TO_GRID);
@@ -416,17 +434,25 @@ public class HellController
         // add boss room
         addBossRoom(hell);
 
-        // add NPC rooms
-        // Forge
-        addNpcRoom(hell, RoomType.FORGE_ROOM);
-        // Lava Pond
-        addNpcRoom(hell, RoomType.LAVA_POND_ROOM);
+        try
+        {
+            // add NPC rooms
+            // Forge
+            addNpcRoom(hell, RoomType.FORGE_ROOM);
+            // Lava Pond
+            addNpcRoom(hell, RoomType.LAVA_POND_ROOM);
 
-        // add monster and random event rooms
-        int numberOfRndMobRooms = getRoomList(hell).size()/2;
-        int mobRooms = numberOfRndMobRooms * WorldConstants.MONSTER_ROOM_RATIO / WorldConstants.ONE_HUNDRED;
-        int randomEventRooms = numberOfRndMobRooms - mobRooms;
-
+            // add monster and random event rooms
+            int numberOfRndMobRooms = getRoomList(hell).size()/2;
+            int mobRooms = numberOfRndMobRooms * WorldConstants.MONSTER_ROOM_RATIO / WorldConstants.ONE_HUNDRED;
+            int randomEventRooms = numberOfRndMobRooms - mobRooms;
+            addRndOrMobRoom(hell, mobRooms, RoomType.ARENA_ROOM);
+            addRndOrMobRoom(hell, randomEventRooms, RoomType.RANDOM_EVENT_ROOM);
+        }
+        catch (NotAValidRoomtypeException ex)
+        {
+            GlobalLogger.warning(ex.getMessage());
+        }
     }
 
     /**
@@ -471,7 +497,14 @@ public class HellController
             newRoom.setLeftRoom(oldRoom.getLeftRoom());
             GlobalLogger.log(LoggerStringValues.LEFT_ROOM_REPLACED);
         }
-        addRoomToGrid(hell, newRoom);
+        try
+        {
+            addRoomToGrid(hell, newRoom);
+        }
+        catch (SpotAlreadyOccupiedException ex)
+        {
+            GlobalLogger.warning(ex.getMessage());
+        }
     }
 
     /**
@@ -506,8 +539,9 @@ public class HellController
      *
      * @param hell hell that should contain the new room
      * @param roomType type of the room that shall be added
+     * @throws NotAValidRoomtypeException thrown if the given RoomType is not a valid NPC room type
      */
-    public static void addNpcRoom (Hell hell, RoomType roomType)
+    public static void addNpcRoom (Hell hell, RoomType roomType) throws NotAValidRoomtypeException
     {
         List<Room> roomList = getRoomList(hell);
         int currIndex = -1;
@@ -537,9 +571,8 @@ public class HellController
                         break;
 
                     default:
-                        // TODO: Add Exception ?
                         GlobalLogger.log(LoggerStringValues.NO_VALID_ROOMTYPE);
-                        break;
+                        throw new NotAValidRoomtypeException();
                 }
                 roomList.remove(currRoom);
                 roomList.add(newRoom);
@@ -555,8 +588,9 @@ public class HellController
      * @param hell hell that should contain the new room
      * @param count how many of the room should be added
      * @param type type of the new room that should be added
+     * @throws NotAValidRoomtypeException thrown if the given RoomType is not a RandomEventRoom or a ArenaRoom
      */
-    public void addRndOrMobRoom (Hell hell, int count, RoomType type)
+    public static void addRndOrMobRoom (Hell hell, int count, RoomType type) throws NotAValidRoomtypeException
     {
         int currIndex = -1;
         Random randomizer = new Random();
@@ -589,6 +623,10 @@ public class HellController
                         roomList.add(eventRoom);
                         GlobalLogger.log((LoggerStringValues.RANDOM_EVENT_ROOM_ADDED));
                         break;
+
+                    default:
+                        GlobalLogger.log(LoggerStringValues.NO_VALID_ROOMTYPE);
+                        throw new NotAValidRoomtypeException();
                 }
                 count--;
             }

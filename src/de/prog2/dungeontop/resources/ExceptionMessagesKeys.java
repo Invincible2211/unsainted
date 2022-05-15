@@ -26,4 +26,10 @@ public interface ExceptionMessagesKeys
 
     String CAN_NOT_FIND_BATTLESTATE = "cantfindbattlephase";
 
+    String NOT_VALID_RNG = "notvalidrng";
+
+    String SPOT_ALREADY_OCCUPIED = "spotoccupied";
+
+    String NO_VALID_ROOMTYPE = "novalidroomtype";
+
 }

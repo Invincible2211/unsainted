@@ -11,13 +11,9 @@ import java.util.Set;
 
 public class ShopManager {
     // instance of the singleton
-    private final static ShopManager shop = new ShopManager();
-
-    // class attributes
-    private Set lockedCards;
+    private final static ShopManager instance = new ShopManager();
 
     private ShopManager (){
-        this.lockedCards = GameManager.getLockedCards();
         GlobalLogger.log(LoggerStringValues.SHOPMANAGER_CREATED);
     }
 
@@ -26,9 +22,9 @@ public class ShopManager {
      *
      * @return Instance of the shop
      */
-    public ShopManager getShop (){
+    public ShopManager getInstance (){
         GlobalLogger.log(LoggerStringValues.SHOPMANAGER_GET);
-        return shop;
+        return instance;
     }
 
     /**
@@ -42,11 +38,11 @@ public class ShopManager {
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 
-        if(this.lockedCards.contains(toUnlock)){
+        if(PlayerManager.getLockedCards().contains(toUnlock)){
             if(player.getSouls() >= price){
                 PlayerManager.addUnlockedCard(toUnlock);
                 playerManager.removeSouls(price);
-                this.lockedCards.remove(toUnlock);
+                PlayerManager.getLockedCards().remove(toUnlock);
 
                 GlobalLogger.log(LoggerStringValues.CARD_UNLOCKED);
 
