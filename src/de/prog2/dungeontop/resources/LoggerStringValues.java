@@ -78,4 +78,5 @@ public interface LoggerStringValues {
     String MOVE_LEFT_FAIL = "Player couldn't move into the room on the left.";
     String MOVE_RIGHT_SUCCESS = "Player moved into the room on the right.";
     String MOVE_RIGHT_FAIL = "Player couldn't move into the room on the right.";
+    String CARD_MANAGER_CREATED = "CardManager wurde erstellt.";
 }

@@ -38,11 +38,11 @@ public class ShopManager {
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 
-        if(PlayerManager.getLockedCards().contains(toUnlock)){
+        if(CardManager.getLockedCards().contains(toUnlock)){
             if(player.getSouls() >= price){
-                PlayerManager.addUnlockedCard(toUnlock);
+                CardManager.addUnlockedCard(toUnlock);
                 playerManager.removeSouls(price);
-                PlayerManager.getLockedCards().remove(toUnlock);
+                CardManager.getLockedCards().remove(toUnlock);
 
                 GlobalLogger.log(LoggerStringValues.CARD_UNLOCKED);
 
