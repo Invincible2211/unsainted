@@ -9,6 +9,7 @@ import java.util.Properties;
 
 public class ConfigurationFileReader {
 
+
     private final static ConfigurationFileReader instance = new ConfigurationFileReader();
 
     private final Properties properties = new Properties();
