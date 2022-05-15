@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.model.inventory;
+package de.prog2.dungeontop.model.items;
 
 import de.prog2.dungeontop.model.items.Item;
 
