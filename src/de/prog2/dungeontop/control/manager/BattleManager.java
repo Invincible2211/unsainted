@@ -26,8 +26,11 @@ public class BattleManager
     private ArrayList<Entity> secondDuellistEntitiesWhoCanAttack = new ArrayList<>();
     private ArrayList<Entity> firstDuellistEntitiesWhoCanMove = new ArrayList<>();
     private ArrayList<Entity> secondDuellistEntitiesWhoCanMove = new ArrayList<>();
+    private ArrayList<Entity> firstDuellistEntities = new ArrayList<>();
+    private ArrayList<Entity> secondDuellistEntities = new ArrayList<>();
     private Player firstduellist = null;
     private Player secondduellist = null;
+    private Player currentActiveDuellist = null;
 
 
     public BattleManager (Player player, DungeonMaster dm, Arena arena)
@@ -67,35 +70,45 @@ public class BattleManager
      */
     public BattlePhase getNextPhaseInCycle ()
     {
-        switch(this.getCurrentPhase()){
+        switch(this.getCurrentPhase())
+        {
             case START:
             case SECOND_DUELLIST_SECOND_PLACE_CARDS:
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.FIRSTDUELLIST_DRAW;
+
             case FIRSTDUELLIST_DRAW:
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
+
             case FIRST_DUELLIST_PLACE_CARDS:
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.SECOND_DUELLIST_DRAW;
+
             case SECOND_DUELLIST_DRAW:
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.SECOND_DUELLIST_PLACE_CARDS;
+
             case SECOND_DUELLIST_PLACE_CARDS:
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.FIRST_DUELLIST_MINION_ACT;
+
             case FIRST_DUELLIST_MINION_ACT:
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.SECOND_DUELLIST_MINION_ACT;
+
             case SECOND_DUELLIST_MINION_ACT:
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS;
+
             case FIRST_DUELLIST_SECOND_PLACE_CARDS:
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS;
+
             case END:
                 GlobalLogger.warning(LoggerStringValues.TRY_TO_GET_PHASE_AFTER_END);
                 return BattlePhase.END;
+
             default:
                 GlobalLogger.warning(ExceptionMessagesKeys.CAN_NOT_FIND_BATTLESTATE);
                 return null;
@@ -116,26 +129,16 @@ public class BattleManager
     /**
      * Places card on Arena tile,
      * @param player who controlls the card
-     * @param cordinate where to place new minion
+     * @param coordinate where to place new minion
      */
-    public void placeCard (Player player, Coordinate cordinate)
+    public void placeCard (Player player, Coordinate coordinate, Card card)
     {
+                //remove from hand
         //put in list of units who cant move
         //put in list of units who cant attack
     }
 
-    private void setPlayerAsFirstDuellist (boolean choice)
-    {
-        if (choice == true) {
-            this.firstduellist = this.player;
-            this.secondduellist = this.dm;
-            GlobalLogger.log(LoggerStringValues.PLAYER_GOES_FIRST);
-        } else {
-            this.firstduellist = this.dm;
-            this.secondduellist = this.player;
-            GlobalLogger.log(LoggerStringValues.DM_GOES_FIRST);
-        }
-    }
+
 
 
     public void attack (Player owner, Entity attacker, Entity attacked)
@@ -168,7 +171,7 @@ public class BattleManager
         updateStats(arena.getAllMinions());
     }
 
-    public void moveUnit (Entity mover, Coordinate coordinate, Player playerWhoMoves)
+    public void moveUnit (Entity mover, Coordinate coordinate)
     {
         //check if unit can move there
         if (isValidMove(mover, coordinate))
@@ -176,7 +179,6 @@ public class BattleManager
 
         //remmove entity form list of units who can move
         //set posi of Unit to new coordinates
-
 
         }
     }
@@ -389,5 +391,59 @@ public class BattleManager
     public void setSecondduellist (Player secondduellist)
     {
         this.secondduellist = secondduellist;
+    }
+
+    private void setCurrentActiveDuellist (Player player)
+    {
+        this.currentActiveDuellist = player;
+    }
+
+    private Player getCurrentActiveDuellist ()
+    {
+        if (this.currentActiveDuellist == this.firstduellist){
+            return this.firstduellist;
+        } else {
+            return this.secondduellist;
+        }
+    }
+
+    private ArrayList<Card> getCurrentHand ()
+    {
+        if (this.currentActiveDuellist == this.firstduellist){
+            return this.getFirstDuellistHand();
+        } else {
+            return this.getSecondDuellistHand();
+        }
+    }
+
+    private ArrayList<Entity> getCurrentEntitiesWhoCanAttack ()
+    {
+        if (this.currentActiveDuellist == this.firstduellist){
+            return this.getFirstDuellistEntitiesWhoCanAttack();
+        } else {
+            return this.getSecondDuellistEntitiesWhoCanAttack();
+        }
+    }
+
+    private ArrayList<Entity> getCurrentEntitiesWhoCanMove ()
+    {
+        if (this.currentActiveDuellist == this.firstduellist){
+            return this.getFirstDuellistEntitiesWhoCanMove();
+        } else {
+            return this.getSecondDuellistEntitiesWhoCanMove();
+        }
+    }
+
+    private void setPlayerAsFirstDuellist (boolean choice)
+    {
+        if (choice == true) {
+            this.firstduellist = this.player;
+            this.secondduellist = this.dm;
+            GlobalLogger.log(LoggerStringValues.PLAYER_GOES_FIRST);
+        } else {
+            this.firstduellist = this.dm;
+            this.secondduellist = this.player;
+            GlobalLogger.log(LoggerStringValues.DM_GOES_FIRST);
+        }
     }
 }
