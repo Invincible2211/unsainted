@@ -79,4 +79,5 @@ public interface LoggerStringValues {
     String MOVE_RIGHT_SUCCESS = "Player moved into the room on the right.";
     String MOVE_RIGHT_FAIL = "Player couldn't move into the room on the right.";
     String CARD_MANAGER_CREATED = "CardManager wurde erstellt.";
+    String INDEX_OUT_OF_BOUND = "Der spezifizierte Index liegt ausserhalb der definierten Reichweite.";
 }

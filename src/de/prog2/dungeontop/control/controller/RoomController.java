@@ -21,6 +21,7 @@ public class RoomController
     public static void addTopRoom (Hell hell, Room room)
     {
         Room top = new EmptyRoom(new Coordinate( room.getCoordinate().getX(), room.getCoordinate().getY() + 1 ));
+        top.setDistanceFromStart(room.getDistanceFromStart() + 1);
         top.setBottomRoom(room);
         room.setTopRoom(top);
         try
@@ -43,6 +44,7 @@ public class RoomController
     public static void addBottomRoom(Hell hell, Room room)
     {
         Room bot = new EmptyRoom (new Coordinate( room.getCoordinate().getX(), room.getCoordinate().getY() - 1 ));
+        bot.setDistanceFromStart(room.getDistanceFromStart() + 1);
         bot.setTopRoom(room);
         room.setBottomRoom(bot);
         try
@@ -66,6 +68,7 @@ public class RoomController
     public static void addLeftRoom (Hell hell, Room room)
     {
         Room left = new EmptyRoom (new Coordinate( room.getCoordinate().getX() - 1, room.getCoordinate().getY() ));
+        left.setDistanceFromStart(room.getDistanceFromStart() + 1);
         left.setRightRoom(room);
         room.setLeftRoom(left);
         try
@@ -89,6 +92,7 @@ public class RoomController
     public static void addRightRoom (Hell hell, Room room)
     {
         Room right = new EmptyRoom (new Coordinate( room.getCoordinate().getX() + 1, room.getCoordinate().getY() ));
+        right.setDistanceFromStart(room.getDistanceFromStart());
         right.setLeftRoom(room);
         room.setRightRoom(right);
         try

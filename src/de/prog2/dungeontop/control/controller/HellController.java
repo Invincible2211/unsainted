@@ -52,6 +52,7 @@ public class HellController
             RoomController.addLeftRoom(hell, startingRoom);
             GlobalLogger.log(LoggerStringValues.START_ROOM_NEIGHBORS);
 
+
             try
             {
                 initNeighbors(hell, startingRoom.getCoordinate());
@@ -74,7 +75,7 @@ public class HellController
             }
         }
         randomizeRoomTypes(hell);
-        initHellComponentHashMap(hell);
+        //initHellComponentHashMap(hell);
     }
 
     /**
@@ -349,19 +350,31 @@ public class HellController
         // room has to be within the bounds of the hell and cannot overlap an already existing room
         if (!roomIsInsideHellBounds(hell, room) || hell.getRoomHashMap().containsKey(room.getCoordinate()))
         {
-            GlobalLogger.warning(LoggerStringValues.ADD_ROOM_ERROR);
+            GlobalLogger.warning("Room inside Bounds: " + roomIsInsideHellBounds(hell,room));
+            GlobalLogger.warning("X: " + room.getCoordinate().getX() + " Y: " + room.getCoordinate().getY());
             throw new SpotAlreadyOccupiedException();
         }
         hell.insertRoom(room.getCoordinate(), room);
         GlobalLogger.log(LoggerStringValues.ADDED_ROOM_TO_GRID);
     }
 
+    /**
+     * Removes the given room from the given hell.
+     *
+     * @param hell hell that contains the to be removed room
+     * @param room room that shall be removed
+     */
+    public static void removeRoomFromGrid (Hell hell, Room room)
+    {
+        hell.getRoomHashMap().remove(room.getCoordinate());
+    }
+
     public static boolean roomIsInsideHellBounds(Hell hell, Room room)
     {
-        return room.getCoordinate().getX() > WorldConstants.LOWEST_COORDINATE &&
-                room.getCoordinate().getX() <= hell.getWidth() &&
-                room.getCoordinate().getY() > WorldConstants.LOWEST_COORDINATE &&
-                room.getCoordinate().getY() <= hell.getHeight();
+        return room.getCoordinate().getX() >= WorldConstants.LOWEST_COORDINATE &&
+                room.getCoordinate().getX() < hell.getWidth() &&
+                room.getCoordinate().getY() >= WorldConstants.LOWEST_COORDINATE &&
+                room.getCoordinate().getY() < hell.getHeight();
     }
 
     /**
@@ -374,7 +387,7 @@ public class HellController
     public static boolean topSideIsAvailable (Hell hell, Coordinate coordinate)
     {
         GlobalLogger.log(LoggerStringValues.TOP_AVAILABLE);
-        if (coordinate.getY() + 1 > hell.getHeight())
+        if (coordinate.getY() + 1 >= hell.getHeight())
             return false;
         return !hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX(), coordinate.getY() + 1));
     }
@@ -419,7 +432,7 @@ public class HellController
     public static boolean rightSideIsAvailable (Hell hell, Coordinate coordinate)
     {
         GlobalLogger.log(LoggerStringValues.RIGHT_AVAILABLE);
-        if (coordinate.getX() + 1 > hell.getWidth())
+        if (coordinate.getX() + 1 >= hell.getWidth())
             return false;
         return !hell.getRoomHashMap().containsKey(new Coordinate(coordinate.getX() + 1, coordinate.getY()));
     }
@@ -429,7 +442,7 @@ public class HellController
      *
      * @param hell hell which contains the rooms that have to be randomized
      */
-    public static void randomizeRoomTypes (Hell hell)
+    private static void randomizeRoomTypes (Hell hell)
     {
         // add boss room
         addBossRoom(hell);
@@ -499,6 +512,7 @@ public class HellController
         }
         try
         {
+            removeRoomFromGrid(hell, oldRoom);
             addRoomToGrid(hell, newRoom);
         }
         catch (SpotAlreadyOccupiedException ex)
@@ -512,7 +526,7 @@ public class HellController
      *
      * @param hell hell that should get the new boss room
      */
-    public static void addBossRoom (Hell hell)
+    private static void addBossRoom (Hell hell)
     {
         List<Room> roomList = getRoomList(hell);
         Room currRoom = null;
@@ -541,7 +555,7 @@ public class HellController
      * @param roomType type of the room that shall be added
      * @throws NotAValidRoomtypeException thrown if the given RoomType is not a valid NPC room type
      */
-    public static void addNpcRoom (Hell hell, RoomType roomType) throws NotAValidRoomtypeException
+    private static void addNpcRoom (Hell hell, RoomType roomType) throws NotAValidRoomtypeException
     {
         List<Room> roomList = getRoomList(hell);
         int currIndex = -1;
@@ -554,7 +568,7 @@ public class HellController
             currIndex = randomizer.nextInt(roomList.size() - 1);
             currRoom = roomList.get(currIndex);
             if (currRoom.getDistanceFromStart() > 1 && currRoom instanceof EmptyRoom &&
-                    RoomController.neighborsContainNPC(currRoom))
+                    !RoomController.neighborsContainNPC(currRoom))
             {
                 switch(roomType)
                 {
@@ -571,7 +585,7 @@ public class HellController
                         break;
 
                     default:
-                        GlobalLogger.log(LoggerStringValues.NO_VALID_ROOMTYPE);
+                        GlobalLogger.warning(LoggerStringValues.NO_VALID_ROOMTYPE);
                         throw new NotAValidRoomtypeException();
                 }
                 roomList.remove(currRoom);
@@ -590,7 +604,7 @@ public class HellController
      * @param type type of the new room that should be added
      * @throws NotAValidRoomtypeException thrown if the given RoomType is not a RandomEventRoom or a ArenaRoom
      */
-    public static void addRndOrMobRoom (Hell hell, int count, RoomType type) throws NotAValidRoomtypeException
+    private static void addRndOrMobRoom (Hell hell, int count, RoomType type) throws NotAValidRoomtypeException
     {
         int currIndex = -1;
         Random randomizer = new Random();
@@ -625,7 +639,7 @@ public class HellController
                         break;
 
                     default:
-                        GlobalLogger.log(LoggerStringValues.NO_VALID_ROOMTYPE);
+                        GlobalLogger.warning(LoggerStringValues.NO_VALID_ROOMTYPE);
                         throw new NotAValidRoomtypeException();
                 }
                 count--;

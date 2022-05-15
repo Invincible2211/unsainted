@@ -1,5 +1,11 @@
 package de.prog2.dungeontop.model.world;
 
+import de.prog2.dungeontop.control.controller.HellController;
+import de.prog2.dungeontop.control.controller.RoomController;
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.WorldConstants;
+import de.prog2.dungeontop.utils.GlobalLogger;
+
 import java.util.HashMap;
 
 /**
@@ -17,6 +23,7 @@ public class Hell
     {
         this.width = width;
         this.height = height;
+        this.roomHashMap = new HashMap<>();
     }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public Room getRoomByCoordinate(Coordinate coordinate)
@@ -53,4 +60,34 @@ public class Hell
     public void setBossRoom (ArenaRoom room) { this.bossRoom = room; }
     public Room getStartingRoom () { return this.startingRoom; }
     public Room getBossRoom () { return this.bossRoom; }
+    @Override
+    public String toString ()
+    {
+        String res = "";
+
+        for (int i = 0; WorldConstants.HELL_SIZE < i; i++)
+        {
+            for (int k = 0; k<3; k++)
+            {
+                for (int j = 0; WorldConstants.HELL_SIZE < j; j++)
+                {
+                    switch(k)
+                    {
+                        case 0:
+                            //res += "┌" + (RoomController.hasTopRoom(this.getRoomByCoordinate(new Coordinate(i, j))) ? "   " : "───") + "┐";
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            GlobalLogger.warning(LoggerStringValues.INDEX_OUT_OF_BOUND);
+                            break;
+                    }
+                }
+            }
+        }
+
+        return res;
+    }
 }

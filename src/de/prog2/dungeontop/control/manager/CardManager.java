@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -11,8 +12,8 @@ public class CardManager
 {
     private final static CardManager instance = new CardManager();
 
-    private Set<Card> unlockedCards = new HashSet<>();
-    private Set<Card> lockedCards = new HashSet<>();
+    private Set<Card> unlockedCards = null;
+    private Set<Card> lockedCards = null;
 
     private CardManager ()
     {
@@ -28,5 +29,6 @@ public class CardManager
     private void initCardData ()
     {
         // TODO: Add reader for locked and unlocked cards
+        // this.unlockedCards = GameSaveFileReader.getInstance().getPlayerSaveData().unlockedCards();
     }
 }

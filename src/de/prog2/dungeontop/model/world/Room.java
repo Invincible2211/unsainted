@@ -22,6 +22,11 @@ public abstract class Room
     {
         this.action = action;
     }
+    public Room(Coordinate coordinate, int distanceFromStart)
+    {
+        this(coordinate);
+        this.distanceFromStart = distanceFromStart;
+    }
 
     public <T> boolean executeAction(T... args)
     {
