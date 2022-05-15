@@ -13,9 +13,6 @@ public class PlayerManager {
     private final static PlayerManager instance = new PlayerManager();
 
     private final Player player = new Player();
-    private Set<Card> unlockedCards = new HashSet<>();
-    private Set<Card> lockedCards = new HashSet<>();
-    private List<Item> items = new LinkedList<>();
 
     private PlayerManager(){
         initPlayerData();
@@ -46,14 +43,10 @@ public class PlayerManager {
     {
         return player.getEgo_points();
     }
-    public static Set<Card> getLockedCards() { return instance.lockedCards; }
-    public  static Set<Card> getUnlockedCards () { return instance.unlockedCards; }
-    public static void addUnlockedCard (Card card) { instance.unlockedCards.add(card); }
-    public static List<Item> getItems() { return instance.items; }
     public static void removeItem (Valuable item)
     {
         if (item instanceof  Item)
-            getItems().remove(item);
+            instance.getPlayer().getInventory().removeItem((Item)item);
         else if (item instanceof Card)
             instance.getPlayer().getDeck().removeCard((Card) item);
     }
