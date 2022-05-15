@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.utils.GlobalLogger;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.util.UUID;
 public class AudioManager {
 
     public static void playSound(int soundID) {
+        GlobalLogger.log();
         File soundFile = AssetsManager.getAssetById(soundID);
         try {
             final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);

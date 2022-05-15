@@ -26,9 +26,19 @@ public class Arena
         return arenaHashmap.get(coordinate);
     }
 
+    public boolean isOccupied (Coordinate coordinate)
+    {
+        return getArenaComponent(coordinate).isOccupied();
+    }
+
     public void insertComponent (Coordinate coordinate, ArenaComponent arenaComponent)
     {
         this.arenaHashmap.put(coordinate, arenaComponent);
+    }
+
+    public void removeComponent (Coordinate coordinate)
+    {
+        this.arenaHashmap.remove(coordinate);
     }
 
     //Set- and Getters

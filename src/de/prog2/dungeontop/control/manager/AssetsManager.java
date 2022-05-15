@@ -14,20 +14,25 @@ public class AssetsManager
 
     public static File getAssetById (int id)
     {
+        GlobalLogger.log();
         if (ASSETS.containsKey(id)){
+            GlobalLogger.log();
             return ASSETS.get(id);
         } else {
             File asset = AssetsFileReader.getInstance().getAssetFile(id);
             ASSETS.put(id, asset);
+            GlobalLogger.log();
             return  asset;
         }
     }
 
     public static int getIdFromAsset (File asset)
     {
+        GlobalLogger.log();
         for (Integer key :
                 ASSETS.keySet()) {
             if (ASSETS.get(key) == asset) {
+                GlobalLogger.log();
                 return key;
             }
         }

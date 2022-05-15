@@ -6,6 +6,9 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 
 import de.prog2.dungeontop.resources.LoggerStringValues;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Player
 {
     private int souls;
@@ -13,6 +16,8 @@ public class Player
     private Deck deck;
     private Inventory inventory;
     private Room currentRoom;
+    private ArrayList<Card>[] hand;
+    private int handCardLimit;
 
     public Player (){
         this.souls = 0;
@@ -20,6 +25,9 @@ public class Player
     public Player (int souls){
         this.souls = souls;
     }
+
+
+
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getSouls(){
@@ -67,5 +75,12 @@ public class Player
     public void setInventory(Inventory inventory)
     {
         this.inventory = inventory;
+    }
+
+
+    public ArrayList<Card> getHand()
+    {
+        Card[] res = new Card[this.hand.length];
+        return this.hand.
     }
 }
