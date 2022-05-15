@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.game;
 
+import de.prog2.dungeontop.model.inventory.Inventory;
 import de.prog2.dungeontop.model.world.Room;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
@@ -10,6 +11,7 @@ public class Player
     private int souls;
     private int ego_points;
     private Deck deck;
+    private Inventory inventory;
     private Room currentRoom;
 
     public Player (){
@@ -55,5 +57,15 @@ public class Player
     public void setDeck(Deck deck)
     {
         this.deck = deck;
+    }
+
+    public Inventory getInventory()
+    {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory)
+    {
+        this.inventory = inventory;
     }
 }

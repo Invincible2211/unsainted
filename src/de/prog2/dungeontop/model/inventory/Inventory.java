@@ -12,14 +12,18 @@ public class Inventory {
         this.inventory = inventory;
     }
 
-    public void addItems(Item neu)
+    public void addItem(Item item)
     {
-        inventory.add(neu);
+        inventory.add(item);
     }
 
-    public void removeItems(Item delete)
+    public void removeItem(Item item)
     {
-        inventory.remove(delete);
+        inventory.remove(item);
+    }
+    public boolean containsItem(Item item)
+    {
+        return this.inventory.contains(item);
     }
 
     //Set- and Getters
