@@ -1,28 +1,46 @@
 package de.prog2.dungeontop.model.entities;
 
+import de.prog2.dungeontop.model.perks.Perk;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.skills.ActiveSkill;
 
 import java.util.ArrayList;
-import java.util.UUID;
+import java.util.List;
 
 public class Minion extends Entity
 {
     private String name = "";
 
-    private final ArrayList<EntityClass> perks = new ArrayList<>();
+    private final List<Perk> perks = new ArrayList<>();
 
     private int possibleAttacksPerRound = 0;
 
     private ActiveSkill activeSkill;
 
-    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, String name, int possibleAttacksPerRound, ActiveSkill activeSkill)
+    private Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, String name,
+                   int possibleAttacksPerRound, ActiveSkill activeSkill)
     {
         super(card, hp, attackDamage, movement, maxMoves, owner);
         this.name = name;
         this.possibleAttacksPerRound = possibleAttacksPerRound;
         this.activeSkill = activeSkill;
+    }
+
+    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, String name,
+                  int possibleAttacksPerRound, ActiveSkill activeSkill, Perk perk1, Perk perk2)
+    {
+        this(card, hp, attackDamage, movement, maxMoves, owner, name, possibleAttacksPerRound, activeSkill);
+
+        this.addPerk(perk1);
+        this.addPerk(perk2);
+    }
+    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, String name,
+                   int possibleAttacksPerRound, ActiveSkill activeSkill, Perk perk1, Perk perk2, Perk perk3)
+    {
+        this(card, hp, attackDamage, movement, maxMoves, owner, name, possibleAttacksPerRound, activeSkill,
+                perk1, perk2);
+        this.addPerk(perk3);
     }
 
 
@@ -35,16 +53,16 @@ public class Minion extends Entity
     {
         this.name = name;
     }
-    public ArrayList<EntityClass> getPerks ()
+    public List<Perk> getPerks ()
     {
         return perks;
     }
 
-    public void addPerk (EntityClass perk)
+    public void addPerk (Perk perk)
     {
         perks.add(perk);
     }
-    public void removePerk (EntityClass perk)
+    public void removePerk (Perk perk)
     {
         perks.remove(perk);
     }

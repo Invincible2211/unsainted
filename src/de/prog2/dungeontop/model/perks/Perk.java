@@ -1,6 +1,7 @@
-package de.prog2.dungeontop.model.entities;
+package de.prog2.dungeontop.model.perks;
 
-public enum EntityClass {
+public enum Perk
+{
     Sturdy,
     Magical,
     Impatient,
