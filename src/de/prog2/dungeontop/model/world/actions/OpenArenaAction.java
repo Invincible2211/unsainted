@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.model.world;
+package de.prog2.dungeontop.model.world.actions;
 
 /**
  * This Action should open an arena dialog

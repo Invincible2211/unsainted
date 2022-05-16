@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.model.world;
+package de.prog2.dungeontop.model.world.actions;
 
 /**
  * Action Interface. It exists for all the different Room-Actions.
