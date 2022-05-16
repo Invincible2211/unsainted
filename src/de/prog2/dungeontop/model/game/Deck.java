@@ -4,39 +4,39 @@ import java.util.Stack;
 
 public class Deck
 {
-    Stack<Card> deck;
+    private Stack<Card> cards;
 
     public Deck()
     {
-        this.deck = new Stack<>();
+        this.cards = new Stack<>();
     }
     public Deck(Stack<Card> deck)
     {
-        this.deck = deck;
+        this.cards = deck;
     }
 
     public void pushCard(Card card)
     {
-        deck.push(card);
+        cards.push(card);
     }
 
     public void removeCard(Card card)
     {
-        deck.remove(card);
+        cards.remove(card);
     }
     public Card popCard()
     {
-        return deck.pop();
+        return cards.pop();
     }
 
     public boolean containsCard(Card card)
     {
-        return this.deck.contains(card);
+        return this.cards.contains(card);
     }
 
     //Set- and Getters
-    public Stack<Card> getDeck()
+    public Stack<Card> getCards ()
     {
-        return deck;
+        return cards;
     }
 }

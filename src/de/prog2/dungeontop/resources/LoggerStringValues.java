@@ -101,4 +101,7 @@ public interface LoggerStringValues {
     String CONFIG_LOAD_ERROR = "Die Config-Datei konnte nicht geladen werden.";
     String CONFIG_KEY_DOES_NOT_EXISTS = "Die Config-Datei beinhaltet einen solchen Key nicht";
     String BATTLE_HAS_ENDED = "Das Duell wurde Beendet";
+    String CARD_REMOVED_FROM_HAND = "Eine Karte aus der Hand genommen";
+    String REDUCED_EGOPOINTS = "Es wurde ein EgoPunkt abgezogen";
+    String NO_EGO_TO_REDUCE = "Es konnten keine EgoPunkte abgezogen werden";
 }

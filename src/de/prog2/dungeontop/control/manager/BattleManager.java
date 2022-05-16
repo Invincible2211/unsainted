@@ -8,13 +8,11 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.utils.CoordinateDirections;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class BattleManager
 {
@@ -22,7 +20,6 @@ public class BattleManager
     private BattlePhase currentPhase = BattlePhase.START;
     private Duellist firstDuellist = null;
     private Duellist secondDuellist = null;
-
 
     /**
      *
@@ -133,15 +130,6 @@ public class BattleManager
 
     }
 
-
-    /**
-     * End the Battle and gives Souls and Skulls
-     */
-    public void endRound ()
-    {
-
-    }
-
     private void updateStats (Entity[] aliveMinions)
     {
 
@@ -218,20 +206,6 @@ public class BattleManager
     /*--------------------Hilfsklassen und ControllerMethodik------------------------*/
 
 
-    private void drawNewDuellistHand(Duellist duellist)
-    {
-        duellist.getHand().clear();
-        Collections.shuffle(duellist.getDeck().getDeck());
-        for (int i = 0; i < duellist.handLimit; i++) {
-            Card drawedCard = duellist.deck.popCard();
-            duellist.hand.add(drawedCard);
-            duellist.discardPile.pushCard(drawedCard);
-        }
-    }
-
-
-
-
     /**
      * Duellist wird ausschließlich in einem Battle benutzt um zu vermeiden durch Nebeneffekte die Felder der Spieler zu verändern
      * Die DuellistControllerLogik wird im BattleManager umgesetzt
@@ -245,6 +219,8 @@ public class BattleManager
         private List<EntityClass> activePerks = new ArrayList<>();
         private List<Card> hand = new ArrayList<>();
         private int handLimit = 0;
+        private int currentEgoPoints = 0;
+        private int egoPointsMax = 0;
 
         public Duellist (Player player, Deck deck, Deck discardPile,
                          List<EntityClass> activePerks)
@@ -254,8 +230,61 @@ public class BattleManager
             this.discardPile = discardPile;
             this.activePerks = activePerks;
             this.handLimit = player.getHandCardLimit();
+            this.currentEgoPoints = player.getEgo_points();
+            this.egoPointsMax = player.getEgo_points();
         }
 
+        /**
+         * will shuffle deck if there are not enough cards to draw
+         * TODO make shure that deck always has at least X amount of cards.
+         */
+        private void drawNewDuellistHand()
+        {
+            if (getDeck().getCards().size() < handLimit)
+            {
+                reStackDeckFromDiscard();
+                Collections.shuffle(getDeck().getCards());
+            }
+            getHand().clear();
+            Collections.shuffle(getDeck().getCards());
+            for (int i = 0; i < handLimit; i++) {
+                Card drawedCard = deck.popCard();
+                hand.add(drawedCard);
+                discardPile.pushCard(drawedCard);
+            }
+        }
+
+        private void removeCardFromHand(Card card)
+        {
+            getHand().remove(card);
+            GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
+        }
+
+        private void tryReduceEgoPoints()
+        {
+            if (currentEgoPoints > 0){
+                GlobalLogger.log(LoggerStringValues.REDUCED_EGOPOINTS);
+                currentEgoPoints--;
+                return;
+            }
+            GlobalLogger.warning(LoggerStringValues.NO_EGO_TO_REDUCE);
+        }
+
+        private void resetEgoPoints()
+        {
+            this.currentEgoPoints = this.egoPointsMax;
+        }
+
+        /**
+         * this should only be done if there are not enough cards in the Deck to draw a new hand
+         */
+        private void reStackDeckFromDiscard()
+        {
+            for (Card card : getDiscardPile().getCards()) {
+                             getDeck().getCards().push(card);
+            }
+            Collections.shuffle(getDeck().getCards());
+        }
 
 
         public List<Card> getHand ()

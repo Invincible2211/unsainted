@@ -11,7 +11,7 @@ public class DeckController
      */
     public static void shuffleDeck(Deck deck)
     {
-        Collections.shuffle(deck.getDeck());
+        Collections.shuffle(deck.getCards());
     }
 
     /**
