@@ -31,9 +31,9 @@ public class BattleManager
      */
     public BattleManager (Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena)
     {
-     this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck,new Deck(),new ArrayList<EntityClass>());
-     this.secondDuellist = new Duellist(secondplayer,secondplayerDeck,new Deck(),new ArrayList<EntityClass>());
-     this.arena = arena;
+        this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck,new Deck(),new ArrayList<EntityClass>());
+        this.secondDuellist = new Duellist(secondplayer,secondplayerDeck,new Deck(),new ArrayList<EntityClass>());
+        this.arena = arena;
     }
 
 
@@ -52,55 +52,55 @@ public class BattleManager
         switch (this.getCurrentPhase())
         {
             case START, SECOND_DUELLIST_SECOND_PLACE_CARDS ->
-            {
-                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.FIRST_DUELLIST_DRAW;
-            }
+                    {
+                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                        return BattlePhase.FIRST_DUELLIST_DRAW;
+                    }
             case FIRST_DUELLIST_DRAW ->
-            {
-                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
-            }
+                    {
+                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                        return BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
+                    }
             case FIRST_DUELLIST_PLACE_CARDS ->
-            {
-                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.SECOND_DUELLIST_DRAW;
-            }
+                    {
+                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                        return BattlePhase.SECOND_DUELLIST_DRAW;
+                    }
             case SECOND_DUELLIST_DRAW ->
-            {
-                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.SECOND_DUELLIST_PLACE_CARDS;
-            }
+                    {
+                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                        return BattlePhase.SECOND_DUELLIST_PLACE_CARDS;
+                    }
             case SECOND_DUELLIST_PLACE_CARDS ->
-            {
-                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.FIRST_DUELLIST_MINION_ACT;
-            }
+                    {
+                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                        return BattlePhase.FIRST_DUELLIST_MINION_ACT;
+                    }
             case FIRST_DUELLIST_MINION_ACT ->
-            {
-                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.SECOND_DUELLIST_MINION_ACT;
-            }
+                    {
+                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                        return BattlePhase.SECOND_DUELLIST_MINION_ACT;
+                    }
             case SECOND_DUELLIST_MINION_ACT ->
-            {
-                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS;
-            }
+                    {
+                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                        return BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS;
+                    }
             case FIRST_DUELLIST_SECOND_PLACE_CARDS ->
-            {
-                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS;
-            }
+                    {
+                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                        return BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS;
+                    }
             case END ->
-            {
-                GlobalLogger.warning(LoggerStringValues.TRY_TO_GET_PHASE_AFTER_END);
-                return BattlePhase.END;
-            }
+                    {
+                        GlobalLogger.warning(LoggerStringValues.TRY_TO_GET_PHASE_AFTER_END);
+                        return BattlePhase.END;
+                    }
             default ->
-            {
-                GlobalLogger.warning(ExceptionMessagesKeys.CAN_NOT_FIND_BATTLESTATE);
-                return null;
-            }
+                    {
+                        GlobalLogger.warning(ExceptionMessagesKeys.CAN_NOT_FIND_BATTLESTATE);
+                        return null;
+                    }
         }
     }
 
@@ -120,7 +120,7 @@ public class BattleManager
     public void placeCard (Duellist duellist, Coordinate coordinate, Card card)
     {
 
-                //remove from hand
+        //remove from hand
         //put in list of units who cant move
         //put in list of units who cant attack
     }
@@ -142,8 +142,7 @@ public class BattleManager
 
     public void updateBattlefield ()
     {
-        updatePerks(arena.getAllMinions());
-        updateStats(arena.getAllMinions());
+
     }
 
     public void moveUnit (Entity mover, MoveDirection direction)
@@ -208,7 +207,7 @@ public class BattleManager
 
     /**
      * Duellist wird ausschließlich in einem Battle benutzt um zu vermeiden durch Nebeneffekte die Felder der Spieler zu verändern
-     * Die DuellistControllerLogik wird im BattleManager umgesetzt
+     * Fuer ein Model hat es zwar zuviel Logik aber eine extra Controllerklasse fuer eine Innere Klasse wollten wir nicht.
      */
     private class Duellist
     {
@@ -251,6 +250,7 @@ public class BattleManager
                 Card drawedCard = deck.popCard();
                 hand.add(drawedCard);
                 discardPile.pushCard(drawedCard);
+                GlobalLogger.log(LoggerStringValues.DREW_NEW_HAND);
             }
         }
 
@@ -281,7 +281,7 @@ public class BattleManager
         private void reStackDeckFromDiscard()
         {
             for (Card card : getDiscardPile().getCards()) {
-                             getDeck().getCards().push(card);
+                getDeck().getCards().push(card);
             }
             Collections.shuffle(getDeck().getCards());
         }
@@ -335,134 +335,6 @@ public class BattleManager
         public void setActivePerks (List<EntityClass> activePerks)
         {
             this.activePerks = activePerks;
-        }
-    }
-
-    public ArrayList<Card> getSecondDuellistHand ()
-    {
-        return secondDuellistHand;
-    }
-
-    public void setSecondDuellistHand (ArrayList<Card> secondDuellistHand)
-    {
-        this.secondDuellistHand = secondDuellistHand;
-    }
-
-    public ArrayList<Entity> getFirstDuellistEntitiesWhoCanAttack ()
-    {
-        return firstDuellistEntitiesWhoCanAttack;
-    }
-
-    public void setFirstDuellistEntitiesWhoCanAttack (
-            ArrayList<Entity> firstDuellistEntitiesWhoCanAttack)
-    {
-        this.firstDuellistEntitiesWhoCanAttack = firstDuellistEntitiesWhoCanAttack;
-    }
-
-    public ArrayList<Entity> getSecondDuellistEntitiesWhoCanAttack ()
-    {
-        return secondDuellistEntitiesWhoCanAttack;
-    }
-
-    public void setSecondDuellistEntitiesWhoCanAttack (
-            ArrayList<Entity> secondDuellistEntitiesWhoCanAttack)
-    {
-        this.secondDuellistEntitiesWhoCanAttack = secondDuellistEntitiesWhoCanAttack;
-    }
-
-    public ArrayList<Entity> getFirstDuellistEntitiesWhoCanMove ()
-    {
-        return firstDuellistEntitiesWhoCanMove;
-    }
-
-    public void setFirstDuellistEntitiesWhoCanMove (
-            ArrayList<Entity> firstDuellistEntitiesWhoCanMove)
-    {
-        this.firstDuellistEntitiesWhoCanMove = firstDuellistEntitiesWhoCanMove;
-    }
-
-    public ArrayList<Entity> getSecondDuellistEntitiesWhoCanMove ()
-    {
-        return secondDuellistEntitiesWhoCanMove;
-    }
-
-    public void setSecondDuellistEntitiesWhoCanMove (
-            ArrayList<Entity> secondDuellistEntitiesWhoCanMove)
-    {
-        this.secondDuellistEntitiesWhoCanMove = secondDuellistEntitiesWhoCanMove;
-    }
-
-    public Player getFirstduellist ()
-    {
-        return firstduellist;
-    }
-
-    public void setFirstduellist (Player firstduellist)
-    {
-        this.firstduellist = firstduellist;
-    }
-
-    public Player getSecondduellist ()
-    {
-        return secondduellist;
-    }
-
-    public void setSecondduellist (Player secondduellist)
-    {
-        this.secondduellist = secondduellist;
-    }
-
-    private void setCurrentActiveDuellist (Player player)
-    {
-        this.currentActiveDuellist = player;
-    }
-
-    private Player getCurrentActiveDuellist ()
-    {
-        if (this.currentActiveDuellist == this.firstduellist){
-            return this.firstduellist;
-        } else {
-            return this.secondduellist;
-        }
-    }
-
-    private ArrayList<Card> getCurrentHand ()
-    {
-        if (this.currentActiveDuellist == this.firstduellist){
-            return this.getFirstDuellistHand();
-        } else {
-            return this.getSecondDuellistHand();
-        }
-    }
-
-    private ArrayList<Entity> getCurrentEntitiesWhoCanAttack ()
-    {
-        if (this.currentActiveDuellist == this.firstduellist){
-            return this.getFirstDuellistEntitiesWhoCanAttack();
-        } else {
-            return this.getSecondDuellistEntitiesWhoCanAttack();
-        }
-    }
-
-    private ArrayList<Entity> getCurrentEntitiesWhoCanMove ()
-    {
-        if (this.currentActiveDuellist == this.firstduellist){
-            return this.getFirstDuellistEntitiesWhoCanMove();
-        } else {
-            return this.getSecondDuellistEntitiesWhoCanMove();
-        }
-    }
-
-    private void setPlayerAsFirstDuellist (boolean choice)
-    {
-        if (choice == true) {
-            this.firstduellist = this.player;
-            this.secondduellist = this.dm;
-            GlobalLogger.log(LoggerStringValues.PLAYER_GOES_FIRST);
-        } else {
-            this.firstduellist = this.dm;
-            this.secondduellist = this.player;
-            GlobalLogger.log(LoggerStringValues.DM_GOES_FIRST);
         }
     }
 }
