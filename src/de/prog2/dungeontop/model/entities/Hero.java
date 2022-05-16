@@ -5,7 +5,6 @@ import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.talents.Talent;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Hero extends Entity

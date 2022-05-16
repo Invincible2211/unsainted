@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.model.world.arena;
 
-import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 
@@ -10,7 +9,7 @@ public class Arena
 {
     private final int height;
     private final int width;
-    private HashMap<Coordinate, ArenaComponent> arenaHashmap;
+    private final HashMap<Coordinate, ArenaComponent> arenaHashmap = new HashMap<>();
     public Arena(int height, int width)
     {
         this.height = height;

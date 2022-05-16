@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class Deck
 {
-    private Stack<Card> cards;
+    private final Stack<Card> cards;
 
     public Deck()
     {

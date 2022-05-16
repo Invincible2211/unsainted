@@ -16,15 +16,14 @@ public class Hell
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private final int width, height;
-    private HashMap<Coordinate, Room> roomHashMap;
-    private HashMap<Coordinate, HellComponent> hellComponentHashMap;
+    private final HashMap<Coordinate, Room> roomHashMap = new HashMap<>();
+    private final HashMap<Coordinate, HellComponent> hellComponentHashMap = new HashMap<>();
     private Room startingRoom, bossRoom;
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
     public Hell(int width, int height)
     {
         this.width = width;
         this.height = height;
-        this.roomHashMap = new HashMap<>();
     }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public Room getRoomByCoordinate(Coordinate coordinate)

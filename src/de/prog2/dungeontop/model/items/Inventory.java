@@ -1,7 +1,5 @@
 package de.prog2.dungeontop.model.items;
 
-import de.prog2.dungeontop.model.items.Item;
-
 import java.util.LinkedList;
 
 public class Inventory {

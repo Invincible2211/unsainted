@@ -6,8 +6,6 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 
 import de.prog2.dungeontop.resources.LoggerStringValues;
 
-import java.util.ArrayList;
-
 public class Player
 {
     private int souls;
@@ -74,13 +72,6 @@ public class Player
     {
         this.inventory = inventory;
     }
-
-
-    public ArrayList<Card> getHand()
-    {
-        return this.hand;
-    }
-
     public int getHandCardLimit ()
     {
         return handCardLimit;
