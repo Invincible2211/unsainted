@@ -8,19 +8,13 @@ import java.util.HashMap;
 
 public class Arena
 {
-    private int height;
-    private int width;
+    private final int height;
+    private final int width;
     private HashMap<Coordinate, ArenaComponent> arenaHashmap;
     public Arena(int height, int width)
     {
         this.height = height;
         this.width = width;
-
-        for (int hoch = 0; hoch < height; hoch++) {
-            for (int weit = 0; weit < width; weit++) {
-                insertComponent(new Coordinate(hoch, weit), new ArenaComponent(null));
-            }
-        }
     }
 
     public void castSpell(Spell spell, Coordinate coordinate)
@@ -62,12 +56,5 @@ public class Arena
     public int getWidth()
     {
         return width;
-    }
-
-    // TODO: FynnK
-    //Get all minions of player, muss in ArenaController, hier nicht !!!!!
-    public Entity[] getAllMinions ()
-    {
-        return null;
     }
 }
