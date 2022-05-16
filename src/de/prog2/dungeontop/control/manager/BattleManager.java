@@ -25,8 +25,6 @@ public class BattleManager
     private Player firstduellist = null;
     private Player secondduellist = null;
     private Player currentActiveDuellist = null;
-    private boolean isPlayerfirst = false;
-
 
     public BattleManager (Player player, DungeonMaster dm, Arena arena)
     {
@@ -314,14 +312,5 @@ public class BattleManager
         this.firstduellist = this.dm;
         this.secondduellist = this.player;
         GlobalLogger.log(LoggerStringValues.DM_GOES_FIRST);
-    }
-    public boolean isPlayerfirst ()
-    {
-        return isPlayerfirst;
-    }
-
-    public void setPlayerfirst (boolean playerfirst)
-    {
-        isPlayerfirst = playerfirst;
     }
 }
