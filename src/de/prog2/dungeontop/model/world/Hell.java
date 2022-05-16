@@ -84,10 +84,10 @@ public class Hell
                         case 0:
                             if (this.getRoomHashMap().containsKey(currCoordinate))
                             {
-                                res.append("\u250c");
+                                res.append("╓");
                                 res.append(RoomController.hasTopRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ? "   " : "\u2500\u2500\u2500");
-                                res.append("\u2510");
+                                        this.getRoomByCoordinate(currCoordinate)) ? "   " : "───");
+                                res.append("╖");
                                 break;
                             }
                             res.append("     ");
@@ -97,10 +97,10 @@ public class Hell
                             if (this.getRoomHashMap().containsKey(currCoordinate))
                             {
                                 res.append(RoomController.hasLeftRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ? " " : "\u2502");
+                                        this.getRoomByCoordinate(currCoordinate)) ? " " : "║");
                                 res.append("   ");
                                 res.append(RoomController.hasRightRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ? " " : "\u2502");
+                                        this.getRoomByCoordinate(currCoordinate)) ? " " : "║");
                                 break;
                             }
                             res.append("     ");
@@ -108,10 +108,10 @@ public class Hell
                         case 2:
                             if (this.getRoomHashMap().containsKey(currCoordinate))
                             {
-                                res.append("\u2514");
+                                res.append("╙");
                                 res.append(RoomController.hasBottomRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ? "   " : "\u2500\u2500\u2500");
-                                res.append("\u2518");
+                                        this.getRoomByCoordinate(currCoordinate)) ? "   " : "───");
+                                res.append("╜");
                                 break;
                             }
                             res.append("     ");
