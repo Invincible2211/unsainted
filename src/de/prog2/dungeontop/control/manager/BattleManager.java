@@ -2,7 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.entities.EntityClass;
+import de.prog2.dungeontop.model.perks.Perk;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -31,8 +31,8 @@ public class BattleManager
      */
     public BattleManager (Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena)
     {
-        this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck,new Deck(),new ArrayList<EntityClass>());
-        this.secondDuellist = new Duellist(secondplayer,secondplayerDeck,new Deck(),new ArrayList<EntityClass>());
+        this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck,new Deck(),new ArrayList<Perk>());
+        this.secondDuellist = new Duellist(secondplayer,secondplayerDeck,new Deck(),new ArrayList<Perk>());
         this.arena = arena;
     }
 
@@ -215,14 +215,14 @@ public class BattleManager
         private Player player = null;
         private Deck deck = null;
         private Deck discardPile = new Deck();
-        private List<EntityClass> activePerks = new ArrayList<>();
+        private List<Perk> activePerks = new ArrayList<>();
         private List<Card> hand = new ArrayList<>();
         private int handLimit = 0;
         private int currentEgoPoints = 0;
         private int egoPointsMax = 0;
 
         public Duellist (Player player, Deck deck, Deck discardPile,
-                         List<EntityClass> activePerks)
+                         List<Perk> activePerks)
         {
             this.player = player;
             this.deck = deck;
@@ -327,12 +327,12 @@ public class BattleManager
             this.discardPile = discardPile;
         }
 
-        public List<EntityClass> getActivePerks ()
+        public List<Perk> getActivePerks ()
         {
             return activePerks;
         }
 
-        public void setActivePerks (List<EntityClass> activePerks)
+        public void setActivePerks (List<Perk> activePerks)
         {
             this.activePerks = activePerks;
         }
