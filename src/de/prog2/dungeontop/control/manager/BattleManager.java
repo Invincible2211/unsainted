@@ -317,11 +317,139 @@ public class BattleManager
     }
     public boolean isPlayerfirst ()
     {
-        return isPlayerfirst;
+        return firstDuellistHand;
     }
 
-    public void setPlayerfirst (boolean playerfirst)
+    public void setFirstDuellistHand (ArrayList<Card> firstDuellistHand)
     {
-        isPlayerfirst = playerfirst;
+        this.firstDuellistHand = firstDuellistHand;
+    }
+
+    public ArrayList<Card> getSecondDuellistHand ()
+    {
+        return secondDuellistHand;
+    }
+
+    public void setSecondDuellistHand (ArrayList<Card> secondDuellistHand)
+    {
+        this.secondDuellistHand = secondDuellistHand;
+    }
+
+    public ArrayList<Entity> getFirstDuellistEntitiesWhoCanAttack ()
+    {
+        return firstDuellistEntitiesWhoCanAttack;
+    }
+
+    public void setFirstDuellistEntitiesWhoCanAttack (
+            ArrayList<Entity> firstDuellistEntitiesWhoCanAttack)
+    {
+        this.firstDuellistEntitiesWhoCanAttack = firstDuellistEntitiesWhoCanAttack;
+    }
+
+    public ArrayList<Entity> getSecondDuellistEntitiesWhoCanAttack ()
+    {
+        return secondDuellistEntitiesWhoCanAttack;
+    }
+
+    public void setSecondDuellistEntitiesWhoCanAttack (
+            ArrayList<Entity> secondDuellistEntitiesWhoCanAttack)
+    {
+        this.secondDuellistEntitiesWhoCanAttack = secondDuellistEntitiesWhoCanAttack;
+    }
+
+    public ArrayList<Entity> getFirstDuellistEntitiesWhoCanMove ()
+    {
+        return firstDuellistEntitiesWhoCanMove;
+    }
+
+    public void setFirstDuellistEntitiesWhoCanMove (
+            ArrayList<Entity> firstDuellistEntitiesWhoCanMove)
+    {
+        this.firstDuellistEntitiesWhoCanMove = firstDuellistEntitiesWhoCanMove;
+    }
+
+    public ArrayList<Entity> getSecondDuellistEntitiesWhoCanMove ()
+    {
+        return secondDuellistEntitiesWhoCanMove;
+    }
+
+    public void setSecondDuellistEntitiesWhoCanMove (
+            ArrayList<Entity> secondDuellistEntitiesWhoCanMove)
+    {
+        this.secondDuellistEntitiesWhoCanMove = secondDuellistEntitiesWhoCanMove;
+    }
+
+    public Player getFirstduellist ()
+    {
+        return firstduellist;
+    }
+
+    public void setFirstduellist (Player firstduellist)
+    {
+        this.firstduellist = firstduellist;
+    }
+
+    public Player getSecondduellist ()
+    {
+        return secondduellist;
+    }
+
+    public void setSecondduellist (Player secondduellist)
+    {
+        this.secondduellist = secondduellist;
+    }
+
+    private void setCurrentActiveDuellist (Player player)
+    {
+        this.currentActiveDuellist = player;
+    }
+
+    private Player getCurrentActiveDuellist ()
+    {
+        if (this.currentActiveDuellist == this.firstduellist){
+            return this.firstduellist;
+        } else {
+            return this.secondduellist;
+        }
+    }
+
+    private ArrayList<Card> getCurrentHand ()
+    {
+        if (this.currentActiveDuellist == this.firstduellist){
+            return this.getFirstDuellistHand();
+        } else {
+            return this.getSecondDuellistHand();
+        }
+    }
+
+    private ArrayList<Entity> getCurrentEntitiesWhoCanAttack ()
+    {
+        if (this.currentActiveDuellist == this.firstduellist){
+            return this.getFirstDuellistEntitiesWhoCanAttack();
+        } else {
+            return this.getSecondDuellistEntitiesWhoCanAttack();
+        }
+    }
+
+    private ArrayList<Entity> getCurrentEntitiesWhoCanMove ()
+    {
+        if (this.currentActiveDuellist == this.firstduellist){
+            return this.getFirstDuellistEntitiesWhoCanMove();
+        } else {
+            return this.getSecondDuellistEntitiesWhoCanMove();
+        }
+    }
+
+    private void setPlayerAsFirstDuellist (boolean choice)
+    {
+        if (choice == true) {
+            this.firstduellist = this.player;
+            this.secondduellist = this.dm;
+            GlobalLogger.log(LoggerStringValues.PLAYER_GOES_FIRST);
+        } else {
+            this.firstduellist = this.dm;
+            this.secondduellist = this.player;
+            GlobalLogger.log(LoggerStringValues.DM_GOES_FIRST);
+        }
     }
 }

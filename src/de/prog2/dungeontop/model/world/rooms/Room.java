@@ -1,8 +1,8 @@
-package de.prog2.dungeontop.model.world;
+package de.prog2.dungeontop.model.world.rooms;
 
-import de.prog2.dungeontop.control.controller.HellController;
-import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.model.world.Action;
+import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.DefaultAction;
 
 /**
  * Represents all the different Rooms.

@@ -4,17 +4,15 @@ import de.prog2.dungeontop.model.exceptions.customexceptions.NotAValidRoomtypeEx
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotValidRngRollException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.SpotAlreadyOccupiedException;
 import de.prog2.dungeontop.model.world.*;
+import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.CoordinateDirections;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
-import javax.swing.*;
-import java.nio.file.LinkOption;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class HellController
 {
@@ -32,7 +30,7 @@ public class HellController
         {
             GlobalLogger.log(LoggerStringValues.HELL_GENERATION_START);
 
-            Room startingRoom = new EmptyRoom (new Coordinate(hell.getWidth()/2, hell.getHeight()/2));
+            Room startingRoom = new EmptyRoom(new Coordinate(hell.getWidth()/2, hell.getHeight()/2));
             try
             {
                 addRoomToGrid(hell, startingRoom);
@@ -574,7 +572,7 @@ public class HellController
                 switch(roomType)
                 {
                     case FORGE_ROOM:
-                        newRoom = new ForgeRoom ();
+                        newRoom = new ForgeRoom();
                         newRoom.setCoordinate(currRoom.getCoordinate());
                         GlobalLogger.log(LoggerStringValues.FORGE_ROOM_ADDED);
                         break;

@@ -14,6 +14,12 @@ public class Arena
     {
         this.height = height;
         this.width = width;
+
+        for (int hoch = 0; hoch < height; hoch++) {
+            for (int weit = 0; weit < width; weit++) {
+                insertComponent(new Coordinate(hoch, weit), new ArenaComponent(null));
+            }
+        }
     }
 
     public HashMap<Coordinate, ArenaComponent> getArenaHashmap()

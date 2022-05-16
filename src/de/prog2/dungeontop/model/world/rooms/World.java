@@ -1,6 +1,7 @@
-package de.prog2.dungeontop.model.world;
+package de.prog2.dungeontop.model.world.rooms;
 
 import de.prog2.dungeontop.control.controller.HellController;
+import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;

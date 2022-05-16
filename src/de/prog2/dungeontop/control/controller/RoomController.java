@@ -2,6 +2,9 @@ package de.prog2.dungeontop.control.controller;
 
 import de.prog2.dungeontop.model.exceptions.customexceptions.SpotAlreadyOccupiedException;
 import de.prog2.dungeontop.model.world.*;
+import de.prog2.dungeontop.model.world.rooms.EmptyRoom;
+import de.prog2.dungeontop.model.world.rooms.NPCRoom;
+import de.prog2.dungeontop.model.world.rooms.Room;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 

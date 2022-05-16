@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.model.world;
+package de.prog2.dungeontop.model.world.rooms;
 
 /**
  * The RandomEventRoom is a room where random events, such as traps, occur.

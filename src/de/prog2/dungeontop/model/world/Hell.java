@@ -1,7 +1,8 @@
 package de.prog2.dungeontop.model.world;
 
-import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.control.controller.RoomController;
+import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
+import de.prog2.dungeontop.model.world.rooms.Room;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
