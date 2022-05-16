@@ -1,6 +1,6 @@
 package de.prog2.dungeontop.resources;
 
-import de.prog2.dungeontop.model.world.Rotation;
+import de.prog2.dungeontop.model.world.hellComponents.Rotation;
 
 import java.util.UUID;
 

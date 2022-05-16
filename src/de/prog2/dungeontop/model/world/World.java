@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.model.world.rooms;
+package de.prog2.dungeontop.model.world;
 
 import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.model.world.Hell;

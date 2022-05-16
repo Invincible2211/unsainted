@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.model.world;
+package de.prog2.dungeontop.model.world.hellComponents;
 
 import java.util.UUID;
 

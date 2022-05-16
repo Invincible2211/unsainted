@@ -1,6 +1,6 @@
-package de.prog2.dungeontop.model.world.rooms;
+package de.prog2.dungeontop.model.world.hellComponents;
 
-import de.prog2.dungeontop.model.world.HellComponent;
+import de.prog2.dungeontop.model.world.rooms.Room;
 import de.prog2.dungeontop.resources.WorldConstants;
 
 /**

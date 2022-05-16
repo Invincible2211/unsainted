@@ -4,6 +4,7 @@ import de.prog2.dungeontop.model.exceptions.customexceptions.NotAValidRoomtypeEx
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotValidRngRollException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.SpotAlreadyOccupiedException;
 import de.prog2.dungeontop.model.world.*;
+import de.prog2.dungeontop.model.world.hellComponents.*;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
@@ -537,7 +538,7 @@ public class HellController
                 currRoom = room;
             }
         }
-        ArenaRoom bossRoom = new ArenaRoom();
+        ArenaRoom bossRoom = new ArenaRoom(null);
         bossRoom.setCoordinate(currRoom.getCoordinate());
         replaceRoom(hell, currRoom, bossRoom);
         roomList.remove(currRoom);
@@ -620,7 +621,7 @@ public class HellController
                 switch(type)
                 {
                     case ARENA_ROOM:
-                        ArenaRoom arenaRoom = new ArenaRoom();
+                        ArenaRoom arenaRoom = new ArenaRoom(null);
                         arenaRoom.setCoordinate(currRoom.getCoordinate());
                         replaceRoom(hell, currRoom, arenaRoom);
                         roomList.remove(currRoom);
