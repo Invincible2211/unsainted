@@ -10,7 +10,7 @@ public abstract class Entity
     private int attackDamage = 0;
     private int movement = 0;
     private Coordinate position;
-    private int movesLeft = 0, maxMoves = 0;
+    private int movesLeftOver = 0, maxMoves = 0;
     private int attackRange = 0, maxAttackRange = 0;
     private Player owner = null;
 
@@ -21,7 +21,7 @@ public abstract class Entity
         this.attackDamage = attackDamage;
         this.movement = movement;
         this.maxMoves = maxMoves;
-        this.movesLeft = maxMoves;
+        this.movesLeftOver = maxMoves;
         this.owner = owner;
     }
 
@@ -76,13 +76,13 @@ public abstract class Entity
         this.maxMoves = maxMoves;
     }
 
-    public int getMovesLeft()
+    public int getMovesLeftOver()
     {
-        return movesLeft;
+        return movesLeftOver;
     }
-    public void setMovesLeft(int movesLeft)
+    public void setMovesLeftOver(int movesLeftOver)
     {
-        this.movesLeft = movesLeft;
+        this.movesLeftOver = movesLeftOver;
     }
 
     public int getAttackRange()

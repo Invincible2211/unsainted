@@ -74,9 +74,10 @@ public class BattleManager
             case START, SECOND_DUELLIST_SECOND_PLACE_CARDS ->
             {
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                return BattlePhase.DRAW_CARDS;
-
-            case DRAW_CARDS:
+                return BattlePhase.FIRST_DUELLIST_DRAW;
+            }
+            case FIRST_DUELLIST_DRAW ->
+            {
                 GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
                 return BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
             }
@@ -126,12 +127,10 @@ public class BattleManager
     public void endBattle (boolean victory)
     {
         setCurrentPhase(BattlePhase.END);
-        if (victory)
-        {
-            GlobalLogger.log(LoggerStringValues.DUELL_HAS_ENDED_VICTORIOUS);
-            return;
-        }
-        GlobalLogger.log(LoggerStringValues.DUELL_HAS_ENDED_IN_DEFEAT);
+        GlobalLogger.log(victory ?
+                LoggerStringValues.DUELL_HAS_ENDED_VICTORIOUS :
+                LoggerStringValues.DUELL_HAS_ENDED_IN_DEFEAT
+        );
     }
 
 
@@ -187,16 +186,17 @@ public class BattleManager
 
     private boolean isInRangeToAttack (Entity attacker, Entity attacked)
     {
-        Coordinate coordinateOfAttacker = attacker.getPosition();
-        for (Coordinate coordinate : CoordinateDirections.getStraightNeighbours(coordinateOfAttacker))
-        {
-            if (coordinate == attacked.getPosition())
-            {
-                GlobalLogger.log(LoggerStringValues.ENTITY_HAS_RANGE_TO_ATTACK);
-                return true;
-            }
-        }
-        GlobalLogger.log(LoggerStringValues.ENTIT_DOES_NOT_HAVE_TARGET_IN_RANGE);
+        // TODO: EntityController @FynnK @Jesse
+//        Coordinate coordinateOfAttacker = attacker.getPosition();
+//        for (Coordinate coordinate : CoordinateDirections.getStraightNeighbours(coordinateOfAttacker))
+//        {
+//            if (coordinate == attacked.getPosition())
+//            {
+//                GlobalLogger.log(LoggerStringValues.ENTITY_HAS_RANGE_TO_ATTACK);
+//                return true;
+//            }
+//        }
+//        GlobalLogger.log(LoggerStringValues.ENTIT_DOES_NOT_HAVE_TARGET_IN_RANGE);
         return false;
     }
 
@@ -206,7 +206,7 @@ public class BattleManager
     private enum BattlePhase
     {
         START, //at threading maybe wait for connections, Decide Beginner
-        DRAW_CARDS, //where duellists get to draw to handcardlimit
+        FIRST_DUELLIST_DRAW, //where first duellist draws cards
         FIRST_DUELLIST_PLACE_CARDS, //first duellist can place cards on arena
         SECOND_DUELLIST_DRAW, //where second duellist draws cards
         SECOND_DUELLIST_PLACE_CARDS, //second duellist can place cards on arena
@@ -268,66 +268,6 @@ public class BattleManager
         this.currentPhase = currentPhase;
     }
 
-    public ArrayList<Card> getFirstDuellistHand ()
-    {
-        return firstDuellistHand;
-    }
-
-    public void setFirstDuellistHand (ArrayList<Card> firstDuellistHand)
-    {
-        this.firstDuellistHand = firstDuellistHand;
-    }
-
-    public ArrayList<Card> getSecondDuellistHand ()
-    {
-        return secondDuellistHand;
-    }
-
-    public void setSecondDuellistHand (ArrayList<Card> secondDuellistHand)
-    {
-        this.secondDuellistHand = secondDuellistHand;
-    }
-
-    public ArrayList<Entity> getFirstDuellistEntitiesWhoCanAttack ()
-    {
-        return firstDuellistEntitiesWhoCanAttack;
-    }
-
-    public void setFirstDuellistEntitiesWhoCanAttack (ArrayList<Entity> firstDuellistEntitiesWhoCanAttack)
-    {
-        this.firstDuellistEntitiesWhoCanAttack = firstDuellistEntitiesWhoCanAttack;
-    }
-
-    public ArrayList<Entity> getSecondDuellistEntitiesWhoCanAttack ()
-    {
-        return secondDuellistEntitiesWhoCanAttack;
-    }
-
-    public void setSecondDuellistEntitiesWhoCanAttack (ArrayList<Entity> secondDuellistEntitiesWhoCanAttack)
-    {
-        this.secondDuellistEntitiesWhoCanAttack = secondDuellistEntitiesWhoCanAttack;
-    }
-
-    public ArrayList<Entity> getFirstDuellistEntitiesWhoCanMove ()
-    {
-        return firstDuellistEntitiesWhoCanMove;
-    }
-
-    public void setFirstDuellistEntitiesWhoCanMove (ArrayList<Entity> firstDuellistEntitiesWhoCanMove)
-    {
-        this.firstDuellistEntitiesWhoCanMove = firstDuellistEntitiesWhoCanMove;
-    }
-
-    public ArrayList<Entity> getSecondDuellistEntitiesWhoCanMove ()
-    {
-        return secondDuellistEntitiesWhoCanMove;
-    }
-
-    public void setSecondDuellistEntitiesWhoCanMove (ArrayList<Entity> secondDuellistEntitiesWhoCanMove)
-    {
-        this.secondDuellistEntitiesWhoCanMove = secondDuellistEntitiesWhoCanMove;
-    }
-
     public Player getFirstduellist ()
     {
         return firstduellist;
@@ -360,33 +300,6 @@ public class BattleManager
             return this.firstduellist;
         }
         return this.secondduellist;
-    }
-
-    private ArrayList<Card> getCurrentHand ()
-    {
-        if (this.currentActiveDuellist == this.firstduellist)
-        {
-            return this.getFirstDuellistHand();
-        }
-        return this.getSecondDuellistHand();
-    }
-
-    private ArrayList<Entity> getCurrentEntitiesWhoCanAttack ()
-    {
-        if (this.currentActiveDuellist == this.firstduellist)
-        {
-            return this.getFirstDuellistEntitiesWhoCanAttack();
-        }
-        return this.getSecondDuellistEntitiesWhoCanAttack();
-    }
-
-    private ArrayList<Entity> getCurrentEntitiesWhoCanMove ()
-    {
-        if (this.currentActiveDuellist == this.firstduellist)
-        {
-            return this.getFirstDuellistEntitiesWhoCanMove();
-        }
-        return this.getSecondDuellistEntitiesWhoCanMove();
     }
 
     private void setPlayerAsFirstDuellist (boolean choice)

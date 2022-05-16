@@ -16,7 +16,7 @@ public class Player
     private Deck deck;
     private Inventory inventory;
     private Room currentRoom;
-    private ArrayList<Card>[] hand;
+    private ArrayList<Card> hand;
     private int handCardLimit;
 
     public Player (){
@@ -80,7 +80,6 @@ public class Player
 
     public ArrayList<Card> getHand()
     {
-        Card[] res = new Card[this.hand.length];
-        return this.hand.
+        return this.hand;
     }
 }

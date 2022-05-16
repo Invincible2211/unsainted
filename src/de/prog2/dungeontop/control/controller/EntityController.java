@@ -53,11 +53,11 @@ public class EntityController
     }
     public static boolean isAllowedToMove(Entity entity)
     {
-        return entity.getMovesLeft() > 0;
+        return entity.getMovesLeftOver() > 0;
     }
     public static void decrementMovesLeft(Entity entity)
     {
-        entity.setMovesLeft(isAllowedToMove(entity) ? entity.getMovesLeft() - 1 : 0);
+        entity.setMovesLeftOver(isAllowedToMove(entity) ? entity.getMovesLeftOver() - 1 : 0);
     }
     public static MoveDirection[] getValidMoveDirections (Arena arena, Entity entity)
     {

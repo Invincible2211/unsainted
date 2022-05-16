@@ -22,8 +22,8 @@ public class ConfigurationFileReader {
             properties.load(new FileInputStream(new File(FilePaths.CONFIGURATION_FILE_PATH)));
             GlobalLogger.log(LoggerStringValues.CONFIG_LOADED);
         } catch (IOException e) {
-            throw new RuntimeException(e);
             GlobalLogger.warning(LoggerStringValues.CONFIG_LOAD_ERROR);
+            throw new RuntimeException(e);
         }
     }
 
@@ -32,6 +32,7 @@ public class ConfigurationFileReader {
        String result = properties.getProperty(key);
        if (result == null)
        {
+           // TODO: Fynn2 mach sachen
            GlobalLogger.warning(LoggerStringValues.CONFIG_KEY_DOES_NOT_EXISTS);
        }
        return result;

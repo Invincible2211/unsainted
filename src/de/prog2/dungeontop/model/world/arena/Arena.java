@@ -47,21 +47,13 @@ public class Arena
         return height;
     }
 
-    public void setHeight(int height)
-    {
-        this.height = height;
-    }
-
     public int getWidth()
     {
         return width;
     }
 
-    public void setWidth(int width)
-    {
-        this.width = width;
-    }
-
+    // TODO: FynnK
+    //Get all minions of player, muss in ArenaController, hier nicht !!!!!
     public Entity[] getAllMinions ()
     {
         return null;
