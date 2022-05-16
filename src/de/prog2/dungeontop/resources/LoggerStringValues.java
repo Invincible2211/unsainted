@@ -100,4 +100,5 @@ public interface LoggerStringValues {
     String CONFIG_LOADED = "Die Config-Datei wurde geladen";
     String CONFIG_LOAD_ERROR = "Die Config-Datei konnte nicht geladen werden.";
     String CONFIG_KEY_DOES_NOT_EXISTS = "Die Config-Datei beinhaltet einen solchen Key nicht";
+    String BATTLE_HAS_ENDED = "Das Duell wurde Beendet";
 }

@@ -2,10 +2,8 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.game.Card;
-import de.prog2.dungeontop.model.game.DungeonMaster;
-import de.prog2.dungeontop.model.game.MoveDirection;
-import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.model.entities.EntityClass;
+import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
@@ -14,49 +12,31 @@ import de.prog2.dungeontop.utils.CoordinateDirections;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class BattleManager
 {
-    private Player player;
-    private DungeonMaster dm;
-    private Arena arena;
+    private final Arena arena;
     private BattlePhase currentPhase = BattlePhase.START;
-    private Player firstduellist = null;
-    private Player secondduellist = null;
-    private Player currentActiveDuellist = null;
+    private Duellist firstDuellist = null;
+    private Duellist secondDuellist = null;
 
-    public BattleManager (Player player, DungeonMaster dm, Arena arena)
-    {
-        this.player = player;
-        this.dm = dm;
-        this.arena = arena;
-    }
 
     /**
-     * coinflip for who can choose who is first.
+     *
+     * @param firstPlayer Player or DM who will draw and play first. Decide before Battle
+     * @param secondplayer Player or DM will go second
+     * @param firstplyerDeck COPY playerDeck or the DMHerodeck, depending who is who.
+     * @param secondplayerDeck COPY playerDeck or the DMHerodeck, depending who is who
+     * @param arena The instance of the Arena
      */
-    public void startBattle ()
+    public BattleManager (Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena)
     {
-        GlobalLogger.log(LoggerStringValues.START_BATTLE);
-        Random random = new Random();
-        if (random.nextBoolean()) // true dann darf der spieler
-        {
-            GlobalLogger.log(LoggerStringValues.PLAYER_CAN_CHOOSE_WHO_IS_FIRST);
-            // HIER DARF SICH DER SPIELER AUSSUCHEN WER ZUERST ZIEHT... MIT EVENT?
-            //Wait for choice of another Thread when we are allowed to
-            boolean choice = true;
-            setPlayerAsFirstDuellist(choice); //TODO hier das TRUE aendern mit dem Ergebnis der choice wer zuerst darf
-            setCurrentPhase(getNextPhaseInCycle());
-            return;
-        }
-         // ansonsten darf der dm
-        GlobalLogger.log(LoggerStringValues.DM_CAN_CHOOSE_WHO_IS_FIRST);
-        // HIER DARF SICH DER DM AUSSUCHEN WER ZUERST ZIEHT... MIT EVENT?
-        //Wait for choice of another Thread when we are allowed to
-        boolean choice = true;
-        setPlayerAsFirstDuellist(choice); //TODO hier das TRUE aendern mit dem Ergebnis der choice wer zuerst darf
-        setCurrentPhase(getNextPhaseInCycle());
+     this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck,new Deck(),new ArrayList<EntityClass>());
+     this.secondDuellist = new Duellist(secondplayer,secondplayerDeck,new Deck(),new ArrayList<EntityClass>());
+     this.arena = arena;
     }
 
 
@@ -65,6 +45,11 @@ public class BattleManager
      * Fuer die Moeglichkeit bei Phases mehr Logik zu implementieren werden Phasen als Enum genommen, anstatt extern in properties zu stehen.
      * @return die naechste Phase in einem Battle die wiederholbar ist. Kein Start und kein End
      */
+    public void startBattle()
+    {
+
+    }
+
     public BattlePhase getNextPhaseInCycle ()
     {
         switch (this.getCurrentPhase())
@@ -122,30 +107,26 @@ public class BattleManager
         }
     }
 
-    public void endBattle (boolean victory)
+    //TODO Event handlen und aufrufen welches das outcome handled und Spieler Belohnt oder run beendet.
+    public BattleOutCome endBattle (Player gewinner, int damageAnVerlierer)
     {
+        GlobalLogger.log(LoggerStringValues.BATTLE_HAS_ENDED);
         setCurrentPhase(BattlePhase.END);
-        GlobalLogger.log(victory ?
-                LoggerStringValues.DUELL_HAS_ENDED_VICTORIOUS :
-                LoggerStringValues.DUELL_HAS_ENDED_IN_DEFEAT
-        );
+        return new BattleOutCome(gewinner, damageAnVerlierer);
     }
-
 
     /**
      * Places card on Arena tile,
-     * @param player who controlls the card
+     * @param duellist who controlls the card
      * @param coordinate where to place new minion
      */
-    public void placeCard (Player player, Coordinate coordinate, Card card)
+    public void placeCard (Duellist duellist, Coordinate coordinate, Card card)
     {
+
                 //remove from hand
         //put in list of units who cant move
         //put in list of units who cant attack
     }
-
-
-
 
     public void attack (Player owner, Entity attacker, Entity attacked)
     {
@@ -224,93 +205,107 @@ public class BattleManager
         END // choose treasure, get exp, skulls, etc. and go back to overworld
     }
 
-    /*---------------------------------------------- GETTER UND SETTER------------------------------------------------*/
-
-    public Player getPlayer ()
-    {
-        return player;
-    }
-
-    public void setPlayer (Player player)
-    {
-        this.player = player;
-    }
-
-    public DungeonMaster getDm ()
-    {
-        return dm;
-    }
-
-    public void setDm (DungeonMaster dm)
-    {
-        this.dm = dm;
-    }
-
-    public Arena getArena ()
-    {
-        return arena;
-    }
-
-    public void setArena (Arena arena)
-    {
-        this.arena = arena;
-    }
+    /*------------------------------Getter und Setter---------------------------------*/
 
     public BattlePhase getCurrentPhase ()
     {
         return currentPhase;
     }
-
     public void setCurrentPhase (BattlePhase currentPhase)
     {
         this.currentPhase = currentPhase;
     }
+    /*--------------------Hilfsklassen und ControllerMethodik------------------------*/
 
-    public Player getFirstduellist ()
-    {
-        return firstduellist;
-    }
 
-    public void setFirstduellist (Player firstduellist)
+    private void drawNewDuellistHand(Duellist duellist)
     {
-        this.firstduellist = firstduellist;
-    }
-
-    public Player getSecondduellist ()
-    {
-        return secondduellist;
-    }
-
-    public void setSecondduellist (Player secondduellist)
-    {
-        this.secondduellist = secondduellist;
-    }
-
-    private void setCurrentActiveDuellist (Player player)
-    {
-        this.currentActiveDuellist = player;
-    }
-
-    private Player getCurrentActiveDuellist ()
-    {
-        if (this.currentActiveDuellist == this.firstduellist)
-        {
-            return this.firstduellist;
+        duellist.getHand().clear();
+        Collections.shuffle(duellist.getDeck().getDeck());
+        for (int i = 0; i < duellist.handLimit; i++) {
+            Card drawedCard = duellist.deck.popCard();
+            duellist.hand.add(drawedCard);
+            duellist.discardPile.pushCard(drawedCard);
         }
-        return this.secondduellist;
     }
 
-    private void setPlayerAsFirstDuellist (boolean choice)
+
+
+
+    /**
+     * Duellist wird ausschließlich in einem Battle benutzt um zu vermeiden durch Nebeneffekte die Felder der Spieler zu verändern
+     * Die DuellistControllerLogik wird im BattleManager umgesetzt
+     */
+    private class Duellist
     {
-        if (choice)
+
+        private Player player = null;
+        private Deck deck = null;
+        private Deck discardPile = new Deck();
+        private List<EntityClass> activePerks = new ArrayList<>();
+        private List<Card> hand = new ArrayList<>();
+        private int handLimit = 0;
+
+        public Duellist (Player player, Deck deck, Deck discardPile,
+                         List<EntityClass> activePerks)
         {
-            this.firstduellist = this.player;
-            this.secondduellist = this.dm;
-            GlobalLogger.log(LoggerStringValues.PLAYER_GOES_FIRST);
-            return;
+            this.player = player;
+            this.deck = deck;
+            this.discardPile = discardPile;
+            this.activePerks = activePerks;
+            this.handLimit = player.getHandCardLimit();
         }
-        this.firstduellist = this.dm;
-        this.secondduellist = this.player;
-        GlobalLogger.log(LoggerStringValues.DM_GOES_FIRST);
+
+
+
+        public List<Card> getHand ()
+        {
+            return hand;
+        }
+
+        public void setHand (List<Card> hand)
+        {
+            this.hand = hand;
+        }
+
+        public Player getPlayer ()
+        {
+            return player;
+        }
+
+        public void setPlayer (Player player)
+        {
+            this.player = player;
+        }
+
+        public Deck getDeck ()
+        {
+            return deck;
+        }
+
+        public void setDeck (Deck deck)
+        {
+            this.deck = deck;
+        }
+
+        public Deck getDiscardPile ()
+        {
+            return discardPile;
+        }
+
+        public void setDiscardPile (Deck discardPile)
+        {
+            this.discardPile = discardPile;
+        }
+
+        public List<EntityClass> getActivePerks ()
+        {
+            return activePerks;
+        }
+
+        public void setActivePerks (List<EntityClass> activePerks)
+        {
+            this.activePerks = activePerks;
+        }
     }
 }
