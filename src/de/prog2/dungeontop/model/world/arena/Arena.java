@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.model.world.arena;
 
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 
 import java.util.HashMap;
@@ -20,6 +21,11 @@ public class Arena
                 insertComponent(new Coordinate(hoch, weit), new ArenaComponent(null));
             }
         }
+    }
+
+    public void castSpell(Spell spell, Coordinate coordinate)
+    {
+
     }
 
     public HashMap<Coordinate, ArenaComponent> getArenaHashmap()

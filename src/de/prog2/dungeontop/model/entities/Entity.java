@@ -1,11 +1,13 @@
 package de.prog2.dungeontop.model.entities;
 
+import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 
 public abstract class Entity
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
+    private final Card card;
     private int hp = 0;
     private int attackDamage = 0;
     private int movement = 0;
@@ -15,8 +17,9 @@ public abstract class Entity
     private Player owner = null;
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(int hp, int attackDamage, int movement, int maxMoves, Player owner)
+    public Entity(Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner)
     {
+        this.card = card;
         this.hp = hp;
         this.attackDamage = attackDamage;
         this.movement = movement;
@@ -113,5 +116,10 @@ public abstract class Entity
     public void setOwner(Player owner)
     {
         this.owner = owner;
+    }
+
+    public Card getCard()
+    {
+        return card;
     }
 }
