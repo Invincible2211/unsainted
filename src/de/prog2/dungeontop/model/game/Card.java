@@ -1,28 +1,35 @@
 package de.prog2.dungeontop.model.game;
 
+import java.util.HashMap;
+import java.util.List;
+
 public abstract class Card
 {
     private int rank = 1;
-    private final int price;
+    private int price;
     private final int maxRank;
+    private final HashMap<AssetType, Integer> assetTypeHashMap = new HashMap<>();
 
-    public Card(int maxRank, int price)
+    public enum AssetType
     {
-        this.maxRank = maxRank;
-        this.price = price;
+        A,B,C
     }
-    public Card(int maxRank, int price, int rank)
+
+    public Card(int maxRank, int price, int rank, List... assets)
     {
         this.maxRank = maxRank;
         this.price = price;
         this.rank = rank;
+
+        for (var asset : assets)
+        {
+            assetTypeHashMap.put((AssetType) asset.get(0), (Integer) asset.get(1));
+        }
     }
 
-    public Card(int maxRank, int price, int rank, int ego_points)
+    public int getAssetId (AssetType type)
     {
-        this.maxRank = maxRank;
-        this.price = price;
-        this.rank = rank;
+        return assetTypeHashMap.get(type);
     }
 
     public int getRank()
@@ -47,5 +54,9 @@ public abstract class Card
     public int getPrice()
     {
         return price;
+    }
+    public void setPrice(int price)
+    {
+        this.price = price;
     }
 }

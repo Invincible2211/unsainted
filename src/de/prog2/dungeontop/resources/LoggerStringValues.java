@@ -100,6 +100,14 @@ public interface LoggerStringValues {
     String CONFIG_LOADED = "Die Config-Datei wurde geladen";
     String CONFIG_LOAD_ERROR = "Die Config-Datei konnte nicht geladen werden.";
     String CONFIG_KEY_DOES_NOT_EXISTS = "Die Config-Datei beinhaltet einen solchen Key nicht";
+    // AudioManager
+    String PLAY_SOUND = "Spielt den  %d";
+    //AssetsManager
+    String STARTED_GET_ASSET_BY_ID = "Macht neue Anfrage für das Asset mit der id %d.";
+    String ASSET_FOUND = "Das Asset mit der id %d wurde gefunden.";
+    String ASSET_NOT_FOUND = "Das Asset mit der id %d wurde nicht gefunden.";
+    String STARTED_GET_ID_BY_ASSET = "Macht neue Anfrage für die id des assets %s.";
+    String ASSET_ID_FOUND = "Die ID des Assets %s wurde gefunden.";
     String BATTLE_HAS_ENDED = "Das Duell wurde Beendet";
     String CARD_REMOVED_FROM_HAND = "Eine Karte aus der Hand genommen";
     String REDUCED_EGOPOINTS = "Es wurde ein EgoPunkt abgezogen";

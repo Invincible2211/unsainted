@@ -1,18 +1,22 @@
 package de.prog2.dungeontop.model.entities;
 
+import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.talents.Talent;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Hero extends Entity
 {
-    private Talent talent = null;
-    private LinkedList<Talent> talents;
+    private Talent mainTalent = null;
+    private final List<Talent> talents = new ArrayList<>();
 
-    public Hero(int hp, int attackDamage, int movement, int maxMoves, Player owner)
+    public Hero(Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, Talent mainTalent)
     {
-        super(hp, attackDamage, movement, maxMoves, owner);
+        super(card, hp, attackDamage, movement, maxMoves, owner);
+        this.mainTalent = mainTalent;
     }
 
     public void addTalents(Talent talent)
@@ -26,23 +30,18 @@ public class Hero extends Entity
     }
 
     //Set- and Getters
-    public Talent getTalent ()
+    public Talent getMainTalent()
     {
-        return talent;
+        return mainTalent;
     }
 
-    public void setTalent (Talent talent)
+    public void setMainTalent(Talent mainTalent)
     {
-        this.talent = talent;
+        this.mainTalent = mainTalent;
     }
 
-    public LinkedList<Talent> getTalents()
+    public List<Talent> getTalents()
     {
         return talents;
-    }
-
-    public void setTalents(LinkedList<Talent> talents)
-    {
-        this.talents = talents;
     }
 }

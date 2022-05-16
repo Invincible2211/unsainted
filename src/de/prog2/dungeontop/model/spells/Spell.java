@@ -4,16 +4,12 @@ public abstract class Spell
 {
     private String name;
     private int ego_points;
-    private int num; //number for damage,heal,cards drawn, etc
 
-    public Spell (String name, int ego_points, int num)
+    public Spell (String name, int ego_points)
     {
         this.name = name;
         this.ego_points = ego_points;
-        this.num = num;
     }
-
-    protected abstract void effekt();
 
     //Set- and Getters
     public String getName()
@@ -30,19 +26,8 @@ public abstract class Spell
         return ego_points;
     }
 
-    public void setEgo_points(int mana_cost)
+    public void setEgo_points(int ego_points)
     {
-        this.ego_points = mana_cost;
+        this.ego_points = ego_points;
     }
-
-    public int getNum()
-    {
-        return num;
-    }
-
-    public void setNum(int num)
-    {
-        this.num = num;
-    }
-
 }

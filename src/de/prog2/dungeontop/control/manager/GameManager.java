@@ -18,12 +18,27 @@ public class GameManager {
         this.currentState = GameState.PAUSE;
     }
 
-    public void beginnBattle(){
+    public void beginBattle()
+    {
         this.currentState = GameState.BATTLE;
+    }
+
+    public void loseRun()
+    {
+        this.currentState = GameState.LOSE;
+    }
+
+    public void openShop()
+    {
+        this.currentState = GameState.SHOP;
+    }
+
+    public void exploringHell()
+    {
+        this.currentState = GameState.EXPLORING;
     }
 
     public GameState getCurrentState() {
         return currentState;
     }
-
 }

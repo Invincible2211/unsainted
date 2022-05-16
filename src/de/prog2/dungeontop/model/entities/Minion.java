@@ -1,109 +1,52 @@
 package de.prog2.dungeontop.model.entities;
 
+import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.skills.ActiveSkill;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Minion extends Entity {
-
-    private int attackValue = 0;
-
-    private int hitpoints = 0;
-
+public class Minion extends Entity
+{
     private String name = "";
 
-    private ArrayList<EntityClass> perks = null;
+    private final ArrayList<EntityClass> perks = new ArrayList<>();
 
     private int possibleAttacksPerRound = 0;
 
-    private ActiveSkill activeSkill= null;
+    private ActiveSkill activeSkill;
 
-    public Minion (int hp, int attackDamage, int movement)
+    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, String name, int possibleAttacksPerRound, ActiveSkill activeSkill)
     {
-        super(hp, attackDamage, movement);
+        super(card, hp, attackDamage, movement, maxMoves, owner);
+        this.name = name;
+        this.possibleAttacksPerRound = possibleAttacksPerRound;
+        this.activeSkill = activeSkill;
     }
 
-    // TODO: Jason oder Fynn 1 fixt das
-    /**
-     * Constructor for creating new instance of Minion
-     * @param attackValue
-     * @param hitpoints
-     * @param name
-     * @param perks
-     * @param possibleAttacksPerRound
-     * @param activeSkill
-     */
-//    public Minion (int attackValue, int hitpoints, String name,
-//                   ArrayList<EntityClass> perks, int possibleAttacksPerRound,
-//                   ActiveSkill activeSkill)
-//    {
-//        this.attackValue = attackValue;
-//        this.hitpoints = hitpoints;
-//        this.name = name;
-//        this.perks = perks;
-//        this.possibleAttacksPerRound = possibleAttacksPerRound;
-//        this.activeSkill = activeSkill;
-//    }
 
-    /**
-     * Constructer for the fileHandler where UUID is already given
-     * @param attackValue
-     * @param hitpoints
-     * @param name
-     * @param perks
-     * @param possibleAttacksPerRound
-     * @param activeSkill
-     * @param uuid
-     */
-//    public Minion(int attackValue, int hitpoints, String name, ArrayList<EntityClass> perks, int possibleAttacksPerRound, ActiveSkill activeSkill, UUID uuid) {
-//        this.attackValue = attackValue;
-//        this.hitpoints = hitpoints;
-//        this.name = name;
-//        this.perks = perks;
-//        this.possibleAttacksPerRound = possibleAttacksPerRound;
-//        this.activeSkill = activeSkill;
-//    }
-
-    /****************************************** Getter and Setter *******************************/
-    public int getAttackValue ()
-    {
-        return attackValue;
-    }
-
-    public void setAttackValue (int attackValue)
-    {
-        this.attackValue = attackValue;
-    }
-
-    public int getHitpoints ()
-    {
-        return hitpoints;
-    }
-
-    public void setHitpoints (int hitpoints)
-    {
-        this.hitpoints = hitpoints;
-    }
-
+    /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public String getName ()
     {
         return name;
     }
-
     public void setName (String name)
     {
         this.name = name;
     }
-
     public ArrayList<EntityClass> getPerks ()
     {
         return perks;
     }
 
-    public void setPerks (ArrayList<EntityClass> perks)
+    public void addPerk (EntityClass perk)
     {
-        this.perks = perks;
+        perks.add(perk);
+    }
+    public void removePerk (EntityClass perk)
+    {
+        perks.remove(perk);
     }
 
     public int getPossibleAttacksPerRound ()
