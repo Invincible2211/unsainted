@@ -87,7 +87,7 @@ public class Hell
                                 res.append("┌");
                                 res.append(RoomController.hasTopRoom(
                                         this.getRoomByCoordinate(currCoordinate)) ? "   " : "───");
-                                res.append("┐");
+                                res.append("\u2510");
                                 break;
                             }
                             res.append("     ");

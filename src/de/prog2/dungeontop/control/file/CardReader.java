@@ -3,7 +3,6 @@ package de.prog2.dungeontop.control.file;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import de.prog2.dungeontop.model.game.Card;
-import de.prog2.dungeontop.model.game.MinionCard;
 import de.prog2.dungeontop.resources.FilePaths;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -36,8 +35,8 @@ public class CardReader {
         for (File f:
              folder.listFiles()) {
             JsonElement jsonFile = jsonParser.parse(new FileReader(f));
-            MinionCard card = new MinionCard(0,0,0,0); //TODO Json -> card
-            cards.add(card);
+            //MinionCard card = new MinionCard(0,0,0,0); //TODO Json -> card
+            //cards.add(card);
             GlobalLogger.log(LoggerStringValues.LOAD_CARD);
         }
         GlobalLogger.log(LoggerStringValues.CARDS_LOADED);
