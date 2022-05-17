@@ -6,6 +6,8 @@ import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.skills.ActiveSkill;
 import de.prog2.dungeontop.model.skills.ManaPool;
 import de.prog2.dungeontop.model.skills.Skill;
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class Minion extends Entity
         this.possibleAttacksPerRound = possibleAttacksPerRound;
         skills.add(activeSkill);
         this.manaPool = manaPool;
+        GlobalLogger.log(LoggerStringValues.MINION_CREATED);
     }
 
     public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner, String name,
