@@ -1,6 +1,8 @@
 package de.prog2.dungeontop;
 
 import de.prog2.dungeontop.control.controller.HellController;
+import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.WorldConstants;
 
@@ -8,11 +10,9 @@ public class DungeonTop
 {
     public static void main(String[] args)
     {
-        Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
-        HellController.initHell(hell);
-        System.out.println(hell);
+        testItems();
     }
-    // TODO Jesse
+    // TODO Fynn#2
     public static void testEntities()
     {
 
@@ -22,12 +22,12 @@ public class DungeonTop
     {
 
     }
-    // TODO Thomas
+    // TODO Jesse
     public static void testItems()
     {
-
+        Item testItem = new TestItem();
     }
-    // TODO Thomas
+    // TODO Jesse
     public static void testPerks()
     {
 
