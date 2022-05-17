@@ -4,7 +4,7 @@ import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.WorldConstants;
 
-public class Unsainted
+public class DungeonTop
 {
     public static void main(String[] args)
     {
