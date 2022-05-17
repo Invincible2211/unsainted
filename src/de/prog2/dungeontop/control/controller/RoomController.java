@@ -119,7 +119,6 @@ public class RoomController
      */
     public static boolean hasTopRoom (Room room)
     {
-        GlobalLogger.log(LoggerStringValues.HAS_TOP_ROOM);
         return room.getTopRoom() != null;
     }
 
@@ -131,7 +130,6 @@ public class RoomController
      */
     public static boolean hasBottomRoom (Room room)
     {
-        GlobalLogger.log(LoggerStringValues.HAS_BOTTOM_ROOM);
         return room.getBottomRoom() != null;
     }
 
@@ -143,7 +141,6 @@ public class RoomController
      */
     public static boolean hasLeftRoom (Room room)
     {
-        GlobalLogger.log(LoggerStringValues.HAS_LEFT_ROOM);
         return room.getLeftRoom() != null;
     }
 
@@ -155,7 +152,6 @@ public class RoomController
      */
     public static boolean hasRightRoom (Room room)
     {
-        GlobalLogger.log(LoggerStringValues.HAS_RIGHT_ROOM);
         return room.getRightRoom() != null;
     }
 
