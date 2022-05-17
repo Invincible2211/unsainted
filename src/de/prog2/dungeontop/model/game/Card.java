@@ -1,5 +1,8 @@
 package de.prog2.dungeontop.model.game;
 
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +20,7 @@ public abstract class Card
 
     public Card(int maxRank, int price, int rank, List... assets)
     {
+        GlobalLogger.log(LoggerStringValues.CARD_CREATED);
         this.maxRank = maxRank;
         this.price = price;
         this.rank = rank;
