@@ -140,6 +140,7 @@ public interface LoggerStringValues {
     String CARD_PUSHED_TO_DECK = "Eine Karte wurde zum Deck gepusht!";
     String CARD_POPPED = "Eine Karte wurde vom Deck gepoppt!";
     String CARD_CONTAIN_IN_DECK = "Es wurde gesucht ob eine Karte im Deck ist!:";
+    String CARD_CREATED = "Es wurde eine Card erstellt!";
     String MINION_CREATED = "Ein Minion wurde erstellt";
     // Items
     String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Preis: %d Souls.";
