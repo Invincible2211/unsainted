@@ -12,6 +12,12 @@ import java.util.UUID;
 
 public class AudioManager {
 
+    private final static AudioManager instance = new AudioManager();
+
+    private AudioManager(){
+
+    }
+
     public static void playSound(int soundID) {
         GlobalLogger.log(String.format(LoggerStringValues.PLAY_SOUND, soundID));
         File soundFile = AssetsManager.getAssetById(soundID);
@@ -23,6 +29,10 @@ public class AudioManager {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
+    }
+
+    public static AudioManager getInstance() {
+        return instance;
     }
 
 }
