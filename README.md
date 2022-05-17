@@ -1,1 +1,1 @@
-# de.prog2.dungeontop.DungeonTop
+# de.prog2.dungeontop.Unsainted
