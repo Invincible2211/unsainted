@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.model.game;
 
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
 
 public class EntityCard extends Card
 {
@@ -10,6 +12,7 @@ public class EntityCard extends Card
     {
         super(maxRank, price, rank);
         this.entity = entity;
+        GlobalLogger.log(LoggerStringValues.ENTITYCARD_CREATED);
     }
 
     public Entity getEntity()

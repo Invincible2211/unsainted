@@ -17,9 +17,11 @@ public class Player
 
     public Player (){
         this.souls = 0;
+        GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
     }
     public Player (int souls){
         this.souls = souls;
+        GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
     }
 
 

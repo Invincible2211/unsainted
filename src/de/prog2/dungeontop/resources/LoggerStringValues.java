@@ -118,4 +118,11 @@ public interface LoggerStringValues {
     String ENTITY_OUT_OF_RANGE = "Entity ist nicht in der Reichweite!";
     String ENTITY_IS_IN_RANGE = "Entity ist in der Reichweite!";
     String RANGE_PROBLEM = "Something went wrong when checking if Entity has enough Range! in EntityController";
+    String SPELLCARD_CREATED = "Eine Spellcard wurde erstellt";
+    String PLAYER_CREATED = "Ein Spieler wurder erstellt!";
+    String ENTITYCARD_CREATED = "Eine EntityCard wurde erstellt!";
+    String DECK_CREATED = "Ein Deck wurde erstellt!";
+    String CARD_PUSHED_TO_DECK = "Eine Karte wurde zum Deck gepusht!";
+    String CARD_POPPED = "Eine Karte wurde vom Deck gepoppt!";
+    String CARD_CONTAIN_IN_DECK = "Es wurde gesucht ob eine Karte im Deck ist!:";
 }
