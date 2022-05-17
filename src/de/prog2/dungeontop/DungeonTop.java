@@ -11,7 +11,7 @@ public class DungeonTop
 {
     public static void main(String[] args)
     {
-
+        testItems();
     }
     // TODO Fynn#2
     public static void testEntities()
