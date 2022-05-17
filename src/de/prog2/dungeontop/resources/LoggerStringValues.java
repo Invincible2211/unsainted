@@ -129,5 +129,5 @@ public interface LoggerStringValues {
     // Items
     String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Preis: %d Souls.";
     String INVENTORY_CREATED = "Inventar wurde erstellt.";
-    String ITEM_ADDED = " wurde erstellt.";
+    String ITEM_ADDED = "%s wurde ins Inventar hinzugefuegt.";
 }
