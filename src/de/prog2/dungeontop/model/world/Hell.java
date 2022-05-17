@@ -4,6 +4,7 @@ import de.prog2.dungeontop.control.controller.RoomController;
 import de.prog2.dungeontop.model.world.hellComponents.HellComponent;
 import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
 import de.prog2.dungeontop.model.world.rooms.Room;
+import de.prog2.dungeontop.resources.HellToStringValues;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -84,34 +85,38 @@ public class Hell
                         case 0:
                             if (this.getRoomHashMap().containsKey(currCoordinate))
                             {
-                                res.append("╓");
+                                res.append(HellToStringValues.TOP_LEFT_CORNER);
                                 res.append(RoomController.hasTopRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ? "   " : "───");
-                                res.append("╖");
+                                        this.getRoomByCoordinate(currCoordinate)) ?
+                                        HellToStringValues.ROOM_CENTER : HellToStringValues.HORIZONTAL_WALL);
+                                res.append(HellToStringValues.TOP_RIGHT_CORNER);
                                 break;
                             }
-                            res.append("     ");
+                            res.append(HellToStringValues.NO_ROOM);
                             break;
                         case 1:
 
                             if (this.getRoomHashMap().containsKey(currCoordinate))
                             {
                                 res.append(RoomController.hasLeftRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ? " " : "║");
+                                        this.getRoomByCoordinate(currCoordinate)) ?
+                                        HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
                                 res.append("   ");
                                 res.append(RoomController.hasRightRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ? " " : "║");
+                                        this.getRoomByCoordinate(currCoordinate)) ?
+                                        HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
                                 break;
                             }
-                            res.append("     ");
+                            res.append(HellToStringValues.NO_ROOM);
                             break;
                         case 2:
                             if (this.getRoomHashMap().containsKey(currCoordinate))
                             {
-                                res.append("╙");
+                                res.append(HellToStringValues.BOTTOM_LEFT_CORNER);
                                 res.append(RoomController.hasBottomRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ? "   " : "───");
-                                res.append("╜");
+                                        this.getRoomByCoordinate(currCoordinate)) ?
+                                        HellToStringValues.ROOM_CENTER : HellToStringValues.HORIZONTAL_WALL);
+                                res.append(HellToStringValues.BOTTOM_RIGHT_CORNER);
                                 break;
                             }
                             res.append("     ");
