@@ -1,8 +1,9 @@
 package de.prog2.dungeontop.model.skills;
 
-public class ActiveSkill extends Skill
+public abstract class ActiveSkill extends Skill
 {
-    public ActiveSkill(String name, int attacks_cost, int num, int cast_range) {
-        super(name, attacks_cost, num, cast_range);
+
+    public ActiveSkill(String name, String description, int range) {
+        super(name, description, range);
     }
 }

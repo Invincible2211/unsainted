@@ -1,32 +1,19 @@
 package de.prog2.dungeontop.model.skills;
 
-public abstract class Skill {
-    private String name;
-    private int attacks_cost;
-    private int num;
-    private int num2;
-    private int cast_range;
+public abstract class Skill
+{
+    private final String name;
+    private final String description;
+    private int range;
 
-    public Skill(String name, int num)
+    public Skill(String name, String description, int range)
     {
         this.name = name;
-        this.num = num;
+        this.description = description;
+        this.range = range;
     }
 
-    public Skill(String name, int num, int num2)
-    {
-        this.name = name;
-        this.num = num;
-        this.num2 = num2;
-    }
-
-    public Skill (String name, int attacks_cost, int num, int cast_range)
-    {
-        this.name = name;
-        this.attacks_cost = attacks_cost;
-        this.num = num;
-        this.cast_range = cast_range;
-    }
+    public abstract void doSomething();
 
     //Set- and Getters
     public String getName()
@@ -34,48 +21,18 @@ public abstract class Skill {
         return name;
     }
 
-    public void setName(String name)
+    public int getRange()
     {
-        this.name = name;
+        return range;
     }
 
-    public int getAttacks_cost()
+    public void setRange(int range)
     {
-        return attacks_cost;
+        this.range = range;
     }
 
-    public void setAttacks_cost(int attacks_cost)
+    public String getDescription()
     {
-        this.attacks_cost = attacks_cost;
-    }
-
-    public int getNum()
-    {
-        return num;
-    }
-
-    public void setNum(int num)
-    {
-        this.num = num;
-    }
-
-    public int getNum2()
-    {
-        return num2;
-    }
-
-    public void setNum2(int num2)
-    {
-        this.num2 = num2;
-    }
-
-    public int getCast_range()
-    {
-        return cast_range;
-    }
-
-    public void setCast_range(int cast_range)
-    {
-        this.cast_range = cast_range;
+        return description;
     }
 }
