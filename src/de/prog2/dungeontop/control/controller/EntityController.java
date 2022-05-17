@@ -73,6 +73,13 @@ public class EntityController
         MoveDirection[] ar = new MoveDirection[results.size()];
         return results.toArray(ar);
     }
+
+    /**
+     * Ueberprueft ob eine Entity eine andere angreifen darf
+     * @param attacker Die Attackierende Entity
+     * @param attacked Die angegriffene Entity
+     * @return
+     */
     public static boolean isInRangeToAttack (Entity attacker, Entity attacked)
     {
         if (attacker.getPosition().getX() != attacked.getPosition().getX() && attacker.getPosition().getY() != attacked.getPosition().getY())
@@ -92,9 +99,7 @@ public class EntityController
             GlobalLogger.log(LoggerStringValues.ENTITY_IS_IN_RANGE);
             return true;
         }
-
-
-
-        return true;
+        GlobalLogger.warning(LoggerStringValues.RANGE_PROBLEM);
+        return false;
     }
 }

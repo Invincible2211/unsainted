@@ -117,4 +117,5 @@ public interface LoggerStringValues {
     String BATTLEMANAGER_GET = "Got instance of Battlemanager";
     String ENTITY_OUT_OF_RANGE = "Entity ist nicht in der Reichweite!";
     String ENTITY_IS_IN_RANGE = "Entity ist in der Reichweite!";
+    String RANGE_PROBLEM = "Something went wrong when checking if Entity has enough Range! in EntityController";
 }
