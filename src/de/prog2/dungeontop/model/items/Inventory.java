@@ -35,9 +35,4 @@ public class Inventory
     {
         return inventory;
     }
-
-    public void setInventory(List<Item> inventory)
-    {
-        this.inventory = inventory;
-    }
 }
