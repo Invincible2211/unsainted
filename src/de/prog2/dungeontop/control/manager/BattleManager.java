@@ -31,8 +31,8 @@ public class BattleManager
      */
     public BattleManager (Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena)
     {
-        this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck,new Deck(),new ArrayList<Perk>());
-        this.secondDuellist = new Duellist(secondplayer,secondplayerDeck,new Deck(),new ArrayList<Perk>());
+        this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck);
+        this.secondDuellist = new Duellist(secondplayer,secondplayerDeck);
         this.arena = arena;
     }
 
@@ -124,6 +124,8 @@ public class BattleManager
         //put in list of units who cant move
         //put in list of units who cant attack
     }
+
+
 
     public void attack (Player owner, Entity attacker, Entity attacked)
     {
@@ -221,16 +223,16 @@ public class BattleManager
         private int currentEgoPoints = 0;
         private int egoPointsMax = 0;
 
-        public Duellist (Player player, Deck deck, Deck discardPile,
-                         List<Perk> activePerks)
+        public Duellist (Player player, Deck deck)
         {
             this.player = player;
             this.deck = deck;
-            this.discardPile = discardPile;
-            this.activePerks = activePerks;
+            this.discardPile = new Deck();
+            this.activePerks = new ArrayList<Perk>();
             this.handLimit = player.getHandCardLimit();
             this.currentEgoPoints = player.getEgo_points();
             this.egoPointsMax = player.getEgo_points();
+
         }
 
         /**
