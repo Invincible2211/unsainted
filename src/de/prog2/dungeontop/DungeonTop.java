@@ -1,16 +1,17 @@
 package de.prog2.dungeontop;
 
 import de.prog2.dungeontop.control.controller.HellController;
+import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
-import de.prog2.dungeontop.model.world.Hell;
-import de.prog2.dungeontop.resources.WorldConstants;
+
+import java.util.LinkedList;
 
 public class DungeonTop
 {
     public static void main(String[] args)
     {
-        testItems();
+
     }
     // TODO Fynn#2
     public static void testEntities()
@@ -26,6 +27,11 @@ public class DungeonTop
     public static void testItems()
     {
         Item testItem = new TestItem();
+        Item testItem2 = new TestItem();
+        Inventory inventory = new Inventory();
+        inventory.addItem(testItem);
+        inventory.addItem(testItem2);
+
     }
     // TODO Jesse
     public static void testPerks()

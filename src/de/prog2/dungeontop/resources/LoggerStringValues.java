@@ -127,4 +127,6 @@ public interface LoggerStringValues {
     String CARD_CONTAIN_IN_DECK = "Es wurde gesucht ob eine Karte im Deck ist!:";
     // Items
     String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Preis: %d Souls.";
+    String INVENTORY_CREATED = "Inventar wurde erstellt.";
+    String ITEM_ADDED = " wurde erstellt.";
 }

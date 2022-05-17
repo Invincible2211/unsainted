@@ -1,11 +1,17 @@
 package de.prog2.dungeontop.model.items;
 
 import java.util.LinkedList;
+import java.util.List;
 
-public class Inventory {
-    LinkedList<Item> inventory;
+public class Inventory
+{
+    private final List<Item> inventory;
 
-    public Inventory(LinkedList<Item> inventory)
+    public Inventory()
+    {
+        this.inventory = new LinkedList<>();
+    }
+    public Inventory(List<Item> inventory)
     {
         this.inventory = inventory;
     }
@@ -25,12 +31,12 @@ public class Inventory {
     }
 
     //Set- and Getters
-    public LinkedList<Item> getInventory()
+    public List<Item> getInventory()
     {
         return inventory;
     }
 
-    public void setInventory(LinkedList<Item> inventory)
+    public void setInventory(List<Item> inventory)
     {
         this.inventory = inventory;
     }
