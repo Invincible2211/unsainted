@@ -73,4 +73,28 @@ public class EntityController
         MoveDirection[] ar = new MoveDirection[results.size()];
         return results.toArray(ar);
     }
+    public static boolean isInRangeToAttack (Entity attacker, Entity attacked)
+    {
+        if (attacker.getPosition().getX() != attacked.getPosition().getX() && attacker.getPosition().getY() != attacked.getPosition().getY())
+        {
+            GlobalLogger.log(LoggerStringValues.ENTITY_OUT_OF_RANGE);
+            return false; //falls das Ziel nicht Horizontal oder Vertikal zu dem attacker steht.
+        }
+        //Wenn sie in der gleicen Spalte stehen und x weniger als attackrange ist.
+        if (Math.abs(attacker.getPosition().getX() - attacked.getPosition().getX()) <= attacker.getAttackRange() && attacker.getPosition().getY() == attacked.getPosition().getY())
+        {
+                GlobalLogger.log(LoggerStringValues.ENTITY_IS_IN_RANGE);
+                return true;
+        }
+        //Wenn sie in der gleicen Zeile stehen und y weniger als attackrange ist.
+        if (Math.abs(attacker.getPosition().getY() - attacked.getPosition().getY()) <= attacker.getAttackRange() && attacker.getPosition().getX() == attacked.getPosition().getX())
+        {
+            GlobalLogger.log(LoggerStringValues.ENTITY_IS_IN_RANGE);
+            return true;
+        }
+
+
+
+        return true;
+    }
 }

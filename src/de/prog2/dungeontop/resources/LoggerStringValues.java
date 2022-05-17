@@ -115,4 +115,6 @@ public interface LoggerStringValues {
 
     String DREW_NEW_HAND = "Neue Hand gezogen!";
     String BATTLEMANAGER_GET = "Got instance of Battlemanager";
+    String ENTITY_OUT_OF_RANGE = "Entity ist nicht in der Reichweite!";
+    String ENTITY_IS_IN_RANGE = "Entity ist in der Reichweite!";
 }

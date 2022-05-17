@@ -108,7 +108,7 @@ public class BattleManager
     }
 
     //TODO Event handlen und aufrufen welches das outcome handled und Spieler Belohnt oder run beendet.
-    public BattleOutCome endBattle (Player gewinner, int damageAnVerlierer)
+    private BattleOutCome endBattle (Player gewinner, int damageAnVerlierer)
     {
         GlobalLogger.log(LoggerStringValues.BATTLE_HAS_ENDED);
         setCurrentPhase(BattlePhase.END);
@@ -120,7 +120,7 @@ public class BattleManager
      * @param duellist who controlls the card
      * @param coordinate where to place new minion
      */
-    public void placeCard (Duellist duellist, Coordinate coordinate, Card card)
+    private void placeCard (Duellist duellist, Coordinate coordinate, Card card)
     {
 
         //remove from hand
@@ -130,7 +130,7 @@ public class BattleManager
 
 
 
-    public void attack (Player owner, Entity attacker, Entity attacked)
+    private void attack (Player owner, Entity attacker, Entity attacked)
     {
 
     }
@@ -145,30 +145,14 @@ public class BattleManager
 
     }
 
-    public void updateBattlefield ()
+    private void updateBattlefield ()
     {
 
     }
 
-    public void moveUnit (Entity mover, MoveDirection direction)
+    private void moveUnit (Entity mover, MoveDirection direction)
     {
         EntityController.tryMoveTowards(this.arena, mover, direction);
-    }
-
-    private boolean isInRangeToAttack (Entity attacker, Entity attacked)
-    {
-        // TODO: EntityController @FynnK @Jesse
-//        Coordinate coordinateOfAttacker = attacker.getPosition();
-//        for (Coordinate coordinate : CoordinateDirections.getStraightNeighbours(coordinateOfAttacker))
-//        {
-//            if (coordinate == attacked.getPosition())
-//            {
-//                GlobalLogger.log(LoggerStringValues.ENTITY_HAS_RANGE_TO_ATTACK);
-//                return true;
-//            }
-//        }
-//        GlobalLogger.log(LoggerStringValues.ENTIT_DOES_NOT_HAVE_TARGET_IN_RANGE);
-        return false;
     }
 
     /**
