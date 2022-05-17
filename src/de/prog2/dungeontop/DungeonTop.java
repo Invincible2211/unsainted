@@ -6,12 +6,16 @@ import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
 
 import java.util.LinkedList;
+import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.model.world.World;
+import de.prog2.dungeontop.resources.StringValues;
+import de.prog2.dungeontop.resources.WorldConstants;
 
 public class DungeonTop
 {
     public static void main(String[] args)
     {
-        testItems();
+        testWorld();
     }
     // TODO Fynn#2
     public static void testEntities()
@@ -61,6 +65,19 @@ public class DungeonTop
     // TODO Thomas
     public static void testWorld()
     {
+        World world = new World(WorldConstants.HELL_SIZE);
+        world.generateLevels();
 
+        for (int i = 0; i < WorldConstants.HELL_SIZE; i++)
+        {
+            Hell hell = world.getCurrentHell();
+            System.out.println(StringValues.HELL);
+            System.out.println(hell);
+            System.out.println(StringValues.HELL_COMPONENT_MAP);
+            System.out.println(HellController.hellcomponentToString(hell));
+
+            if (i < WorldConstants.HELL_SIZE - 1)
+                world.getNextHell();
+        }
     }
 }

@@ -10,4 +10,5 @@ public interface HellToStringValues {
     String WHITESPACE = " ";
     String NO_ROOM = "     ";
     String ROOM_CENTER = "   ";
+    String LINE_BREAK = "\n";
 }
