@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Minion extends Entity
 {
-    private String name = "";
+    private final String name;
 
     private final List<Perk> perks = new ArrayList<>();
 
@@ -21,29 +21,29 @@ public class Minion extends Entity
     private final ManaPool manaPool;
     private final List<Skill> skills = new ArrayList<>();
 
-    private Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, String name,
+    private Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner, String name,
                    int possibleAttacksPerRound, ActiveSkill activeSkill, ManaPool manaPool)
     {
-        super(card, hp, attackDamage, movement, maxMoves, owner);
+        super(card, hp, attackDamage, movement, maxMoves, attackRange, owner);
         this.name = name;
         this.possibleAttacksPerRound = possibleAttacksPerRound;
         skills.add(activeSkill);
         this.manaPool = manaPool;
     }
 
-    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, String name,
+    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner, String name,
                   int possibleAttacksPerRound, ActiveSkill activeSkill, ManaPool manaPool, Perk perk1, Perk perk2)
     {
-        this(card, hp, attackDamage, movement, maxMoves, owner, name, possibleAttacksPerRound, activeSkill, manaPool);
+        this(card, hp, attackDamage, movement, maxMoves, attackRange, owner, name, possibleAttacksPerRound, activeSkill, manaPool);
 
         this.addPerk(perk1);
         this.addPerk(perk2);
     }
-    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, String name,
+    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner, String name,
                    int possibleAttacksPerRound, ActiveSkill activeSkill, ManaPool manaPool,
                    Perk perk1, Perk perk2, Perk perk3)
     {
-        this(card, hp, attackDamage, movement, maxMoves, owner, name, possibleAttacksPerRound, activeSkill, manaPool,
+        this(card, hp, attackDamage, movement, maxMoves, attackRange, owner, name, possibleAttacksPerRound, activeSkill, manaPool,
                 perk1, perk2);
         this.addPerk(perk3);
     }
@@ -53,10 +53,6 @@ public class Minion extends Entity
     public String getName ()
     {
         return name;
-    }
-    public void setName (String name)
-    {
-        this.name = name;
     }
     public List<Perk> getPerks ()
     {

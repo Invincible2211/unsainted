@@ -12,9 +12,9 @@ public class Hero extends Entity
     private Talent mainTalent = null;
     private final List<Talent> talents = new ArrayList<>();
 
-    public Hero(Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner, Talent mainTalent)
+    public Hero(Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner, Talent mainTalent)
     {
-        super(card, hp, attackDamage, movement, maxMoves, owner);
+        super(card, hp, attackDamage, movement, maxMoves, attackRange, owner);
         this.mainTalent = mainTalent;
     }
 

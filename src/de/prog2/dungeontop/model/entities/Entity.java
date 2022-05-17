@@ -13,11 +13,11 @@ public abstract class Entity
     private int movement = 0;
     private Coordinate position;
     private int movesLeftOver = 0, maxMoves = 0;
-    private int attackRange = 0, maxAttackRange = 0;
+    private int attackRange = 0;
     private Player owner = null;
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(Card card, int hp, int attackDamage, int movement, int maxMoves, Player owner)
+    public Entity(Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner)
     {
         this.card = card;
         this.hp = hp;
@@ -25,6 +25,7 @@ public abstract class Entity
         this.movement = movement;
         this.maxMoves = maxMoves;
         this.movesLeftOver = maxMoves;
+        this.attackRange = attackRange;
         this.owner = owner;
     }
 
@@ -96,16 +97,6 @@ public abstract class Entity
     public void setAttackRange(int attackRange)
     {
         this.attackRange = attackRange;
-    }
-
-    public int getMaxAttackRange()
-    {
-        return maxAttackRange;
-    }
-
-    public void setMaxAttackRange(int maxAttackRange)
-    {
-        this.maxAttackRange = maxAttackRange;
     }
 
     public Player getOwner()
