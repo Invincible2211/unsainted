@@ -16,34 +16,37 @@ import java.util.List;
 
 public class BattleManager
 {
-    private final Arena arena;
+    private Arena arena;
     private BattlePhase currentPhase = BattlePhase.START;
     private Duellist firstDuellist = null;
     private Duellist secondDuellist = null;
 
+    //BattleManager ist ein Singleton.
+    private final static BattleManager instance = new BattleManager();
+
+    public BattleManager getInstance ()
+    {
+        GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_GET);
+        return instance;
+    }
+    // BattleManager ist ein Singleton
+    private BattleManager ()
+    {
+    }
+
+
     /**
-     *
      * @param firstPlayer Player or DM who will draw and play first. Decide before Battle
      * @param secondplayer Player or DM will go second
      * @param firstplyerDeck COPY playerDeck or the DMHerodeck, depending who is who.
      * @param secondplayerDeck COPY playerDeck or the DMHerodeck, depending who is who
      * @param arena The instance of the Arena
      */
-    public BattleManager (Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena)
+    public void startBattle(Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena)
     {
         this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck);
         this.secondDuellist = new Duellist(secondplayer,secondplayerDeck);
         this.arena = arena;
-    }
-
-
-    /**
-     * Legt die Reihenfolge des Battles fest
-     * Fuer die Moeglichkeit bei Phases mehr Logik zu implementieren werden Phasen als Enum genommen, anstatt extern in properties zu stehen.
-     * @return die naechste Phase in einem Battle die wiederholbar ist. Kein Start und kein End
-     */
-    public void startBattle()
-    {
 
     }
 

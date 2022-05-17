@@ -114,4 +114,5 @@ public interface LoggerStringValues {
     String NO_EGO_TO_REDUCE = "Es konnten keine EgoPunkte abgezogen werden";
 
     String DREW_NEW_HAND = "Neue Hand gezogen!";
+    String BATTLEMANAGER_GET = "Got instance of Battlemanager";
 }

@@ -72,3 +72,5 @@ replay_pid*
 gradle/wrapper/gradle-wrapper.properties
 
 gradlew
+
+build/tmp/compileJava/previous-compilation-data.bin
