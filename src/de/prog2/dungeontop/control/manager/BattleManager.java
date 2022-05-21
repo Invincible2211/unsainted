@@ -145,12 +145,17 @@ public class BattleManager
         }
     }
 
-    
+
+
     private void attack (Entity attacker, Entity attacked)
     {
-        this.arena = EntityController.attack(attacker, attacked.getPosition(), this.arena);
+        this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
     }
 
+    private void updatePerks (Entity[] aliveMinions)
+    {
+
+    }
 
     private void moveUnit (Entity mover, MoveDirection direction)
     {

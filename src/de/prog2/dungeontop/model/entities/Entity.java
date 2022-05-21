@@ -113,4 +113,8 @@ public abstract class Entity
     {
         this.canMove = canMove;
     }
+
+    public abstract Arena attackAction (Coordinate position, Arena arena);
+
+    public abstract Arena takeDamage (Coordinate position, Arena arena);
 }
