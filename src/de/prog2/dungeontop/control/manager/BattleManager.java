@@ -130,22 +130,12 @@ public class BattleManager
 
 
 
-    private void attack (Player owner, Entity attacker, Entity attacked)
+    private void attack (Entity attacker, Entity attacked)
     {
-
-    }
-
-    private void updateStats (Entity[] aliveMinions)
-    {
-
+        this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
     }
 
     private void updatePerks (Entity[] aliveMinions)
-    {
-
-    }
-
-    private void updateBattlefield ()
     {
 
     }

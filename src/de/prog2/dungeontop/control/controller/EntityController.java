@@ -102,4 +102,10 @@ public class EntityController
         GlobalLogger.warning(LoggerStringValues.RANGE_PROBLEM);
         return false;
     }
+
+    public static Arena tryAttack (Entity attacker, Coordinate position,
+                                   Arena arena)
+    {
+        return attacker.attackAction(position, arena);
+    }
 }

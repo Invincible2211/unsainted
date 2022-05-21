@@ -3,6 +3,7 @@ package de.prog2.dungeontop.model.entities;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.arena.Arena;
 
 public abstract class Entity
 {
@@ -113,4 +114,8 @@ public abstract class Entity
     {
         return card;
     }
+
+    public abstract Arena attackAction (Coordinate position, Arena arena);
+
+    public abstract Arena takeDamage (Coordinate position, Arena arena);
 }
