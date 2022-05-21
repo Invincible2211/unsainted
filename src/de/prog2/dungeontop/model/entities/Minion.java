@@ -16,30 +16,27 @@ import java.util.List;
 
 public class Minion extends Entity
 {
-    private final String name;
-
+    private String name;
     private final List<Perk> perks = new ArrayList<>();
-
     private int possibleAttacksPerRound = 0;
-
-    private final ManaPool manaPool;
+    private ManaPool manaPool;
     private final List<Skill> skills = new ArrayList<>();
 
-    private Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner, String name,
+    private Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner,
                    int possibleAttacksPerRound, ActiveSkill activeSkill, ManaPool manaPool)
     {
         super(card, hp, attackDamage, movement, maxMoves, attackRange, owner);
-        this.name = name;
+
         this.possibleAttacksPerRound = possibleAttacksPerRound;
         skills.add(activeSkill);
         this.manaPool = manaPool;
         GlobalLogger.log(LoggerStringValues.MINION_CREATED);
     }
 
-    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner, String name,
+    public Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner,
                   int possibleAttacksPerRound, ActiveSkill activeSkill, ManaPool manaPool, Perk perk1, Perk perk2)
     {
-        this(card, hp, attackDamage, movement, maxMoves, attackRange, owner, name, possibleAttacksPerRound, activeSkill, manaPool);
+        this(card, hp, attackDamage, movement, maxMoves, attackRange, owner, possibleAttacksPerRound, activeSkill, manaPool);
 
         this.addPerk(perk1);
         this.addPerk(perk2);
@@ -48,13 +45,15 @@ public class Minion extends Entity
                    int possibleAttacksPerRound, ActiveSkill activeSkill, ManaPool manaPool,
                    Perk perk1, Perk perk2, Perk perk3)
     {
-        this(card, hp, attackDamage, movement, maxMoves, attackRange, owner, name, possibleAttacksPerRound, activeSkill, manaPool,
+        this(card, hp, attackDamage, movement, maxMoves, attackRange, owner, possibleAttacksPerRound, activeSkill, manaPool,
                 perk1, perk2);
         this.addPerk(perk3);
     }
 
-
-
+    public Minion (Card card, Player owner, int rank, Coordinate coordinate)
+    {
+        super(card, owner, rank, coordinate);
+    }
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public String getName ()

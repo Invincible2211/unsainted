@@ -35,6 +35,7 @@ public class BattleManager
     }
 
 
+
     /**
      * @param firstPlayer Player or DM who will draw and play first. Decide before Battle
      * @param secondplayer Player or DM will go second
@@ -135,9 +136,11 @@ public class BattleManager
         this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
     }
 
-    private void updatePerks (Entity[] aliveMinions)
+    private int getPerkRank (Player player, Perk perk)
     {
+        int count = 0;
 
+        return 0;
     }
 
     private void moveUnit (Entity mover, MoveDirection direction)

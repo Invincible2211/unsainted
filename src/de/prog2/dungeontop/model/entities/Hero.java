@@ -3,6 +3,8 @@ package de.prog2.dungeontop.model.entities;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.talents.Talent;
+import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.arena.Arena;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,5 +44,17 @@ public class Hero extends Entity
     public List<Talent> getTalents()
     {
         return talents;
+    }
+
+    @Override
+    public Arena attackAction (Coordinate position, Arena arena)
+    {
+        return null;
+    }
+
+    @Override
+    public Arena takeDamage (Coordinate position, Arena arena)
+    {
+        return null;
     }
 }

@@ -131,4 +131,8 @@ public interface LoggerStringValues {
     String INVENTORY_CREATED = "Inventar wurde erstellt.";
     String ITEM_ADDED = "%s wurde ins Inventar hinzugefuegt.";
     String CARD_CREATED = "Es wurde eine Card erstellt!";
+    String RANK_ONE_SAMIRA_BEING_CREATED = "a one Star Samira is being created";
+    String RANK_TWO_SAMIRA_BEING_CREATED = "a two Star Samira is being created";
+    String RANK_THREE_SAMIRA_BEING_CREATED = "a three Star Samira is being created";
+    String SPECIFY_RANK = "no stars were Specified";
 }
