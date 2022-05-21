@@ -11,7 +11,13 @@ import java.util.HashMap;
 public class AssetsManager
 {
 
+    private final static AssetsManager instance = new AssetsManager();
+
     private final static HashMap<Integer, File> ASSETS = new HashMap<>();
+
+    private AssetsManager(){
+
+    }
 
     public static File getAssetById (int id)
     {
@@ -39,6 +45,10 @@ public class AssetsManager
         }
         GlobalLogger.warning(ExceptionMessagesKeys.NO_ID_FOUND_EXCEPTION);
         return -1;
+    }
+
+    public static AssetsManager getInstance() {
+        return instance;
     }
 
 }

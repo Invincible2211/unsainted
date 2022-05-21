@@ -6,9 +6,9 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 
 public class EntityCard extends Card
 {
-    private final Entity entity;
+    private Entity entity;
 
-    public EntityCard(Entity entity, int maxRank, int price, int rank)
+    public EntityCard(int maxRank, int price, int rank)
     {
         super(maxRank, price, rank);
         this.entity = entity;
@@ -18,5 +18,9 @@ public class EntityCard extends Card
     public Entity getEntity()
     {
         return entity;
+    }
+
+    public void setEntity(Entity entity) {
+        this.entity = entity;
     }
 }

@@ -1,42 +1,24 @@
 package de.prog2.dungeontop.model.items;
 
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
+
 public abstract class Item
 {
-    private String name;
+    private final String name;
     private int price;
-    private int bonus; // int for bonuses that weapon or artifacts provide
-    private int bonus2; // e.g bonus health and damage, etc.
 
     public Item(String name, int price)
     {
         this.name = name;
         this.price = price;
-    }
-
-    public Item(String name, int price, int bonus)
-    {
-        this.name = name;
-        this. price = price;
-        this.bonus = bonus;
-    }
-
-    public Item(String name, int price, int bonus, int bonus2)
-    {
-        this.name = name;
-        this. price = price;
-        this.bonus = bonus;
-        this.bonus2 = bonus2;
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.price));
     }
 
     //Set- and Getters
     public String getName()
     {
         return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
     }
 
     public int getPrice()
@@ -47,25 +29,5 @@ public abstract class Item
     public void setPrice(int price)
     {
         this.price = price;
-    }
-
-    public int getBonus()
-    {
-        return bonus;
-    }
-
-    public void setBonus(int bonus)
-    {
-        this.bonus = bonus;
-    }
-
-    public int getBonus2()
-    {
-        return bonus2;
-    }
-
-    public void setBonus2(int bonus2)
-    {
-        this.bonus2 = bonus2;
     }
 }

@@ -1,18 +1,30 @@
 package de.prog2.dungeontop.model.items;
 
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
+
 import java.util.LinkedList;
+import java.util.List;
 
-public class Inventory {
-    LinkedList<Item> inventory;
+public class Inventory
+{
+    private final List<Item> inventory;
 
-    public Inventory(LinkedList<Item> inventory)
+    public Inventory()
     {
+        GlobalLogger.log(LoggerStringValues.INVENTORY_CREATED);
+        this.inventory = new LinkedList<>();
+    }
+    public Inventory(List<Item> inventory)
+    {
+        GlobalLogger.log(LoggerStringValues.INVENTORY_CREATED);
         this.inventory = inventory;
     }
 
     public void addItem(Item item)
     {
         inventory.add(item);
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_ADDED, item.getName()));
     }
 
     public void removeItem(Item item)
@@ -25,13 +37,8 @@ public class Inventory {
     }
 
     //Set- and Getters
-    public LinkedList<Item> getInventory()
+    public List<Item> getInventory()
     {
         return inventory;
-    }
-
-    public void setInventory(LinkedList<Item> inventory)
-    {
-        this.inventory = inventory;
     }
 }

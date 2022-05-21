@@ -16,7 +16,7 @@ public class World
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private final int hellCount;
     private int currentHell = 0;
-    private HashMap<Integer, Hell> hells;
+    private final HashMap<Integer, Hell> hells = new HashMap<>();
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
     public World(int hellCount)
     {

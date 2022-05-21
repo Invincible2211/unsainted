@@ -4,6 +4,12 @@ import de.prog2.dungeontop.model.game.GameState;
 
 public class GameManager {
 
+    private final static GameManager instance = new GameManager();
+
+    private GameManager(){
+
+    }
+
     private GameState currentState = GameState.MAIN_MENU;
 
     public void startGame(){
@@ -41,4 +47,9 @@ public class GameManager {
     public GameState getCurrentState() {
         return currentState;
     }
+
+    public static GameManager getInstance() {
+        return instance;
+    }
+
 }

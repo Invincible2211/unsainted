@@ -40,7 +40,7 @@ public class Hell
     {
         return this.roomHashMap;
     }
-
+    public HashMap<Coordinate, HellComponent> getHellComponentHashMap () { return this.hellComponentHashMap; }
     public HellComponent getHellComponentByCoordinate(Coordinate coordinate)
     {
         return hellComponentHashMap.get(coordinate);
@@ -101,7 +101,7 @@ public class Hell
                                 res.append(RoomController.hasLeftRoom(
                                         this.getRoomByCoordinate(currCoordinate)) ?
                                         HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
-                                res.append("   ");
+                                res.append(HellToStringValues.ROOM_CENTER);
                                 res.append(RoomController.hasRightRoom(
                                         this.getRoomByCoordinate(currCoordinate)) ?
                                         HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
@@ -119,14 +119,14 @@ public class Hell
                                 res.append(HellToStringValues.BOTTOM_RIGHT_CORNER);
                                 break;
                             }
-                            res.append("     ");
+                            res.append(HellToStringValues.NO_ROOM);
                             break;
                         default:
                             GlobalLogger.warning(LoggerStringValues.INDEX_OUT_OF_BOUND);
                             break;
                     }
                 }
-                res.append("\n");
+                res.append(HellToStringValues.LINE_BREAK);
             }
         }
         return res.toString();
