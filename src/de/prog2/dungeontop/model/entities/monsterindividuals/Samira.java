@@ -60,15 +60,15 @@ public class Samira extends Minion
 
         switch(rank){
             case 1:
-                setOneStar();
+                setRankOne();
                 GlobalLogger.log(LoggerStringValues.RANK_ONE_SAMIRA_BEING_CREATED);
                 break;
             case 2:
-                setTwoStars();
+                setRankTwo();
                 GlobalLogger.log(LoggerStringValues.RANK_TWO_SAMIRA_BEING_CREATED);
                 break;
             case 3:
-                setThreeStars();
+                setRankThree();
                 GlobalLogger.log(LoggerStringValues.RANK_THREE_SAMIRA_BEING_CREATED);
                 break;
             default:
@@ -78,7 +78,7 @@ public class Samira extends Minion
     }
 
     //Samira one Star
-    private void setOneStar ()
+    private void setRankOne ()
     {
         this.setHp(DefaultMinionValues.SAMIRA_HP_RANK_ONE);
         this.setAttackDamage(DefaultMinionValues.SAMIRA_DMG_RANK_ONE);
@@ -86,7 +86,7 @@ public class Samira extends Minion
         this.setAttackRange(DefaultMinionValues.SAMIRA_RANGE_RANK_ONE);
     }
     //Samira two Stars
-    private void setTwoStars ()
+    private void setRankTwo ()
     {
         this.setHp(DefaultMinionValues.SAMIRA_HP_RANK_TWO);
         this.setAttackDamage(DefaultMinionValues.SAMIRA_DMG_RANK_TWO);
@@ -94,7 +94,7 @@ public class Samira extends Minion
         this.setAttackRange(DefaultMinionValues.SAMIRA_RANGE_RANK_TWO);
     }
     //Samira three Stars
-    private void setThreeStars ()
+    private void setRankThree ()
     {
         this.setHp(DefaultMinionValues.SAMIRA_HP_RANK_THREE);
         this.setAttackDamage(DefaultMinionValues.SAMIRA_DMG_RANK_THREE);
