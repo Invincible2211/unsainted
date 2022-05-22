@@ -30,6 +30,12 @@ public class Samira extends Minion
     }
 
     @Override
+    public String getName ()
+    {
+        return DefaultMinionValues.SAMIRA_NAME;
+    }
+    
+    @Override
     public Arena takeDamage (Coordinate position, Arena arena)
     {
         return super.takeDamage(position, arena);

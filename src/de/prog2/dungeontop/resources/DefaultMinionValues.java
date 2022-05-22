@@ -22,4 +22,5 @@ public interface DefaultMinionValues
     Perk SAMIRA_SECOND_PERK = Perk.Imperial;
     Perk SAMIRA_FIRST_PERK = Perk.Challenger;
 
+    String SAMIRA_NAME = "Samira";
 }
