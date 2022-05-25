@@ -17,9 +17,13 @@ import java.util.List;
 public class Minion extends Entity
 {
     private String name;
+    @Deprecated
     private final List<Perk> perks = new ArrayList<>();
+    @Deprecated
     private int possibleAttacksPerRound = 0;
+    @Deprecated
     private ManaPool manaPool;
+    @Deprecated
     private final List<Skill> skills = new ArrayList<>();
 
     private Minion (Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner,
@@ -101,6 +105,7 @@ public class Minion extends Entity
         return manaPool;
     }
 
+    //Will only be implemented when we implement furter battlelogik. Optional fuer die Abgabe
     @Override
     public Arena attackAction (Coordinate position, Arena arena)
     {
@@ -113,6 +118,7 @@ public class Minion extends Entity
         return null;
     }
 
+    //Will only be implemented when we implement furter battlelogik. Optional fuer die Abgabe
     @Override
     public Arena takeDamage (Coordinate position, Arena arena)
     {

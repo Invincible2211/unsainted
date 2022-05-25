@@ -7,7 +7,7 @@ import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import java.io.*;
 import java.util.*;
 
-
+@Deprecated
 public class MinionHandler
 {
 

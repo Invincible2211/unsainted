@@ -1,9 +1,10 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.perks.Perk;
 import de.prog2.dungeontop.model.game.*;
+import de.prog2.dungeontop.model.perks.Perk;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
@@ -11,7 +12,6 @@ import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class BattleManager
@@ -136,6 +136,7 @@ public class BattleManager
         this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
     }
 
+    @Deprecated
     private int getPerkRank (Player player, Perk perk)
     {
         int count = 0;
@@ -224,10 +225,10 @@ public class BattleManager
             if (getDeck().getCards().size() < handLimit)
             {
                 reStackDeckFromDiscard();
-                Collections.shuffle(getDeck().getCards());
+                DeckController.shuffleDeck(getDeck());
             }
             getHand().clear();
-            Collections.shuffle(getDeck().getCards());
+            DeckController.shuffleDeck(getDeck());
             for (int i = 0; i < handLimit; i++) {
                 Card drawedCard = deck.popCard();
                 hand.add(drawedCard);
@@ -265,7 +266,7 @@ public class BattleManager
             for (Card card : getDiscardPile().getCards()) {
                 getDeck().getCards().push(card);
             }
-            Collections.shuffle(getDeck().getCards());
+            DeckController.shuffleDeck(getDeck());
         }
 
 

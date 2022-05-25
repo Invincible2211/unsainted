@@ -13,7 +13,9 @@ public abstract class Entity
     private int attackDamage = 0;
     private int movement = 0;
     private Coordinate position;
+    @Deprecated
     private int movesLeftOver = 0, maxMoves = 0;
+    @Deprecated
     private int attackRange = 0;
     private Player owner = null;
 
