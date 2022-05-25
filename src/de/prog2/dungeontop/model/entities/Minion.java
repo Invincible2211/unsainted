@@ -54,6 +54,7 @@ public class Minion extends Entity
         this.addPerk(perk3);
     }
 
+    //Will only be implemented when we implement furter battlelogik. Optional fuer die Abgabe
     public Minion (Card card, Player owner, int rank, Coordinate coordinate)
     {
         super(card, owner, rank, coordinate);
