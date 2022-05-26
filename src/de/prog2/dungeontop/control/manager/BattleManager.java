@@ -124,7 +124,11 @@ public class BattleManager
     }
 
     /**
-     * Places card on Arena tile,
+     * Entitycard from hand into Arena
+     * uses EntitycardController to make instance of entity to place
+     * reduced egopoints
+     * puts card into discardpile
+     * @param entityCard the card that is played
      * @param duellist who controlls the card
      * @param coordinate where to place new minion
      */
@@ -135,12 +139,15 @@ public class BattleManager
             EntityCardController.tryInstantiate(entityCard, arena, coordinate);
             duellist.removeCardFromHand(entityCard);
             GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
-        } else {
+            for (int i = 0; i < entityCard.getPrice(); i++) {
+                duellist.tryReduceEgoPoints();
+            }
+            } else {
             GlobalLogger.warning(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
         }
     }
 
-    
+
     private void attack (Entity attacker, Entity attacked)
     {
         this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
@@ -251,6 +258,8 @@ public class BattleManager
         {
             getHand().remove(card);
             GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
+            getDiscardPile().pushCard(card);
+            GlobalLogger.log(LoggerStringValues.CARD_IN_DISCARDPILE);
         }
 
         private void tryReduceEgoPoints()

@@ -135,4 +135,5 @@ public interface LoggerStringValues {
     String SPECIFY_RANK = "no stars were Specified";
     String PLACED_CARD_IN_ARENA = "Placed entity in arena from battlemanager";
     String NOT_ENOUGH_EGOPOINTS = "Duellist does not have neough egopoints to play this minion";
+    String CARD_IN_DISCARDPILE = "put card into discard pile";
 }
