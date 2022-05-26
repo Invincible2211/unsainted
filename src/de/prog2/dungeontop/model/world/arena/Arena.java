@@ -48,6 +48,7 @@ public class Arena
         this.arenaHashmap.remove(coordinate);
     }
 
+
     public ArrayList<Minion> getAllMinions ()
     {
         ArrayList<Minion> allMinions = new ArrayList<>();

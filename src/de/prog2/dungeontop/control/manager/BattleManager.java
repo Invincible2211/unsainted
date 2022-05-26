@@ -1,12 +1,14 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.controller.DeckController;
+import de.prog2.dungeontop.control.controller.EntityCardController;
 import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.perks.Perk;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.model.world.arena.ArenaComponent;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -116,21 +118,29 @@ public class BattleManager
         return new BattleOutCome(gewinner, damageAnVerlierer);
     }
 
+    public void endAPhase ()
+    {
+        setCurrentPhase(getNextPhaseInCycle());
+    }
+
     /**
      * Places card on Arena tile,
      * @param duellist who controlls the card
      * @param coordinate where to place new minion
      */
-    private void placeCard (Duellist duellist, Coordinate coordinate, Card card)
+    public void placeEntity (Duellist duellist, Coordinate coordinate, EntityCard entityCard)
     {
-
-        //remove from hand
-        //put in list of units who cant move
-        //put in list of units who cant attack
+        if (entityCard.getPrice() <= duellist.getCurrentEgoPoints())
+        {
+            EntityCardController.tryInstantiate(entityCard, arena, coordinate);
+            duellist.removeCardFromHand(entityCard);
+            GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
+        } else {
+            GlobalLogger.warning(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
+        }
     }
 
-
-
+    
     private void attack (Entity attacker, Entity attacked)
     {
         this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
@@ -269,6 +279,15 @@ public class BattleManager
             DeckController.shuffleDeck(getDeck());
         }
 
+        public int getCurrentEgoPoints ()
+        {
+            return currentEgoPoints;
+        }
+
+        public void setCurrentEgoPoints (int currentEgoPoints)
+        {
+            this.currentEgoPoints = currentEgoPoints;
+        }
 
         public List<Card> getHand ()
         {

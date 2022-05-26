@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.perks;
 
+@Deprecated
 public enum Perk
 {
     Sturdy,
