@@ -2,6 +2,7 @@ package de.prog2.dungeontop.resources;
 
 import de.prog2.dungeontop.model.perks.Perk;
 
+//Will only be implemented when we implement furter battlelogik. Optional fuer die Abgabe
 public interface DefaultMinionValues
 {
 

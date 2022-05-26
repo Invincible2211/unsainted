@@ -12,6 +12,7 @@ import de.prog2.dungeontop.resources.DefaultMinionValues;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+@Deprecated
 public class Samira extends Minion
 {
     @Override
