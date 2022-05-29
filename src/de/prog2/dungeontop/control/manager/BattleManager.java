@@ -5,7 +5,6 @@ import de.prog2.dungeontop.control.controller.EntityCardController;
 import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.*;
-import de.prog2.dungeontop.model.perks.Perk;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.arena.ArenaComponent;
@@ -146,13 +145,6 @@ public class BattleManager
         this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
     }
 
-    @Deprecated
-    private int getPerkRank (Player player, Perk perk)
-    {
-        int count = 0;
-
-        return 0;
-    }
 
     private void moveUnit (Entity mover, MoveDirection direction)
     {
@@ -208,7 +200,7 @@ public class BattleManager
         private Player player = null;
         private Deck deck = null;
         private Deck discardPile = new Deck();
-        private List<Perk> activePerks = new ArrayList<>();
+
         private List<Card> hand = new ArrayList<>();
         private int handLimit = 0;
         private int currentEgoPoints = 0;
@@ -219,7 +211,7 @@ public class BattleManager
             this.player = player;
             this.deck = deck;
             this.discardPile = new Deck();
-            this.activePerks = new ArrayList<Perk>();
+
             this.handLimit = player.getHandCardLimit();
             this.currentEgoPoints = player.getEgo_points();
             this.egoPointsMax = player.getEgo_points();
@@ -329,14 +321,5 @@ public class BattleManager
             this.discardPile = discardPile;
         }
 
-        public List<Perk> getActivePerks ()
-        {
-            return activePerks;
-        }
-
-        public void setActivePerks (List<Perk> activePerks)
-        {
-            this.activePerks = activePerks;
-        }
     }
 }
