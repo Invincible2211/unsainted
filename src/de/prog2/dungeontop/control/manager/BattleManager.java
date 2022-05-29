@@ -7,7 +7,6 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.model.world.arena.ArenaComponent;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -142,7 +141,7 @@ public class BattleManager
     
     private void attack (Entity attacker, Entity attacked)
     {
-        this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
+        this.arena = EntityController.attack(attacker, attacked.getPosition(), this.arena);
     }
 
 

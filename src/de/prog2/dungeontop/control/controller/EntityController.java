@@ -10,7 +10,6 @@ import de.prog2.dungeontop.utils.CoordinateUtils;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EntityController
 {
@@ -107,7 +106,7 @@ public class EntityController
         return false;
     }
 
-    public static Arena tryAttack (Entity attacker, Coordinate position, Arena arena)
+    public static Arena attack (Entity attacker, Coordinate position, Arena arena)
     {
         return attacker.attackAction(position, arena);
     }
