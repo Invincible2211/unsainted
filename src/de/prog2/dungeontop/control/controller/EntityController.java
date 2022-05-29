@@ -34,7 +34,7 @@ public class EntityController
         currentAC.deleteOccupant();
         nextAC.setOccupant(entity);
         entity.setPosition(newCoord);
-        decrementMovesLeft(entity);
+        setCanMove(entity, false);
         GlobalLogger.log(LoggerStringValues.MOVE_UP_SUCCESS);
         return true;
     }
@@ -49,19 +49,19 @@ public class EntityController
     {
         Coordinate newCoord = CoordinateUtils.getCoordinateFromMoveDirection(entity.getPosition(), direction);
         ArenaComponent nextAC = arena.getArenaComponent(newCoord);
-        return nextAC != null && !nextAC.isOccupied() && isAllowedToMove(entity);
+        return nextAC != null && !nextAC.isOccupied() && canMove(entity);
     }
-    public static boolean isAllowedToMove(Entity entity)
+    public static boolean canMove(Entity entity)
     {
-        return entity.getMovesLeftOver() > 0;
+        return entity.canMove();
     }
-    public static void decrementMovesLeft(Entity entity)
+    public static void setCanMove(Entity entity, boolean value)
     {
-        entity.setMovesLeftOver(isAllowedToMove(entity) ? entity.getMovesLeftOver() - 1 : 0);
+        entity.setCanMove(value);
     }
     public static MoveDirection[] getValidMoveDirections (Arena arena, Entity entity)
     {
-        List<MoveDirection> results = new ArrayList<MoveDirection>();
+        var results = new ArrayList<MoveDirection>();
         for (MoveDirection direction :
                 MoveDirection.values())
         {
@@ -80,21 +80,25 @@ public class EntityController
      * @param attacked Die angegriffene Entity
      * @return
      */
+    @Deprecated
     public static boolean isInRangeToAttack (Entity attacker, Entity attacked)
     {
-        if (attacker.getPosition().getX() != attacked.getPosition().getX() && attacker.getPosition().getY() != attacked.getPosition().getY())
+        if (attacker.getPosition().getX() != attacked.getPosition().getX()
+                && attacker.getPosition().getY() != attacked.getPosition().getY())
         {
             GlobalLogger.log(LoggerStringValues.ENTITY_OUT_OF_RANGE);
             return false; //falls das Ziel nicht Horizontal oder Vertikal zu dem attacker steht.
         }
         //Wenn sie in der gleicen Spalte stehen und x weniger als attackrange ist.
-        if (Math.abs(attacker.getPosition().getX() - attacked.getPosition().getX()) <= attacker.getAttackRange() && attacker.getPosition().getY() == attacked.getPosition().getY())
+        if (Math.abs(attacker.getPosition().getX() - attacked.getPosition().getX()) <= 1/*attacker.getAttackRange()*/
+                && attacker.getPosition().getY() == attacked.getPosition().getY())
         {
                 GlobalLogger.log(LoggerStringValues.ENTITY_IS_IN_RANGE);
                 return true;
         }
         //Wenn sie in der gleicen Zeile stehen und y weniger als attackrange ist.
-        if (Math.abs(attacker.getPosition().getY() - attacked.getPosition().getY()) <= attacker.getAttackRange() && attacker.getPosition().getX() == attacked.getPosition().getX())
+        if (Math.abs(attacker.getPosition().getY() - attacked.getPosition().getY()) <= 1/*attacker.getAttackRange()*/
+                && attacker.getPosition().getX() == attacked.getPosition().getX())
         {
             GlobalLogger.log(LoggerStringValues.ENTITY_IS_IN_RANGE);
             return true;
@@ -103,8 +107,7 @@ public class EntityController
         return false;
     }
 
-    public static Arena tryAttack (Entity attacker, Coordinate position,
-                                   Arena arena)
+    public static Arena tryAttack (Entity attacker, Coordinate position, Arena arena)
     {
         return attacker.attackAction(position, arena);
     }
