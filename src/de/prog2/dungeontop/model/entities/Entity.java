@@ -13,30 +13,31 @@ public abstract class Entity
     private int attackDamage = 0;
     private int movement = 0;
     private Coordinate position;
-    @Deprecated
-    private int movesLeftOver = 0, maxMoves = 0;
-    @Deprecated
-    private int attackRange = 0;
+    private boolean canMove = false;
     private Player owner = null;
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner)
+    public Entity(Card card, int hp, int attackDamage, int movement, Player owner)
     {
         this.card = card;
         this.hp = hp;
         this.attackDamage = attackDamage;
         this.movement = movement;
-        this.maxMoves = maxMoves;
-        this.movesLeftOver = maxMoves;
-        this.attackRange = attackRange;
         this.owner = owner;
     }
+    public Entity(Card card, int hp, int attackDamage, int movement, Coordinate position, boolean canMove, Player owner)
+    {
+        this(card, hp, attackDamage, movement, owner);
+        this.position = position;
+        this.canMove = canMove;
+    }
+
+    @Deprecated
     //TEST
     public Entity(Card card, Player owner, int rank, Coordinate coordinate)
     {
 
     }
-
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getHp()
@@ -79,35 +80,6 @@ public abstract class Entity
         this.position = position;
     }
 
-    public int getMaxMoves()
-    {
-        return maxMoves;
-    }
-
-    public void setMaxMoves(int maxMoves)
-    {
-        this.maxMoves = maxMoves;
-    }
-
-    public int getMovesLeftOver()
-    {
-        return movesLeftOver;
-    }
-    public void setMovesLeftOver(int movesLeftOver)
-    {
-        this.movesLeftOver = movesLeftOver;
-    }
-
-    public int getAttackRange()
-    {
-        return attackRange;
-    }
-
-    public void setAttackRange(int attackRange)
-    {
-        this.attackRange = attackRange;
-    }
-
     public Player getOwner()
     {
         return owner;
@@ -130,5 +102,15 @@ public abstract class Entity
     public void setCard (Card card)
     {
         this.card = card;
+    }
+
+    public boolean canMove()
+    {
+        return canMove;
+    }
+
+    public void setCanMove(boolean canMove)
+    {
+        this.canMove = canMove;
     }
 }
