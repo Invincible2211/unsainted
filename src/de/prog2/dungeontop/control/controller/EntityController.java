@@ -74,39 +74,6 @@ public class EntityController
         return results.toArray(ar);
     }
 
-    /**
-     * Ueberprueft ob eine Entity eine andere angreifen darf
-     * @param attacker Die Attackierende Entity
-     * @param attacked Die angegriffene Entity
-     * @return
-     */
-    @Deprecated
-    public static boolean isInRangeToAttack (Entity attacker, Entity attacked)
-    {
-        if (attacker.getPosition().getX() != attacked.getPosition().getX()
-                && attacker.getPosition().getY() != attacked.getPosition().getY())
-        {
-            GlobalLogger.log(LoggerStringValues.ENTITY_OUT_OF_RANGE);
-            return false; //falls das Ziel nicht Horizontal oder Vertikal zu dem attacker steht.
-        }
-        //Wenn sie in der gleicen Spalte stehen und x weniger als attackrange ist.
-        if (Math.abs(attacker.getPosition().getX() - attacked.getPosition().getX()) <= 1/*attacker.getAttackRange()*/
-                && attacker.getPosition().getY() == attacked.getPosition().getY())
-        {
-                GlobalLogger.log(LoggerStringValues.ENTITY_IS_IN_RANGE);
-                return true;
-        }
-        //Wenn sie in der gleicen Zeile stehen und y weniger als attackrange ist.
-        if (Math.abs(attacker.getPosition().getY() - attacked.getPosition().getY()) <= 1/*attacker.getAttackRange()*/
-                && attacker.getPosition().getX() == attacked.getPosition().getX())
-        {
-            GlobalLogger.log(LoggerStringValues.ENTITY_IS_IN_RANGE);
-            return true;
-        }
-        GlobalLogger.warning(LoggerStringValues.RANGE_PROBLEM);
-        return false;
-    }
-
     public static Arena tryAttack (Entity attacker, Coordinate position, Arena arena)
     {
         return attacker.attackAction(position, arena);
