@@ -74,7 +74,7 @@ public class EntityController
         return results.toArray(ar);
     }
 
-    public static Arena tryAttack (Entity attacker, Coordinate position, Arena arena)
+    public static Arena attack (Entity attacker, Coordinate position, Arena arena)
     {
         return attacker.attackAction(position, arena);
     }
