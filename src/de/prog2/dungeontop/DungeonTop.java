@@ -4,19 +4,23 @@ import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
-
-import java.util.LinkedList;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class DungeonTop
+public class DungeonTop extends Application
 {
     public static void main(String[] args)
     {
-        testWorld();
+        launch();
     }
+
     // TODO Fynn#2
     public static void testEntities()
     {
@@ -79,5 +83,14 @@ public class DungeonTop
             if (i < WorldConstants.HELL_SIZE - 1)
                 world.getNextHell();
         }
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/mainmenue.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

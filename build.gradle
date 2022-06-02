@@ -1,16 +1,16 @@
-group 'de.prog2.dungeontop'
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
 plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
 }
+
+repositories {
+    mavenCentral()
+}
+
+group 'de.prog2.dungeontop'
+version '1.0-SNAPSHOT'
 
 ext {
     junitVersion = '5.8.2'
@@ -20,10 +20,7 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-application {
-    mainModule = 'de.prog2.dungeontop'
-    mainClass = 'de.prog2.dungeontop.Dungeontop'
-}
+mainClassName = 'de.prog2.dungeontop.DungeonTop'
 
 javafx {
     version = '16'
@@ -31,7 +28,7 @@ javafx {
 }
 
 dependencies {
-    implementation('org.controlsfx:controlsfx:11.1.1')
+    implementation 'org.controlsfx:controlsfx:11.1.1'
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'io.github.kostaskougios:cloning:1.10.3'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
@@ -52,4 +49,9 @@ jlink {
 
 jlinkZip {
     group = 'distribution'
+}
+
+sourceSets {
+    main.java.srcDirs = ['src']
+    main.resources.srcDirs = ['rsc']
 }
