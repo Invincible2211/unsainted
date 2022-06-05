@@ -1,6 +1,7 @@
 package de.prog2.dungeontop;
 
 import de.prog2.dungeontop.control.controller.HellController;
+import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
@@ -12,7 +13,15 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
 
 public class DungeonTop extends Application
 {
@@ -92,5 +101,6 @@ public class DungeonTop extends Application
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+        AudioManager.playSound(99);
     }
 }
