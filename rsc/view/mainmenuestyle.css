@@ -1,0 +1,12 @@
+.button{
+    -fx-background-image: url(button-background.png);
+    -fx-background-color: transparent;
+}
+
+.button:hover{
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+    -fx-background-size: cover;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.3;
+}
