@@ -67,6 +67,15 @@ public interface LoggerStringValues {
     String START_BATTLE = "Starting an arenaBattle";
     String PLAYER_CAN_CHOOSE_WHO_IS_FIRST = "Der Spieler darf aussuchen wer zuerst im duell Zieht";
     String DM_CAN_CHOOSE_WHO_IS_FIRST = "Der DM darf aussucher wer zuerst im duell Zieht";
+    String FILE_NOT_FOUND = "The specified file could not be found.";
+    String TILE_DRAWN = "Tile drawn on coordinate (";
+    String COMMA = ", ";
+    String CLOSING_BRACKET = ")";
+    String GC_ROTATED = "GraphicsContext rotated by ";
+    String HELLVIEW_INIT = "Initialized a HellView.";
+    String CAM_INIT_START = "Initialization of the player camera started.";
+    String CAM_INIT_END = "Initialization of the player camera ended.";
+    String MOVED_PLAYER = "Moved player ";
 
     String MOVE_UP_SUCCESS = "Player moved into the room above.";
     String MOVE_UP_FAIL = "Player couldn't move into the room above.";

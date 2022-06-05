@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.world.hellComponents;
 
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.WorldConstants;
 
 /**
@@ -13,6 +14,6 @@ public class Passage extends HellComponent
      */
     public Passage(Rotation rotation)
     {
-        super(WorldConstants.HellComponentAssetIds.PASSAGE_ASSET_ID, rotation);
+        super(AssetIds.PASSAGE, rotation);
     }
 }

@@ -8,6 +8,7 @@ import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
+import de.prog2.dungeontop.view.HellView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -92,5 +93,17 @@ public class DungeonTop extends Application
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        testHellView(primaryStage);
+    }
+
+    public static void testHellView(Stage primaryStage)
+    {
+        Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
+        HellController.initHell(hell);
+        HellView view = new HellView();
+
+        primaryStage.setScene(view.initHellView(hell));
+        System.out.println(hell);
     }
 }
