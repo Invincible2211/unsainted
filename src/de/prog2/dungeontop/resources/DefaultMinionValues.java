@@ -1,7 +1,5 @@
 package de.prog2.dungeontop.resources;
 
-import de.prog2.dungeontop.model.perks.Perk;
-
 //Will only be implemented when we implement furter battlelogik. Optional fuer die Abgabe
 public interface DefaultMinionValues
 {
@@ -20,8 +18,6 @@ public interface DefaultMinionValues
     int SAMIRA_DMG_RANK_THREE = 200;
     int SAMIRA_MAXMOV_RANK_THREE = 2;
     int SAMIRA_RANGE_RANK_THREE = 2;
-    Perk SAMIRA_SECOND_PERK = Perk.Imperial;
-    Perk SAMIRA_FIRST_PERK = Perk.Challenger;
 
     String SAMIRA_NAME = "Samira";
 }
