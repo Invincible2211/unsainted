@@ -526,24 +526,24 @@ public class HellGenerator
             // add passages and walls
             // top
             if(RoomController.hasTopRoom(entry.getValue()))
-                hell.insertHellComponent(coordTop, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL));
+                hell.insertHellComponent(coordTop, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL_TOP));
             else
-                hell.insertHellComponent(coordTop, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL));
+                hell.insertHellComponent(coordTop, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL_TOP));
             // bottom
             if(RoomController.hasBottomRoom(entry.getValue()))
-                hell.insertHellComponent(coordBottom, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL));
+                hell.insertHellComponent(coordBottom, new Passage(WorldConstants.HellComponentRotations.HORIZONTAL_BOTTOM));
             else
-                hell.insertHellComponent(coordBottom, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL));
+                hell.insertHellComponent(coordBottom, new Wall(WorldConstants.HellComponentRotations.HORIZONTAL_BOTTOM));
             // left
             if(RoomController.hasLeftRoom(entry.getValue()))
-                hell.insertHellComponent(coordLeft, new Passage(WorldConstants.HellComponentRotations.VERTICAL));
+                hell.insertHellComponent(coordLeft, new Passage(WorldConstants.HellComponentRotations.VERTICAL_LEFT));
             else
-                hell.insertHellComponent(coordLeft, new Wall(WorldConstants.HellComponentRotations.VERTICAL));
+                hell.insertHellComponent(coordLeft, new Wall(WorldConstants.HellComponentRotations.VERTICAL_LEFT));
             // right
             if(RoomController.hasRightRoom(entry.getValue()))
-                hell.insertHellComponent(coordRight, new Passage(WorldConstants.HellComponentRotations.VERTICAL));
+                hell.insertHellComponent(coordRight, new Passage(WorldConstants.HellComponentRotations.VERTICAL_RIGHT));
             else
-                hell.insertHellComponent(coordRight, new Wall(WorldConstants.HellComponentRotations.VERTICAL));
+                hell.insertHellComponent(coordRight, new Wall(WorldConstants.HellComponentRotations.VERTICAL_RIGHT));
         }
         GlobalLogger.log(LoggerStringValues.INIT_HELL_COMPONENT_HASH_MAP_END);
     }
