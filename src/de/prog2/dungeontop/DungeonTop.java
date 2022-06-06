@@ -8,11 +8,13 @@ import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.resources.StringValues;
+import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -25,6 +27,9 @@ import java.io.File;
 
 public class DungeonTop extends Application
 {
+
+    private static Stage stage;
+
     public static void main(String[] args)
     {
         launch();
@@ -96,11 +101,21 @@ public class DungeonTop extends Application
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/mainmenue.fxml"));
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML));
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        AudioManager.playSound(99);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
+        stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
+        stage.show();
+        AudioManager.getInstance().playSound(99);
     }
+
+    public static Stage getStage() {
+        return stage;
+    }
+
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url(/assets/00Unsainted.png);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url(/assets/00Unsainted.png);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.MainMenueController">
    <children>
       <ImageView fitHeight="98.0" fitWidth="143.0" focusTraversable="true" layoutX="600.0" layoutY="210.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="-fx-scale-x: 4; -fx-scale-y: 4;">
          <image>
@@ -39,18 +39,18 @@
             <Image url="@/assets/93MMEP.gif" />
          </image>
       </ImageView>
-      <Button id="button" layoutX="1050.0" layoutY="660.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Zurück zu Windows">
+      <Button id="button" layoutX="1050.0" layoutY="660.0" mnemonicParsing="false" onAction="#onBackToWindowsButtonPressed" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Zurück zu Windows">
          <effect>
             <InnerShadow />
          </effect>
          <font>
             <Font size="24.0" />
          </font></Button>
-      <Button id="button" layoutX="1050.0" layoutY="510.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Einstellungen">
+      <Button id="button" layoutX="1050.0" layoutY="510.0" mnemonicParsing="false" onAction="#onSettingsButtonPressed" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Einstellungen">
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button id="button" layoutX="1050.0" layoutY="360.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Spiel starten">
+      <Button id="button" layoutX="1050.0" layoutY="360.0" mnemonicParsing="false" onAction="#onGameStartButtonPressed" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Spiel starten">
          <effect>
             <InnerShadow />
          </effect></Button>
