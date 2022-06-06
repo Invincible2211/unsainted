@@ -1,22 +1,13 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
-import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
-import de.prog2.dungeontop.model.items.Inventory;
-import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.TestItem;
+import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.SettingsController;
-import de.prog2.dungeontop.model.world.Hell;
-import de.prog2.dungeontop.model.world.World;
-import de.prog2.dungeontop.resources.StringValues;
-import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
@@ -59,8 +50,7 @@ public class DungeonTop extends Application
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
 
-        testCardView(primaryStage);
-        testHellView(scene);
+//        testCardView(primaryStage);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
@@ -87,23 +77,29 @@ public class DungeonTop extends Application
         primaryStage.setScene(scene);
     }
 
-    public static void testHellView(Scene scene) throws Exception
+    public static void testArena() throws  Exception
     {
+        public static void testArenaView() throws Exception
+        {
+            Entity harald = new Minion(6, 4, 1, "Harald");
+            Deck deck1 = new Deck();
+            Deck deck2 = new Deck();
+            for (int i = 0; i < 10; i++)
+            {
+                deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
+                deck2.pushCard(new EntityCard(harald, 5, 3, 1, 1 + i));
+            }
+            Player player1 = new Player(12, 10);
+            player1.setDeck(deck1);
+            Player player2 = new Player(12, 10);
+            player2.setDeck(deck2);
 
-        System.out.println(stage.getHeight());
-
-        Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
-        HellGenerator.initHell(hell);
-        HellView view = new HellView();
-        Scene hellView = view.initHellView(hell);
-        //view.initPlayerCamera(scene);
-        //view.initOverlay(hellView);
-
-        stage.setScene(scene);
-        stage.setScene(hellView);
-
-
-        System.out.println(hell);
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/arenaView.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("view/arenaView.css");
+            getStage().setScene(scene);
+        }
     }
 
     public static Stage getStage()
