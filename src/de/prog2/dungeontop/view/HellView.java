@@ -197,6 +197,7 @@ public class HellView
      */
     private double clampRange (double value, double min, double max)
     {
+        // use MyMath.clamp instead xD
         if (value < min)
             return min;
         if (value > max)
