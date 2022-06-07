@@ -8,4 +8,8 @@ public interface ViewStrings {
 
     String SETTINGS_FXML = "view/settings.fxml";
 
+    String SELECT_HERO_FXML = "view/selectHero.fxml";
+
+    String HERO_SCREEN_FXML = "view/heroScreen.fxml";
+
 }
