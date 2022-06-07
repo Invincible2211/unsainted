@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SelectHeroController">
+   <children>
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" opacity="0.9" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/selectherobg.png" />
+         </image>
+      </ImageView>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onReturnButtonPressed" prefHeight="100.0" prefWidth="500.0" stylesheets="@mainmenuestyle.css" text="Return To Main Menu" translateX="50.0" translateY="50.0" />
+      <HBox alignment="CENTER" layoutX="272.0" layoutY="240.0" prefHeight="600.0" prefWidth="900.0" spacing="200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
+               <children>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero1ButtonPressed" prefHeight="200.0" prefWidth="200.0" stylesheets="@selectHeroStyle.css">
+                     <graphic>
+                        <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../assets/heroimage.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Hero's Name" textFill="#eceae9">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
+               <children>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero2ButtonPressed" prefHeight="200.0" prefWidth="200.0" stylesheets="@selectHeroStyle.css">
+                     <graphic>
+                        <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../assets/heroimage.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Hero's Name" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
+               <children>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero3ButtonPressed" prefHeight="200.0" prefWidth="200.0" stylesheets="@selectHeroStyle.css">
+                     <graphic>
+                        <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../assets/heroimage.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Hero's Name" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
+               <children>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero4ButtonPressed" prefHeight="200.0" prefWidth="200.0" stylesheets="@selectHeroStyle.css">
+                     <graphic>
+                        <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../assets/heroimage.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Hero's Name" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Text fill="#d2e42c" layoutX="772.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Your Hero" wrappingWidth="464.79998779296875">
+         <font>
+            <Font size="54.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
