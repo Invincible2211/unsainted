@@ -62,11 +62,12 @@ public class AudioManager {
         }
     }
 
+    public DoubleProperty getVolume() {
+        return volume;
+    }
+
     public static AudioManager getInstance() {
         return instance;
     }
 
-    public DoubleProperty getVolume() {
-        return volume;
-    }
 }
