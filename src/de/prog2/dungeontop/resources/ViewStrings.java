@@ -10,4 +10,6 @@ public interface ViewStrings {
 
     String SELECT_HERO_FXML = "view/selectHero.fxml";
 
+    String HERO_SCREEN_FXML = "view/heroScreen.fxml";
+
 }
