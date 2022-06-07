@@ -76,6 +76,7 @@ public interface LoggerStringValues {
     String CAM_INIT_START = "Initialization of the player camera started.";
     String CAM_INIT_END = "Initialization of the player camera ended.";
     String MOVED_PLAYER = "Moved player ";
+    String BACKGROUND_CREATED = "Hell Background has been created.";
 
     String MOVE_UP_SUCCESS = "Player moved into the room above.";
     String MOVE_UP_FAIL = "Player couldn't move into the room above.";

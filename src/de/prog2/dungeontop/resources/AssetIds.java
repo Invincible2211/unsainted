@@ -8,4 +8,5 @@ public interface AssetIds {
     int PASSAGE = 12;
     int CENTER = 13;
     int PLAYER = 19;
+    int COGWHEEL = 15;
 }
