@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true">
          <image>
-            <Image url="@/assets/selectherobg.png" />
+            <Image url="@/assets/02_selectherobg.png" />
          </image>
       </ImageView>
       <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="100.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Return to Hero Selection Screen" translateX="50.0" translateY="50.0" />

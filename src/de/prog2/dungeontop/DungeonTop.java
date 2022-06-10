@@ -1,15 +1,8 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.view.SettingsController;
-import de.prog2.dungeontop.control.controller.HellController;
-import de.prog2.dungeontop.model.items.Inventory;
-import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.model.world.Hell;
-import de.prog2.dungeontop.model.world.World;
-import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
@@ -35,31 +28,42 @@ public class DungeonTop extends Application
     public void start(Stage primaryStage) throws Exception
     {
         stage = primaryStage;
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML));
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
 
-        testHellView(primaryStage);
-    }
 
-    public static void testHellView(Stage primaryStage)
-    {
-        Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
-        HellGenerator.initHell(hell);
-        HellView view = new HellView();
-
-        primaryStage.setScene(view.initHellView(hell));
-        System.out.println(hell);
-        stage.setScene(scene);
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
         stage.show();
-        AudioManager.getInstance().playSound(99);
+        //AudioManager.getInstance().playSound(99);
+
         SettingsController.initStage();
+        testHellView(scene);
+    }
+
+    public static void testHellView(Scene scene) throws Exception
+    {
+
+        System.out.println(stage.getHeight());
+
+        Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
+        HellGenerator.initHell(hell);
+        HellView view = new HellView();
+        Scene hellView = view.initHellView(hell);
+        //view.initPlayerCamera(scene);
+        //view.initOverlay(hellView);
+
+        stage.setScene(scene);
+        stage.setScene(hellView);
+
+
+        System.out.println(scene.getHeight());
+
+        System.out.println(hell);
     }
 
     public static Stage getStage()

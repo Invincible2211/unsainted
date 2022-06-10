@@ -5,6 +5,7 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Valuable;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.*;
 
@@ -29,6 +30,11 @@ public class PlayerManager {
 
     public int getPlayerSouls(){
         return player.getSouls();
+    }
+
+    public SimpleIntegerProperty getPlayerSoulsProperty ()
+    {
+        return player.getSoulsProperty();
     }
 
     public void addEgoPoints(int amount)

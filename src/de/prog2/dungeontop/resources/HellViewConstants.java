@@ -28,6 +28,8 @@ public interface HellViewConstants
     double SETTING_HEIGHT_MULTI = 1.5;
     double HALF = .5;
     double STAT_BOARD_WIDTH_MULTI = 3;
+    double PANE_WIDTH = HORIZONTAL_TILES * ROOM_TILE_WIDTH;
+    double PANE_HEIGHT = VERTICAL_TILES * ROOM_TILE_HEIGHT;
 
     int STAT_BOARD_TEXT_SIZE = 18;
     Font STAT_BOARD_FONT = new Font(STAT_BOARD_TEXT_SIZE);

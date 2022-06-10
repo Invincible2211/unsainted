@@ -15,6 +15,7 @@ import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -32,17 +33,19 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.awt.desktop.SystemSleepEvent;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class HellView {
     //  variable to remember the last pressed and not yet handled key input
     private ImageView playerView = null;
     private boolean isAnimating = false;
-
+    Pane pane;
 
     /**
      * Initialize the View for a given hell
@@ -52,21 +55,23 @@ public class HellView {
      */
     public Scene initHellView(Hell hell) {
         // create hell
-        Pane pane = createBackground(hell.getHellComponentHashMap());
+        pane = createBackground(hell.getHellComponentHashMap());
         BorderPane border = new BorderPane(pane);
+
         Player player = PlayerManager.getInstance().getPlayer();
         player.setCurrentRoom(hell.getStartingRoom());
 
         pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
         Scene scene = new Scene(border, HellViewConstants.SCENE_STARTUP_WIDTH, HellViewConstants.SCENE_STARTUP_HEIGHT);
-        initPlayerCamera(scene, pane);
 
+        initPlayerCamera(scene, pane);
         initOverlay(scene, pane);
 
         scene.setOnKeyPressed(e -> movePlayer(e.getCode()));
 
         GlobalLogger.log(LoggerStringValues.HELLVIEW_INIT);
+
         return scene;
     }
 
@@ -85,10 +90,9 @@ public class HellView {
         // Initializing the Container pane
         Pane containerPane = new Pane(canvas);
 
-        containerPane.setMinSize(HellViewConstants.HORIZONTAL_TILES * HellViewConstants.ROOM_TILE_WIDTH,
-                HellViewConstants.VERTICAL_TILES * HellViewConstants.ROOM_TILE_HEIGHT);
-        containerPane.setPrefSize(containerPane.getMinWidth(), containerPane.getMinHeight());
-        containerPane.setMaxSize(containerPane.getMinWidth(), containerPane.getMinHeight());
+        containerPane.setMinSize(canvas.getWidth(), canvas.getHeight());
+        containerPane.setPrefSize(canvas.getWidth(), canvas.getHeight());
+        containerPane.setMaxSize(canvas.getWidth(), canvas.getHeight());
 
         // Iterating over all HellComponents and draw them onto the canvas
         for (Coordinate coordinate : roomComponents.keySet()) {
@@ -104,7 +108,9 @@ public class HellView {
                             HellViewConstants.ROOM_TILE_HEIGHT
             );
         }
+
         GlobalLogger.warning(LoggerStringValues.BACKGROUND_CREATED);
+
         return containerPane;
     }
 
@@ -168,19 +174,21 @@ public class HellView {
 
         pane.getChildren().add(playerView);
 
+
         // init the "camera"
         Rectangle camera = new Rectangle();
         camera.widthProperty().bind(scene.widthProperty());
         camera.heightProperty().bind(scene.heightProperty());
 
+
         // bind the camera to the player
         camera.xProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(playerView.getX() - scene.getWidth() / 2, 0, pane.getWidth() - scene.getWidth()),
+                () -> clampRange(playerView.getX() - scene.getWidth() / 2, 0, HellViewConstants.PANE_WIDTH - scene.getWidth()),
                 playerView.xProperty(), scene.widthProperty()
         ));
 
         camera.yProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(playerView.getY() - scene.getHeight() / 2, 0, pane.getHeight() - scene.getHeight()),
+                () -> clampRange(playerView.getY() - scene.getHeight() / 2, 0, HellViewConstants.PANE_HEIGHT - scene.getHeight()),
                 playerView.yProperty(), scene.heightProperty()
         ));
 
@@ -201,6 +209,12 @@ public class HellView {
      * @return nearest available value
      */
     private double clampRange(double value, double min, double max) {
+        if (min > max)
+        {
+            GlobalLogger.warning(LoggerStringValues.CLAMPING_FAILURE);
+            return 0.0;
+        }
+
         if (value < min)
             return min;
         if (value > max)
@@ -305,17 +319,17 @@ public class HellView {
         settings.layoutXProperty().bind(Bindings.createDoubleBinding(
                 () -> clampRange(
                         playerView.getX() + scene.getWidth() * HellViewConstants.HALF -
-                                settings.getWidth() * HellViewConstants.SETTINGS_WIDTH_MULTI,
-                        scene.getWidth() - settings.getWidth() * HellViewConstants.SETTINGS_WIDTH_MULTI,
-                        pane.getWidth() - settings.getWidth() * HellViewConstants.SETTINGS_WIDTH_MULTI
+                                HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.SETTINGS_WIDTH_MULTI,
+                        scene.getWidth() - HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.SETTINGS_WIDTH_MULTI,
+                        HellViewConstants.PANE_WIDTH - HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.SETTINGS_WIDTH_MULTI
                 ),
                 playerView.xProperty(), scene.widthProperty()
         ));
 
         settings.layoutYProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(playerView.getY() - scene.getHeight() / 2 + settings.getHeight() / 2,
-                        settings.getHeight() / 2,
-                        pane.getHeight() - scene.getHeight() + settings.getHeight() / 2
+                () -> clampRange(playerView.getY() - scene.getHeight() / 2 + HellViewConstants.SETTINGS_FIT_HEIGHT / 2,
+                        HellViewConstants.SETTINGS_FIT_HEIGHT / 2,
+                        HellViewConstants.PANE_HEIGHT - scene.getHeight() + HellViewConstants.SETTINGS_FIT_HEIGHT / 2
                 ),
                 playerView.yProperty(), scene.heightProperty()
         ));
@@ -323,11 +337,12 @@ public class HellView {
         // TODO: MAKE IT BEAUTIFUL
         // init visualization of player status
         FlowPane playerStats = new FlowPane(Orientation.HORIZONTAL);
-        playerStats.setPrefHeight(settingsImage.getFitHeight());
+        playerStats.setPrefHeight(HellViewConstants.SETTINGS_FIT_HEIGHT);
         playerStats.prefWidthProperty().bind(Bindings.createDoubleBinding(
                 () -> scene.getWidth() - settingsImage.getFitWidth() * HellViewConstants.STAT_BOARD_WIDTH_MULTI,
                 scene.widthProperty(), settingsImage.fitWidthProperty()
         ));
+
 
         playerStats.setHgap(HellViewConstants.PLAYER_STATS_HGAP);
         playerStats.setAlignment(Pos.CENTER);
@@ -340,35 +355,34 @@ public class HellView {
         // bind the player stats to the player;
         playerStats.layoutXProperty().bind(Bindings.createDoubleBinding(
                 () -> clampRange(playerView.getX() - scene.getWidth() * HellViewConstants.HALF +
-                                settings.getWidth() * HellViewConstants.HALF,
-                        settings.getWidth() * HellViewConstants.HALF,
-                        pane.getWidth() - scene.getWidth() + settings.getWidth() * HellViewConstants.HALF),
+                                HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.HALF,
+                        HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.HALF,
+                        HellViewConstants.PANE_WIDTH - scene.getWidth() + HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.HALF),
                 playerView.xProperty(), scene.widthProperty()
         ));
 
         playerStats.layoutYProperty().bind(Bindings.createDoubleBinding(
                 () -> clampRange(playerView.getY() - scene.getHeight() * HellViewConstants.HALF +
-                                settings.getHeight() * HellViewConstants.HALF,
-                        settings.getHeight() * HellViewConstants.HALF,
-                        pane.getHeight() - scene.getHeight() + settings.getHeight() * HellViewConstants.HALF),
+                                HellViewConstants.SETTINGS_FIT_HEIGHT * HellViewConstants.HALF,
+                        HellViewConstants.SETTINGS_FIT_HEIGHT * HellViewConstants.HALF,
+                        HellViewConstants.PANE_HEIGHT - scene.getHeight() + HellViewConstants.SETTINGS_FIT_HEIGHT * HellViewConstants.HALF),
                 playerView.yProperty(), scene.heightProperty()
         ));
         pane.getChildren().add(playerStats);
 
         // PLACEHOLDER
+        // ANSATZ: Binding nur im Properties/Observables --> Stats == Observable machen?
         Text souls = new Text();
         souls.textProperty().bind(Bindings.createStringBinding(
-                () -> {return "" + PlayerManager.getInstance().getPlayerSouls();}
+                () -> {return "" + PlayerManager.getInstance().getPlayerSoulsProperty().getValue();}, PlayerManager.getInstance().getPlayerSoulsProperty()
         ));
-        souls.setFont(new Font(60));
 
         HBox soulsContainer = createStatboardElement(15, "Souls");
         soulsContainer.getChildren().add(souls);
-        playerStats.getChildren().add(soulsContainer);
 
-        //playerStats.getChildren().add(new Text("Souls: " + PlayerManager.getInstance().getPlayerSouls()));
-        //for (int i = 0; i<6; i++)
-        //    playerStats.getChildren().add(createStatboardElement(15, "TEST"));
+        souls.setFont(new Font(HellViewConstants.STAT_BOARD_ICON_HEIGHT));
+
+        playerStats.getChildren().add(soulsContainer);
     }
 
     /**
@@ -378,11 +392,19 @@ public class HellView {
      * TODO: Add functionality to open Dialogue for settings
      */
     private void openSettings() {
-        // REPLACE WITH CODE TO OPEN DIALOGUE
-        System.out.println("MOEP");
+        // REPLACE WITH CODE TO OPENw DIALOGUE
+        System.out.println("MOEP: " + PlayerManager.getInstance().getPlayerSoulsProperty().get());
         PlayerManager.getInstance().addSouls(10);
+        SettingsController.showSettings();
     }
 
+    /**
+     * Method to create an item which is thought to be used as element inside the StatBoard on the HellMap
+     *
+     * @param assetId ID of the asset which represents the icon
+     * @param subtitle Text that will be shown below the icon
+     * @return HBox object that represents an element from the StatBoard
+     */
     private HBox createStatboardElement (final int assetId, String subtitle)
     {
         HBox container = new HBox();
