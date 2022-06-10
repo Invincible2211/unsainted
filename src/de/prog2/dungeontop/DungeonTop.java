@@ -1,6 +1,11 @@
 package de.prog2.dungeontop;
 
+import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.HellController;
+import de.prog2.dungeontop.control.controller.ShopViewController;
+import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
@@ -15,6 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class DungeonTop extends Application
 {
@@ -95,7 +102,8 @@ public class DungeonTop extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        testHellView(primaryStage);
+        //testHellView(primaryStage);
+        testCardView(primaryStage);
     }
 
     public static void testHellView(Stage primaryStage)
@@ -106,5 +114,29 @@ public class DungeonTop extends Application
 
         primaryStage.setScene(view.initHellView(hell));
         System.out.println(hell);
+    }
+    public static void testCardView(Stage primaryStage) throws Exception
+    {
+        var card = new EntityCard(3, 100, 1);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/shopView.fxml"));
+        ShopViewController.addCards(fxmlLoader.getController(), cards);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("view/shopView.css");
+        primaryStage.setScene(scene);
     }
 }
