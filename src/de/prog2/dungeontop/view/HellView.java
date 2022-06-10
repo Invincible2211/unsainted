@@ -15,26 +15,33 @@ import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.util.HashMap;
+import java.util.Set;
 
-public class HellView
-{
+public class HellView {
     //  variable to remember the last pressed and not yet handled key input
     private ImageView playerView = null;
     private boolean isAnimating = false;
-    private Scene scene = null;
 
 
     /**
@@ -43,18 +50,21 @@ public class HellView
      * @param hell hell that has to be visualized
      * @return scene representing the given hell
      */
-    public Scene initHellView (Hell hell)
-    {
+    public Scene initHellView(Hell hell) {
+        // create hell
         Pane pane = createBackground(hell.getHellComponentHashMap());
         BorderPane border = new BorderPane(pane);
         Player player = PlayerManager.getInstance().getPlayer();
         player.setCurrentRoom(hell.getStartingRoom());
 
-        scene = new Scene(border, 1920, 1080);
+        pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+
+        Scene scene = new Scene(border, HellViewConstants.SCENE_STARTUP_WIDTH, HellViewConstants.SCENE_STARTUP_HEIGHT);
         initPlayerCamera(scene, pane);
 
-        scene.setOnKeyPressed(e -> movePlayer(e.getCode()));
+        initOverlay(scene, pane);
 
+        scene.setOnKeyPressed(e -> movePlayer(e.getCode()));
 
         GlobalLogger.log(LoggerStringValues.HELLVIEW_INIT);
         return scene;
@@ -66,8 +76,7 @@ public class HellView
      * @param roomComponents HashMap which contains the HellComponents and Coordinates for each room
      * @return Container Pane for the visual Hell representation
      */
-    private Pane createBackground (HashMap<Coordinate, HellComponent> roomComponents)
-    {
+    private Pane createBackground(HashMap<Coordinate, HellComponent> roomComponents) {
         // Creating the canvas on which the Hell will be drawn
         Canvas canvas = new Canvas(HellViewConstants.HORIZONTAL_TILES * HellViewConstants.ROOM_TILE_WIDTH,
                 HellViewConstants.VERTICAL_TILES * HellViewConstants.ROOM_TILE_HEIGHT);
@@ -82,8 +91,7 @@ public class HellView
         containerPane.setMaxSize(containerPane.getMinWidth(), containerPane.getMinHeight());
 
         // Iterating over all HellComponents and draw them onto the canvas
-        for (Coordinate coordinate : roomComponents.keySet())
-        {
+        for (Coordinate coordinate : roomComponents.keySet()) {
             // draw the tile with a rotation that is saved within the HellComponent on the
             // coordinate for the current iteration
             // the y coordinate has to be recalculated as we based our thoughts on (0, 0) being the bottom
@@ -92,24 +100,23 @@ public class HellView
                     AssetsManager.getImageByAssetId(roomComponents.get(coordinate).getAssetId()),
                     roomComponents.get(coordinate).getRotation().getAngle(),
                     coordinate.getX() * HellViewConstants.ROOM_TILE_WIDTH,
-                    HellViewConstants.TRANSFORM_Y_COORDINATE - (coordinate.getY()+1) *
+                    HellViewConstants.TRANSFORM_Y_COORDINATE - (coordinate.getY() + 1) *
                             HellViewConstants.ROOM_TILE_HEIGHT
             );
         }
-        GlobalLogger.warning("CREATED BACKGROUND");
+        GlobalLogger.warning(LoggerStringValues.BACKGROUND_CREATED);
         return containerPane;
     }
 
     /**
      * Rotating a given GraphicsContext around a specified pivot point.
      *
-     * @param gc GraphicsContext that will be rotated
-     * @param angle angle by which the GraphicsContext shall be rotated
+     * @param gc     GraphicsContext that will be rotated
+     * @param angle  angle by which the GraphicsContext shall be rotated
      * @param pivotX x coordinate around which the GraphicsContext shall be rotated
      * @param pivotY y coordinate around which the GraphicsContext shall be rotated
      */
-    private void rotate (GraphicsContext gc, double angle, double pivotX, double pivotY)
-    {
+    private void rotate(GraphicsContext gc, double angle, double pivotX, double pivotY) {
         Rotate r = new Rotate(angle, pivotX, pivotY);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 
@@ -119,14 +126,13 @@ public class HellView
     /**
      * Draws an image rotated by a given angle.
      *
-     * @param gc GraphicsContext the image will be drawn onto
-     * @param image Image that will be drawn
-     * @param angle angle of the rotation
+     * @param gc       GraphicsContext the image will be drawn onto
+     * @param image    Image that will be drawn
+     * @param angle    angle of the rotation
      * @param topLeftX top left x coordinate where the image will be drawn
      * @param topLeftY top left y coordinate where the image will be drawn
      */
-    private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double topLeftX, double topLeftY)
-    {
+    private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double topLeftX, double topLeftY) {
         // saving the current state of the GraphicsContext
         gc.save();
         // rotating the GraphicsContext
@@ -145,10 +151,9 @@ public class HellView
      * Creates a pseudo-camera and binds it to the player
      *
      * @param scene scene the camera shall be added to
-     * @param pane pane the player will be added to
+     * @param pane  pane the player will be added to
      */
-    private void initPlayerCamera (Scene scene, Pane pane)
-    {
+    private void initPlayerCamera(Scene scene, Pane pane) {
         GlobalLogger.log(LoggerStringValues.CAM_INIT_START);
         // Inititalize the visual representation for the player
         Player player = PlayerManager.getInstance().getPlayer();
@@ -170,13 +175,13 @@ public class HellView
 
         // bind the camera to the player
         camera.xProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(playerView.getX() - scene.getWidth()/2, 0, pane.getWidth() - scene.getHeight()),
+                () -> clampRange(playerView.getX() - scene.getWidth() / 2, 0, pane.getWidth() - scene.getWidth()),
                 playerView.xProperty(), scene.widthProperty()
         ));
 
         camera.yProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(playerView.getY() - scene.getHeight()/2, 0, pane.getHeight() - scene.getHeight()),
-                        playerView.yProperty(), scene.heightProperty()
+                () -> clampRange(playerView.getY() - scene.getHeight() / 2, 0, pane.getHeight() - scene.getHeight()),
+                playerView.yProperty(), scene.heightProperty()
         ));
 
         pane.setClip(camera);
@@ -191,13 +196,11 @@ public class HellView
      * (see "https://en.wikipedia.org/wiki/Clamping_(graphics)")
      *
      * @param value Value that shall be restricted to the given range
-     * @param min lower boundary of the range
-     * @param max upper boundary of the range
+     * @param min   lower boundary of the range
+     * @param max   upper boundary of the range
      * @return nearest available value
      */
-    private double clampRange (double value, double min, double max)
-    {
-        // use MyMath.clamp instead xD
+    private double clampRange(double value, double min, double max) {
         if (value < min)
             return min;
         if (value > max)
@@ -211,10 +214,9 @@ public class HellView
      *
      * @param key key which was pressed
      */
-    private void movePlayer(KeyCode key)
-    {
+    private void movePlayer(KeyCode key) {
         // prohibit running the method multiple times simultaneously
-        if(isAnimating)
+        if (isAnimating)
             return;
         isAnimating = true;
 
@@ -223,41 +225,37 @@ public class HellView
         double deltaY = 0;
 
         // sett the change in a certain direction and move the player on the underlying grid if valid
-        switch (key)
-        {
+        switch (key) {
             case UP:
                 deltaY -= HellViewConstants.PLAYER_MOVESPEED;
-                if(!MovementManager.getInstance().moveTowards(MoveDirection.UP))
-                {
+                if (!MovementManager.getInstance().moveTowards(MoveDirection.UP)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
             case DOWN:
                 deltaY += HellViewConstants.PLAYER_MOVESPEED;
-                if(!MovementManager.getInstance().moveTowards(MoveDirection.DOWN))
-                {
+                if (!MovementManager.getInstance().moveTowards(MoveDirection.DOWN)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
             case LEFT:
                 deltaX -= HellViewConstants.PLAYER_MOVESPEED;
-                if(!MovementManager.getInstance().moveTowards(MoveDirection.LEFT))
-                {
+                if (!MovementManager.getInstance().moveTowards(MoveDirection.LEFT)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
             case RIGHT:
                 deltaX += HellViewConstants.PLAYER_MOVESPEED;
-                if(!MovementManager.getInstance().moveTowards(MoveDirection.RIGHT))
-                {
+                if (!MovementManager.getInstance().moveTowards(MoveDirection.RIGHT)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
             default:
+                unlockIsAnimating();
                 return;
         }
 
@@ -282,8 +280,143 @@ public class HellView
     /**
      * unlock the player movement animation
      */
-    private void unlockIsAnimating ()
-    {
+    private void unlockIsAnimating() {
         isAnimating = false;
+    }
+
+    // TODO: Comment Method + Split into seperate Methods
+    public void initOverlay(Scene scene, Pane pane) {
+        // Init settings button
+        Image cogwheel = AssetsManager.getImageByAssetId(AssetIds.COGWHEEL);
+        ImageView settingsImage = new ImageView(cogwheel);
+        settingsImage.setFitHeight(HellViewConstants.SETTINGS_FIT_HEIGHT);
+        settingsImage.setFitWidth(HellViewConstants.SETTINGS_FIT_WIDTH);
+
+        Button settings = new Button();
+
+        pane.getChildren().add(settings);
+        settings.setGraphic(settingsImage);
+
+        settings.setOnMouseClicked(e -> openSettings());
+        settings.setFocusTraversable(HellViewConstants.SETTINGS_FOCUS_TRAVERSABLE);
+
+
+        // bind the settings button to the player
+        settings.layoutXProperty().bind(Bindings.createDoubleBinding(
+                () -> clampRange(
+                        playerView.getX() + scene.getWidth() * HellViewConstants.HALF -
+                                settings.getWidth() * HellViewConstants.SETTINGS_WIDTH_MULTI,
+                        scene.getWidth() - settings.getWidth() * HellViewConstants.SETTINGS_WIDTH_MULTI,
+                        pane.getWidth() - settings.getWidth() * HellViewConstants.SETTINGS_WIDTH_MULTI
+                ),
+                playerView.xProperty(), scene.widthProperty()
+        ));
+
+        settings.layoutYProperty().bind(Bindings.createDoubleBinding(
+                () -> clampRange(playerView.getY() - scene.getHeight() / 2 + settings.getHeight() / 2,
+                        settings.getHeight() / 2,
+                        pane.getHeight() - scene.getHeight() + settings.getHeight() / 2
+                ),
+                playerView.yProperty(), scene.heightProperty()
+        ));
+
+        // TODO: MAKE IT BEAUTIFUL
+        // init visualization of player status
+        FlowPane playerStats = new FlowPane(Orientation.HORIZONTAL);
+        playerStats.setPrefHeight(settingsImage.getFitHeight());
+        playerStats.prefWidthProperty().bind(Bindings.createDoubleBinding(
+                () -> scene.getWidth() - settingsImage.getFitWidth() * HellViewConstants.STAT_BOARD_WIDTH_MULTI,
+                scene.widthProperty(), settingsImage.fitWidthProperty()
+        ));
+
+        playerStats.setHgap(HellViewConstants.PLAYER_STATS_HGAP);
+        playerStats.setAlignment(Pos.CENTER);
+        playerStats.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, CornerRadii.EMPTY, null)));
+        playerStats.setBorder(
+                new Border(
+                        new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)
+                ));
+
+        // bind the player stats to the player;
+        playerStats.layoutXProperty().bind(Bindings.createDoubleBinding(
+                () -> clampRange(playerView.getX() - scene.getWidth() * HellViewConstants.HALF +
+                                settings.getWidth() * HellViewConstants.HALF,
+                        settings.getWidth() * HellViewConstants.HALF,
+                        pane.getWidth() - scene.getWidth() + settings.getWidth() * HellViewConstants.HALF),
+                playerView.xProperty(), scene.widthProperty()
+        ));
+
+        playerStats.layoutYProperty().bind(Bindings.createDoubleBinding(
+                () -> clampRange(playerView.getY() - scene.getHeight() * HellViewConstants.HALF +
+                                settings.getHeight() * HellViewConstants.HALF,
+                        settings.getHeight() * HellViewConstants.HALF,
+                        pane.getHeight() - scene.getHeight() + settings.getHeight() * HellViewConstants.HALF),
+                playerView.yProperty(), scene.heightProperty()
+        ));
+        pane.getChildren().add(playerStats);
+
+        // PLACEHOLDER
+        Text souls = new Text();
+        souls.textProperty().bind(Bindings.createStringBinding(
+                () -> {return "" + PlayerManager.getInstance().getPlayerSouls();}
+        ));
+        souls.setFont(new Font(60));
+
+        HBox soulsContainer = createStatboardElement(15, "Souls");
+        soulsContainer.getChildren().add(souls);
+        playerStats.getChildren().add(soulsContainer);
+
+        //playerStats.getChildren().add(new Text("Souls: " + PlayerManager.getInstance().getPlayerSouls()));
+        //for (int i = 0; i<6; i++)
+        //    playerStats.getChildren().add(createStatboardElement(15, "TEST"));
+    }
+
+    /**
+     * Called if the settings button is pressed.
+     * Opens a dialogue for the game settings.
+     * <p>
+     * TODO: Add functionality to open Dialogue for settings
+     */
+    private void openSettings() {
+        // REPLACE WITH CODE TO OPEN DIALOGUE
+        System.out.println("MOEP");
+        PlayerManager.getInstance().addSouls(10);
+    }
+
+    private HBox createStatboardElement (final int assetId, String subtitle)
+    {
+        HBox container = new HBox();
+        container.setAlignment(Pos.CENTER);
+        container.setPadding(HellViewConstants.STAT_BOARD_ELEMENT_PADDING);
+
+        // set preferences for VBox
+        VBox leftHalf = new VBox();
+        leftHalf.setAlignment(Pos.CENTER);
+        leftHalf.setPadding(HellViewConstants.STAT_BOARD_ICON_TEXT_DISTANCE);
+
+
+        // create icon
+        Image iconImage = AssetsManager.getImageByAssetId(assetId);
+        ImageView icon = new ImageView(iconImage);
+        icon.setFitWidth(HellViewConstants.STAT_BOARD_ICON_WIDTH);
+        icon.setFitHeight(HellViewConstants.STAT_BOARD_ICON_HEIGHT);
+
+        // create text for the subtitle
+        Text subtitleText = new Text(subtitle);
+        subtitleText.setFont(HellViewConstants.STAT_BOARD_FONT);
+
+        // assemble StatBoardElement
+        leftHalf.getChildren().add(icon);
+        leftHalf.getChildren().add(subtitleText);
+        container.getChildren().add(leftHalf);
+
+        // JUST FOR TESTS
+        /*
+        Text test = new Text("36");
+        test.setFont(new Font(60));
+        container.getChildren().add(test);
+         */
+
+        return container;
     }
 }
