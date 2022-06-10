@@ -1,6 +1,8 @@
 .button{
     -fx-background-image: url(button-background.png);
     -fx-background-color: transparent;
+    -fx-font-family: Hombre;
+    -fx-font-size: 24pt;
 }
 
 .button:hover{
