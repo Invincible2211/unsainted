@@ -2,14 +2,14 @@ package de.prog2.dungeontop.model.world;
 
 import de.prog2.dungeontop.control.controller.RoomController;
 import de.prog2.dungeontop.model.world.hellComponents.HellComponent;
-import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
-import de.prog2.dungeontop.model.world.rooms.Room;
+import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.HellToStringValues;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * The Hell represents a level with rooms.
@@ -101,7 +101,18 @@ public class Hell
                                 res.append(RoomController.hasLeftRoom(
                                         this.getRoomByCoordinate(currCoordinate)) ?
                                         HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
-                                res.append(HellToStringValues.ROOM_CENTER);
+
+                                //res.append(HellToStringValues.ROOM_CENTER);
+                                Room currRoom = getRoomByCoordinate(currCoordinate);
+                                if (currRoom instanceof ArenaRoom)
+                                    res.append(" A ");
+                                if (currRoom instanceof EmptyRoom)
+                                    res.append(HellToStringValues.ROOM_CENTER);
+                                if (currRoom instanceof NPCRoom)
+                                    res.append(" N ");
+                                if (currRoom instanceof RandomEventRoom)
+                                    res.append(" R ");
+
                                 res.append(RoomController.hasRightRoom(
                                         this.getRoomByCoordinate(currCoordinate)) ?
                                         HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);

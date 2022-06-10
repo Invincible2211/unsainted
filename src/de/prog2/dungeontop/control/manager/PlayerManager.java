@@ -32,6 +32,27 @@ public class PlayerManager {
         return player.getSouls();
     }
 
+    public int getPlayerHp ()
+    {
+        return player.getHp();
+    }
+
+    public void addHp (int amount)
+    {
+        player.setHp(player.getHp() + amount);
+    }
+
+    public void removeHp (int amount)
+    {
+        player.setHp(player.getHp() - amount);
+    }
+
+    public SimpleIntegerProperty getPlayerHpProperty ()
+    {
+        return player.getHpProperty();
+    }
+
+
     public SimpleIntegerProperty getPlayerSoulsProperty ()
     {
         return player.getSoulsProperty();

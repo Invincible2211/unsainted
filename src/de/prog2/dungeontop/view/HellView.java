@@ -7,7 +7,9 @@ import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.model.world.hellComponents.HellComponent;
+import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellViewConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
@@ -55,7 +57,7 @@ public class HellView {
      */
     public Scene initHellView(Hell hell) {
         // create hell
-        pane = createBackground(hell.getHellComponentHashMap());
+        pane = createBackground(hell);
         BorderPane border = new BorderPane(pane);
 
         Player player = PlayerManager.getInstance().getPlayer();
@@ -78,10 +80,12 @@ public class HellView {
     /**
      * Method that draws a visual representation of a given hell.
      *
-     * @param roomComponents HashMap which contains the HellComponents and Coordinates for each room
+     * @param hell Hell which contains the HellComponentHashmap and Coordinates for each room
      * @return Container Pane for the visual Hell representation
      */
-    private Pane createBackground(HashMap<Coordinate, HellComponent> roomComponents) {
+    private Pane createBackground(Hell hell)
+    {
+        HashMap<Coordinate, HellComponent> roomComponents = hell.getHellComponentHashMap();
         // Creating the canvas on which the Hell will be drawn
         Canvas canvas = new Canvas(HellViewConstants.HORIZONTAL_TILES * HellViewConstants.ROOM_TILE_WIDTH,
                 HellViewConstants.VERTICAL_TILES * HellViewConstants.ROOM_TILE_HEIGHT);
@@ -108,10 +112,50 @@ public class HellView {
                             HellViewConstants.ROOM_TILE_HEIGHT
             );
         }
+        drawRoomTypes(canvas, hell);
 
         GlobalLogger.warning(LoggerStringValues.BACKGROUND_CREATED);
 
         return containerPane;
+    }
+
+    private void drawRoomTypes (Canvas canvas, Hell hell)
+    {
+        Image monsterRoom = AssetsManager.getImageByAssetId(7);
+        Image forgeRoom = AssetsManager.getImageByAssetId(8);
+        Image lavaPondRoom = AssetsManager.getImageByAssetId(9);
+        Image randomEventRoom = AssetsManager.getImageByAssetId(4);
+
+        for (Room room : hell.getRoomHashMap().values())
+        {
+            Image currRoomImage = null;
+            if(room instanceof EmptyRoom)
+                continue;
+            if (room instanceof ArenaRoom)
+                currRoomImage = monsterRoom;
+            else if (room instanceof RandomEventRoom)
+                currRoomImage = randomEventRoom;
+            else if (room instanceof ForgeRoom)
+                currRoomImage = forgeRoom;
+            else if (room instanceof LavaPondRoom)
+                currRoomImage = lavaPondRoom;
+
+            if (currRoomImage == null)
+            {
+                GlobalLogger.warning("Should not happen!");
+                continue;
+            }
+
+
+            canvas.getGraphicsContext2D().drawImage
+            (
+                    currRoomImage,
+                    (room.getCoordinate().getX() * 3 + 1) * HellViewConstants.ROOM_TILE_FIT_WIDTH,
+                    ((WorldConstants.HELL_SIZE - room.getCoordinate().getY() - 1) * 3 + 1)
+                            * HellViewConstants.ROOM_TILE_FIT_HEIGHT,
+                    HellViewConstants.ROOM_TILE_FIT_WIDTH, HellViewConstants.ROOM_TILE_FIT_HEIGHT
+            );
+        }
     }
 
     /**
@@ -268,6 +312,18 @@ public class HellView {
                     return;
                 }
                 break;
+
+            // Cases to manipulate playerstats by a keystroke to test the statboard
+            case PLUS:
+                PlayerManager.getInstance().addSouls(10);
+                PlayerManager.getInstance().addHp(10);
+                unlockIsAnimating();
+                return;
+            case MINUS:
+                PlayerManager.getInstance().removeSouls(10);
+                PlayerManager.getInstance().removeHp(10);
+                unlockIsAnimating();
+                return;
             default:
                 unlockIsAnimating();
                 return;
@@ -337,6 +393,8 @@ public class HellView {
         // TODO: MAKE IT BEAUTIFUL
         // init visualization of player status
         FlowPane playerStats = new FlowPane(Orientation.HORIZONTAL);
+        BackgroundSize sizzle = new BackgroundSize(100, 100, true, true, false, true);
+        playerStats.setBackground(new Background(new BackgroundImage(AssetsManager.getImageByAssetId(18), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, sizzle)));
         playerStats.setPrefHeight(HellViewConstants.SETTINGS_FIT_HEIGHT);
         playerStats.prefWidthProperty().bind(Bindings.createDoubleBinding(
                 () -> scene.getWidth() - settingsImage.getFitWidth() * HellViewConstants.STAT_BOARD_WIDTH_MULTI,
@@ -346,11 +404,14 @@ public class HellView {
 
         playerStats.setHgap(HellViewConstants.PLAYER_STATS_HGAP);
         playerStats.setAlignment(Pos.CENTER);
+
+        /*
         playerStats.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, CornerRadii.EMPTY, null)));
         playerStats.setBorder(
                 new Border(
                         new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)
                 ));
+         */
 
         // bind the player stats to the player;
         playerStats.layoutXProperty().bind(Bindings.createDoubleBinding(
@@ -370,18 +431,26 @@ public class HellView {
         ));
         pane.getChildren().add(playerStats);
 
-        // PLACEHOLDER
-        // ANSATZ: Binding nur im Properties/Observables --> Stats == Observable machen?
-        Text souls = new Text();
-        souls.textProperty().bind(Bindings.createStringBinding(
-                () -> {return "" + PlayerManager.getInstance().getPlayerSoulsProperty().getValue();}, PlayerManager.getInstance().getPlayerSoulsProperty()
+        // PLACEHOLDER Hp Element
+        Text hp = new Text();
+        hp.textProperty().bind(Bindings.createStringBinding(
+                () -> {return "" + PlayerManager.getInstance().getPlayerHpProperty().getValue();},
+                PlayerManager.getInstance().getPlayerHpProperty()
         ));
 
-        HBox soulsContainer = createStatboardElement(15, "Souls");
-        soulsContainer.getChildren().add(souls);
+        // TODO: Replace asset 06 by a real asset that does not infringe copyright
+        HBox hpContainer = createStatboardElement(06, "HP", hp);
+        playerStats.getChildren().add(hpContainer);
 
-        souls.setFont(new Font(HellViewConstants.STAT_BOARD_ICON_HEIGHT));
+        // PLACEHOLDER Soul Element
+        Text souls = new Text();
+        souls.textProperty().bind(Bindings.createStringBinding(
+                () -> {return "" + PlayerManager.getInstance().getPlayerSoulsProperty().getValue();},
+                PlayerManager.getInstance().getPlayerSoulsProperty()
+        ));
 
+        // TODO: Replace asset 05 by a real asset that does not infringe copyright
+        HBox soulsContainer = createStatboardElement(05, "Souls", souls);
         playerStats.getChildren().add(soulsContainer);
     }
 
@@ -392,9 +461,7 @@ public class HellView {
      * TODO: Add functionality to open Dialogue for settings
      */
     private void openSettings() {
-        // REPLACE WITH CODE TO OPENw DIALOGUE
-        System.out.println("MOEP: " + PlayerManager.getInstance().getPlayerSoulsProperty().get());
-        PlayerManager.getInstance().addSouls(10);
+        // REPLACE WITH CODE TO OPEN DIALOGUE
         SettingsController.showSettings();
     }
 
@@ -405,7 +472,7 @@ public class HellView {
      * @param subtitle Text that will be shown below the icon
      * @return HBox object that represents an element from the StatBoard
      */
-    private HBox createStatboardElement (final int assetId, String subtitle)
+    private HBox createStatboardElement (final int assetId, String subtitle, Text value)
     {
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
@@ -431,6 +498,11 @@ public class HellView {
         leftHalf.getChildren().add(icon);
         leftHalf.getChildren().add(subtitleText);
         container.getChildren().add(leftHalf);
+
+        // add the defined Text next to the shown icon
+        // --> should be the value of the stat that we want to show (e.g. souls)
+        container.getChildren().add(value);
+        value.setFont(new Font(HellViewConstants.STAT_BOARD_ICON_HEIGHT));
 
         // JUST FOR TESTS
         /*

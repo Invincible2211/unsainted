@@ -420,12 +420,22 @@ public class HellGenerator
                     case FORGE_ROOM:
                         newRoom = new ForgeRoom();
                         newRoom.setCoordinate(currRoom.getCoordinate());
+
+                        HellController.replaceRoom(hell, currRoom, newRoom);
+                        roomList.remove(currRoom);
+                        roomList.add(newRoom);
+
                         GlobalLogger.log(LoggerStringValues.FORGE_ROOM_ADDED);
                         break;
 
                     case LAVA_POND_ROOM:
                         newRoom = new LavaPondRoom();
                         newRoom.setCoordinate(currRoom.getCoordinate());
+
+                        HellController.replaceRoom(hell, currRoom, newRoom);
+                        roomList.remove(currRoom);
+                        roomList.add(newRoom);
+
                         GlobalLogger.log(LoggerStringValues.LAVA_POND_ROOM_ADDED);
                         break;
 
