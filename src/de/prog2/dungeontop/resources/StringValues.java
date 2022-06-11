@@ -3,6 +3,7 @@ package de.prog2.dungeontop.resources;
 public interface StringValues
 {
     String FILE_TYPE = "properties";
+    String CURRENCY = "%d souls";
 
     //Talent
     String TEST_TALENT_NAME = "Specialist";
