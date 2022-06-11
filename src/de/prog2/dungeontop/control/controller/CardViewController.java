@@ -2,14 +2,18 @@ package de.prog2.dungeontop.control.controller;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
+import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.resources.StringValues;
-import de.prog2.dungeontop.view.CardView;
+import de.prog2.dungeontop.view.cardViews.CardView;
+import de.prog2.dungeontop.view.cardViews.EntityCardView;
+import de.prog2.dungeontop.view.cardViews.SpellCardView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
+import jdk.jshell.spi.ExecutionControl;
 
 public abstract class CardViewController
 {
@@ -18,7 +22,7 @@ public abstract class CardViewController
         try
         {
             FXMLLoader loader = new FXMLLoader();
-            Node cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardView.fxml"));
+            Node cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/entityCardView.fxml"));
             CardView controller = loader.getController();
             fillCardViewWithData(card, controller);
             return cardView;
@@ -35,10 +39,27 @@ public abstract class CardViewController
         controller.getRankLabel().setText(String.format(StringValues.RANK, card.getRank(), card.getMaxRank()));
         controller.getSummonCostLabel().setText(String.format(StringValues.SUMMON_COST, card.getSummonCost()));
 
-        controller.getEntityNameLabel().setText(((Minion)((EntityCard)card).getEntity()).getName());
-
-        controller.getEntityImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(19));
+        if(card instanceof EntityCard)
+        {
+            fillEntityCardView((EntityCard)card, (EntityCardView)controller);
+        }
+        else if(card instanceof SpellCard)
+        {
+            fillSpellCardView((SpellCard)card, (SpellCardView)controller);
+        }
 
         controller.setCard(card);
+    }
+
+    private static void fillEntityCardView(EntityCard card, EntityCardView controller)
+    {
+        Entity entity = card.getEntity();
+        controller.getEntityNameLabel().setText(entity.getName());
+
+        controller.getEntityImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(entity.getAssetId()));
+    }
+    private static void fillSpellCardView(SpellCard card, SpellCardView controller)
+    {
+        // TODO Implement SpellCardView
     }
 }

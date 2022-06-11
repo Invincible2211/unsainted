@@ -7,7 +7,7 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<AnchorPane prefHeight="480" prefWidth="343" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.CardView">
+<AnchorPane prefHeight="480" prefWidth="343" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.cardViews.EntityCardView">
     <AnchorPane maxHeight="480" maxWidth="343" prefHeight="480" prefWidth="343" style="-fx-background-image: url(/assets/50_CardBackground.png);">
         <VBox AnchorPane.topAnchor="45" AnchorPane.leftAnchor="55" AnchorPane.rightAnchor="55" AnchorPane.bottomAnchor="200"
               alignment="CENTER">
