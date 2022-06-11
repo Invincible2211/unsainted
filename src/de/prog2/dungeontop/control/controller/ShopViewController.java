@@ -12,6 +12,8 @@ import java.util.List;
 
 public abstract class ShopViewController
 {
+    // TODO Remove Magic Numbers
+    // TODO Add Logger
     public static void addCards(ShopView shopView, List<Card> cards)
     {
         int columns = 0, row = 1;

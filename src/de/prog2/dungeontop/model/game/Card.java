@@ -11,6 +11,7 @@ public abstract class Card
     private int rank = 1;
     private int price;
     private final int maxRank;
+    private int summonCost;
     private final HashMap<AssetType, Integer> assetTypeHashMap = new HashMap<>();
 
     public enum AssetType
@@ -18,12 +19,13 @@ public abstract class Card
         A,B,C
     }
 
-    public Card(int maxRank, int price, int rank, List... assets)
+    public Card(int maxRank, int price, int rank, int summonCost, List... assets)
     {
         GlobalLogger.log(LoggerStringValues.CARD_CREATED);
         this.maxRank = maxRank;
         this.price = price;
         this.rank = rank;
+        this.summonCost = summonCost;
 
         for (var asset : assets)
         {
@@ -62,5 +64,15 @@ public abstract class Card
     public void setPrice(int price)
     {
         this.price = price;
+    }
+
+    public int getSummonCost()
+    {
+        return summonCost;
+    }
+
+    public void setSummonCost(int summonCost)
+    {
+        this.summonCost = summonCost;
     }
 }
