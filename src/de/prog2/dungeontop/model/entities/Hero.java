@@ -7,8 +7,8 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 
 public class Hero extends Entity
 {
-    public Hero(int hp, int attackDamage, int movement, Player owner)
+    public Hero(String name, int hp, int attackDamage, int movement, int assetId, Player owner)
     {
-        super(hp, attackDamage, movement, owner);
+        super(name, hp, attackDamage, movement, assetId, owner);
     }
 }

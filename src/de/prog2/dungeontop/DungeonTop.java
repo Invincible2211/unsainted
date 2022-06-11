@@ -57,11 +57,11 @@ public class DungeonTop extends Application
 
         testCardView(primaryStage);
         //testHellView(scene);
-        testArenaView();
+        //testArenaView();
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
-        Entity entity = new Minion(6, 4, 1, "Harald");
+        Entity entity = new Minion("Harald", 6, 4, 1, 19);
         var card = new EntityCard(entity, 3, 100, 1, 2);
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(card);
@@ -106,7 +106,7 @@ public class DungeonTop extends Application
 
     public static void testArenaView() throws Exception
     {
-        Entity harald = new Minion(6, 4, 1, "Harald");
+        Entity harald = new Minion("Harald", 6, 4, 1, 19);
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
         for (int i = 0; i < 10; i++)

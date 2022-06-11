@@ -9,24 +9,28 @@ public abstract class Entity
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private Card card;
+    private String name;
     private int hp = 0;
     private int attackDamage = 0;
     private int movement = 0;
+    private int assetId;
     private Coordinate position;
     private boolean canMove = false;
     private Player owner = null;
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(int hp, int attackDamage, int movement, Player owner)
+    public Entity(String name, int hp, int attackDamage, int movement, int assetId, Player owner)
     {
+        this.name = name;
         this.hp = hp;
         this.attackDamage = attackDamage;
         this.movement = movement;
+        this.assetId = assetId;
         this.owner = owner;
     }
-    public Entity(int hp, int attackDamage, int movement, Coordinate position, boolean canMove, Player owner)
+    public Entity(String name, int hp, int attackDamage, int movement, int assetId, Coordinate position, boolean canMove, Player owner)
     {
-        this(hp, attackDamage, movement, owner);
+        this(name, hp, attackDamage, movement, assetId, owner);
         this.position = position;
         this.canMove = canMove;
     }
@@ -107,5 +111,25 @@ public abstract class Entity
     public void setCanMove(boolean canMove)
     {
         this.canMove = canMove;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public int getAssetId()
+    {
+        return assetId;
+    }
+
+    public void setAssetId(int assetId)
+    {
+        this.assetId = assetId;
     }
 }
