@@ -19,7 +19,7 @@ public abstract class ShopViewController
         int columns = 0, row = 1;
         for (Card card : cards)
         {
-            Node cardView = CardViewController.init(card);
+            Node cardView = CardViewController.getCardView(card);
             Button button = new Button(String.format(StringValues.CURRENCY, card.getPrice()));
             //button.setStyle("-fx-background-image: url(/view/button-background.png);");
             button.setPrefWidth(((AnchorPane)cardView).getPrefWidth());

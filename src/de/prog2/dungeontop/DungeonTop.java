@@ -1,20 +1,11 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
-import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
-import de.prog2.dungeontop.model.items.Inventory;
-import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.TestItem;
-import de.prog2.dungeontop.model.world.Hell;
-import de.prog2.dungeontop.model.world.World;
-import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -56,7 +47,8 @@ public class DungeonTop extends Application
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
-        var card = new EntityCard(3, 100, 1, 2);
+        Entity entity = new Minion(6, 4, 1, "Harald");
+        var card = new EntityCard(entity, 3, 100, 1, 2);
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(card);
         cards.add(card);

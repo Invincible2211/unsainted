@@ -5,8 +5,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="480" prefWidth="343" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.CardView">
     <AnchorPane maxHeight="480" maxWidth="343" prefHeight="480" prefWidth="343" style="-fx-background-image: url(/assets/50_CardBackground.png);">
+        <VBox AnchorPane.topAnchor="52" AnchorPane.leftAnchor="52" AnchorPane.rightAnchor="52" AnchorPane.bottomAnchor="200">
+            <Label fx:id="entityNameLabel" text="name"/>
+            <ImageView fx:id="entityImageView" fitHeight="200" fitWidth="200"/>
+        </VBox>
         <VBox AnchorPane.bottomAnchor="52" AnchorPane.leftAnchor="52" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="290">
             <BorderPane>
                 <left><Label text="Rank: "/></left>

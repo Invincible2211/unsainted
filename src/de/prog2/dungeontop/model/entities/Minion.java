@@ -11,11 +11,15 @@ public class Minion extends Entity
 {
     private final String name;
 
-    private Minion(Card card, int hp, int attackDamage, int movement, Player owner, String name)
+    private Minion(int hp, int attackDamage, int movement, Player owner, String name)
     {
-        super(card, hp, attackDamage, movement, owner);
+        super(hp, attackDamage, movement, owner);
         this.name = name;
         GlobalLogger.log(LoggerStringValues.MINION_CREATED);
+    }
+    public Minion(int hp, int attackDamage, int movement, String name)
+    {
+        this(hp, attackDamage, movement, null, name);
     }
 
     @Deprecated

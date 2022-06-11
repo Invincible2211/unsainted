@@ -7,9 +7,9 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 
 public class Hero extends Entity
 {
-    public Hero(Card card, int hp, int attackDamage, int movement, Player owner)
+    public Hero(int hp, int attackDamage, int movement, Player owner)
     {
-        super(card, hp, attackDamage, movement, owner);
+        super(hp, attackDamage, movement, owner);
     }
 
     @Override

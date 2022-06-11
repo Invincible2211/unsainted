@@ -17,17 +17,16 @@ public abstract class Entity
     private Player owner = null;
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(Card card, int hp, int attackDamage, int movement, Player owner)
+    public Entity(int hp, int attackDamage, int movement, Player owner)
     {
-        this.card = card;
         this.hp = hp;
         this.attackDamage = attackDamage;
         this.movement = movement;
         this.owner = owner;
     }
-    public Entity(Card card, int hp, int attackDamage, int movement, Coordinate position, boolean canMove, Player owner)
+    public Entity(int hp, int attackDamage, int movement, Coordinate position, boolean canMove, Player owner)
     {
-        this(card, hp, attackDamage, movement, owner);
+        this(hp, attackDamage, movement, owner);
         this.position = position;
         this.canMove = canMove;
     }
