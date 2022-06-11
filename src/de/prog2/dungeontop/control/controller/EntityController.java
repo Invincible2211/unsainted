@@ -76,12 +76,6 @@ public class EntityController
 
     public static Arena attack (Entity attacker, Coordinate position, Arena arena)
     {
-        return null;//attacker.attackAction(position, arena);
-    }
-
-    public static Arena tryAttack (Entity attacker, Coordinate position,
-                                   Arena arena)
-    {
-        return null;//attacker.attackAction(position, arena);
+        return null;
     }
 }

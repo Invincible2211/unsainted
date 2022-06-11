@@ -3,6 +3,7 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.util.List;
 
@@ -44,12 +46,12 @@ public abstract class ArenaBaseController
         GridPane gridPane = arenaBaseView.getBattlefieldGridPane();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                Pane pane = new Pane();
-                Image image = AssetsManager.getImageByAssetId(22);
-                ImageView iv = new ImageView();
-                iv.setImage(image);
-                pane.getChildren().add(iv);
-                gridPane.add(pane, x, y);
+                StackPane stackPane = new StackPane();
+                Image background = AssetsManager.getImageByAssetId(AssetIds.BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID);
+                ImageView imageView = new ImageView();
+                imageView.setImage(background);
+                stackPane.getChildren().add(imageView);
+                gridPane.add(stackPane, x, y);
             }
         }
     }
@@ -65,6 +67,8 @@ public abstract class ArenaBaseController
         GlobalLogger.warning(LoggerStringValues.COULD_NOT_FIND_NODE_ON_BATTLEFIELD + x + " " +y);
         return null;
     }
+
+
 
 
 }
