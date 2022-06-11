@@ -11,6 +11,11 @@ public interface LoggerStringValues {
     String PLAYERSOULS_GET = "Playersouls abgefragt.";
     String SET = " gesetzt.";
     String PLAYERSOULS_SET = "Playersouls wurden auf ";
+    String PLAYERSOULS_PROPERTY_GET = "Playersouls Property abgefragt.";
+    String PLAYERHP_GET = "PlayerHP abgefragt.";
+    String PLAYERHP_SET = "PlayerHP wurden auf ";
+    String PLAYERHP_PROPERTY_GET = "PlayerHP Property abgefragt.";
+
 
     String ADD_ROOM_ERROR = "ERROR: Out of bounds or overlapping with an already existing room.";
     String ADDED_ROOM_TO_GRID = "Added room to hellgrid.";
@@ -77,6 +82,8 @@ public interface LoggerStringValues {
     String CAM_INIT_END = "Initialization of the player camera ended.";
     String MOVED_PLAYER = "Moved player ";
     String BACKGROUND_CREATED = "Hell Background has been created.";
+    String CLAMPING_FAILURE = "CLAMPING: Min Value bigger than Max Value.";
+    String DRAW_ROOM_TYPES_IMAGE_NOT_FOUND = "The image for the room you try to draw cannot be found.";
 
     String MOVE_UP_SUCCESS = "Player moved into the room above.";
     String MOVE_UP_FAIL = "Player couldn't move into the room above.";
