@@ -33,7 +33,6 @@ public class ArenaBaseView
     @FXML
     private Label egopointsPlayerOne;
 
-    //BIND THESE TWO WAY
     @FXML
     private Label egopointsPlayerTwo;
 

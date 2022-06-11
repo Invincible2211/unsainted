@@ -54,8 +54,6 @@ public class BattleManager
         ArenaBaseController.updatePlayerHands(arenaBaseView,
                 this.getFirstDuellist().getHand(),
                 this.getSecondDuellist().getHand());
-
-
     }
 
     public BattlePhase getNextPhaseInCycle ()
@@ -126,6 +124,7 @@ public class BattleManager
     public void endAPhase ()
     {
         setCurrentPhase(getNextPhaseInCycle());
+        GlobalLogger.log(LoggerStringValues.CURRENTPHASE_IS_NOW + getCurrentPhase());
     }
 
     /**
@@ -138,6 +137,11 @@ public class BattleManager
         if (entityCard.getPrice() <= duellist.getCurrentEgoPoints())
         {
             EntityCardController.tryInstantiate(entityCard, arena, coordinate);
+            //Reduce egopoints by one for each cost of card
+            for (int cost = 0; cost < entityCard.getPrice(); cost++)
+            {
+                duellist.tryReduceEgoPoints();
+            }
             duellist.removeCardFromHand(entityCard);
             GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
         } else {
@@ -145,17 +149,11 @@ public class BattleManager
         }
     }
 
-
-
     private void attack (Entity attacker, Entity attacked)
     {
-        this.arena = EntityController.tryAttack(attacker, attacked.getPosition(), this.arena);
+        this.arena = EntityController.attack(attacker, attacked.getPosition(), this.arena);
     }
 
-    private void updatePerks (Entity[] aliveMinions)
-    {
-
-    }
 
     private void moveUnit (Entity mover, MoveDirection direction)
     {
@@ -271,6 +269,7 @@ public class BattleManager
             GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
         }
 
+        //technically not a try as it is not a boolean
         private void tryReduceEgoPoints()
         {
             if (currentEgoPoints > 0){

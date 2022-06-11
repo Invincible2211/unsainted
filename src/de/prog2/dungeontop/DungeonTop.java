@@ -1,6 +1,5 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -58,6 +57,8 @@ public class DungeonTop extends Application
         testCardView(primaryStage);
         //testHellView(scene);
         //testArenaView();
+        //testSelectHero(primaryStage);
+        //testInventory(primaryStage);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
@@ -121,12 +122,27 @@ public class DungeonTop extends Application
 
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/arenaBase.fxml"));
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
     }
 
+    public static void testSelectHero(Stage stage) throws Exception
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SELECT_HERO_FXML));
+        Scene scene = new Scene(root);
+        getStage().setScene(scene);
+    }
+
+    public static void testInventory(Stage stage) throws Exception
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/inventory.fxml"));
+        Scene scene = new Scene(root);
+        getStage().setScene(scene);
+    }
     public static Stage getStage()
     {
         return stage;

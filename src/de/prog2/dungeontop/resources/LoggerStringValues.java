@@ -156,4 +156,5 @@ public interface LoggerStringValues {
     //Battlefield
     String RETURN_NODE_ON_BATTLEFIELD = "return the node: ";
     String COULD_NOT_FIND_NODE_ON_BATTLEFIELD = "could not find the node on the battlefield with xy: ";
+    String CURRENTPHASE_IS_NOW = "Phase wurde geaendert auf: ";
 }
