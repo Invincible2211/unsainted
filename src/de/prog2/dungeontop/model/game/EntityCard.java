@@ -4,14 +4,15 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import java.util.List;
+
 public class EntityCard extends Card
 {
     private Entity entity;
 
-    public EntityCard(int maxRank, int price, int rank)
+    public EntityCard(int maxRank, int price, int rank, int summonCost, List... assets)
     {
-        super(maxRank, price, rank);
-        this.entity = entity;
+        super(maxRank, price, rank, summonCost, assets);
         GlobalLogger.log(LoggerStringValues.ENTITYCARD_CREATED);
     }
 

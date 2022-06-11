@@ -7,7 +7,9 @@ import javafx.scene.control.Label;
 public class CardView
 {
     @FXML
-    public Label rankLabel;
+    private Label rankLabel;
+    @FXML
+    private Label summonCostLabel;
 
     private Card card;
 
@@ -24,5 +26,10 @@ public class CardView
     public Label getRankLabel()
     {
         return rankLabel;
+    }
+
+    public Label getSummonCostLabel()
+    {
+        return summonCostLabel;
     }
 }

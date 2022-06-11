@@ -10,28 +10,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SelectHeroController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@selectHeroStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SelectHeroController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" opacity="0.85" pickOnBounds="true">
          <image>
-            <Image url="@/assets/02_selectherobg.png" />
+            <Image url="@/assets/selectherobg.png" />
          </image>
       </ImageView>
       <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onReturnButtonPressed" prefHeight="100.0" prefWidth="500.0" stylesheets="@view/mainmenuestyle.css" text="Return To Main Menu" translateX="50.0" translateY="50.0" />
-      <HBox alignment="CENTER" layoutX="272.0" layoutY="240.0" prefHeight="600.0" prefWidth="900.0" spacing="200.0">
+      <Text fill="#d2e42c" layoutX="772.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Select Your Class" wrappingWidth="464.79998779296875">
+         <font>
+            <Font size="54.0" />
+         </font>
+      </Text>
+      <HBox alignment="CENTER" layoutX="171.0" layoutY="278.0" prefHeight="600.0" prefWidth="900.0" spacing="200.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero1ButtonPressed" prefHeight="200.0" prefWidth="200.0" stylesheets="@view/selectHeroStyle.css">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero1ButtonPressed" onMouseEntered="#onHero1ButtonEntered" onMouseExited="#onHero1ButtonExit" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                            <image>
-                              <Image url="@/assets/01_heroimage.jpg" />
+                              <Image url="@/assets/heroimage.jpg" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Hero's Name" textFill="#eceae9">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Warrior" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -40,16 +45,16 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero2ButtonPressed" prefHeight="200.0" prefWidth="200.0" stylesheets="@view/selectHeroStyle.css">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero2ButtonPressed" onMouseEntered="#onHero2ButtonEntered" onMouseExited="#onHero2ButtonExit" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                            <image>
-                              <Image url="@/assets/01_heroimage.jpg" />
+                              <Image url="@/assets/heroimage.jpg" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Hero's Name" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Mage" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -58,34 +63,16 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero3ButtonPressed" prefHeight="200.0" prefWidth="200.0" stylesheets="@view/selectHeroStyle.css">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero3ButtonPressed" onMouseEntered="#onHero3ButtonEntered" onMouseExited="#onHero3ButtonExit" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                            <image>
-                              <Image url="@/assets/01_heroimage.jpg" />
+                              <Image url="@/assets/heroimage.jpg" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Hero's Name" textFill="WHITE">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
-               <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHero4ButtonPressed" prefHeight="200.0" prefWidth="200.0" stylesheets="@/view/selectHeroStyle.css">
-                     <graphic>
-                        <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@/assets/01_heroimage.jpg" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Hero's Name" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Archer" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -94,10 +81,34 @@
             </VBox>
          </children>
       </HBox>
-      <Text fill="#d2e42c" layoutX="772.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Your Hero" wrappingWidth="464.79998779296875">
-         <font>
-            <Font size="54.0" />
-         </font>
-      </Text>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1500.0" layoutY="887.0" mnemonicParsing="false" onAction="#onReturnButtonPressed" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Confirm" />
+      <AnchorPane layoutX="1373.0" layoutY="164.0" prefHeight="526.0" prefWidth="418.0">
+         <children>
+            <VBox fx:id="heroText1" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Warrior" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health: 12" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack: 2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent: " />
+               </children>
+            </VBox>
+            <VBox fx:id="heroText2" alignment="TOP_CENTER" layoutY="-2.0" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Thief" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health : 10" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack: 3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent:" />
+               </children>
+            </VBox>
+            <VBox fx:id="heroText3" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Mage" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health : 8" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent:" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

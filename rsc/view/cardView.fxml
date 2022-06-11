@@ -9,5 +9,6 @@
     <StackPane prefWidth="343" prefHeight="480" maxWidth="343" maxHeight="480"
                style="-fx-background-image: url(/assets/50_CardBackground.png);">
         <Label fx:id="rankLabel" text="2"/>
+        <Label fx:id="summonCostLabel" text="2"/>
     </StackPane>
 </AnchorPane>

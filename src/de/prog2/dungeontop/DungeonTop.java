@@ -1,9 +1,23 @@
 package de.prog2.dungeontop;
 
+import de.prog2.dungeontop.control.controller.HellController;
+import de.prog2.dungeontop.control.controller.ShopViewController;
+import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.entities.Minion;
+import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.EntityCard;
+import de.prog2.dungeontop.model.items.Inventory;
+import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.model.world.World;
+import de.prog2.dungeontop.resources.StringValues;
+import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
+import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Application;
@@ -13,6 +27,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.util.ArrayList;
 
 public class DungeonTop extends Application
 {
@@ -32,6 +48,7 @@ public class DungeonTop extends Application
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML));
         Scene scene = new Scene(root);
+        stage.setScene(scene);
 
 
         stage.setResizable(false);
@@ -40,9 +57,34 @@ public class DungeonTop extends Application
         stage.sizeToScene();
         stage.show();
         //AudioManager.getInstance().playSound(99);
-
         SettingsController.initStage();
+
+        testCardView(primaryStage);
         testHellView(scene);
+    }
+    public static void testCardView(Stage primaryStage) throws Exception
+    {
+        var card = new EntityCard(3, 100, 1, 2);
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+        cards.add(card);
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/shopView.fxml"));
+        ShopViewController.addCards(fxmlLoader.getController(), cards);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("view/shopView.css");
+        primaryStage.setScene(scene);
     }
 
     public static void testHellView(Scene scene) throws Exception
