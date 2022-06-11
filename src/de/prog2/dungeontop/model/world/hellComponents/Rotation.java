@@ -13,13 +13,13 @@ public enum Rotation
     RIGHT(RotationAngles.RIGHT),
     DOWN(RotationAngles.DOWN);
 
-    private final int angle;
-    Rotation(int angle)
+    private final double angle;
+    Rotation(double angle)
     {
         this.angle = angle;
     }
 
-    public int getAngle()
+    public double getAngle()
     {
         return this.angle;
     }

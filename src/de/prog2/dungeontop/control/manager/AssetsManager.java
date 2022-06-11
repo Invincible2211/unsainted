@@ -1,11 +1,15 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.file.AssetsFileReader;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class AssetsManager
@@ -31,6 +35,26 @@ public class AssetsManager
             GlobalLogger.log(String.format(LoggerStringValues.ASSET_NOT_FOUND, id));
             return asset;
         }
+    }
+
+    /**
+     * Handling requests for Images
+     *
+     * @param id AssetId of the requested image
+     * @return Image object
+     */
+    public static Image getImageByAssetId (int id)
+    {
+        Image image = null;
+        try
+        {
+            image = new Image (new FileInputStream(AssetsManager.getAssetById(id)));
+        }
+        catch (FileNotFoundException fileNotFoundException)
+        {
+            GlobalLogger.warning(LoggerStringValues.FILE_NOT_FOUND);
+        }
+        return image;
     }
 
     public static int getIdFromAsset (File asset)

@@ -35,8 +35,10 @@ public interface WorldConstants
     interface HellComponentRotations
     {
         // Passage and Walls
-        Rotation HORIZONTAL = Rotation.UP;
-        Rotation VERTICAL = Rotation.LEFT;
+        Rotation HORIZONTAL_TOP = Rotation.UP;
+        Rotation HORIZONTAL_BOTTOM = Rotation.DOWN;
+        Rotation VERTICAL_LEFT = Rotation.LEFT;
+        Rotation VERTICAL_RIGHT = Rotation.RIGHT;
 
         Rotation TOP_LEFT = Rotation.UP;
         Rotation TOP_RIGHT = Rotation.RIGHT;
