@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.view;
 
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
@@ -14,7 +13,7 @@ public class ArenaBaseView
 {
 
     @FXML
-    private GridPane battlefield;
+    private GridPane battlefieldGridPane;
 
     @FXML
     private HBox enemyHandHBox;
@@ -44,9 +43,9 @@ public class ArenaBaseView
 
     //----------------------- Getter ------------------//
 
-    public GridPane getBattlefield ()
+    public GridPane getBattlefieldGridPane ()
     {
-        return battlefield;
+        return battlefieldGridPane;
     }
 
     public HBox getEnemyHandHBox ()
