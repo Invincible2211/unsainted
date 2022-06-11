@@ -17,3 +17,9 @@
     -fx-font-size: 18;
     -fx-font-family: Hombre;
 }
+
+.header-label{
+    -fx-font-size: 28;
+    -fx-font-family: Hombre;
+    -fx-font-weight: bold;
+}

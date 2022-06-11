@@ -2,7 +2,9 @@ package de.prog2.dungeontop.control.controller;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.view.CardView;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +35,7 @@ public abstract class CardViewController
         controller.getRankLabel().setText(String.format(StringValues.RANK, card.getRank(), card.getMaxRank()));
         controller.getSummonCostLabel().setText(String.format(StringValues.SUMMON_COST, card.getSummonCost()));
 
-        //controller.getEntityNameLabel().setText(card.getName());
+        controller.getEntityNameLabel().setText(((Minion)((EntityCard)card).getEntity()).getName());
 
         controller.getEntityImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(19));
 

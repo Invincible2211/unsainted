@@ -26,7 +26,7 @@ public abstract class ShopViewController
             button.setPrefHeight(((AnchorPane)cardView).getPrefHeight()/5);
             shopView.getGrid().add(new VBox(cardView, button), columns, row);
             columns++;
-            if (columns == 9)
+            if (columns == 4)
             {
                 columns = 0;
                 row++;
