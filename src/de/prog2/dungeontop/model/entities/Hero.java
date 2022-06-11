@@ -11,16 +11,4 @@ public class Hero extends Entity
     {
         super(hp, attackDamage, movement, owner);
     }
-
-    @Override
-    public Arena attackAction (Coordinate position, Arena arena)
-    {
-        return null;
-    }
-
-    @Override
-    public Arena takeDamage (Coordinate position, Arena arena)
-    {
-        return null;
-    }
 }

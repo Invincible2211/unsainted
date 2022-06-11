@@ -28,11 +28,11 @@ public abstract class ArenaBaseController
         HBox secondHandContainer = arenaBaseView.getEnemyHandHBox();
         for (Card card : handOne)
         {
-            handcontainer.getChildren().add(CardViewController.init(card));
+            handcontainer.getChildren().add(CardViewController.getCardView(card));
         }
         for (Card card : handTwo)
         {
-            secondHandContainer.getChildren().add(CardViewController.init(card));
+            secondHandContainer.getChildren().add(CardViewController.getCardView(card));
         }
     }
 
