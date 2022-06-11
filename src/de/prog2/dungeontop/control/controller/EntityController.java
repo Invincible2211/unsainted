@@ -78,4 +78,10 @@ public class EntityController
     {
         return attacker.attackAction(position, arena);
     }
+
+    public static Arena tryAttack (Entity attacker, Coordinate position,
+                                   Arena arena)
+    {
+        return attacker.attackAction(position, arena);
+    }
 }

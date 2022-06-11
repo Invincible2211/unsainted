@@ -140,16 +140,20 @@ public interface LoggerStringValues {
     String CARD_PUSHED_TO_DECK = "Eine Karte wurde zum Deck gepusht!";
     String CARD_POPPED = "Eine Karte wurde vom Deck gepoppt!";
     String CARD_CONTAIN_IN_DECK = "Es wurde gesucht ob eine Karte im Deck ist!:";
+    String CARD_CREATED = "Es wurde eine Card erstellt!";
     String MINION_CREATED = "Ein Minion wurde erstellt";
     // Items
     String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Preis: %d Souls.";
     String INVENTORY_CREATED = "Inventar wurde erstellt.";
     String ITEM_ADDED = "%s wurde ins Inventar hinzugefuegt.";
-    String CARD_CREATED = "Es wurde eine Card erstellt!";
     String RANK_ONE_SAMIRA_BEING_CREATED = "a one Star Samira is being created";
     String RANK_TWO_SAMIRA_BEING_CREATED = "a two Star Samira is being created";
     String RANK_THREE_SAMIRA_BEING_CREATED = "a three Star Samira is being created";
     String SPECIFY_RANK = "no stars were Specified";
     String PLACED_CARD_IN_ARENA = "Placed entity in arena from battlemanager";
     String NOT_ENOUGH_EGOPOINTS = "Duellist does not have neough egopoints to play this minion";
+    
+    //Battlefield
+    String RETURN_NODE_ON_BATTLEFIELD = "return the node: ";
+    String COULD_NOT_FIND_NODE_ON_BATTLEFIELD = "could not find the node on the battlefield with xy: ";
 }
