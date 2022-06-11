@@ -11,6 +11,7 @@ import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
@@ -55,9 +56,11 @@ public class DungeonTop extends Application
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
 
-        testCardView(primaryStage);
+        //testCardView(primaryStage);
         //testHellView(scene);
-        testArenaView();
+        //testArenaView();
+        testSelectHero(primaryStage);
+        //testInventory(primaryStage);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
@@ -127,6 +130,21 @@ public class DungeonTop extends Application
         getStage().setScene(scene);
     }
 
+    public static void testSelectHero(Stage stage) throws Exception
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SELECT_HERO_FXML));
+        Scene scene = new Scene(root);
+        getStage().setScene(scene);
+    }
+
+    public static void testInventory(Stage stage) throws Exception
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/inventory.fxml"));
+        Scene scene = new Scene(root);
+        getStage().setScene(scene);
+    }
     public static Stage getStage()
     {
         return stage;

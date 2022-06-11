@@ -60,32 +60,33 @@ public class SelectHeroController
     }
 
     @FXML
-    private void onHero1ButtonPressed()
+    private void onHero1ButtonClicked()
     {
 
     }
 
     @FXML
-    private void onHero2ButtonPressed()
+    private void onHero2ButtonClicked()
     {
 
 
     }
 
     @FXML
-    private void onHero3ButtonPressed()
+    private void onHero3ButtonClicked()
     {
 
 
     }
 
-    private void onConfirmButtonPressed()
+    @FXML
+    private void onConfirmButtonClicked()
     {
 
     }
 
     @FXML
-    private void onReturnButtonPressed()
+    private void onReturnButtonClicked()
     {
 
     }
