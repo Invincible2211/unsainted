@@ -83,6 +83,7 @@ public interface LoggerStringValues {
     String MOVED_PLAYER = "Moved player ";
     String BACKGROUND_CREATED = "Hell Background has been created.";
     String CLAMPING_FAILURE = "CLAMPING: Min Value bigger than Max Value.";
+    String DRAW_ROOM_TYPES_IMAGE_NOT_FOUND = "The image for the room you try to draw cannot be found.";
 
     String MOVE_UP_SUCCESS = "Player moved into the room above.";
     String MOVE_UP_FAIL = "Player couldn't move into the room above.";

@@ -61,8 +61,6 @@ public class DungeonTop extends Application
         stage.setScene(hellView);
 
 
-        System.out.println(scene.getHeight());
-
         System.out.println(hell);
     }
 
