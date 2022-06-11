@@ -13,21 +13,21 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ArenaBaseView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(/assets/21_BackgroundPlaceholder.jpg);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ArenaBaseView">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER" />
-                  <Pane id="deckdisplay" prefHeight="200.0" prefWidth="200.0" />
+                  <Button fx:id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER" />
+                  <Pane fx:id="deckdisplay" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </VBox>
          </right>
          <left>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Accordion id="lastMovesAccordion">
+                  <Accordion fx:id="lastMovesAccordion">
                     <panes>
                       <TitledPane animated="false" text="untitled 1">
                         <content>
@@ -50,7 +50,7 @@
             </VBox>
          </left>
          <center>
-            <GridPane id="battlefield" BorderPane.alignment="CENTER">
+            <GridPane fx:id="battlefieldGridPane" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -65,7 +65,7 @@
          <bottom>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox id="playerHandHBox" prefHeight="100.0" prefWidth="200.0">
+                  <HBox fx:id="playerHandHBox" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label fx:id="egopointsPlayerOne" text="Label" />
                      </children>
@@ -76,7 +76,7 @@
          <top>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox id="enemyHandHBox" prefHeight="100.0" prefWidth="200.0">
+                  <HBox fx:id="enemyHandHBox" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label fx:id="egopointsPlayerTwo" text="Label" />
                      </children>

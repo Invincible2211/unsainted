@@ -1,6 +1,8 @@
 package de.prog2.dungeontop;
 
+import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
+import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
@@ -8,6 +10,7 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
@@ -54,6 +57,7 @@ public class DungeonTop extends Application
 
         testCardView(primaryStage);
         //testHellView(scene);
+        testArenaView();
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
@@ -93,11 +97,11 @@ public class DungeonTop extends Application
         //view.initPlayerCamera(scene);
         //view.initOverlay(hellView);
 
-        stage.setScene(scene);
-        stage.setScene(hellView);
+//        stage.setScene(scene);
+//        stage.setScene(hellView);
 
 
-        System.out.println(hell);
+//        System.out.println(hell);
     }
 
     public static void testArenaView() throws Exception
@@ -115,10 +119,11 @@ public class DungeonTop extends Application
         Player player2 = new Player(12, 10);
         player2.setDeck(deck2);
 
+
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/arenaView.fxml"));
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/arenaBase.fxml"));
+        BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("view/arenaView.css");
         getStage().setScene(scene);
     }
 
