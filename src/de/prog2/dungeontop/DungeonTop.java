@@ -56,10 +56,10 @@ public class DungeonTop extends Application
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
 
-        testCardView(primaryStage);
+        //testCardView(primaryStage);
         //testHellView(scene);
         //testArenaView();
-        //testSelectHero(primaryStage);
+        testSelectHero(primaryStage);
         //testInventory(primaryStage);
     }
     public static void testCardView(Stage primaryStage) throws Exception

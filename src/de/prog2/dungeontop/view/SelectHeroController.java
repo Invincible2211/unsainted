@@ -79,6 +79,7 @@ public class SelectHeroController
 
     }
 
+    @FXML
     private void onConfirmButtonClicked()
     {
 

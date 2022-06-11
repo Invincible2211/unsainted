@@ -1,8 +1,8 @@
 package de.prog2.dungeontop.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
-import java.awt.*;
 
 public class InventoryController
 {

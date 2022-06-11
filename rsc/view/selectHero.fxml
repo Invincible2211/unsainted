@@ -27,7 +27,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero1ButtonClicked" onMouseEntered="#onHero1ButtonEntered" onMouseExited="#onHero1ButtonExit" prefHeight="200.0" prefWidth="200.0">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero1ButtonClicked" onMouseEntered="#onHero1ButtonEntered" onMouseExited="#onHero1ButtonExit" prefHeight="200.0" prefWidth="200.0" stylesheets="@view/selectHeroStyle.css">
                      <graphic>
                         <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                            <image>
@@ -35,6 +35,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <font>
+                        <Font size="35.0" />
+                     </font>
                   </Button>
                   <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Warrior" textFill="WHITE">
                      <font>
@@ -45,7 +48,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero2ButtonClicked" onMouseEntered="#onHero2ButtonEntered" onMouseExited="#onHero2ButtonExit" prefHeight="200.0" prefWidth="200.0">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero2ButtonClicked" onMouseEntered="#onHero2ButtonEntered" onMouseExited="#onHero2ButtonExit" prefHeight="200.0" prefWidth="200.0" stylesheets="@view/selectHeroStyle.css">
                      <graphic>
                         <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                            <image>
@@ -63,7 +66,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero3ButtonClicked" onMouseEntered="#onHero3ButtonEntered" onMouseExited="#onHero3ButtonExit" prefHeight="200.0" prefWidth="200.0">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero3ButtonClicked" onMouseEntered="#onHero3ButtonEntered" onMouseExited="#onHero3ButtonExit" prefHeight="200.0" prefWidth="200.0" stylesheets="@view/selectHeroStyle.css">
                      <graphic>
                         <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                            <image>
@@ -81,31 +84,67 @@
             </VBox>
          </children>
       </HBox>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1500.0" layoutY="887.0" mnemonicParsing="false" onAction="#onReturnButtonPressed" onMouseClicked="#onConfirmButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Confirm" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1500.0" layoutY="887.0" mnemonicParsing="false" onMouseClicked="#onConfirmButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Confirm" />
       <AnchorPane layoutX="1373.0" layoutY="164.0" prefHeight="526.0" prefWidth="418.0">
          <children>
             <VBox fx:id="heroText1" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Warrior" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health: 12" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack: 2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent: " />
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Warrior">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health: 12">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack: 2">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent: ">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
                </children>
             </VBox>
             <VBox fx:id="heroText3" alignment="TOP_CENTER" layoutY="-2.0" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Rogue" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health : 10" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack: 3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent:" />
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Rogue">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health : 10">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack: 3">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent:">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
                </children>
             </VBox>
             <VBox fx:id="heroText2" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Mage" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health : 8" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack : 4" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent:" />
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Mage">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health : 8">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack : 4">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
+                  <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent:">
+                     <font>
+                        <Font size="35.0" />
+                     </font></Text>
                </children>
             </VBox>
          </children>
