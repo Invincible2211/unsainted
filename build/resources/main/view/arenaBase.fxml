@@ -29,17 +29,17 @@
                <children>
                   <Accordion fx:id="lastMovesAccordion">
                     <panes>
-                      <TitledPane animated="false" text="untitled 1">
+                      <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                       </TitledPane>
-                      <TitledPane animated="false" text="untitled 2">
+                      <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                       </TitledPane>
-                      <TitledPane animated="false" text="untitled 3">
+                      <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>

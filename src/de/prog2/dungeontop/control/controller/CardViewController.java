@@ -37,7 +37,8 @@ public abstract class CardViewController
 
     private static void fillCardViewWithData(Card card, CardView controller)
     {
-        controller.getRankLabel().setText(String.format(StringValues.RANK, card.getRank(), card.getMaxRank()));
+        controller.getRankLabel().setText(card.getRank() + "");
+        controller.getRankImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.getRankIcon(card.getRank())));
 
         controller.getSummonCostLabel().setText(card.getSummonCost() + "");
         controller.getSummonImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.SUMMON_COST_ICON));

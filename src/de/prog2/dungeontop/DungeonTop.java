@@ -68,20 +68,11 @@ public class DungeonTop extends Application
     public static void testCardView(Stage primaryStage) throws Exception
     {
         Entity entity = new Minion("Harald", 6, 4, 1, 19);
-        var card = new EntityCard(entity, 3, 100, 1, 2);
         ArrayList<Card> cards = new ArrayList<>();
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
+        for (int i = 0; i < 6; i++)
+        {
+            cards.add(new EntityCard(entity, 6, 100, 1 + i, 2));
+        }
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/shopView.fxml"));
