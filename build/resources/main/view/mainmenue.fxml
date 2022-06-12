@@ -7,11 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< Updated upstream
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url(/assets/00Unsainted.png);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.MainMenueController">
-=======
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url(/assets/00Unsainted.png); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.MainMenueController">
->>>>>>> Stashed changes
    <children>
       <ImageView fitHeight="98.0" fitWidth="143.0" focusTraversable="true" layoutX="600.0" layoutY="210.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" style="-fx-scale-x: 4; -fx-scale-y: 4;">
          <image>
@@ -54,11 +50,7 @@
          <effect>
             <InnerShadow />
          </effect></Button>
-<<<<<<< Updated upstream
-      <Button id="button" layoutX="1050.0" layoutY="360.0" mnemonicParsing="false" onAction="#onGameStartButtonPressed" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Spiel starten">
-=======
       <Button id="button" layoutX="1050.0" layoutY="360.0" mnemonicParsing="false" onAction="#onGameStartButtonPressed" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Spiel starten" AnchorPane.bottomAnchor="600.0" AnchorPane.leftAnchor="1050.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="360.0">
->>>>>>> Stashed changes
          <effect>
             <InnerShadow />
          </effect></Button>

@@ -4,51 +4,89 @@ import de.prog2.dungeontop.model.game.GameState;
 
 public class GameManager {
 
+    /*----------------------------------------------ATTRIBUTE---------------------------------------------------------*/
+
     private final static GameManager instance = new GameManager();
-
-    private GameManager(){
-
-    }
 
     private GameState currentState = GameState.MAIN_MENU;
 
-    public void startGame(){
+    /*--------------------------------------------KONSTRUKTOREN-------------------------------------------------------*/
+
+    /**
+     * Der Konstruktor ist private, da der GameManager ein Singelton ist
+     */
+    private GameManager()
+    {
+
+    }
+
+    /*----------------------------------------------METHODEN----------------------------------------------------------*/
+
+    /**
+     * Das Spiel wird in den Zustand des gestarteten Spiels gesetzt.
+     */
+    public void startGame()
+    {
         this.currentState = GameState.RUNNING;
     }
 
-    public void endGame(){
+    /**
+     * Das Spiel wird in den Zustand des beendeten Spiels gesetzt.
+     */
+    public void endGame()
+    {
         this.currentState = GameState.END;
     }
 
-    public void Pause(){
+    /**
+     * Das Spiel wird in den Zustand des pausierten Spiels gesetzt.
+     */
+    public void Pause()
+    {
         this.currentState = GameState.PAUSE;
     }
 
+    /**
+     * Das Spiel wird in den Zustand des gestarteten Kampfes gesetzt.
+     */
     public void beginBattle()
     {
         this.currentState = GameState.BATTLE;
     }
 
+    /**
+     * Das Spiel wird in den Zustand eines gescheiterten Spieldurchlaufs gesetzt.
+     */
     public void loseRun()
     {
         this.currentState = GameState.LOSE;
     }
 
+    /**
+     * Das Spiel wird in den Zustand eines geoeffneten Shops gesetzt.
+     */
     public void openShop()
     {
         this.currentState = GameState.SHOP;
     }
 
+    /**
+     * Das Spiel wird in den Zustand der Erkundung der Hell gesetzt.
+     */
     public void exploringHell()
     {
         this.currentState = GameState.EXPLORING;
     }
 
-    public GameState getCurrentState() {
+    /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
+
+    public GameState getCurrentState()
+    {
         return currentState;
     }
 
-    public static GameManager getInstance() {
+    public static GameManager getInstance()
+    {
         return instance;
     }
 

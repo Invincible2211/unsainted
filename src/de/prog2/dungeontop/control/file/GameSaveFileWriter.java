@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.file;
 
+@Deprecated
 public class GameSaveFileWriter {
 
     private final static GameSaveFileWriter instance = new GameSaveFileWriter();
