@@ -25,4 +25,28 @@ public interface AssetIds {
     int PLAYER = 19;
     int COGWHEEL = 15;
     int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 22;
+
+    // Card Asset IDs
+    int HP_ICON = 6;
+    int ATTACK_ICON = 52;
+    int SUMMON_COST_ICON = 53;
+    int MOVEMENT_ICON = 51;
+    int RANK1_ICON = 54;
+    int RANK2_ICON = 55;
+    int RANK3_ICON = 56;
+    int RANK4_ICON = 57;
+    int RANK5_ICON = 58;
+    int RANK6_ICON = 59;
+    static int getRankIcon(int rank)
+    {
+        return switch (rank)
+        {
+            case 1 -> RANK1_ICON;
+            case 2 -> RANK2_ICON;
+            case 3 -> RANK3_ICON;
+            case 4 -> RANK4_ICON;
+            case 5 -> RANK5_ICON;
+            default -> RANK6_ICON;
+        };
+    }
 }

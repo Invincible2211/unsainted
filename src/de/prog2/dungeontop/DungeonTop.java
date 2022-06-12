@@ -1,5 +1,6 @@
 package de.prog2.dungeontop;
 
+import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -17,7 +18,6 @@ import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
-import de.prog2.dungeontop.view.SceneScaler;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -53,35 +53,26 @@ public class DungeonTop extends Application
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
+        stage.sizeToScene();
         stage.show();
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
-        //testCardView(primaryStage);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
-        //testCardView(primaryStage);
-        testHellView(scene);
+        testCardView(primaryStage);
+        //testHellView(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
         Entity entity = new Minion("Harald", 6, 4, 1, 19);
-        var card = new EntityCard(entity, 3, 100, 1, 2);
         ArrayList<Card> cards = new ArrayList<>();
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
+        for (int i = 0; i < 6; i++)
+        {
+            cards.add(new EntityCard(entity, 6, 100, 1 + i, 2));
+        }
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/shopView.fxml"));
@@ -100,10 +91,11 @@ public class DungeonTop extends Application
         //view.initPlayerCamera(scene);
         //view.initOverlay(hellView);
 
-        stage.setScene(scene);
-        stage.setScene(hellView);
+//        stage.setScene(scene);
+//        stage.setScene(hellView);
 
-        System.out.println(hell);
+
+//        System.out.println(hell);
     }
 
     public static void testArenaView() throws Exception
@@ -120,6 +112,8 @@ public class DungeonTop extends Application
         player1.setDeck(deck1);
         Player player2 = new Player(12, 10);
         player2.setDeck(deck2);
+        player1.setHandCardLimit(5);
+        player2.setHandCardLimit(5);
 
 
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -127,6 +121,7 @@ public class DungeonTop extends Application
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
+
     }
 
     public static void testSelectHero(Stage stage) throws Exception

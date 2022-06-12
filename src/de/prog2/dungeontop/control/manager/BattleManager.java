@@ -48,12 +48,24 @@ public class BattleManager
         this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck);
         this.secondDuellist = new Duellist(secondplayer,secondplayerDeck);
         this.arena = arena;
+        statinitialiser(arenaBaseView);
+    }
 
+    /**
+     * @param arenaBaseView the View that it will draw on
+     */
+    private void statinitialiser(ArenaBaseView arenaBaseView)
+    {
         ArenaBaseController.init(arenaBaseView);
         this.getFirstDuellist().drawNewDuellistHand();
+        this.getSecondDuellist().drawNewDuellistHand();
         ArenaBaseController.updatePlayerHands(arenaBaseView,
                 this.getFirstDuellist().getHand(),
                 this.getSecondDuellist().getHand());
+        this.currentPhase = BattlePhase.START;
+        ArenaBaseController.updateEgoPoints(arenaBaseView,
+                this.getFirstDuellist().currentEgoPoints,
+                this.getSecondDuellist().getCurrentEgoPoints());
     }
 
     public BattlePhase getNextPhaseInCycle ()
@@ -239,6 +251,7 @@ public class BattleManager
             this.handLimit = player.getHandCardLimit();
             this.currentEgoPoints = player.getEgo_points();
             this.egoPointsMax = player.getEgo_points();
+            this.drawNewDuellistHand();
 
         }
 
