@@ -7,18 +7,13 @@ import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
-import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.model.world.hellComponents.HellComponent;
 import de.prog2.dungeontop.model.world.rooms.*;
-import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.HellViewConstants;
-import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.resources.WorldConstants;
+import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -365,7 +360,10 @@ public class HellView
         timeline.play();
 
         // unlock the movement method again
-        timeline.setOnFinished(e -> isAnimating = false);
+        timeline.setOnFinished(e -> {
+            isAnimating = false;
+            RoomDialogueViewController.getInstance().showStage(PlayerManager.getInstance().getPlayer().getCurrentRoom());
+        });
 
         GlobalLogger.log(LoggerStringValues.MOVED_PLAYER + key);
     }

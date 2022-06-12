@@ -1,6 +1,7 @@
 .button{
     -fx-background-image: url(button-background.png);
     -fx-background-color: transparent;
+    -fx-background-size: cover;
     -fx-font-family: Hombre;
     -fx-font-size: 24pt;
 }

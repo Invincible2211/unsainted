@@ -9,7 +9,7 @@
 /.idea
 /gradlew
 /gradlew.bat
-/gradle
+/.gradle
 
 # Compiled class file
 *.class

@@ -8,6 +8,9 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.view.RoomDialogueViewController;
+import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ViewStrings;
@@ -53,12 +56,14 @@ public class DungeonTop extends Application
         stage.show();
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
+        RoomDialogueViewController.initStage();
 
         testCardView(primaryStage);
-        //testHellView(scene);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
+        //testCardView(primaryStage);
+        testHellView(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
@@ -88,9 +93,6 @@ public class DungeonTop extends Application
 
     public static void testHellView(Scene scene) throws Exception
     {
-
-        System.out.println(stage.getHeight());
-
         Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
         HellGenerator.initHell(hell);
         HellView view = new HellView();
