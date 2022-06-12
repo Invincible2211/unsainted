@@ -2,7 +2,6 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AudioManager;
-import de.prog2.dungeontop.resources.FilePaths;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +17,8 @@ import java.io.IOException;
 
 public class SettingsController {
 
+    /*----------------------------------------------ATTRIBUTE---------------------------------------------------------*/
+
     @FXML
     private Slider volumeSlider;
 
@@ -25,37 +26,58 @@ public class SettingsController {
     ChoiceBox<String> resolution;
     private static final Stage settingsStage = new Stage();
 
-    public SettingsController(){
+    /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
-    }
-
+    /**
+     * Dies ist die Eventmethode, welche ausgefuehrt wird, wenn auf den Save-Button gedrueckt wird.
+     * Die Einstellungen werden ausgeblendet.
+     */
     @FXML
-    private void onSaveButtonPressed(){
+    private void onSaveButtonPressed()
+    {
         hideSettings();
     }
 
+    /**
+     * Nach der Instanziierung der GUI-Komponenten wird der Volume-Slider an die Volume-Property des AudioManagers gebindet.
+     */
     @FXML
-    void initialize(){
+    void initialize()
+    {
         volumeSlider.valueProperty().bindBidirectional(AudioManager.getInstance().getVolume());
     }
 
-    public static void showSettings(){
+    /**
+     * Diese Methode blendet die Settings-Stage ein.
+     */
+    public static void showSettings()
+    {
         settingsStage.show();
     }
 
-    public static void hideSettings(){
+    /**
+     * Diese Methode blendet die Settings-Stage aus.
+     */
+    public static void hideSettings()
+    {
         settingsStage.hide();
     }
 
-    public static void initStage(){
+    /**
+     * Diese Methode erzeugt die Stage aus der FXML-Datei der Settings
+     */
+    public static void initStage()
+    {
         final FXMLLoader fxmlLoader = new FXMLLoader();
         settingsStage.initModality(Modality.APPLICATION_MODAL);
         settingsStage.initOwner(DungeonTop.getStage());
         settingsStage.initStyle(StageStyle.UNDECORATED);
         AnchorPane rootPane = new AnchorPane();
-        try {
+        try
+        {
             rootPane = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SETTINGS_FXML));
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
         final Scene settingsScene = new Scene(rootPane);
