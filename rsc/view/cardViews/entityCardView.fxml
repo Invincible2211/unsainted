@@ -6,23 +6,47 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <AnchorPane prefHeight="480" prefWidth="343" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.cardViews.EntityCardView">
     <AnchorPane maxHeight="480" maxWidth="343" prefHeight="480" prefWidth="343" style="-fx-background-image: url(/assets/50_CardBackground.png);">
+        <!-- HP -->
+        <StackPane AnchorPane.topAnchor="15" AnchorPane.leftAnchor="15">
+            <ImageView fx:id="hpImageView" fitHeight="55" fitWidth="55" />
+            <Label fx:id="hpLabel" text="0" styleClass="status-label"/>
+        </StackPane>
+        <!-- Attack -->
+        <StackPane AnchorPane.topAnchor="15" AnchorPane.rightAnchor="15">
+            <ImageView fx:id="attackImageView" fitHeight="55" fitWidth="55" />
+            <Label fx:id="attackLabel" text="0" styleClass="status-label"/>
+        </StackPane>
+        <!-- Summon Cost -->
+        <StackPane AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="15">
+            <ImageView fx:id="summonImageView" fitHeight="55" fitWidth="55" />
+            <Label fx:id="summonCostLabel" styleClass="status-label" text="0" />
+        </StackPane>
+        <!-- Movement -->
+        <StackPane AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="15">
+            <ImageView fx:id="movementImageView" fitHeight="55" fitWidth="55" />
+            <Label fx:id="movementLabel" text="0" styleClass="status-label"/>
+        </StackPane>
+        <!-- Entity -->
         <VBox AnchorPane.topAnchor="45" AnchorPane.leftAnchor="55" AnchorPane.rightAnchor="55" AnchorPane.bottomAnchor="200"
               alignment="CENTER">
             <Label fx:id="entityNameLabel" text="name" styleClass="header-label"/>
             <ImageView fx:id="entityImageView" fitHeight="200" fitWidth="200" scaleX="0.9" scaleY="0.9"/>
         </VBox>
-        <VBox AnchorPane.bottomAnchor="55" AnchorPane.leftAnchor="55" AnchorPane.rightAnchor="55" AnchorPane.topAnchor="290">
-            <BorderPane>
-                <left><Label text="Rank: "/></left>
-                <right><Label fx:id="rankLabel" text="1" /></right>
-            </BorderPane>
-            <BorderPane>
-                <left><Label text="Summon Cost: " /></left>
-                <right><Label fx:id="summonCostLabel" text="1" /></right>
-        </BorderPane>
-        </VBox>
+        <!-- Rank -->
+        <StackPane AnchorPane.bottomAnchor="55" AnchorPane.leftAnchor="55" AnchorPane.rightAnchor="55" AnchorPane.topAnchor="290">
+            <ImageView fx:id="rankImageView" fitHeight="55" fitWidth="55" scaleY="1.2" scaleX="1.2"/>
+            <Label fx:id="rankLabel" text="0" styleClass="status-label"/>
+        </StackPane>
+
+<!--        <VBox AnchorPane.bottomAnchor="55" AnchorPane.leftAnchor="55" AnchorPane.rightAnchor="55" AnchorPane.topAnchor="290">-->
+<!--            <BorderPane>-->
+<!--                <left><Label text="Rank: "/></left>-->
+<!--                <right><Label fx:id="rankLabel" text="1" /></right>-->
+<!--            </BorderPane>-->
+<!--        </VBox>-->
     </AnchorPane>
 </AnchorPane>

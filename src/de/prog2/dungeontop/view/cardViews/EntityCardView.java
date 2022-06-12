@@ -10,6 +10,18 @@ public class EntityCardView extends CardView
     private Label entityNameLabel;
     @FXML
     private ImageView entityImageView;
+    @FXML
+    private Label hpLabel;
+    @FXML
+    private ImageView hpImageView;
+    @FXML
+    private Label attackLabel;
+    @FXML
+    private ImageView attackImageView;
+    @FXML
+    private Label movementLabel;
+    @FXML
+    private ImageView movementImageView;
 
 
     public Label getEntityNameLabel()
@@ -20,5 +32,35 @@ public class EntityCardView extends CardView
     public ImageView getEntityImageView()
     {
         return entityImageView;
+    }
+
+    public Label getHpLabel()
+    {
+        return hpLabel;
+    }
+
+    public ImageView getHpImageView()
+    {
+        return hpImageView;
+    }
+
+    public Label getAttackLabel()
+    {
+        return attackLabel;
+    }
+
+    public ImageView getAttackImageView()
+    {
+        return attackImageView;
+    }
+
+    public Label getMovementLabel()
+    {
+        return movementLabel;
+    }
+
+    public ImageView getMovementImageView()
+    {
+        return movementImageView;
     }
 }
