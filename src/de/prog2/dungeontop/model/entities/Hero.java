@@ -7,20 +7,8 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 
 public class Hero extends Entity
 {
-    public Hero(Card card, int hp, int attackDamage, int movement, Player owner)
+    public Hero(String name, int hp, int attackDamage, int movement, int assetId, Player owner)
     {
-        super(card, hp, attackDamage, movement, owner);
-    }
-
-    @Override
-    public Arena attackAction (Coordinate position, Arena arena)
-    {
-        return null;
-    }
-
-    @Override
-    public Arena takeDamage (Coordinate position, Arena arena)
-    {
-        return null;
+        super(name, hp, attackDamage, movement, assetId, owner);
     }
 }

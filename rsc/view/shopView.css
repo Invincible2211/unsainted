@@ -12,3 +12,14 @@
     -fx-scale-x: 1.01;
     -fx-scale-y: 1.03;
 }
+
+.label{
+    -fx-font-size: 18;
+    -fx-font-family: Hombre;
+}
+
+.header-label{
+    -fx-font-size: 28;
+    -fx-font-family: Hombre;
+    -fx-font-weight: bold;
+}
