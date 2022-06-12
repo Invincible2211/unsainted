@@ -125,6 +125,7 @@ public class HellView
     {
         // load the images of all roomtypes we want to show
         Image monsterRoom = AssetsManager.getImageByAssetId(AssetIds.ARENA_ROOM);
+        Image bossRoom = AssetsManager.getImageByAssetId(AssetIds.BOSS_ROOM);
         Image forgeRoom = AssetsManager.getImageByAssetId(AssetIds.FORGE_ROOM);
         Image lavaPondRoom = AssetsManager.getImageByAssetId(AssetIds.LAVA_POND);
         Image randomEventRoom = AssetsManager.getImageByAssetId(AssetIds.RANDOM_EVENT_ROOM);
@@ -136,7 +137,12 @@ public class HellView
             if(room instanceof EmptyRoom)
                 continue;
             if (room instanceof ArenaRoom)
-                currRoomImage = monsterRoom;
+            {
+                if (room == hell.getBossRoom())
+                    currRoomImage = bossRoom;
+                else
+                    currRoomImage = monsterRoom;
+            }
             else if (room instanceof RandomEventRoom)
                 currRoomImage = randomEventRoom;
             else if (room instanceof ForgeRoom)

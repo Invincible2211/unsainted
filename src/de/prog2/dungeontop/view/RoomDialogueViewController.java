@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.RoomDialogueConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
@@ -53,6 +54,9 @@ public class RoomDialogueViewController
 
     public record StageVariable(int assetId, String description){};
 
+    /**
+     * Initializes the RoomDialogueStage
+     */
     public static void initStage()
     {
         final FXMLLoader fxmlLoader = new FXMLLoader();
@@ -142,31 +146,47 @@ public class RoomDialogueViewController
         lowerButton.textProperty().setValue(lowerButtonText);
     }
 
+    /**
+     * Hide the DialogueStage.
+     */
     @FXML
     private void hideStage ()
     {
         roomDialogueStage.hide();
     }
 
+    /**
+     * Start the battle for the ArenaRoom.
+     */
     private void startBattle ()
     {
         //TODO: Implement method to start a battle
     }
 
+    /**
+     * Execute a random event.
+     */
     private void openRandomEvent ()
     {
         // TODO: Implement method to open a RandomEvent
     }
 
+    /**
+     * Open the ForgeView.
+     */
     private void openForge ()
     {
         // TODO: Implement method to open a ForgeView
     }
 
+    /**
+     * Open the LavaPondView.
+     */
     private void openLavaPond ()
     {
         // TODO: Implement method to open a LavaPondView
     }
+
     /**
      * Get a pseudo-random Asset-Description-Pair to show in a RoomDialogue.
      *

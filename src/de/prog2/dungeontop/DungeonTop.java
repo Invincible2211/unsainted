@@ -101,8 +101,8 @@ public class DungeonTop extends Application
         //view.initPlayerCamera(scene);
         //view.initOverlay(hellView);
 
-//        stage.setScene(scene);
-//        stage.setScene(hellView);
+        stage.setScene(scene);
+        stage.setScene(hellView);
 
 
 //        System.out.println(hell);
