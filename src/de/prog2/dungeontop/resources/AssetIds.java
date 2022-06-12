@@ -24,11 +24,17 @@ public interface AssetIds {
     int CENTER = 13;
     int PLAYER = 19;
     int COGWHEEL = 15;
-    int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 23;
+
 
     // Card Asset IDs
     int HP_ICON = 6;
     int ATTACK_ICON = 52;
     int SUMMON_COST_ICON = 53;
     int MOVEMENT_ICON = 51;
+
+    // Arena Asset IDs
+    int ARENA_BG_DEFAULT_ID = 21;
+    int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 23;
+
+
 }

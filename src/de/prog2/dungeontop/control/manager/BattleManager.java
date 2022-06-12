@@ -33,8 +33,6 @@ public class BattleManager
     {
     }
 
-
-
     /**
      * @param firstPlayer Player or DM who will draw and play first. Decide before Battle
      * @param secondplayer Player or DM will go second
