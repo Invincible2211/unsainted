@@ -23,3 +23,9 @@
     -fx-font-family: Hombre;
     -fx-font-weight: bold;
 }
+.status-label{
+    -fx-font-size: 18;
+    -fx-font-family: Hombre;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}

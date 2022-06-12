@@ -7,6 +7,7 @@ import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.view.cardViews.CardView;
 import de.prog2.dungeontop.view.cardViews.EntityCardView;
@@ -37,7 +38,9 @@ public abstract class CardViewController
     private static void fillCardViewWithData(Card card, CardView controller)
     {
         controller.getRankLabel().setText(String.format(StringValues.RANK, card.getRank(), card.getMaxRank()));
+
         controller.getSummonCostLabel().setText(String.format(StringValues.SUMMON_COST, card.getSummonCost()));
+        controller.getSummonImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.SUMMON_COST_ICON));
 
         if(card instanceof EntityCard)
         {
@@ -54,8 +57,20 @@ public abstract class CardViewController
     private static void fillEntityCardView(EntityCard card, EntityCardView controller)
     {
         Entity entity = card.getEntity();
+        // Name
         controller.getEntityNameLabel().setText(entity.getName());
 
+        // HP
+        controller.getHpLabel().setText(entity.getHp() + "");
+        controller.getHpImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.HP_ICON));
+        // Attack
+        controller.getAttackLabel().setText(entity.getAttackDamage() + "");
+        controller.getAttackImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.ATTACK_ICON));
+        // Movement
+        controller.getMovementLabel().setText(entity.getMovement() + "");
+        controller.getMovementImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.MOVEMENT_ICON));
+
+        // Image
         controller.getEntityImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(entity.getAssetId()));
     }
     private static void fillSpellCardView(SpellCard card, SpellCardView controller)
