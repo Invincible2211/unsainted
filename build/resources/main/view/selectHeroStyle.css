@@ -3,12 +3,16 @@
 }
 
 .button:hover{
+<<<<<<< Updated upstream
     -fx-font-family: Hombre;
+=======
+>>>>>>> Stashed changes
     -fx-background-color: black;
     -fx-background-size: cover;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
 }
+<<<<<<< Updated upstream
 
 .text-id{
     -fx-font-family: Hombre;
@@ -16,3 +20,5 @@
     -fx-fill: yellow;
     -fx-font-size: 25pt;
 }
+=======
+>>>>>>> Stashed changes

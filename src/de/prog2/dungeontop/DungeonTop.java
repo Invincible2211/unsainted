@@ -14,9 +14,13 @@ import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ViewStrings;
+<<<<<<< Updated upstream
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
+=======
+import de.prog2.dungeontop.view.SceneScaler;
+>>>>>>> Stashed changes
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +56,6 @@ public class DungeonTop extends Application
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
-        stage.sizeToScene();
         stage.show();
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();

@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.resources.FilePaths;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
