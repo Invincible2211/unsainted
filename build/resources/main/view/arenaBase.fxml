@@ -19,7 +19,7 @@
          <right>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" stylesheets="@view/importantstyle.css"  onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER" />
+                  <Button fx:id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER" />
                   <Pane fx:id="deckdisplay" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </VBox>
