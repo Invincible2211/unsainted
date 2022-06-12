@@ -25,58 +25,28 @@ public class SelectHeroController
     @FXML
     private VBox heroText3;
 
-
-    @FXML
-    private void onHero1ButtonEntered()
-    {
-        heroText1.setVisible(true);
-    }
-    @FXML
-    private void onHero2ButtonEntered()
-    {
-        heroText2.setVisible(true);
-    }
-    @FXML
-    private void onHero3ButtonEntered()
-    {
-        heroText3.setVisible(true);
-    }
-
-    @FXML
-    private void onHero1ButtonExit()
-    {
-        heroText1.setVisible(false);
-    }
-
-    @FXML
-    private void onHero2ButtonExit()
-    {
-        heroText2.setVisible(false);
-    }
-    @FXML
-    private void onHero3ButtonExit()
-    {
-        heroText3.setVisible(false);
-    }
-
     @FXML
     private void onHero1ButtonClicked()
     {
-
+        heroText1.setVisible(true);
+        heroText2.setVisible(false);
+        heroText3.setVisible(false);
     }
 
     @FXML
     private void onHero2ButtonClicked()
     {
-
-
+        heroText2.setVisible(true);
+        heroText1.setVisible(false);
+        heroText3.setVisible(false);
     }
 
     @FXML
     private void onHero3ButtonClicked()
     {
-
-
+        heroText3.setVisible(true);
+        heroText1.setVisible(false);
+        heroText2.setVisible(false);
     }
 
     @FXML
