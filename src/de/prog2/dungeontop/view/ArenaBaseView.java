@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+
 
 public class ArenaBaseView
 {
@@ -35,6 +37,12 @@ public class ArenaBaseView
 
     @FXML
     private Label egopointsPlayerTwo;
+
+    @FXML
+    private ImageView egopointsPlayerOneImageView;
+
+    @FXML
+    private ImageView egopointsPlayerTwoImageView;
 
     //hier laesst sich drueber streiten ob nicht eigentlich erst ueber den Controller der aufruf am Battlemanager stattfinden sollte.
     @FXML
@@ -80,5 +88,15 @@ public class ArenaBaseView
     public Label getEgopointsPlayerTwo ()
     {
         return egopointsPlayerTwo;
+    }
+
+    public ImageView getEgopointsPlayerOneImageView ()
+    {
+        return egopointsPlayerOneImageView;
+    }
+
+    public ImageView getEgopointsPlayerTwoImageView ()
+    {
+        return egopointsPlayerTwoImageView;
     }
 }

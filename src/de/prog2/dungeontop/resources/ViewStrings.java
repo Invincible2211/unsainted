@@ -13,4 +13,7 @@ public interface ViewStrings {
     String ARENA_ROOM_DIALOGUE_FXML = "view/roomDialogueView.fxml";
 
     String ARENABASE_VIEW = "view/arenaBase.fxml";
+    //ist kein string aber kann hier trotzdem rein
+    int EGOPOINTS_BACKROUND_HEIGHT = 50;
+    int EGOPOINTS_BACKROUND_WIDTH = 50;
 }

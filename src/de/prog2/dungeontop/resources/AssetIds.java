@@ -24,7 +24,7 @@ public interface AssetIds {
     int CENTER = 13;
     int PLAYER = 19;
     int COGWHEEL = 15;
-    int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 22;
+    int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 23;
 
     // Card Asset IDs
     int HP_ICON = 6;

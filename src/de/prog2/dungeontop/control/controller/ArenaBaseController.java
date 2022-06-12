@@ -5,6 +5,7 @@ import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
 import javafx.scene.Node;
@@ -23,7 +24,19 @@ public abstract class ArenaBaseController
     public static void init(ArenaBaseView arenaBaseView)
     {
        initBattlefield(arenaBaseView, BattleManager.getInstance().getArena().getHeight(), BattleManager.getInstance().getArena().getWidth());
+       initEgoPoints(arenaBaseView);
+    }
 
+    private static void initEgoPoints (ArenaBaseView arenaBaseView)
+    {
+        ImageView egoPointsPlayerOneImageView = arenaBaseView.getEgopointsPlayerOneImageView();
+        ImageView egoPointsPlayerTwoImageView = arenaBaseView.getEgopointsPlayerTwoImageView();
+        egoPointsPlayerOneImageView.setImage(AssetsManager.getImageByAssetId(AssetIds.SUMMON_COST_ICON));
+        egoPointsPlayerTwoImageView.setImage(AssetsManager.getImageByAssetId(AssetIds.SUMMON_COST_ICON));
+        egoPointsPlayerOneImageView.setFitHeight(ViewStrings.EGOPOINTS_BACKROUND_HEIGHT);
+        egoPointsPlayerOneImageView.setFitWidth(ViewStrings.EGOPOINTS_BACKROUND_WIDTH);
+        egoPointsPlayerTwoImageView.setFitHeight(ViewStrings.EGOPOINTS_BACKROUND_HEIGHT);
+        egoPointsPlayerTwoImageView.setFitWidth(ViewStrings.EGOPOINTS_BACKROUND_WIDTH);
     }
 
     //TODO BINDING THIS -> binddirectional maybe
@@ -67,6 +80,7 @@ public abstract class ArenaBaseController
             }
         }
     }
+
 
     public static Node getBattleFieldPane(ArenaBaseView arenaBaseView, int x,int y)
     {
