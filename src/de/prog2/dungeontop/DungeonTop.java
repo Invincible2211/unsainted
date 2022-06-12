@@ -1,23 +1,13 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
-import de.prog2.dungeontop.control.manager.AudioManager;
-import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
-import de.prog2.dungeontop.model.items.Inventory;
-import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.view.RoomDialogueViewController;
 import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
-import de.prog2.dungeontop.model.world.World;
-import de.prog2.dungeontop.resources.StringValues;
-import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
-import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Application;
@@ -58,8 +48,9 @@ public class DungeonTop extends Application
         stage.show();
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
+        RoomDialogueViewController.initStage();
 
-        testCardView(primaryStage);
+        //testCardView(primaryStage);
         testHellView(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
@@ -89,9 +80,6 @@ public class DungeonTop extends Application
 
     public static void testHellView(Scene scene) throws Exception
     {
-
-        System.out.println(stage.getHeight());
-
         Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
         HellGenerator.initHell(hell);
         HellView view = new HellView();

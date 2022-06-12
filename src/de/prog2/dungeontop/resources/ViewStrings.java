@@ -10,4 +10,5 @@ public interface ViewStrings {
 
     String SELECT_HERO_FXML = "view/selectHero.fxml";
 
+    String ARENA_ROOM_DIALOGUE_FXML = "view/roomDialogueView.fxml";
 }
