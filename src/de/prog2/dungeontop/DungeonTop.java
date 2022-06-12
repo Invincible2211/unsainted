@@ -1,6 +1,7 @@
 package de.prog2.dungeontop;
 
 import de.prog2.dungeontop.control.controller.ArenaBaseController;
+import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DungeonTop extends Application
 {
@@ -63,7 +65,15 @@ public class DungeonTop extends Application
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         testCardView(primaryStage);
+        testEntityView(primaryStage);
         //testHellView(scene);
+    }
+    public static void testEntityView(Stage primaryStage) throws Exception
+    {
+        Entity entity = new Minion("Harald", 6, 4, 3, 19);
+        Scene scene = new Scene((Parent) Objects.requireNonNull(EntityViewController.getEntityView(entity)));
+        scene.getStylesheets().add("view/shopView.css");
+        primaryStage.setScene(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {

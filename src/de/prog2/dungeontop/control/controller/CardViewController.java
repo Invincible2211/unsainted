@@ -23,7 +23,15 @@ public abstract class CardViewController
         try
         {
             FXMLLoader loader = new FXMLLoader();
-            Node cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/entityCardView.fxml"));
+            Node cardView = null;
+            if(card instanceof EntityCard)
+            {
+                cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/entityCardView.fxml"));
+            }
+            else if(card instanceof SpellCard)
+            {
+                cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/spellCardView.fxml"));
+            }
             CardView controller = loader.getController();
             fillCardViewWithData(card, controller);
             return cardView;
