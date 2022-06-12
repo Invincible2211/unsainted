@@ -122,6 +122,8 @@ public class DungeonTop extends Application
         player1.setDeck(deck1);
         Player player2 = new Player(12, 10);
         player2.setDeck(deck2);
+        player1.setHandCardLimit(5);
+        player2.setHandCardLimit(5);
 
 
         FXMLLoader fxmlLoader = new FXMLLoader();
