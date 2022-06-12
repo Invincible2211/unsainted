@@ -7,6 +7,7 @@ public interface AssetIds {
     int ARENA_ROOM = 7;
     int FORGE_ROOM = 8;
     int LAVA_POND = 9;
+    int BOSS_ROOM = 16;
 
 
     // Statboard Iconsw

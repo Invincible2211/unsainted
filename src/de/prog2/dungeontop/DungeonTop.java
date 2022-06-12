@@ -13,9 +13,12 @@ import de.prog2.dungeontop.view.RoomDialogueViewController;
 import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
+import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,7 +63,6 @@ public class DungeonTop extends Application
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
-        //testCardView(primaryStage);
         testHellView(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
@@ -101,7 +103,8 @@ public class DungeonTop extends Application
         stage.setScene(scene);
         stage.setScene(hellView);
 
-        System.out.println(hell);
+
+//        System.out.println(hell);
     }
 
     public static void testArenaView() throws Exception
