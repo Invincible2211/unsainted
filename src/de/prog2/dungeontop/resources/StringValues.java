@@ -12,4 +12,8 @@ public interface StringValues
     //World
     String HELL = "Hell: ";
     String HELL_COMPONENT_MAP = "HellComponentHashMap: ";
+
+    //Cardview
+    String RANK = "%d / %d";
+    String SUMMON_COST = "%d ego";
 }

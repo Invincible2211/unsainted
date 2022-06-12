@@ -1,8 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
-import de.prog2.dungeontop.control.controller.DeckController;
-import de.prog2.dungeontop.control.controller.EntityCardController;
-import de.prog2.dungeontop.control.controller.EntityController;
+import de.prog2.dungeontop.control.controller.*;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -10,6 +8,7 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.ArenaBaseView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class BattleManager
     //BattleManager ist ein Singleton.
     private final static BattleManager instance = new BattleManager();
 
-    public BattleManager getInstance ()
+    public static BattleManager getInstance ()
     {
         GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_GET);
         return instance;
@@ -42,13 +41,19 @@ public class BattleManager
      * @param firstplyerDeck COPY playerDeck or the DMHerodeck, depending who is who.
      * @param secondplayerDeck COPY playerDeck or the DMHerodeck, depending who is who
      * @param arena The instance of the Arena
+     * @param arenaBaseView the View that it will draw on
      */
-    public void startBattle(Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena)
+    public void startBattle(Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena, ArenaBaseView arenaBaseView)
     {
         this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck);
         this.secondDuellist = new Duellist(secondplayer,secondplayerDeck);
         this.arena = arena;
 
+        ArenaBaseController.init(arenaBaseView);
+        this.getFirstDuellist().drawNewDuellistHand();
+        ArenaBaseController.updatePlayerHands(arenaBaseView,
+                this.getFirstDuellist().getHand(),
+                this.getSecondDuellist().getHand());
     }
 
     public BattlePhase getNextPhaseInCycle ()
@@ -119,6 +124,7 @@ public class BattleManager
     public void endAPhase ()
     {
         setCurrentPhase(getNextPhaseInCycle());
+        GlobalLogger.log(LoggerStringValues.CURRENTPHASE_IS_NOW + getCurrentPhase());
     }
 
     /**
@@ -131,6 +137,11 @@ public class BattleManager
         if (entityCard.getPrice() <= duellist.getCurrentEgoPoints())
         {
             EntityCardController.tryInstantiate(entityCard, arena, coordinate);
+            //Reduce egopoints by one for each cost of card
+            for (int cost = 0; cost < entityCard.getPrice(); cost++)
+            {
+                duellist.tryReduceEgoPoints();
+            }
             duellist.removeCardFromHand(entityCard);
             GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
         } else {
@@ -138,7 +149,6 @@ public class BattleManager
         }
     }
 
-    
     private void attack (Entity attacker, Entity attacked)
     {
         this.arena = EntityController.attack(attacker, attacked.getPosition(), this.arena);
@@ -185,6 +195,21 @@ public class BattleManager
     public void setCurrentPhase (BattlePhase currentPhase)
     {
         this.currentPhase = currentPhase;
+    }
+
+    public Arena getArena ()
+    {
+        return arena;
+    }
+
+    public Duellist getFirstDuellist ()
+    {
+        return firstDuellist;
+    }
+
+    public Duellist getSecondDuellist ()
+    {
+        return secondDuellist;
     }
     /*--------------------Hilfsklassen und ControllerMethodik------------------------*/
 
@@ -244,6 +269,7 @@ public class BattleManager
             GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
         }
 
+        //technically not a try as it is not a boolean
         private void tryReduceEgoPoints()
         {
             if (currentEgoPoints > 0){

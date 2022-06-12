@@ -10,9 +10,10 @@ public class EntityCard extends Card
 {
     private Entity entity;
 
-    public EntityCard(int maxRank, int price, int rank, int summonCost, List... assets)
+    public EntityCard(Entity entity, int maxRank, int price, int rank, int summonCost, List... assets)
     {
         super(maxRank, price, rank, summonCost, assets);
+        this.entity = entity;
         GlobalLogger.log(LoggerStringValues.ENTITYCARD_CREATED);
     }
 

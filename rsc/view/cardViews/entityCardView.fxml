@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="480" prefWidth="343" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.cardViews.EntityCardView">
+    <AnchorPane maxHeight="480" maxWidth="343" prefHeight="480" prefWidth="343" style="-fx-background-image: url(/assets/50_CardBackground.png);">
+        <VBox AnchorPane.topAnchor="45" AnchorPane.leftAnchor="55" AnchorPane.rightAnchor="55" AnchorPane.bottomAnchor="200"
+              alignment="CENTER">
+            <Label fx:id="entityNameLabel" text="name" styleClass="header-label"/>
+            <ImageView fx:id="entityImageView" fitHeight="200" fitWidth="200" scaleX="0.9" scaleY="0.9"/>
+        </VBox>
+        <VBox AnchorPane.bottomAnchor="55" AnchorPane.leftAnchor="55" AnchorPane.rightAnchor="55" AnchorPane.topAnchor="290">
+            <BorderPane>
+                <left><Label text="Rank: "/></left>
+                <right><Label fx:id="rankLabel" text="1" /></right>
+            </BorderPane>
+            <BorderPane>
+                <left><Label text="Summon Cost: " /></left>
+                <right><Label fx:id="summonCostLabel" text="1" /></right>
+        </BorderPane>
+        </VBox>
+    </AnchorPane>
+</AnchorPane>
