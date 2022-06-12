@@ -16,7 +16,7 @@ public interface ViewStrings {
 
     //ist kein string aber kann hier trotzdem rein
     int RESOLUTION_X = 1920;
-    int RESOLUTION_Y = 1080;
+    int RESOLUTION_Y = 300;
     double EGOPOINTS_BACKROUND_HEIGHT = RESOLUTION_X * 0.05;
     double EGOPOINTS_BACKROUND_WIDTH = RESOLUTION_Y * 0.05;
     double HAND_PLAYER_X = RESOLUTION_X * 0.8;

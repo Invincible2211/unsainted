@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane fx:id="backGroundAnchorPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ArenaBaseView" maxHeight="1080" maxWidth="1920" prefHeight="1080" prefWidth="1920">
+
+<AnchorPane fx:id="backGroundAnchorPane" maxHeight="1080" maxWidth="1920" prefHeight="1080" prefWidth="1920" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ArenaBaseView">
    <children>
        <StackPane fx:id="backGroundStackPane" alignment="TOP_LEFT">
       <BorderPane fx:id="borderPaneID">
          <right>
-            <VBox BorderPane.alignment="CENTER">
+            <VBox maxHeight="50" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER" />
-                  <Pane fx:id="deckdisplay" prefHeight="200.0" prefWidth="200.0" />
+                  <Pane fx:id="deckdisplay" />
                </children>
             </VBox>
          </right>
          <left>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox BorderPane.alignment="CENTER">
                <children>
                   <Accordion fx:id="lastMovesAccordion">
                     <panes>
@@ -51,8 +52,8 @@
                      <children>
                         <StackPane>
                            <children>
-                              <ImageView fx:id="egopointsPlayerOneImageView" pickOnBounds="true" preserveRatio="true"/>
-                              <Label fx:id="egopointsPlayerOne" text="Label" alignment="CENTER"/>
+                              <ImageView fx:id="egopointsPlayerOneImageView" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="egopointsPlayerOne" alignment="CENTER" text="Label" />
                            </children>
                         </StackPane>
                      </children>
@@ -61,14 +62,14 @@
             </VBox>
          </bottom>
          <top>
-            <VBox BorderPane.alignment="CENTER">
+            <VBox fillWidth="false" BorderPane.alignment="CENTER">
                <children>
-                  <HBox fx:id="enemyHandHBox">
+                  <HBox fx:id="enemyHandHBox" fillHeight="false" VBox.vgrow="SOMETIMES">
                      <children>
                         <StackPane>
                            <children>
-                              <ImageView fx:id="egopointsPlayerTwoImageView" pickOnBounds="true" preserveRatio="true"/>
-                              <Label fx:id="egopointsPlayerTwo" text="Label" alignment="CENTER" />
+                              <ImageView fx:id="egopointsPlayerTwoImageView" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="egopointsPlayerTwo" alignment="CENTER" text="Label" />
                            </children>
                         </StackPane>
                      </children>

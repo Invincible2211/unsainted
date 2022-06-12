@@ -35,6 +35,8 @@ public abstract class ArenaBaseController
         arenaBaseView.getBorderPaneID().getTop().maxHeight(ViewStrings.HAND_PLAYER_Y);
         arenaBaseView.getBorderPaneID().getTop().maxWidth(ViewStrings.HAND_PLAYER_Y);
         arenaBaseView.getBorderPaneID().getBottom().maxHeight(ViewStrings.HAND_PLAYER_Y);
+        arenaBaseView.getBorderPaneID().autosize();
+        arenaBaseView.getBackGroundAnchorPane().autosize();
 
     }
 
@@ -68,13 +70,12 @@ public abstract class ArenaBaseController
     public static void updatePlayerHands (ArenaBaseView arenaBaseView, List<Card> handOne, List<Card> handTwo)
     {
         HBox handcontainer = arenaBaseView.getPlayerHandHBox();
-        handcontainer.setPrefSize(ViewStrings.HAND_PLAYER_X, 40);
-        handcontainer.setMaxSize(ViewStrings.HAND_PLAYER_X, 40);
+        handcontainer.setPrefSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
+        handcontainer.setMaxSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
         HBox secondHandContainer = arenaBaseView.getEnemyHandHBox();
-        secondHandContainer.setPrefSize(ViewStrings.HAND_PLAYER_X, 40);
-        secondHandContainer.setMaxSize(ViewStrings.HAND_PLAYER_X, 40);
+        secondHandContainer.setPrefSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
+        secondHandContainer.setMaxSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
         double scal = (ViewStrings.HAND_PLAYER_X / handOne.size())/ViewStrings.CARD_WIDTH;
-        scal = scal * 0.8;
         for (Card card : handOne)
         {
             Node cardViewNode = CardViewController.getCardView(card);
