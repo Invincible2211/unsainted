@@ -23,6 +23,7 @@ public abstract class ArenaBaseController
     public static void init(ArenaBaseView arenaBaseView)
     {
        initBattlefield(arenaBaseView, BattleManager.getInstance().getArena().getHeight(), BattleManager.getInstance().getArena().getWidth());
+
     }
 
     //TODO BINDING THIS -> binddirectional maybe
@@ -40,6 +41,17 @@ public abstract class ArenaBaseController
         }
     }
 
+    /**
+     *
+     * @param arenaBaseView the view to update
+     * @param egoPointsOne the amount of ego points of player one
+     * @param egoPointsTwo the amount of ego points of player two
+     */
+    public static void updateEgoPoints (ArenaBaseView arenaBaseView, int egoPointsOne, int egoPointsTwo)
+    {
+        arenaBaseView.getEgopointsPlayerOne().setText(String.valueOf(egoPointsOne));
+        arenaBaseView.getEgopointsPlayerTwo().setText(String.valueOf(egoPointsTwo));
+    }
 
     private static void initBattlefield(ArenaBaseView arenaBaseView, int height, int width)
     {

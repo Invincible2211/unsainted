@@ -1,5 +1,6 @@
 package de.prog2.dungeontop;
 
+import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -58,12 +59,12 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
-        testCardView(primaryStage);
-        //testArenaView();
+        //estCardView(primaryStage);
+        testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
-        testHellView(scene);
+        //testHellView(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
@@ -128,6 +129,7 @@ public class DungeonTop extends Application
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
+
     }
 
     public static void testSelectHero(Stage stage) throws Exception
