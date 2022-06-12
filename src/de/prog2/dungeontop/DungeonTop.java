@@ -1,5 +1,6 @@
 package de.prog2.dungeontop;
 
+import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -120,6 +121,8 @@ public class DungeonTop extends Application
         player1.setDeck(deck1);
         Player player2 = new Player(12, 10);
         player2.setDeck(deck2);
+        player1.setHandCardLimit(5);
+        player2.setHandCardLimit(5);
 
 
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -127,6 +130,7 @@ public class DungeonTop extends Application
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
+
     }
 
     public static void testSelectHero(Stage stage) throws Exception
