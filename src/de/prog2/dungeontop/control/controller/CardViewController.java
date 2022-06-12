@@ -39,7 +39,7 @@ public abstract class CardViewController
     {
         controller.getRankLabel().setText(String.format(StringValues.RANK, card.getRank(), card.getMaxRank()));
 
-        controller.getSummonCostLabel().setText(String.format(StringValues.SUMMON_COST, card.getSummonCost()));
+        controller.getSummonCostLabel().setText(card.getSummonCost() + "");
         controller.getSummonImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.SUMMON_COST_ICON));
 
         if(card instanceof EntityCard)

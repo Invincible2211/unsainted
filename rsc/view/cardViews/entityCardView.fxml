@@ -23,7 +23,7 @@
         <!-- Summon Cost -->
         <StackPane AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="15">
             <ImageView fx:id="summonImageView" fitHeight="55" fitWidth="55" />
-            <Label fx:id="summonCostLabel" text="0" />
+            <Label fx:id="summonCostLabel" styleClass="status-label" text="0" />
         </StackPane>
         <!-- Movement -->
         <StackPane AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="15">

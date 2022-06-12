@@ -58,12 +58,11 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
-        testCardView(primaryStage);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
-        //testCardView(primaryStage);
-        testHellView(scene);
+        testCardView(primaryStage);
+        //testHellView(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
