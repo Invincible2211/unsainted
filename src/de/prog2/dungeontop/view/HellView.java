@@ -406,15 +406,36 @@ public class HellView
         ImageView settingsImage = new ImageView(cogwheel);
 
         // Init settings button
-        settingsImage.setFitHeight(HellViewConstants.SETTINGS_FIT_HEIGHT);
-        settingsImage.setFitWidth(HellViewConstants.SETTINGS_FIT_WIDTH);
-
         Button settings = new Button();
+
+        // set the settings style
+        settings.setBackground(Background.EMPTY);
+        settings.setStyle(HellViewConstants.SETTINGS_STYLE_STRING);
+
+        // Set the button height and width to fit the SETTINGS_FIT_HEIGHT/SETTINGS_FIT_WIDTH constants
+        settingsImage.fitHeightProperty().bind(Bindings.createDoubleBinding(
+                () -> HellViewConstants.SETTINGS_FIT_HEIGHT -
+                        settings.paddingProperty().get().getTop() -
+                        settings.paddingProperty().get().getBottom() -
+                        settings.borderProperty().get().getInsets().getBottom() -
+                        settings.borderProperty().get().getInsets().getTop(),
+                settings.paddingProperty(), settings.borderProperty()
+        ));
+
+
+        settingsImage.fitWidthProperty().bind(Bindings.createDoubleBinding(
+                () -> HellViewConstants.SETTINGS_FIT_WIDTH -
+                        settings.paddingProperty().get().getLeft() -
+                        settings.paddingProperty().get().getRight() -
+                        settings.borderProperty().get().getInsets().getLeft() -
+                        settings.borderProperty().get().getInsets().getRight(),
+                settings.paddingProperty(), settings.borderProperty()
+        ));
 
         pane.getChildren().add(settings);
         settings.setGraphic(settingsImage);
 
-        settings.setOnMouseClicked(e -> openSettings());
+        settings.setOnAction(e -> openSettings());
         settings.setFocusTraversable(HellViewConstants.SETTINGS_FOCUS_TRAVERSABLE);
 
 
@@ -519,7 +540,8 @@ public class HellView
      * Called if the settings button is pressed.
      * Opens a dialogue for the game settings.
      */
-    private void openSettings() {
+    private void openSettings()
+    {
         SettingsController.showSettings();
     }
 

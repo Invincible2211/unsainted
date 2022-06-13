@@ -49,6 +49,8 @@ public interface HellViewConstants
     double SETTINGS_WIDTH_MULTI = 1.5;
     double SETTING_HEIGHT_MULTI = 1.5;
     boolean SETTINGS_FOCUS_TRAVERSABLE = false;
+    String SETTINGS_STYLE_STRING = "-fx-border-radius: 10; -fx-background-color: #e0c59f; -fx-border-color: black; " +
+            "-fx-border-width: 5; -fx-background-radius: 15; -fx-background-insets: 0; -fx-border-insets: 0;";
 
     // container pane constants
     double PANE_WIDTH = HORIZONTAL_TILES * ROOM_TILE_WIDTH;

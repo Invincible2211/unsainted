@@ -65,7 +65,7 @@ public interface RoomDialogueConstants
     // LavaPondRoom Constants
     String LAVA_POND_UPPER_BUTTON = "Feuer frei!";
     String LAVA_POND_LOWER_BUTTON = "Niedliches Flaemmchen.";
-    String LAVA_POND_DESCRIPTION = "Du findest einen kleinen Goblin vor einem noch kleineren Lavareich.\n" +
+    String LAVA_POND_DESCRIPTION = "Du findest einen kleinen Goblin vor einem noch kleineren Lavateich.\n" +
             "\"Das erste mal ist mehrkostenfrei, danach kostet es dich nicht mehr als ein paar Seelen.\"\n" +
             "Wie lautet deine Antwort?";
     int LAVA_POND_VIEW_ASSET = AssetIds.LAVA_POND;
