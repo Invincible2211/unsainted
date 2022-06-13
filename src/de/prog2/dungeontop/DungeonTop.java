@@ -1,6 +1,5 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
@@ -15,11 +14,9 @@ import de.prog2.dungeontop.view.RoomDialogueViewController;
 import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
-import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
