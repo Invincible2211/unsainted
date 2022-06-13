@@ -144,7 +144,6 @@ public class DungeonTop extends Application
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/inventory.fxml"));
         Scene scene = new Scene(root);
         getStage().setScene(scene);
-        Inventory
     }
     public static Stage getStage()
     {

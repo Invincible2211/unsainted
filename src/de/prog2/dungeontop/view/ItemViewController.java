@@ -26,7 +26,7 @@ public class ItemViewController
                 cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/entityCardView.fxml"));
 
             CardView controller = loader.getController();
-            fillCardViewWithData(item, controller);
+            //fillCardViewWithData(item, controller);
             return cardView;
         }
         catch (Exception e)
