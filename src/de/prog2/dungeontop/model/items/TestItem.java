@@ -6,6 +6,6 @@ public class TestItem extends Item
 {
     public TestItem()
     {
-        super(ItemValues.TEST_ITEM_NAME, ItemValues.TEST_ITEM_PRICE);
+        super(ItemValues.TEST_ITEM_NAME, ItemValues.TEST_ITEM_DESCRIPTION, ItemValues.TEST_ITEM_PRICE);
     }
 }

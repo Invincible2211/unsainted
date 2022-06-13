@@ -6,13 +6,15 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 public abstract class Item
 {
     private final String name;
+    private String description;
     private int price;
 
-    public Item(String name, int price)
+    public Item(String name, String description, int price)
     {
         this.name = name;
+        this.description = description;
         this.price = price;
-        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.price));
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price));
     }
 
     //Set- and Getters
@@ -26,8 +28,7 @@ public abstract class Item
         return price;
     }
 
-    public void setPrice(int price)
-    {
-        this.price = price;
+    public String getDescription() {
+        return description;
     }
 }

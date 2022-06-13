@@ -1,6 +1,6 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
+import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -10,15 +10,11 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.RoomDialogueViewController;
-import de.prog2.dungeontop.view.SettingsController;
+import de.prog2.dungeontop.view.*;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
-import de.prog2.dungeontop.view.HellView;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DungeonTop extends Application
 {
@@ -60,12 +57,20 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
-        //testCardView(primaryStage);
+        testCardView(primaryStage);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
-        testHellView(scene);
+        //testEntityView(primaryStage);
+        //testHellView(scene);
+    }
+    public static void testEntityView(Stage primaryStage) throws Exception
+    {
+        Entity entity = new Minion("Harald", 6, 4, 3, 19);
+        Scene scene = new Scene((Parent) Objects.requireNonNull(EntityViewController.getEntityView(entity)));
+        scene.getStylesheets().add("view/shopView.css");
+        primaryStage.setScene(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {

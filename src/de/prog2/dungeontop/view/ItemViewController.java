@@ -1,39 +1,32 @@
-package de.prog2.dungeontop.control.controller;
+package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
+import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.view.cardViews.CardView;
 import de.prog2.dungeontop.view.cardViews.EntityCardView;
 import de.prog2.dungeontop.view.cardViews.SpellCardView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import jdk.jshell.spi.ExecutionControl;
 
-public abstract class CardViewController
+public class ItemViewController
 {
-    public static Node getCardView(Card card)
+    public static Node getItemView(Item item)
     {
         try
         {
             FXMLLoader loader = new FXMLLoader();
             Node cardView = null;
-            if(card instanceof EntityCard)
-            {
+
                 cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/entityCardView.fxml"));
-            }
-            else if(card instanceof SpellCard)
-            {
-                cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/spellCardView.fxml"));
-            }
+
             CardView controller = loader.getController();
-            fillCardViewWithData(card, controller);
+            //fillCardViewWithData(item, controller);
             return cardView;
         }
         catch (Exception e)
@@ -51,14 +44,7 @@ public abstract class CardViewController
         controller.getSummonCostLabel().setText(card.getSummonCost() + "");
         controller.getSummonImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.SUMMON_COST_ICON));
 
-        if(card instanceof EntityCard)
-        {
-            fillEntityCardView((EntityCard)card, (EntityCardView)controller);
-        }
-        else if(card instanceof SpellCard)
-        {
-            fillSpellCardView((SpellCard)card, (SpellCardView)controller);
-        }
+        fillEntityCardView((EntityCard)card, (EntityCardView)controller);
 
         controller.setCard(card);
     }
@@ -82,8 +68,5 @@ public abstract class CardViewController
         // Image
         controller.getEntityImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(entity.getAssetId()));
     }
-    private static void fillSpellCardView(SpellCard card, SpellCardView controller)
-    {
-        // TODO Implement SpellCardView
-    }
+
 }
