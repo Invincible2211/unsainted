@@ -58,12 +58,13 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
+        //testCardView(primaryStage);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         testCardView(primaryStage);
         //testEntityView(primaryStage);
-        //testHellView(scene);
+        testHellView(scene);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {
@@ -89,20 +90,22 @@ public class DungeonTop extends Application
         primaryStage.setScene(scene);
     }
 
-    public static void testHellView(Scene scene) throws Exception
+    public static void testHellView(Scene scene)
     {
         Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
         HellGenerator.initHell(hell);
         HellView view = new HellView();
         Scene hellView = view.initHellView(hell);
-        //view.initPlayerCamera(scene);
-        //view.initOverlay(hellView);
+
+        Hell hell2 = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
+        HellGenerator.initHell(hell2);
+        HellGenerator.initHell(hell2);
+        Scene hellView2 = view.initHellView(hell2);
 
         stage.setScene(scene);
+
         stage.setScene(hellView);
-
-
-//        System.out.println(hell);
+        stage.setScene(hellView2);
     }
 
     public static void testArenaView() throws Exception

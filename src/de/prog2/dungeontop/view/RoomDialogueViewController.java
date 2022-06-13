@@ -2,7 +2,6 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
-import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.RoomDialogueConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
