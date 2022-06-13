@@ -8,12 +8,14 @@ public abstract class Item
     private final String name;
     private String description;
     private int price;
+    private int assetID;
 
-    public Item(String name, String description, int price)
+    public Item(String name, String description, int price, int assetID)
     {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.assetID = assetID;
         GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price));
     }
 
