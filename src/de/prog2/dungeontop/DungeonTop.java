@@ -74,10 +74,10 @@ public class DungeonTop extends Application
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
-        Entity entity = new Minion("Harald", 6, 4, 1, 19);
         ArrayList<Card> cards = new ArrayList<>();
         for (int i = 0; i < 6; i++)
         {
+            Entity entity = new Minion("Harald", 6, 4, 1, 41 + i);
             cards.add(new EntityCard(entity, 6, 100, 1 + i, 2));
         }
 

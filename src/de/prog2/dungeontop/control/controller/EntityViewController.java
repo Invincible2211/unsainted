@@ -3,19 +3,18 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.game.Card;
-import de.prog2.dungeontop.model.game.EntityCard;
-import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.view.EntityView;
-import de.prog2.dungeontop.view.cardViews.CardView;
-import de.prog2.dungeontop.view.cardViews.EntityCardView;
-import de.prog2.dungeontop.view.cardViews.SpellCardView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public abstract class EntityViewController
 {
+    /**
+     * Returns a Node containing the EntityView for the given Entity.
+     * @param entity The Entity to display.
+     * @return A Node containing the EntityView for the given Entity.
+     */
     public static Node getEntityView(Entity entity)
     {
         try
@@ -32,6 +31,12 @@ public abstract class EntityViewController
             return null;
         }
     }
+
+    /**
+     * Fills the given EntityView with the data of the given Entity.
+     * @param entity The Entity to display.
+     * @param controller The EntityView to fill.
+     */
     private static void fillEntityViewWithData(Entity entity, EntityView controller)
     {
         controller.setEntity(entity);

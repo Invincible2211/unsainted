@@ -28,6 +28,7 @@ public interface AssetIds {
     int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 22;
 
     // Card Asset IDs
+    int CARD_BACKGROUND_IMAGE_ID = 50;
     int HP_ICON = 6;
     int ATTACK_ICON = 52;
     int SUMMON_COST_ICON = 53;

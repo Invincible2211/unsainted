@@ -157,4 +157,10 @@ public interface LoggerStringValues {
     String RETURN_NODE_ON_BATTLEFIELD = "return the node: ";
     String COULD_NOT_FIND_NODE_ON_BATTLEFIELD = "could not find the node on the battlefield with xy: ";
     String CURRENTPHASE_IS_NOW = "Phase wurde geaendert auf: ";
+
+    //Shop View
+    String SHOP_VIEW_STARTED_ADDING_CARDS = "ShopView started adding cards.";
+    String SHOP_VIEW_ADDED_CARD = "ShopView added card: ";
+    // CardViewController
+    String CARD_VIEW_CONTROLLER_CREATED_CARD = "CardViewController created a card with a scale of %1.1f.";
 }
