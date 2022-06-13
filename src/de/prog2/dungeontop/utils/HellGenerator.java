@@ -14,6 +14,7 @@ import de.prog2.dungeontop.resources.WorldConstants;
 
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class HellGenerator
 {
@@ -24,6 +25,12 @@ public class HellGenerator
      */
     public static void initHell(Hell hell)
     {
+        if (hell.getStartingRoom() != null)
+        {
+            GlobalLogger.warning(LoggerStringValues.HELL_ALREADY_INITIALIZED);
+            return;
+        }
+
         // generate new maps until one is created which has a suitable room count
         while (true)
         {

@@ -14,6 +14,7 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -306,28 +307,28 @@ public class HellView
 
         // sett the change in a certain direction and move the player on the underlying grid if valid
         switch (key) {
-            case UP:
+            case UP, W:
                 deltaY -= HellViewConstants.PLAYER_MOVESPEED;
                 if (!MovementManager.getInstance().moveTowards(MoveDirection.UP)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
-            case DOWN:
+            case DOWN, S:
                 deltaY += HellViewConstants.PLAYER_MOVESPEED;
                 if (!MovementManager.getInstance().moveTowards(MoveDirection.DOWN)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
-            case LEFT:
+            case LEFT, A:
                 deltaX -= HellViewConstants.PLAYER_MOVESPEED;
                 if (!MovementManager.getInstance().moveTowards(MoveDirection.LEFT)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
-            case RIGHT:
+            case RIGHT, D:
                 deltaX += HellViewConstants.PLAYER_MOVESPEED;
                 if (!MovementManager.getInstance().moveTowards(MoveDirection.RIGHT)) {
                     unlockIsAnimating();
@@ -412,28 +413,13 @@ public class HellView
         settings.setBackground(Background.EMPTY);
         settings.setStyle(HellViewConstants.SETTINGS_STYLE_STRING);
 
-        // Set the button height and width to fit the SETTINGS_FIT_HEIGHT/SETTINGS_FIT_WIDTH constants
-        settingsImage.fitHeightProperty().bind(Bindings.createDoubleBinding(
-                () -> HellViewConstants.SETTINGS_FIT_HEIGHT -
-                        settings.paddingProperty().get().getTop() -
-                        settings.paddingProperty().get().getBottom() -
-                        settings.borderProperty().get().getInsets().getBottom() -
-                        settings.borderProperty().get().getInsets().getTop(),
-                settings.paddingProperty(), settings.borderProperty()
-        ));
-
-
-        settingsImage.fitWidthProperty().bind(Bindings.createDoubleBinding(
-                () -> HellViewConstants.SETTINGS_FIT_WIDTH -
-                        settings.paddingProperty().get().getLeft() -
-                        settings.paddingProperty().get().getRight() -
-                        settings.borderProperty().get().getInsets().getLeft() -
-                        settings.borderProperty().get().getInsets().getRight(),
-                settings.paddingProperty(), settings.borderProperty()
-        ));
-
         pane.getChildren().add(settings);
         settings.setGraphic(settingsImage);
+
+        settingsImage.setFitWidth(HellViewConstants.SETTINGS_FIT_WIDTH - 2 * HellViewConstants.SETTINGS_PADDING -
+                2 * HellViewConstants.SETTINGS_BORDER_WIDTH);
+        settingsImage.setFitHeight(HellViewConstants.SETTINGS_FIT_HEIGHT - 2 * HellViewConstants.SETTINGS_PADDING -
+                2 * HellViewConstants.SETTINGS_BORDER_WIDTH);
 
         settings.setOnAction(e -> openSettings());
         settings.setFocusTraversable(HellViewConstants.SETTINGS_FOCUS_TRAVERSABLE);

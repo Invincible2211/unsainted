@@ -49,8 +49,20 @@ public interface HellViewConstants
     double SETTINGS_WIDTH_MULTI = 1.5;
     double SETTING_HEIGHT_MULTI = 1.5;
     boolean SETTINGS_FOCUS_TRAVERSABLE = false;
-    String SETTINGS_STYLE_STRING = "-fx-border-radius: 10; -fx-background-color: #e0c59f; -fx-border-color: black; " +
-            "-fx-border-width: 5; -fx-background-radius: 15; -fx-background-insets: 0; -fx-border-insets: 0;";
+
+    // Settings Button Style
+    double  SETTINGS_BORDER_RADIUS = 10;
+    double SETTINGS_PADDING = 5;
+    Insets SETTINGS_PADDING_INSET = new Insets(SETTINGS_PADDING);
+    double SETTINGS_BG_RADIUS = 15;
+    double SETTINGS_BORDER_INSETS = -2.5;
+    double SETTINGS_BORDER_WIDTH = 5;
+
+
+    String SETTINGS_STYLE_STRING = "-fx-border-radius: "+ SETTINGS_BORDER_RADIUS +
+            "; -fx-background-color: #e0c59f; -fx-border-color: black; -fx-border-width: " + SETTINGS_BORDER_WIDTH +
+            "; -fx-background-radius: " + SETTINGS_BG_RADIUS + "; -fx-border-insets: " + SETTINGS_BORDER_INSETS +"; " +
+            "-fx-padding: " + SETTINGS_PADDING + ";";
 
     // container pane constants
     double PANE_WIDTH = HORIZONTAL_TILES * ROOM_TILE_WIDTH;
