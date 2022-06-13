@@ -10,6 +10,7 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.*;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -52,7 +53,7 @@ public class DungeonTop extends Application
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
-        stage.show();
+        //stage.show();
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
@@ -63,7 +64,8 @@ public class DungeonTop extends Application
         //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
-        testHellView(scene);
+        //testHellView(scene);
+        testWorld();
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {
@@ -101,10 +103,23 @@ public class DungeonTop extends Application
         HellGenerator.initHell(hell2);
         Scene hellView2 = view.initHellView(hell2);
 
+        System.out.println(hell);
+
         stage.setScene(scene);
 
         stage.setScene(hellView);
         stage.setScene(hellView2);
+    }
+
+    public static void testWorld ()
+    {
+        for (int i = 1; i<= 100; i++)
+        {
+            Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
+            HellGenerator.initHell(hell);
+            System.out.println("Hell No." + i +" von 100:");
+            System.out.println(hell);
+        }
     }
 
     public static void testArenaView() throws Exception
