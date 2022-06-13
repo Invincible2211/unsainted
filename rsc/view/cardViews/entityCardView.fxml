@@ -2,11 +2,9 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <AnchorPane prefHeight="480" prefWidth="343" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.cardViews.EntityCardView">
     <AnchorPane maxHeight="480" maxWidth="343" prefHeight="480" prefWidth="343" style="-fx-background-image: url(/assets/50_CardBackground.png);">
@@ -41,12 +39,5 @@
             <ImageView fx:id="rankImageView" fitHeight="55" fitWidth="55" scaleY="1.2" scaleX="1.2"/>
             <Label fx:id="rankLabel" text="0" styleClass="status-label"/>
         </StackPane>
-
-<!--        <VBox AnchorPane.bottomAnchor="55" AnchorPane.leftAnchor="55" AnchorPane.rightAnchor="55" AnchorPane.topAnchor="290">-->
-<!--            <BorderPane>-->
-<!--                <left><Label text="Rank: "/></left>-->
-<!--                <right><Label fx:id="rankLabel" text="1" /></right>-->
-<!--            </BorderPane>-->
-<!--        </VBox>-->
     </AnchorPane>
 </AnchorPane>

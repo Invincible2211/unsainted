@@ -3,18 +3,15 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.view.cardViews.CardView;
 import de.prog2.dungeontop.view.cardViews.EntityCardView;
 import de.prog2.dungeontop.view.cardViews.SpellCardView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import jdk.jshell.spi.ExecutionControl;
 
 public abstract class CardViewController
 {
