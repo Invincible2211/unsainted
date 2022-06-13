@@ -25,6 +25,10 @@ public class SelectHeroController
     @FXML
     private VBox heroText3;
 
+    /**
+     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Hero-Button gedrueckt wird.
+     * Hero's Werte(Angriffe, usw.) wird jetzt gezeigt.
+     */
     @FXML
     private void onHero1ButtonClicked()
     {
@@ -49,12 +53,20 @@ public class SelectHeroController
         heroText2.setVisible(false);
     }
 
+    /**
+     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Confirm-Button gedrueckt wird.
+     * Held-Auswahl wird bestätigt und der Spieler geht zur nächsten Szene (Hell) über
+     */
     @FXML
     private void onConfirmButtonClicked()
     {
 
     }
 
+    /**
+     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Return-Button gedrueckt wird.
+     * Der Spieler kehrt zum Hauptmenü zurück.
+     */
     @FXML
     private void onReturnButtonClicked()
     {

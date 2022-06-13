@@ -1,6 +1,5 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
@@ -11,14 +10,11 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.RoomDialogueViewController;
-import de.prog2.dungeontop.view.SettingsController;
+import de.prog2.dungeontop.view.*;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
-import de.prog2.dungeontop.view.HellView;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -148,6 +144,7 @@ public class DungeonTop extends Application
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/inventory.fxml"));
         Scene scene = new Scene(root);
         getStage().setScene(scene);
+        Inventory
     }
     public static Stage getStage()
     {
