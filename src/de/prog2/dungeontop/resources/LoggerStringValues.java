@@ -85,6 +85,10 @@ public interface LoggerStringValues {
     String CLAMPING_FAILURE = "CLAMPING: Min Value bigger than Max Value.";
     String DRAW_ROOM_TYPES_IMAGE_NOT_FOUND = "The image for the room you try to draw cannot be found.";
     String HELL_ALREADY_INITIALIZED = "Die uebergeben Hell wurde bereits initialisiert!";
+    String START_BATTLE_HANDLER = "Handler: startBattle()";
+    String RANDOM_EVENT_HANDLER = "Handler: startRandomEvent()";
+    String OPEN_FORGE_HANDLER = "Handler: openForge()";
+    String OPEN_LAVAPOND_HANDLER = "Handler: openLavaPond()";
 
     String MOVE_UP_SUCCESS = "Player moved into the room above.";
     String MOVE_UP_FAIL = "Player couldn't move into the room above.";

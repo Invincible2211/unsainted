@@ -3,8 +3,10 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.world.rooms.*;
+import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.RoomDialogueConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -106,7 +108,7 @@ public class RoomDialogueViewController
                 setDialogueProperties(RoomDialogueConstants.EVENT_ROOM_UPPER_BUTTON,
                         RoomDialogueConstants.EVENT_ROOM_LOWER_BUTTON,
                         dialogueStageAttributes.get(room).description(),dialogueStageAttributes.get(room).assetId());
-                upperButton.setOnAction(e -> openRandomEvent());
+                upperButton.setOnAction(e -> startRandomEvent());
             }
         }
         else if (room instanceof ForgeRoom)
@@ -160,14 +162,16 @@ public class RoomDialogueViewController
     private void startBattle ()
     {
         //TODO: Implement method to start a battle
+        GlobalLogger.log(LoggerStringValues.START_BATTLE_HANDLER);
     }
 
     /**
      * Execute a random event.
      */
-    private void openRandomEvent ()
+    private void startRandomEvent()
     {
         // TODO: Implement method to open a RandomEvent
+        GlobalLogger.log(LoggerStringValues.RANDOM_EVENT_HANDLER);
     }
 
     /**
@@ -176,6 +180,7 @@ public class RoomDialogueViewController
     private void openForge ()
     {
         // TODO: Implement method to open a ForgeView
+        GlobalLogger.log(LoggerStringValues.OPEN_FORGE_HANDLER);
     }
 
     /**
@@ -184,6 +189,7 @@ public class RoomDialogueViewController
     private void openLavaPond ()
     {
         // TODO: Implement method to open a LavaPondView
+        GlobalLogger.log(LoggerStringValues.OPEN_LAVAPOND_HANDLER);
     }
 
     /**
