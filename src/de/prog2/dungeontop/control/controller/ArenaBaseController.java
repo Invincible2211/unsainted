@@ -72,22 +72,26 @@ public abstract class ArenaBaseController
         HBox handcontainer = arenaBaseView.getPlayerHandHBox();
         handcontainer.setPrefSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
         handcontainer.setMaxSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
+
         HBox secondHandContainer = arenaBaseView.getEnemyHandHBox();
         secondHandContainer.setPrefSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
         secondHandContainer.setMaxSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
-        double scal = (ViewStrings.HAND_PLAYER_X / handOne.size())/ViewStrings.CARD_WIDTH;
+
+        double scalX = (ViewStrings.HAND_PLAYER_X / handOne.size())/ViewStrings.CARD_WIDTH;
+        double scalY = ViewStrings.HAND_PLAYER_Y / ViewStrings.CARD_HEIGHT;
+
         for (Card card : handOne)
         {
             Node cardViewNode = CardViewController.getCardView(card);
-            cardViewNode.setScaleX(scal);
-            cardViewNode.setScaleY(scal);
+            cardViewNode.setScaleX(scalX);
+            cardViewNode.setScaleY(scalY);
             handcontainer.getChildren().add(cardViewNode);
         }
         for (Card card : handTwo)
         {
             Node cardViewNode = CardViewController.getCardView(card);
-            cardViewNode.setScaleX(scal);
-            cardViewNode.setScaleY(scal);
+            cardViewNode.setScaleX(scalX);
+            cardViewNode.setScaleY(scalY);
             secondHandContainer.getChildren().add(cardViewNode);
         }
     }

@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="backGroundAnchorPane" maxHeight="1080" maxWidth="1920" prefHeight="1080" prefWidth="1920" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ArenaBaseView">
    <children>
-       <StackPane fx:id="backGroundStackPane" alignment="TOP_LEFT">
+       <StackPane fx:id="backGroundStackPane" alignment="TOP_LEFT" AnchorPane.topAnchor="0.0">
       <BorderPane fx:id="borderPaneID">
          <right>
             <VBox maxHeight="50" BorderPane.alignment="CENTER">
@@ -64,7 +64,7 @@
          <top>
             <VBox fillWidth="false" BorderPane.alignment="CENTER">
                <children>
-                  <HBox fx:id="enemyHandHBox" fillHeight="false" VBox.vgrow="SOMETIMES">
+                  <HBox fx:id="enemyHandHBox" fillHeight="false" VBox.vgrow="NEVER">
                      <children>
                         <StackPane>
                            <children>

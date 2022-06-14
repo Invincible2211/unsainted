@@ -16,11 +16,11 @@ public interface ViewStrings {
 
     //ist kein string aber kann hier trotzdem rein
     int RESOLUTION_X = 1920;
-    int RESOLUTION_Y = 300;
+    int RESOLUTION_Y = 1080;
     double EGOPOINTS_BACKROUND_HEIGHT = RESOLUTION_X * 0.05;
     double EGOPOINTS_BACKROUND_WIDTH = RESOLUTION_Y * 0.05;
     double HAND_PLAYER_X = RESOLUTION_X * 0.8;
-    double HAND_PLAYER_Y = RESOLUTION_Y * 0.05;
+    double HAND_PLAYER_Y = RESOLUTION_Y * 0.1;
     double BATTLEFIELDSIZE_X = RESOLUTION_X * 0.9;
     double BATTLEFIELDSIZE_Y = RESOLUTION_Y * 0.65;
     double CARD_WIDTH = 343;
