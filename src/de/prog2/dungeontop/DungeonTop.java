@@ -162,7 +162,7 @@ public class DungeonTop extends Application
     public static void testInventory(Stage stage) throws Exception
     {
         TestItem item = new TestItem("Potion",66);
-        Inventory inventory = new Inventory(new LinkedList<Item>());
+        Inventory inventory = new Inventory();
         for (int i = 0; i < 8; i++)
         {
             inventory.addItem(item);

@@ -7,13 +7,13 @@ import java.util.List;
 
 public class InventoryController
 {
-    public static void addItems(Inventory inventory, List<Item> items)
+    public static void addItems(InventoryView inventoryView, List<Item> items)
     {
         int columns = 0, row = 0;
         for (Item item : items)
         {
             Node itemView = ItemViewController.getItemView(item);
-            inventory.getGridPane().add(itemView, columns, row);
+            inventoryView.getGridPane().add(itemView, columns, row);
             columns++;
             if (columns == 5)
             {

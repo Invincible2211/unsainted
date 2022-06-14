@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 
-public class Inventory
+public class InventoryView
 {
     @FXML
     GridPane gridPane;
