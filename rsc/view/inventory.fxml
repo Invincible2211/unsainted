@@ -1,23 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Line?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.InventoryView">
    <children>
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true">
+         <image>
+            <Image url="@/assets/65_Inventory_Background.jpg" />
+         </image>
+      </ImageView>
       <Button fx:id="returnButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Zurück" translateX="100.0" translateY="50.0" />
-      <ScrollPane layoutX="101.0" layoutY="195.0" prefHeight="774.0" prefWidth="1219.0">
-         <content>
-            <GridPane fx:id="gridPane">
+      <AnchorPane layoutX="100.0" layoutY="195.0" prefHeight="808.0" prefWidth="1403.0" style="-fx-background-color: brown;">
+         <children>
+            <GridPane fx:id="gridPane" hgap="100.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
             </GridPane>
-         </content>
-      </ScrollPane>
+            <Line endX="212.5" endY="-6.0" layoutX="-13.0" layoutY="7.0" startX="212.5" startY="794.5">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="212.5" endY="-6.0" layoutX="187.0" layoutY="7.0" startX="212.5" startY="794.5">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="212.5" endY="-6.0" layoutX="387.0" layoutY="12.0" startX="212.5" startY="790.5">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="212.5" endY="-6.0" layoutX="587.0" layoutY="7.0" startX="212.5" startY="795.5">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="212.5" endY="-6.0" layoutX="787.0" layoutY="7.0" startX="212.5" startY="794.5">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="212.5" endY="-6.0" layoutX="987.0" layoutY="7.0" startX="212.5" startY="794.5">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="67.0" startX="1355.0" startY="135.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="267.0" startX="1355.0" startY="135.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="467.0" startX="1355.0" startY="135.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="-131.0" startX="1355.0" startY="135.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+            <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="667.0" startX="1355.0" startY="135.0">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Line>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

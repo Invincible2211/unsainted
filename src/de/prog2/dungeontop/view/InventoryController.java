@@ -15,7 +15,7 @@ public class InventoryController
             Node itemView = ItemViewController.getItemView(item);
             inventoryView.getGridPane().add(itemView, columns, row);
             columns++;
-            if (columns == 5)
+            if (columns == 7)
             {
                 columns = 0;
                 row++;
