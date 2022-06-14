@@ -3,7 +3,8 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.*;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.EntityView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,25 +12,43 @@ import javafx.scene.Node;
 public abstract class EntityViewController
 {
     /**
-     * Returns a Node containing the EntityView for the given Entity.
-     * @param entity The Entity to display.
-     * @return A Node containing the EntityView for the given Entity.
+     * Returns a Node containing the EntityView for the given Entity with a scale of 1.
+     * @param entity The entity that is displayed by the entity view.
+     * @return The Node that is controlled by this controller.
      */
     public static Node getEntityView(Entity entity)
     {
+        return getEntityView(entity, 1);
+    }
+    /**
+     * Returns a Node containing the EntityView for the given Entity.
+     * @param entity The Entity to display.
+     * @param scale The scale of the entity view.
+     * @return A Node containing the EntityView for the given Entity.
+     */
+    public static Node getEntityView(Entity entity, double scale)
+    {
+        Node entityView = null;
         try
         {
             FXMLLoader loader = new FXMLLoader();
-            Node cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/entityView.fxml"));
+            entityView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ENTITY_VIEW_FXML));
             EntityView controller = loader.getController();
             fillEntityViewWithData(entity, controller);
-            return cardView;
+
+            double width = EntityConstants.ENTITY_BASE_WIDTH * scale;
+            double height = EntityConstants.ENTITY_BASE_HEIGHT * scale;
+            controller.setWidth(width);
+            controller.setHeight(height);
+            controller.setAnchorScale(scale);
+
+            GlobalLogger.log(String.format(LoggerStringValues.ENTITY_VIEW_CONTROLLER_CREATED_ENTITY, scale));
         }
         catch (Exception e)
         {
-            e.printStackTrace();
-            return null;
+            GlobalLogger.warning(e.getMessage());
         }
+        return entityView;
     }
 
     /**

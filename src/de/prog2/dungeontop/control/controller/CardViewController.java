@@ -6,9 +6,7 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
-import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.CardConstants;
-import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.CardView;
 import de.prog2.dungeontop.view.cardViews.EntityCardView;
@@ -41,11 +39,11 @@ public abstract class CardViewController
 
             if(card instanceof EntityCard)
             {
-                cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/entityCardView.fxml"));
+                cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ENTITY_CARD_VIEW_FXML));
             }
             else if(card instanceof SpellCard)
             {
-                cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/spellCardView.fxml"));
+                cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SPELL_CARD_VIEW_FXML));
             }
             CardView controller = loader.getController();
 
@@ -58,7 +56,6 @@ public abstract class CardViewController
             fillCardViewWithData(card, controller);
 
             GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
-            return cardView;
         }
         catch (Exception e)
         {

@@ -168,4 +168,6 @@ public interface LoggerStringValues {
     String SHOP_VIEW_ADDED_CARD = "ShopView added card: ";
     // CardViewController
     String CARD_VIEW_CONTROLLER_CREATED_CARD = "CardViewController created a card with a scale of %1.1f.";
+    // EntityViewController
+    String ENTITY_VIEW_CONTROLLER_CREATED_ENTITY = "EntityViewController created an entity with a scale of %1.1f.";
 }

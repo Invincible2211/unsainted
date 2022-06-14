@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="de.prog2.dungeontop.view.EntityView"
-            fx:id="container"
-            prefHeight="256.0" prefWidth="256.0">
-    <ImageView fx:id="statusBarImageView" AnchorPane.leftAnchor="5" AnchorPane.rightAnchor="5" AnchorPane.bottomAnchor="5" fitHeight="50"/>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.layout.VBox?>
+<AnchorPane fx:id="container" prefHeight="469.0" prefWidth="469.0"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.prog2.dungeontop.view.EntityView">
+    <ImageView fx:id="statusBarImageView" fitHeight="469" fitWidth="469"/>
     <!-- HP -->
-    <StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="15">
+    <StackPane fx:id="hpContainer" AnchorPane.leftAnchor="90" AnchorPane.topAnchor="269.0">
         <ImageView fx:id="hpImageView" fitHeight="55" fitWidth="55" />
-        <Label fx:id="hpLabel" text="0" styleClass="status-label"/>
+        <Label fx:id="hpLabel" styleClass="status-label" text="0" />
     </StackPane>
     <!-- Movement -->
-    <StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="100">
+    <StackPane fx:id="movementContainer" AnchorPane.leftAnchor="200" AnchorPane.topAnchor="269.0">
         <ImageView fx:id="movementImageView" fitHeight="55" fitWidth="55" />
-        <Label fx:id="movementLabel" text="0" styleClass="status-label"/>
+        <Label fx:id="movementLabel" styleClass="status-label" text="0" />
     </StackPane>
     <!-- Attack -->
-    <StackPane AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="15">
+    <StackPane fx:id="attackContainer" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="269.0">
         <ImageView fx:id="attackImageView" fitHeight="55" fitWidth="55" />
-        <Label fx:id="attackLabel" text="0" styleClass="status-label"/>
+        <Label fx:id="attackLabel" styleClass="status-label" text="0" />
     </StackPane>
     <!-- Entity -->
-    <ImageView fx:id="entityImageView" AnchorPane.leftAnchor="5" AnchorPane.rightAnchor="5"
-               scaleX="0.9" scaleY="0.9" fitHeight="200" fitWidth="200" />
+    <VBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" alignment="CENTER">
+        <ImageView fx:id="entityImageView" fitHeight="200" fitWidth="200"/>
+    </VBox>
 </AnchorPane>
