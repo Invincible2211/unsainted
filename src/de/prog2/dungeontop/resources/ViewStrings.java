@@ -28,14 +28,15 @@ public interface ViewStrings
     //ist kein string aber kann hier trotzdem rein
     int RESOLUTION_X = 1920;
     int RESOLUTION_Y = 1080;
-    double EGOPOINTS_BACKROUND_HEIGHT = RESOLUTION_X * 0.05;
+    double EGOPOINTS_BACKROUND_HEIGHT = RESOLUTION_X * 0.02;
     double EGOPOINTS_BACKROUND_WIDTH = RESOLUTION_Y * 0.05;
     double HAND_PLAYER_X = RESOLUTION_X * 0.8;
-    double HAND_PLAYER_Y = RESOLUTION_Y * 0.1;
+    double HAND_PLAYER_Y = RESOLUTION_Y * 0.10;
     double BATTLEFIELDSIZE_X = RESOLUTION_X * 0.9;
-    double BATTLEFIELDSIZE_Y = RESOLUTION_Y * 0.65;
+    double BATTLEFIELDSIZE_Y = RESOLUTION_Y * 0.9;
     double CARD_WIDTH = 343;
     double CARD_HEIGHT = 480;
-    double BATTLEFIELD_HGAP_DEFAULT = 10;
-    double BATTLEFIELD_VGAP_DEFAULT = 10;
+    double BATTLEFIELD_HGAP_DEFAULT = 5;
+    double BATTLEFIELD_VGAP_DEFAULT = 5;
+    double BATTLEFIELD_CELL_MIN_SIZE_MODIFIER = 0.5;
 }

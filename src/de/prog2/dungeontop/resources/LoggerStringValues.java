@@ -173,4 +173,7 @@ public interface LoggerStringValues {
     // HellController
     String HELL_CONTROLLER_WARNING_ROOM_INSIDE_BOUNDS = "HellController warning: Room inside bounds == %b";
     String HELL_CONTROLLER_WARNING_ROOM_COORDINATES = "HellController warning: Room coordinates are: x: %d, y: %d";
+    String ADDING_CELL_TO_VIEW_BATTLFIELD = "Adding battlefield cell to gridpane";
+    String GOT_NODE_ON_BATTLEFIELD = "got node on battlefield";
+    String REMOVING_CELL_FROM_VIEW_BATTLFIELD = "removed everything on a stackpanenode on the battlefield";
 }

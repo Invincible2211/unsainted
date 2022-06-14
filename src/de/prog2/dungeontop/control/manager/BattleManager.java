@@ -142,7 +142,7 @@ public class BattleManager
      * @param duellist who controlls the card
      * @param coordinate where to place new minion
      */
-    public void placeEntity (Duellist duellist, Coordinate coordinate, EntityCard entityCard)
+    public void placeEntity (Duellist duellist, Coordinate coordinate, EntityCard entityCard, ArenaBaseView arenaBaseView)
     {
         if (entityCard.getPrice() <= duellist.getCurrentEgoPoints())
         {
@@ -152,7 +152,12 @@ public class BattleManager
             {
                 duellist.tryReduceEgoPoints();
             }
-            duellist.removeCardFromHand(entityCard);
+
+            if (EntityCardController.tryInstantiate(entityCard, arena, coordinate))
+            {
+                duellist.removeCardFromHand(entityCard);
+                ArenaBaseController.updateBattlefield(arenaBaseView, arena);
+            }
             GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
         } else {
             GlobalLogger.warning(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);

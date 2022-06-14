@@ -1,5 +1,6 @@
 package de.prog2.dungeontop;
 
+import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
@@ -11,8 +12,10 @@ import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.TestItem;
+import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.model.world.arena.ArenaComponent;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
@@ -135,9 +138,13 @@ public class DungeonTop extends Application
         }
     }
 
+    /**
+     * As we do not know that Unit tests exist and time is short this is where i put magic numbers for testing
+     * @throws Exception
+     */
     public static void testArenaView() throws Exception
     {
-        Entity harald = new Minion("Harald", 6, 4, 1, 19);
+        Entity harald = new Minion("Harald", 6, 4, 1, 45);
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
         for (int i = 0; i < 10; i++)
@@ -149,16 +156,18 @@ public class DungeonTop extends Application
         player1.setDeck(deck1);
         Player player2 = new Player(12, 10);
         player2.setDeck(deck2);
-        player1.setHandCardLimit(5);
-        player2.setHandCardLimit(5);
-
+        player1.setHandCardLimit(6);
+        player2.setHandCardLimit(2);
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         getStage().setScene(scene);
-
+        harald.setPosition(new Coordinate(1, 1));
+        BattleManager.getInstance().getArena().getArenaHashmap().put(new Coordinate(1, 1),new ArenaComponent(harald));
+        ArenaBaseController.updateBattlefield(fxmlLoader.getController(), BattleManager.getInstance().getArena());
     }
 
     public static void testSelectHero(Stage stage) throws Exception

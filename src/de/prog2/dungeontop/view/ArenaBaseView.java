@@ -50,12 +50,20 @@ public class ArenaBaseView
 
     @FXML BorderPane borderPaneID;
 
+    @FXML
+    private VBox vBoxEnemyAreaContainer;
+
     //hier laesst sich drueber streiten ob nicht eigentlich erst ueber den Controller der aufruf am Battlemanager stattfinden sollte.
     @FXML
     private void endTurn(){BattleManager.getInstance().endAPhase();}
 
     //----------------------- Getter ------------------//
 
+
+    public VBox getvBoxEnemyAreaContainer ()
+    {
+        return vBoxEnemyAreaContainer;
+    }
 
     public BorderPane getBorderPaneID ()
     {

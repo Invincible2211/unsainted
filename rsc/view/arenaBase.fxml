@@ -5,79 +5,67 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane fx:id="backGroundAnchorPane" maxHeight="1080" maxWidth="1920" prefHeight="1080" prefWidth="1920" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ArenaBaseView">
-   <children>
-       <StackPane fx:id="backGroundStackPane" alignment="TOP_LEFT" AnchorPane.topAnchor="0.0">
-      <BorderPane fx:id="borderPaneID">
-         <right>
-            <VBox maxHeight="50" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER" />
-                  <Pane fx:id="deckdisplay" />
-               </children>
-            </VBox>
-         </right>
-         <left>
-            <VBox BorderPane.alignment="CENTER">
-               <children>
-                  <Accordion fx:id="lastMovesAccordion">
-                    <panes>
-                      <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
-                      </TitledPane>
-                    </panes>
-                  </Accordion>
-               </children>
-            </VBox>
-         </left>
-         <center>
-            <GridPane fx:id="battlefieldGridPane" BorderPane.alignment="CENTER">
-            </GridPane>
-         </center>
-         <bottom>
-            <VBox BorderPane.alignment="CENTER">
-               <children>
-                  <HBox fx:id="playerHandHBox">
-                     <children>
-                        <StackPane>
-                           <children>
-                              <ImageView fx:id="egopointsPlayerOneImageView" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="egopointsPlayerOne" alignment="CENTER" text="Label" />
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </bottom>
-         <top>
-            <VBox fillWidth="false" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox fx:id="enemyHandHBox" fillHeight="false" VBox.vgrow="NEVER">
-                     <children>
-                        <StackPane>
-                           <children>
-                              <ImageView fx:id="egopointsPlayerTwoImageView" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="egopointsPlayerTwo" alignment="CENTER" text="Label" />
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </top>
-      </BorderPane>
-       </StackPane>
-   </children>
+    <StackPane fx:id="backGroundStackPane" alignment="TOP_LEFT" AnchorPane.topAnchor="0.0">
+        <BorderPane fx:id="borderPaneID" prefHeight="1080" prefWidth="1920">
+            <right>
+                <VBox maxHeight="50" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER" />
+                        <Pane fx:id="deckdisplay" />
+                    </children>
+                </VBox>
+            </right>
+            <left>
+                <VBox BorderPane.alignment="CENTER">
+                    <Accordion fx:id="lastMovesAccordion">
+                        <panes>
+                            <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </content>
+                            </TitledPane>
+                            <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </content>
+                            </TitledPane>
+                            <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </content>
+                            </TitledPane>
+                        </panes>
+                    </Accordion>
+                </VBox>
+            </left>
+            <center>
+                <GridPane fx:id="battlefieldGridPane" alignment="CENTER" BorderPane.alignment="CENTER">
+                </GridPane>
+            </center>
+            <bottom>
+                <VBox alignment="TOP_CENTER">
+                    <StackPane>
+                        <ImageView fx:id="egopointsPlayerOneImageView" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="egopointsPlayerOne" alignment="CENTER" text="Label" />
+                    </StackPane>
+                    <HBox fx:id="playerHandHBox" alignment="CENTER">
+                    </HBox>
+                </VBox>
+            </bottom>
+            <top>
+                <VBox fx:id="vBoxEnemyAreaContainer" alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox fx:id="enemyHandHBox" alignment="CENTER">
+                        </HBox>
+                    </children>
+                    <StackPane>
+                        <children>
+                            <ImageView fx:id="egopointsPlayerTwoImageView" pickOnBounds="true" preserveRatio="true" />
+                            <Label fx:id="egopointsPlayerTwo" alignment="CENTER" text="Label" />
+                        </children>
+                    </StackPane>
+                </VBox>
+            </top>
+        </BorderPane>
+    </StackPane>
 </AnchorPane>
