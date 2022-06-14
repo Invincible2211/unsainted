@@ -9,7 +9,11 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.model.items.Inventory;
+import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.view.InventoryController;
 import de.prog2.dungeontop.view.RoomDialogueViewController;
 import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
@@ -28,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class DungeonTop extends Application
@@ -60,7 +65,6 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
-        //testCardView(primaryStage);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
@@ -170,8 +174,16 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
+        TestItem item = new TestItem("Potion",66);
+        Inventory inventory = new Inventory(new LinkedList<Item>());
+        for (int i = 0; i < 8; i++)
+        {
+            inventory.addItem(item);
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/inventory.fxml"));
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
+        InventoryController.addItems(fxmlLoader.getController(), inventory.getInventory());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
     }
