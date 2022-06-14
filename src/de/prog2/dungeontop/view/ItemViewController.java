@@ -3,6 +3,7 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.resources.AssetIds;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
@@ -30,7 +31,7 @@ public class ItemViewController
 
     private static void fillItemViewWithData(Item item, ItemView controller)
     {
-        controller.getItemImage().imageProperty().setValue(AssetsManager.getImageByAssetId(66));
+        controller.getItemImage().imageProperty().setValue(AssetsManager.getImageByAssetId(item.getAssetID()));
         controller.getItemName().setText(item.getName());
         controller.setItem(item);
     }

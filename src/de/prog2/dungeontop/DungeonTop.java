@@ -12,6 +12,7 @@ import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.view.InventoryController;
 import de.prog2.dungeontop.view.RoomDialogueViewController;
@@ -161,7 +162,7 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        TestItem item = new TestItem("Potion",66);
+        TestItem item = new TestItem("Potion", AssetIds.HEALTH_POTION);
         Inventory inventory = new Inventory();
         for (int i = 0; i < 8; i++)
         {
