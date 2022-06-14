@@ -17,6 +17,7 @@ import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.arena.ArenaComponent;
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
@@ -35,6 +36,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DungeonTop extends Application
 {
@@ -66,19 +68,22 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
-        testArenaView();
+        //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
+        testEntityView(primaryStage);
         //testHellView(scene);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {
+        List<Entity> entities = TestConstants.getTestEntities();
         ArrayList<Node> entityViews = new ArrayList<>();
-        for (int i = 0; i < 6; i++)
+        int i = 0;
+        for (Entity entity : entities)
         {
-            Entity entity = new Minion("Harald", 6, 4, 1, 41 + i);
-            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (2)));
+            i++;
+            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (i)));
         }
         HBox hBox = new HBox();
         hBox.setStyle("-fx-background-color: #000000;");
@@ -92,12 +97,7 @@ public class DungeonTop extends Application
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
-        ArrayList<Card> cards = new ArrayList<>();
-        for (int i = 0; i < 6; i++)
-        {
-            Entity entity = new Minion("Harald", 6, 4, 1, 41 + i);
-            cards.add(new EntityCard(entity, 6, 100, 1 + i, 2));
-        }
+        List<Card> cards = TestConstants.getTestCards();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
