@@ -33,7 +33,6 @@ import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Objects;
 
 public class DungeonTop extends Application
 {
@@ -68,8 +67,8 @@ public class DungeonTop extends Application
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
-        //testCardView(primaryStage);
-        testEntityView(primaryStage);
+        testCardView(primaryStage);
+        //testEntityView(primaryStage);
         //testHellView(scene);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
@@ -78,7 +77,7 @@ public class DungeonTop extends Application
         for (int i = 0; i < 6; i++)
         {
             Entity entity = new Minion("Harald", 6, 4, 1, 41 + i);
-            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (1 + i)));
+            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (2)));
         }
         HBox hBox = new HBox();
         hBox.setStyle("-fx-background-color: #000000;");
@@ -87,7 +86,7 @@ public class DungeonTop extends Application
             hBox.getChildren().add(entityView);
         }
         Scene scene = new Scene(hBox);
-        scene.getStylesheets().add("view/shopView.css");
+        scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         primaryStage.setScene(scene);
     }
     public static void testCardView(Stage primaryStage) throws Exception
@@ -100,10 +99,10 @@ public class DungeonTop extends Application
         }
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/shopView.fxml"));
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
         ShopViewController.addCards(fxmlLoader.getController(), cards);
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("view/shopView.css");
+        scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         primaryStage.setScene(scene);
     }
 

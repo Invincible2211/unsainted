@@ -16,4 +16,12 @@ public interface ViewStrings
     // Arena
     String ARENA_ROOM_DIALOGUE_FXML = "view/roomDialogueView.fxml";
     String ARENABASE_VIEW = "view/arenaBase.fxml";
+    // Entity View
+    String ENTITY_VIEW_FXML = "view/entityView.fxml";
+    // Card View
+    String ENTITY_CARD_VIEW_FXML = "view/cardViews/entityCardView.fxml";
+    String SPELL_CARD_VIEW_FXML = "view/cardViews/spellCardView.fxml";
+    // Shop View
+    String SHOP_VIEW_FXML = "view/shopView.fxml";
+    String SHOP_VIEW_CSS = "view/shopView.css";
 }
