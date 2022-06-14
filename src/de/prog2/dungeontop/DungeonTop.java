@@ -19,9 +19,11 @@ import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -63,13 +65,24 @@ public class DungeonTop extends Application
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
-        //testEntityView(primaryStage);
-        testHellView(scene);
+        testEntityView(primaryStage);
+        //testHellView(scene);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {
-        Entity entity = new Minion("Harald", 6, 4, 3, 19);
-        Scene scene = new Scene((Parent) Objects.requireNonNull(EntityViewController.getEntityView(entity)));
+        ArrayList<Node> entityViews = new ArrayList<>();
+        for (int i = 0; i < 6; i++)
+        {
+            Entity entity = new Minion("Harald", 6, 4, 1, 41 + i);
+            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (1 + i)));
+        }
+        HBox hBox = new HBox();
+        hBox.setStyle("-fx-background-color: #000000;");
+        for (Node entityView : entityViews)
+        {
+            hBox.getChildren().add(entityView);
+        }
+        Scene scene = new Scene(hBox);
         scene.getStylesheets().add("view/shopView.css");
         primaryStage.setScene(scene);
     }
