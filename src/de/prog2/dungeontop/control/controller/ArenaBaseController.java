@@ -172,6 +172,7 @@ public abstract class ArenaBaseController
     public static StackPane getBattleFieldPane(ArenaBaseView arenaBaseView, int x, int y)
     {
         for (Node node : arenaBaseView.getBattlefieldGridPane().getChildren()) {
+            //Die Magicnumber -1 entsteht weil die Arena mit 0,0 indiziert und die Gridpane mit 1,1.
             if (GridPane.getColumnIndex(node) == y-1 && GridPane.getRowIndex(node) == x-1) {
                 GlobalLogger.log(LoggerStringValues.GOT_NODE_ON_BATTLEFIELD + GridPane.getColumnIndex(node) + GridPane.getRowIndex(node));
                 return (StackPane) node;
