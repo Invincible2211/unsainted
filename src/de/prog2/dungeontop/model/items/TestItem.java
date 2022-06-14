@@ -5,7 +5,7 @@ import de.prog2.dungeontop.resources.ItemValues;
 
 public class TestItem extends Item
 {
-    public TestItem(String name, String description, int price, int assetID) {
-        super(name, description, price, assetID);
+    public TestItem(String name, int assetID) {
+        super(name, assetID);
     }
 }

@@ -16,7 +16,14 @@ public abstract class Item
         this.description = description;
         this.price = price;
         this.assetID = assetID;
-        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price));
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
+    }
+
+    public Item(String name, int assetID)
+    {
+        this.name = name;
+        this.assetID = assetID;
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name,this.assetID));
     }
 
     //Set- and Getters

@@ -2,18 +2,17 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.model.items.Item;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
-import javax.swing.text.html.ImageView;
-import java.awt.*;
 
 public class ItemView
 {
-    @FXML
-    Label itemName;
 
     @FXML
-    ImageView itemImage;
-
+    private ImageView itemImage;
+    @FXML
+    private Label itemName;
     private Item item;
 
     public Label getItemName()

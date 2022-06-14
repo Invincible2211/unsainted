@@ -1,31 +1,21 @@
 package de.prog2.dungeontop.view;
 
-import de.prog2.dungeontop.control.controller.CardViewController;
-import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.resources.StringValues;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 
 import java.util.List;
 
 public class InventoryController
 {
-    public static void addCards(Item shopView, List<Card> cards)
+    public static void addItems(Inventory inventory, List<Item> items)
     {
-        int columns = 0, row = 1;
-        for (Card card : cards)
+        int columns = 0, row = 0;
+        for (Item item : items)
         {
-            Node cardView = CardViewController.getCardView(card);
-            Button button = new Button(String.format(StringValues.CURRENCY, card.getPrice()));
-            //button.setStyle("-fx-background-image: url(/view/button-background.png);");
-            button.setPrefWidth(((AnchorPane)cardView).getPrefWidth());
-            button.setPrefHeight(((AnchorPane)cardView).getPrefHeight()/5);
-            //shopView.getGrid().add(new VBox(cardView, button), columns, row);
+            Node itemView = ItemViewController.getItemView(item);
+            inventory.getGridPane().add(itemView, columns, row);
             columns++;
-            if (columns == 4)
+            if (columns == 5)
             {
                 columns = 0;
                 row++;
