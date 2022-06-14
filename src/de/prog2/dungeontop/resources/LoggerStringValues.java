@@ -148,7 +148,7 @@ public interface LoggerStringValues {
     String CARD_CREATED = "Es wurde eine Card erstellt!";
     String MINION_CREATED = "Ein Minion wurde erstellt";
     // Items
-    String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Preis: %d Souls.";
+    String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Description: %s, Preis: %d Souls, AssetID = %d.";
     String INVENTORY_CREATED = "Inventar wurde erstellt.";
     String ITEM_ADDED = "%s wurde ins Inventar hinzugefuegt.";
     String RANK_ONE_SAMIRA_BEING_CREATED = "a one Star Samira is being created";
@@ -160,7 +160,7 @@ public interface LoggerStringValues {
     
     //Battlefield
     String RETURN_NODE_ON_BATTLEFIELD = "return the node: ";
-    String COULD_NOT_FIND_NODE_ON_BATTLEFIELD = "could not find the node on the battlefield with xy: ";
+    String COULD_NOT_FIND_NODE_ON_BATTLEFIELD = "could not find the node on the battlefield with x: %d and y: %d.";
     String CURRENTPHASE_IS_NOW = "Phase wurde geaendert auf: ";
 
     //Shop View
@@ -170,4 +170,7 @@ public interface LoggerStringValues {
     String CARD_VIEW_CONTROLLER_CREATED_CARD = "CardViewController created a card with a scale of %1.1f.";
     // EntityViewController
     String ENTITY_VIEW_CONTROLLER_CREATED_ENTITY = "EntityViewController created an entity with a scale of %1.1f.";
+    // HellController
+    String HELL_CONTROLLER_WARNING_ROOM_INSIDE_BOUNDS = "HellController warning: Room inside bounds == %b";
+    String HELL_CONTROLLER_WARNING_ROOM_COORDINATES = "HellController warning: Room coordinates are: x: %d, y: %d";
 }

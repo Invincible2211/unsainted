@@ -8,7 +8,7 @@ public abstract class Item
     private final String name;
     private String description;
     private int price;
-    private int assetID;
+    private final int assetID;
 
     public Item(String name, String description, int price, int assetID)
     {

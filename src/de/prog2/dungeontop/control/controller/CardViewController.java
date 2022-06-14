@@ -104,12 +104,12 @@ public abstract class CardViewController
         // HP
         controller.getHpLabel().setText(entity.getHp() + "");
         controller.getHpImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.HP_ICON));
-        // Attack
-        controller.getAttackLabel().setText(entity.getAttackDamage() + "");
-        controller.getAttackImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.ATTACK_ICON));
         // Movement
         controller.getMovementLabel().setText(entity.getMovement() + "");
         controller.getMovementImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.MOVEMENT_ICON));
+        // Attack
+        controller.getAttackLabel().setText(entity.getAttackDamage() + "");
+        controller.getAttackImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.ATTACK_ICON));
 
         // Image
         controller.getEntityImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(entity.getAssetId()));

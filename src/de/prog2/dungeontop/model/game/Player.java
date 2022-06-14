@@ -10,8 +10,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Player
 {
-    private SimpleIntegerProperty soulsProperty;
-    private SimpleIntegerProperty hpProperty;
+    private final SimpleIntegerProperty soulsProperty;
+    private final SimpleIntegerProperty hpProperty;
     private int ego_points;
     private Deck deck;
     private Inventory inventory;

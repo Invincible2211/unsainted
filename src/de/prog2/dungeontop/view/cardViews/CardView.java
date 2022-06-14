@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
-public class CardView
+public abstract class CardView
 {
     @FXML
     private ImageView backgroundImageView;

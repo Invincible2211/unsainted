@@ -67,9 +67,9 @@ public class DungeonTop extends Application
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
-        testCardView(primaryStage);
+        //testCardView(primaryStage);
         //testEntityView(primaryStage);
-        //testHellView(scene);
+        testHellView(scene);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {

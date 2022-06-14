@@ -56,8 +56,10 @@ public abstract class ArenaBaseController
     private static void initBattlefield(ArenaBaseView arenaBaseView, int height, int width)
     {
         GridPane gridPane = arenaBaseView.getBattlefieldGridPane();
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
                 StackPane stackPane = new StackPane();
                 Image background = AssetsManager.getImageByAssetId(AssetIds.BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID);
                 ImageView imageView = new ImageView();
@@ -71,12 +73,12 @@ public abstract class ArenaBaseController
     public static Node getBattleFieldPane(ArenaBaseView arenaBaseView, int x,int y)
     {
         for (Node node : arenaBaseView.getBattlefieldGridPane().getChildren()) {
-            if (arenaBaseView.getBattlefieldGridPane().getColumnIndex(node) == y && arenaBaseView.getBattlefieldGridPane().getRowIndex(node) == x) {
+            if (GridPane.getColumnIndex(node) == y && GridPane.getRowIndex(node) == x) {
                 GlobalLogger.log(LoggerStringValues.RETURN_NODE_ON_BATTLEFIELD + node.toString());
                 return node;
             }
         }
-        GlobalLogger.warning(LoggerStringValues.COULD_NOT_FIND_NODE_ON_BATTLEFIELD + x + " " +y);
+        GlobalLogger.warning(String.format(LoggerStringValues.COULD_NOT_FIND_NODE_ON_BATTLEFIELD, x, y));
         return null;
     }
 

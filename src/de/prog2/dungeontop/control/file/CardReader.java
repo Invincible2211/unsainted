@@ -49,8 +49,7 @@ public class CardReader
         GlobalLogger.log(LoggerStringValues.CARDS_LOADING);
         JsonParser jsonParser = new JsonParser();
         File folder = new File(FilePaths.CARDS_FOLDER);
-        for (File f:
-             folder.listFiles())
+        for (File f : folder.listFiles())
         {
             JsonElement jsonFile = jsonParser.parse(new FileReader(f));
             GlobalLogger.log(LoggerStringValues.LOAD_CARD);
