@@ -13,12 +13,13 @@ import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.*;
+import de.prog2.dungeontop.view.RoomDialogueViewController;
+import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
-import de.prog2.dungeontop.view.SettingsController;
+import de.prog2.dungeontop.view.HellView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -77,10 +78,10 @@ public class DungeonTop extends Application
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
-        Entity entity = new Minion("Harald", 6, 4, 1, 19);
         ArrayList<Card> cards = new ArrayList<>();
         for (int i = 0; i < 6; i++)
         {
+            Entity entity = new Minion("Harald", 6, 4, 1, 41 + i);
             cards.add(new EntityCard(entity, 6, 100, 1 + i, 2));
         }
 
@@ -92,20 +93,35 @@ public class DungeonTop extends Application
         primaryStage.setScene(scene);
     }
 
-    public static void testHellView(Scene scene) throws Exception
+    public static void testHellView(Scene scene)
     {
         Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
         HellGenerator.initHell(hell);
         HellView view = new HellView();
         Scene hellView = view.initHellView(hell);
-        //view.initPlayerCamera(scene);
-        //view.initOverlay(hellView);
+
+        Hell hell2 = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
+        HellGenerator.initHell(hell2);
+        HellGenerator.initHell(hell2);
+        Scene hellView2 = view.initHellView(hell2);
+
+        System.out.println(hell);
 
         stage.setScene(scene);
+
         stage.setScene(hellView);
+        stage.setScene(hellView2);
+    }
 
-
-//        System.out.println(hell);
+    public static void testWorld ()
+    {
+        for (int i = 1; i<= 100000; i++)
+        {
+            Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
+            HellGenerator.initHell(hell);
+            System.out.println("Hell No." + i +" von 100:");
+            System.out.println(hell);
+        }
     }
 
     public static void testArenaView() throws Exception

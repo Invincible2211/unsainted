@@ -84,6 +84,11 @@ public interface LoggerStringValues {
     String BACKGROUND_CREATED = "Hell Background has been created.";
     String CLAMPING_FAILURE = "CLAMPING: Min Value bigger than Max Value.";
     String DRAW_ROOM_TYPES_IMAGE_NOT_FOUND = "The image for the room you try to draw cannot be found.";
+    String HELL_ALREADY_INITIALIZED = "Die uebergeben Hell wurde bereits initialisiert!";
+    String START_BATTLE_HANDLER = "Handler: startBattle()";
+    String RANDOM_EVENT_HANDLER = "Handler: startRandomEvent()";
+    String OPEN_FORGE_HANDLER = "Handler: openForge()";
+    String OPEN_LAVAPOND_HANDLER = "Handler: openLavaPond()";
 
     String MOVE_UP_SUCCESS = "Player moved into the room above.";
     String MOVE_UP_FAIL = "Player couldn't move into the room above.";
@@ -157,4 +162,10 @@ public interface LoggerStringValues {
     String RETURN_NODE_ON_BATTLEFIELD = "return the node: ";
     String COULD_NOT_FIND_NODE_ON_BATTLEFIELD = "could not find the node on the battlefield with xy: ";
     String CURRENTPHASE_IS_NOW = "Phase wurde geaendert auf: ";
+
+    //Shop View
+    String SHOP_VIEW_STARTED_ADDING_CARDS = "ShopView started adding cards.";
+    String SHOP_VIEW_ADDED_CARD = "ShopView added card: ";
+    // CardViewController
+    String CARD_VIEW_CONTROLLER_CREATED_CARD = "CardViewController created a card with a scale of %1.1f.";
 }

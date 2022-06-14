@@ -3,27 +3,42 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.StringValues;
+import de.prog2.dungeontop.resources.CardConstants;
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.CardView;
 import de.prog2.dungeontop.view.cardViews.EntityCardView;
 import de.prog2.dungeontop.view.cardViews.SpellCardView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import jdk.jshell.spi.ExecutionControl;
 
 public abstract class CardViewController
 {
+    /**
+     * @param card  The card that is displayed by the card view.
+     * @return The Node that is controlled by this controller.
+     */
     public static Node getCardView(Card card)
     {
+        return getCardView(card, 1);
+    }
+
+    /**
+     * @param card  The card that is displayed by the card view.
+     * @param scale The scale of the card view. 1 makes the cardView have an height of 866 px.
+     * @return The Node that is controlled by this controller.
+     */
+    public static Node getCardView(Card card, double scale)
+    {
+        Node cardView = null;
         try
         {
             FXMLLoader loader = new FXMLLoader();
-            Node cardView = null;
+
             if(card instanceof EntityCard)
             {
                 cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/entityCardView.fxml"));
@@ -33,18 +48,33 @@ public abstract class CardViewController
                 cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/cardViews/spellCardView.fxml"));
             }
             CardView controller = loader.getController();
+
+            double width = CardConstants.CARD_BASE_WIDTH * scale;
+            double height = CardConstants.CARD_BASE_HEIGHT * scale;
+            controller.setWidth(width);
+            controller.setHeight(height);
+            controller.setAnchorScale(scale);
+
             fillCardViewWithData(card, controller);
+
+            GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
             return cardView;
         }
         catch (Exception e)
         {
-            e.printStackTrace();
-            return null;
+            GlobalLogger.warning(e.getMessage());
         }
+        return cardView;
     }
 
+    /**
+     * Fills the card view with data from the card.
+     * @param card The card that is displayed by the card view.
+     * @param controller The controller of the card view.
+     */
     private static void fillCardViewWithData(Card card, CardView controller)
     {
+        controller.getBackgroundImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.CARD_BACKGROUND_IMAGE_ID));
         controller.getRankLabel().setText(card.getRank() + "");
         controller.getRankImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.getRankIcon(card.getRank())));
 
@@ -63,6 +93,11 @@ public abstract class CardViewController
         controller.setCard(card);
     }
 
+    /**
+     * Fills the card view with data from the entity card.
+     * @param card The entity card that is displayed by the card view.
+     * @param controller The controller of the card view.
+     */
     private static void fillEntityCardView(EntityCard card, EntityCardView controller)
     {
         Entity entity = card.getEntity();
@@ -82,6 +117,12 @@ public abstract class CardViewController
         // Image
         controller.getEntityImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(entity.getAssetId()));
     }
+
+    /**
+     * Fills the card view with data from the spell card.
+     * @param card The spell card that is displayed by the card view.
+     * @param controller The controller of the card view.
+     */
     private static void fillSpellCardView(SpellCard card, SpellCardView controller)
     {
         // TODO Implement SpellCardView
