@@ -1,6 +1,7 @@
 package de.prog2.dungeontop;
 
 import de.prog2.dungeontop.control.controller.ArenaBaseController;
+import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DungeonTop extends Application
 {
@@ -65,23 +67,21 @@ public class DungeonTop extends Application
         //testCardView(primaryStage);
         //testHellView(scene);
     }
+    public static void testEntityView(Stage primaryStage) throws Exception
+    {
+        Entity entity = new Minion("Harald", 6, 4, 3, 19);
+        Scene scene = new Scene((Parent) Objects.requireNonNull(EntityViewController.getEntityView(entity)));
+        scene.getStylesheets().add("view/shopView.css");
+        primaryStage.setScene(scene);
+    }
     public static void testCardView(Stage primaryStage) throws Exception
     {
         Entity entity = new Minion("Harald", 6, 4, 1, 19);
-        var card = new EntityCard(entity, 3, 100, 1, 2);
         ArrayList<Card> cards = new ArrayList<>();
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
-        cards.add(card);
+        for (int i = 0; i < 6; i++)
+        {
+            cards.add(new EntityCard(entity, 6, 100, 1 + i, 2));
+        }
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/shopView.fxml"));
@@ -100,8 +100,8 @@ public class DungeonTop extends Application
         //view.initPlayerCamera(scene);
         //view.initOverlay(hellView);
 
-//        stage.setScene(scene);
-//        stage.setScene(hellView);
+        stage.setScene(scene);
+        stage.setScene(hellView);
 
 
 //        System.out.println(hell);

@@ -11,6 +11,8 @@ public class CardView
     @FXML
     private Label rankLabel;
     @FXML
+    private ImageView rankImageView;
+    @FXML
     private Label summonCostLabel;
     @FXML
     private ImageView summonImageView;
@@ -40,5 +42,10 @@ public class CardView
     public ImageView getSummonImageView()
     {
         return summonImageView;
+    }
+
+    public ImageView getRankImageView()
+    {
+        return rankImageView;
     }
 }

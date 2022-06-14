@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.file.AssetsFileReader;
-import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -15,20 +14,36 @@ import java.util.HashMap;
 public class AssetsManager
 {
 
+    /*----------------------------------------------ATTRIBUTE---------------------------------------------------------*/
+
     private final static AssetsManager instance = new AssetsManager();
 
     private final static HashMap<Integer, File> ASSETS = new HashMap<>();
 
+    /*--------------------------------------------KONSTRUKTOREN-------------------------------------------------------*/
+
+    /**
+     * Der Konstruktor ist private, da der AssetManager ein Singelton ist.
+     */
     private AssetsManager(){
 
     }
 
+    /*----------------------------------------------METHODEN----------------------------------------------------------*/
+
+    /**
+     * Diese Methode wird benutzt, um auf die Assets zuzugreifen.
+     * @param id die ID des Assets
+     * @return ein File-Object, welches das Asset beinhaltet
+     */
     public static File getAssetById (int id)
     {
         GlobalLogger.log(String.format(LoggerStringValues.STARTED_GET_ASSET_BY_ID, id));
+        //Wurde ein Asset schon einmal geladen, ist dieses fuer weniger Festplattenzugriffe im Arbeitsspeicher geladen.
         if (ASSETS.containsKey(id)){
             GlobalLogger.log(String.format(LoggerStringValues.ASSET_FOUND, id));
             return ASSETS.get(id);
+        //Assets die noch nicht geladen wurden, werden fuer weitere Zugriffe in den Arbeitsspeicher geladen.
         } else {
             File asset = AssetsFileReader.getInstance().getAssetFile(id);
             ASSETS.put(id, asset);
@@ -57,19 +72,7 @@ public class AssetsManager
         return image;
     }
 
-    public static int getIdFromAsset (File asset)
-    {
-        GlobalLogger.log(String.format(LoggerStringValues.STARTED_GET_ID_BY_ASSET, asset.getName()));
-        for (Integer key :
-                ASSETS.keySet()) {
-            if (ASSETS.get(key) == asset) {
-                GlobalLogger.log(String.format(LoggerStringValues.ASSET_ID_FOUND, asset.getName()));
-                return key;
-            }
-        }
-        GlobalLogger.warning(ExceptionMessagesKeys.NO_ID_FOUND_EXCEPTION);
-        return -1;
-    }
+    /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
 
     public static AssetsManager getInstance() {
         return instance;
