@@ -18,7 +18,7 @@ import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
-import de.prog2.dungeontop.view.InventoryController;
+import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.view.RoomDialogueViewController;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;

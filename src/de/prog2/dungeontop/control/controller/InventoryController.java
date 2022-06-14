@@ -1,6 +1,8 @@
-package de.prog2.dungeontop.view;
+package de.prog2.dungeontop.control.controller;
 
+import de.prog2.dungeontop.control.controller.ItemViewController;
 import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.view.InventoryView;
 import javafx.scene.Node;
 
 import java.util.List;
