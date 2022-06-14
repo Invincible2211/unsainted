@@ -10,6 +10,10 @@ import javafx.scene.Node;
 
 public class ItemViewController
 {
+    /**
+     * create an ItemView for an item.
+     *
+     */
     public static Node getItemView(Item item)
     {
         try
@@ -30,6 +34,11 @@ public class ItemViewController
         }
     }
 
+    /**
+     * Add cards to the shop view.
+     * @param controller an instance of ItemView, the controller of itemView.fxml
+     *
+     */
     private static void fillItemViewWithData(Item item, ItemView controller)
     {
         controller.getItemImage().imageProperty().setValue(AssetsManager.getImageByAssetId(item.getAssetID()));
