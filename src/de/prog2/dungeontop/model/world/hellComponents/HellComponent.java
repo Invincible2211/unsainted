@@ -1,7 +1,5 @@
 package de.prog2.dungeontop.model.world.hellComponents;
 
-import java.util.UUID;
-
 /**
  * Represents a quadratic cell in a grid, where all the rooms are deployed as their corners and walls
  */

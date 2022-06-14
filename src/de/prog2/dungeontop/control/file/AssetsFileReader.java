@@ -47,8 +47,7 @@ public class AssetsFileReader
      */
     private void getAssetPaths(File folder)
     {
-        for (File asset:
-        folder.listFiles())
+        for (File asset : folder.listFiles())
         {
             if (asset.isDirectory())
             {

@@ -43,7 +43,7 @@ public class ConfigurationFileReader
      * Diese Methode gibt den Wert eines Eintrags in der Property-Datei fuer einen bestimmten Key zurueck.
      * @param key ein String, der als identifier fuer den value dient
      * @return ein String, der den in der .properties-Datei gespeicherten Wert enthaelt,
-     * exestiert kein Eintrag ist das Ergebnis der Abfrage null
+     * existiert kein Eintrag ist das Ergebnis der Abfrage null
      */
    public String getConfigurationValue(String key)
    {

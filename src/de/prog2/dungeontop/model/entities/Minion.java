@@ -3,7 +3,6 @@ package de.prog2.dungeontop.model.entities;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
-import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
@@ -18,13 +17,5 @@ public class Minion extends Entity
     public Minion(String name, int hp, int attackDamage, int movement, int assetId)
     {
         this(name, hp, attackDamage, movement, assetId, null);
-    }
-
-    @Deprecated
-    //Will only be implemented when we implement furter battlelogik. Optional fuer die Abgabe
-    public Minion (Card card, Player owner, int rank, Coordinate coordinate, String name)
-    {
-        super(card, owner, rank, coordinate);
-        //this.name = name;
     }
 }

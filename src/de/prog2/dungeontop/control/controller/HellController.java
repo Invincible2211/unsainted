@@ -27,15 +27,18 @@ public class HellController
      *
      * @param hell hell for which the room shall be added
      * @param room room which shall be added
-     * @throws SpotAlreadyOccupiedException thrown if the method tries to place a room on a spot that is already occupied by another room
+     * @throws SpotAlreadyOccupiedException thrown if the method tries to place a room on a spot
+     * that is already occupied by another room
      */
     public static void addRoomToGrid (Hell hell, Room room) throws SpotAlreadyOccupiedException
     {
         // room has to be within the bounds of the hell and cannot overlap an already existing room
         if (!roomIsInsideHellBounds(hell, room) || hell.getRoomHashMap().containsKey(room.getCoordinate()))
         {
-            GlobalLogger.warning("Room inside Bounds: " + roomIsInsideHellBounds(hell,room));
-            GlobalLogger.warning("X: " + room.getCoordinate().getX() + " Y: " + room.getCoordinate().getY());
+            GlobalLogger.warning(String.format(LoggerStringValues.HELL_CONTROLLER_WARNING_ROOM_INSIDE_BOUNDS,
+                    roomIsInsideHellBounds(hell,room)));
+            GlobalLogger.warning(String.format(LoggerStringValues.HELL_CONTROLLER_WARNING_ROOM_COORDINATES,
+                    room.getCoordinate().getX(), room.getCoordinate().getY()));
             throw new SpotAlreadyOccupiedException();
         }
         hell.insertRoom(room.getCoordinate(), room);

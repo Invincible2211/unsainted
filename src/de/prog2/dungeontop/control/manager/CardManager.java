@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.control.manager;
 
-import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
