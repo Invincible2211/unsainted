@@ -51,4 +51,7 @@ public interface AssetIds {
             default -> RANK6_ICON;
         };
     }
+
+    //Item AssetIds
+    int HEALTH_POTION = 66;
 }

@@ -10,17 +10,17 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
-import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
-import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.InventoryController;
-import de.prog2.dungeontop.view.RoomDialogueViewController;
-import de.prog2.dungeontop.view.SettingsController;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
+import de.prog2.dungeontop.control.controller.InventoryController;
+import de.prog2.dungeontop.view.RoomDialogueViewController;
+import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -32,7 +32,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class DungeonTop extends Application
 {
@@ -173,8 +172,8 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        TestItem item = new TestItem("Potion",66);
-        Inventory inventory = new Inventory(new LinkedList<Item>());
+        TestItem item = new TestItem("Potion", AssetIds.HEALTH_POTION);
+        Inventory inventory = new Inventory();
         for (int i = 0; i < 8; i++)
         {
             inventory.addItem(item);
