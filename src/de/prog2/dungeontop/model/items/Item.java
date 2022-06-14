@@ -23,7 +23,7 @@ public abstract class Item
     {
         this.name = name;
         this.assetID = assetID;
-        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name,this.assetID));
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
     }
 
     //Set- and Getters

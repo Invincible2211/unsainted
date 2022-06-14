@@ -123,7 +123,12 @@ public class BattleManager
         }
     }
 
-    //TODO Event handlen und aufrufen welches das outcome handled und Spieler Belohnt oder run beendet.
+    /**
+     *
+     * @param gewinner
+     * @param damageAnVerlierer
+     * @return
+     */
     private BattleOutCome endBattle (Player gewinner, int damageAnVerlierer)
     {
         GlobalLogger.log(LoggerStringValues.BATTLE_HAS_ENDED);
@@ -138,7 +143,7 @@ public class BattleManager
     }
 
     /**
-     * Places card on Arena tile,
+     * Places card on Arena tile, then updates it on the View.
      * @param duellist who controlls the card
      * @param coordinate where to place new minion
      */
