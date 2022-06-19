@@ -25,6 +25,7 @@ public interface AssetIds {
     int CENTER = 13;
     int PLAYER = 19;
     int COGWHEEL = 15;
+    int BAG = 14;
 
 
     // Card Asset IDs

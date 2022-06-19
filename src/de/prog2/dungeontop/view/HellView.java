@@ -14,7 +14,6 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -51,7 +50,7 @@ public class HellView
         // container for the canvas
         Pane pane = createBackground(hell);
         // container for the pane
-        BorderPane border = new BorderPane(pane);
+        AnchorPane container = new AnchorPane(pane);
 
         // Set the player to the starting room of the hell we want to visualize
         // this is done so that the actual state of the player is the same as the one shown
@@ -60,11 +59,11 @@ public class HellView
         // Set the background that is seen between the rooms
         pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
-        Scene scene = new Scene(border, HellViewConstants.SCENE_STARTUP_WIDTH, HellViewConstants.SCENE_STARTUP_HEIGHT);
+        Scene scene = new Scene(container, HellViewConstants.SCENE_STARTUP_WIDTH, HellViewConstants.SCENE_STARTUP_HEIGHT);
 
         // init a camera that follows the player and some UI elements
         initPlayerCamera(scene, pane);
-        initOverlay(scene, pane);
+        initOverlay(container);
 
         // key listener for player movement
         scene.setOnKeyPressed(e -> movePlayer(e.getCode()));
@@ -72,6 +71,70 @@ public class HellView
         GlobalLogger.log(LoggerStringValues.HELLVIEW_INIT);
         return scene;
     }
+
+    /**
+     * Initialize the overlay for the HellView.
+     * The overlay consists of a settings button, an inventory button and a statboard showing the player stats.
+     *
+     * @param container AnchorPane used as container in the HellView
+     */
+    private void initOverlay (AnchorPane container)
+    {
+        // add settings button
+        Button settingsButton = getOverlayButton(AssetIds.COGWHEEL);
+        container.getChildren().add(settingsButton);
+        // set position of the settings button
+        AnchorPane.setTopAnchor(settingsButton, HellViewConstants.OVERLAY_BUTTON_FIT_HEIGHT *
+                HellViewConstants.HALF);
+        AnchorPane.setRightAnchor(settingsButton, HellViewConstants.OVERLAY_BUTTON_FIT_WIDTH *
+                HellViewConstants.HALF);
+
+        settingsButton.setOnAction(e -> openSettings());
+
+
+        // add inventory button
+        Button inventoryButton = getOverlayButton(AssetIds.BAG);
+        container.getChildren().add(inventoryButton);
+        // set position of the inventory button
+        AnchorPane.setTopAnchor(inventoryButton, HellViewConstants.OVERLAY_BUTTON_FIT_HEIGHT *
+                HellViewConstants.HALF);
+        AnchorPane.setLeftAnchor(inventoryButton, HellViewConstants.OVERLAY_BUTTON_FIT_WIDTH *
+                HellViewConstants.HALF);
+
+        inventoryButton.setOnAction(e -> openInventory());
+
+        initPlayerStats(container);
+    }
+
+    /**
+     * Creates a new Button which is thought to be used in the HellView Overlay.
+     *
+     * @param assetId ID of the image-asset that shall be used inside the button
+     * @return button with style that fits the HellView Overlay
+     */
+    private Button getOverlayButton (final int assetId)
+    {
+        Image buttonImage = AssetsManager.getImageByAssetId(assetId);
+        ImageView buttonImageView = new ImageView(buttonImage);
+
+        Button overlayButton = new Button();
+
+        // set the button style
+        overlayButton.setBackground(Background.EMPTY);
+        overlayButton.setStyle(HellViewConstants.OVERLAY_BUTTON_STYLE);
+
+        overlayButton.setGraphic(buttonImageView);
+
+        buttonImageView.setFitWidth(HellViewConstants.OVERLAY_BUTTON_FIT_WIDTH - 2 * HellViewConstants.OVERLAY_BUTTON_PADDING -
+                2 * HellViewConstants.OVERLAY_BUTTON_BORDER_WIDTH);
+        buttonImageView.setFitHeight(HellViewConstants.OVERLAY_BUTTON_FIT_HEIGHT - 2 * HellViewConstants.OVERLAY_BUTTON_PADDING -
+                2 * HellViewConstants.OVERLAY_BUTTON_BORDER_WIDTH);
+
+        overlayButton.setFocusTraversable(HellViewConstants.OVERLAY_BUTTON_FOCUS_TRAVERSABLE);
+
+        return overlayButton;
+    }
+
 
     /**
      * Method that draws a visual representation of a given hell.
@@ -383,102 +446,32 @@ public class HellView
     }
 
     /**
-     * Initialize the overlay for the HellView.
-     * The overlay consists of a settings button and a statboard showing the player stats.
-     *
-     * @param scene scene the overlay shall be added to
-     * @param pane container pane containing all the HellView components
-     */
-    public void initOverlay(Scene scene, Pane pane)
-    {
-        initSettings(scene, pane);
-        initPlayerStats(scene, pane);
-    }
-
-    /**
-     * Add an icon which can be used to open the settings to the overlay
-     *
-     * @param scene HellView the settings button shall be added to
-     * @param pane pane inside the HelLView containing the HelLView components
-     */
-    private void initSettings (Scene scene, Pane pane)
-    {
-        Image cogwheel = AssetsManager.getImageByAssetId(AssetIds.COGWHEEL);
-        ImageView settingsImage = new ImageView(cogwheel);
-
-        // Init settings button
-        Button settings = new Button();
-
-        // set the settings style
-        settings.setBackground(Background.EMPTY);
-        settings.setStyle(HellViewConstants.SETTINGS_STYLE_STRING);
-
-        pane.getChildren().add(settings);
-        settings.setGraphic(settingsImage);
-
-        settingsImage.setFitWidth(HellViewConstants.SETTINGS_FIT_WIDTH - 2 * HellViewConstants.SETTINGS_PADDING -
-                2 * HellViewConstants.SETTINGS_BORDER_WIDTH);
-        settingsImage.setFitHeight(HellViewConstants.SETTINGS_FIT_HEIGHT - 2 * HellViewConstants.SETTINGS_PADDING -
-                2 * HellViewConstants.SETTINGS_BORDER_WIDTH);
-
-        settings.setOnAction(e -> openSettings());
-        settings.setFocusTraversable(HellViewConstants.SETTINGS_FOCUS_TRAVERSABLE);
-
-
-        // bind the settings button to the player
-        // bind the x coordinate
-        settings.layoutXProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(
-                        playerView.getX() + scene.getWidth() * HellViewConstants.HALF -
-                                HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.SETTINGS_WIDTH_MULTI,
-                        scene.getWidth() - HellViewConstants.SETTINGS_FIT_WIDTH *
-                                HellViewConstants.SETTINGS_WIDTH_MULTI,
-                        HellViewConstants.PANE_WIDTH - HellViewConstants.SETTINGS_FIT_WIDTH *
-                                HellViewConstants.SETTINGS_WIDTH_MULTI
-                ),
-                playerView.xProperty(), scene.widthProperty()
-        ));
-
-        // bind the y coordinate
-        settings.layoutYProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange
-                        (
-                                playerView.getY() - scene.getHeight() * HellViewConstants.HALF +
-                                        HellViewConstants.SETTINGS_FIT_HEIGHT * HellViewConstants.HALF,
-                                HellViewConstants.SETTINGS_FIT_HEIGHT * HellViewConstants.HALF,
-                                HellViewConstants.PANE_HEIGHT -
-                                        scene.getHeight() + HellViewConstants.SETTINGS_FIT_HEIGHT *
-                                        HellViewConstants.HALF
-                        ),
-                playerView.yProperty(), scene.heightProperty()
-        ));
-    }
-
-    /**
      * Add a statboard to the UI that shows different stats depending the player like his current HP
      *
-     * @param scene HellView the statboard shall be added to
-     * @param pane pane inside the HellView containing the HellView components
+     * @param container Pane that will contain the statboard
      */
-    private void initPlayerStats (Scene scene, Pane pane)
+    private void initPlayerStats (AnchorPane container)
     {
         // init visualization of player status
         FlowPane playerStats = new FlowPane(Orientation.HORIZONTAL);
 
+        // set height and width (width depends on the the size of the settings button and the size of the scene)
+        playerStats.setPrefHeight(HellViewConstants.OVERLAY_BUTTON_FIT_HEIGHT);
+        playerStats.prefWidthProperty().bind(Bindings.createDoubleBinding(
+                () -> container.getWidth() - HellViewConstants.OVERLAY_BUTTON_FIT_WIDTH *
+                        HellViewConstants.STAT_BOARD_WIDTH_MULTI * HellViewConstants.OVERLAY_BUTTON_NUMBER,
+                container.widthProperty()
+        ));
+
         // set the Background on which the stats will be shown
         playerStats.setBackground(new Background(new BackgroundImage
                 (
-                        AssetsManager.getImageByAssetId(AssetIds.STATBOARD_BACKGROUND_SCROLL),
+                        AssetsManager.getImageByAssetId(AssetIds.STATBOARD_BACKGROUND_SCROLL,
+                                playerStats.getPrefWidth(), playerStats.getPrefHeight(),
+                                HellViewConstants.STAT_BOARD_BG_IMG_PRESERVE_RATIO,
+                                HellViewConstants.STAT_BOARD_BG_IMG_SMOOTH),
                         BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                        HellViewConstants.STATBOARD_BACKGROUND_SIZE)
-        ));
-
-        // set height and width (width depends on the the size of the settings button and the size of the scene)
-        playerStats.setPrefHeight(HellViewConstants.SETTINGS_FIT_HEIGHT);
-        playerStats.prefWidthProperty().bind(Bindings.createDoubleBinding(
-                () -> scene.getWidth() - HellViewConstants.SETTINGS_FIT_WIDTH *
-                        HellViewConstants.STAT_BOARD_WIDTH_MULTI,
-                scene.widthProperty()
+                        HellViewConstants.STAT_BOARD_BACKGROUND_SIZE)
         ));
 
         // spacing between the statboard elements and alignment
@@ -486,34 +479,14 @@ public class HellView
         playerStats.setAlignment(Pos.CENTER);
 
         // bind the player stats to the player;
-        // bind the x property
-        playerStats.layoutXProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange
-                        (
-                                playerView.getX() - scene.getWidth() * HellViewConstants.HALF +
-                                        HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.HALF,
-                                HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.HALF,
-                                HellViewConstants.PANE_WIDTH - scene.getWidth() +
-                                        HellViewConstants.SETTINGS_FIT_WIDTH * HellViewConstants.HALF
-                        ),
-                playerView.xProperty(), scene.widthProperty()
-        ));
+        AnchorPane.setLeftAnchor(playerStats, HellViewConstants.OVERLAY_BUTTON_FIT_WIDTH
+                * HellViewConstants.OVERLAY_BUTTON_X_OFFSET_MULTI);
 
-        // bind the y property
-        playerStats.layoutYProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange
-                        (
-                                playerView.getY() - scene.getHeight() * HellViewConstants.HALF +
-                                        HellViewConstants.SETTINGS_FIT_HEIGHT * HellViewConstants.HALF,
-                                HellViewConstants.SETTINGS_FIT_HEIGHT * HellViewConstants.HALF,
-                                HellViewConstants.PANE_HEIGHT - scene.getHeight() +
-                                        HellViewConstants.SETTINGS_FIT_HEIGHT * HellViewConstants.HALF
-                        ),
-                playerView.yProperty(), scene.heightProperty()
-        ));
+        AnchorPane.setTopAnchor(playerStats, HellViewConstants.OVERLAY_BUTTON_FIT_HEIGHT
+                * HellViewConstants.HALF);
 
         // add the statboard to the pane containing all the HellView components
-        pane.getChildren().add(playerStats);
+        container.getChildren().add(playerStats);
 
         // init the statboard elements
         initStatboardElement(playerStats, HellViewConstants.HP_SUBTITLE, AssetIds.HEART_ICON,
@@ -529,6 +502,15 @@ public class HellView
     private void openSettings()
     {
         SettingsController.showSettings();
+    }
+
+    /**
+     * Called if the inventory button is pressed.
+     * Opens the player inventory.
+     */
+    private void openInventory()
+    {
+        // TODO: Add Logic to open Inventory
     }
 
     /**

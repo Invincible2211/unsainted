@@ -27,8 +27,9 @@ public interface HellViewConstants
     double PLAYER_FIT_HEIGHT = 200;
 
     // statboard constants
+    int OVERLAY_BUTTON_NUMBER = 2;
     double PLAYER_STATS_HGAP = 10;
-    double STAT_BOARD_WIDTH_MULTI = 3;
+    double STAT_BOARD_WIDTH_MULTI = 2;
     int STAT_BOARD_TEXT_SIZE = 18;
     Font STAT_BOARD_FONT = new Font(STAT_BOARD_TEXT_SIZE);
     double STAT_BOARD_ICON_WIDTH = 50;
@@ -36,33 +37,36 @@ public interface HellViewConstants
     Insets STAT_BOARD_ELEMENT_PADDING = new Insets(STAT_BOARD_ICON_HEIGHT/6, STAT_BOARD_ICON_WIDTH,
             STAT_BOARD_ICON_HEIGHT/6, STAT_BOARD_ICON_WIDTH);
     Insets STAT_BOARD_ICON_TEXT_DISTANCE = new Insets(0, 25, 0, 25);
-    BackgroundSize STATBOARD_BACKGROUND_SIZE =  new BackgroundSize(100, 100,
+    BackgroundSize STAT_BOARD_BACKGROUND_SIZE =  new BackgroundSize(100, 100,
             true, true, false, true);
+    boolean STAT_BOARD_BG_IMG_PRESERVE_RATIO = false;
+    boolean STAT_BOARD_BG_IMG_SMOOTH = true;
 
     String HP_SUBTITLE = "HP";
     String SOUL_SUBTITLE = "Souls";
     String EMPTY_STRING = "";
 
     // setting button constants
-    double SETTINGS_FIT_HEIGHT = 100;
-    double SETTINGS_FIT_WIDTH = 100;
+    double OVERLAY_BUTTON_FIT_HEIGHT = 100;
+    double OVERLAY_BUTTON_FIT_WIDTH = 100;
     double SETTINGS_WIDTH_MULTI = 1.5;
     double SETTING_HEIGHT_MULTI = 1.5;
-    boolean SETTINGS_FOCUS_TRAVERSABLE = false;
+    boolean OVERLAY_BUTTON_FOCUS_TRAVERSABLE = false;
+    double OVERLAY_BUTTON_X_OFFSET_MULTI = 2;
 
     // Settings Button Style
     double  SETTINGS_BORDER_RADIUS = 10;
-    double SETTINGS_PADDING = 5;
-    Insets SETTINGS_PADDING_INSET = new Insets(SETTINGS_PADDING);
+    double OVERLAY_BUTTON_PADDING = 5;
+    Insets SETTINGS_PADDING_INSET = new Insets(OVERLAY_BUTTON_PADDING);
     double SETTINGS_BG_RADIUS = 15;
     double SETTINGS_BORDER_INSETS = -2.5;
-    double SETTINGS_BORDER_WIDTH = 5;
+    double OVERLAY_BUTTON_BORDER_WIDTH = 5;
 
 
-    String SETTINGS_STYLE_STRING = "-fx-border-radius: "+ SETTINGS_BORDER_RADIUS +
-            "; -fx-background-color: #e0c59f; -fx-border-color: black; -fx-border-width: " + SETTINGS_BORDER_WIDTH +
+    String OVERLAY_BUTTON_STYLE = "-fx-border-radius: "+ SETTINGS_BORDER_RADIUS +
+            "; -fx-background-color: #e0c59f; -fx-border-color: black; -fx-border-width: " + OVERLAY_BUTTON_BORDER_WIDTH +
             "; -fx-background-radius: " + SETTINGS_BG_RADIUS + "; -fx-border-insets: " + SETTINGS_BORDER_INSETS +"; " +
-            "-fx-padding: " + SETTINGS_PADDING + ";";
+            "-fx-padding: " + OVERLAY_BUTTON_PADDING + ";";
 
     // container pane constants
     double PANE_WIDTH = HORIZONTAL_TILES * ROOM_TILE_WIDTH;
