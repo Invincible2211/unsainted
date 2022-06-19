@@ -13,6 +13,7 @@ public abstract class Entity
     private int attackDamage = 0;
     private int movement = 0;
     private int assetId;
+    private String talent;
     private Coordinate position;
     private boolean canMove = false;
     private Player owner = null;
@@ -32,6 +33,13 @@ public abstract class Entity
         this(name, hp, attackDamage, movement, assetId, owner);
         this.position = position;
         this.canMove = canMove;
+    }
+    public Entity(String name, int hp, int attackDamage, String talent)
+    {
+        this.name = name;
+        this.hp = hp;
+        this.attackDamage = attackDamage;
+        this.talent = talent;
     }
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
@@ -123,5 +131,10 @@ public abstract class Entity
     public void setAssetId(int assetId)
     {
         this.assetId = assetId;
+    }
+
+    public String getTalent()
+    {
+        return talent;
     }
 }

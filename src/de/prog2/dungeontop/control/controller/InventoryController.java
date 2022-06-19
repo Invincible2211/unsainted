@@ -9,6 +9,11 @@ import java.util.List;
 
 public class InventoryController
 {
+    /**
+     * Add items to the inventory.
+     * @param inventoryView The inventory view.
+     * @param items A List of items to add.
+     */
     public static void addItems(InventoryView inventoryView, List<Item> items)
     {
         int columns = 0, row = 0;

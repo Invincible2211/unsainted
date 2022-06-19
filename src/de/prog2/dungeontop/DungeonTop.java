@@ -70,15 +70,18 @@ public class DungeonTop extends Application
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
-        testHellView(scene);
+        //testEntityView(primaryStage);
+        //testHellView(scene);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {
+        List<Entity> entities = TestConstants.getTestEntities();
         ArrayList<Node> entityViews = new ArrayList<>();
-        for (int i = 0; i < 6; i++)
+        int i = 0;
+        for (Entity entity : entities)
         {
-            Entity entity = new Minion("Harald", 6, 4, 1, 41 + i);
-            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (2)));
+            i++;
+            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (i)));
         }
         HBox hBox = new HBox();
         hBox.setStyle("-fx-background-color: #000000;");
@@ -92,12 +95,7 @@ public class DungeonTop extends Application
     }
     public static void testCardView(Stage primaryStage) throws Exception
     {
-        ArrayList<Card> cards = new ArrayList<>();
-        for (int i = 0; i < 6; i++)
-        {
-            Entity entity = new Minion("Harald", 6, 4, 1, 41 + i);
-            cards.add(new EntityCard(entity, 6, 100, 1 + i, 2));
-        }
+        List<Card> cards = TestConstants.getTestCards();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
@@ -193,6 +191,7 @@ public class DungeonTop extends Application
         Scene scene = new Scene(root);
         getStage().setScene(scene);
     }
+
     public static Stage getStage()
     {
         return stage;

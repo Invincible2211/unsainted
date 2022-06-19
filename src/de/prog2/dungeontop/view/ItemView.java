@@ -15,6 +15,7 @@ public class ItemView
     private Label itemName;
     private Item item;
 
+    //Get- und Setters
     public Label getItemName()
     {
         return itemName;

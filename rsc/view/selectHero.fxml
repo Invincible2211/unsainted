@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@selectHeroStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SelectHeroController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@selectHeroStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SelectHero">
     <children>
         <ImageView fitHeight="1080.0" fitWidth="1920.0" opacity="0.85" pickOnBounds="true">
             <image>
@@ -87,61 +87,21 @@
         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1500.0" layoutY="887.0" mnemonicParsing="false" onMouseClicked="#onConfirmButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Bestätigen" />
         <AnchorPane layoutX="1373.0" layoutY="164.0" prefHeight="526.0" prefWidth="418.0">
             <children>
-                <VBox fx:id="heroText1" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
+                <VBox fx:id="heroText" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
                     <children>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Warrior">
+                        <Text fx:id="heroClass" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
                             <font>
                                 <Font size="35.0" />
                             </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health: 12">
+                        <Text fx:id="heroHealth" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
                             <font>
                                 <Font size="35.0" />
                             </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack: 2">
+                        <Text fx:id="heroAttack" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
                             <font>
                                 <Font size="35.0" />
                             </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent: ">
-                            <font>
-                                <Font size="35.0" />
-                            </font></Text>
-                    </children>
-                </VBox>
-                <VBox fx:id="heroText3" alignment="TOP_CENTER" layoutY="-2.0" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
-                    <children>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Rogue">
-                            <font>
-                                <Font size="35.0" />
-                            </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health : 10">
-                            <font>
-                                <Font size="35.0" />
-                            </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack: 3">
-                            <font>
-                                <Font size="35.0" />
-                            </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent:">
-                            <font>
-                                <Font size="35.0" />
-                            </font></Text>
-                    </children>
-                </VBox>
-                <VBox fx:id="heroText2" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="100.0" visible="false">
-                    <children>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Class: Mage">
-                            <font>
-                                <Font size="35.0" />
-                            </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Health : 8">
-                            <font>
-                                <Font size="35.0" />
-                            </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Attack : 4">
-                            <font>
-                                <Font size="35.0" />
-                            </font></Text>
-                        <Text fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Talent:">
+                        <Text fx:id="heroTalent" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
                             <font>
                                 <Font size="35.0" />
                             </font></Text>

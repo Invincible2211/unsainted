@@ -21,6 +21,7 @@ import java.util.List;
 public abstract class ArenaBaseController
 {
 
+    //TODO the ArenabaseView to replace the parameter in every method as static variable
     /**
      * creates a default arena
      * @param arenaBaseView
@@ -34,6 +35,7 @@ public abstract class ArenaBaseController
        setBackgroundImage(arenaBaseView, AssetIds.ARENA_BG_DEFAULT_ID);
        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ViewStrings.RESOLUTION_X, ViewStrings.RESOLUTION_Y);
        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ViewStrings.RESOLUTION_X, ViewStrings.RESOLUTION_Y);
+
        setPreferredMeasurements(arenaBaseView);
     }
 
@@ -54,7 +56,10 @@ public abstract class ArenaBaseController
     }
 
 
-
+    /**
+     * posssibility to automatically rescale the Arena for different resolutions
+     * @param arenaBaseView
+     */
     private static void setPreferredMeasurements(ArenaBaseView arenaBaseView)
     {
         arenaBaseView.getBorderPaneID().getTop().prefHeight(ViewStrings.HAND_PLAYER_Y);
@@ -66,6 +71,11 @@ public abstract class ArenaBaseController
         arenaBaseView.getBackGroundAnchorPane().autosize();
     }
 
+    /**
+     * sets the background image of the arena
+     * @param arenaBaseView
+     * @param imageID
+     */
     public static void setBackgroundImage(ArenaBaseView arenaBaseView, int imageID)
     {
         Image image = AssetsManager.getImageByAssetId(imageID);
@@ -88,7 +98,6 @@ public abstract class ArenaBaseController
         egoPointsPlayerOneImageView.setFitWidth(ViewStrings.EGOPOINTS_BACKROUND_WIDTH);
         egoPointsPlayerTwoImageView.setFitHeight(ViewStrings.EGOPOINTS_BACKROUND_HEIGHT);
         egoPointsPlayerTwoImageView.setFitWidth(ViewStrings.EGOPOINTS_BACKROUND_WIDTH);
-
     }
 
     //TODO BINDING THIS -> binddirectional maybe
@@ -129,6 +138,12 @@ public abstract class ArenaBaseController
         arenaBaseView.getEgopointsPlayerTwo().setText(String.valueOf(egoPointsTwo));
     }
 
+    /**
+     * Initialisiert das Battlefield als visualisierung der Arena, update duruch UpdateBattlefield
+     * @param arenaBaseView
+     * @param height
+     * @param width
+     */
     private static void initBattlefield(ArenaBaseView arenaBaseView, int height, int width)
     {
         double size = ViewStrings.BATTLEFIELDSIZE_Y / height;
@@ -168,8 +183,10 @@ public abstract class ArenaBaseController
         }
     }
 
-
-    public static StackPane getBattleFieldPane(ArenaBaseView arenaBaseView, int x, int y)
+    /**
+     * hilfmethode um auf einzelne Felder zugreifen zu koennen
+     */
+    private static StackPane getBattleFieldPane(ArenaBaseView arenaBaseView, int x, int y)
     {
         for (Node node : arenaBaseView.getBattlefieldGridPane().getChildren()) {
             //Die Magicnumber -1 entsteht weil die Arena mit 0,0 indiziert und die Gridpane mit 1,1.
@@ -182,6 +199,11 @@ public abstract class ArenaBaseController
         return null;
     }
 
+    /**
+     * Die alternative zu einem Binding der Inhalte der Model-arena zu der View-arena.
+     * @param arenaBaseView
+     * @param arena
+     */
     public static void updateBattlefield (ArenaBaseView arenaBaseView, Arena arena)
     {
         //redraw arena components by deleting them and adding them again
@@ -199,7 +221,5 @@ public abstract class ArenaBaseController
                     .getChildren().add(EntityViewController.getEntityView(arenaComponent.getOccupant(), size));
 
         }
-
     }
-
 }
