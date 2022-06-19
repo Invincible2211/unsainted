@@ -7,6 +7,7 @@ public interface AssetIds {
     int ARENA_ROOM = 7;
     int FORGE_ROOM = 8;
     int LAVA_POND = 9;
+    int BOSS_ROOM = 16;
 
 
     // Statboard Iconsw
@@ -24,9 +25,10 @@ public interface AssetIds {
     int CENTER = 13;
     int PLAYER = 19;
     int COGWHEEL = 15;
-    int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 22;
+
 
     // Card Asset IDs
+    int CARD_BACKGROUND_IMAGE_ID = 50;
     int HP_ICON = 6;
     int ATTACK_ICON = 52;
     int SUMMON_COST_ICON = 53;
@@ -49,4 +51,13 @@ public interface AssetIds {
             default -> RANK6_ICON;
         };
     }
+
+    //Item AssetIds
+    int HEALTH_POTION = 66;
+
+    // Arena Asset IDs
+    int ARENA_BG_DEFAULT_ID = 21;
+    int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 23;
+
+
 }

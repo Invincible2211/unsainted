@@ -3,12 +3,11 @@
 
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.TextField?>
+
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="de.prog2.dungeontop.view.ShopView"
-            prefHeight="1000.0" prefWidth="1600.0"
+            prefHeight="1080.0" prefWidth="1920.0"
             style="-fx-background-color: #222">
     <ScrollPane fitToWidth="true"
                 AnchorPane.leftAnchor="10"

@@ -33,6 +33,7 @@ public class Arena
         return arenaHashmap.get(coordinate);
     }
 
+    @Deprecated
     public boolean isOccupied (Coordinate coordinate)
     {
         return getArenaComponent(coordinate).isOccupied();

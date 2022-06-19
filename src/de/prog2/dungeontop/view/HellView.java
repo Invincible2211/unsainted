@@ -14,6 +14,7 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -125,6 +126,7 @@ public class HellView
     {
         // load the images of all roomtypes we want to show
         Image monsterRoom = AssetsManager.getImageByAssetId(AssetIds.ARENA_ROOM);
+        Image bossRoom = AssetsManager.getImageByAssetId(AssetIds.BOSS_ROOM);
         Image forgeRoom = AssetsManager.getImageByAssetId(AssetIds.FORGE_ROOM);
         Image lavaPondRoom = AssetsManager.getImageByAssetId(AssetIds.LAVA_POND);
         Image randomEventRoom = AssetsManager.getImageByAssetId(AssetIds.RANDOM_EVENT_ROOM);
@@ -136,7 +138,12 @@ public class HellView
             if(room instanceof EmptyRoom)
                 continue;
             if (room instanceof ArenaRoom)
-                currRoomImage = monsterRoom;
+            {
+                if (room == hell.getBossRoom())
+                    currRoomImage = bossRoom;
+                else
+                    currRoomImage = monsterRoom;
+            }
             else if (room instanceof RandomEventRoom)
                 currRoomImage = randomEventRoom;
             else if (room instanceof ForgeRoom)
@@ -300,28 +307,28 @@ public class HellView
 
         // sett the change in a certain direction and move the player on the underlying grid if valid
         switch (key) {
-            case UP:
+            case UP, W:
                 deltaY -= HellViewConstants.PLAYER_MOVESPEED;
                 if (!MovementManager.getInstance().moveTowards(MoveDirection.UP)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
-            case DOWN:
+            case DOWN, S:
                 deltaY += HellViewConstants.PLAYER_MOVESPEED;
                 if (!MovementManager.getInstance().moveTowards(MoveDirection.DOWN)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
-            case LEFT:
+            case LEFT, A:
                 deltaX -= HellViewConstants.PLAYER_MOVESPEED;
                 if (!MovementManager.getInstance().moveTowards(MoveDirection.LEFT)) {
                     unlockIsAnimating();
                     return;
                 }
                 break;
-            case RIGHT:
+            case RIGHT, D:
                 deltaX += HellViewConstants.PLAYER_MOVESPEED;
                 if (!MovementManager.getInstance().moveTowards(MoveDirection.RIGHT)) {
                     unlockIsAnimating();
@@ -400,15 +407,21 @@ public class HellView
         ImageView settingsImage = new ImageView(cogwheel);
 
         // Init settings button
-        settingsImage.setFitHeight(HellViewConstants.SETTINGS_FIT_HEIGHT);
-        settingsImage.setFitWidth(HellViewConstants.SETTINGS_FIT_WIDTH);
-
         Button settings = new Button();
+
+        // set the settings style
+        settings.setBackground(Background.EMPTY);
+        settings.setStyle(HellViewConstants.SETTINGS_STYLE_STRING);
 
         pane.getChildren().add(settings);
         settings.setGraphic(settingsImage);
 
-        settings.setOnMouseClicked(e -> openSettings());
+        settingsImage.setFitWidth(HellViewConstants.SETTINGS_FIT_WIDTH - 2 * HellViewConstants.SETTINGS_PADDING -
+                2 * HellViewConstants.SETTINGS_BORDER_WIDTH);
+        settingsImage.setFitHeight(HellViewConstants.SETTINGS_FIT_HEIGHT - 2 * HellViewConstants.SETTINGS_PADDING -
+                2 * HellViewConstants.SETTINGS_BORDER_WIDTH);
+
+        settings.setOnAction(e -> openSettings());
         settings.setFocusTraversable(HellViewConstants.SETTINGS_FOCUS_TRAVERSABLE);
 
 
@@ -513,7 +526,8 @@ public class HellView
      * Called if the settings button is pressed.
      * Opens a dialogue for the game settings.
      */
-    private void openSettings() {
+    private void openSettings()
+    {
         SettingsController.showSettings();
     }
 

@@ -7,4 +7,9 @@ public class SpellCardView extends CardView
 {
     @FXML
     private ImageView spellImageView;
+
+    public ImageView getSpellImageView()
+    {
+        return spellImageView;
+    }
 }

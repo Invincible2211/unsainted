@@ -3,8 +3,10 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.world.rooms.*;
+import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.RoomDialogueConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -53,6 +55,9 @@ public class RoomDialogueViewController
 
     public record StageVariable(int assetId, String description){};
 
+    /**
+     * Initializes the RoomDialogueStage
+     */
     public static void initStage()
     {
         final FXMLLoader fxmlLoader = new FXMLLoader();
@@ -103,7 +108,7 @@ public class RoomDialogueViewController
                 setDialogueProperties(RoomDialogueConstants.EVENT_ROOM_UPPER_BUTTON,
                         RoomDialogueConstants.EVENT_ROOM_LOWER_BUTTON,
                         dialogueStageAttributes.get(room).description(),dialogueStageAttributes.get(room).assetId());
-                upperButton.setOnAction(e -> openRandomEvent());
+                upperButton.setOnAction(e -> startRandomEvent());
             }
         }
         else if (room instanceof ForgeRoom)
@@ -142,31 +147,51 @@ public class RoomDialogueViewController
         lowerButton.textProperty().setValue(lowerButtonText);
     }
 
+    /**
+     * Hide the DialogueStage.
+     */
     @FXML
     private void hideStage ()
     {
         roomDialogueStage.hide();
     }
 
+    /**
+     * Start the battle for the ArenaRoom.
+     */
     private void startBattle ()
     {
         //TODO: Implement method to start a battle
+        GlobalLogger.log(LoggerStringValues.START_BATTLE_HANDLER);
     }
 
-    private void openRandomEvent ()
+    /**
+     * Execute a random event.
+     */
+    private void startRandomEvent()
     {
         // TODO: Implement method to open a RandomEvent
+        GlobalLogger.log(LoggerStringValues.RANDOM_EVENT_HANDLER);
     }
 
+    /**
+     * Open the ForgeView.
+     */
     private void openForge ()
     {
         // TODO: Implement method to open a ForgeView
+        GlobalLogger.log(LoggerStringValues.OPEN_FORGE_HANDLER);
     }
 
+    /**
+     * Open the LavaPondView.
+     */
     private void openLavaPond ()
     {
         // TODO: Implement method to open a LavaPondView
+        GlobalLogger.log(LoggerStringValues.OPEN_LAVAPOND_HANDLER);
     }
+
     /**
      * Get a pseudo-random Asset-Description-Pair to show in a RoomDialogue.
      *

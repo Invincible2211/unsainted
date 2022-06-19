@@ -33,8 +33,6 @@ public class BattleManager
     {
     }
 
-
-
     /**
      * @param firstPlayer Player or DM who will draw and play first. Decide before Battle
      * @param secondplayer Player or DM will go second
@@ -125,7 +123,12 @@ public class BattleManager
         }
     }
 
-    //TODO Event handlen und aufrufen welches das outcome handled und Spieler Belohnt oder run beendet.
+    /**
+     *
+     * @param gewinner
+     * @param damageAnVerlierer
+     * @return
+     */
     private BattleOutCome endBattle (Player gewinner, int damageAnVerlierer)
     {
         GlobalLogger.log(LoggerStringValues.BATTLE_HAS_ENDED);
@@ -140,11 +143,11 @@ public class BattleManager
     }
 
     /**
-     * Places card on Arena tile,
+     * Places card on Arena tile, then updates it on the View.
      * @param duellist who controlls the card
      * @param coordinate where to place new minion
      */
-    public void placeEntity (Duellist duellist, Coordinate coordinate, EntityCard entityCard)
+    public void placeEntity (Duellist duellist, Coordinate coordinate, EntityCard entityCard, ArenaBaseView arenaBaseView)
     {
         if (entityCard.getPrice() <= duellist.getCurrentEgoPoints())
         {
@@ -154,7 +157,12 @@ public class BattleManager
             {
                 duellist.tryReduceEgoPoints();
             }
-            duellist.removeCardFromHand(entityCard);
+
+            if (EntityCardController.tryInstantiate(entityCard, arena, coordinate))
+            {
+                duellist.removeCardFromHand(entityCard);
+                ArenaBaseController.updateBattlefield(arenaBaseView, arena);
+            }
             GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
         } else {
             GlobalLogger.warning(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);

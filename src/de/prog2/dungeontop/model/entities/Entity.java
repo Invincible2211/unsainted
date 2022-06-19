@@ -3,7 +3,6 @@ package de.prog2.dungeontop.model.entities;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
-import de.prog2.dungeontop.model.world.arena.Arena;
 
 public abstract class Entity
 {
@@ -14,6 +13,7 @@ public abstract class Entity
     private int attackDamage = 0;
     private int movement = 0;
     private int assetId;
+    private String talent;
     private Coordinate position;
     private boolean canMove = false;
     private Player owner = null;
@@ -34,12 +34,12 @@ public abstract class Entity
         this.position = position;
         this.canMove = canMove;
     }
-
-    @Deprecated
-    //TEST
-    public Entity(Card card, Player owner, int rank, Coordinate coordinate)
+    public Entity(String name, int hp, int attackDamage, String talent)
     {
-
+        this.name = name;
+        this.hp = hp;
+        this.attackDamage = attackDamage;
+        this.talent = talent;
     }
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
@@ -131,5 +131,10 @@ public abstract class Entity
     public void setAssetId(int assetId)
     {
         this.assetId = assetId;
+    }
+
+    public String getTalent()
+    {
+        return talent;
     }
 }

@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+
 
 public class ArenaBaseView
 {
@@ -36,11 +36,49 @@ public class ArenaBaseView
     @FXML
     private Label egopointsPlayerTwo;
 
+    @FXML
+    private ImageView egopointsPlayerOneImageView;
+
+    @FXML
+    private ImageView egopointsPlayerTwoImageView;
+
+    @FXML
+    private AnchorPane backGroundAnchorPane;
+
+    @FXML
+    private StackPane backGroundStackPane;
+
+    @FXML BorderPane borderPaneID;
+
+    @FXML
+    private VBox vBoxEnemyAreaContainer;
+
     //hier laesst sich drueber streiten ob nicht eigentlich erst ueber den Controller der aufruf am Battlemanager stattfinden sollte.
     @FXML
     private void endTurn(){BattleManager.getInstance().endAPhase();}
 
     //----------------------- Getter ------------------//
+
+
+    public VBox getvBoxEnemyAreaContainer ()
+    {
+        return vBoxEnemyAreaContainer;
+    }
+
+    public BorderPane getBorderPaneID ()
+    {
+        return borderPaneID;
+    }
+
+    public StackPane getBackGroundStackPane ()
+    {
+        return backGroundStackPane;
+    }
+
+    public AnchorPane getBackGroundAnchorPane ()
+    {
+        return backGroundAnchorPane;
+    }
 
     public GridPane getBattlefieldGridPane ()
     {
@@ -80,5 +118,15 @@ public class ArenaBaseView
     public Label getEgopointsPlayerTwo ()
     {
         return egopointsPlayerTwo;
+    }
+
+    public ImageView getEgopointsPlayerOneImageView ()
+    {
+        return egopointsPlayerOneImageView;
+    }
+
+    public ImageView getEgopointsPlayerTwoImageView ()
+    {
+        return egopointsPlayerTwoImageView;
     }
 }

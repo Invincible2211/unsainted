@@ -105,13 +105,25 @@ public class Hell
                                 //res.append(HellToStringValues.ROOM_CENTER);
                                 Room currRoom = getRoomByCoordinate(currCoordinate);
                                 if (currRoom instanceof ArenaRoom)
-                                    res.append(" A ");
+                                {
+                                    if (currRoom == this.getBossRoom())
+                                        res.append(HellToStringValues.BOSS_ROOM);
+                                    else
+                                        res.append(HellToStringValues.ARENA_ROOM);
+                                }
                                 if (currRoom instanceof EmptyRoom)
                                     res.append(HellToStringValues.ROOM_CENTER);
                                 if (currRoom instanceof NPCRoom)
-                                    res.append(" N ");
+                                {
+                                    if (currRoom instanceof ForgeRoom)
+                                        res.append(HellToStringValues.FORGE_ROOM);
+                                    else if (currRoom instanceof LavaPondRoom)
+                                        res.append(HellToStringValues.LAVAPOND_ROOM);
+                                    else
+                                        res.append(HellToStringValues.NPC_ROOM);
+                                }
                                 if (currRoom instanceof RandomEventRoom)
-                                    res.append(" R ");
+                                    res.append(HellToStringValues.RANDOM_EVENT_ROOM);
 
                                 res.append(RoomController.hasRightRoom(
                                         this.getRoomByCoordinate(currCoordinate)) ?
