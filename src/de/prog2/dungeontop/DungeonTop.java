@@ -119,7 +119,7 @@ public class DungeonTop extends Application
         HellGenerator.initHell(hell2);
         Scene hellView2 = view.initHellView(hell2);
 
-        System.out.println(hell);
+        System.out.println(hell2);
 
         stage.setScene(scene);
 
