@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3e9990b3-d3d8-464c-8b4a-5ddb4f8b2318" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rsc/config/consolecolors.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rsc/lang/exceptionmessages.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rsc/lang/messages.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/DungeonTop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/ApplicationConsole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/DungeonScheduler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/MapGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/controller/DeckController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/controller/EntityCardController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/controller/EntityController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/controller/HellController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/controller/NpcController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/controller/RoomController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/controller/SpellCardController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/file/AssetsFileReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/file/CardReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/file/ConfigurationFileReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/file/GameSaveFileReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/file/GameSaveFileWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/manager/AssetsManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/manager/AudioManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/manager/BattleManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/manager/CardManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/manager/GameManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/manager/MovementManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/manager/PlayerManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/manager/ShopManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/control/userinput/KeyHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/entities/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/entities/Hero.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/entities/Minion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/CustomException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/customexceptions/CardAlreadyMaxRankException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/customexceptions/CardAlreadyUnlockedException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/customexceptions/CardNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/customexceptions/ItemNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/customexceptions/NotAValidRoomtypeException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/customexceptions/NotEnoughSoulsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/customexceptions/NotValidRngRollException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/exceptions/customexceptions/SpotAlreadyOccupiedException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/BattleOutCome.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/Deck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/DungeonMaster.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/EntityCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/GameState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/MoveDirection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/game/SpellCard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/items/Artifact.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/items/Inventory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/items/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/items/Valuable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/items/Weapon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/perks/Perk.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/savegame/GameSaveData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/savegame/PlayerSaveData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/skills/ActiveSkill.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/skills/ManaPool.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/skills/PassiveSkill.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/skills/Skill.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/skills/TestActiveSkill.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/skills/TestPassiveSkill.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/spells/Spell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/spells/TestSpell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/talents/Talent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/talents/TestTalent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/Coordinate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/Hell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/World.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/actions/Action.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/actions/DefaultAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/actions/OpenArenaAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/arena/Arena.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/arena/ArenaComponent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/hellComponents/HellComponent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/hellComponents/Passage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/hellComponents/RoomCenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/hellComponents/Rotation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/hellComponents/Wall.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/hellComponents/WallCorner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/rooms/ArenaRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/rooms/EmptyRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/rooms/ForgeRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/rooms/LavaPondRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/rooms/NPCRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/rooms/RandomEventRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/model/world/rooms/Room.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/ActiveSkillValues.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/ColorKeys.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/DefaultValuesFallback.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/ExceptionMessagesKeys.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/FilePaths.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/HellToStringValues.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/LoggerStringValues.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/PassiveSkillValues.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/RotationAngles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/SpellValues.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/StringValues.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/resources/WorldConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/utils/CoordinateDirections.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/utils/CoordinateUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/utils/GlobalLogger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/de/prog2/dungeontop/utils/MinionHandler.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="29J4qEsXVsvrXl1CIx26K4mqm8N" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/SoNotOkay/IdeaProjects/dungeontop"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e9990b3-d3d8-464c-8b4a-5ddb4f8b2318" name="Changes" comment="" />
+      <created>1652818042318</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652818042318</updated>
+    </task>
+    <servers />
+  </component>
+</project>
