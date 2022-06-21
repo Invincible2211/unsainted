@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'de.prog2.dungeontop'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'io.github.kostaskougios:cloning:1.10.3'
+}
