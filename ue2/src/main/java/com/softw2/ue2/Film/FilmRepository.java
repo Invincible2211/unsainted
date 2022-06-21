@@ -1,0 +1,8 @@
+package com.softw2.ue2.Film;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FilmRepository extends JpaRepository<Film, Integer>
+{
+
+}
