@@ -44,4 +44,12 @@ public class Coordinate
     {
         return this.hashCode;
     }
+
+    @Override
+    public String toString()
+    {
+        String res = new String();
+        res = "X: " + this.getX() + ", Y: " + this.getY();
+        return res;
+    }
 }

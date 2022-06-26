@@ -131,14 +131,15 @@ public abstract class CardViewController
 
     public static void mouseEntered (CardView cardView)
     {
-        cardView.setAnchorScale(ViewStrings.CARD_HEIGHT * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
-        cardView.setHeight(ViewStrings.CARD_HEIGHT * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
-        cardView.setWidth(ViewStrings.CARD_WIDTH * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+//        cardView.setAnchorScale(ViewStrings.CARD_HEIGHT * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+//        cardView.setHeight(ViewStrings.CARD_HEIGHT * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+//        cardView.setWidth(ViewStrings.CARD_WIDTH * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
     }
+
     public static void mouseExited (CardView cardView)
     {
-        cardView.setHeight(ViewStrings.CARD_HEIGHT * instantiatedScalee);
-        cardView.setWidth(ViewStrings.CARD_WIDTH * instantiatedScalee);
+//        cardView.setHeight(ViewStrings.CARD_HEIGHT * instantiatedScalee);
+//        cardView.setWidth(ViewStrings.CARD_WIDTH * instantiatedScalee);
     }
 
     public static void setZoomable(boolean shouldThisBeZoomable)

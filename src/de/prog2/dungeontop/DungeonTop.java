@@ -166,7 +166,9 @@ public class DungeonTop extends Application
         scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         getStage().setScene(scene);
         harald.setPosition(new Coordinate(1, 1));
+        harald.setOwner(player1);
         BattleManager.getInstance().getArena().getArenaHashmap().put(new Coordinate(1, 1),new ArenaComponent(harald));
+        //somethign wrong with this
         ArenaBaseController.updateBattlefield(fxmlLoader.getController(), BattleManager.getInstance().getArena());
     }
 

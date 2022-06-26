@@ -176,4 +176,15 @@ public interface LoggerStringValues {
     String ADDING_CELL_TO_VIEW_BATTLFIELD = "Adding battlefield cell to gridpane";
     String GOT_NODE_ON_BATTLEFIELD = "got node on battlefield";
     String REMOVING_CELL_FROM_VIEW_BATTLFIELD = "removed everything on a stackpanenode on the battlefield";
+    String ARENA_TILE_HAS_BEEN_CLICKED = "ClickEvent detected";
+    String ARENA_TILE_PRESSED_MESSAGE = "Mouse Pressed event on tile detected";
+    String ARENA_TILE_RELEASED_MESSAGE = "Mouse released event on tile detected";
+    String ARENA_TILE_UNHANDLEDEVENT = "TileEventHandler detected event that is not handled, yet.";
+    String CURRENT_ACTIVE_PLAYER_ONE = "Player One is currently active";
+    String CURRENT_ACTIVE_PLAYER_TWO = "Player Two is currently active";
+    String NOT_YOUR_UNIT = "This is not your unit!";
+    String NO_UNIT_SELECTED = "No unit selected!";
+    String THERE_IS_NO_UNIT_HERE = "There is no unit here!";
+    String UNIT_ALREADY_SELECTED = "A unit is already selected while trying to select another one";
+    String NO_UNIT_ON_TILE = "There is no unit on this tile!";
 }
