@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,10 +22,7 @@ public class MainMenueController {
     @FXML
     private void onGameStartButtonPressed() throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SELECT_HERO_FXML));
-        Scene scene = new Scene(root);
-        DungeonTop.getStage().setScene(scene);
+        GameManager.getInstance().startGame();
     }
 
     /**

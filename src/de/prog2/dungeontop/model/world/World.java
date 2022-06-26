@@ -5,6 +5,8 @@ import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.utils.HellGenerator;
+import de.prog2.dungeontop.view.HellView;
+import javafx.scene.Scene;
 
 import java.util.HashMap;
 
@@ -41,6 +43,8 @@ public class World
     {
         this.generateLevels();
         PlayerManager.getInstance().getPlayer().setCurrentRoom(getCurrentHell().getStartingRoom());
+        HellView view = new HellView();
+        HellView.setCurrHellView(view.initHellView(getCurrentHell()));
     }
 
     /**
@@ -59,6 +63,8 @@ public class World
     {
         currentHell++;
         PlayerManager.getInstance().getPlayer().setCurrentRoom(getCurrentHell().getStartingRoom());
+        HellView view = new HellView();
+        HellView.setCurrHellView(view.initHellView(getCurrentHell()));
         return getCurrentHell();
     }
 }
