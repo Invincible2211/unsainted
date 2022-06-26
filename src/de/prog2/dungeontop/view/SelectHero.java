@@ -3,6 +3,7 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.entities.Hero;
+import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ public class SelectHero
     private Hero hero1 = new Hero("Warrior", 12, 2, "Sturdy");
     private Hero hero2 = new Hero("Mage", 8, 4, "Intelligent");
     private Hero hero3 = new Hero("Rogue", 10, 3, "Sneaky");
+    private Player player;
 
     @FXML
     private VBox heroText;
@@ -45,6 +47,7 @@ public class SelectHero
         selectHeroFillText(hero1);
         hero = hero1;
         heroText.setVisible(true);
+        player.setHero(hero);
     }
 
     @FXML
@@ -54,6 +57,7 @@ public class SelectHero
         selectHeroFillText(hero2);
         hero = hero2;
         heroText.setVisible(true);
+        player.setHero(hero);
     }
 
     @FXML
@@ -63,6 +67,7 @@ public class SelectHero
         selectHeroFillText(hero3);
         hero = hero3;
         heroText.setVisible(true);
+        player.setHero(hero);
     }
 
     /**

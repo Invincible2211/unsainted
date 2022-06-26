@@ -35,7 +35,7 @@ public class ItemViewController
     }
 
     /**
-     * Add cards to the shop view.
+     * Add item to the itemview.
      * @param controller an instance of ItemView, the controller of itemView.fxml
      *
      */
