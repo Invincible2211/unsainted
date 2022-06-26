@@ -28,7 +28,7 @@ public class BattleManager
 
     public static BattleManager getInstance ()
     {
-        GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_GET);
+//        GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_GET);
         return instance;
     }
 

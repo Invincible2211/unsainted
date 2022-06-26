@@ -71,6 +71,7 @@ public class Arena
     {
         for (ArenaComponent arenaComponent : arenaHashmap.values()) {
             if (arenaComponent.getOccupant().isSelected()) {
+                GlobalLogger.log(LoggerStringValues.SELECTED_UNIT_FOUND + arenaComponent.getOccupant().getName());
                 return arenaComponent.getOccupant();
             }
         }

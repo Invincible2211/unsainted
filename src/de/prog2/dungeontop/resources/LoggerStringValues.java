@@ -187,4 +187,5 @@ public interface LoggerStringValues {
     String THERE_IS_NO_UNIT_HERE = "There is no unit here!";
     String UNIT_ALREADY_SELECTED = "A unit is already selected while trying to select another one";
     String NO_UNIT_ON_TILE = "There is no unit on this tile!";
+    String SELECTED_UNIT_FOUND = "Selected unit found!";
 }
