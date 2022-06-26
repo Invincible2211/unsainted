@@ -10,10 +10,17 @@ public class ArenaRoom extends Room
 {
     private final Arena arena;
     private boolean isAlive = true;
+    private boolean isBoss = false;
     public ArenaRoom(Arena arena)
     {
         super(new OpenArenaAction());
         this.arena = arena;
+    }
+
+    public ArenaRoom (Arena arena, boolean isBoss)
+    {
+        this(arena);
+        this.isBoss = isBoss;
     }
 
     public Arena getArena()
@@ -29,5 +36,15 @@ public class ArenaRoom extends Room
     public void setAlive(boolean alive)
     {
         isAlive = alive;
+    }
+
+    public void setIsBoss (boolean isBoss)
+    {
+        this.isBoss = isBoss;
+    }
+
+    public boolean isBoss ()
+    {
+        return this.isBoss;
     }
 }

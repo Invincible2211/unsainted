@@ -14,7 +14,7 @@ public class Player
     private final SimpleIntegerProperty hpProperty;
     private int ego_points;
     private Deck deck;
-    private Inventory inventory;
+    private final Inventory inventory = new Inventory();
     private Room currentRoom;
     private int handCardLimit;
 
@@ -98,10 +98,13 @@ public class Player
         return inventory;
     }
 
+    /*
     public void setInventory(Inventory inventory)
     {
         this.inventory = inventory;
     }
+     */
+
     public int getHandCardLimit ()
     {
         return handCardLimit;
