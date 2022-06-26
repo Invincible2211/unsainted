@@ -1,9 +1,11 @@
 package de.prog2.dungeontop.control.network;
 
 import java.io.*;
-import java.net.ConnectException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TCPTunnel extends Thread{
     private InputStream inputStream;
@@ -19,21 +21,49 @@ public class TCPTunnel extends Thread{
         this.remoteHost = remoteHost;
         this.remotePort = remotePort;
         this.localPort = localPort;
-        this.start();
     }
 
     @Override
     public void run() {
         try
         {
+            Socket socket = new Socket();
+            System.out.println("Created socket");
+            socket.bind(new InetSocketAddress(12345));
+            System.out.println("Bind Socket");
+            socket.connect(new InetSocketAddress(remoteHost,12345));
+            System.out.println("Connected Socket");
+            /*
             TCPHole tcpHole = new TCPHole();
             tcpHole.start();
-            System.out.println("Listening on local Port "+localPort);
             serverSocket = new ServerSocket(localPort);
+            System.out.println("Listening on local Port "+localPort);
             Socket clientConnection = serverSocket.accept();
             System.out.println("Accepted Connection");
             inputStream = clientConnection.getInputStream();
             outputStream = clientConnection.getOutputStream();
+             */
+            inputStream = socket.getInputStream();
+            outputStream = socket.getOutputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            PrintStream printStream = new PrintStream(outputStream);
+            Timer timer = new Timer();
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    System.out.println(123);
+                    printStream.println("PING");
+                    System.out.println(234);
+                }
+            };
+            timer.scheduleAtFixedRate(timerTask, 0L,1000L);
+            while (true){
+                try {
+                    System.out.println(reader.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         catch(Exception e)
         {
@@ -47,21 +77,23 @@ public class TCPTunnel extends Thread{
         @Override
         public void run() {
             try {
-                System.out.println("Create RemoteSocket to "+ remoteHost +" : "+ remotePort);
                 remote = new Socket(remoteHost,remotePort);
+                System.out.println("Create RemoteSocket to "+ remoteHost +" : "+ remotePort);
                 PrintStream printStream = new PrintStream(remote.getOutputStream());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(remote.getInputStream()));
-                while (true){
-                    printStream.println("PING");
-                    String line = reader.readLine();
-                    while (line!=null){
-                        System.out.println(line);
-                        line = reader.readLine();
+                if (remote!=null){
+                    while (true){
+                        printStream.println("PING");
+                        String line = reader.readLine();
+                        while (line!=null){
+                            System.out.println(line);
+                            line = reader.readLine();
+                        }
+                        sleep(1000);
                     }
-                    sleep(1000);
                 }
             } catch (IOException | InterruptedException e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }

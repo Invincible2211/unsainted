@@ -15,7 +15,8 @@ public class LobbyController {
 
     @FXML
     private void onOnlinebuttonAction(){
-        new de.prog2.dungeontop.control.network.LobbyController(partnerIP.getText());
+        de.prog2.dungeontop.control.network.LobbyController controller = new de.prog2.dungeontop.control.network.LobbyController(partnerIP.getText());
+        controller.run();
     }
 
     @FXML
