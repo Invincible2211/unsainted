@@ -1,8 +1,6 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.resources.NetworkData;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 
 import java.io.*;
 
@@ -12,7 +10,6 @@ public class LobbyController extends Thread{
 
     public LobbyController(String partnerIP){
         this.partnerIP = partnerIP;
-        this.run();
     }
 
     //private final MySQLConnector sqlConnector = new MySQLConnector();
@@ -49,6 +46,7 @@ public class LobbyController extends Thread{
         progressBar.setProgress(0.6);
          **/
         TCPTunnel tcpTunnel = new TCPTunnel(NetworkData.DEFAULT_PORT, partnerIP, NetworkData.DEFAULT_PORT);
+        tcpTunnel.start();
         while (tcpTunnel.getInputStream()==null){
             try {
                 sleep(1000);
