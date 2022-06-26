@@ -7,26 +7,39 @@ import de.prog2.dungeontop.model.world.Coordinate;
 public abstract class Entity
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
-    private final Card card;
+    private Card card;
+    private String name;
     private int hp = 0;
     private int attackDamage = 0;
     private int movement = 0;
+    private int assetId;
+    private String talent;
     private Coordinate position;
-    private int movesLeftOver = 0, maxMoves = 0;
-    private int attackRange = 0;
+    private boolean canMove = false;
     private Player owner = null;
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner)
+    public Entity(String name, int hp, int attackDamage, int movement, int assetId, Player owner)
     {
-        this.card = card;
+        this.name = name;
         this.hp = hp;
         this.attackDamage = attackDamage;
         this.movement = movement;
-        this.maxMoves = maxMoves;
-        this.movesLeftOver = maxMoves;
-        this.attackRange = attackRange;
+        this.assetId = assetId;
         this.owner = owner;
+    }
+    public Entity(String name, int hp, int attackDamage, int movement, int assetId, Coordinate position, boolean canMove, Player owner)
+    {
+        this(name, hp, attackDamage, movement, assetId, owner);
+        this.position = position;
+        this.canMove = canMove;
+    }
+    public Entity(String name, int hp, int attackDamage, String talent)
+    {
+        this.name = name;
+        this.hp = hp;
+        this.attackDamage = attackDamage;
+        this.talent = talent;
     }
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
@@ -70,35 +83,6 @@ public abstract class Entity
         this.position = position;
     }
 
-    public int getMaxMoves()
-    {
-        return maxMoves;
-    }
-
-    public void setMaxMoves(int maxMoves)
-    {
-        this.maxMoves = maxMoves;
-    }
-
-    public int getMovesLeftOver()
-    {
-        return movesLeftOver;
-    }
-    public void setMovesLeftOver(int movesLeftOver)
-    {
-        this.movesLeftOver = movesLeftOver;
-    }
-
-    public int getAttackRange()
-    {
-        return attackRange;
-    }
-
-    public void setAttackRange(int attackRange)
-    {
-        this.attackRange = attackRange;
-    }
-
     public Player getOwner()
     {
         return owner;
@@ -112,5 +96,45 @@ public abstract class Entity
     public Card getCard()
     {
         return card;
+    }
+
+    public void setCard (Card card)
+    {
+        this.card = card;
+    }
+
+    public boolean canMove()
+    {
+        return canMove;
+    }
+
+    public void setCanMove(boolean canMove)
+    {
+        this.canMove = canMove;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public int getAssetId()
+    {
+        return assetId;
+    }
+
+    public void setAssetId(int assetId)
+    {
+        this.assetId = assetId;
+    }
+
+    public String getTalent()
+    {
+        return talent;
     }
 }

@@ -1,17 +1,16 @@
 package de.prog2.dungeontop.control.manager;
 
-import de.prog2.dungeontop.control.controller.EntityController;
+import de.prog2.dungeontop.control.controller.*;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.perks.Perk;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.ArenaBaseView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class BattleManager
@@ -24,7 +23,7 @@ public class BattleManager
     //BattleManager ist ein Singleton.
     private final static BattleManager instance = new BattleManager();
 
-    public BattleManager getInstance ()
+    public static BattleManager getInstance ()
     {
         GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_GET);
         return instance;
@@ -34,20 +33,37 @@ public class BattleManager
     {
     }
 
-
     /**
      * @param firstPlayer Player or DM who will draw and play first. Decide before Battle
      * @param secondplayer Player or DM will go second
      * @param firstplyerDeck COPY playerDeck or the DMHerodeck, depending who is who.
      * @param secondplayerDeck COPY playerDeck or the DMHerodeck, depending who is who
      * @param arena The instance of the Arena
+     * @param arenaBaseView the View that it will draw on
      */
-    public void startBattle(Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena)
+    public void startBattle(Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena, ArenaBaseView arenaBaseView)
     {
         this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck);
         this.secondDuellist = new Duellist(secondplayer,secondplayerDeck);
         this.arena = arena;
+        statinitialiser(arenaBaseView);
+    }
 
+    /**
+     * @param arenaBaseView the View that it will draw on
+     */
+    private void statinitialiser(ArenaBaseView arenaBaseView)
+    {
+        ArenaBaseController.init(arenaBaseView);
+        this.getFirstDuellist().drawNewDuellistHand();
+        this.getSecondDuellist().drawNewDuellistHand();
+        ArenaBaseController.updatePlayerHands(arenaBaseView,
+                this.getFirstDuellist().getHand(),
+                this.getSecondDuellist().getHand());
+        this.currentPhase = BattlePhase.START;
+        ArenaBaseController.updateEgoPoints(arenaBaseView,
+                this.getFirstDuellist().currentEgoPoints,
+                this.getSecondDuellist().getCurrentEgoPoints());
     }
 
     public BattlePhase getNextPhaseInCycle ()
@@ -107,7 +123,12 @@ public class BattleManager
         }
     }
 
-    //TODO Event handlen und aufrufen welches das outcome handled und Spieler Belohnt oder run beendet.
+    /**
+     *
+     * @param gewinner
+     * @param damageAnVerlierer
+     * @return
+     */
     private BattleOutCome endBattle (Player gewinner, int damageAnVerlierer)
     {
         GlobalLogger.log(LoggerStringValues.BATTLE_HAS_ENDED);
@@ -115,40 +136,44 @@ public class BattleManager
         return new BattleOutCome(gewinner, damageAnVerlierer);
     }
 
+    public void endAPhase ()
+    {
+        setCurrentPhase(getNextPhaseInCycle());
+        GlobalLogger.log(LoggerStringValues.CURRENTPHASE_IS_NOW + getCurrentPhase());
+    }
+
     /**
-     * Places card on Arena tile,
+     * Places card on Arena tile, then updates it on the View.
      * @param duellist who controlls the card
      * @param coordinate where to place new minion
      */
-    private void placeCard (Duellist duellist, Coordinate coordinate, Card card)
+    public void placeEntity (Duellist duellist, Coordinate coordinate, EntityCard entityCard, ArenaBaseView arenaBaseView)
     {
+        if (entityCard.getPrice() <= duellist.getCurrentEgoPoints())
+        {
+            EntityCardController.tryInstantiate(entityCard, arena, coordinate);
+            //Reduce egopoints by one for each cost of card
+            for (int cost = 0; cost < entityCard.getPrice(); cost++)
+            {
+                duellist.tryReduceEgoPoints();
+            }
 
-        //remove from hand
-        //put in list of units who cant move
-        //put in list of units who cant attack
+            if (EntityCardController.tryInstantiate(entityCard, arena, coordinate))
+            {
+                duellist.removeCardFromHand(entityCard);
+                ArenaBaseController.updateBattlefield(arenaBaseView, arena);
+            }
+            GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
+        } else {
+            GlobalLogger.warning(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
+        }
     }
 
-
-
-    private void attack (Player owner, Entity attacker, Entity attacked)
+    private void attack (Entity attacker, Entity attacked)
     {
-
+        this.arena = EntityController.attack(attacker, attacked.getPosition(), this.arena);
     }
 
-    private void updateStats (Entity[] aliveMinions)
-    {
-
-    }
-
-    private void updatePerks (Entity[] aliveMinions)
-    {
-
-    }
-
-    private void updateBattlefield ()
-    {
-
-    }
 
     private void moveUnit (Entity mover, MoveDirection direction)
     {
@@ -191,6 +216,21 @@ public class BattleManager
     {
         this.currentPhase = currentPhase;
     }
+
+    public Arena getArena ()
+    {
+        return arena;
+    }
+
+    public Duellist getFirstDuellist ()
+    {
+        return firstDuellist;
+    }
+
+    public Duellist getSecondDuellist ()
+    {
+        return secondDuellist;
+    }
     /*--------------------Hilfsklassen und ControllerMethodik------------------------*/
 
 
@@ -204,7 +244,7 @@ public class BattleManager
         private Player player = null;
         private Deck deck = null;
         private Deck discardPile = new Deck();
-        private List<Perk> activePerks = new ArrayList<>();
+
         private List<Card> hand = new ArrayList<>();
         private int handLimit = 0;
         private int currentEgoPoints = 0;
@@ -215,10 +255,11 @@ public class BattleManager
             this.player = player;
             this.deck = deck;
             this.discardPile = new Deck();
-            this.activePerks = new ArrayList<Perk>();
+
             this.handLimit = player.getHandCardLimit();
             this.currentEgoPoints = player.getEgo_points();
             this.egoPointsMax = player.getEgo_points();
+            this.drawNewDuellistHand();
 
         }
 
@@ -231,10 +272,10 @@ public class BattleManager
             if (getDeck().getCards().size() < handLimit)
             {
                 reStackDeckFromDiscard();
-                Collections.shuffle(getDeck().getCards());
+                DeckController.shuffleDeck(getDeck());
             }
             getHand().clear();
-            Collections.shuffle(getDeck().getCards());
+            DeckController.shuffleDeck(getDeck());
             for (int i = 0; i < handLimit; i++) {
                 Card drawedCard = deck.popCard();
                 hand.add(drawedCard);
@@ -249,6 +290,7 @@ public class BattleManager
             GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
         }
 
+        //technically not a try as it is not a boolean
         private void tryReduceEgoPoints()
         {
             if (currentEgoPoints > 0){
@@ -272,9 +314,18 @@ public class BattleManager
             for (Card card : getDiscardPile().getCards()) {
                 getDeck().getCards().push(card);
             }
-            Collections.shuffle(getDeck().getCards());
+            DeckController.shuffleDeck(getDeck());
         }
 
+        public int getCurrentEgoPoints ()
+        {
+            return currentEgoPoints;
+        }
+
+        public void setCurrentEgoPoints (int currentEgoPoints)
+        {
+            this.currentEgoPoints = currentEgoPoints;
+        }
 
         public List<Card> getHand ()
         {
@@ -316,14 +367,5 @@ public class BattleManager
             this.discardPile = discardPile;
         }
 
-        public List<Perk> getActivePerks ()
-        {
-            return activePerks;
-        }
-
-        public void setActivePerks (List<Perk> activePerks)
-        {
-            this.activePerks = activePerks;
-        }
     }
 }

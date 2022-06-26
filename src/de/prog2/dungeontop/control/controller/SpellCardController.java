@@ -8,6 +8,13 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 
 public class SpellCardController
 {
+    /**
+     *  Instantiate a new spell stored in the card
+     * @param card the card that stores the spell
+     * @param arena the arena where the spell is cast
+     * @param coordinate the position of the spell in the arena
+     * @return always true
+     */
     public static boolean tryInstantiate(SpellCard card, Arena arena, Coordinate coordinate)
     {
         Cloner cloner = new Cloner();

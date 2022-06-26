@@ -2,25 +2,30 @@ package de.prog2.dungeontop.model.game;
 
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.world.rooms.Room;
+import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Player
 {
-    private int souls;
+    private final SimpleIntegerProperty soulsProperty;
+    private final SimpleIntegerProperty hpProperty;
     private int ego_points;
     private Deck deck;
-    private Inventory inventory;
+    private final Inventory inventory = new Inventory();
     private Room currentRoom;
     private int handCardLimit;
 
     public Player (){
-        this.souls = 0;
+        this.soulsProperty = new SimpleIntegerProperty(0);
+        this.hpProperty = new SimpleIntegerProperty(GameConstants.DEFAULT_PLAYER_MAX_HP);
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
     }
-    public Player (int souls){
-        this.souls = souls;
+    public Player (int souls, int healthPoints){
+        this.hpProperty = new SimpleIntegerProperty(healthPoints);
+        this.soulsProperty = new SimpleIntegerProperty(souls);
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
     }
 
@@ -30,11 +35,34 @@ public class Player
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getSouls(){
         GlobalLogger.log(LoggerStringValues.PLAYERSOULS_GET);
-        return this.souls;
+        return this.soulsProperty.get();
     }
     public void setSouls(int souls){
         GlobalLogger.log(LoggerStringValues.PLAYERSOULS_SET + souls + LoggerStringValues.SET);
-        this.souls = souls;
+        this.soulsProperty.set(souls);
+    }
+
+    public SimpleIntegerProperty getSoulsProperty() {
+        GlobalLogger.log(LoggerStringValues.PLAYERSOULS_PROPERTY_GET);
+        return this.soulsProperty;
+    }
+
+    public int getHp ()
+    {
+        GlobalLogger.log(LoggerStringValues.PLAYERHP_GET);
+        return this.hpProperty.get();
+    }
+
+    public void setHp(int healthPoints)
+    {
+        GlobalLogger.log(LoggerStringValues.PLAYERHP_SET + healthPoints + LoggerStringValues.SET);
+        this.hpProperty.set(healthPoints);
+    }
+
+    public SimpleIntegerProperty getHpProperty ()
+    {
+        GlobalLogger.log(LoggerStringValues.PLAYERHP_PROPERTY_GET);
+        return this.hpProperty;
     }
 
     public Room getCurrentRoom()
@@ -70,10 +98,13 @@ public class Player
         return inventory;
     }
 
+    /*
     public void setInventory(Inventory inventory)
     {
         this.inventory = inventory;
     }
+     */
+
     public int getHandCardLimit ()
     {
         return handCardLimit;

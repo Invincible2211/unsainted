@@ -209,7 +209,7 @@ public class RoomController
 
         for (Room neighbor : neighbors)
         {
-            if (room instanceof NPCRoom)
+            if (neighbor instanceof NPCRoom)
             {
                 GlobalLogger.log(LoggerStringValues.NEIGHBOR_CONTAINS_NPC);
                 return true;

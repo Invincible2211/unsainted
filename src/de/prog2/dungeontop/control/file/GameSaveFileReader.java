@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.control.file;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.prog2.dungeontop.model.savegame.GameSaveData;
 import de.prog2.dungeontop.model.savegame.PlayerSaveData;
@@ -11,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+@Deprecated
 public class GameSaveFileReader {
 
     private final static GameSaveFileReader instance = new GameSaveFileReader();
@@ -40,7 +40,6 @@ public class GameSaveFileReader {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        //TODO json -> GamesaveData + PlayerSaveData
     }
 
     public static GameSaveFileReader getInstance() {

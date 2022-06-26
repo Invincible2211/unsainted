@@ -9,7 +9,7 @@
 /.idea
 /gradlew
 /gradlew.bat
-/gradle
+/.gradle
 
 # Compiled class file
 *.class
@@ -74,3 +74,9 @@ gradle/wrapper/gradle-wrapper.properties
 gradlew
 
 build/tmp/compileJava/previous-compilation-data.bin
+
+build/resources/main/lang/exceptionmessages.properties
+
+build/resources/main/lang/messages.properties
+
+src/de/prog2/dungeontop/resources/ViewStrings.java

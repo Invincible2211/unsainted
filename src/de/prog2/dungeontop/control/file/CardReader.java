@@ -14,39 +14,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CardReader {
+public class CardReader
+{
+
+    /*----------------------------------------------ATTRIBUTE---------------------------------------------------------*/
 
     private final List<Card> cards = new ArrayList<>();
 
     private final static CardReader instance = new CardReader();
 
+    /*--------------------------------------------KONSTRUKTOREN-------------------------------------------------------*/
+
+    /**
+     * Der Konstruktor laed bei der Erstellung zunaechst alle Karten, die verfuegbar sind,
+     * mithilfe der {@link #loadCards()} Methode.
+     */
     private CardReader(){
-        try {
+        try
+        {
             loadCards();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e)
+        {
             throw new RuntimeException(e);
         }
     }
 
+    /*----------------------------------------------METHODEN----------------------------------------------------------*/
+
+    /**
+     * Diese Methode erstellt aus einer den JSON-Dateien im jeweiligen Ordner Kartenobjekte.
+     * @throws FileNotFoundException wenn keine JSON-Dateien vorhanden sind, wird eine Exception ausgeloest
+     */
     private void loadCards() throws FileNotFoundException {
         GlobalLogger.log(LoggerStringValues.CARDS_LOADING);
         JsonParser jsonParser = new JsonParser();
         File folder = new File(FilePaths.CARDS_FOLDER);
-        for (File f:
-             folder.listFiles()) {
+        for (File f : folder.listFiles())
+        {
             JsonElement jsonFile = jsonParser.parse(new FileReader(f));
-            //MinionCard card = new MinionCard(0,0,0,0); //TODO Json -> card
-            //cards.add(card);
             GlobalLogger.log(LoggerStringValues.LOAD_CARD);
         }
         GlobalLogger.log(LoggerStringValues.CARDS_LOADED);
     }
 
-    public List<Card> getCards(){
+    /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
+
+    public List<Card> getCards()
+    {
         return this.cards;
     }
 
-    public static CardReader getInstance() {
+    public static CardReader getInstance()
+    {
         return instance;
     }
 

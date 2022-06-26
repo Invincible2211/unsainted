@@ -1,10 +1,10 @@
 package de.prog2.dungeontop.model.world;
 
-import de.prog2.dungeontop.control.controller.HellController;
-import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.utils.HellGenerator;
 
 import java.util.HashMap;
 
@@ -16,7 +16,7 @@ public class World
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private final int hellCount;
     private int currentHell = 0;
-    private HashMap<Integer, Hell> hells;
+    private final HashMap<Integer, Hell> hells = new HashMap<>();
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
     public World(int hellCount)
     {
@@ -31,10 +31,16 @@ public class World
         for (int i = 0; i < this.hellCount; i++)
         {
             var hell = new Hell(WorldConstants.HELL_SIZE,WorldConstants.HELL_SIZE);
-            HellController.initHell(hell);
+            HellGenerator.initHell(hell);
             hells.put(i, hell);
             GlobalLogger.log(LoggerStringValues.ADDED_HELL_TO_WORLD + i);
         }
+    }
+
+    public void initWorld ()
+    {
+        this.generateLevels();
+        PlayerManager.getInstance().getPlayer().setCurrentRoom(getCurrentHell().getStartingRoom());
     }
 
     /**
@@ -52,6 +58,7 @@ public class World
     public Hell getNextHell()
     {
         currentHell++;
+        PlayerManager.getInstance().getPlayer().setCurrentRoom(getCurrentHell().getStartingRoom());
         return getCurrentHell();
     }
 }

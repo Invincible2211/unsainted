@@ -1,31 +1,29 @@
 package de.prog2.dungeontop.model.items;
 
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
+
 public abstract class Item
 {
-    private String name;
+    private final String name;
+    private String description;
     private int price;
-    private int bonus; // int for bonuses that weapon or artifacts provide
-    private int bonus2; // e.g bonus health and damage, etc.
+    private final int assetID;
 
-    public Item(String name, int price)
+    public Item(String name, String description, int price, int assetID)
     {
         this.name = name;
+        this.description = description;
         this.price = price;
+        this.assetID = assetID;
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
     }
 
-    public Item(String name, int price, int bonus)
+    public Item(String name, int assetID)
     {
         this.name = name;
-        this. price = price;
-        this.bonus = bonus;
-    }
-
-    public Item(String name, int price, int bonus, int bonus2)
-    {
-        this.name = name;
-        this. price = price;
-        this.bonus = bonus;
-        this.bonus2 = bonus2;
+        this.assetID = assetID;
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
     }
 
     //Set- and Getters
@@ -34,38 +32,17 @@ public abstract class Item
         return name;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
     public int getPrice()
     {
         return price;
     }
 
-    public void setPrice(int price)
-    {
-        this.price = price;
+    public String getDescription() {
+        return description;
     }
 
-    public int getBonus()
+    public int getAssetID()
     {
-        return bonus;
-    }
-
-    public void setBonus(int bonus)
-    {
-        this.bonus = bonus;
-    }
-
-    public int getBonus2()
-    {
-        return bonus2;
-    }
-
-    public void setBonus2(int bonus2)
-    {
-        this.bonus2 = bonus2;
+        return assetID;
     }
 }

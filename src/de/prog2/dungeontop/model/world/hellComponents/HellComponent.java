@@ -1,7 +1,5 @@
 package de.prog2.dungeontop.model.world.hellComponents;
 
-import java.util.UUID;
-
 /**
  * Represents a quadratic cell in a grid, where all the rooms are deployed as their corners and walls
  */
@@ -9,13 +7,13 @@ public abstract class HellComponent
 {
     Rotation rotation = Rotation.UP;
     private boolean isVisible = false;
-    private final UUID assetId;
+    private final int assetId;
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public HellComponent(UUID assetId)
+    public HellComponent(int assetId)
     {
         this.assetId = assetId;
     }
-    public HellComponent(UUID assetId, Rotation rotation)
+    public HellComponent(int assetId, Rotation rotation)
     {
         this.assetId = assetId;
         this.rotation = rotation;
@@ -34,7 +32,7 @@ public abstract class HellComponent
         isVisible = visible;
     }
 
-    public UUID getAssetId()
+    public int getAssetId()
     {
         return assetId;
     }

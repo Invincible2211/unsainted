@@ -1,46 +1,19 @@
 package de.prog2.dungeontop.model.entities;
 
-import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.talents.Talent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Hero extends Entity
 {
-    private Talent mainTalent = null;
-    private final List<Talent> talents = new ArrayList<>();
+    private String talent;
 
-    public Hero(Card card, int hp, int attackDamage, int movement, int maxMoves, int attackRange, Player owner, Talent mainTalent)
+    public Hero(String name, int hp, int attackDamage, int movement, int assetId, Player owner)
     {
-        super(card, hp, attackDamage, movement, maxMoves, attackRange, owner);
-        this.mainTalent = mainTalent;
+        super(name, hp, attackDamage, movement, assetId, owner);
     }
 
-    public void addTalents(Talent talent)
+    public Hero(String name, int hp, int attackDamage, String talent)
     {
-        talents.add(talent);
+        super(name, hp, attackDamage, talent);
     }
 
-    public void removeTalents(Talent talent)
-    {
-        talents.remove(talent);
-    }
-
-    //Set- and Getters
-    public Talent getMainTalent()
-    {
-        return mainTalent;
-    }
-
-    public void setMainTalent(Talent mainTalent)
-    {
-        this.mainTalent = mainTalent;
-    }
-
-    public List<Talent> getTalents()
-    {
-        return talents;
-    }
 }

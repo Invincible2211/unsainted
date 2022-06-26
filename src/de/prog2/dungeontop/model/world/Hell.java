@@ -2,14 +2,14 @@ package de.prog2.dungeontop.model.world;
 
 import de.prog2.dungeontop.control.controller.RoomController;
 import de.prog2.dungeontop.model.world.hellComponents.HellComponent;
-import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
-import de.prog2.dungeontop.model.world.rooms.Room;
+import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.HellToStringValues;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * The Hell represents a level with rooms.
@@ -40,7 +40,7 @@ public class Hell
     {
         return this.roomHashMap;
     }
-
+    public HashMap<Coordinate, HellComponent> getHellComponentHashMap () { return this.hellComponentHashMap; }
     public HellComponent getHellComponentByCoordinate(Coordinate coordinate)
     {
         return hellComponentHashMap.get(coordinate);
@@ -101,7 +101,30 @@ public class Hell
                                 res.append(RoomController.hasLeftRoom(
                                         this.getRoomByCoordinate(currCoordinate)) ?
                                         HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
-                                res.append("   ");
+
+                                //res.append(HellToStringValues.ROOM_CENTER);
+                                Room currRoom = getRoomByCoordinate(currCoordinate);
+                                if (currRoom instanceof ArenaRoom)
+                                {
+                                    if (currRoom == this.getBossRoom())
+                                        res.append(HellToStringValues.BOSS_ROOM);
+                                    else
+                                        res.append(HellToStringValues.ARENA_ROOM);
+                                }
+                                if (currRoom instanceof EmptyRoom)
+                                    res.append(HellToStringValues.ROOM_CENTER);
+                                if (currRoom instanceof NPCRoom)
+                                {
+                                    if (currRoom instanceof ForgeRoom)
+                                        res.append(HellToStringValues.FORGE_ROOM);
+                                    else if (currRoom instanceof LavaPondRoom)
+                                        res.append(HellToStringValues.LAVAPOND_ROOM);
+                                    else
+                                        res.append(HellToStringValues.NPC_ROOM);
+                                }
+                                if (currRoom instanceof RandomEventRoom)
+                                    res.append(HellToStringValues.RANDOM_EVENT_ROOM);
+
                                 res.append(RoomController.hasRightRoom(
                                         this.getRoomByCoordinate(currCoordinate)) ?
                                         HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
@@ -119,14 +142,14 @@ public class Hell
                                 res.append(HellToStringValues.BOTTOM_RIGHT_CORNER);
                                 break;
                             }
-                            res.append("     ");
+                            res.append(HellToStringValues.NO_ROOM);
                             break;
                         default:
                             GlobalLogger.warning(LoggerStringValues.INDEX_OUT_OF_BOUND);
                             break;
                     }
                 }
-                res.append("\n");
+                res.append(HellToStringValues.LINE_BREAK);
             }
         }
         return res.toString();

@@ -5,14 +5,17 @@ public interface LoggerStringValues {
     String SHOPMANAGER_CREATED = "ShopManager erstellt.";
     String SHOPMANAGER_GET = "ShopManager abgefragt.";
     String CARD_UNLOCKED = "Karte wurde freigeschaltet";
-    String PRESSED = " gedrueckt.";
-    String RELEASED = " losgelassen.";
     String CARD_REMOVED_FROM_DECK = "Eine Karte wurde aus dem Deck entfernt.";
     String CARD_FROM_DECK_SOLD = "Eine Karte aus dem Deck wurde verkauft.";
     String ITEM_SOLD = "Ein Gegenstand wurde verkauft.";
     String PLAYERSOULS_GET = "Playersouls abgefragt.";
     String SET = " gesetzt.";
     String PLAYERSOULS_SET = "Playersouls wurden auf ";
+    String PLAYERSOULS_PROPERTY_GET = "Playersouls Property abgefragt.";
+    String PLAYERHP_GET = "PlayerHP abgefragt.";
+    String PLAYERHP_SET = "PlayerHP wurden auf ";
+    String PLAYERHP_PROPERTY_GET = "PlayerHP Property abgefragt.";
+
 
     String ADD_ROOM_ERROR = "ERROR: Out of bounds or overlapping with an already existing room.";
     String ADDED_ROOM_TO_GRID = "Added room to hellgrid.";
@@ -69,6 +72,23 @@ public interface LoggerStringValues {
     String START_BATTLE = "Starting an arenaBattle";
     String PLAYER_CAN_CHOOSE_WHO_IS_FIRST = "Der Spieler darf aussuchen wer zuerst im duell Zieht";
     String DM_CAN_CHOOSE_WHO_IS_FIRST = "Der DM darf aussucher wer zuerst im duell Zieht";
+    String FILE_NOT_FOUND = "The specified file could not be found.";
+    String TILE_DRAWN = "Tile drawn on coordinate (";
+    String COMMA = ", ";
+    String CLOSING_BRACKET = ")";
+    String GC_ROTATED = "GraphicsContext rotated by ";
+    String HELLVIEW_INIT = "Initialized a HellView.";
+    String CAM_INIT_START = "Initialization of the player camera started.";
+    String CAM_INIT_END = "Initialization of the player camera ended.";
+    String MOVED_PLAYER = "Moved player ";
+    String BACKGROUND_CREATED = "Hell Background has been created.";
+    String CLAMPING_FAILURE = "CLAMPING: Min Value bigger than Max Value.";
+    String DRAW_ROOM_TYPES_IMAGE_NOT_FOUND = "The image for the room you try to draw cannot be found.";
+    String HELL_ALREADY_INITIALIZED = "Die uebergeben Hell wurde bereits initialisiert!";
+    String START_BATTLE_HANDLER = "Handler: startBattle()";
+    String RANDOM_EVENT_HANDLER = "Handler: startRandomEvent()";
+    String OPEN_FORGE_HANDLER = "Handler: openForge()";
+    String OPEN_LAVAPOND_HANDLER = "Handler: openLavaPond()";
 
     String MOVE_UP_SUCCESS = "Player moved into the room above.";
     String MOVE_UP_FAIL = "Player couldn't move into the room above.";
@@ -125,4 +145,37 @@ public interface LoggerStringValues {
     String CARD_PUSHED_TO_DECK = "Eine Karte wurde zum Deck gepusht!";
     String CARD_POPPED = "Eine Karte wurde vom Deck gepoppt!";
     String CARD_CONTAIN_IN_DECK = "Es wurde gesucht ob eine Karte im Deck ist!:";
+    String CARD_CREATED = "Es wurde eine Card erstellt!";
+    String MINION_CREATED = "Ein Minion wurde erstellt";
+    // Items
+    String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Description: %s, Preis: %d Souls, AssetID = %d.";
+    String INVENTORY_CREATED = "Inventar wurde erstellt.";
+    String ITEM_ADDED = "%s wurde ins Inventar hinzugefuegt.";
+    String RANK_ONE_SAMIRA_BEING_CREATED = "a one Star Samira is being created";
+    String RANK_TWO_SAMIRA_BEING_CREATED = "a two Star Samira is being created";
+    String RANK_THREE_SAMIRA_BEING_CREATED = "a three Star Samira is being created";
+    String SPECIFY_RANK = "no stars were Specified";
+    String PLACED_CARD_IN_ARENA = "Placed entity in arena from battlemanager";
+    String NOT_ENOUGH_EGOPOINTS = "Duellist does not have neough egopoints to play this minion";
+    
+    //Battlefield
+    String RETURN_NODE_ON_BATTLEFIELD = "return the node: ";
+    String COULD_NOT_FIND_NODE_ON_BATTLEFIELD = "could not find the node on the battlefield with x: %d and y: %d.";
+    String CURRENTPHASE_IS_NOW = "Phase wurde geaendert auf: ";
+
+    //Shop View
+    String SHOP_VIEW_STARTED_ADDING_CARDS = "ShopView started adding cards.";
+    String SHOP_VIEW_ADDED_CARD = "ShopView added card: ";
+    // CardViewController
+    String CARD_VIEW_CONTROLLER_CREATED_CARD = "CardViewController created a card with a scale of %1.1f.";
+    // EntityViewController
+    String ENTITY_VIEW_CONTROLLER_CREATED_ENTITY = "EntityViewController created an entity with a scale of %1.1f.";
+    // HellController
+    String HELL_CONTROLLER_WARNING_ROOM_INSIDE_BOUNDS = "HellController warning: Room inside bounds == %b";
+    String HELL_CONTROLLER_WARNING_ROOM_COORDINATES = "HellController warning: Room coordinates are: x: %d, y: %d";
+    String ADDING_CELL_TO_VIEW_BATTLFIELD = "Adding battlefield cell to gridpane";
+    String GOT_NODE_ON_BATTLEFIELD = "got node on battlefield";
+    String REMOVING_CELL_FROM_VIEW_BATTLFIELD = "removed everything on a stackpanenode on the battlefield";
+    // FXMLLoader
+    String FXML_LOAD_ERROR = "Failed to load FXML File!";
 }

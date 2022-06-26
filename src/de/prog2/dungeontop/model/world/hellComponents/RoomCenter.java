@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.model.world.hellComponents;
 
 import de.prog2.dungeontop.model.world.rooms.Room;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.WorldConstants;
 
 /**
@@ -14,7 +15,7 @@ public class RoomCenter extends HellComponent
      */
     public RoomCenter(Room room)
     {
-        super(WorldConstants.HellComponentAssetIds.ROOM_CENTER_ASSET_ID);
+        super(AssetIds.CENTER);
         this.room = room;
     }
 

@@ -1,8 +1,10 @@
 package de.prog2.dungeontop.model.world.arena;
 
+import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Arena
@@ -31,6 +33,7 @@ public class Arena
         return arenaHashmap.get(coordinate);
     }
 
+    @Deprecated
     public boolean isOccupied (Coordinate coordinate)
     {
         return getArenaComponent(coordinate).isOccupied();
@@ -45,6 +48,13 @@ public class Arena
     {
         this.arenaHashmap.remove(coordinate);
     }
+
+
+    public ArrayList<Minion> getAllMinions ()
+    {
+        ArrayList<Minion> allMinions = new ArrayList<>();
+        return  null;
+     }
 
     //Set- and Getters
     public int getHeight()
