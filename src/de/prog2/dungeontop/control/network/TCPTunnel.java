@@ -1,35 +1,39 @@
 package de.prog2.dungeontop.control.network;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class TCPTunnel extends Thread{
-    private String remoteHost;
+    private InputStream inputStream;
+    private OutputStream outputStream;
+
+    private int localPort;
     private int remotePort;
+    private String remoteHost;
+    private ServerSocket serverSocket;
+    private Socket remote;
 
-    InputStream inputStream;
-    OutputStream outputStream;
-
-    private ServerSocket listener;
-
-    public TCPTunnel(int localPort, String remoteHost, int remotePort, InputStream inputStream, OutputStream outputStream){
+    public TCPTunnel(int localPort, String remoteHost, int remotePort){
         this.remoteHost = remoteHost;
         this.remotePort = remotePort;
-        try {
-            this.listener = new ServerSocket(localPort);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        this.localPort = localPort;
+        this.start();
     }
 
     @Override
     public void run() {
         try
         {
-            System.err.println("TCPTunnel listening...");
-            SocketTunnel tunnel = new SocketTunnel(listener.accept(), remoteHost, remotePort);
-            tunnel.start();
+            TCPHole tcpHole = new TCPHole();
+            tcpHole.start();
+            System.out.println("Listening on local Port "+localPort);
+            serverSocket = new ServerSocket(localPort);
+            Socket clientConnection = serverSocket.accept();
+            System.out.println("Accepted Connection");
+            inputStream = clientConnection.getInputStream();
+            outputStream = clientConnection.getOutputStream();
         }
         catch(Exception e)
         {
@@ -38,28 +42,28 @@ public class TCPTunnel extends Thread{
         }
     }
 
-    private class SocketTunnel extends Thread {
+    private class TCPHole extends Thread{
 
-        private Socket remoteSock, bounceSock;
-        private String bounceHost;
-        private int    bouncePort;
-        public SocketTunnel(Socket remoteSock, String bounceHost, int bouncePort)
-        {
-            this.remoteSock = remoteSock;
-            this.bounceHost = bounceHost;
-            this.bouncePort = bouncePort;
-        }
-
+        @Override
         public void run() {
-            try
-            {
-                bounceSock = new Socket(bounceHost, bouncePort);
-            }
-            catch(Exception e){
-
+            try {
+                System.out.println("Create RemoteSocket to "+ remoteHost +" : "+ remotePort);
+                remote = new Socket(remoteHost,remotePort);
+                PrintStream printStream = new PrintStream(remote.getOutputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(remote.getInputStream()));
+                while (true){
+                    printStream.println("PING");
+                    String line = reader.readLine();
+                    while (line!=null){
+                        System.out.println(line);
+                        line = reader.readLine();
+                    }
+                    sleep(1000);
+                }
+            } catch (IOException | InterruptedException e) {
+                //e.printStackTrace();
             }
         }
-
     }
 
     public InputStream getInputStream() {
@@ -69,4 +73,5 @@ public class TCPTunnel extends Thread{
     public OutputStream getOutputStream() {
         return outputStream;
     }
+
 }
