@@ -51,9 +51,7 @@ public class TCPTunnel extends Thread{
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println(123);
                     printStream.println("PING");
-                    System.out.println(234);
                 }
             };
             timer.scheduleAtFixedRate(timerTask, 0L,1000L);

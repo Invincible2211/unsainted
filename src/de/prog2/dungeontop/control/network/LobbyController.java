@@ -23,11 +23,11 @@ public class LobbyController extends Thread{
         String hostIP = sqlConnector.getIPHost();
         if (hostIP == null){
             info.setText("Erstelle Lobby...");
-            sqlConnector.createLobby(IPChecker.getIPAdress());
+            sqlConnector.createLobby(IPChecker.getPublicIPAdress());
             info.setText("Warte auf zweiten Spieler...");
         } else {
             info.setText("Lobby gefunden, trete bei...");
-            sqlConnector.joinLobby(IPChecker.getIPAdress());
+            sqlConnector.joinLobby(IPChecker.getPublicIPAdress());
         }
         progressBar.setProgress(0.3);
         String otherIP;
