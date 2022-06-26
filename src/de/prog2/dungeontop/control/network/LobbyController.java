@@ -4,26 +4,25 @@ import de.prog2.dungeontop.resources.NetworkData;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class LobbyController extends Thread{
 
-    private final ProgressBar progressBar;
-    private final Label info;
+    private final String partnerIP;
 
-    public LobbyController(ProgressBar progressBar, Label info){
-        this. progressBar = progressBar;
-        this.info = info;
+    public LobbyController(String partnerIP){
+        this.partnerIP = partnerIP;
+        this.run();
     }
 
-    private final MySQLConnector sqlConnector = new MySQLConnector();
+    //private final MySQLConnector sqlConnector = new MySQLConnector();
 
     private InputStream inStream;
     private OutputStream outStream;
 
     @Override
     public void run() {
+        /**
         String hostIP = sqlConnector.getIPHost();
         if (hostIP == null){
             info.setText("Erstelle Lobby...");
@@ -48,11 +47,29 @@ public class LobbyController extends Thread{
         }
         info.setText("Spiel gefunden...");
         progressBar.setProgress(0.6);
-        TCPTunnel tcpTunnel = new TCPTunnel(NetworkData.DEFAULT_PORT, otherIP, NetworkData.DEFAULT_PORT, inStream, outStream);
-        info.setText("Verbindung aufgebaut");
-        progressBar.setProgress(1);
-        inStream = tcpTunnel.inputStream;
+         **/
+        TCPTunnel tcpTunnel = new TCPTunnel(NetworkData.DEFAULT_PORT, partnerIP, NetworkData.DEFAULT_PORT);
+        while (tcpTunnel.getInputStream()==null){
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        inStream = tcpTunnel.getInputStream();
         outStream = tcpTunnel.getOutputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inStream));
+        while (true){
+            String s = null;
+            try {
+                s = reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (s!=null){
+                System.out.println(s);
+            }
+        }
     }
 
     public InputStream getInStream() {

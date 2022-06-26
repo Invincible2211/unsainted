@@ -24,6 +24,7 @@ public interface ViewStrings
     // Shop View
     String SHOP_VIEW_FXML = "view/shopView.fxml";
     String SHOP_VIEW_CSS = "view/shopView.css";
+    String LOBBY_FXML = "view/lobby.fxml";
 
     //ist kein string aber kann hier trotzdem rein
     int RESOLUTION_X = 1920;

@@ -65,7 +65,10 @@ public class DungeonTop extends Application
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
-
+        fxmlLoader = new FXMLLoader();
+        Parent parent = fxmlLoader.load((DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.LOBBY_FXML)));
+        Scene scene1 = new Scene(parent);
+        stage.setScene(scene1);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
