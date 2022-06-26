@@ -3,6 +3,7 @@ package de.prog2.dungeontop.control.manager;
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Valuable;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -105,5 +106,7 @@ public class PlayerManager {
     {
 
     }
+
+    public Inventory getPlayerInventory () { return this.getPlayer().getInventory(); }
 
 }

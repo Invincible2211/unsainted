@@ -17,6 +17,7 @@ public interface WorldConstants
     int ONE_HUNDRED = 100;
     int MINIMUM_ROOM_COUNT = 25;
     int MAXIMUM_ROOM_COUNT = MINIMUM_ROOM_COUNT + 5;
+    int HELL_COUNT = 7;
 
     /**
      * Holds alle the AssetIds for the HellComponents

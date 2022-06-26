@@ -1,9 +1,17 @@
 package de.prog2.dungeontop.view;
 
+import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.entities.Hero;
+import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 
 public class SelectHero
@@ -64,7 +72,10 @@ public class SelectHero
     @FXML
     private void onConfirmButtonClicked()
     {
-
+        // TODO: Possibility to choose new game or load game
+        HellView view = new HellView();
+        Scene scene = view.initHellView(GameManager.getInstance().getGameWorld().getCurrentHell());
+        DungeonTop.getStage().setScene(scene);
     }
 
     /**
@@ -72,9 +83,12 @@ public class SelectHero
      * Der Spieler kehrt zum Hauptmenü zurück.
      */
     @FXML
-    private void onReturnButtonClicked()
+    private void onReturnButtonClicked() throws IOException
     {
-
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML));
+        Scene scene = new Scene(root);
+        DungeonTop.getStage().setScene(scene);
     }
 
     public void selectHeroFillText(Hero hero)

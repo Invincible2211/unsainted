@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.view;
 
+import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.MovementManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
@@ -14,8 +16,10 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -31,6 +36,7 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.HashMap;
 public class HellView
 {
@@ -51,10 +57,6 @@ public class HellView
         Pane pane = createBackground(hell);
         // container for the pane
         AnchorPane container = new AnchorPane(pane);
-
-        // Set the player to the starting room of the hell we want to visualize
-        // this is done so that the actual state of the player is the same as the one shown
-        PlayerManager.getInstance().getPlayer().setCurrentRoom(hell.getStartingRoom());
 
         // Set the background that is seen between the rooms
         pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
@@ -295,8 +297,12 @@ public class HellView
         // Place the player representation to his current room (most likely the starting room of the current hell)
         playerView.setX((player.getCurrentRoom().getCoordinate().getX() *
                 WorldConstants.ROOM_SIZE + HellViewConstants.OFFSET_ONE) * HellViewConstants.ROOM_TILE_FIT_WIDTH);
-        playerView.setY((player.getCurrentRoom().getCoordinate().getY() *
-                WorldConstants.ROOM_SIZE + HellViewConstants.OFFSET_ONE) * HellViewConstants.ROOM_TILE_FIT_HEIGHT);
+        playerView.setY(
+                ((WorldConstants.HELL_SIZE
+                        - player.getCurrentRoom().getCoordinate().getY()
+                        - HellViewConstants.OFFSET_ONE)
+                * WorldConstants.ROOM_SIZE + HellViewConstants.OFFSET_ONE)
+                * HellViewConstants.ROOM_TILE_FIT_HEIGHT);
 
         pane.getChildren().add(playerView);
 
@@ -510,7 +516,22 @@ public class HellView
      */
     private void openInventory()
     {
-        // TODO: Add Logic to open Inventory
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = null;
+
+        try
+        {
+            root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
+        }
+        catch (IOException e)
+        {
+            GlobalLogger.warning(LoggerStringValues.FXML_LOAD_ERROR);
+            return;
+        }
+        InventoryController.addItems(fxmlLoader.getController(),
+                PlayerManager.getInstance().getPlayerInventory().getInventory());
+        Scene scene = new Scene(root);
+        DungeonTop.getStage().setScene(scene);
     }
 
     /**

@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.model.game.GameState;
+import de.prog2.dungeontop.model.world.World;
+import de.prog2.dungeontop.resources.WorldConstants;
 
 public class GameManager {
 
@@ -9,6 +11,7 @@ public class GameManager {
     private final static GameManager instance = new GameManager();
 
     private GameState currentState = GameState.MAIN_MENU;
+    private final World gameWorld = new World(WorldConstants.HELL_COUNT);
 
     /*--------------------------------------------KONSTRUKTOREN-------------------------------------------------------*/
 
@@ -17,7 +20,7 @@ public class GameManager {
      */
     private GameManager()
     {
-
+        this.gameWorld.initWorld();
     }
 
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
@@ -89,5 +92,7 @@ public class GameManager {
     {
         return instance;
     }
+
+    public World getGameWorld() { return this.gameWorld; }
 
 }

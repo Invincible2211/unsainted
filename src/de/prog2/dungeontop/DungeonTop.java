@@ -17,6 +17,7 @@ import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.arena.ArenaComponent;
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
@@ -35,6 +36,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DungeonTop extends Application
 {
@@ -68,7 +70,7 @@ public class DungeonTop extends Application
         fxmlLoader = new FXMLLoader();
         Parent parent = fxmlLoader.load((DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.LOBBY_FXML)));
         Scene scene1 = new Scene(parent);
-        stage.setScene(scene1);
+        //stage.setScene(scene1);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
