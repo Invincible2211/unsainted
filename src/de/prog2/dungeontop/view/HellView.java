@@ -3,6 +3,7 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.MovementManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.game.MoveDirection;
@@ -44,6 +45,9 @@ public class HellView
     private ImageView playerView = null;
     // is an animation currently in progress?
     private boolean isAnimating = HellViewConstants.IS_ANIMATING_DEFAULT_VALUE;
+    // currently used HellView
+    private static Scene currHellView;
+    private static int playerAssetId = AssetIds.PLAYER;
 
     /**
      * Initialize the View for a given hell
@@ -288,7 +292,7 @@ public class HellView
 
         // Initialize the visual representation for the player
         Player player = PlayerManager.getInstance().getPlayer();
-        Image playerImage = AssetsManager.getImageByAssetId(AssetIds.PLAYER);
+        Image playerImage = AssetsManager.getImageByAssetId(playerAssetId);
         playerView = new ImageView(playerImage);
         playerView.setFitHeight(HellViewConstants.PLAYER_FIT_HEIGHT);
         playerView.setFitWidth(HellViewConstants.PLAYER_FIT_WIDTH);
@@ -507,7 +511,7 @@ public class HellView
      */
     private void openSettings()
     {
-        SettingsController.showSettings();
+        GameManager.getInstance().pause();
     }
 
     /**
@@ -585,5 +589,45 @@ public class HellView
         elementText.setFont(new Font(HellViewConstants.STAT_BOARD_ICON_HEIGHT));
 
         playerStats.getChildren().add(container);
+    }
+
+    /**
+     * Getter for the currently used HellView
+     *
+     * @return currently used HellView
+     */
+    public static Scene getCurrHellView ()
+    {
+        return HellView.currHellView;
+    }
+
+    /**
+     * Set the currently used HellView to a new one.
+     *
+     * @param nextHellView HellView that shall be used from now on.
+     */
+    public static void setCurrHellView (Scene nextHellView)
+    {
+        HellView.currHellView = nextHellView;
+    }
+
+    /**
+     * Getter for the AssetId of the selected class
+     *
+     * @return AssetId to be used when rendering the HellView
+     */
+    public static int getPlayerAssetId ()
+    {
+        return HellView.playerAssetId;
+    }
+
+    /**
+     * Setter for the AssetId of the image which shall be used to represent the player on the HellView
+     *
+     * @param playerAssetId ID of the Image asset that shall be used for the HellView
+     */
+    public static void setPlayerAssetId (final int playerAssetId)
+    {
+        HellView.playerAssetId = playerAssetId;
     }
 }

@@ -23,9 +23,16 @@ public interface AssetIds {
     int WALL = 11;
     int PASSAGE = 12;
     int CENTER = 13;
-    int PLAYER = 19;
     int COGWHEEL = 15;
     int BAG = 14;
+
+    // PlayerImage on HellView
+    // Default
+    int PLAYER = 19;
+    // Depending on class
+    int WARRIOR = 1;
+    int MAGICIAN = 2;
+    int ROGUE = 3;
 
 
     // Card Asset IDs

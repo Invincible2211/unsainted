@@ -3,7 +3,10 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.entities.Hero;
+import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -73,9 +76,22 @@ public class SelectHero
     private void onConfirmButtonClicked()
     {
         // TODO: Possibility to choose new game or load game
-        HellView view = new HellView();
-        Scene scene = view.initHellView(GameManager.getInstance().getGameWorld().getCurrentHell());
-        DungeonTop.getStage().setScene(scene);
+        if (hero == null)
+        {
+            GlobalLogger.warning(LoggerStringValues.NO_CHAR_SELECTED);
+            return;
+        }
+
+        if (hero == hero1)
+            HellView.setPlayerAssetId(AssetIds.WARRIOR);
+        else if (hero == hero2)
+            HellView.setPlayerAssetId(AssetIds.MAGICIAN);
+        else if (hero == hero3)
+            HellView.setPlayerAssetId(AssetIds.ROGUE);
+
+        System.out.println("STILL RUNNING");
+        GameManager.getInstance().getGameWorld().initWorld();
+        DungeonTop.getStage().setScene(HellView.getCurrHellView());
     }
 
     /**
