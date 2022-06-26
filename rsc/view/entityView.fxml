@@ -9,7 +9,7 @@
 <AnchorPane fx:id="container" prefHeight="469.0" prefWidth="469.0"
             xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="de.prog2.dungeontop.view.EntityView">
-    <ImageView fx:id="statusBarImageView" fitHeight="469" fitWidth="469"/>
+    <ImageView fx:id="statusBarImageView" fitHeight="120" fitWidth="469"/>
     <!-- HP -->
     <StackPane fx:id="hpContainer" AnchorPane.leftAnchor="90" AnchorPane.topAnchor="269.0">
         <ImageView fx:id="hpImageView" fitHeight="55" fitWidth="55" />
