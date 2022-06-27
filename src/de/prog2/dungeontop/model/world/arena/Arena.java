@@ -1,8 +1,11 @@
 package de.prog2.dungeontop.model.world.arena;
 
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +42,7 @@ public class Arena
         return getArenaComponent(coordinate).isOccupied();
     }
 
+
     public void insertComponent (Coordinate coordinate, ArenaComponent arenaComponent)
     {
         this.arenaHashmap.put(coordinate, arenaComponent);
@@ -49,6 +53,31 @@ public class Arena
         this.arenaHashmap.remove(coordinate);
     }
 
+    public boolean hasSelectedUnit()
+    {
+        if (arenaHashmap.isEmpty())
+        {
+            return false;
+        }
+        for (ArenaComponent arenaComponent : arenaHashmap.values()) {
+            if (arenaComponent.getOccupant().isSelected()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Entity getSelectedUnit()
+    {
+        for (ArenaComponent arenaComponent : arenaHashmap.values()) {
+            if (arenaComponent.getOccupant().isSelected()) {
+                GlobalLogger.log(LoggerStringValues.SELECTED_UNIT_FOUND + arenaComponent.getOccupant().getName());
+                return arenaComponent.getOccupant();
+            }
+        }
+        GlobalLogger.warning(LoggerStringValues.NO_UNIT_SELECTED);
+        return null;
+    }
 
     public ArrayList<Minion> getAllMinions ()
     {
@@ -65,5 +94,14 @@ public class Arena
     public int getWidth()
     {
         return width;
+    }
+
+    public void selectUnit (Coordinate coordinate)
+    {
+        if (this.hasSelectedUnit() == false){
+        getArenaComponent(coordinate).getOccupant().setSelected(true);
+    } else  {
+            GlobalLogger.warning(LoggerStringValues.UNIT_ALREADY_SELECTED);
+        }
     }
 }

@@ -16,6 +16,10 @@ import javafx.scene.Node;
 
 public abstract class CardViewController
 {
+
+    private static boolean isZoomable = false;
+    private static double instantiatedScalee = 0;
+
     /**
      * @param card  The card that is displayed by the card view.
      * @return The Node that is controlled by this controller.
@@ -52,7 +56,7 @@ public abstract class CardViewController
             controller.setWidth(width);
             controller.setHeight(height);
             controller.setAnchorScale(scale);
-
+            instantiatedScalee = scale;
             fillCardViewWithData(card, controller);
 
             GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
@@ -123,5 +127,28 @@ public abstract class CardViewController
     private static void fillSpellCardView(SpellCard card, SpellCardView controller)
     {
         // TODO Implement SpellCardView
+    }
+
+    public static void mouseEntered (CardView cardView)
+    {
+//        cardView.setAnchorScale(ViewStrings.CARD_HEIGHT * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+//        cardView.setHeight(ViewStrings.CARD_HEIGHT * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+//        cardView.setWidth(ViewStrings.CARD_WIDTH * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+    }
+
+    public static void mouseExited (CardView cardView)
+    {
+//        cardView.setHeight(ViewStrings.CARD_HEIGHT * instantiatedScalee);
+//        cardView.setWidth(ViewStrings.CARD_WIDTH * instantiatedScalee);
+    }
+
+    public static void setZoomable(boolean shouldThisBeZoomable)
+    {
+        isZoomable = shouldThisBeZoomable;
+    }
+
+    public static boolean isZoomable()
+    {
+        return isZoomable;
     }
 }

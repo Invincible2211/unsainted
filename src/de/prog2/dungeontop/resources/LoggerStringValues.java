@@ -180,4 +180,16 @@ public interface LoggerStringValues {
     String FXML_LOAD_ERROR = "Failed to load FXML File!";
     // SelectHero
     String NO_CHAR_SELECTED = "No character to play with has been selected!";
+    String ARENA_TILE_HAS_BEEN_CLICKED = "ClickEvent detected";
+    String ARENA_TILE_PRESSED_MESSAGE = "Mouse Pressed event on tile detected";
+    String ARENA_TILE_RELEASED_MESSAGE = "Mouse released event on tile detected";
+    String ARENA_TILE_UNHANDLEDEVENT = "TileEventHandler detected event that is not handled, yet.";
+    String CURRENT_ACTIVE_PLAYER_ONE = "Player One is currently active";
+    String CURRENT_ACTIVE_PLAYER_TWO = "Player Two is currently active";
+    String NOT_YOUR_UNIT = "This is not your unit!";
+    String NO_UNIT_SELECTED = "No unit selected!";
+    String THERE_IS_NO_UNIT_HERE = "There is no unit here!";
+    String UNIT_ALREADY_SELECTED = "A unit is already selected while trying to select another one";
+    String NO_UNIT_ON_TILE = "There is no unit on this tile!";
+    String SELECTED_UNIT_FOUND = "Selected unit found!";
 }

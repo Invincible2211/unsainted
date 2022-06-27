@@ -55,10 +55,12 @@ public class EntityController
     {
         return entity.canMove();
     }
+
     public static void setCanMove(Entity entity, boolean value)
     {
         entity.setCanMove(value);
     }
+
     public static MoveDirection[] getValidMoveDirections (Arena arena, Entity entity)
     {
         var results = new ArrayList<MoveDirection>();
@@ -76,6 +78,15 @@ public class EntityController
 
     public static Arena attack (Entity attacker, Coordinate position, Arena arena)
     {
-        return null;
+        Entity attacked = arena.getArenaComponent(position).getOccupant();
+        attacked.setHp(attacked.getHp() - attacker.getAttackDamage());
+        if (attacked.getHp() <= 0)
+        {
+            arena.removeComponent(position);
+        }
+        //make attacker unable to attack again
+        return arena;
     }
+
+
 }

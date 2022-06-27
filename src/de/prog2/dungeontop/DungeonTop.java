@@ -93,8 +93,6 @@ public class DungeonTop extends Application
         hBox.setStyle("-fx-background-color: #000000;");
         for (Node entityView : entityViews)
         {
-            entityView.setScaleX(0.5);
-            entityView.setScaleY(0.5);
             hBox.getChildren().add(entityView);
         }
         Scene scene = new Scene(hBox);
@@ -172,7 +170,9 @@ public class DungeonTop extends Application
         scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         getStage().setScene(scene);
         harald.setPosition(new Coordinate(1, 1));
+        harald.setOwner(player1);
         BattleManager.getInstance().getArena().getArenaHashmap().put(new Coordinate(1, 1),new ArenaComponent(harald));
+        //somethign wrong with this
         ArenaBaseController.updateBattlefield(fxmlLoader.getController(), BattleManager.getInstance().getArena());
     }
 

@@ -3,17 +3,21 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.arena.ArenaComponent;
+import de.prog2.dungeontop.model.world.arena.ArenaStackPane;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.EntityConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import java.util.List;
@@ -160,12 +164,13 @@ public abstract class ArenaBaseController
             for (int x = 0; x < width; x++)
             {
                 //each cell is a StackPane if we want to add effects or something later
-                StackPane stackPane = new StackPane();
+                ArenaStackPane stackPane = new ArenaStackPane(new Coordinate(x,y));
                 stackPane.setBackground(new Background(myBI));;
                 GlobalLogger.log(LoggerStringValues.ADDING_CELL_TO_VIEW_BATTLFIELD);
 //                stackPane.setPrefSize(size, size); TODO they shall only be Square even with uneven resolution
                 stackPane.setMinSize(size * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER, size * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER);
                 stackPane.setMaxSize(size * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER, size * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER);
+
                 gridPane.add(stackPane, x, y);
             }
         }
