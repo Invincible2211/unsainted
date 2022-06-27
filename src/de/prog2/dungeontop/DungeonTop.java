@@ -72,27 +72,29 @@ public class DungeonTop extends Application
         Parent parent = fxmlLoader.load((DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.LOBBY_FXML)));
         Scene scene1 = new Scene(parent);
         //stage.setScene(scene1);
-        //testArenaView();
+        testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
-        //testHellView(scene);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {
         List<Entity> entities = TestConstants.getTestEntities();
+        entities.addAll(TestConstants.getTestEntities());
         ArrayList<Node> entityViews = new ArrayList<>();
         int i = 0;
         for (Entity entity : entities)
         {
             i++;
-            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (i)));
+            entityViews.add(EntityViewController.getEntityView(entity, 1));//0.1 + 0.05 * (i)));
         }
         HBox hBox = new HBox();
         hBox.setStyle("-fx-background-color: #000000;");
         for (Node entityView : entityViews)
         {
+            entityView.setScaleX(0.5);
+            entityView.setScaleY(0.5);
             hBox.getChildren().add(entityView);
         }
         Scene scene = new Scene(hBox);

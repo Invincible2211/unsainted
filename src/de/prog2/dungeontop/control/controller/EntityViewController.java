@@ -36,11 +36,9 @@ public abstract class EntityViewController
             EntityView controller = loader.getController();
             fillEntityViewWithData(entity, controller);
 
-            double width = EntityConstants.ENTITY_BASE_WIDTH * scale;
-            double height = EntityConstants.ENTITY_BASE_HEIGHT * scale;
-            controller.setWidth(width);
-            controller.setHeight(height);
-            controller.setAnchorScale(scale);
+            controller.setAnchorScale(1);
+            entityView.setScaleX(scale);
+            entityView.setScaleY(scale);
 
             GlobalLogger.log(String.format(LoggerStringValues.ENTITY_VIEW_CONTROLLER_CREATED_ENTITY, scale));
         }

@@ -17,7 +17,7 @@ public class EntityView
     @FXML
     private ImageView entityImageView;
     @FXML
-    private ImageView statusBarImageView;
+    private ImageView backgroundImageView;
     @FXML
     private Label hpLabel;
     @FXML
@@ -47,8 +47,9 @@ public class EntityView
      */
     public void setWidth(double width)
     {
+        backgroundImageView.setFitWidth(width);
         container.setPrefWidth(width);
-        statusBarImageView.setFitWidth(width);
+        container.setMaxWidth(width);
     }
 
     /**
@@ -57,8 +58,9 @@ public class EntityView
      */
     public void setHeight(double height)
     {
+        backgroundImageView.setFitHeight(height);
         container.setPrefHeight(height);
-        statusBarImageView.setFitHeight(height);
+        container.setMaxHeight(height);
     }
     public void setAnchorScale(double scale)
     {
@@ -67,25 +69,25 @@ public class EntityView
 
         hpContainer.setScaleX(scale);
         hpContainer.setScaleY(scale);
-        AnchorPane.setTopAnchor(hpContainer, scale * EntityConstants.HP_TOP_ANCHOR - CardConstants.ICON_OFFSET);
-        AnchorPane.setLeftAnchor(hpContainer, scale * EntityConstants.HP_LEFT_ANCHOR - CardConstants.ICON_OFFSET);
+        AnchorPane.setTopAnchor(hpContainer, scale * EntityConstants.HP_TOP_ANCHOR - EntityConstants.ICON_OFFSET);
+        AnchorPane.setLeftAnchor(hpContainer, scale * EntityConstants.HP_LEFT_ANCHOR - EntityConstants.ICON_OFFSET);
 
         attackContainer.setScaleX(scale);
         attackContainer.setScaleY(scale);
-        AnchorPane.setTopAnchor(attackContainer, scale * EntityConstants.ATTACK_TOP_ANCHOR - CardConstants.ICON_OFFSET);
-        AnchorPane.setLeftAnchor(attackContainer, scale * EntityConstants.ATTACK_LEFT_ANCHOR - CardConstants.ICON_OFFSET);
+        AnchorPane.setTopAnchor(attackContainer, scale * EntityConstants.ATTACK_TOP_ANCHOR - EntityConstants.ICON_OFFSET);
+        AnchorPane.setLeftAnchor(attackContainer, scale * EntityConstants.ATTACK_LEFT_ANCHOR - EntityConstants.ICON_OFFSET);
 
         movementContainer.setScaleX(scale);
         movementContainer.setScaleY(scale);
-        AnchorPane.setTopAnchor(movementContainer, scale * EntityConstants.MOVEMENT_TOP_ANCHOR - CardConstants.ICON_OFFSET);
-        AnchorPane.setLeftAnchor(movementContainer, scale * EntityConstants.MOVEMENT_LEFT_ANCHOR - CardConstants.ICON_OFFSET);
+        AnchorPane.setTopAnchor(movementContainer, scale * EntityConstants.MOVEMENT_TOP_ANCHOR - EntityConstants.ICON_OFFSET);
+        AnchorPane.setLeftAnchor(movementContainer, scale * EntityConstants.MOVEMENT_LEFT_ANCHOR - EntityConstants.ICON_OFFSET);
     }
 
     @FXML
     private void initialize()
     {
         container.setBackground(Background.EMPTY);
-        statusBarImageView.imageProperty().setValue(AssetsManager.getImageByAssetId(40));
+        backgroundImageView.imageProperty().setValue(AssetsManager.getImageByAssetId(40));
     }
 
     public ImageView getEntityImageView()

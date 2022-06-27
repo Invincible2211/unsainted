@@ -215,10 +215,11 @@ public abstract class ArenaBaseController
 
         for (ArenaComponent arenaComponent : arena.getArenaHashmap().values())
         {
+            Node entityView = EntityViewController.getEntityView(arenaComponent.getOccupant(), size);
             getBattleFieldPane(arenaBaseView,
                     arenaComponent.getOccupant().getPosition().getX(),
                     arenaComponent.getOccupant().getPosition().getY())
-                    .getChildren().add(EntityViewController.getEntityView(arenaComponent.getOccupant(), size));
+                    .getChildren().add(entityView);
 
         }
     }
