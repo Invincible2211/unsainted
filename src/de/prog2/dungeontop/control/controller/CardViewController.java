@@ -14,8 +14,6 @@ import de.prog2.dungeontop.view.cardViews.SpellCardView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
-import javax.swing.text.View;
-
 public abstract class CardViewController
 {
     /**
@@ -126,13 +124,13 @@ public abstract class CardViewController
         // TODO Implement SpellCardView
     }
 
-    public static void mouseEntered (Node cardView)
+    public static void zoomCardView(Node cardView)
     {
         cardView.setScaleX(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
         cardView.setScaleY(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
     }
 
-    public static void mouseExited (Node cardView)
+    public static void resetZoom(Node cardView)
     {
         cardView.setScaleX(1);
         cardView.setScaleY(1);

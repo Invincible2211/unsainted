@@ -4,14 +4,10 @@ import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.resources.CardConstants;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-
-import java.util.ArrayList;
 
 public abstract class CardView
 {
@@ -32,9 +28,9 @@ public abstract class CardView
     @FXML
     private StackPane rankContainer;
     @FXML
-    private void mouseEntered() {CardViewController.mouseEntered(container);}
+    private void mouseEntered() {CardViewController.zoomCardView(container);}
     @FXML
-    private void mouseExited() {CardViewController.mouseExited(container);}
+    private void mouseExited() {CardViewController.resetZoom(container);}
 
     /**
      * Sets the width of the card.

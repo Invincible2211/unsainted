@@ -1,8 +1,9 @@
 package de.prog2.dungeontop.view;
 
+import de.prog2.dungeontop.control.controller.CardViewController;
+import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.resources.CardConstants;
 import de.prog2.dungeontop.resources.EntityConstants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 public class EntityView
 {
@@ -31,6 +31,7 @@ public class EntityView
     @FXML
     private ImageView movementImageView;
     private Entity entity;
+    private double scale = 1;
 
     @FXML
     private AnchorPane container;
@@ -40,6 +41,16 @@ public class EntityView
     private StackPane attackContainer;
     @FXML
     private StackPane movementContainer;
+    @FXML
+    private void mouseEntered()
+    {
+        EntityViewController.zoomEntityView(container, scale);
+    }
+    @FXML
+    private void mouseExited()
+    {
+        EntityViewController.resetZoom(container, scale);
+    }
 
     /**
      * Sets the width of the entity.
@@ -81,6 +92,13 @@ public class EntityView
         movementContainer.setScaleY(scale);
         AnchorPane.setTopAnchor(movementContainer, scale * EntityConstants.MOVEMENT_TOP_ANCHOR - EntityConstants.ICON_OFFSET);
         AnchorPane.setLeftAnchor(movementContainer, scale * EntityConstants.MOVEMENT_LEFT_ANCHOR - EntityConstants.ICON_OFFSET);
+    }
+
+    public void setScale(double scale)
+    {
+        container.setScaleX(scale);
+        container.setScaleY(scale);
+        this.scale = scale;
     }
 
     @FXML
