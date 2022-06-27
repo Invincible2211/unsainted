@@ -2,6 +2,8 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.RoomDialogueConstants;
@@ -98,10 +100,22 @@ public class RoomDialogueViewController
             // set the button properties
             if (room instanceof ArenaRoom)
             {
-                setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
-                        RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
-                        dialogueStageAttributes.get(room).description(),dialogueStageAttributes.get(room).assetId());
-                upperButton.setOnAction(e -> startBattle());
+                if (!((ArenaRoom) room).isAlive())
+                    return;
+                if(((ArenaRoom) room).isBoss())
+                {
+                    setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
+                            RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,RoomDialogueConstants.BOSS_ROOM_DESCRIPTION,
+                            RoomDialogueConstants.BOSS_ROOM_VIEW_ASSET);
+                    upperButton.setOnAction(e -> startBattle());
+                }
+                else
+                {
+                    setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
+                            RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
+                            dialogueStageAttributes.get(room).description(), dialogueStageAttributes.get(room).assetId());
+                    upperButton.setOnAction(e -> startBattle());
+                }
             }
             else
             {
@@ -161,7 +175,7 @@ public class RoomDialogueViewController
      */
     private void startBattle ()
     {
-        //TODO: Implement method to start a battle
+        GameManager.getInstance().beginBattle();
         GlobalLogger.log(LoggerStringValues.START_BATTLE_HANDLER);
     }
 

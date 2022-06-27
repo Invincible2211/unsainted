@@ -58,17 +58,17 @@ public class DungeonTop extends Application
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
-
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
         stage.show();
+
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
-        testArenaView();
+        //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
@@ -119,7 +119,7 @@ public class DungeonTop extends Application
         HellGenerator.initHell(hell2);
         Scene hellView2 = view.initHellView(hell2);
 
-        System.out.println(hell);
+        System.out.println(hell2);
 
         stage.setScene(scene);
 

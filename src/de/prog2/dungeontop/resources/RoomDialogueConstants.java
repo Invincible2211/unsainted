@@ -69,4 +69,7 @@ public interface RoomDialogueConstants
             "\"Das erste mal ist mehrkostenfrei, danach kostet es dich nicht mehr als ein paar Seelen.\"\n" +
             "Wie lautet deine Antwort?";
     int LAVA_POND_VIEW_ASSET = AssetIds.LAVA_POND;
+
+    String BOSS_ROOM_DESCRIPTION = "Hier koennte Ihre Werbung stehen.";
+    int BOSS_ROOM_VIEW_ASSET = 16;
 }

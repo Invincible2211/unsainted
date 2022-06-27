@@ -176,6 +176,10 @@ public interface LoggerStringValues {
     String ADDING_CELL_TO_VIEW_BATTLFIELD = "Adding battlefield cell to gridpane";
     String GOT_NODE_ON_BATTLEFIELD = "got node on battlefield";
     String REMOVING_CELL_FROM_VIEW_BATTLFIELD = "removed everything on a stackpanenode on the battlefield";
+    // FXMLLoader
+    String FXML_LOAD_ERROR = "Failed to load FXML File!";
+    // SelectHero
+    String NO_CHAR_SELECTED = "No character to play with has been selected!";
     String ARENA_TILE_HAS_BEEN_CLICKED = "ClickEvent detected";
     String ARENA_TILE_PRESSED_MESSAGE = "Mouse Pressed event on tile detected";
     String ARENA_TILE_RELEASED_MESSAGE = "Mouse released event on tile detected";

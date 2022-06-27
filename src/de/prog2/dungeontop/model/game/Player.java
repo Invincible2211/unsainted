@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.game;
 
+import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.world.rooms.Room;
 import de.prog2.dungeontop.resources.GameConstants;
@@ -14,9 +15,10 @@ public class Player
     private final SimpleIntegerProperty hpProperty;
     private int ego_points;
     private Deck deck;
-    private Inventory inventory;
+    private final Inventory inventory = new Inventory();
     private Room currentRoom;
     private int handCardLimit;
+    private Hero hero;
 
     public Player (){
         this.soulsProperty = new SimpleIntegerProperty(0);
@@ -98,10 +100,6 @@ public class Player
         return inventory;
     }
 
-    public void setInventory(Inventory inventory)
-    {
-        this.inventory = inventory;
-    }
     public int getHandCardLimit ()
     {
         return handCardLimit;
@@ -110,5 +108,15 @@ public class Player
     public void setHandCardLimit (int handCardLimit)
     {
         this.handCardLimit = handCardLimit;
+    }
+
+    public Hero getHero()
+    {
+        return hero;
+    }
+
+    public void setHero(Hero hero)
+    {
+        this.hero = hero;
     }
 }

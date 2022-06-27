@@ -7,8 +7,10 @@ import de.prog2.dungeontop.model.exceptions.customexceptions.NotValidRngRollExce
 import de.prog2.dungeontop.model.exceptions.customexceptions.SpotAlreadyOccupiedException;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.hellComponents.*;
 import de.prog2.dungeontop.model.world.rooms.*;
+import de.prog2.dungeontop.resources.ArenaConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 
@@ -391,7 +393,7 @@ public class HellGenerator
                 currRoom = room;
             }
         }
-        ArenaRoom bossRoom = new ArenaRoom(null);
+        ArenaRoom bossRoom = new ArenaRoom(new Arena(ArenaConstants.ARENA_HEIGHT, ArenaConstants.ARENA_WIDTH), true);
         bossRoom.setCoordinate(currRoom.getCoordinate());
         HellController.replaceRoom(hell, currRoom, bossRoom);
         roomList.remove(currRoom);

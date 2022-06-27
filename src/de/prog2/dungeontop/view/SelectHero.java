@@ -1,9 +1,21 @@
 package de.prog2.dungeontop.view;
 
+import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.entities.Hero;
+import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 
 public class SelectHero
@@ -12,6 +24,7 @@ public class SelectHero
     private Hero hero1 = new Hero("Warrior", 12, 2, "Sturdy");
     private Hero hero2 = new Hero("Mage", 8, 4, "Intelligent");
     private Hero hero3 = new Hero("Rogue", 10, 3, "Sneaky");
+    private Player player;
 
     @FXML
     private VBox heroText;
@@ -37,6 +50,7 @@ public class SelectHero
         selectHeroFillText(hero1);
         hero = hero1;
         heroText.setVisible(true);
+        player.setHero(hero);
     }
 
     @FXML
@@ -46,6 +60,7 @@ public class SelectHero
         selectHeroFillText(hero2);
         hero = hero2;
         heroText.setVisible(true);
+        player.setHero(hero);
     }
 
     @FXML
@@ -55,6 +70,7 @@ public class SelectHero
         selectHeroFillText(hero3);
         hero = hero3;
         heroText.setVisible(true);
+        player.setHero(hero);
     }
 
     /**
@@ -64,7 +80,23 @@ public class SelectHero
     @FXML
     private void onConfirmButtonClicked()
     {
+        // TODO: Possibility to choose new game or load game
+        if (hero == null)
+        {
+            GlobalLogger.warning(LoggerStringValues.NO_CHAR_SELECTED);
+            return;
+        }
 
+        if (hero == hero1)
+            HellView.setPlayerAssetId(AssetIds.WARRIOR);
+        else if (hero == hero2)
+            HellView.setPlayerAssetId(AssetIds.MAGICIAN);
+        else if (hero == hero3)
+            HellView.setPlayerAssetId(AssetIds.ROGUE);
+
+        System.out.println("STILL RUNNING");
+        GameManager.getInstance().getGameWorld().initWorld();
+        DungeonTop.getStage().setScene(HellView.getCurrHellView());
     }
 
     /**
@@ -72,9 +104,12 @@ public class SelectHero
      * Der Spieler kehrt zum Hauptmenü zurück.
      */
     @FXML
-    private void onReturnButtonClicked()
+    private void onReturnButtonClicked() throws IOException
     {
-
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML));
+        Scene scene = new Scene(root);
+        DungeonTop.getStage().setScene(scene);
     }
 
     public void selectHeroFillText(Hero hero)

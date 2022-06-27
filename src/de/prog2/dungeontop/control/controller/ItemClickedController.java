@@ -3,29 +3,25 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.view.ItemClicked;
 import de.prog2.dungeontop.view.ItemView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
-public class ItemViewController
+public class ItemClickedController
 {
-    /**
-     * create an ItemView for an item.
-     *
-     */
-    public static Node getItemView(Item item)
+    public static Node getItemClicked(Item item)
     {
         try
         {
             FXMLLoader loader = new FXMLLoader();
-            Node itemView = null;
+            Node itemClicked = null;
 
-                itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/itemView.fxml"));
+            itemClicked = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/itemView.fxml"));
 
-            ItemView controller = loader.getController();
-            fillItemViewWithData(item, controller);
-            return itemView;
+            ItemClicked controller = loader.getController();
+            fillItem(item, controller);
+            return itemClicked;
         }
         catch (Exception e)
         {
@@ -35,14 +31,14 @@ public class ItemViewController
     }
 
     /**
-     * Add item to the itemview.
+     * Add item to the pop-up view.
      * @param controller an instance of ItemView, the controller of itemView.fxml
      *
      */
-    private static void fillItemViewWithData(Item item, ItemView controller)
+    private static void fillItem(Item item, ItemClicked controller)
     {
         controller.getItemImage().imageProperty().setValue(AssetsManager.getImageByAssetId(item.getAssetID()));
-        controller.getItemName().setText(item.getName());
+        controller.getItemDescription().setText(item.getDescription());
         controller.setItem(item);
     }
 }

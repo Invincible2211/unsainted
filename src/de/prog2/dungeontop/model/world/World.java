@@ -1,9 +1,12 @@
 package de.prog2.dungeontop.model.world;
 
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.utils.HellGenerator;
+import de.prog2.dungeontop.view.HellView;
+import javafx.scene.Scene;
 
 import java.util.HashMap;
 
@@ -36,6 +39,14 @@ public class World
         }
     }
 
+    public void initWorld ()
+    {
+        this.generateLevels();
+        PlayerManager.getInstance().getPlayer().setCurrentRoom(getCurrentHell().getStartingRoom());
+        HellView view = new HellView();
+        HellView.setCurrHellView(view.initHellView(getCurrentHell()));
+    }
+
     /**
      * @return returns the current Hell, the player should be playing
      */
@@ -51,6 +62,9 @@ public class World
     public Hell getNextHell()
     {
         currentHell++;
+        PlayerManager.getInstance().getPlayer().setCurrentRoom(getCurrentHell().getStartingRoom());
+        HellView view = new HellView();
+        HellView.setCurrHellView(view.initHellView(getCurrentHell()));
         return getCurrentHell();
     }
 }
