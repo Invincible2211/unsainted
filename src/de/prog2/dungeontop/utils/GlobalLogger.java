@@ -15,4 +15,7 @@ public class GlobalLogger {
         LOGGER.warning(message);
     }
 
+    public static void turnOff () {
+        LOGGER.setLevel(Level.OFF);
+    }
 }

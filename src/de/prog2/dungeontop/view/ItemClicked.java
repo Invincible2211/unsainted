@@ -3,40 +3,36 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.model.items.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 
-
-public class ItemView
+public class ItemClicked
 {
-
+    @FXML
+    private Button returnButton;
+    @FXML
+    private Button useItemButton;
+    @FXML
+    private Text itemDescription;
     @FXML
     private ImageView itemImage;
-    @FXML
-    private Label itemName;
-    @FXML
-    private Button itemButton;
+
     private Item item;
 
-    private void itemButtonClicked()
-    {
-
-    }
-
     //Get- und Setters
-    public Label getItemName()
+    public Text getItemDescription()
     {
-        return itemName;
-    }
-
-    public ImageView getItemImage()
-    {
-        return itemImage;
+        return itemDescription;
     }
 
     public Item getItem()
     {
         return item;
+    }
+
+    public ImageView getItemImage()
+    {
+        return itemImage;
     }
 
     public void setItem(Item item)

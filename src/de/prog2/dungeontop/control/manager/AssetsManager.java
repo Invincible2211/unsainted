@@ -72,6 +72,36 @@ public class AssetsManager
         return image;
     }
 
+    /**
+     * Handling requests for Images with the specified parameters.
+     *
+     * @param id AssetId of the requested image
+     * @param requestedWidth the image's bounding box width
+     * @param requestedHeight the image's bounding box height
+     * @param preserveRatio indicates whether to preserve the aspect ratio of the original image when
+     *                      scaling to fit the image within the specified bounding box
+     * @param smooth indicates whether to use a better quality filtering algorithm or a faster one when
+     *               scaling this image to fit within the specified bounding box
+     * @return
+     */
+    public static Image getImageByAssetId (int id, double requestedWidth, double requestedHeight,
+                                           boolean preserveRatio, boolean smooth)
+    {
+        Image image = null;
+        try
+        {
+            image = new Image (
+                    new FileInputStream(AssetsManager.getAssetById(id)),
+                    requestedWidth, requestedHeight, preserveRatio, smooth
+            );
+        }
+        catch (FileNotFoundException fileNotFoundException)
+        {
+            GlobalLogger.warning(LoggerStringValues.FILE_NOT_FOUND);
+        }
+        return image;
+    }
+
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
 
     public static AssetsManager getInstance() {

@@ -14,13 +14,18 @@ public class LobbyController {
     private TextField partnerIP;
 
     @FXML
+    private Label labelIPLocal;
+
+    @FXML
     private void onOnlinebuttonAction(){
-        new de.prog2.dungeontop.control.network.LobbyController(partnerIP.getText());
+        de.prog2.dungeontop.control.network.LobbyController controller = new de.prog2.dungeontop.control.network.LobbyController(partnerIP.getText());
+        controller.run();
     }
 
     @FXML
     void initialize(){
-        labelIP.setText(IPChecker.getIPAdress());
+        labelIP.setText(IPChecker.getPublicIPAdress());
+        labelIPLocal.setText(IPChecker.getLocalIPAdress());
     }
 
 }
