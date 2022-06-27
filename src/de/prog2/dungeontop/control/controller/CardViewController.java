@@ -14,12 +14,10 @@ import de.prog2.dungeontop.view.cardViews.SpellCardView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
+import javax.swing.text.View;
+
 public abstract class CardViewController
 {
-
-    private static boolean isZoomable = false;
-    private static double instantiatedScalee = 0;
-
     /**
      * @param card  The card that is displayed by the card view.
      * @return The Node that is controlled by this controller.
@@ -56,7 +54,6 @@ public abstract class CardViewController
             controller.setWidth(width);
             controller.setHeight(height);
             controller.setAnchorScale(scale);
-            instantiatedScalee = scale;
             fillCardViewWithData(card, controller);
 
             GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
@@ -129,26 +126,15 @@ public abstract class CardViewController
         // TODO Implement SpellCardView
     }
 
-    public static void mouseEntered (CardView cardView)
+    public static void mouseEntered (Node cardView)
     {
-//        cardView.setAnchorScale(ViewStrings.CARD_HEIGHT * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
-//        cardView.setHeight(ViewStrings.CARD_HEIGHT * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
-//        cardView.setWidth(ViewStrings.CARD_WIDTH * ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+        cardView.setScaleX(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+        cardView.setScaleY(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
     }
 
-    public static void mouseExited (CardView cardView)
+    public static void mouseExited (Node cardView)
     {
-//        cardView.setHeight(ViewStrings.CARD_HEIGHT * instantiatedScalee);
-//        cardView.setWidth(ViewStrings.CARD_WIDTH * instantiatedScalee);
-    }
-
-    public static void setZoomable(boolean shouldThisBeZoomable)
-    {
-        isZoomable = shouldThisBeZoomable;
-    }
-
-    public static boolean isZoomable()
-    {
-        return isZoomable;
+        cardView.setScaleX(1);
+        cardView.setScaleY(1);
     }
 }

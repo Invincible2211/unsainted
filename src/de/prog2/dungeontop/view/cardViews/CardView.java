@@ -32,9 +32,9 @@ public abstract class CardView
     @FXML
     private StackPane rankContainer;
     @FXML
-    private void mouseEntered() {CardViewController.mouseEntered(this);}
+    private void mouseEntered() {CardViewController.mouseEntered(container);}
     @FXML
-    private void mouseExited() {CardViewController.mouseExited(this);}
+    private void mouseExited() {CardViewController.mouseExited(container);}
 
     /**
      * Sets the width of the card.
