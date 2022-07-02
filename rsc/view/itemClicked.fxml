@@ -8,8 +8,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ItemClicked">
    <children>
-      <Button fx:id="returnButton" layoutX="14.0" layoutY="331.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="173.0" text="Zurück" />
-      <Button fx:id="useItemButton" layoutX="211.0" layoutY="330.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="174.0" text="Gegenstand verwenden" />
+      <Button layoutX="14.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked" prefHeight="53.0" prefWidth="173.0" text="Zurück" />
+      <Button layoutX="211.0" layoutY="330.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="174.0" text="Gegenstand verwenden" />
       <Text fx:id="itemDescription" layoutX="80.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="238.13671875">
          <font>
             <Font size="20.0" />

@@ -12,6 +12,7 @@ public interface ViewStrings
     // Inventory
     String INVENTORY_FXML = "view/inventory.fxml";
     String ITEM_VIEW_FXML = "view/itemView.fxml";
+    String ITEM_CLICKED_FXML = "view/itemClicked.fxml";
 
     // Arena
     String ARENA_ROOM_DIALOGUE_FXML = "view/roomDialogueView.fxml";
