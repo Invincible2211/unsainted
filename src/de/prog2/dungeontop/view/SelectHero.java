@@ -118,7 +118,10 @@ public class SelectHero
     @FXML
     private void onOpenShopButtonClicked() throws  IOException
     {
-
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
+        Scene scene = new Scene(root);
+        DungeonTop.getStage().setScene(scene);
     }
 
     public void selectHeroFillText(Hero hero)
