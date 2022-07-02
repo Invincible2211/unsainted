@@ -11,6 +11,7 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
+import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
@@ -70,7 +71,7 @@ public class DungeonTop extends Application
 
         //testArenaView();
         //testSelectHero(primaryStage);
-        //testInventory(primaryStage);
+        testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
         //testHellView(scene);
@@ -182,7 +183,7 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        TestItem item = new TestItem("Potion", AssetIds.HEALTH_POTION);
+        Item item = new Item("Potion", "Heals 10 Health", 100, AssetIds.HEALTH_POTION);
         Inventory inventory = new Inventory();
         for (int i = 0; i < 8; i++)
         {
