@@ -1,14 +1,10 @@
-package de.prog2.dungeontop.resources;
+package de.prog2.dungeontop.resources.views;
 
-public interface CardConstants
+public interface CardDetailConstants
 {
     int ENTITY_NAME_FONT_SIZE = 28;
     double CARD_BASE_HEIGHT = 866;
     double CARD_BASE_WIDTH = 489;
-    // Shop
-    int SHOP_COLUMN_COUNT = 4;
-    int SHOP_SELL_BUTTON_HEIGHT_MULTIPLIER = 5;
-    double SHOP_CARD_SCALE = 0.9;
     // EntityCard
     double ENTITY_IMAGE_SCALE = 0.25;
     double ENTITY_IMAGE_WIDTH = 884 * ENTITY_IMAGE_SCALE;

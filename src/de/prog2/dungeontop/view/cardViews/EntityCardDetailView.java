@@ -1,6 +1,6 @@
 package de.prog2.dungeontop.view.cardViews;
 
-import de.prog2.dungeontop.resources.views.CardConstants;
+import de.prog2.dungeontop.resources.views.CardDetailConstants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
-public class EntityCardView extends CardView
+public class EntityCardDetailView extends CardDetailView
 {
     @FXML
     private Label entityNameLabel;
@@ -41,27 +41,27 @@ public class EntityCardView extends CardView
     protected void setAnchorScale(double scale)
     {
         super.setAnchorScale(scale);
-        entityNameLabel.setStyle(String.format(CardConstants.NAME_FONT_SIZE_STYLE, (int)(scale * (double) CardConstants.ENTITY_NAME_FONT_SIZE)));
-        AnchorPane.setTopAnchor(nameContainer, scale * (CardConstants.NAME_TOP_ANCHOR - CardConstants.NAME_OFFSET_Y));
+        entityNameLabel.setStyle(String.format(CardDetailConstants.NAME_FONT_SIZE_STYLE, (int)(scale * (double) CardDetailConstants.ENTITY_NAME_FONT_SIZE)));
+        AnchorPane.setTopAnchor(nameContainer, scale * (CardDetailConstants.NAME_TOP_ANCHOR - CardDetailConstants.NAME_OFFSET_Y));
 
-        entityImageView.setFitWidth(scale * CardConstants.ENTITY_IMAGE_WIDTH);
-        entityImageView.setFitHeight(scale * CardConstants.ENTITY_IMAGE_HEIGHT);
-        AnchorPane.setTopAnchor(entityImageContainer, scale * (CardConstants.ENTITY_IMAGE_TOP_ANCHOR - CardConstants.ENTITY_IMAGE_OFFSET_Y));
+        entityImageView.setFitWidth(scale * CardDetailConstants.ENTITY_IMAGE_WIDTH);
+        entityImageView.setFitHeight(scale * CardDetailConstants.ENTITY_IMAGE_HEIGHT);
+        AnchorPane.setTopAnchor(entityImageContainer, scale * (CardDetailConstants.ENTITY_IMAGE_TOP_ANCHOR - CardDetailConstants.ENTITY_IMAGE_OFFSET_Y));
 
         hpContainer.setScaleX(scale);
         hpContainer.setScaleY(scale);
-        AnchorPane.setTopAnchor(hpContainer, scale * CardConstants.HP_TOP_ANCHOR - CardConstants.ICON_OFFSET);
-        AnchorPane.setLeftAnchor(hpContainer, scale * CardConstants.HP_LEFT_ANCHOR - CardConstants.ICON_OFFSET);
+        AnchorPane.setTopAnchor(hpContainer, scale * CardDetailConstants.HP_TOP_ANCHOR - CardDetailConstants.ICON_OFFSET);
+        AnchorPane.setLeftAnchor(hpContainer, scale * CardDetailConstants.HP_LEFT_ANCHOR - CardDetailConstants.ICON_OFFSET);
 
         attackContainer.setScaleX(scale);
         attackContainer.setScaleY(scale);
-        AnchorPane.setTopAnchor(attackContainer, scale * CardConstants.ATTACK_TOP_ANCHOR - CardConstants.ICON_OFFSET);
-        AnchorPane.setLeftAnchor(attackContainer, scale * CardConstants.ATTACK_LEFT_ANCHOR - CardConstants.ICON_OFFSET);
+        AnchorPane.setTopAnchor(attackContainer, scale * CardDetailConstants.ATTACK_TOP_ANCHOR - CardDetailConstants.ICON_OFFSET);
+        AnchorPane.setLeftAnchor(attackContainer, scale * CardDetailConstants.ATTACK_LEFT_ANCHOR - CardDetailConstants.ICON_OFFSET);
 
         movementContainer.setScaleX(scale);
         movementContainer.setScaleY(scale);
-        AnchorPane.setTopAnchor(movementContainer, scale * CardConstants.MOVEMENT_TOP_ANCHOR - CardConstants.ICON_OFFSET);
-        AnchorPane.setLeftAnchor(movementContainer, scale * CardConstants.MOVEMENT_LEFT_ANCHOR - CardConstants.ICON_OFFSET);
+        AnchorPane.setTopAnchor(movementContainer, scale * CardDetailConstants.MOVEMENT_TOP_ANCHOR - CardDetailConstants.ICON_OFFSET);
+        AnchorPane.setLeftAnchor(movementContainer, scale * CardDetailConstants.MOVEMENT_LEFT_ANCHOR - CardDetailConstants.ICON_OFFSET);
     }
 
 

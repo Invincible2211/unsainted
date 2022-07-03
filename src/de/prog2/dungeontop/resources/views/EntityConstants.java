@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.resources;
+package de.prog2.dungeontop.resources.views;
 
 public interface EntityConstants
 {

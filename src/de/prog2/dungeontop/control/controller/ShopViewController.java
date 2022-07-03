@@ -3,7 +3,7 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.CardConstants;
+import de.prog2.dungeontop.resources.views.CardConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ShopView;
@@ -28,7 +28,7 @@ public abstract class ShopViewController
         int columns = 0, row = 1;
         for (Card card : cards)
         {
-            Node cardView = CardViewController.getCardView(card, CardConstants.SHOP_CARD_SCALE);
+            Node cardView = CardViewController.getCardDetailView(card, CardConstants.SHOP_CARD_SCALE);
             AnchorPane anchorPane = (AnchorPane) cardView;
             Button button = createButton(anchorPane.getPrefWidth(), anchorPane.getPrefHeight() / CardConstants.SHOP_SELL_BUTTON_HEIGHT_MULTIPLIER, card);
             button.setGraphic(createSoulIcon());
