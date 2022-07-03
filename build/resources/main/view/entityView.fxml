@@ -13,20 +13,20 @@
     <ImageView fx:id="backgroundImageView" fitHeight="469" fitWidth="469" />
     <!-- Entity -->
     <VBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" alignment="CENTER">
-        <ImageView fx:id="entityImageView" fitHeight="200" fitWidth="200"/>
+        <ImageView fx:id="entityImageView" fitHeight="354" fitWidth="340"/>
     </VBox>
     <!-- HP -->
-    <StackPane fx:id="hpContainer" AnchorPane.leftAnchor="90" AnchorPane.topAnchor="269.0">
+    <StackPane AnchorPane.leftAnchor="40" AnchorPane.topAnchor="60">
         <ImageView fx:id="hpImageView" fitHeight="120" fitWidth="120" />
         <Label fx:id="hpLabel" styleClass="status-label" text="0" style="-fx-font-size: 70"/>
     </StackPane>
     <!-- Movement -->
-    <StackPane fx:id="movementContainer" AnchorPane.leftAnchor="200" AnchorPane.topAnchor="269.0">
+    <StackPane AnchorPane.leftAnchor="200" AnchorPane.topAnchor="350">
         <ImageView fx:id="movementImageView" fitHeight="120" fitWidth="120" />
         <Label fx:id="movementLabel" styleClass="status-label" text="0" style="-fx-font-size: 70"/>
     </StackPane>
     <!-- Attack -->
-    <StackPane fx:id="attackContainer" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="269.0">
+    <StackPane AnchorPane.leftAnchor="350" AnchorPane.topAnchor="60">
         <ImageView fx:id="attackImageView" fitHeight="120" fitWidth="120" />
         <Label fx:id="attackLabel" styleClass="status-label" text="0" style="-fx-font-size: 70"/>
     </StackPane>

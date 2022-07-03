@@ -36,7 +36,6 @@ public abstract class EntityViewController
             EntityView controller = loader.getController();
             fillEntityViewWithData(entity, controller);
 
-            controller.setAnchorScale(1);
             controller.setScale(scale);
 
             GlobalLogger.log(String.format(LoggerStringValues.ENTITY_VIEW_CONTROLLER_CREATED_ENTITY, scale));
