@@ -4,6 +4,7 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.view.ItemView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,7 +22,7 @@ public class ItemViewController
             FXMLLoader loader = new FXMLLoader();
             Node itemView = null;
 
-                itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream("view/itemView.fxml"));
+                itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_VIEW_FXML));
 
             ItemView controller = loader.getController();
             fillItemViewWithData(item, controller);
@@ -35,7 +36,7 @@ public class ItemViewController
     }
 
     /**
-     * Add cards to the shop view.
+     * Add item to the itemview.
      * @param controller an instance of ItemView, the controller of itemView.fxml
      *
      */

@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
@@ -174,7 +175,7 @@ public class RoomDialogueViewController
      */
     private void startBattle ()
     {
-        //TODO: Implement method to start a battle
+        GameManager.getInstance().beginBattle();
         GlobalLogger.log(LoggerStringValues.START_BATTLE_HANDLER);
     }
 
@@ -197,11 +198,11 @@ public class RoomDialogueViewController
     }
 
     /**
-     * Open the LavaPondView.
+     * Open the NpcRoomView.
      */
     private void openLavaPond ()
     {
-        // TODO: Implement method to open a LavaPondView
+        // TODO: Implement method to open a NpcRoomView
         GlobalLogger.log(LoggerStringValues.OPEN_LAVAPOND_HANDLER);
     }
 

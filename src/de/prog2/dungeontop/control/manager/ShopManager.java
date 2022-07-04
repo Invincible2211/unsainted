@@ -22,7 +22,7 @@ public class ShopManager {
      *
      * @return Instance of the shop
      */
-    public ShopManager getInstance (){
+    public static ShopManager getInstance (){
         GlobalLogger.log(LoggerStringValues.SHOPMANAGER_GET);
         return instance;
     }

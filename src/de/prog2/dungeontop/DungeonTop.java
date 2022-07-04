@@ -5,6 +5,7 @@ import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
@@ -12,11 +13,13 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
+import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.arena.ArenaComponent;
+import de.prog2.dungeontop.model.world.rooms.LavaPondRoom;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
@@ -24,6 +27,8 @@ import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
 import de.prog2.dungeontop.view.NetworkController;
+import de.prog2.dungeontop.control.controller.InventoryController;
+import de.prog2.dungeontop.view.NpcRoomView;
 import de.prog2.dungeontop.view.RoomDialogueViewController;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Application;
@@ -59,33 +64,35 @@ public class DungeonTop extends Application
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
-
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
         stage.show();
+
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
         //stage.setScene(scene1);
-        //testArenaView();
+        testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
         //testHellView(scene);
+        testLavaPondView(primaryStage);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {
         List<Entity> entities = TestConstants.getTestEntities();
+        entities.addAll(TestConstants.getTestEntities());
         ArrayList<Node> entityViews = new ArrayList<>();
         int i = 0;
         for (Entity entity : entities)
         {
             i++;
-            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (i)));
+            entityViews.add(EntityViewController.getEntityView(entity, 1));//0.1 + 0.05 * (i)));
         }
         HBox hBox = new HBox();
         hBox.setStyle("-fx-background-color: #000000;");
@@ -114,11 +121,14 @@ public class DungeonTop extends Application
         Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
         HellGenerator.initHell(hell);
         HellView view = new HellView();
+        PlayerManager.getInstance().getPlayer().setCurrentRoom(hell.getStartingRoom());
         Scene hellView = view.initHellView(hell);
+        stage.setScene(hellView);
 
         Hell hell2 = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
         HellGenerator.initHell(hell2);
         HellGenerator.initHell(hell2);
+        PlayerManager.getInstance().getPlayer().setCurrentRoom(hell2.getStartingRoom());
         Scene hellView2 = view.initHellView(hell2);
 
         System.out.println(hell2);
@@ -163,12 +173,14 @@ public class DungeonTop extends Application
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
-        BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
+        BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(4, 4),fxmlLoader.getController());
         Scene scene = new Scene(root);
         scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         getStage().setScene(scene);
         harald.setPosition(new Coordinate(1, 1));
+        harald.setOwner(player1);
         BattleManager.getInstance().getArena().getArenaHashmap().put(new Coordinate(1, 1),new ArenaComponent(harald));
+        //somethign wrong with this
         ArenaBaseController.updateBattlefield(fxmlLoader.getController(), BattleManager.getInstance().getArena());
     }
 
@@ -182,7 +194,7 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        TestItem item = new TestItem("Potion", AssetIds.HEALTH_POTION);
+        Item item = new Item("Potion", "Heals 10 Health", 100, AssetIds.HEALTH_POTION);
         Inventory inventory = new Inventory();
         for (int i = 0; i < 8; i++)
         {
@@ -194,6 +206,23 @@ public class DungeonTop extends Application
         InventoryController.addItems(fxmlLoader.getController(), inventory.getInventory());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
+    }
+
+    public static void testLavaPondView (Stage stage)
+    {
+        Entity harald = new Minion("Harald", 6, 4, 1, 45);
+        Deck deck = new Deck();
+        for (int i = 0; i < 30; i++)
+        {
+            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
+        }
+
+        LavaPondRoom room = new LavaPondRoom();
+        PlayerManager.getInstance().addSouls(100);
+        PlayerManager.getInstance().getPlayer().setDeck(deck);
+        NpcRoomView view = new NpcRoomView(room);
+        Scene scene = view.getNpcRoomView();
+        stage.setScene(scene);
     }
 
     public static Stage getStage()

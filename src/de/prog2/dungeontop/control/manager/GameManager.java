@@ -1,8 +1,18 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.model.game.GameState;
 import de.prog2.dungeontop.model.world.World;
+import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
+import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.SettingsController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+
+import java.io.IOException;
 
 public class GameManager {
 
@@ -20,7 +30,7 @@ public class GameManager {
      */
     private GameManager()
     {
-        this.gameWorld.initWorld();
+        //this.gameWorld.initWorld();
     }
 
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
@@ -30,6 +40,19 @@ public class GameManager {
      */
     public void startGame()
     {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = null;
+        try
+        {
+            root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SELECT_HERO_FXML));
+        }
+        catch (IOException e)
+        {
+            GlobalLogger.warning(LoggerStringValues.FXML_LOAD_ERROR);
+        }
+        Scene scene = new Scene(root);
+        DungeonTop.getStage().setScene(scene);
+
         this.currentState = GameState.RUNNING;
     }
 
@@ -44,8 +67,9 @@ public class GameManager {
     /**
      * Das Spiel wird in den Zustand des pausierten Spiels gesetzt.
      */
-    public void Pause()
+    public void pause()
     {
+        SettingsController.showSettings();
         this.currentState = GameState.PAUSE;
     }
 

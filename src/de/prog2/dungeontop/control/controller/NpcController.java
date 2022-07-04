@@ -45,10 +45,9 @@ public class NpcController {
      *
      * @param card Card which shall be removed from the player's card deck
      * @param price Cost for removing the specified card from the player's deck.
-     * @throws CardNotFoundException Thrown if the player's deck doesn't contain the specified card.
      * @throws NotEnoughSoulsException Thrown if the player doesn't own enough souls to remove the card from his deck.
      */
-    public static void removeCard (Card card, int price) throws CardNotFoundException, NotEnoughSoulsException {
+    public static void removeCard (Card card, int price) throws NotEnoughSoulsException {
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 

@@ -17,6 +17,7 @@ public abstract class Entity
     private Coordinate position;
     private boolean canMove = false;
     private Player owner = null;
+    private boolean selected = false;
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
     public Entity(String name, int hp, int attackDamage, int movement, int assetId, Player owner)
@@ -136,5 +137,15 @@ public abstract class Entity
     public String getTalent()
     {
         return talent;
+    }
+
+    public boolean isSelected ()
+    {
+        return selected;
+    }
+
+    public void setSelected (boolean selected)
+    {
+        this.selected = selected;
     }
 }

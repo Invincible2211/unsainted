@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.controller.*;
-import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -19,112 +18,101 @@ public class BattleManager
     private BattlePhase currentPhase = BattlePhase.START;
     private Duellist firstDuellist = null;
     private Duellist secondDuellist = null;
+    private ArenaBaseView myArenaBaseView = null;
 
     //BattleManager ist ein Singleton.
     private final static BattleManager instance = new BattleManager();
 
     public static BattleManager getInstance ()
     {
-        GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_GET);
+//        GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_GET);
         return instance;
     }
+
     // BattleManager ist ein Singleton
     private BattleManager ()
     {
     }
 
     /**
-     * @param firstPlayer Player or DM who will draw and play first. Decide before Battle
-     * @param secondplayer Player or DM will go second
-     * @param firstplyerDeck COPY playerDeck or the DMHerodeck, depending who is who.
+     * @param firstPlayer      Player or DM who will draw and play first. Decide before Battle
+     * @param secondplayer     Player or DM will go second
+     * @param firstplyerDeck   COPY playerDeck or the DMHerodeck, depending who is who.
      * @param secondplayerDeck COPY playerDeck or the DMHerodeck, depending who is who
-     * @param arena The instance of the Arena
-     * @param arenaBaseView the View that it will draw on
+     * @param arena            The instance of the Arena
+     * @param arenaBaseView    the View that it will draw on
      */
-    public void startBattle(Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck, Arena arena, ArenaBaseView arenaBaseView)
+    public void startBattle (Player firstPlayer, Player secondplayer, Deck firstplyerDeck, Deck secondplayerDeck,
+                             Arena arena, ArenaBaseView arenaBaseView)
     {
-        this.firstDuellist = new Duellist(firstPlayer,firstplyerDeck);
-        this.secondDuellist = new Duellist(secondplayer,secondplayerDeck);
+        this.firstDuellist = new Duellist(firstPlayer, firstplyerDeck);
+        this.secondDuellist = new Duellist(secondplayer, secondplayerDeck);
         this.arena = arena;
-        statinitialiser(arenaBaseView);
+        this.myArenaBaseView = arenaBaseView;
+        statinitialiser();
     }
 
-    /**
-     * @param arenaBaseView the View that it will draw on
-     */
-    private void statinitialiser(ArenaBaseView arenaBaseView)
+    private void statinitialiser ()
     {
-        ArenaBaseController.init(arenaBaseView);
+        ArenaBaseController.init(this.myArenaBaseView);
         this.getFirstDuellist().drawNewDuellistHand();
         this.getSecondDuellist().drawNewDuellistHand();
-        ArenaBaseController.updatePlayerHands(arenaBaseView,
+        ArenaBaseController.updatePlayerHands(this.myArenaBaseView,
                 this.getFirstDuellist().getHand(),
                 this.getSecondDuellist().getHand());
         this.currentPhase = BattlePhase.START;
-        ArenaBaseController.updateEgoPoints(arenaBaseView,
+        ArenaBaseController.updateEgoPoints(this.myArenaBaseView,
                 this.getFirstDuellist().currentEgoPoints,
                 this.getSecondDuellist().getCurrentEgoPoints());
     }
 
     public BattlePhase getNextPhaseInCycle ()
     {
-        switch (this.getCurrentPhase())
-        {
-            case START, SECOND_DUELLIST_SECOND_PLACE_CARDS ->
-                    {
-                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                        return BattlePhase.FIRST_DUELLIST_DRAW;
-                    }
-            case FIRST_DUELLIST_DRAW ->
-                    {
-                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                        return BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
-                    }
-            case FIRST_DUELLIST_PLACE_CARDS ->
-                    {
-                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                        return BattlePhase.SECOND_DUELLIST_DRAW;
-                    }
-            case SECOND_DUELLIST_DRAW ->
-                    {
-                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                        return BattlePhase.SECOND_DUELLIST_PLACE_CARDS;
-                    }
-            case SECOND_DUELLIST_PLACE_CARDS ->
-                    {
-                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                        return BattlePhase.FIRST_DUELLIST_MINION_ACT;
-                    }
-            case FIRST_DUELLIST_MINION_ACT ->
-                    {
-                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                        return BattlePhase.SECOND_DUELLIST_MINION_ACT;
-                    }
-            case SECOND_DUELLIST_MINION_ACT ->
-                    {
-                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                        return BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS;
-                    }
-            case FIRST_DUELLIST_SECOND_PLACE_CARDS ->
-                    {
-                        GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
-                        return BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS;
-                    }
-            case END ->
-                    {
-                        GlobalLogger.warning(LoggerStringValues.TRY_TO_GET_PHASE_AFTER_END);
-                        return BattlePhase.END;
-                    }
-            default ->
-                    {
-                        GlobalLogger.warning(ExceptionMessagesKeys.CAN_NOT_FIND_BATTLESTATE);
-                        return null;
-                    }
+        switch (this.getCurrentPhase()) {
+            case START, SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
+                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                return BattlePhase.FIRST_DUELLIST_DRAW;
+            }
+            case FIRST_DUELLIST_DRAW -> {
+                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                return BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
+            }
+            case FIRST_DUELLIST_PLACE_CARDS -> {
+                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                return BattlePhase.SECOND_DUELLIST_DRAW;
+            }
+            case SECOND_DUELLIST_DRAW -> {
+                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                return BattlePhase.SECOND_DUELLIST_PLACE_CARDS;
+            }
+            case SECOND_DUELLIST_PLACE_CARDS -> {
+                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                return BattlePhase.FIRST_DUELLIST_MINION_ACT;
+            }
+            case FIRST_DUELLIST_MINION_ACT -> {
+                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                return BattlePhase.SECOND_DUELLIST_MINION_ACT;
+            }
+            case SECOND_DUELLIST_MINION_ACT -> {
+                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                return BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS;
+            }
+            case FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
+                GlobalLogger.log(LoggerStringValues.GOT_NEXT_BATTLEPHASE);
+                return BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS;
+            }
+            case END -> {
+                GlobalLogger.warning(LoggerStringValues.TRY_TO_GET_PHASE_AFTER_END);
+                return BattlePhase.END;
+            }
+            default -> {
+                GlobalLogger.warning(ExceptionMessagesKeys.CAN_NOT_FIND_BATTLESTATE);
+                return null;
+            }
         }
     }
 
     /**
-     *
      * @param gewinner
      * @param damageAnVerlierer
      * @return
@@ -144,40 +132,117 @@ public class BattleManager
 
     /**
      * Places card on Arena tile, then updates it on the View.
-     * @param duellist who controlls the card
+     *
+     * @param duellist   who controlls the card
      * @param coordinate where to place new minion
+     * @param entityCard the card to place
+     * @return true if successful, false if not
      */
-    public void placeEntity (Duellist duellist, Coordinate coordinate, EntityCard entityCard, ArenaBaseView arenaBaseView)
+    public boolean tryPlaceEntity(Duellist duellist, Coordinate coordinate, EntityCard entityCard)
     {
-        if (entityCard.getPrice() <= duellist.getCurrentEgoPoints())
+        // Check if the duellist has enough EgoPoints to place the card.
+        if (entityCard.getPrice() > duellist.getCurrentEgoPoints())
         {
-            EntityCardController.tryInstantiate(entityCard, arena, coordinate);
-            //Reduce egopoints by one for each cost of card
-            for (int cost = 0; cost < entityCard.getPrice(); cost++)
-            {
-                duellist.tryReduceEgoPoints();
-            }
-
-            if (EntityCardController.tryInstantiate(entityCard, arena, coordinate))
-            {
-                duellist.removeCardFromHand(entityCard);
-                ArenaBaseController.updateBattlefield(arenaBaseView, arena);
-            }
-            GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
-        } else {
             GlobalLogger.warning(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
+            return false;
         }
+        // If the tile is empty, place the card on it.
+        if (!EntityCardController.tryInstantiate(entityCard, arena, coordinate))
+        {
+            GlobalLogger.warning(LoggerStringValues.ALREADY_OCCUPIED);
+            return false;
+        }
+        // Update duellist and arena.
+        duellist.reduceEgoPoints(entityCard.getPrice());
+        duellist.removeCardFromHand(entityCard);
+        ArenaBaseController.updateBattlefield(this.myArenaBaseView, arena);
+        GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
+        return true;
     }
 
-    private void attack (Entity attacker, Entity attacked)
+    private void attack (Coordinate coordinateOfAttackedEntity)
     {
-        this.arena = EntityController.attack(attacker, attacked.getPosition(), this.arena);
+        this.arena = EntityController.attack(this.getArena().getSelectedUnit(), coordinateOfAttackedEntity, this.arena);
+        ArenaBaseController.updateBattlefield(this.myArenaBaseView, this.getArena());
     }
 
 
-    private void moveUnit (Entity mover, MoveDirection direction)
+    private void moveUnit (MoveDirection direction)
     {
-        EntityController.tryMoveTowards(this.arena, mover, direction);
+        EntityController.tryMoveTowards(this.arena, this.arena.getSelectedUnit(), direction);
+        ArenaBaseController.updateBattlefield(this.myArenaBaseView, this.getArena());
+
+    }
+
+    public void arenaTilePressed (Coordinate coordinate)
+    {
+        //if no entity has been selected yet, try to select one
+        if (!this.getArena().hasSelectedUnit())
+        {
+            //select a unit if one is on the tile
+            if (this.getArena().getArenaComponent(coordinate) != null)
+            {
+                this.getArena().selectUnit(coordinate);
+            } else {
+                GlobalLogger.warning(LoggerStringValues.NO_UNIT_ON_TILE);
+            }
+        }
+        //if a unit has been selected, either move or attack
+        else
+        {
+            //if the tile is not empty, attack the unit
+            if (this.getArena().getArenaComponent(coordinate) != null)
+            {
+                this.attack(coordinate);
+                return;
+            }
+            //if the tile is empty, move the unit
+
+            //this is where bugs will happen
+            if (this.getArena().getSelectedUnit().getPosition().getX() == coordinate.getX())
+            {
+                if (this.getArena().getSelectedUnit().getPosition().getY() < coordinate.getY())
+                {
+                    moveUnit(MoveDirection.DOWN);
+                } else {
+                    moveUnit(MoveDirection.UP);
+                }
+            } else {
+                if (this.getArena().getSelectedUnit().getPosition().getX() < coordinate.getX())
+                {
+                    moveUnit(MoveDirection.RIGHT);
+                } else {
+                    moveUnit(MoveDirection.LEFT);
+                }
+            }
+
+        }
+
+    }
+
+
+    public void arenaTileReleased (Coordinate coordinate)
+    {
+        //Logik und ueberpruefung ob darf und was passiert
+    }
+
+    public Player getCurrentActivePlayer ()
+    {
+        if (getCurrentPhase() == BattlePhase.FIRST_DUELLIST_DRAW ||
+                getCurrentPhase() == BattlePhase.FIRST_DUELLIST_PLACE_CARDS ||
+                getCurrentPhase() == BattlePhase.FIRST_DUELLIST_MINION_ACT ||
+                getCurrentPhase() == BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS) {
+            GlobalLogger.log(LoggerStringValues.CURRENT_ACTIVE_PLAYER_ONE);
+            return this.getFirstDuellist().getPlayer();
+
+        } else if (getCurrentPhase() == BattlePhase.SECOND_DUELLIST_DRAW ||
+                getCurrentPhase() == BattlePhase.SECOND_DUELLIST_PLACE_CARDS ||
+                getCurrentPhase() == BattlePhase.SECOND_DUELLIST_MINION_ACT ||
+                getCurrentPhase() == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS) {
+            GlobalLogger.log(LoggerStringValues.CURRENT_ACTIVE_PLAYER_TWO);
+            return this.getSecondDuellist().getPlayer();
+        }
+        return null;
     }
 
     /**
@@ -212,6 +277,7 @@ public class BattleManager
     {
         return currentPhase;
     }
+
     public void setCurrentPhase (BattlePhase currentPhase)
     {
         this.currentPhase = currentPhase;
@@ -267,10 +333,9 @@ public class BattleManager
          * will shuffle deck if there are not enough cards to draw
          * TODO make shure that deck always has at least X amount of cards.
          */
-        private void drawNewDuellistHand()
+        private void drawNewDuellistHand ()
         {
-            if (getDeck().getCards().size() < handLimit)
-            {
+            if (getDeck().getCards().size() < handLimit) {
                 reStackDeckFromDiscard();
                 DeckController.shuffleDeck(getDeck());
             }
@@ -284,16 +349,21 @@ public class BattleManager
             }
         }
 
-        private void removeCardFromHand(Card card)
+        private void removeCardFromHand (Card card)
         {
             getHand().remove(card);
             GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
         }
 
-        //technically not a try as it is not a boolean
-        private void tryReduceEgoPoints()
+        protected void reduceEgoPoints (int amount)
         {
-            if (currentEgoPoints > 0){
+            this.currentEgoPoints -= amount;
+            GlobalLogger.log(LoggerStringValues.REDUCED_EGOPOINTS);
+        }
+        //technically not a try as it is not a boolean
+        private void tryReduceEgoPoints ()
+        {
+            if (currentEgoPoints > 0) {
                 GlobalLogger.log(LoggerStringValues.REDUCED_EGOPOINTS);
                 currentEgoPoints--;
                 return;
@@ -301,7 +371,7 @@ public class BattleManager
             GlobalLogger.warning(LoggerStringValues.NO_EGO_TO_REDUCE);
         }
 
-        private void resetEgoPoints()
+        private void resetEgoPoints ()
         {
             this.currentEgoPoints = this.egoPointsMax;
         }
@@ -309,7 +379,7 @@ public class BattleManager
         /**
          * this should only be done if there are not enough cards in the Deck to draw a new hand
          */
-        private void reStackDeckFromDiscard()
+        private void reStackDeckFromDiscard ()
         {
             for (Card card : getDiscardPile().getCards()) {
                 getDeck().getCards().push(card);

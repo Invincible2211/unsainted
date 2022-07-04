@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 
-public class InventoryView
+public class InventoryViewController
 {
     @FXML
     GridPane gridPane;
@@ -23,8 +23,6 @@ public class InventoryView
     @FXML
     private void onReturnButtonClicked()
     {
-        HellView view = new HellView();
-        Scene scene = view.initHellView(GameManager.getInstance().getGameWorld().getCurrentHell());
-        DungeonTop.getStage().setScene(scene);
+        DungeonTop.getStage().setScene(HellView.getCurrHellView());
     }
 }

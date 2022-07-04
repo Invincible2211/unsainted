@@ -3,7 +3,7 @@ package de.prog2.dungeontop.model.items;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
-public abstract class Item
+public class Item
 {
     private final String name;
     private String description;
@@ -19,9 +19,10 @@ public abstract class Item
         GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
     }
 
-    public Item(String name, int assetID)
+    public Item(String name, String description, int assetID)
     {
         this.name = name;
+        this.description = description;
         this.assetID = assetID;
         GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
     }
