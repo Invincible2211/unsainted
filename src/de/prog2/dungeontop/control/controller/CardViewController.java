@@ -175,7 +175,12 @@ public abstract class CardViewController
      */
     private static void fillSpellCardView(SpellCard card, SpellCardView controller)
     {
-        // TODO Implement SpellCardView
+        Spell spell = card.getSpell();
+        // Name
+        controller.getNameLabel().setText(spell.getName());
+        
+        // Image
+        controller.getSpellImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(spell.getAssetId()));
     }
     /**
      * Fills the card view with data from the spell card.
