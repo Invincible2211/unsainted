@@ -33,4 +33,7 @@ public interface CardDetailConstants
     String NAME_FONT_SIZE_STYLE = "-fx-font-size: %d px;";
     double ENTITY_IMAGE_OFFSET_Y = ENTITY_IMAGE_HEIGHT/2d;
     double ENTITY_IMAGE_TOP_ANCHOR = 100 + ENTITY_IMAGE_HEIGHT;
+    // Spell
+    double DESCRIPTION_TOP_ANCHOR = 560;
+    double DESCRIPTION_HORIZONTAL_ANCHOR = 60;
 }

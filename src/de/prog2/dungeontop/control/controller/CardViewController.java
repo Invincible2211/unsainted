@@ -6,6 +6,7 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
+import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.resources.views.CardConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -110,9 +111,9 @@ public abstract class CardViewController
         else if(card instanceof SpellCard)
         {
             if(detail)
-                fillSpellCardView((SpellCard) card, (SpellCardView) controller);
-            else
                 fillSpellCardDetailView((SpellCard) card, (SpellCardDetailView) controller);
+            else
+                fillSpellCardView((SpellCard) card, (SpellCardView) controller);
         }
 
         controller.setCard(card);
@@ -183,7 +184,14 @@ public abstract class CardViewController
      */
     private static void fillSpellCardDetailView(SpellCard card, SpellCardDetailView controller)
     {
-        // TODO Implement SpellCardView
+        Spell spell = card.getSpell();
+        // Name
+        controller.getNameLabel().setText(spell.getName());
+        // Description
+        controller.getDescriptionLabel().setText(spell.getDescription());
+
+        // Image
+        controller.getSpellImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(spell.getAssetId()));
     }
 
     public static void zoomCardView(Node cardView)
