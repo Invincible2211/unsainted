@@ -34,6 +34,7 @@ public interface AssetIds {
 
     // NpcRoom Asset IDs
     int NPC_ROOM_BUTTON_BG = 17;
+    int SMALL_BUTTON_IMG = 80;
 
 
     // Card Asset IDs

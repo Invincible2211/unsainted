@@ -6,6 +6,7 @@ import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.NpcRoomViewConstants;
 import de.prog2.dungeontop.resources.RoomDialogueConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -175,6 +176,7 @@ public class RoomDialogueViewController
      */
     private void startBattle ()
     {
+        hideStage();
         GameManager.getInstance().beginBattle();
         GlobalLogger.log(LoggerStringValues.START_BATTLE_HANDLER);
     }
@@ -193,7 +195,9 @@ public class RoomDialogueViewController
      */
     private void openForge ()
     {
-        // TODO: Implement method to open a ForgeView
+        NpcRoomView view = new NpcRoomView((NPCRoom) PlayerManager.getInstance().getPlayer().getCurrentRoom());
+        DungeonTop.getStage().setScene(view.createNpcRoomView());
+        hideStage();
         GlobalLogger.log(LoggerStringValues.OPEN_FORGE_HANDLER);
     }
 
@@ -202,7 +206,9 @@ public class RoomDialogueViewController
      */
     private void openLavaPond ()
     {
-        // TODO: Implement method to open a NpcRoomView
+        NpcRoomView view = new NpcRoomView((NPCRoom) PlayerManager.getInstance().getPlayer().getCurrentRoom());
+        DungeonTop.getStage().setScene(view.createNpcRoomView());
+        hideStage();
         GlobalLogger.log(LoggerStringValues.OPEN_LAVAPOND_HANDLER);
     }
 

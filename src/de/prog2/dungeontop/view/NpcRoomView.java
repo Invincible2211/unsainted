@@ -1,9 +1,9 @@
 package de.prog2.dungeontop.view;
+import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.NpcController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
-import de.prog2.dungeontop.control.manager.ShopManager;
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotEnoughSoulsException;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Deck;
@@ -15,9 +15,6 @@ import de.prog2.dungeontop.resources.HellViewConstants;
 import de.prog2.dungeontop.resources.NpcRoomViewConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -27,7 +24,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.util.Stack;
@@ -46,7 +42,7 @@ public class NpcRoomView
     public NpcRoomView (NPCRoom room)
     {
         this.room = room;
-        this.npcRoomView = createNpcRoomView(room);
+        this.npcRoomView = createNpcRoomView();
     }
 
     // *-------------------------------------- Getter & Setter -----------------------------------------------------* //
@@ -87,10 +83,9 @@ public class NpcRoomView
     /**
      * Creates a view that is used to give the player the ability to interact with certain NpcRooms
      *
-     * @param room room the player shall be able to interact with
      * @return scene containing the view
      */
-    public Scene createNpcRoomView(NPCRoom room)
+    public Scene createNpcRoomView()
     {
         // create the outer pane which will contain the statboard and the scrollpane
         AnchorPane outerContainer = new AnchorPane();
@@ -115,10 +110,18 @@ public class NpcRoomView
         this. loadDeck();
 
         // create the statboard, configure it and add it to the outer pane
-        FlowPane statboard = this.createStatboard(room);
+        FlowPane statboard = this.createStatboard(this.getRoom());
         AnchorPane.setTopAnchor(statboard, NpcRoomViewConstants.STATBOARD_TOP_ANCHOR);
         AnchorPane.setLeftAnchor(statboard, NpcRoomViewConstants.STATBOARD_LEFT_ANCHOR);
         outerContainer.getChildren().add(statboard);
+
+        // add a button to close the view and return to the hellView
+        Button closeButton = createSmallButton(AssetIds.SMALL_BUTTON_IMG);
+        outerContainer.getChildren().add(closeButton);
+        AnchorPane.setTopAnchor(closeButton, NpcRoomViewConstants.STATBOARD_TOP_ANCHOR);
+        AnchorPane.setRightAnchor(closeButton, NpcRoomViewConstants.SMALL_BUTTON_FIT_WIDTH *
+                HellViewConstants.HALF);
+        closeButton.setOnAction(e -> DungeonTop.getStage().setScene(HellView.getCurrHellView()));
 
         return scene;
     }
@@ -229,7 +232,7 @@ public class NpcRoomView
      * Create a button which is thought to be used below a cardView to begin an action
      *
      * @param text Descriptive text which will be shown on the button
-     * @return button
+     * @return button consisting of a background image and the descriptive text
      */
     private static Button createButton(String text)
     {
@@ -254,6 +257,38 @@ public class NpcRoomView
     }
 
     /**
+     * Create a small button to be used in the UI
+     *
+     * @param assetId ID of the asset which shall be used for the background of the button
+     * @return button which shows the backgroundimage with corner radius and border
+     */
+    private static Button createSmallButton (final int assetId)
+    {
+        Image buttonImage = AssetsManager.getImageByAssetId(assetId);
+        ImageView buttonImageView = new ImageView(buttonImage);
+
+        Button smallButton = new Button();
+
+        // set the button style
+        smallButton.setBackground(Background.EMPTY);
+        smallButton.setStyle(NpcRoomViewConstants.CLOSE_BUTTON_STYLE);
+
+        smallButton.setGraphic(buttonImageView);
+
+        buttonImageView.setFitWidth(NpcRoomViewConstants.SMALL_BUTTON_FIT_WIDTH -
+                2 * NpcRoomViewConstants.SMALL_BUTTON_PADDING -
+                2 * NpcRoomViewConstants.SMALL_BUTTON_BORDER_WIDTH);
+
+        buttonImageView.setFitHeight(NpcRoomViewConstants.SMALL_BUTTON_FIT_HEIGHT -
+                2 * NpcRoomViewConstants.SMALL_BUTTON_PADDING -
+                2 * NpcRoomViewConstants.SMALL_BUTTON_BORDER_WIDTH);
+
+        smallButton.setFocusTraversable(NpcRoomViewConstants.SMALL_BUTTON_FOCUS_TRAVERSABLE);
+
+        return smallButton;
+    }
+
+    /**
      * Create a statboard that shows the price of the next action and the current player souls.
      *
      * @param room room for which the statboard shall be created
@@ -269,7 +304,12 @@ public class NpcRoomView
         statboard.setBackground(
                 new Background(
                         new BackgroundImage(
-                                AssetsManager.getImageByAssetId(AssetIds.STATBOARD_BACKGROUND_SCROLL),
+                                AssetsManager.getImageByAssetId(
+                                        AssetIds.STATBOARD_BACKGROUND_SCROLL,
+                                        NpcRoomViewConstants.STATBOARD_BG_WIDTH,
+                                        NpcRoomViewConstants.STATBOARD_BG_HEIGHT,
+                                        HellViewConstants.STAT_BOARD_BG_IMG_PRESERVE_RATIO,
+                                        HellViewConstants.STAT_BOARD_BG_IMG_SMOOTH),
                                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                                 BackgroundSize.DEFAULT
                         )

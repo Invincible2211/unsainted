@@ -70,17 +70,26 @@ public class DungeonTop extends Application
         stage.sizeToScene();
         stage.show();
 
+        // TODO: give the player his goddamn deck
+        Entity harald = new Minion("Harald", 6, 4, 1, 45);
+        Deck deck = new Deck();
+        for (int i = 0; i < 10; i++)
+        {
+            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
+        }
+        PlayerManager.getInstance().getPlayer().setDeck(deck);
+
         //AudioManager.getInstance().playSound(99);
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
-        //stage.setScene(scene1);
+        stage.setScene(scene);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
-        testHellView(scene);
+        //testHellView(scene);
         //testLavaPondView(primaryStage);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
