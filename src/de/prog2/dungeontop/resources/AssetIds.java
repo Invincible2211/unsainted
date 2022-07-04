@@ -36,7 +36,8 @@ public interface AssetIds {
 
 
     // Card Asset IDs
-    int CARD_BACKGROUND_IMAGE_ID = 50;
+    int CARD_BACKGROUND_IMAGE_ID = 49;
+    int CARD_DETAIL_BACKGROUND_IMAGE_ID = 50;
     int HP_ICON = 6;
     int ATTACK_ICON = 52;
     int SUMMON_COST_ICON = 53;

@@ -92,7 +92,8 @@ public abstract class CardViewController
      */
     private static void fillCardViewWithData(Card card, CardView controller, boolean detail)
     {
-        controller.getBackgroundImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.CARD_BACKGROUND_IMAGE_ID));
+        controller.getBackgroundImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(
+                detail ? AssetIds.CARD_DETAIL_BACKGROUND_IMAGE_ID : AssetIds.CARD_BACKGROUND_IMAGE_ID));
         controller.getRankLabel().setText(card.getRank() + "");
         controller.getRankImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.getRankIcon(card.getRank())));
 
