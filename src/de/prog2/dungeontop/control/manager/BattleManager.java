@@ -190,34 +190,32 @@ public class BattleManager
         //if a unit has been selected, either move or attack
         else
         {
-            //if the tile is empty, move the unit
-            if (this.getArena().getArenaComponent(coordinate) == null)
-            {
-                //move the unit
-                //this is where bugs will happen
-                if (this.getArena().getSelectedUnit().getPosition().getX() == coordinate.getX())
-                {
-                    if (this.getArena().getSelectedUnit().getPosition().getY() < coordinate.getY())
-                    {
-                        moveUnit(MoveDirection.DOWN);
-                    } else {
-                        moveUnit(MoveDirection.UP);
-                    }
-                } else {
-                    if (this.getArena().getSelectedUnit().getPosition().getX() < coordinate.getX())
-                    {
-                        moveUnit(MoveDirection.RIGHT);
-                    } else {
-                        moveUnit(MoveDirection.LEFT);
-                    }
-                }
-
-            }
             //if the tile is not empty, attack the unit
-            else
+            if (this.getArena().getArenaComponent(coordinate) != null)
             {
                 this.attack(coordinate);
+                return;
             }
+            //if the tile is empty, move the unit
+
+            //this is where bugs will happen
+            if (this.getArena().getSelectedUnit().getPosition().getX() == coordinate.getX())
+            {
+                if (this.getArena().getSelectedUnit().getPosition().getY() < coordinate.getY())
+                {
+                    moveUnit(MoveDirection.DOWN);
+                } else {
+                    moveUnit(MoveDirection.UP);
+                }
+            } else {
+                if (this.getArena().getSelectedUnit().getPosition().getX() < coordinate.getX())
+                {
+                    moveUnit(MoveDirection.RIGHT);
+                } else {
+                    moveUnit(MoveDirection.LEFT);
+                }
+            }
+
         }
 
     }
