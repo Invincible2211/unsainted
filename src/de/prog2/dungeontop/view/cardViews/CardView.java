@@ -2,16 +2,12 @@ package de.prog2.dungeontop.view.cardViews;
 
 import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.model.game.Card;
-import de.prog2.dungeontop.resources.CardConstants;
+import de.prog2.dungeontop.resources.views.CardConstants;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-
-import java.util.ArrayList;
 
 public abstract class CardView
 {
@@ -28,19 +24,29 @@ public abstract class CardView
     @FXML
     private ImageView summonImageView;
     @FXML
-    private StackPane summonCostContainer;
+    protected StackPane summonCostContainer;
     @FXML
-    private StackPane rankContainer;
+    protected StackPane rankContainer;
     @FXML
-    private void mouseEntered() {CardViewController.mouseEntered(this);}
+    private void mouseEntered() {CardViewController.zoomCardView(container);}
     @FXML
-    private void mouseExited() {CardViewController.mouseExited(this);}
+    private void mouseExited() {CardViewController.resetZoom(container);}
 
+    /**
+     * Sets the scale of the card view.
+     * @param scale The scale of the card view.
+     */
+    public void setScale(double scale)
+    {
+        setWidth(CardConstants.CARD_BASE_WIDTH * scale);
+        setHeight(CardConstants.CARD_BASE_HEIGHT * scale);
+        setAnchorScale(scale);
+    }
     /**
      * Sets the width of the card.
      * @param width the width, in pixels
      */
-    public void setWidth(double width)
+    protected void setWidth(double width)
     {
         backgroundImageView.setFitWidth(width);
         container.setPrefWidth(width);
@@ -51,7 +57,7 @@ public abstract class CardView
      * Sets the height of the card.
      * @param height the height, in pixels
      */
-    public void setHeight(double height)
+    protected void setHeight(double height)
     {
         backgroundImageView.setFitHeight(height);
         container.setPrefHeight(height);
@@ -60,14 +66,15 @@ public abstract class CardView
 
     /**
      * Sets the scale of the single elements on the card displaying the stats.
-     * @param scale the scale, from 0 to 1
+     * @param scale The scale of the single elements on the card displaying the stats.
      */
-    public void setAnchorScale(double scale)
+    protected void setAnchorScale(double scale)
     {
         summonCostContainer.setScaleX(scale);
         summonCostContainer.setScaleY(scale);
         AnchorPane.setTopAnchor(summonCostContainer, scale * CardConstants.SUMMON_COST_TOP_ANCHOR - CardConstants.ICON_OFFSET);
         AnchorPane.setLeftAnchor(summonCostContainer, scale * CardConstants.SUMMON_COST_LEFT_ANCHOR - CardConstants.ICON_OFFSET);
+
         rankContainer.setScaleX(scale);
         rankContainer.setScaleY(scale);
         AnchorPane.setTopAnchor(rankContainer, scale * CardConstants.RANK_TOP_ANCHOR - CardConstants.ICON_OFFSET);

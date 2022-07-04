@@ -12,6 +12,7 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
+import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
@@ -71,7 +72,11 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
 
-        //testArenaView();
+        fxmlLoader = new FXMLLoader();
+        Parent parent = fxmlLoader.load((DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.LOBBY_FXML)));
+        Scene scene1 = new Scene(parent);
+        //stage.setScene(scene1);
+        testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
@@ -82,12 +87,13 @@ public class DungeonTop extends Application
     public static void testEntityView(Stage primaryStage) throws Exception
     {
         List<Entity> entities = TestConstants.getTestEntities();
+        entities.addAll(TestConstants.getTestEntities());
         ArrayList<Node> entityViews = new ArrayList<>();
         int i = 0;
         for (Entity entity : entities)
         {
             i++;
-            entityViews.add(EntityViewController.getEntityView(entity, 0.25 * (i)));
+            entityViews.add(EntityViewController.getEntityView(entity, 1));//0.1 + 0.05 * (i)));
         }
         HBox hBox = new HBox();
         hBox.setStyle("-fx-background-color: #000000;");
@@ -125,7 +131,12 @@ public class DungeonTop extends Application
         HellGenerator.initHell(hell2);
         PlayerManager.getInstance().getPlayer().setCurrentRoom(hell2.getStartingRoom());
         Scene hellView2 = view.initHellView(hell2);
+
         System.out.println(hell2);
+
+        stage.setScene(scene);
+
+        stage.setScene(hellView);
         stage.setScene(hellView2);
     }
 
@@ -163,7 +174,7 @@ public class DungeonTop extends Application
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
-        BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
+        BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(4, 4),fxmlLoader.getController());
         Scene scene = new Scene(root);
         scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         getStage().setScene(scene);
@@ -184,7 +195,7 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        TestItem item = new TestItem("Potion", AssetIds.HEALTH_POTION);
+        Item item = new Item("Potion", "Heals 10 Health", 100, AssetIds.HEALTH_POTION);
         Inventory inventory = new Inventory();
         for (int i = 0; i < 8; i++)
         {

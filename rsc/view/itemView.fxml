@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ItemView">
    <children>
-      <Button fx:id="itemButton" layoutX="5.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#itemButtonClicked" prefHeight="190.0" prefWidth="190.0">
+      <Button layoutX="5.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#itemButtonClicked" prefHeight="190.0" prefWidth="190.0">
          <graphic>
             <ImageView fx:id="itemImage" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
