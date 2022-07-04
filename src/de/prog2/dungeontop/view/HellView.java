@@ -67,6 +67,10 @@ public class HellView
 
         Scene scene = new Scene(container, HellViewConstants.SCENE_STARTUP_WIDTH, HellViewConstants.SCENE_STARTUP_HEIGHT);
 
+        // if the player is currently in no room
+        if (PlayerManager.getInstance().getPlayer().getCurrentRoom() == null)
+            PlayerManager.getInstance().getPlayer().setCurrentRoom(hell.getStartingRoom());
+
         // init a camera that follows the player and some UI elements
         initPlayerCamera(scene, pane);
         initOverlay(container);

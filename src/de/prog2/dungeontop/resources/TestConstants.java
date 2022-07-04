@@ -4,6 +4,9 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
+import de.prog2.dungeontop.model.game.SpellCard;
+import de.prog2.dungeontop.model.spells.Spell;
+import de.prog2.dungeontop.model.spells.TestSpell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +20,10 @@ public class TestConstants
         cards.add(new EntityCard(harald, 6, 99, 5, 3));
         Entity james = new Minion("James", 4, 9, 3, 42);
         cards.add(new EntityCard(james, 6, 120, 2, 1));
-        Entity dieter = new Minion("Dieter", 6, 7, 4, 43);
-        cards.add(new EntityCard(dieter, 6, 350, 6, 5));
-        Entity johann = new Minion("Johann", 8, 5, 5, 44);
-        cards.add(new EntityCard(johann, 6, 30, 3, 10));
+        Spell testSpell = new TestSpell();
+        cards.add(new SpellCard(testSpell, 6, 350, 6, 5));
+        Spell testSpell2 = new TestSpell();
+        cards.add(new SpellCard(testSpell2, 6, 30, 3, 10));
         Entity josef = new Minion("Josef", 10, 3, 6, 46);
         cards.add(new EntityCard(josef, 6, 70, 4, 2));
         return cards;

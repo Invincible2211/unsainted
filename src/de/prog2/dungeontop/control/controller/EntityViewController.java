@@ -36,11 +36,7 @@ public abstract class EntityViewController
             EntityView controller = loader.getController();
             fillEntityViewWithData(entity, controller);
 
-            double width = EntityConstants.ENTITY_BASE_WIDTH * scale;
-            double height = EntityConstants.ENTITY_BASE_HEIGHT * scale;
-            controller.setWidth(width);
-            controller.setHeight(height);
-            controller.setAnchorScale(scale);
+            controller.setScale(scale);
 
             GlobalLogger.log(String.format(LoggerStringValues.ENTITY_VIEW_CONTROLLER_CREATED_ENTITY, scale));
         }
@@ -71,5 +67,17 @@ public abstract class EntityViewController
 
         // Image
         controller.getEntityImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(entity.getAssetId()));
+    }
+
+    public static void zoomEntityView(Node entityView, double scale)
+    {
+        entityView.setScaleX(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD * scale);
+        entityView.setScaleY(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD * scale);
+    }
+
+    public static void resetZoom(Node entityView, double scale)
+    {
+        entityView.setScaleX(scale);
+        entityView.setScaleY(scale);
     }
 }

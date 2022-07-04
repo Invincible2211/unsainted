@@ -7,10 +7,11 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Arena
+public class Arena implements Serializable
 {
     private final int height;
     private final int width;

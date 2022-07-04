@@ -157,6 +157,7 @@ public interface LoggerStringValues {
     String SPECIFY_RANK = "no stars were Specified";
     String PLACED_CARD_IN_ARENA = "Placed entity in arena from battlemanager";
     String NOT_ENOUGH_EGOPOINTS = "Duellist does not have neough egopoints to play this minion";
+    String ALREADY_OCCUPIED = "This position is already occupied";
     
     //Battlefield
     String RETURN_NODE_ON_BATTLEFIELD = "return the node: ";

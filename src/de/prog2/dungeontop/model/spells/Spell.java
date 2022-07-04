@@ -2,32 +2,28 @@ package de.prog2.dungeontop.model.spells;
 
 public abstract class Spell
 {
-    private String name;
-    private int ego_points;
+    private final String name;
+    private final String description;
+    private final int assetId;
 
-    public Spell (String name, int ego_points)
+    public Spell (String name, String description, int assetId)
     {
         this.name = name;
-        this.ego_points = ego_points;
+        this.description = description;
+        this.assetId = assetId;
     }
 
-    //Set- and Getters
     public String getName()
     {
         return name;
     }
-    public void setName(String name)
+    public int getAssetId()
     {
-        this.name = name;
+        return assetId;
     }
 
-    public int getEgo_points()
+    public String getDescription()
     {
-        return ego_points;
-    }
-
-    public void setEgo_points(int ego_points)
-    {
-        this.ego_points = ego_points;
+        return description;
     }
 }

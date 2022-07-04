@@ -1,9 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.controller.*;
-import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.entities.Hero;
-import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -138,24 +135,29 @@ public class BattleManager
      *
      * @param duellist   who controlls the card
      * @param coordinate where to place new minion
+     * @param entityCard the card to place
+     * @return true if successful, false if not
      */
-    public void placeEntity (Duellist duellist, Coordinate coordinate, EntityCard entityCard)
+    public boolean tryPlaceEntity(Duellist duellist, Coordinate coordinate, EntityCard entityCard)
     {
-        if (entityCard.getPrice() <= duellist.getCurrentEgoPoints()) {
-            EntityCardController.tryInstantiate(entityCard, arena, coordinate);
-            //Reduce egopoints by one for each cost of card
-            for (int cost = 0; cost < entityCard.getPrice(); cost++) {
-                duellist.tryReduceEgoPoints();
-            }
-
-            if (EntityCardController.tryInstantiate(entityCard, arena, coordinate)) {
-                duellist.removeCardFromHand(entityCard);
-                ArenaBaseController.updateBattlefield(this.myArenaBaseView, arena);
-            }
-            GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
-        } else {
+        // Check if the duellist has enough EgoPoints to place the card.
+        if (entityCard.getPrice() > duellist.getCurrentEgoPoints())
+        {
             GlobalLogger.warning(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
+            return false;
         }
+        // If the tile is empty, place the card on it.
+        if (!EntityCardController.tryInstantiate(entityCard, arena, coordinate))
+        {
+            GlobalLogger.warning(LoggerStringValues.ALREADY_OCCUPIED);
+            return false;
+        }
+        // Update duellist and arena.
+        duellist.reduceEgoPoints(entityCard.getPrice());
+        duellist.removeCardFromHand(entityCard);
+        ArenaBaseController.updateBattlefield(this.myArenaBaseView, arena);
+        GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
+        return true;
     }
 
     private void attack (Coordinate coordinateOfAttackedEntity)
@@ -188,34 +190,32 @@ public class BattleManager
         //if a unit has been selected, either move or attack
         else
         {
-            //if the tile is empty, move the unit
-            if (this.getArena().getArenaComponent(coordinate) == null)
-            {
-                //move the unit
-                //this is where bugs will happen
-                if (this.getArena().getSelectedUnit().getPosition().getX() == coordinate.getX())
-                {
-                    if (this.getArena().getSelectedUnit().getPosition().getY() < coordinate.getY())
-                    {
-                        moveUnit(MoveDirection.DOWN);
-                    } else {
-                        moveUnit(MoveDirection.UP);
-                    }
-                } else {
-                    if (this.getArena().getSelectedUnit().getPosition().getX() < coordinate.getX())
-                    {
-                        moveUnit(MoveDirection.RIGHT);
-                    } else {
-                        moveUnit(MoveDirection.LEFT);
-                    }
-                }
-
-            }
             //if the tile is not empty, attack the unit
-            else
+            if (this.getArena().getArenaComponent(coordinate) != null)
             {
                 this.attack(coordinate);
+                return;
             }
+            //if the tile is empty, move the unit
+
+            //this is where bugs will happen
+            if (this.getArena().getSelectedUnit().getPosition().getX() == coordinate.getX())
+            {
+                if (this.getArena().getSelectedUnit().getPosition().getY() < coordinate.getY())
+                {
+                    moveUnit(MoveDirection.DOWN);
+                } else {
+                    moveUnit(MoveDirection.UP);
+                }
+            } else {
+                if (this.getArena().getSelectedUnit().getPosition().getX() < coordinate.getX())
+                {
+                    moveUnit(MoveDirection.RIGHT);
+                } else {
+                    moveUnit(MoveDirection.LEFT);
+                }
+            }
+
         }
 
     }
@@ -355,6 +355,11 @@ public class BattleManager
             GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
         }
 
+        protected void reduceEgoPoints (int amount)
+        {
+            this.currentEgoPoints -= amount;
+            GlobalLogger.log(LoggerStringValues.REDUCED_EGOPOINTS);
+        }
         //technically not a try as it is not a boolean
         private void tryReduceEgoPoints ()
         {

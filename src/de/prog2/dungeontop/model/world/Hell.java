@@ -8,13 +8,13 @@ import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Random;
 
 /**
  * The Hell represents a level with rooms.
  */
-public class Hell
+public class Hell implements Serializable
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private final int width, height;

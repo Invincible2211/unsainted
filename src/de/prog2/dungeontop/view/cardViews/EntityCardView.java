@@ -1,6 +1,6 @@
 package de.prog2.dungeontop.view.cardViews;
 
-import de.prog2.dungeontop.resources.CardConstants;
+import de.prog2.dungeontop.resources.views.CardConstants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -38,7 +38,7 @@ public class EntityCardView extends CardView
     private StackPane movementContainer;
 
     @Override
-    public void setAnchorScale(double scale)
+    protected void setAnchorScale(double scale)
     {
         super.setAnchorScale(scale);
         entityNameLabel.setStyle(String.format(CardConstants.NAME_FONT_SIZE_STYLE, (int)(scale * (double) CardConstants.ENTITY_NAME_FONT_SIZE)));

@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.network.NetController;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ public class MainMenueController {
     @FXML
     private void onGameStartButtonPressed() throws IOException
     {
+        NetController.enable(null);
         GameManager.getInstance().startGame();
     }
 
@@ -43,6 +45,11 @@ public class MainMenueController {
     private void onBackToWindowsButtonPressed()
     {
         Platform.exit();
+    }
+
+    @FXML
+    private void onPlayAsDungeonMasterButtonPressed(){
+        NetworkController.showNetworkGUI();
     }
 
 }
