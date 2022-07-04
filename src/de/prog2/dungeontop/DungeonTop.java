@@ -75,7 +75,7 @@ public class DungeonTop extends Application
         //stage.setScene(scene1);
         testArenaView();
         //testSelectHero(primaryStage);
-        testInventory(primaryStage);
+        //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
     }
