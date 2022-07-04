@@ -75,13 +75,13 @@ public class DungeonTop extends Application
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
         //stage.setScene(scene1);
-        testArenaView();
+        //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
-        //testHellView(scene);
-        testLavaPondView(primaryStage);
+        testHellView(scene);
+        //testLavaPondView(primaryStage);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {
@@ -121,14 +121,12 @@ public class DungeonTop extends Application
         Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
         HellGenerator.initHell(hell);
         HellView view = new HellView();
-        PlayerManager.getInstance().getPlayer().setCurrentRoom(hell.getStartingRoom());
         Scene hellView = view.initHellView(hell);
         stage.setScene(hellView);
 
         Hell hell2 = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
         HellGenerator.initHell(hell2);
         HellGenerator.initHell(hell2);
-        PlayerManager.getInstance().getPlayer().setCurrentRoom(hell2.getStartingRoom());
         Scene hellView2 = view.initHellView(hell2);
 
         System.out.println(hell2);
