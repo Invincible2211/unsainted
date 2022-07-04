@@ -198,11 +198,11 @@ public class RoomDialogueViewController
     }
 
     /**
-     * Open the LavaPondView.
+     * Open the NpcRoomView.
      */
     private void openLavaPond ()
     {
-        // TODO: Implement method to open a LavaPondView
+        // TODO: Implement method to open a NpcRoomView
         GlobalLogger.log(LoggerStringValues.OPEN_LAVAPOND_HANDLER);
     }
 
