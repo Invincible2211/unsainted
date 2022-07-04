@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.AssetIds;
@@ -24,11 +25,9 @@ public class SelectHero
     private Hero hero1 = new Hero("Warrior", 12, 2, "Sturdy");
     private Hero hero2 = new Hero("Mage", 8, 4, "Intelligent");
     private Hero hero3 = new Hero("Rogue", 10, 3, "Sneaky");
-    private Player player;
 
     @FXML
     private VBox heroText;
-
     @FXML
     private Text heroClass;
     @FXML
@@ -50,7 +49,7 @@ public class SelectHero
         selectHeroFillText(hero1);
         hero = hero1;
         heroText.setVisible(true);
-        player.setHero(hero);
+        PlayerManager.getInstance().getPlayer().setHero(hero);
     }
 
     @FXML
@@ -60,7 +59,7 @@ public class SelectHero
         selectHeroFillText(hero2);
         hero = hero2;
         heroText.setVisible(true);
-        player.setHero(hero);
+        PlayerManager.getInstance().getPlayer().setHero(hero);
     }
 
     @FXML
@@ -70,7 +69,7 @@ public class SelectHero
         selectHeroFillText(hero3);
         hero = hero3;
         heroText.setVisible(true);
-        player.setHero(hero);
+        PlayerManager.getInstance().getPlayer().setHero(hero);
     }
 
     /**
@@ -108,6 +107,19 @@ public class SelectHero
     {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML));
+        Scene scene = new Scene(root);
+        DungeonTop.getStage().setScene(scene);
+    }
+
+    /**
+     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Shop-Button gedrueckt wird.
+     * Der Spieler betritt das Shop.
+     */
+    @FXML
+    private void onOpenShopButtonClicked() throws  IOException
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
         Scene scene = new Scene(root);
         DungeonTop.getStage().setScene(scene);
     }
