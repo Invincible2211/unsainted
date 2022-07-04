@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.model.world.actions;
 
-public class DefaultAction implements Action
+import java.io.Serializable;
+
+public class DefaultAction implements Action, Serializable
 {
     @Override
     public <T> boolean execute(T... args)

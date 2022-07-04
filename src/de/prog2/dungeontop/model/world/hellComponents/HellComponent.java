@@ -1,9 +1,11 @@
 package de.prog2.dungeontop.model.world.hellComponents;
 
+import java.io.Serializable;
+
 /**
  * Represents a quadratic cell in a grid, where all the rooms are deployed as their corners and walls
  */
-public abstract class HellComponent
+public abstract class HellComponent implements Serializable
 {
     Rotation rotation = Rotation.UP;
     private boolean isVisible = false;

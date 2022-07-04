@@ -80,3 +80,5 @@ build/resources/main/lang/exceptionmessages.properties
 build/resources/main/lang/messages.properties
 
 src/de/prog2/dungeontop/resources/ViewStrings.java
+/build/resources/main/view/network.fxml
+/build/resources/main/assets/14_Inventory.PNG

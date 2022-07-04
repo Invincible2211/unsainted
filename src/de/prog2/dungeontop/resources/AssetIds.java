@@ -10,15 +10,13 @@ public interface AssetIds {
     int BOSS_ROOM = 16;
 
 
-    // Statboard Iconsw
+    // Statboard Icons
     int SOUL_ICON = 5;
     int HEART_ICON = 6;
     int STATBOARD_BACKGROUND_SCROLL = 18;
 
 
     // Hell Asset IDs
-    // Range: 10-19
-
     int WALL_CORNER = 10;
     int WALL = 11;
     int PASSAGE = 12;
@@ -33,6 +31,10 @@ public interface AssetIds {
     int WARRIOR = 1;
     int MAGICIAN = 2;
     int ROGUE = 3;
+
+    // NpcRoom Asset IDs
+    int NPC_ROOM_BUTTON_BG = 17;
+    int SMALL_BUTTON_IMG = 80;
 
 
     // Card Asset IDs
