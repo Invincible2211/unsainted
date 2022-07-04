@@ -3,10 +3,12 @@ package de.prog2.dungeontop.model.world.hellComponents;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.WorldConstants;
 
+import java.io.Serializable;
+
 /**
  * Represents a corner of a room
  */
-public class WallCorner extends HellComponent
+public class WallCorner extends HellComponent implements Serializable
 {
     /**
      * Creates a WallCorner facing the right direction

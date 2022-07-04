@@ -4,10 +4,12 @@ import de.prog2.dungeontop.model.world.actions.Action;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.actions.DefaultAction;
 
+import java.io.Serializable;
+
 /**
  * Represents all the different Rooms.
  */
-public abstract class Room
+public abstract class Room implements Serializable
 {
     private Room topRoom, bottomRoom, leftRoom, rightRoom;
     private Coordinate coordinate;

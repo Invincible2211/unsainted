@@ -2,7 +2,9 @@ package de.prog2.dungeontop.model.world.arena;
 
 import de.prog2.dungeontop.model.entities.Entity;
 
-public class ArenaComponent
+import java.io.Serializable;
+
+public class ArenaComponent implements Serializable
 {
     private Entity occupant;
     public ArenaComponent(Entity occupant)

@@ -1,11 +1,12 @@
 package de.prog2.dungeontop.model.world;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Dient als Container für den X- und Y-Wert eines Fields
  */
-public class Coordinate
+public class Coordinate implements Serializable
 {
     private final int x;
     private final int y;

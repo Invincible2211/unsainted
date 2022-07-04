@@ -2,11 +2,13 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.control.network.IPChecker;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -25,6 +27,9 @@ public class SettingsController {
     @FXML
     ChoiceBox<String> resolution;
     private static final Stage settingsStage = new Stage();
+
+    @FXML
+    private Label ipLabel;
 
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
@@ -45,6 +50,7 @@ public class SettingsController {
     void initialize()
     {
         volumeSlider.valueProperty().bindBidirectional(AudioManager.getInstance().getVolume());
+        ipLabel.setText("IPAdresse: "+ IPChecker.getLocalIPAdress());
     }
 
     /**

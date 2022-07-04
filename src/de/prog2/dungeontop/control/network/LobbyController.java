@@ -4,6 +4,7 @@ import de.prog2.dungeontop.resources.NetworkData;
 
 import java.io.*;
 
+@Deprecated
 public class LobbyController extends Thread{
 
     private final String partnerIP;

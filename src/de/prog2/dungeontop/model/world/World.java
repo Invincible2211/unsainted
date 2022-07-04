@@ -6,12 +6,13 @@ import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.utils.HellGenerator;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Holds all the Hells
  */
-public class World
+public class World implements Serializable
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private final int hellCount;

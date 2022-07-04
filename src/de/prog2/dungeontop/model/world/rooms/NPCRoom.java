@@ -1,9 +1,11 @@
 package de.prog2.dungeontop.model.world.rooms;
 
+import java.io.Serializable;
+
 /**
  * Represents the different peaceful Action-Rooms
  */
-public abstract class NPCRoom extends Room
+public abstract class NPCRoom extends Room implements Serializable
 {
     private int freeActions = 1;
     public NPCRoom () {}

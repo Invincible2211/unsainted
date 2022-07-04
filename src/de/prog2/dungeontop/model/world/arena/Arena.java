@@ -4,10 +4,11 @@ import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Arena
+public class Arena implements Serializable
 {
     private final int height;
     private final int width;

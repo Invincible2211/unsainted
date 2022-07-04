@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.network.NetController;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ public class MainMenueController {
     @FXML
     private void onGameStartButtonPressed() throws IOException
     {
+        NetController.enable(null);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SELECT_HERO_FXML));
         Scene scene = new Scene(root);
@@ -45,6 +47,11 @@ public class MainMenueController {
     private void onBackToWindowsButtonPressed()
     {
         Platform.exit();
+    }
+
+    @FXML
+    private void onPlayAsDungeonMasterButtonPressed(){
+        NetworkController.showNetworkGUI();
     }
 
 }
