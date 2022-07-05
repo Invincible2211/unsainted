@@ -5,10 +5,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.NetworkController">
-   <children>
-      <Button layoutX="226.0" layoutY="168.0" mnemonicParsing="false" onAction="#onConnectButtonPressed" prefHeight="25.0" prefWidth="149.0" text="Verbinden" />
-      <TextField fx:id="partnerIP" layoutX="226.0" layoutY="200.0" promptText="Partner IP" />
-      <Label fx:id="info" layoutX="226.0" layoutY="229.0" prefHeight="17.0" prefWidth="149.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.prog2.dungeontop.view.NetworkController">
+   <Button layoutX="226.0" layoutY="168.0" mnemonicParsing="false" onAction="#onConnectButtonPressed" prefHeight="25.0"
+           prefWidth="149.0" text="Verbinden"/>
+   <TextField fx:id="partnerIP" layoutX="226.0" layoutY="200.0" promptText="Partner IP"/>
+   <Label fx:id="info" layoutX="226.0" layoutY="229.0" prefHeight="17.0" prefWidth="149.0"/>
 </AnchorPane>
