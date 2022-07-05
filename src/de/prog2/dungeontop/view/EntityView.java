@@ -3,6 +3,7 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.resources.AssetIds;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -55,7 +56,7 @@ public class EntityView
     private void initialize()
     {
         container.setBackground(Background.EMPTY);
-        backgroundImageView.imageProperty().setValue(AssetsManager.getImageByAssetId(40));
+        backgroundImageView.imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.ENTITY_VIEW_BACKGROUND));
     }
 
     public ImageView getEntityImageView()
