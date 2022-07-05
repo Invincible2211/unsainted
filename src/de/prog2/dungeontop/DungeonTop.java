@@ -11,13 +11,10 @@ import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.TestItem;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.spells.TestSpell;
-import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.model.world.arena.ArenaComponent;
 import de.prog2.dungeontop.model.world.rooms.LavaPondRoom;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.TestConstants;
@@ -26,7 +23,6 @@ import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
 import de.prog2.dungeontop.view.NetworkController;
-import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.view.NpcRoomView;
 import de.prog2.dungeontop.view.RoomDialogueViewController;
 import de.prog2.dungeontop.view.SettingsController;
@@ -168,7 +164,7 @@ public class DungeonTop extends Application
         Deck deck2 = new Deck();
         for (int i = 0; i < 10; i++)
         {
-            deck1.pushCard(new SpellCard(testSpell, 5, 3, 1, 2 + i));
+//            deck1.pushCard(new SpellCard(testSpell, 5, 3, 1, 2 + i));
             deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
             deck2.pushCard(new EntityCard(harald, 5, 3, 1, 1 + i));
         }
@@ -185,11 +181,12 @@ public class DungeonTop extends Application
         Scene scene = new Scene(root);
         scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         getStage().setScene(scene);
-        harald.setPosition(new Coordinate(1, 1));
-        harald.setOwner(player1);
-        BattleManager.getInstance().getArena().getArenaHashmap().put(new Coordinate(1, 1),new ArenaComponent(harald));
+        BattleManager.getInstance().setCurrentPhase(BattleManager.getInstance().getNextPhaseInCycle());
+        BattleManager.getInstance().testPlaceCard();
+        BattleManager.getInstance().getArena().getEntity(0,0).setCanMove(true);
+
         //somethign wrong with this
-        ArenaBaseController.updateBattlefield(fxmlLoader.getController(), BattleManager.getInstance().getArena());
+        ArenaBaseController.updateBattlefield(BattleManager.getInstance().getArena());
     }
 
     public static void testSelectHero(Stage stage) throws Exception

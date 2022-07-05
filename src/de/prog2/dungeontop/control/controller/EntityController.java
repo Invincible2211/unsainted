@@ -4,13 +4,12 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.model.world.arena.ArenaComponent;
+
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.CoordinateUtils;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EntityController
 {
@@ -20,22 +19,19 @@ public class EntityController
      */
     public static boolean tryMoveTowards(Arena arena, Entity entity, MoveDirection direction)
     {
-        ArenaComponent currentAC = arena.getArenaComponent(entity.getPosition());
-
         Coordinate newCoord = CoordinateUtils.getCoordinateFromMoveDirection(entity.getPosition(), direction);
-        ArenaComponent nextAC = arena.getArenaComponent(newCoord);
 
         if(!isValidMove(arena, entity, direction))
         {
-            GlobalLogger.log(LoggerStringValues.MOVE_UP_FAIL);
+            GlobalLogger.log(LoggerStringValues.ENTITY_MOVE_FAILED);
             return false;
         }
 
-        currentAC.deleteOccupant();
-        nextAC.setOccupant(entity);
+        arena.removeEntity(entity.getPosition());
+        arena.insertEntity(newCoord, entity);
         entity.setPosition(newCoord);
         setCanMove(entity, false);
-        GlobalLogger.log(LoggerStringValues.MOVE_UP_SUCCESS);
+        GlobalLogger.log(LoggerStringValues.ENTITY_MOVE_SUCCESSFUL);
         return true;
     }
 
@@ -48,15 +44,15 @@ public class EntityController
     public static boolean isValidMove(Arena arena, Entity entity, MoveDirection direction)
     {
         Coordinate newCoord = CoordinateUtils.getCoordinateFromMoveDirection(entity.getPosition(), direction);
-        ArenaComponent nextAC = arena.getArenaComponent(newCoord);
-        return nextAC != null && !nextAC.isOccupied() && canMove(entity);
+
+        return arena.getEntity(newCoord) != null && canMove(entity);
     }
-    public static boolean canMove(Entity entity)
+    public static boolean canMove(de.prog2.dungeontop.model.entities.Entity entity)
     {
         return entity.canMove();
     }
 
-    public static void setCanMove(Entity entity, boolean value)
+    public static void setCanMove(de.prog2.dungeontop.model.entities.Entity entity, boolean value)
     {
         entity.setCanMove(value);
     }
@@ -78,11 +74,11 @@ public class EntityController
 
     public static Arena attack (Entity attacker, Coordinate position, Arena arena)
     {
-        Entity attacked = arena.getArenaComponent(position).getOccupant();
+        Entity attacked = arena.getEntity(position);
         attacked.setHp(attacked.getHp() - attacker.getAttackDamage());
         if (attacked.getHp() <= 0)
         {
-            arena.removeComponent(position);
+            arena.removeEntity(position);
         }
         //make attacker unable to attack again
         return arena;

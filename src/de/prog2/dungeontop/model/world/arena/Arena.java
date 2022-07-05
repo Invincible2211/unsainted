@@ -6,7 +6,6 @@ import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +14,8 @@ public class Arena implements Serializable
 {
     private final int height;
     private final int width;
-    private final HashMap<Coordinate, ArenaComponent> arenaHashmap = new HashMap<>();
+    private Entity selectedEntity;
+    private final HashMap<Coordinate, Entity> arenaHashmap = new HashMap<>();
     public Arena(int height, int width)
     {
         this.height = height;
@@ -27,63 +27,48 @@ public class Arena implements Serializable
 
     }
 
-    public HashMap<Coordinate, ArenaComponent> getArenaHashmap()
+    public HashMap<Coordinate, Entity> getArenaHashmap()
     {
         return arenaHashmap;
     }
 
-    public ArenaComponent getArenaComponent(Coordinate coordinate)
+    public Entity getEntity (Coordinate coordinate)
     {
         return arenaHashmap.get(coordinate);
     }
 
-    @Deprecated
-    public boolean isOccupied (Coordinate coordinate)
+    public Entity getEntity (int x, int y)
     {
-        return getArenaComponent(coordinate).isOccupied();
+        return arenaHashmap.get(new Coordinate(x, y));
     }
 
-
-    public void insertComponent (Coordinate coordinate, ArenaComponent arenaComponent)
+    public void insertEntity (Coordinate coordinate, Entity entity)
     {
-        this.arenaHashmap.put(coordinate, arenaComponent);
+        this.arenaHashmap.put(coordinate, entity);
+        entity.setPosition(coordinate);
+        GlobalLogger.log(LoggerStringValues.ARENA_ENTITY_INSERTED_MESSAGE + coordinate.toString());
     }
 
-    public void removeComponent (Coordinate coordinate)
+    public void removeEntity (Coordinate coordinate)
     {
         this.arenaHashmap.remove(coordinate);
     }
 
     public boolean hasSelectedUnit()
     {
-        if (arenaHashmap.isEmpty())
+        if (this.selectedEntity == null)
         {
             return false;
         }
-        for (ArenaComponent arenaComponent : arenaHashmap.values()) {
-            if (arenaComponent.getOccupant().isSelected()) {
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 
-    public Entity getSelectedUnit()
+    //TODO: test this method 
+    public Entity[] getAllMinions ()
     {
-        for (ArenaComponent arenaComponent : arenaHashmap.values()) {
-            if (arenaComponent.getOccupant().isSelected()) {
-                GlobalLogger.log(LoggerStringValues.SELECTED_UNIT_FOUND + arenaComponent.getOccupant().getName());
-                return arenaComponent.getOccupant();
-            }
-        }
-        GlobalLogger.warning(LoggerStringValues.NO_UNIT_SELECTED);
-        return null;
-    }
-
-    public ArrayList<Minion> getAllMinions ()
-    {
-        ArrayList<Minion> allMinions = new ArrayList<>();
-        return  null;
+        return this.arenaHashmap.values().stream()
+                .filter(entity -> entity instanceof Minion)
+                .toArray(Entity[]::new);
      }
 
     //Set- and Getters
@@ -97,12 +82,18 @@ public class Arena implements Serializable
         return width;
     }
 
-    public void selectUnit (Coordinate coordinate)
+    public void selectUnit (Entity entity)
     {
-        if (this.hasSelectedUnit() == false){
-        getArenaComponent(coordinate).getOccupant().setSelected(true);
-    } else  {
-            GlobalLogger.warning(LoggerStringValues.UNIT_ALREADY_SELECTED);
-        }
+        this.selectedEntity = entity;
+    }
+
+    public Entity getSelectedEntity ()
+    {
+        return selectedEntity;
+    }
+
+    public void setSelectedEntity (Entity selectedEntity)
+    {
+        this.selectedEntity = selectedEntity;
     }
 }

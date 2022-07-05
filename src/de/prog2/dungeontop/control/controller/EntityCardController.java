@@ -17,12 +17,12 @@ public class EntityCardController
      */
     public static boolean tryInstantiate(EntityCard card, Arena arena, Coordinate coordinate)
     {
-        if(arena.getArenaComponent(coordinate).isOccupied()) return false;
+        if(arena.getEntity(coordinate) != null) return false;
 
         Cloner cloner = new Cloner();
         Entity entity = cloner.deepClone(card.getEntity());
 
-        arena.getArenaComponent(coordinate).setOccupant(entity);
+        arena.insertEntity(coordinate, entity);
         return true;
     }
 }

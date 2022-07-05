@@ -5,6 +5,7 @@ import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
+import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
@@ -25,7 +26,6 @@ public class BattleManager
 
     public static BattleManager getInstance ()
     {
-//        GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_GET);
         return instance;
     }
 
@@ -57,11 +57,11 @@ public class BattleManager
         ArenaBaseController.init(this.myArenaBaseView);
         this.getFirstDuellist().drawNewDuellistHand();
         this.getSecondDuellist().drawNewDuellistHand();
-        ArenaBaseController.updatePlayerHands(this.myArenaBaseView,
+        ArenaBaseController.updatePlayerHands(
                 this.getFirstDuellist().getHand(),
                 this.getSecondDuellist().getHand());
         this.currentPhase = BattlePhase.START;
-        ArenaBaseController.updateEgoPoints(this.myArenaBaseView,
+        ArenaBaseController.updateEgoPoints(
                 this.getFirstDuellist().currentEgoPoints,
                 this.getSecondDuellist().getCurrentEgoPoints());
     }
@@ -126,7 +126,19 @@ public class BattleManager
 
     public void endAPhase ()
     {
+        //IF new reound both players get more egopointsmax and current to max
+        if (getCurrentPhase() == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS) {
+            GlobalLogger.log(LoggerStringValues.NEXT_ROUND_BOTH_PLAYERS_GET_EGOPOINTS);
+            this.getFirstDuellist().egoPointsMax += GameConstants.EGOPOINTS_PER_ROUND_INCREMENT;
+            this.getSecondDuellist().egoPointsMax += GameConstants.EGOPOINTS_PER_ROUND_INCREMENT;
+            this.getFirstDuellist().currentEgoPoints = this.getFirstDuellist().egoPointsMax;
+            this.getSecondDuellist().currentEgoPoints = this.getSecondDuellist().egoPointsMax;
+        }
+        //for tests
+        ArenaBaseController.updateBattlefield(this.getArena());
+        //set next phase
         setCurrentPhase(getNextPhaseInCycle());
+        //TODO check if match is over
         GlobalLogger.log(LoggerStringValues.CURRENTPHASE_IS_NOW + getCurrentPhase());
     }
 
@@ -155,23 +167,32 @@ public class BattleManager
         // Update duellist and arena.
         duellist.reduceEgoPoints(entityCard.getPrice());
         duellist.removeCardFromHand(entityCard);
-        ArenaBaseController.updateBattlefield(this.myArenaBaseView, arena);
+        ArenaBaseController.updateBattlefield(arena);
+        ArenaBaseController.updateEgoPoints(firstDuellist.currentEgoPoints, secondDuellist.currentEgoPoints);
         GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
         return true;
     }
 
     private void attack (Coordinate coordinateOfAttackedEntity)
     {
-        this.arena = EntityController.attack(this.getArena().getSelectedUnit(), coordinateOfAttackedEntity, this.arena);
-        ArenaBaseController.updateBattlefield(this.myArenaBaseView, this.getArena());
+        this.arena = EntityController.attack(this.getArena().getSelectedEntity(), coordinateOfAttackedEntity, this.arena);
+        ArenaBaseController.updateBattlefield(this.getArena());
     }
 
 
     private void moveUnit (MoveDirection direction)
     {
-        EntityController.tryMoveTowards(this.arena, this.arena.getSelectedUnit(), direction);
-        ArenaBaseController.updateBattlefield(this.myArenaBaseView, this.getArena());
+        EntityController.tryMoveTowards(this.arena, this.arena.getSelectedEntity(), direction);
+        ArenaBaseController.updateBattlefield(this.getArena());
 
+    }
+
+    public void testPlaceCard()
+    {
+        this.getFirstDuellist().setCurrentEgoPoints(10);
+        ArenaBaseController.updateEgoPoints(this.getFirstDuellist().currentEgoPoints, this.getSecondDuellist().currentEgoPoints);
+        this.tryPlaceEntity(this.getFirstDuellist(), new Coordinate(0, 0), (EntityCard) this.getFirstDuellist().getHand().get(0));
+        ArenaBaseController.updateBattlefield(this.getArena());
     }
 
     public void arenaTilePressed (Coordinate coordinate)
@@ -180,9 +201,11 @@ public class BattleManager
         if (!this.getArena().hasSelectedUnit())
         {
             //select a unit if one is on the tile
-            if (this.getArena().getArenaComponent(coordinate) != null)
+            if (this.getArena().getEntity(coordinate) != null)
             {
-                this.getArena().selectUnit(coordinate);
+                this.getArena().selectUnit(this.arena.getEntity(coordinate));
+                GlobalLogger.log(LoggerStringValues.BATTLEMANAGER_SELECT_A_UNIT);
+
             } else {
                 GlobalLogger.warning(LoggerStringValues.NO_UNIT_ON_TILE);
             }
@@ -191,7 +214,7 @@ public class BattleManager
         else
         {
             //if the tile is not empty, attack the unit
-            if (this.getArena().getArenaComponent(coordinate) != null)
+            if (this.getArena().getEntity(coordinate) != null)
             {
                 this.attack(coordinate);
                 return;
@@ -199,16 +222,16 @@ public class BattleManager
             //if the tile is empty, move the unit
 
             //this is where bugs will happen
-            if (this.getArena().getSelectedUnit().getPosition().getX() == coordinate.getX())
+            if (this.getArena().getSelectedEntity().getPosition().getX() == coordinate.getX())
             {
-                if (this.getArena().getSelectedUnit().getPosition().getY() < coordinate.getY())
+                if (this.getArena().getSelectedEntity().getPosition().getY() < coordinate.getY())
                 {
                     moveUnit(MoveDirection.DOWN);
                 } else {
                     moveUnit(MoveDirection.UP);
                 }
             } else {
-                if (this.getArena().getSelectedUnit().getPosition().getX() < coordinate.getX())
+                if (this.getArena().getSelectedEntity().getPosition().getX() < coordinate.getX())
                 {
                     moveUnit(MoveDirection.RIGHT);
                 } else {
@@ -217,7 +240,6 @@ public class BattleManager
             }
 
         }
-
     }
 
 

@@ -14,8 +14,8 @@ import javax.naming.ldap.Control;
 
 public class ArenaStackPane extends StackPane
 {
-
     Coordinate coordinate = new Coordinate(0, 0);
+    private boolean isSelected = false;
 
     public ArenaStackPane (Coordinate coordinate)
     {
@@ -30,6 +30,11 @@ public class ArenaStackPane extends StackPane
         public void handle(Event evt) {
             if (evt.getEventType().equals(MouseEvent.MOUSE_PRESSED)){
                 GlobalLogger.log(LoggerStringValues.ARENA_TILE_PRESSED_MESSAGE + coordinate.toString());
+
+                    if (BattleManager.getInstance().getArena().getEntity(coordinate.getX(), coordinate.getY()) != null)
+                    {
+                        GlobalLogger.log(BattleManager.getInstance().getArena().getEntity(coordinate.getX(), coordinate.getY()).getName() + LoggerStringValues.WAS_SELECTED);
+                    }
                 BattleManager.getInstance().arenaTilePressed(coordinate);
                 return;
             }
@@ -50,5 +55,15 @@ public class ArenaStackPane extends StackPane
     public void setCoordinate (Coordinate coordinate)
     {
         this.coordinate = coordinate;
+    }
+
+    public boolean isSelected ()
+    {
+        return isSelected;
+    }
+
+    public void setSelected (boolean selected)
+    {
+        isSelected = selected;
     }
 }
