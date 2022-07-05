@@ -28,7 +28,7 @@ public abstract class ArenaBaseController
     //TODO the ArenabaseView to replace the parameter in every method as static variable
     /**
      * creates a default arena
-     * @param arenaBaseView
+     * @param arenaBaseView the view to be used
      */
     public static void init(ArenaBaseView arenaBaseView)
     {
@@ -47,8 +47,8 @@ public abstract class ArenaBaseController
 
     /**
      * sets the background image of the arena if an alternative image is wanted.
-     * @param arenaBaseView
-     * @param backGroundAlternativeID
+     * @param arenaBaseView the view to be used
+     * @param backGroundAlternativeID the id of the alternative image
      */
     public static void init(ArenaBaseView arenaBaseView, int backGroundAlternativeID)
     {
@@ -147,6 +147,7 @@ public abstract class ArenaBaseController
      * Initialisiert das Battlefield als visualisierung der Arena, update duruch UpdateBattlefield
      * @param height
      * @param width
+     * @param arenaBaseView the view to be used
      */
     private static void initBattlefield(int height, int width)
     {

@@ -1,5 +1,8 @@
 package de.prog2.dungeontop.control.network;
 
+import de.prog2.dungeontop.resources.NetworkingConstants;
+import de.prog2.dungeontop.utils.GlobalLogger;
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -27,12 +30,13 @@ public class TCPTunnel extends Thread{
     public void run() {
         try
         {
+            // TODO : Remove magic?
             Socket socket = new Socket();
-            System.out.println("Created socket");
+            GlobalLogger.log(NetworkingConstants.SOCKET_CREATED);
             socket.bind(new InetSocketAddress(12345));
-            System.out.println("Bind Socket");
+            GlobalLogger.log(NetworkingConstants.BIND_SOCKET);
             socket.connect(new InetSocketAddress(remoteHost,12345));
-            System.out.println("Connected Socket");
+            GlobalLogger.log(NetworkingConstants.SOCKET_CONNECTED);
             /*
             TCPHole tcpHole = new TCPHole();
             tcpHole.start();
@@ -51,25 +55,27 @@ public class TCPTunnel extends Thread{
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    printStream.println("PING");
+                    GlobalLogger.log(NetworkingConstants.PING_MESSAGE);
                 }
             };
             timer.scheduleAtFixedRate(timerTask, 0L,1000L);
             while (true){
                 try {
-                    System.out.println(reader.readLine());
+                    GlobalLogger.log(reader.readLine());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    GlobalLogger.log(e.getMessage());
                 }
             }
         }
         catch(Exception e)
         {
+            // TODO : ADD LOGGER?
             e.printStackTrace(System.err);
-            System.err.println("TCPTunnel stopped");
+            GlobalLogger.warning(NetworkingConstants.TCP_TUNNEL_STOPPED);
         }
     }
 
+    // TODO : REMOVE MAGIC
     private class TCPHole extends Thread{
 
         @Override
@@ -91,7 +97,7 @@ public class TCPTunnel extends Thread{
                     }
                 }
             } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+                GlobalLogger.warning(e.getMessage());
             }
         }
     }

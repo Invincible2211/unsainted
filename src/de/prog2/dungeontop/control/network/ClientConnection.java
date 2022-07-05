@@ -2,15 +2,18 @@ package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.model.network.NetworkConnectionI;
 import de.prog2.dungeontop.resources.NetworkData;
+import de.prog2.dungeontop.resources.NetworkingConstants;
+import de.prog2.dungeontop.resources.StringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class ClientConnection extends Thread implements NetworkConnectionI {
-
-    private String ip;
+public class ClientConnection extends Thread implements NetworkConnectionI
+{
+    private final String ip;
     private InputStream inputStream;
     private OutputStream outputStream;
 
@@ -20,13 +23,13 @@ public class ClientConnection extends Thread implements NetworkConnectionI {
 
     @Override
     public void run() {
-        System.out.println("connecting");
+        GlobalLogger.log(String.format(NetworkingConstants.NETWORK_CONNECTING_TO, ip));
         try {
             Socket socket = new Socket(ip, NetworkData.DEFAULT_PORT);
             inputStream = socket.getInputStream();
             outputStream = socket.getOutputStream();
         } catch (IOException e) {
-            e.printStackTrace();
+            GlobalLogger.warning(e.getMessage());
         }
     }
 

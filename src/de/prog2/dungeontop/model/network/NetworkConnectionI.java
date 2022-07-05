@@ -5,10 +5,10 @@ import java.io.OutputStream;
 
 public interface NetworkConnectionI {
 
-    public InputStream getInputStream();
+    InputStream getInputStream();
 
-    public OutputStream getOutputStream();
+    OutputStream getOutputStream();
 
-    public boolean isConnected();
+    boolean isConnected();
 
 }

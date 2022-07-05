@@ -4,7 +4,6 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class CardManager

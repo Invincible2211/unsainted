@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.model.world.rooms;
 
+import de.prog2.dungeontop.model.world.actions.RandomEventAction;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,6 @@ import java.io.Serializable;
 public class RandomEventRoom extends Room implements Serializable
 {
     // RandomEventAction not implemented yet
-    //public RandomEventRoom () { super(new RandomEventAction());}
+    public RandomEventRoom () { super(new RandomEventAction());}
 }
 

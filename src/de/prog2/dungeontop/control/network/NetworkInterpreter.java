@@ -2,6 +2,8 @@ package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.resources.NetworkingConstants;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.HellView;
 import javafx.scene.Scene;
 import org.apache.commons.lang3.SerializationUtils;
@@ -21,30 +23,30 @@ public class NetworkInterpreter extends Thread{
 
     @Override
     public void run() {
-        System.out.println("start interpreting");
+        GlobalLogger.log(NetworkingConstants.START_INTERPRETING);
         byte[] recievedData = new byte[0];
         while (true){
-            System.out.println("waiting for data");
+            GlobalLogger.log(NetworkingConstants.WAITING_FOR_DATA);
             try {
                 if (inStream != null){
                     byte[] data = new byte[16000];
                     int count = inStream.read(data);
-                    System.out.println(count+" bytes to read");
+                    GlobalLogger.log(String.format(NetworkingConstants.BYTES_TO_READ, count));
                     recievedData = Arrays.copyOfRange(data,0,count);
-                    System.out.println("recieved "+recievedData.length+" bytes");
+                    GlobalLogger.log(String.format(NetworkingConstants.RECEIVED_DATA, recievedData.length));
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                GlobalLogger.warning(e.getMessage());
             }
             if (recievedData.length != 0){
-                System.out.println("interpreting data");
+                GlobalLogger.log(NetworkingConstants.INTERPRETING_DATA);
                 this.interpret(recievedData);
             }
         }
     }
 
     private void interpret(byte[] data){
-        System.out.println(data.length+" bytes to interpret");
+        GlobalLogger.log(String.format(NetworkingConstants.BYTES_TO_INTERPRET, data.length));
         byte[] identifier = new byte[]{data[0],data[1],data[2],data[3]};
         byte[] content = new byte[data.length - 4];
         for (int i = 4; i < data.length; i++) {
@@ -56,7 +58,9 @@ public class NetworkInterpreter extends Thread{
         builder.append(identifier[2]);
         builder.append(identifier[3]);
         String identifierAsString = builder.toString();
-        System.out.println(identifierAsString);
+        GlobalLogger.log(identifierAsString);
+
+        // TODO : Remove magic?
         switch (identifierAsString){
             case "0001":
                 System.out.println("getHell");

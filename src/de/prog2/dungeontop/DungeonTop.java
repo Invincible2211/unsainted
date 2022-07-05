@@ -66,7 +66,7 @@ public class DungeonTop extends Application
         stage.show();
 
         // TODO: give the player his goddamn deck
-        Entity harald = new Minion("Harald", 6, 4, 1, 45);
+        Entity harald = new Minion("Harald", 6, 4, 1, 450);
         Deck deck = new Deck();
         for (int i = 0; i < 10; i++)
         {
@@ -79,7 +79,7 @@ public class DungeonTop extends Application
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
         stage.setScene(scene);
-        testArenaView();
+        //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
@@ -158,7 +158,7 @@ public class DungeonTop extends Application
      */
     public static void testArenaView() throws Exception
     {
-        Entity harald = new Minion("Harald", 6, 4, 1, 45);
+        Entity harald = new Minion("Harald", 6, 4, 1, 450);
         Spell testSpell = new TestSpell();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();

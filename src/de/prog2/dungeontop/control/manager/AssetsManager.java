@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.file.AssetsFileReader;
-import de.prog2.dungeontop.resources.ExceptionMessagesKeys;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.scene.image.Image;
@@ -82,7 +81,7 @@ public class AssetsManager
      *                      scaling to fit the image within the specified bounding box
      * @param smooth indicates whether to use a better quality filtering algorithm or a faster one when
      *               scaling this image to fit within the specified bounding box
-     * @return
+     * @return Image object
      */
     public static Image getImageByAssetId (int id, double requestedWidth, double requestedHeight,
                                            boolean preserveRatio, boolean smooth)

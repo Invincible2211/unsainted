@@ -4,7 +4,6 @@ import de.prog2.dungeontop.resources.FilePaths;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -28,7 +27,7 @@ public class ConfigurationFileReader
         GlobalLogger.log(LoggerStringValues.LOAD_CONFIG);
         try
         {
-            properties.load(new FileInputStream(new File(FilePaths.CONFIGURATION_FILE_PATH)));
+            properties.load(new FileInputStream(FilePaths.CONFIGURATION_FILE_PATH));
             GlobalLogger.log(LoggerStringValues.CONFIG_LOADED);
         } catch (IOException e)
         {

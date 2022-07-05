@@ -6,7 +6,6 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableDoubleValue;
 import javafx.beans.value.ObservableValue;
 
 import javax.sound.sampled.*;
@@ -32,7 +31,8 @@ public class AudioManager
      */
     private AudioManager()
     {
-        volume.addListener(new ChangeListener<Number>() {
+        volume.addListener(new ChangeListener<Number>()
+        {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
             {
@@ -70,7 +70,7 @@ public class AudioManager
             clip.start(); //TODO auf Thread auslagern sobald erlaubt
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
         {
-            e.printStackTrace();
+            GlobalLogger.warning(e.getMessage());
         }
     }
 
@@ -81,8 +81,7 @@ public class AudioManager
     private void changeVolume(double volumeLevel)
     {
         FloatControl volume;
-        for (Clip c:
-             playingClips)
+        for (Clip c : playingClips)
         {
             volume = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
             volume.setValue(20f * (float) Math.log10(volumeLevel/100));

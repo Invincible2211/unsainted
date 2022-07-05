@@ -3,7 +3,6 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.view.ItemView;
 import javafx.fxml.FXMLLoader;

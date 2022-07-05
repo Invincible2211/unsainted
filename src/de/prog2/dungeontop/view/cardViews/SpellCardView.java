@@ -1,13 +1,11 @@
 package de.prog2.dungeontop.view.cardViews;
 
 import de.prog2.dungeontop.resources.views.CardConstants;
-import de.prog2.dungeontop.resources.views.CardDetailConstants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 public class SpellCardView extends CardView
 {

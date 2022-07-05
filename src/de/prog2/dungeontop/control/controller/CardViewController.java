@@ -8,7 +8,6 @@ import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.resources.*;
-import de.prog2.dungeontop.resources.views.CardConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.*;
 import javafx.fxml.FXMLLoader;

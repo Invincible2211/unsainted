@@ -11,13 +11,11 @@ import de.prog2.dungeontop.model.world.rooms.Room;
 import de.prog2.dungeontop.resources.HellToStringValues;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
-import de.prog2.dungeontop.utils.CoordinateDirections;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class HellController
 {
