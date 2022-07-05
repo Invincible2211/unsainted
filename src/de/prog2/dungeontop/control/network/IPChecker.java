@@ -1,5 +1,8 @@
 package de.prog2.dungeontop.control.network;
 
+import de.prog2.dungeontop.resources.NetworkingConstants;
+import de.prog2.dungeontop.utils.GlobalLogger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +13,7 @@ public class IPChecker {
     public static String getPublicIPAdress(){
         String ip = "";
         try {
-            URL ipAdressURL = new URL("http://checkip.amazonaws.com");
+            URL ipAdressURL = new URL(NetworkingConstants.TEST_PUBLIC_ADDRESS_URL);
             BufferedReader in = new BufferedReader(new InputStreamReader(ipAdressURL.openStream()));
             ip = in.readLine();
         } catch (IOException e) {
@@ -22,10 +25,10 @@ public class IPChecker {
     public static String getLocalIPAdress(){
         String ip = null;
         try(final DatagramSocket socket = new DatagramSocket()){
-            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            socket.connect(InetAddress.getByName(NetworkingConstants.TEST_PUBLIC_DNS_IP), NetworkingConstants.TEST_PUBLIC_DNS_PORT);
             ip = socket.getLocalAddress().getHostAddress();
         } catch (UnknownHostException | SocketException e) {
-            e.printStackTrace();
+            GlobalLogger.warning(e.getMessage());
         }
         return ip;
     }

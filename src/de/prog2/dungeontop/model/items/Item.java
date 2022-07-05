@@ -6,7 +6,7 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 public class Item
 {
     private final String name;
-    private String description;
+    private final String description;
     private int price;
     private final int assetID;
 

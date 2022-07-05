@@ -16,4 +16,7 @@ public interface StringValues
     //Cardview
     String RANK = "%d / %d";
     String SUMMON_COST = "%d ego";
+
+    //Coordinate
+    String COORDINATE = "X: %d, Y: %d";
 }

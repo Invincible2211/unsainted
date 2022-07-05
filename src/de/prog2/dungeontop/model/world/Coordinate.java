@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.model.world;
 
+import de.prog2.dungeontop.resources.StringValues;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -49,8 +51,6 @@ public class Coordinate implements Serializable
     @Override
     public String toString()
     {
-        String res = new String();
-        res = "X: " + this.getX() + ", Y: " + this.getY();
-        return res;
+        return String.format(StringValues.COORDINATE, this.getX(), this.getY());
     }
 }

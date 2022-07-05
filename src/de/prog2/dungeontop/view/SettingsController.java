@@ -3,7 +3,9 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.network.IPChecker;
+import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -50,7 +52,7 @@ public class SettingsController {
     void initialize()
     {
         volumeSlider.valueProperty().bindBidirectional(AudioManager.getInstance().getVolume());
-        ipLabel.setText("IPAdresse: "+ IPChecker.getLocalIPAdress());
+        ipLabel.setText(String.format(NetworkingConstants.SETTINGS_IP_LABEL, IPChecker.getLocalIPAdress()));
     }
 
     /**
@@ -84,7 +86,7 @@ public class SettingsController {
             rootPane = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SETTINGS_FXML));
         } catch (IOException e)
         {
-            e.printStackTrace();
+            GlobalLogger.warning(e.getMessage());
         }
         final Scene settingsScene = new Scene(rootPane);
         settingsStage.setScene(settingsScene);

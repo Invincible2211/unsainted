@@ -4,6 +4,7 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.network.NetController;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -54,7 +55,7 @@ public class NetworkController {
             rootPane = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.NETWORK_FXML));
         } catch (IOException e)
         {
-            e.printStackTrace();
+            GlobalLogger.warning(e.getMessage());
         }
         final Scene settingsScene = new Scene(rootPane);
         networkStage.setScene(settingsScene);

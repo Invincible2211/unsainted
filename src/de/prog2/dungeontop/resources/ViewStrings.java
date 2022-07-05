@@ -44,4 +44,7 @@ public interface ViewStrings
     double BATTLEFIELD_VGAP_DEFAULT = 5;
     double BATTLEFIELD_CELL_MIN_SIZE_MODIFIER = 0.5;
     double ZOOMFACTO_ON_MOUSE_HOVER_CARD = 1.5;
+    //Scene scaler
+    double X_SCALE = 0.5;
+    double Y_SCALE = 0.5;
 }

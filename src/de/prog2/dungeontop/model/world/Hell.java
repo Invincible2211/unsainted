@@ -68,6 +68,7 @@ public class Hell implements Serializable
      *
      * @return String representation of the hell
      */
+    @Deprecated
     @Override
     public String toString ()
     {

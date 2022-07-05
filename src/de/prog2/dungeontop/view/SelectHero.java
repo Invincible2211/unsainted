@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-
+// TODO Bitte Magic entfernen, was ist das hier?
 public class SelectHero
 {
     private Hero hero;

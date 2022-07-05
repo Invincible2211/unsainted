@@ -6,10 +6,7 @@ import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.view.ItemClicked;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class ItemClickedController
 {
@@ -18,10 +15,7 @@ public class ItemClickedController
         try
         {
             FXMLLoader loader = new FXMLLoader();
-            AnchorPane itemClicked = null;
-
-            itemClicked = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_CLICKED_FXML));
-
+            AnchorPane itemClicked = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_CLICKED_FXML));
             ItemClicked controller = loader.getController();
             fillItem(item, controller);
             return itemClicked;

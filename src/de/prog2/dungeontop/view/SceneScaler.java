@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.view;
 
+import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,10 +11,11 @@ import javafx.stage.Window;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO was soll diese Klasse
 public class SceneScaler {
 
-    private static double xScale = 0.5;
-    private static double yScale = 0.5;
+    private static double xScale = ViewStrings.X_SCALE;
+    private static double yScale = ViewStrings.Y_SCALE;
 
     public static void scaleScene(Scene scene){
         Window window = scene.getWindow();;

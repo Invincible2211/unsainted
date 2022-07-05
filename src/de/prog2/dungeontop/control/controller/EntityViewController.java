@@ -12,15 +12,6 @@ import javafx.scene.Node;
 public abstract class EntityViewController
 {
     /**
-     * Returns a Node containing the EntityView for the given Entity with a scale of 1.
-     * @param entity The entity that is displayed by the entity view.
-     * @return The Node that is controlled by this controller.
-     */
-    public static Node getEntityView(Entity entity)
-    {
-        return getEntityView(entity, 1);
-    }
-    /**
      * Returns a Node containing the EntityView for the given Entity.
      * @param entity The Entity to display.
      * @param scale The scale of the entity view.

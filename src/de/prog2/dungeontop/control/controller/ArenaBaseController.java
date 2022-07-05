@@ -26,7 +26,7 @@ public abstract class ArenaBaseController
     //TODO the ArenabaseView to replace the parameter in every method as static variable
     /**
      * creates a default arena
-     * @param arenaBaseView
+     * @param arenaBaseView the view to be used
      */
     public static void init(ArenaBaseView arenaBaseView)
     {
@@ -43,8 +43,8 @@ public abstract class ArenaBaseController
 
     /**
      * sets the background image of the arena if an alternative image is wanted.
-     * @param arenaBaseView
-     * @param backGroundAlternativeID
+     * @param arenaBaseView the view to be used
+     * @param backGroundAlternativeID the id of the alternative image
      */
     public static void init(ArenaBaseView arenaBaseView, int backGroundAlternativeID)
     {
@@ -60,7 +60,7 @@ public abstract class ArenaBaseController
 
     /**
      * posssibility to automatically rescale the Arena for different resolutions
-     * @param arenaBaseView
+     * @param arenaBaseView the view to be used
      */
     private static void setPreferredMeasurements(ArenaBaseView arenaBaseView)
     {
@@ -75,8 +75,8 @@ public abstract class ArenaBaseController
 
     /**
      * sets the background image of the arena
-     * @param arenaBaseView
-     * @param imageID
+     * @param arenaBaseView the view to be used
+     * @param imageID the id of the image
      */
     public static void setBackgroundImage(ArenaBaseView arenaBaseView, int imageID)
     {
@@ -88,7 +88,7 @@ public abstract class ArenaBaseController
 
     /**
      * die Aufteilung auf player one und player two soll soaeter dabei helfen DM und Spieler in der Controlle zu unterscheiden
-     * @param arenaBaseView
+     * @param arenaBaseView the view to be used
      */
     private static void initEgoPoints (ArenaBaseView arenaBaseView)
     {
@@ -142,9 +142,9 @@ public abstract class ArenaBaseController
 
     /**
      * Initialisiert das Battlefield als visualisierung der Arena, update duruch UpdateBattlefield
-     * @param arenaBaseView
-     * @param height
-     * @param width
+     * @param arenaBaseView the view to be used
+     * @param height the height of the battlefield
+     * @param width the width of the battlefield
      */
     private static void initBattlefield(ArenaBaseView arenaBaseView, int height, int width)
     {
@@ -176,9 +176,10 @@ public abstract class ArenaBaseController
 
     private static void deleteAllMinionsFromArenaView (ArenaBaseView arenaBaseView, int x, int y)
     {
-        for (int width = 0; width < x; width++) {
-            for (int height = 0; height < y; height++) {
-                GlobalLogger.log(getBattleFieldPane(arenaBaseView, x,y).getChildren().toString() + "ABCDEFG");
+        for (int width = 0; width < x; width++)
+        {
+            for (int height = 0; height < y; height++)
+            {
                 getBattleFieldPane(arenaBaseView, x, y).getChildren().removeAll();
                 GlobalLogger.log(getBattleFieldPane(arenaBaseView, x,y).getChildren().toString());
                 GlobalLogger.log(LoggerStringValues.REMOVING_CELL_FROM_VIEW_BATTLFIELD);
@@ -191,9 +192,11 @@ public abstract class ArenaBaseController
      */
     private static StackPane getBattleFieldPane(ArenaBaseView arenaBaseView, int x, int y)
     {
-        for (Node node : arenaBaseView.getBattlefieldGridPane().getChildren()) {
+        for (Node node : arenaBaseView.getBattlefieldGridPane().getChildren())
+        {
             //Die Magicnumber -1 entsteht weil die Arena mit 0,0 indiziert und die Gridpane mit 1,1.
-            if (GridPane.getColumnIndex(node) == y-1 && GridPane.getRowIndex(node) == x-1) {
+            if (GridPane.getColumnIndex(node) == y-1 && GridPane.getRowIndex(node) == x-1)
+            {
                 GlobalLogger.log(LoggerStringValues.GOT_NODE_ON_BATTLEFIELD + GridPane.getColumnIndex(node) + GridPane.getRowIndex(node));
                 return (StackPane) node;
             }
@@ -204,8 +207,8 @@ public abstract class ArenaBaseController
 
     /**
      * Die alternative zu einem Binding der Inhalte der Model-arena zu der View-arena.
-     * @param arenaBaseView
-     * @param arena
+     * @param arenaBaseView the view to be updated
+     * @param arena the model arena to be updated
      */
     public static void updateBattlefield (ArenaBaseView arenaBaseView, Arena arena)
     {

@@ -9,7 +9,8 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.util.Set;
 
-public class ShopManager {
+public class ShopManager
+{
     // instance of the singleton
     private final static ShopManager instance = new ShopManager();
 
