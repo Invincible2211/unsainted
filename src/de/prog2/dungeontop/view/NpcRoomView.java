@@ -121,7 +121,11 @@ public class NpcRoomView
         AnchorPane.setTopAnchor(closeButton, NpcRoomViewConstants.STATBOARD_TOP_ANCHOR);
         AnchorPane.setRightAnchor(closeButton, NpcRoomViewConstants.SMALL_BUTTON_FIT_WIDTH *
                 HellViewConstants.HALF);
-        closeButton.setOnAction(e -> DungeonTop.getStage().setScene(HellView.getCurrHellView()));
+        closeButton.setOnAction(e ->
+                {
+                    if(HellView.getCurrHellView() != null)
+                        DungeonTop.getStage().setScene(HellView.getCurrHellView());
+                });
 
         return scene;
     }
@@ -152,7 +156,7 @@ public class NpcRoomView
         for (Card card : cardStack)
         {
             // get the cardView for the card
-            Node cardView = CardViewController.getCardView(card, NpcRoomViewConstants.CARD_SCALE);
+            Node cardView = CardViewController.getCardDetailView(card, NpcRoomViewConstants.CARD_SCALE);
             VBox entry = new VBox(cardView);
             entry.setSpacing(NpcRoomViewConstants.VBOX_SPACING);
             entry.setAlignment(Pos.CENTER);

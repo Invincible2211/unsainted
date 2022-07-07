@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.network.NetworkConnectionI;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -35,7 +36,8 @@ public class NetManager extends Thread{
         networkInterpreter.start();
         if (connection instanceof SessionHost)
         {
-            networkAPI.sendHellData(GameManager.getInstance().getGameWorld().getCurrentHell());
+            networkAPI.sendHellData(GameManager.getInstance().getGameWorld().getCurrentHell(),
+                    PlayerManager.getInstance().getPlayer().getCurrentRoom().getCoordinate());
             GlobalLogger.log(NetworkingConstants.SENDS_HELL_DATA);
         }
     }
