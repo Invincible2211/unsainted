@@ -22,6 +22,7 @@ public class GameManager {
 
     private GameState currentState = GameState.MAIN_MENU;
     private final World gameWorld = new World(WorldConstants.HELL_COUNT);
+    private boolean isDM = false;
 
     /*--------------------------------------------KONSTRUKTOREN-------------------------------------------------------*/
 
@@ -119,4 +120,13 @@ public class GameManager {
 
     public World getGameWorld() { return this.gameWorld; }
 
+    public void setDM ()
+    {
+        this.isDM = true;
+    }
+
+    public boolean isDM()
+    {
+        return this.isDM;
+    }
 }

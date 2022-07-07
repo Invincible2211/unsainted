@@ -1,6 +1,9 @@
 package de.prog2.dungeontop.model.network;
 
-public abstract class Package {
+import java.io.Serializable;
+
+public abstract class Package implements Serializable
+{
 
     private byte[] identifier;
 

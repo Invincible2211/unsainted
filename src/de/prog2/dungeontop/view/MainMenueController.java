@@ -49,6 +49,7 @@ public class MainMenueController {
 
     @FXML
     private void onPlayAsDungeonMasterButtonPressed(){
+        GameManager.getInstance().setDM();
         NetworkController.showNetworkGUI();
     }
 

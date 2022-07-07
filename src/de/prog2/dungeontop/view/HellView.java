@@ -6,6 +6,8 @@ import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.MovementManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.network.NetManager;
+import de.prog2.dungeontop.control.network.NetworkAPI;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -42,7 +44,7 @@ import java.util.HashMap;
 public class HellView
 {
     // representation of the player on the hell view
-    private ImageView playerView = null;
+    private static ImageView playerView = null;
     // is an animation currently in progress?
     private boolean isAnimating = HellViewConstants.IS_ANIMATING_DEFAULT_VALUE;
     // currently used HellView
@@ -81,7 +83,15 @@ public class HellView
         initOverlay(container);
 
         // key listener for player movement
-        scene.setOnKeyPressed(e -> movePlayer(e.getCode()));
+        scene.setOnKeyPressed(e ->
+                {
+                    KeyCode keyCode = e.getCode();
+                    if (keyCode == KeyCode.ESCAPE)
+                        openSettings();
+                    else
+                        if (!GameManager.getInstance().isDM())
+                            movePlayer(keyCode);
+                });
 
         GlobalLogger.log(LoggerStringValues.HELLVIEW_INIT);
         return scene;
@@ -109,7 +119,8 @@ public class HellView
 
         // add inventory button
         Button inventoryButton = getOverlayButton(AssetIds.BAG);
-        container.getChildren().add(inventoryButton);
+        if (!GameManager.getInstance().isDM())
+            container.getChildren().add(inventoryButton);
         // set position of the inventory button
         AnchorPane.setTopAnchor(inventoryButton, HellViewConstants.OVERLAY_BUTTON_FIT_HEIGHT *
                 HellViewConstants.HALF);
@@ -377,18 +388,19 @@ public class HellView
      *
      * @param key key which was pressed
      */
-    private void movePlayer(KeyCode key)
+    public void movePlayer(KeyCode key)
     {
         // prohibit running the method multiple times simultaneously
         if (isAnimating)
             return;
         isAnimating = true;
+        NetworkAPI networkAPI = NetManager.getInstance().getNetworkAPI();
 
         // change to the player coordinate
         double deltaX = HellViewConstants.DELTA_X_INIT;
         double deltaY = HellViewConstants.DELTA_Y_INIT;
 
-        // sett the change in a certain direction and move the player on the underlying grid if valid
+        // set the change in a certain direction and move the player on the underlying grid if valid
         switch (key) {
             case UP, W:
                 deltaY -= HellViewConstants.PLAYER_MOVESPEED;
@@ -396,6 +408,8 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
+                if(!GameManager.getInstance().isDM() && networkAPI != null)
+                    networkAPI.sendPlayerMovementData(key);
                 break;
             case DOWN, S:
                 deltaY += HellViewConstants.PLAYER_MOVESPEED;
@@ -403,6 +417,8 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
+                if(!GameManager.getInstance().isDM() && networkAPI != null)
+                    networkAPI.sendPlayerMovementData(key);
                 break;
             case LEFT, A:
                 deltaX -= HellViewConstants.PLAYER_MOVESPEED;
@@ -410,6 +426,8 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
+                if(!GameManager.getInstance().isDM() && networkAPI != null)
+                    networkAPI.sendPlayerMovementData(key);
                 break;
             case RIGHT, D:
                 deltaX += HellViewConstants.PLAYER_MOVESPEED;
@@ -417,9 +435,8 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
-                break;
-            case ESCAPE:
-                openSettings();
+                if(!GameManager.getInstance().isDM() && networkAPI != null)
+                    networkAPI.sendPlayerMovementData(key);
                 break;
 
             // Cases to manipulate playerstats by a keystroke to test the statboard
@@ -455,7 +472,8 @@ public class HellView
         // unlock the movement method again
         timeline.setOnFinished(e -> {
             isAnimating = false;
-            RoomDialogueViewController.getInstance().showStage(PlayerManager.getInstance().getPlayer().getCurrentRoom());
+            if (!GameManager.getInstance().isDM())
+                RoomDialogueViewController.getInstance().showStage(PlayerManager.getInstance().getPlayer().getCurrentRoom());
         });
 
         GlobalLogger.log(LoggerStringValues.MOVED_PLAYER + key);
