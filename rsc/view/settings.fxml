@@ -6,20 +6,13 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0"
-            prefWidth="1520.0" style="-fx-background-image: url(assets/920_SettingsBackground.png);"
-            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="de.prog2.dungeontop.view.SettingsController">
-   <Button id="button" layoutX="512.0" layoutY="539.0" mnemonicParsing="false" onAction="#onSaveButtonPressed"
-           prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Fertig"/>
-   <Slider fx:id="volumeSlider" layoutX="266.0" layoutY="381.0" minorTickCount="10" prefHeight="26.0" prefWidth="1091.0"
-           snapToTicks="true" style="-fx-background-color: #a39f2a; -fx-background-radius: 14;">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1520.0" style="-fx-background-image: url(assets/920_SettingsBackground.png);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SettingsController">
+   <Button id="button" layoutX="512.0" layoutY="539.0" mnemonicParsing="false" onAction="#onSaveButtonPressed" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Fertig" />
+   <Slider fx:id="volumeSlider" layoutX="266.0" layoutY="381.0" minorTickCount="10" prefHeight="26.0" prefWidth="1091.0" snapToTicks="true" style="-fx-background-color: #a39f2a; -fx-background-radius: 14;">
       <padding>
-         <Insets left="10.0" right="10.0"/>
+         <Insets left="10.0" right="10.0" />
       </padding>
    </Slider>
-   <Label layoutX="150.0" layoutY="350.0" prefHeight="93.0" prefWidth="93.0"
-          style="-fx-background-image: url(assets/910_SoundICO.png); -fx-background-size: cover;"/>
-   <Label fx:id="ipLabel" layoutX="1293.0" layoutY="27.0" prefHeight="40.0" prefWidth="200.0"
-          style="-fx-background-color: gray;"/>
+   <Label layoutX="150.0" layoutY="350.0" prefHeight="93.0" prefWidth="93.0" style="-fx-background-image: url(assets/910_SoundICO.png); -fx-background-size: cover;" />
+   <Label fx:id="ipLabel" layoutX="1293.0" layoutY="27.0" onMouseClicked="#onIPLabelClicked" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: gray;" />
 </AnchorPane>

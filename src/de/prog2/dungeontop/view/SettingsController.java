@@ -17,6 +17,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 
 public class SettingsController {
@@ -90,6 +93,14 @@ public class SettingsController {
         }
         final Scene settingsScene = new Scene(rootPane);
         settingsStage.setScene(settingsScene);
+    }
+
+    @FXML
+    private void onIPLabelClicked(){
+        String content = IPChecker.getLocalIPAdress();
+        StringSelection selection = new StringSelection(content);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
     }
 
 }

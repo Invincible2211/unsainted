@@ -37,6 +37,7 @@ public class MovementManager
         if(RoomController.hasTopRoom(player.getCurrentRoom()))
         {
             player.setCurrentRoom(player.getCurrentRoom().getTopRoom());
+
             GlobalLogger.log(LoggerStringValues.MOVE_UP_SUCCESS);
             return true;
         }
