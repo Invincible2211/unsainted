@@ -1,9 +1,6 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
-import de.prog2.dungeontop.control.controller.EntityViewController;
-import de.prog2.dungeontop.control.controller.InventoryController;
-import de.prog2.dungeontop.control.controller.ShopViewController;
+import de.prog2.dungeontop.control.controller.*;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -79,13 +76,20 @@ public class DungeonTop extends Application
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
         stage.setScene(scene);
-        testArenaView();
+        //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
         //testHellView(scene);
         //testLavaPondView(primaryStage);
+        testHell();
+    }
+    public void testHell()
+    {
+        Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);
+        HellGenerator.initHell(hell);
+        System.out.println(hell);
     }
     public static void testEntityView(Stage primaryStage) throws Exception
     {

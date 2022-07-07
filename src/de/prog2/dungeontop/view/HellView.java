@@ -197,6 +197,7 @@ public class HellView
      */
     private void drawRoomTypes (Canvas canvas, Hell hell)
     {
+        // TODO : Jesse
         // load the images of all roomtypes we want to show
         Image monsterRoom = AssetsManager.getImageByAssetId(AssetIds.ARENA_ROOM);
         Image bossRoom = AssetsManager.getImageByAssetId(AssetIds.BOSS_ROOM);

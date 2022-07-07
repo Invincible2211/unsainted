@@ -2,6 +2,7 @@ package de.prog2.dungeontop.model.world.rooms;
 
 import de.prog2.dungeontop.model.world.actions.OpenArenaAction;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.HellToStringValues;
 
 import java.io.Serializable;
 
@@ -23,6 +24,12 @@ public class ArenaRoom extends Room implements Serializable
     {
         this(arena);
         this.isBoss = isBoss;
+    }
+
+    @Override
+    public String toString()
+    {
+        return isBoss ? HellToStringValues.BOSS_ROOM : HellToStringValues.ARENA_ROOM;
     }
 
     public Arena getArena()

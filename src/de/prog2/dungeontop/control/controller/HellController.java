@@ -7,7 +7,7 @@ import de.prog2.dungeontop.model.world.hellComponents.HellComponent;
 import de.prog2.dungeontop.model.world.hellComponents.RoomCenter;
 import de.prog2.dungeontop.model.world.hellComponents.Wall;
 import de.prog2.dungeontop.model.world.hellComponents.WallCorner;
-import de.prog2.dungeontop.model.world.rooms.Room;
+import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.HellToStringValues;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
@@ -189,60 +189,5 @@ public class HellController
             roomList.add(room.getValue());
         }
         return roomList;
-    }
-
-    /**
-     * Generates the string representation of a hellcomponentHashMap.
-     *
-     * @return string representation of a hellcomponentHashMap
-     */
-    @Deprecated
-    public static String hellcomponentToString (Hell hell)
-    {
-        StringBuilder res = new StringBuilder();
-        HashMap<Coordinate, HellComponent> hellComponents = hell.getHellComponentHashMap();
-        int height = hell.getHeight();
-        int width = hell.getWidth();
-
-        for (int y=(height*WorldConstants.ROOM_SIZE)-1; y >= 0; y--)
-        {
-            for (int x=0; x<width*WorldConstants.ROOM_SIZE; x++)
-            {
-                Coordinate coord = new Coordinate(x,y);
-                if(!hellComponents.containsKey(coord))
-                {
-                    res.append(x%WorldConstants.ROOM_SIZE == 1 ?
-                            HellToStringValues.ROOM_CENTER: HellToStringValues.WHITESPACE);
-                    continue;
-                }
-                HellComponent curr = hell.getHellComponentByCoordinate(coord);
-                if ( curr instanceof WallCorner)
-                {
-                    switch (curr.getRotation()) {
-                        case UP -> res.append(HellToStringValues.TOP_LEFT_CORNER);
-                        case RIGHT -> res.append(HellToStringValues.TOP_RIGHT_CORNER);
-                        case LEFT -> res.append(HellToStringValues.BOTTOM_LEFT_CORNER);
-                        case DOWN -> res.append(HellToStringValues.BOTTOM_RIGHT_CORNER);
-                    }
-                }
-                else if (curr instanceof Wall)
-                {
-                    switch (curr.getRotation())
-                    {
-                        case UP -> res.append(HellToStringValues.HORIZONTAL_WALL);
-                        case LEFT -> res.append(HellToStringValues.VERTICAL_WALL);
-                    }
-                }
-                else if (curr instanceof RoomCenter)
-                {
-                    res.append(HellToStringValues.ROOM_CENTER);
-                } else {
-                    res.append(x%WorldConstants.ROOM_SIZE == 1 ?
-                            HellToStringValues.ROOM_CENTER: HellToStringValues.WHITESPACE);
-                }
-            }
-            res.append(HellToStringValues.LINE_BREAK);
-        }
-        return res.toString();
     }
 }

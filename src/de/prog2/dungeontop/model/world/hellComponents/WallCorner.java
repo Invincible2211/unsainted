@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.model.world.hellComponents;
 
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.HellToStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 
 import java.io.Serializable;
@@ -17,5 +18,17 @@ public class WallCorner extends HellComponent implements Serializable
     public WallCorner(Rotation rotation)
     {
         super(AssetIds.WALL_CORNER, rotation);
+    }
+
+    @Override
+    public String toString()
+    {
+        return switch (this.getRotation())
+        {
+            case UP -> HellToStringValues.TOP_LEFT_CORNER;
+            case RIGHT -> HellToStringValues.TOP_RIGHT_CORNER;
+            case LEFT -> HellToStringValues.BOTTOM_LEFT_CORNER;
+            case DOWN -> HellToStringValues.BOTTOM_RIGHT_CORNER;
+        };
     }
 }

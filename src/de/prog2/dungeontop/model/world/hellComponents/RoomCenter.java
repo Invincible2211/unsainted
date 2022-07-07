@@ -2,7 +2,6 @@ package de.prog2.dungeontop.model.world.hellComponents;
 
 import de.prog2.dungeontop.model.world.rooms.Room;
 import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.WorldConstants;
 
 import java.io.Serializable;
 
@@ -24,5 +23,11 @@ public class RoomCenter extends HellComponent implements Serializable
     public Room getRoom()
     {
         return room;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getRoom().toString();
     }
 }
