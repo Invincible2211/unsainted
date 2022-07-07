@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Represents a wall of a room between two corners
  */
-public class Wall extends HellComponent implements Serializable
+public class Wall extends HellComponent
 {
     /**
      * Creates a Wall facing the right direction

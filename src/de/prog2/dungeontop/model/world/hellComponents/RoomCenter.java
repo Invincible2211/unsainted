@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Represents the center of a room.
  */
-public class RoomCenter extends HellComponent implements Serializable
+public class RoomCenter extends HellComponent
 {
     private final Room room;
     /**

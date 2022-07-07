@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Represents a corner of a room
  */
-public class WallCorner extends HellComponent implements Serializable
+public class WallCorner extends HellComponent
 {
     /**
      * Creates a WallCorner facing the right direction

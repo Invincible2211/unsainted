@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * The ArenaRoom is a room, where the player has to fight.
  */
-public class ArenaRoom extends Room implements Serializable
+public class ArenaRoom extends Room
 {
     private final Arena arena;
     private boolean isAlive = true;

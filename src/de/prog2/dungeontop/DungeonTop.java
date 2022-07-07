@@ -80,6 +80,7 @@ public class DungeonTop extends Application
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
         //stage.setScene(scene);
+
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
@@ -87,7 +88,7 @@ public class DungeonTop extends Application
         //testEntityView(primaryStage);
         //testHellView(scene);
         //testLavaPondView(primaryStage);
-        testHell();
+        //testHell();
     }
     public void testHell()
     {

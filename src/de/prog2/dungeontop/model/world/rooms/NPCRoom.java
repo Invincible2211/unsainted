@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 /**
  * Represents the different peaceful Action-Rooms
  */
-public abstract class NPCRoom extends Room implements Serializable
+public abstract class NPCRoom extends Room
 {
     private final SerializableSimpleIntegerProperty freeActions = new SerializableSimpleIntegerProperty(1);
     public NPCRoom () {}

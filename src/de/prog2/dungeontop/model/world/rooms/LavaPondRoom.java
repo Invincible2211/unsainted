@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * The LavaPondRoom is a room, where the player can remove cards from his deck
  */
-public class LavaPondRoom extends NPCRoom implements Serializable
+public class LavaPondRoom extends NPCRoom
 {
     @Override
     public String toString()
