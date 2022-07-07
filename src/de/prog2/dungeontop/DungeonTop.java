@@ -88,6 +88,7 @@ public class DungeonTop extends Application
         //testHellView(scene);
         //testLavaPondView(primaryStage);
     }
+    /*
     public static void testEntityView(Stage primaryStage) throws Exception
     {
         List<Entity> entities = TestConstants.getTestEntities();
@@ -109,6 +110,8 @@ public class DungeonTop extends Application
         scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         primaryStage.setScene(scene);
     }
+    */
+
     public static void testCardView(Stage primaryStage) throws Exception
     {
         List<Card> cards = TestConstants.getTestCards();
