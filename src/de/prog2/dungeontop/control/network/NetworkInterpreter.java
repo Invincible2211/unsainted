@@ -1,17 +1,22 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.model.network.packages.HellPackage;
+import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.resources.NetworkInterpreterConstants;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import org.apache.commons.lang3.SerializationUtils;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 
 public class NetworkInterpreter extends Thread{
@@ -63,12 +68,29 @@ public class NetworkInterpreter extends Thread{
 
         // TODO : Remove magic?
         switch (identifierAsString){
-            case "0001":
-                System.out.println("getHell");
-                Hell hell = (Hell) SerializationUtils.deserialize(content);
+            // package containing data to rebuild the hellView
+            case NetworkInterpreterConstants.HELL_PACKAGE:
+                // deserialize package
+                HellPackage hellPackage = (HellPackage) SerializationUtils.deserialize(content);
+
+                // get hell and set current player room
+                // this is needed to prevent asynch behaviour
+                Coordinate playerCoordinate = hellPackage.getPlayerCoordinate();
+                Hell hell = hellPackage.getHell();
+                PlayerManager.getInstance().getPlayer().setCurrentRoom(hell.getRoomByCoordinate(playerCoordinate));
+
+                // create and set HellView
                 HellView view = new HellView();
                 Scene hellView = view.initHellView(hell);
+                HellView.setCurrHellView(hellView);
                 Platform.runLater(() -> DungeonTop.getStage().setScene(hellView));
+                break;
+            // package containing movement data
+            case NetworkInterpreterConstants.PLAYER_MOVEMENT_PACKAGE:
+                KeyCode keyCode = (KeyCode) SerializationUtils.deserialize(content);
+                HellView viewInstance = new HellView();
+                viewInstance.movePlayer(keyCode);
+                break;
 
         }
     }
