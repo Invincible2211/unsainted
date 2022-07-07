@@ -64,6 +64,11 @@ public class HellView
 
         // Set the background that is seen between the rooms
         pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+        /*
+        // TODO: Find usable asset for animated lava background and use it to replace the black BackgroundFill
+        pane.setBackground(new Background(new BackgroundImage(AssetsManager.getImageByAssetId(AssetIds.HELL_LAVA_BG),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        */
 
         Scene scene = new Scene(container, HellViewConstants.SCENE_STARTUP_WIDTH, HellViewConstants.SCENE_STARTUP_HEIGHT);
 
@@ -372,7 +377,8 @@ public class HellView
      *
      * @param key key which was pressed
      */
-    private void movePlayer(KeyCode key) {
+    private void movePlayer(KeyCode key)
+    {
         // prohibit running the method multiple times simultaneously
         if (isAnimating)
             return;
@@ -411,6 +417,9 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
+                break;
+            case ESCAPE:
+                openSettings();
                 break;
 
             // Cases to manipulate playerstats by a keystroke to test the statboard
