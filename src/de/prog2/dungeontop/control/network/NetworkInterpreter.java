@@ -5,6 +5,7 @@ import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.HellView;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import org.apache.commons.lang3.SerializationUtils;
 
@@ -67,7 +68,8 @@ public class NetworkInterpreter extends Thread{
                 Hell hell = (Hell) SerializationUtils.deserialize(content);
                 HellView view = new HellView();
                 Scene hellView = view.initHellView(hell);
-                DungeonTop.getStage().setScene(hellView);
+                Platform.runLater(() -> DungeonTop.getStage().setScene(hellView));
+
         }
     }
 

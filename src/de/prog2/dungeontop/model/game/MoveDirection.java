@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.model.game;
 
-public enum MoveDirection
+import java.io.Serializable;
+
+public enum MoveDirection implements Serializable
 {
     UP,DOWN,LEFT,RIGHT
 }

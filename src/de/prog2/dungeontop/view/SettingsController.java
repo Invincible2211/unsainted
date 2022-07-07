@@ -97,8 +97,8 @@ public class SettingsController {
 
     @FXML
     private void onIPLabelClicked(){
-        String theString = IPChecker.getLocalIPAdress();
-        StringSelection selection = new StringSelection(theString);
+        String content = IPChecker.getLocalIPAdress();
+        StringSelection selection = new StringSelection(content);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, selection);
     }

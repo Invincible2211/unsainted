@@ -4,6 +4,7 @@ import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
+import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -74,11 +75,11 @@ public class DungeonTop extends Application
         }
         PlayerManager.getInstance().getPlayer().setDeck(deck);
 
-        //AudioManager.getInstance().playSound(99);
+        //AudioManager.getInstance().playSound(990);
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
-        stage.setScene(scene);
+        //stage.setScene(scene);
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
