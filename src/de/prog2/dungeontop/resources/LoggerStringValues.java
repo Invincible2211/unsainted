@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.resources;
 
-public interface LoggerStringValues {
+public interface LoggerStringValues
+{
     String CARD_RANK_INCREASED = "Rank of a Card increased.";
     String SHOPMANAGER_CREATED = "ShopManager erstellt.";
     String SHOPMANAGER_GET = "ShopManager abgefragt.";

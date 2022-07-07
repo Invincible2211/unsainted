@@ -79,7 +79,7 @@ public class DungeonTop extends Application
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
         stage.setScene(scene);
-        //testArenaView();
+        testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);

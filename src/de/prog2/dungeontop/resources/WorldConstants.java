@@ -2,8 +2,6 @@ package de.prog2.dungeontop.resources;
 
 import de.prog2.dungeontop.model.world.hellComponents.Rotation;
 
-import java.util.UUID;
-
 public interface WorldConstants
 {
     /**
@@ -18,17 +16,6 @@ public interface WorldConstants
     int MINIMUM_ROOM_COUNT = 25;
     int MAXIMUM_ROOM_COUNT = MINIMUM_ROOM_COUNT + 5;
     int HELL_COUNT = 7;
-
-    /**
-     * Holds alle the AssetIds for the HellComponents
-     */
-    interface HellComponentAssetIds
-    {
-        UUID WALL_ASSET_ID = UUID.randomUUID();
-        UUID WALL_CORNER_ASSET_ID = UUID.randomUUID();
-        UUID PASSAGE_ASSET_ID = UUID.randomUUID();
-        UUID ROOM_CENTER_ASSET_ID = UUID.randomUUID();
-    }
 
     /**
      * Holds all the different Rotations for the HellComponents

@@ -11,9 +11,9 @@ import de.prog2.dungeontop.model.spells.TestSpell;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestConstants
+public interface TestConstants
 {
-    public static List<Card> getTestCards()
+    static List<Card> getTestCards()
     {
         ArrayList<Card> cards = new ArrayList<>();
         Entity harald = new Minion("Harald", 12, 5, 2, 450);
@@ -28,7 +28,7 @@ public class TestConstants
         cards.add(new EntityCard(josef, 6, 70, 4, 2));
         return cards;
     }
-    public static List<Entity> getTestEntities()
+    static List<Entity> getTestEntities()
     {
         ArrayList<Entity> entities = new ArrayList<>();
         Entity harald = new Minion("Harald", 12, 5, 2, 450);

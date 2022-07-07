@@ -4,6 +4,7 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.resources.*;
+import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.EntityView;
 import javafx.fxml.FXMLLoader;
@@ -62,8 +63,8 @@ public abstract class EntityViewController
 
     public static void zoomEntityView(Node entityView, double scale)
     {
-        entityView.setScaleX(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD * scale);
-        entityView.setScaleY(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD * scale);
+        entityView.setScaleX(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD * scale);
+        entityView.setScaleY(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD * scale);
     }
 
     public static void resetZoom(Node entityView, double scale)

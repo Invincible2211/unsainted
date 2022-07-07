@@ -8,9 +8,9 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.arena.ArenaStackPane;
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.resources.views.EntityConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
 import javafx.scene.Node;
@@ -38,8 +38,8 @@ public abstract class ArenaBaseController
 
        initEgoPoints();
        setBackgroundImage(AssetIds.ARENA_BG_DEFAULT_ID);
-       arenaBaseView.getBackGroundAnchorPane().setPrefSize(ViewStrings.RESOLUTION_X, ViewStrings.RESOLUTION_Y);
-       arenaBaseView.getBackGroundAnchorPane().setMaxSize(ViewStrings.RESOLUTION_X, ViewStrings.RESOLUTION_Y);
+       arenaBaseView.getBackGroundAnchorPane().setPrefSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
+       arenaBaseView.getBackGroundAnchorPane().setMaxSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
 
        setPreferredMeasurements();
 
@@ -57,8 +57,8 @@ public abstract class ArenaBaseController
                 BattleManager.getInstance().getArena().getWidth());
         initEgoPoints();
         setBackgroundImage(backGroundAlternativeID);
-        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ViewStrings.RESOLUTION_X, ViewStrings.RESOLUTION_Y);
-        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ViewStrings.RESOLUTION_X, ViewStrings.RESOLUTION_Y);
+        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
+        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
         setPreferredMeasurements();
 
     }
@@ -70,11 +70,11 @@ public abstract class ArenaBaseController
      */
     private static void setPreferredMeasurements()
     {
-        currentArenaBaseView.getBorderPaneID().getTop().prefHeight(ViewStrings.HAND_PLAYER_Y);
-        currentArenaBaseView.getBorderPaneID().getBottom().prefHeight(ViewStrings.HAND_PLAYER_Y);
-        currentArenaBaseView.getBorderPaneID().getTop().maxHeight(ViewStrings.HAND_PLAYER_Y);
-        currentArenaBaseView.getBorderPaneID().getTop().maxWidth(ViewStrings.HAND_PLAYER_Y);
-        currentArenaBaseView.getBorderPaneID().getBottom().maxHeight(ViewStrings.HAND_PLAYER_Y);
+        currentArenaBaseView.getBorderPaneID().getTop().prefHeight(ArenaViewConstants.HAND_PLAYER_Y);
+        currentArenaBaseView.getBorderPaneID().getBottom().prefHeight(ArenaViewConstants.HAND_PLAYER_Y);
+        currentArenaBaseView.getBorderPaneID().getTop().maxHeight(ArenaViewConstants.HAND_PLAYER_Y);
+        currentArenaBaseView.getBorderPaneID().getTop().maxWidth(ArenaViewConstants.HAND_PLAYER_Y);
+        currentArenaBaseView.getBorderPaneID().getBottom().maxHeight(ArenaViewConstants.HAND_PLAYER_Y);
         currentArenaBaseView.getBorderPaneID().autosize();
         currentArenaBaseView.getBackGroundAnchorPane().autosize();
     }
@@ -87,7 +87,7 @@ public abstract class ArenaBaseController
     {
         Image image = AssetsManager.getImageByAssetId(imageID);
         BackgroundImage myBI= new BackgroundImage(image, BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT,
-                new BackgroundSize(ViewStrings.RESOLUTION_X, ViewStrings.RESOLUTION_Y, false, false, false, false));
+                new BackgroundSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y, false, false, false, false));
         currentArenaBaseView.getBackGroundAnchorPane().setBackground(new Background(myBI));
     }
 
@@ -100,10 +100,10 @@ public abstract class ArenaBaseController
         ImageView egoPointsPlayerTwoImageView = currentArenaBaseView.getEgopointsPlayerTwoImageView();
         egoPointsPlayerOneImageView.setImage(AssetsManager.getImageByAssetId(AssetIds.SUMMON_COST_ICON));
         egoPointsPlayerTwoImageView.setImage(AssetsManager.getImageByAssetId(AssetIds.SUMMON_COST_ICON));
-        egoPointsPlayerOneImageView.setFitHeight(ViewStrings.EGOPOINTS_BACKROUND_HEIGHT);
-        egoPointsPlayerOneImageView.setFitWidth(ViewStrings.EGOPOINTS_BACKROUND_WIDTH);
-        egoPointsPlayerTwoImageView.setFitHeight(ViewStrings.EGOPOINTS_BACKROUND_HEIGHT);
-        egoPointsPlayerTwoImageView.setFitWidth(ViewStrings.EGOPOINTS_BACKROUND_WIDTH);
+        egoPointsPlayerOneImageView.setFitHeight(ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
+        egoPointsPlayerOneImageView.setFitWidth(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH);
+        egoPointsPlayerTwoImageView.setFitHeight(ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
+        egoPointsPlayerTwoImageView.setFitWidth(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH);
     }
 
     //TODO BINDING THIS -> binddirectional maybe
@@ -111,14 +111,14 @@ public abstract class ArenaBaseController
     public static void updatePlayerHands (List<Card> handOne, List<Card> handTwo)
     {
         HBox handcontainer = currentArenaBaseView.getPlayerHandHBox();
-        handcontainer.setPrefSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
-        handcontainer.setMaxSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
+        handcontainer.setPrefSize(ArenaViewConstants.HAND_PLAYER_X, ArenaViewConstants.HAND_PLAYER_Y);
+        handcontainer.setMaxSize(ArenaViewConstants.HAND_PLAYER_X, ArenaViewConstants.HAND_PLAYER_Y);
 
         HBox secondHandContainer = currentArenaBaseView.getEnemyHandHBox();
-        secondHandContainer.setPrefSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
-        secondHandContainer.setMaxSize(ViewStrings.HAND_PLAYER_X, ViewStrings.HAND_PLAYER_Y);
+        secondHandContainer.setPrefSize(ArenaViewConstants.HAND_PLAYER_X, ArenaViewConstants.HAND_PLAYER_Y);
+        secondHandContainer.setMaxSize(ArenaViewConstants.HAND_PLAYER_X, ArenaViewConstants.HAND_PLAYER_Y);
 
-        double handCardScale = ViewStrings.HAND_PLAYER_Y / ViewStrings.CARD_HEIGHT;
+        double handCardScale = ArenaViewConstants.HAND_PLAYER_Y / ArenaViewConstants.CARD_HEIGHT;
 
         for (Card card : handOne)
         {
@@ -151,10 +151,10 @@ public abstract class ArenaBaseController
      */
     private static void initBattlefield(int height, int width)
     {
-        double size = ViewStrings.BATTLEFIELDSIZE_Y / height;
+        double size = ArenaViewConstants.BATTLEFIELD_SIZE_Y / height;
         GridPane gridPane = currentArenaBaseView.getBattlefieldGridPane();
-        gridPane.setVgap(ViewStrings.BATTLEFIELD_VGAP_DEFAULT);
-        gridPane.setHgap(ViewStrings.BATTLEFIELD_HGAP_DEFAULT);
+        gridPane.setVgap(ArenaViewConstants.BATTLEFIELD_VGAP_DEFAULT);
+        gridPane.setHgap(ArenaViewConstants.BATTLEFIELD_HGAP_DEFAULT);
 
         Image background = AssetsManager.getImageByAssetId(AssetIds.BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID);
         BackgroundImage myBI= new BackgroundImage(background, BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT,
@@ -169,8 +169,8 @@ public abstract class ArenaBaseController
                 stackPane.setBackground(new Background(myBI));;
                 GlobalLogger.log(LoggerStringValues.ADDING_CELL_TO_VIEW_BATTLFIELD);
 //                stackPane.setPrefSize(size, size); TODO they shall only be Square even with uneven resolution
-                stackPane.setMinSize(size * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER, size * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER);
-                stackPane.setMaxSize(size * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER, size * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER);
+                stackPane.setMinSize(size * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER, size * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER);
+                stackPane.setMaxSize(size * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER, size * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER);
 
                 gridPane.add(stackPane, x, y);
             }
@@ -211,8 +211,8 @@ public abstract class ArenaBaseController
         //redraw arena components by deleting them and adding them again
         deleteAllMinionsFromArenaView();
 
-        double sizescaleY = ViewStrings.BATTLEFIELDSIZE_Y / arena.getHeight() / EntityConstants.ENTITY_BASE_HEIGHT * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER;
-        double sizescaleX = ViewStrings.BATTLEFIELDSIZE_X / arena.getWidth() / EntityConstants.ENTITY_BASE_WIDTH * ViewStrings.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER;
+        double sizescaleY = ArenaViewConstants.BATTLEFIELD_SIZE_Y / arena.getHeight() / EntityConstants.ENTITY_BASE_HEIGHT * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER;
+        double sizescaleX = ArenaViewConstants.BATTLEFIELD_SIZE_X / arena.getWidth() / EntityConstants.ENTITY_BASE_WIDTH * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER;
         double size = Math.min(sizescaleY, sizescaleX);
 
         for (Entity entity : arena.getArenaHashmap().values())

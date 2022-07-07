@@ -14,7 +14,7 @@ public interface ViewStrings
     String ITEM_VIEW_FXML = "view/itemView.fxml";
     String ITEM_CLICKED_FXML = "view/itemClicked.fxml";
 
-    // Arena
+    // Arena View
     String ARENA_ROOM_DIALOGUE_FXML = "view/roomDialogueView.fxml";
     String ARENABASE_VIEW = "view/arenaBase.fxml";
     // Entity View
@@ -27,24 +27,6 @@ public interface ViewStrings
     // Shop View
     String SHOP_VIEW_FXML = "view/shopView.fxml";
     String SHOP_VIEW_CSS = "view/shopView.css";
+    // Network View
     String NETWORK_FXML = "view/network.fxml";
-
-    //ist kein string aber kann hier trotzdem rein
-    int RESOLUTION_X = 1920;
-    int RESOLUTION_Y = 1080;
-    double EGOPOINTS_BACKROUND_HEIGHT = RESOLUTION_X * 0.02;
-    double EGOPOINTS_BACKROUND_WIDTH = RESOLUTION_Y * 0.05;
-    double HAND_PLAYER_X = RESOLUTION_X * 0.8;
-    double HAND_PLAYER_Y = RESOLUTION_Y * 0.1;//0.10;
-    double BATTLEFIELDSIZE_X = RESOLUTION_X * 0.9;
-    double BATTLEFIELDSIZE_Y = RESOLUTION_Y * 0.9;
-    double CARD_WIDTH = 343;
-    double CARD_HEIGHT = 480;
-    double BATTLEFIELD_HGAP_DEFAULT = 5;
-    double BATTLEFIELD_VGAP_DEFAULT = 5;
-    double BATTLEFIELD_CELL_MIN_SIZE_MODIFIER = 0.5;
-    double ZOOMFACTO_ON_MOUSE_HOVER_CARD = 1.5;
-    //Scene scaler
-    double X_SCALE = 0.5;
-    double Y_SCALE = 0.5;
 }
