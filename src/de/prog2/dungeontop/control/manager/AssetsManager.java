@@ -59,6 +59,8 @@ public class AssetsManager
      */
     public static Image getImageByAssetId (int id)
     {
+        if(id < 0) return null;
+
         Image image = null;
         try
         {

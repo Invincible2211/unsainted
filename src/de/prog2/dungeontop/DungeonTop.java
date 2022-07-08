@@ -14,8 +14,10 @@ import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.spells.TestSpell;
+import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.model.world.rooms.EmptyRoom;
 import de.prog2.dungeontop.model.world.rooms.LavaPondRoom;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.TestConstants;
@@ -191,7 +193,6 @@ public class DungeonTop extends Application
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(4, 4),fxmlLoader.getController());
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         getStage().setScene(scene);
         BattleManager.getInstance().setCurrentPhase(BattleManager.getInstance().getNextPhaseInCycle());
         BattleManager.getInstance().testPlaceCard();
@@ -234,7 +235,7 @@ public class DungeonTop extends Application
             deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
         }
 
-        LavaPondRoom room = new LavaPondRoom();
+        LavaPondRoom room = new LavaPondRoom(new EmptyRoom(new Coordinate(0,0), 1));
         PlayerManager.getInstance().addSouls(100);
         PlayerManager.getInstance().getPlayer().setDeck(deck);
         NpcRoomView view = new NpcRoomView(room);

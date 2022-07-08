@@ -15,24 +15,25 @@ public abstract class Room implements Serializable
     private Coordinate coordinate;
     private boolean processed = false;
     private int distanceFromStart = 0;
+    private final int assetId;
 
     private Action action = new DefaultAction();
 
-    public Room(){}
-    public Room (Coordinate coordinate) { this.coordinate = coordinate; }
-    public Room(Action action)
+    public Room (Coordinate coordinate, int distanceFromStart, Action action, int assetId)
     {
-        this.action = action;
-    }
-    public Room(Coordinate coordinate, int distanceFromStart)
-    {
-        this(coordinate);
+        this.coordinate = coordinate;
         this.distanceFromStart = distanceFromStart;
+        this.action = action;
+        this.assetId = assetId;
+    }
+    public Room (Room room, Action action, int assetId)
+    {
+        this(room.getCoordinate(), room.getDistanceFromStart(), action, assetId);
     }
 
-    public <T> boolean executeAction(T... args)
+    public boolean executeAction()
     {
-        return this.action.execute(args);
+        return this.action.execute(this);
     }
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
@@ -89,5 +90,10 @@ public abstract class Room implements Serializable
     public void setDistanceFromStart (int distance)
     {
         this.distanceFromStart = distance;
+    }
+
+    public int getAssetId()
+    {
+        return assetId;
     }
 }

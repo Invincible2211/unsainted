@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="container" prefHeight="469.0" prefWidth="469.0"
             xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="de.prog2.dungeontop.view.EntityView"
+            fx:controller="de.prog2.dungeontop.view.EntityView" stylesheets="@view/entityStyle.css"
             onMouseEntered="#mouseEntered" onMouseExited="#mouseExited">
     <ImageView fx:id="backgroundImageView" fitHeight="469" fitWidth="469" />
     <!-- Entity -->
