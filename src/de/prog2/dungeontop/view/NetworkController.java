@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -48,7 +49,7 @@ public class NetworkController {
         final FXMLLoader fxmlLoader = new FXMLLoader();
         networkStage.initModality(Modality.APPLICATION_MODAL);
         networkStage.initOwner(DungeonTop.getStage());
-        networkStage.initStyle(StageStyle.UNDECORATED);
+        networkStage.initStyle(StageStyle.TRANSPARENT);
         AnchorPane rootPane = new AnchorPane();
         try
         {
@@ -57,7 +58,7 @@ public class NetworkController {
         {
             GlobalLogger.warning(e.getMessage());
         }
-        final Scene settingsScene = new Scene(rootPane);
+        final Scene settingsScene = new Scene(rootPane, Color.TRANSPARENT);
         networkStage.setScene(settingsScene);
     }
 

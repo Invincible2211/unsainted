@@ -6,6 +6,7 @@ import de.prog2.dungeontop.control.network.IPChecker;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -46,6 +48,25 @@ public class SettingsController {
     private void onSaveButtonPressed()
     {
         hideSettings();
+    }
+
+    @FXML
+    private void onExitButtonPressed()
+    {
+        Platform.exit();
+    }
+
+    @FXML
+    private void onMMButtonPressed()
+    {
+        hideSettings();
+        Scene scene = new Scene(new AnchorPane());
+        try {
+            scene = new Scene(new FXMLLoader().load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        DungeonTop.getStage().setScene(scene);
     }
 
     /**
@@ -82,7 +103,7 @@ public class SettingsController {
         final FXMLLoader fxmlLoader = new FXMLLoader();
         settingsStage.initModality(Modality.APPLICATION_MODAL);
         settingsStage.initOwner(DungeonTop.getStage());
-        settingsStage.initStyle(StageStyle.UNDECORATED);
+        settingsStage.initStyle(StageStyle.TRANSPARENT);
         AnchorPane rootPane = new AnchorPane();
         try
         {
@@ -91,7 +112,7 @@ public class SettingsController {
         {
             GlobalLogger.warning(e.getMessage());
         }
-        final Scene settingsScene = new Scene(rootPane);
+        final Scene settingsScene = new Scene(rootPane, Color.TRANSPARENT);
         settingsStage.setScene(settingsScene);
     }
 
