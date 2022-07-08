@@ -62,4 +62,14 @@ public class NetworkController {
         networkStage.setScene(settingsScene);
     }
 
+    @FXML
+    private void openSettings(){
+        SettingsController.showSettings();
+    }
+
+    @FXML
+    private void onBackToMM(){
+        hideNetworkGUI();
+    }
+
 }

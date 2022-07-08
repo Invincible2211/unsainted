@@ -15,20 +15,12 @@
    <Label fx:id="info" layoutX="226.0" layoutY="229.0" prefHeight="17.0" prefWidth="149.0" />
    <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: transparent;">
      <menus>
-       <Menu mnemonicParsing="false" text="File">
-         <items>
-           <MenuItem mnemonicParsing="false" text="Close" />
-         </items>
-       </Menu>
-       <Menu mnemonicParsing="false" text="Edit">
-         <items>
-           <MenuItem mnemonicParsing="false" text="Delete" />
-         </items>
-       </Menu>
-       <Menu mnemonicParsing="false" text="Help">
-         <items>
-           <MenuItem mnemonicParsing="false" text="About" />
-         </items>
+         <Menu disable="true" mnemonicParsing="false" text="                                                                       " />
+       <Menu mnemonicParsing="false" text="Einstellungen">
+            <items>
+               <MenuItem mnemonicParsing="false" onAction="#openSettings" text="Einstellungen öffnen" />
+               <MenuItem mnemonicParsing="false" onAction="#onBackToMM" text="Zurück zum Hauptmenü" />
+            </items>
        </Menu>
      </menus>
    </MenuBar>

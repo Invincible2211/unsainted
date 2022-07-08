@@ -1,7 +1,9 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.model.game.GameState;
+import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.ViewStrings;
@@ -23,6 +25,8 @@ public class GameManager {
     private GameState currentState = GameState.MAIN_MENU;
     private final World gameWorld = new World(WorldConstants.HELL_COUNT);
     private boolean isDM = false;
+
+    private SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
 
     /*--------------------------------------------KONSTRUKTOREN-------------------------------------------------------*/
 
@@ -129,4 +133,9 @@ public class GameManager {
     {
         return this.isDM;
     }
+
+    public SaveGame getSaveGame() {
+        return saveGame;
+    }
+
 }

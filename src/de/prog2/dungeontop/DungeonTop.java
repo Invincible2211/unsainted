@@ -4,8 +4,11 @@ import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
+import de.prog2.dungeontop.control.file.GameSaveFileReader;
+import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.BattleManager;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
@@ -24,11 +27,7 @@ import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
-import de.prog2.dungeontop.view.HellView;
-import de.prog2.dungeontop.view.NetworkController;
-import de.prog2.dungeontop.view.NpcRoomView;
-import de.prog2.dungeontop.view.RoomDialogueViewController;
-import de.prog2.dungeontop.view.SettingsController;
+import de.prog2.dungeontop.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -61,13 +60,12 @@ public class DungeonTop extends Application
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
         stage.show();
-
+        //MainMenueController.addMenuebar();
         // TODO: give the player his goddamn deck
         Entity harald = new Minion("Harald", 6, 4, 1, 450);
         Deck deck = new Deck();

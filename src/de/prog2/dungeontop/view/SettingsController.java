@@ -1,7 +1,9 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.IPChecker;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
@@ -53,6 +55,7 @@ public class SettingsController {
     @FXML
     private void onExitButtonPressed()
     {
+        GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
         Platform.exit();
     }
 
