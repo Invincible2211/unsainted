@@ -193,7 +193,6 @@ public class DungeonTop extends Application
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(4, 4),fxmlLoader.getController());
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
         getStage().setScene(scene);
         BattleManager.getInstance().setCurrentPhase(BattleManager.getInstance().getNextPhaseInCycle());
         BattleManager.getInstance().testPlaceCard();
