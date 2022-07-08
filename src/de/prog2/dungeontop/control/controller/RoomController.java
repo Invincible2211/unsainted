@@ -23,7 +23,7 @@ public class RoomController
      */
     public static void addTopRoom (Hell hell, Room room)
     {
-        Room top = new EmptyRoom(new Coordinate( room.getCoordinate().getX(), room.getCoordinate().getY() + 1 ),
+        Room top = new EmptyRoom(new Coordinate(room.getCoordinate().getX(), room.getCoordinate().getY() + 1),
                 room.getDistanceFromStart() + 1);
         top.setBottomRoom(room);
         room.setTopRoom(top);
@@ -46,7 +46,7 @@ public class RoomController
      */
     public static void addBottomRoom(Hell hell, Room room)
     {
-        Room bot = new EmptyRoom (new Coordinate( room.getCoordinate().getX(), room.getCoordinate().getY() - 1 ),
+        Room bot = new EmptyRoom (new Coordinate(room.getCoordinate().getX(), room.getCoordinate().getY() - 1),
                 room.getDistanceFromStart() + 1);
         bot.setTopRoom(room);
         room.setBottomRoom(bot);
@@ -70,7 +70,7 @@ public class RoomController
      */
     public static void addLeftRoom (Hell hell, Room room)
     {
-        Room left = new EmptyRoom (new Coordinate( room.getCoordinate().getX() - 1, room.getCoordinate().getY() ),
+        Room left = new EmptyRoom (new Coordinate(room.getCoordinate().getX() - 1, room.getCoordinate().getY()),
                 room.getDistanceFromStart() + 1);
         left.setRightRoom(room);
         room.setLeftRoom(left);
@@ -83,7 +83,6 @@ public class RoomController
         {
             GlobalLogger.warning(ex.getMessage());
         }
-
     }
 
     /**
@@ -94,7 +93,7 @@ public class RoomController
      */
     public static void addRightRoom (Hell hell, Room room)
     {
-        Room right = new EmptyRoom (new Coordinate( room.getCoordinate().getX() + 1, room.getCoordinate().getY() ),
+        Room right = new EmptyRoom (new Coordinate( room.getCoordinate().getX() + 1, room.getCoordinate().getY()),
                 room.getDistanceFromStart() + 1);
         right.setLeftRoom(room);
         room.setRightRoom(right);

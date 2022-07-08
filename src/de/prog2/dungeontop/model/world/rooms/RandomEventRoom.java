@@ -1,11 +1,8 @@
 package de.prog2.dungeontop.model.world.rooms;
 
-import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.actions.RandomEventAction;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellToStringValues;
-
-import java.io.Serializable;
 
 /**
  * The RandomEventRoom is a room where random events, such as traps, occur.

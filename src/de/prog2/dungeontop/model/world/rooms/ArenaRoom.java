@@ -1,13 +1,9 @@
 package de.prog2.dungeontop.model.world.rooms;
 
-import de.prog2.dungeontop.model.world.Coordinate;
-import de.prog2.dungeontop.model.world.actions.Action;
 import de.prog2.dungeontop.model.world.actions.OpenArenaAction;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellToStringValues;
-
-import java.io.Serializable;
 
 /**
  * The ArenaRoom is a room, where the player has to fight.
