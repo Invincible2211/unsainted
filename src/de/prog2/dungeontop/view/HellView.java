@@ -451,7 +451,10 @@ public class HellView
         timeline.setOnFinished(e -> {
             isAnimating = false;
             if (!GameManager.getInstance().isDM())
-                RoomDialogueViewController.getInstance().showStage(PlayerManager.getInstance().getPlayer().getCurrentRoom());
+            {
+                PlayerManager.getInstance().getPlayer().getCurrentRoom().executeAction();
+                //RoomDialogueViewController.getInstance().showStage(PlayerManager.getInstance().getPlayer().getCurrentRoom());
+            }
         });
 
         GlobalLogger.log(LoggerStringValues.MOVED_PLAYER + key);

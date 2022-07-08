@@ -31,9 +31,9 @@ public abstract class Room implements Serializable
         this(room.getCoordinate(), room.getDistanceFromStart(), action, assetId);
     }
 
-    public <T> boolean executeAction(T... args)
+    public boolean executeAction()
     {
-        return this.action.execute(args);
+        return this.action.execute(this);
     }
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
