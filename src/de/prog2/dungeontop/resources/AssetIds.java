@@ -53,6 +53,8 @@ public interface AssetIds
     int RANK4_ICON = 570;
     int RANK5_ICON = 580;
     int RANK6_ICON = 590;
+    int EMPTY_ROOM = -1; // -1 is used to make the loaded asset is null
+
     static int getRankIcon(int rank)
     {
         return switch (rank)

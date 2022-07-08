@@ -213,33 +213,10 @@ public class HellView
      */
     private void drawRoomTypes (Canvas canvas, Hell hell)
     {
-        // TODO : Jesse
-        // load the images of all roomtypes we want to show
-        Image monsterRoom = AssetsManager.getImageByAssetId(AssetIds.ARENA_ROOM);
-        Image bossRoom = AssetsManager.getImageByAssetId(AssetIds.BOSS_ROOM);
-        Image forgeRoom = AssetsManager.getImageByAssetId(AssetIds.FORGE_ROOM);
-        Image lavaPondRoom = AssetsManager.getImageByAssetId(AssetIds.LAVA_POND);
-        Image randomEventRoom = AssetsManager.getImageByAssetId(AssetIds.RANDOM_EVENT_ROOM);
-
         // iterate over all rooms in the given hell and set the image for the next room that shall be drawn
         for (Room room : hell.getRoomHashMap().values())
         {
-            Image currRoomImage = null;
-            if(room instanceof EmptyRoom)
-                continue;
-            if (room instanceof ArenaRoom)
-            {
-                if (room == hell.getBossRoom())
-                    currRoomImage = bossRoom;
-                else
-                    currRoomImage = monsterRoom;
-            }
-            else if (room instanceof RandomEventRoom)
-                currRoomImage = randomEventRoom;
-            else if (room instanceof ForgeRoom)
-                currRoomImage = forgeRoom;
-            else if (room instanceof LavaPondRoom)
-                currRoomImage = lavaPondRoom;
+            Image currRoomImage = AssetsManager.getImageByAssetId(room.getAssetId());
 
             if (currRoomImage == null)
             {

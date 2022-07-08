@@ -14,8 +14,10 @@ import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.spells.TestSpell;
+import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.model.world.rooms.EmptyRoom;
 import de.prog2.dungeontop.model.world.rooms.LavaPondRoom;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.TestConstants;
@@ -234,7 +236,7 @@ public class DungeonTop extends Application
             deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
         }
 
-        LavaPondRoom room = new LavaPondRoom();
+        LavaPondRoom room = new LavaPondRoom(new EmptyRoom(new Coordinate(0,0), 1));
         PlayerManager.getInstance().addSouls(100);
         PlayerManager.getInstance().getPlayer().setDeck(deck);
         NpcRoomView view = new NpcRoomView(room);

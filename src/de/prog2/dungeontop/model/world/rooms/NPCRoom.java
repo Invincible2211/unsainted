@@ -3,6 +3,8 @@ package de.prog2.dungeontop.model.world.rooms;
 import java.io.Serializable;
 
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
+import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.actions.Action;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -11,10 +13,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 public abstract class NPCRoom extends Room
 {
     private final SerializableSimpleIntegerProperty freeActions = new SerializableSimpleIntegerProperty(1);
-    public NPCRoom () {}
-    public NPCRoom (int freeActions)
+    public NPCRoom (Room room, Action action, int assetId)
     {
-        this.freeActions.setValue(freeActions);
+        super(room, action, assetId);
     }
 
     public int getFreeActions () { return this.freeActions.getValue(); }

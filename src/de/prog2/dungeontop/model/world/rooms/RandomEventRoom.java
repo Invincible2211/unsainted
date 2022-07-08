@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.model.world.rooms;
 
+import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.actions.RandomEventAction;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellToStringValues;
 
 import java.io.Serializable;
@@ -10,8 +12,11 @@ import java.io.Serializable;
  */
 public class RandomEventRoom extends Room
 {
-    // RandomEventAction not implemented yet
-    public RandomEventRoom () { super(new RandomEventAction());}
+    // TODO RandomEventAction not implemented yet
+    public RandomEventRoom(Room room)
+    {
+        super(room, new RandomEventAction(), AssetIds.RANDOM_EVENT_ROOM);
+    }
 
     @Override
     public String toString()

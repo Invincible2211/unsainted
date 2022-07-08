@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.model.world.rooms;
 
 import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.actions.DefaultAction;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellToStringValues;
 
 import java.io.Serializable;
@@ -10,9 +12,9 @@ import java.io.Serializable;
  */
 public class EmptyRoom extends Room
 {
-    public EmptyRoom (Coordinate coordinate)
+    public EmptyRoom (Coordinate coordinate, int distanceFromStart)
     {
-        super(coordinate);
+        super(coordinate, distanceFromStart, new DefaultAction(), AssetIds.EMPTY_ROOM);
     }
 
     @Override

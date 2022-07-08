@@ -1,7 +1,10 @@
 package de.prog2.dungeontop.model.world.rooms;
 
+import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.actions.Action;
 import de.prog2.dungeontop.model.world.actions.OpenArenaAction;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellToStringValues;
 
 import java.io.Serializable;
@@ -14,16 +17,10 @@ public class ArenaRoom extends Room
     private final Arena arena;
     private boolean isAlive = true;
     private boolean isBoss = false;
-    public ArenaRoom(Arena arena)
+    public ArenaRoom(Arena arena, boolean isBoss, Room room)
     {
-        super(new OpenArenaAction());
+        super(room, new OpenArenaAction(), isBoss ? AssetIds.BOSS_ROOM : AssetIds.ARENA_ROOM);
         this.arena = arena;
-    }
-
-    public ArenaRoom (Arena arena, boolean isBoss)
-    {
-        this(arena);
-        this.isBoss = isBoss;
     }
 
     @Override
