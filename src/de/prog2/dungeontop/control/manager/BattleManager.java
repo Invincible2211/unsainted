@@ -134,12 +134,17 @@ public class BattleManager
             this.getFirstDuellist().currentEgoPoints = this.getFirstDuellist().egoPointsMax;
             this.getSecondDuellist().currentEgoPoints = this.getSecondDuellist().egoPointsMax;
         }
+
+        //-------------------------------------my test button---------------------------------------------
         //for tests
         ArenaBaseController.updateBattlefield(this.getArena());
+
+
         //set next phase
         setCurrentPhase(getNextPhaseInCycle());
         //TODO check if match is over
         GlobalLogger.log(LoggerStringValues.CURRENTPHASE_IS_NOW + getCurrentPhase());
+        ArenaBaseController.updateBattlefield(this.getArena());
     }
 
     /**
@@ -192,6 +197,7 @@ public class BattleManager
         this.getFirstDuellist().setCurrentEgoPoints(10);
         ArenaBaseController.updateEgoPoints(this.getFirstDuellist().currentEgoPoints, this.getSecondDuellist().currentEgoPoints);
         this.tryPlaceEntity(this.getFirstDuellist(), new Coordinate(0, 0), (EntityCard) this.getFirstDuellist().getHand().get(0));
+        setCurrentPhase(BattlePhase.FIRST_DUELLIST_MINION_ACT);
         ArenaBaseController.updateBattlefield(this.getArena());
     }
 
@@ -217,6 +223,7 @@ public class BattleManager
             if (this.getArena().getEntity(coordinate) != null)
             {
                 this.attack(coordinate);
+                this.getArena().setSelectedEntity(null);
                 return;
             }
             //if the tile is empty, move the unit
@@ -227,15 +234,19 @@ public class BattleManager
                 if (this.getArena().getSelectedEntity().getPosition().getY() < coordinate.getY())
                 {
                     moveUnit(MoveDirection.DOWN);
+                    this.getArena().setSelectedEntity(null);
                 } else {
                     moveUnit(MoveDirection.UP);
+                    this.getArena().setSelectedEntity(null);
                 }
             } else {
                 if (this.getArena().getSelectedEntity().getPosition().getX() < coordinate.getX())
                 {
                     moveUnit(MoveDirection.RIGHT);
+                    this.getArena().setSelectedEntity(null);
                 } else {
                     moveUnit(MoveDirection.LEFT);
+                    this.getArena().setSelectedEntity(null);
                 }
             }
 

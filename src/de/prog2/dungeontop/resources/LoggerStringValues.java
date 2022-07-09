@@ -198,8 +198,9 @@ public interface LoggerStringValues
     String BATTLEMANAGER_SELECT_A_UNIT = "Select a unit in battlemanager";
     String UNIT_SELECTED = "Unit selected";
     String ARENA_ENTITY_INSERTED_MESSAGE = "Entity inserted into arena";
-    String REMOVING_CHILDREN_OF_BATTLEFIELD = "Removing children of battlefieldPane on Coordinates: x: %d, y: %d";
+    String REMOVING_CHILDREN_OF_BATTLEFIELD = "Removing children of battlefieldPane on Coordinates: ";
     String WAS_SELECTED = " was selected";
     String ENTITY_MOVE_SUCCESSFUL = "Entity moved successfully";
     String ENTITY_MOVE_FAILED = "Entity move failed";
+    String DELETED_ALL_MINIONS_FROM_ARENA_VIEW = "Deleted all minions from arena view";
 }

@@ -21,7 +21,7 @@ public class ArenaStackPane extends StackPane
     {
         this.coordinate = coordinate;
         addEventHandler(MouseEvent.MOUSE_PRESSED, new MyEventHandler());
-        addEventHandler(MouseEvent.MOUSE_RELEASED, new MyEventHandler());
+      //  addEventHandler(MouseEvent.MOUSE_RELEASED, new MyEventHandler());
     }
 
     private class MyEventHandler implements EventHandler<Event>
@@ -36,11 +36,13 @@ public class ArenaStackPane extends StackPane
                         GlobalLogger.log(BattleManager.getInstance().getArena().getEntity(coordinate.getX(), coordinate.getY()).getName() + LoggerStringValues.WAS_SELECTED);
                     }
                 BattleManager.getInstance().arenaTilePressed(coordinate);
+                    evt.consume();
                 return;
             }
             if (evt.getEventType().equals(MouseEvent.MOUSE_RELEASED)){
                 GlobalLogger.log(LoggerStringValues.ARENA_TILE_RELEASED_MESSAGE + coordinate.toString());
                 BattleManager.getInstance().arenaTileReleased(coordinate);
+                evt.consume();
                 return;
             }
             GlobalLogger.warning(LoggerStringValues.ARENA_TILE_UNHANDLEDEVENT + coordinate.toString());

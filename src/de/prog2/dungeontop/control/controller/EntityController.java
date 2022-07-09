@@ -26,7 +26,7 @@ public class EntityController
             GlobalLogger.log(LoggerStringValues.ENTITY_MOVE_FAILED);
             return false;
         }
-
+// arena wird geupdated, durch neuladen aller coordinaten etc. dann muss man die nicht raus und reinschmeiSen
         arena.removeEntity(entity.getPosition());
         arena.insertEntity(newCoord, entity);
         entity.setPosition(newCoord);
@@ -45,7 +45,7 @@ public class EntityController
     {
         Coordinate newCoord = CoordinateUtils.getCoordinateFromMoveDirection(entity.getPosition(), direction);
 
-        return arena.getEntity(newCoord) != null && canMove(entity);
+        return arena.getEntity(newCoord) == null && canMove(entity);
     }
     public static boolean canMove(de.prog2.dungeontop.model.entities.Entity entity)
     {

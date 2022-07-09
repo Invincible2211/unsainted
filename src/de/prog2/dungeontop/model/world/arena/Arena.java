@@ -63,7 +63,6 @@ public class Arena implements Serializable
         return true;
     }
 
-    //TODO: test this method 
     public Entity[] getAllMinions ()
     {
         return this.arenaHashmap.values().stream()

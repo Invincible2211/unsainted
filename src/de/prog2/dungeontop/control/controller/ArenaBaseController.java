@@ -13,6 +13,7 @@ import de.prog2.dungeontop.resources.views.EntityConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
+import de.prog2.dungeontop.view.EntityView;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -147,7 +148,6 @@ public abstract class ArenaBaseController
      * Initialisiert das Battlefield als visualisierung der Arena, update duruch UpdateBattlefield
      * @param height
      * @param width
-     * @param arenaBaseView the view to be used
      */
     private static void initBattlefield(int height, int width)
     {
@@ -179,12 +179,14 @@ public abstract class ArenaBaseController
 
     private static void deleteAllMinionsFromArenaView ()
     {
-        for (int x = 0; x < ArenaBaseController.getCurrentArenaBaseView().getBattlefieldGridPane().getColumnCount(); x++) {
-            for (int y = 0; y < ArenaBaseController.getCurrentArenaBaseView().getBattlefieldGridPane().getRowCount(); y++) {
+        int height = currentArenaBaseView.getBattlefieldGridPane().getRowCount();
+        int width = currentArenaBaseView.getBattlefieldGridPane().getColumnCount();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
                 getBattleFieldPane(x, y).getChildren().removeAll();
-                GlobalLogger.log(LoggerStringValues.REMOVING_CHILDREN_OF_BATTLEFIELD + x + y);
             }
         }
+        GlobalLogger.log(LoggerStringValues.DELETED_ALL_MINIONS_FROM_ARENA_VIEW, GlobalLogger.LoggerLevel.DEFAULT);
     }
 
     /**

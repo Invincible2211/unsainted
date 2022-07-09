@@ -5,13 +5,14 @@ import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.resources.AssetIds;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 
-public class EntityView
+public class EntityView extends Node
 {
     @FXML
     private ImageView entityImageView;
@@ -58,6 +59,7 @@ public class EntityView
         container.setBackground(Background.EMPTY);
         backgroundImageView.imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.ENTITY_VIEW_BACKGROUND));
     }
+
 
     public ImageView getEntityImageView()
     {

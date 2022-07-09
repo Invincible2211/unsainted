@@ -81,7 +81,7 @@ public class DungeonTop extends Application
         NetworkController.initStage();
         //stage.setScene(scene);
 
-        //testArenaView();
+        testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
@@ -192,11 +192,10 @@ public class DungeonTop extends Application
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(4, 4),fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
-        BattleManager.getInstance().setCurrentPhase(BattleManager.getInstance().getNextPhaseInCycle());
-        BattleManager.getInstance().testPlaceCard();
-        BattleManager.getInstance().getArena().getEntity(0,0).setCanMove(true);
 
-        //somethign wrong with this
+        BattleManager.getInstance().testPlaceCard();
+        BattleManager.getInstance().setCurrentPhase(BattleManager.getInstance().getNextPhaseInCycle());
+        BattleManager.getInstance().getArena().getEntity(0,0).setCanMove(true);
         ArenaBaseController.updateBattlefield(BattleManager.getInstance().getArena());
     }
 

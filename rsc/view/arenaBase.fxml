@@ -9,23 +9,22 @@
         <BorderPane fx:id="borderPaneID" prefHeight="1080" prefWidth="1920">
             <right>
                 <VBox maxHeight="50" BorderPane.alignment="CENTER">
-                    <Button fx:id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                            onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER"/>
-                    <Pane fx:id="deckdisplay"/>
+                    <Button fx:id="endPhaseButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#endTurn" text="End Phase" textAlignment="CENTER" />
+                    <Pane fx:id="deckdisplay" />
                 </VBox>
             </right>
             <left>
                 <VBox BorderPane.alignment="CENTER">
-                    <Accordion fx:id="lastMovesAccordion">
+                    <Accordion fx:id="lastMovesAccordion" visible="false">
                         <panes>
                             <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                             </TitledPane>
                             <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                             </TitledPane>
                             <TitledPane animated="false" text="WIP RINGBUFFER letzter zuege">
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                             </TitledPane>
                         </panes>
                     </Accordion>
@@ -48,8 +47,8 @@
             <top>
                 <VBox fx:id="vBoxEnemyAreaContainer" alignment="TOP_CENTER" BorderPane.alignment="CENTER">
                     <StackPane>
-                        <ImageView fx:id="egopointsPlayerTwoImageView" pickOnBounds="true" preserveRatio="true"/>
-                        <Label fx:id="egopointsPlayerTwo" alignment="CENTER" text="Label"/>
+                        <ImageView fx:id="egopointsPlayerTwoImageView" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="egopointsPlayerTwo" alignment="CENTER" text="Label" />
                     </StackPane>
                     <HBox fx:id="enemyHandHBox" alignment="CENTER">
                     </HBox>
