@@ -7,6 +7,7 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.arena.ArenaStackPane;
+import de.prog2.dungeontop.resources.ApplicationConstants;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.resources.views.EntityConstants;
@@ -38,8 +39,8 @@ public abstract class ArenaBaseController
 
        initEgoPoints();
        setBackgroundImage(AssetIds.ARENA_BG_DEFAULT_ID);
-       arenaBaseView.getBackGroundAnchorPane().setPrefSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
-       arenaBaseView.getBackGroundAnchorPane().setMaxSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
+       arenaBaseView.getBackGroundAnchorPane().setPrefSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
+       arenaBaseView.getBackGroundAnchorPane().setMaxSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
 
        setPreferredMeasurements();
 
@@ -57,8 +58,8 @@ public abstract class ArenaBaseController
                 BattleManager.getInstance().getArena().getWidth());
         initEgoPoints();
         setBackgroundImage(backGroundAlternativeID);
-        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
-        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
+        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
+        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
         setPreferredMeasurements();
 
     }
@@ -87,7 +88,7 @@ public abstract class ArenaBaseController
     {
         Image image = AssetsManager.getImageByAssetId(imageID);
         BackgroundImage myBI= new BackgroundImage(image, BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT,
-                new BackgroundSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y, false, false, false, false));
+                new BackgroundSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y, false, false, false, false));
         currentArenaBaseView.getBackGroundAnchorPane().setBackground(new Background(myBI));
     }
 
@@ -147,7 +148,6 @@ public abstract class ArenaBaseController
      * Initialisiert das Battlefield als visualisierung der Arena, update duruch UpdateBattlefield
      * @param height
      * @param width
-     * @param arenaBaseView the view to be used
      */
     private static void initBattlefield(int height, int width)
     {
