@@ -1,18 +1,18 @@
 package de.prog2.dungeontop.model.world.rooms;
 
-import java.io.Serializable;
+import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
+import de.prog2.dungeontop.model.world.actions.Action;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * Represents the different peaceful Action-Rooms
  */
-public abstract class NPCRoom extends Room implements Serializable
+public abstract class NPCRoom extends Room
 {
-    private final SimpleIntegerProperty freeActions = new SimpleIntegerProperty(1);
-    public NPCRoom () {}
-    public NPCRoom (int freeActions)
+    private final SerializableSimpleIntegerProperty freeActions = new SerializableSimpleIntegerProperty(1);
+    public NPCRoom (Room room, Action action, int assetId)
     {
-        this.freeActions.setValue(freeActions);
+        super(room, action, assetId);
     }
 
     public int getFreeActions () { return this.freeActions.getValue(); }

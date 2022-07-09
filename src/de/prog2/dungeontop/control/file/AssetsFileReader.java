@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.file;
 
+import de.prog2.dungeontop.resources.FileConstants;
 import de.prog2.dungeontop.resources.FilePaths;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -55,7 +56,7 @@ public class AssetsFileReader
             } else
             {
                 GlobalLogger.log(String.format(LoggerStringValues.ASSET_FILE_NAME, asset.getName()));
-                assetPaths.put(Integer.parseInt(asset.getName().substring(0,2)), asset.getAbsolutePath());
+                assetPaths.put(Integer.parseInt(asset.getName().substring(0, FileConstants.ASSET_ID_LENGTH)), asset.getAbsolutePath());
             }
         }
     }

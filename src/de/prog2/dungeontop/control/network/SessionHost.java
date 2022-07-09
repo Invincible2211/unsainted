@@ -2,6 +2,8 @@ package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.model.network.NetworkConnectionI;
 import de.prog2.dungeontop.resources.NetworkData;
+import de.prog2.dungeontop.resources.NetworkingConstants;
+import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +17,7 @@ public class SessionHost extends Thread implements NetworkConnectionI {
     private OutputStream outputStream;
 
     protected SessionHost(){
-        System.out.println("waiting");
+        GlobalLogger.log(NetworkingConstants.WAITTNG);
     }
 
     @Override
@@ -26,7 +28,7 @@ public class SessionHost extends Thread implements NetworkConnectionI {
             inputStream = clientConnection.getInputStream();
             outputStream = clientConnection.getOutputStream();
         } catch (IOException e) {
-            e.printStackTrace();
+            GlobalLogger.warning(e.getMessage());
         }
     }
 

@@ -1,9 +1,14 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.IPChecker;
+import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,10 +16,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 
 public class SettingsController {
@@ -43,6 +52,26 @@ public class SettingsController {
         hideSettings();
     }
 
+    @FXML
+    private void onExitButtonPressed()
+    {
+        GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
+        Platform.exit();
+    }
+
+    @FXML
+    private void onMMButtonPressed()
+    {
+        hideSettings();
+        Scene scene = new Scene(new AnchorPane());
+        try {
+            scene = new Scene(new FXMLLoader().load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        DungeonTop.getStage().setScene(scene);
+    }
+
     /**
      * Nach der Instanziierung der GUI-Komponenten wird der Volume-Slider an die Volume-Property des AudioManagers gebindet.
      */
@@ -50,7 +79,7 @@ public class SettingsController {
     void initialize()
     {
         volumeSlider.valueProperty().bindBidirectional(AudioManager.getInstance().getVolume());
-        ipLabel.setText("IPAdresse: "+ IPChecker.getLocalIPAdress());
+        ipLabel.setText(String.format(NetworkingConstants.SETTINGS_IP_LABEL, IPChecker.getLocalIPAdress()));
     }
 
     /**
@@ -77,17 +106,25 @@ public class SettingsController {
         final FXMLLoader fxmlLoader = new FXMLLoader();
         settingsStage.initModality(Modality.APPLICATION_MODAL);
         settingsStage.initOwner(DungeonTop.getStage());
-        settingsStage.initStyle(StageStyle.UNDECORATED);
+        settingsStage.initStyle(StageStyle.TRANSPARENT);
         AnchorPane rootPane = new AnchorPane();
         try
         {
             rootPane = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SETTINGS_FXML));
         } catch (IOException e)
         {
-            e.printStackTrace();
+            GlobalLogger.warning(e.getMessage());
         }
-        final Scene settingsScene = new Scene(rootPane);
+        final Scene settingsScene = new Scene(rootPane, Color.TRANSPARENT);
         settingsStage.setScene(settingsScene);
+    }
+
+    @FXML
+    private void onIPLabelClicked(){
+        String content = IPChecker.getLocalIPAdress();
+        StringSelection selection = new StringSelection(content);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
     }
 
 }

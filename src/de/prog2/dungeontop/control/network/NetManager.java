@@ -1,7 +1,10 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.network.NetworkConnectionI;
+import de.prog2.dungeontop.resources.NetworkingConstants;
+import de.prog2.dungeontop.utils.GlobalLogger;
 
 public class NetManager extends Thread{
 
@@ -21,19 +24,21 @@ public class NetManager extends Thread{
     public void run() {
         while (!connection.isConnected()){
             try {
-                sleep(1000);
+                sleep(NetworkingConstants.WAITING_TIME_FOR_CONNECTION);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("waiting for connection");
+            GlobalLogger.log(NetworkingConstants.WAITING_FOR_CONNECTION);
         }
-        System.out.println("connected");
+        GlobalLogger.log(NetworkingConstants.CONNECTED);
         networkAPI = new NetworkAPI(connection.getOutputStream());
         networkInterpreter = new NetworkInterpreter(connection.getInputStream());
         networkInterpreter.start();
-        if (connection instanceof SessionHost){
-            networkAPI.sendHellData(GameManager.getInstance().getGameWorld().getCurrentHell());
-            System.out.println("sendet");
+        if (connection instanceof SessionHost)
+        {
+            networkAPI.sendHellData(GameManager.getInstance().getGameWorld().getCurrentHell(),
+                    PlayerManager.getInstance().getPlayer().getCurrentRoom().getCoordinate());
+            GlobalLogger.log(NetworkingConstants.SENDS_HELL_DATA);
         }
     }
 

@@ -38,7 +38,7 @@ public class HellGenerator
         {
             GlobalLogger.log(LoggerStringValues.HELL_GENERATION_START);
 
-            Room startingRoom = new EmptyRoom(new Coordinate(hell.getWidth()/2, hell.getHeight()/2));
+            Room startingRoom = new EmptyRoom(new Coordinate(hell.getWidth()/2, hell.getHeight()/2), 0);
             try
             {
                 HellController.addRoomToGrid(hell, startingRoom);
@@ -393,8 +393,8 @@ public class HellGenerator
                 currRoom = room;
             }
         }
-        ArenaRoom bossRoom = new ArenaRoom(new Arena(ArenaConstants.ARENA_HEIGHT, ArenaConstants.ARENA_WIDTH), true);
-        bossRoom.setCoordinate(currRoom.getCoordinate());
+        // TODO Check Arena creation
+        ArenaRoom bossRoom = new ArenaRoom(new Arena(ArenaConstants.ARENA_HEIGHT, ArenaConstants.ARENA_WIDTH), true, currRoom);
         HellController.replaceRoom(hell, currRoom, bossRoom);
         roomList.remove(currRoom);
         roomList.add(bossRoom);
@@ -427,9 +427,7 @@ public class HellGenerator
                 switch(roomType)
                 {
                     case FORGE_ROOM:
-                        newRoom = new ForgeRoom();
-                        newRoom.setCoordinate(currRoom.getCoordinate());
-
+                        newRoom = new ForgeRoom(currRoom);
                         HellController.replaceRoom(hell, currRoom, newRoom);
                         roomList.remove(currRoom);
                         roomList.add(newRoom);
@@ -438,9 +436,7 @@ public class HellGenerator
                         break;
 
                     case LAVA_POND_ROOM:
-                        newRoom = new LavaPondRoom();
-                        newRoom.setCoordinate(currRoom.getCoordinate());
-
+                        newRoom = new LavaPondRoom(currRoom);
                         HellController.replaceRoom(hell, currRoom, newRoom);
                         roomList.remove(currRoom);
                         roomList.add(newRoom);
@@ -484,8 +480,8 @@ public class HellGenerator
                 switch(type)
                 {
                     case ARENA_ROOM:
-                        ArenaRoom arenaRoom = new ArenaRoom(null);
-                        arenaRoom.setCoordinate(currRoom.getCoordinate());
+                        // TODO add new Arena instead of null
+                        ArenaRoom arenaRoom = new ArenaRoom(null, false, currRoom);
                         HellController.replaceRoom(hell, currRoom, arenaRoom);
                         roomList.remove(currRoom);
                         roomList.add(arenaRoom);
@@ -493,8 +489,7 @@ public class HellGenerator
                         break;
 
                     case RANDOM_EVENT_ROOM:
-                        RandomEventRoom eventRoom = new RandomEventRoom();
-                        eventRoom.setCoordinate(currRoom.getCoordinate());
+                        RandomEventRoom eventRoom = new RandomEventRoom(currRoom);
                         HellController.replaceRoom(hell, currRoom, eventRoom);
                         roomList.remove(currRoom);
                         roomList.add(eventRoom);

@@ -1,11 +1,13 @@
 package de.prog2.dungeontop.model.world.actions;
 
+import de.prog2.dungeontop.model.world.rooms.Room;
+
 import java.io.Serializable;
 
-public class DefaultAction implements Action, Serializable
+public class DefaultAction implements Action
 {
     @Override
-    public <T> boolean execute(T... args)
+    public boolean execute(Room room)
     {
         return true;
     }

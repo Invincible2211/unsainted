@@ -71,5 +71,5 @@ public interface RoomDialogueConstants
     int LAVA_POND_VIEW_ASSET = AssetIds.LAVA_POND;
 
     String BOSS_ROOM_DESCRIPTION = "Hier koennte Ihre Werbung stehen.";
-    int BOSS_ROOM_VIEW_ASSET = 16;
+    int BOSS_ROOM_VIEW_ASSET = AssetIds.BOSS_ROOM;
 }

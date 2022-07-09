@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.game;
 
+import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.world.rooms.Room;
@@ -11,8 +12,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Player
 {
-    private final SimpleIntegerProperty soulsProperty;
-    private final SimpleIntegerProperty hpProperty;
+    private final SerializableSimpleIntegerProperty soulsProperty;
+    private final SerializableSimpleIntegerProperty hpProperty;
     private int ego_points;
     private Deck deck;
     private final Inventory inventory = new Inventory();
@@ -21,13 +22,13 @@ public class Player
     private Hero hero;
 
     public Player (){
-        this.soulsProperty = new SimpleIntegerProperty(0);
-        this.hpProperty = new SimpleIntegerProperty(GameConstants.DEFAULT_PLAYER_MAX_HP);
+        this.soulsProperty = new SerializableSimpleIntegerProperty(0);
+        this.hpProperty = new SerializableSimpleIntegerProperty(GameConstants.DEFAULT_PLAYER_MAX_HP);
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
     }
     public Player (int souls, int healthPoints){
-        this.hpProperty = new SimpleIntegerProperty(healthPoints);
-        this.soulsProperty = new SimpleIntegerProperty(souls);
+        this.hpProperty = new SerializableSimpleIntegerProperty(healthPoints);
+        this.soulsProperty = new SerializableSimpleIntegerProperty(souls);
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
     }
 

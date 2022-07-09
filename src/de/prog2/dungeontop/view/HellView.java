@@ -6,6 +6,8 @@ import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.MovementManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.network.NetManager;
+import de.prog2.dungeontop.control.network.NetworkAPI;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -42,7 +44,7 @@ import java.util.HashMap;
 public class HellView
 {
     // representation of the player on the hell view
-    private ImageView playerView = null;
+    private static ImageView playerView = null;
     // is an animation currently in progress?
     private boolean isAnimating = HellViewConstants.IS_ANIMATING_DEFAULT_VALUE;
     // currently used HellView
@@ -64,6 +66,11 @@ public class HellView
 
         // Set the background that is seen between the rooms
         pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+        /*
+        // TODO: Find usable asset for animated lava background and use it to replace the black BackgroundFill
+        pane.setBackground(new Background(new BackgroundImage(AssetsManager.getImageByAssetId(AssetIds.HELL_LAVA_BG),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        */
 
         Scene scene = new Scene(container, HellViewConstants.SCENE_STARTUP_WIDTH, HellViewConstants.SCENE_STARTUP_HEIGHT);
 
@@ -76,7 +83,15 @@ public class HellView
         initOverlay(container);
 
         // key listener for player movement
-        scene.setOnKeyPressed(e -> movePlayer(e.getCode()));
+        scene.setOnKeyPressed(e ->
+                {
+                    KeyCode keyCode = e.getCode();
+                    if (keyCode == KeyCode.ESCAPE)
+                        openSettings();
+                    else
+                        if (!GameManager.getInstance().isDM())
+                            movePlayer(keyCode);
+                });
 
         GlobalLogger.log(LoggerStringValues.HELLVIEW_INIT);
         return scene;
@@ -104,7 +119,8 @@ public class HellView
 
         // add inventory button
         Button inventoryButton = getOverlayButton(AssetIds.BAG);
-        container.getChildren().add(inventoryButton);
+        if (!GameManager.getInstance().isDM())
+            container.getChildren().add(inventoryButton);
         // set position of the inventory button
         AnchorPane.setTopAnchor(inventoryButton, HellViewConstants.OVERLAY_BUTTON_FIT_HEIGHT *
                 HellViewConstants.HALF);
@@ -197,32 +213,10 @@ public class HellView
      */
     private void drawRoomTypes (Canvas canvas, Hell hell)
     {
-        // load the images of all roomtypes we want to show
-        Image monsterRoom = AssetsManager.getImageByAssetId(AssetIds.ARENA_ROOM);
-        Image bossRoom = AssetsManager.getImageByAssetId(AssetIds.BOSS_ROOM);
-        Image forgeRoom = AssetsManager.getImageByAssetId(AssetIds.FORGE_ROOM);
-        Image lavaPondRoom = AssetsManager.getImageByAssetId(AssetIds.LAVA_POND);
-        Image randomEventRoom = AssetsManager.getImageByAssetId(AssetIds.RANDOM_EVENT_ROOM);
-
         // iterate over all rooms in the given hell and set the image for the next room that shall be drawn
         for (Room room : hell.getRoomHashMap().values())
         {
-            Image currRoomImage = null;
-            if(room instanceof EmptyRoom)
-                continue;
-            if (room instanceof ArenaRoom)
-            {
-                if (room == hell.getBossRoom())
-                    currRoomImage = bossRoom;
-                else
-                    currRoomImage = monsterRoom;
-            }
-            else if (room instanceof RandomEventRoom)
-                currRoomImage = randomEventRoom;
-            else if (room instanceof ForgeRoom)
-                currRoomImage = forgeRoom;
-            else if (room instanceof LavaPondRoom)
-                currRoomImage = lavaPondRoom;
+            Image currRoomImage = AssetsManager.getImageByAssetId(room.getAssetId());
 
             if (currRoomImage == null)
             {
@@ -372,17 +366,19 @@ public class HellView
      *
      * @param key key which was pressed
      */
-    private void movePlayer(KeyCode key) {
+    public void movePlayer(KeyCode key)
+    {
         // prohibit running the method multiple times simultaneously
         if (isAnimating)
             return;
         isAnimating = true;
+        NetworkAPI networkAPI = NetManager.getInstance().getNetworkAPI();
 
         // change to the player coordinate
         double deltaX = HellViewConstants.DELTA_X_INIT;
         double deltaY = HellViewConstants.DELTA_Y_INIT;
 
-        // sett the change in a certain direction and move the player on the underlying grid if valid
+        // set the change in a certain direction and move the player on the underlying grid if valid
         switch (key) {
             case UP, W:
                 deltaY -= HellViewConstants.PLAYER_MOVESPEED;
@@ -390,6 +386,8 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
+                if(!GameManager.getInstance().isDM() && networkAPI != null)
+                    networkAPI.sendPlayerMovementData(key);
                 break;
             case DOWN, S:
                 deltaY += HellViewConstants.PLAYER_MOVESPEED;
@@ -397,6 +395,8 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
+                if(!GameManager.getInstance().isDM() && networkAPI != null)
+                    networkAPI.sendPlayerMovementData(key);
                 break;
             case LEFT, A:
                 deltaX -= HellViewConstants.PLAYER_MOVESPEED;
@@ -404,6 +404,8 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
+                if(!GameManager.getInstance().isDM() && networkAPI != null)
+                    networkAPI.sendPlayerMovementData(key);
                 break;
             case RIGHT, D:
                 deltaX += HellViewConstants.PLAYER_MOVESPEED;
@@ -411,6 +413,8 @@ public class HellView
                     unlockIsAnimating();
                     return;
                 }
+                if(!GameManager.getInstance().isDM() && networkAPI != null)
+                    networkAPI.sendPlayerMovementData(key);
                 break;
 
             // Cases to manipulate playerstats by a keystroke to test the statboard
@@ -446,7 +450,11 @@ public class HellView
         // unlock the movement method again
         timeline.setOnFinished(e -> {
             isAnimating = false;
-            RoomDialogueViewController.getInstance().showStage(PlayerManager.getInstance().getPlayer().getCurrentRoom());
+            if (!GameManager.getInstance().isDM())
+            {
+                PlayerManager.getInstance().getPlayer().getCurrentRoom().executeAction();
+                //RoomDialogueViewController.getInstance().showStage(PlayerManager.getInstance().getPlayer().getCurrentRoom());
+            }
         });
 
         GlobalLogger.log(LoggerStringValues.MOVED_PLAYER + key);

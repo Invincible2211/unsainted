@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.resources;
 
-public interface LoggerStringValues {
+public interface LoggerStringValues
+{
     String CARD_RANK_INCREASED = "Rank of a Card increased.";
     String SHOPMANAGER_CREATED = "ShopManager erstellt.";
     String SHOPMANAGER_GET = "ShopManager abgefragt.";
@@ -193,4 +194,12 @@ public interface LoggerStringValues {
     String UNIT_ALREADY_SELECTED = "A unit is already selected while trying to select another one";
     String NO_UNIT_ON_TILE = "There is no unit on this tile!";
     String SELECTED_UNIT_FOUND = "Selected unit found!";
+    String NEXT_ROUND_BOTH_PLAYERS_GET_EGOPOINTS = "Both players get egopoints for the next round";
+    String BATTLEMANAGER_SELECT_A_UNIT = "Select a unit in battlemanager";
+    String UNIT_SELECTED = "Unit selected";
+    String ARENA_ENTITY_INSERTED_MESSAGE = "Entity inserted into arena";
+    String REMOVING_CHILDREN_OF_BATTLEFIELD = "Removing children of battlefieldPane on Coordinates: x: %d, y: %d";
+    String WAS_SELECTED = " was selected";
+    String ENTITY_MOVE_SUCCESSFUL = "Entity moved successfully";
+    String ENTITY_MOVE_FAILED = "Entity move failed";
 }

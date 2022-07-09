@@ -1,55 +1,60 @@
 package de.prog2.dungeontop.resources;
 
-public interface AssetIds {
-
+public interface AssetIds
+{
     // Room Types
-    int RANDOM_EVENT_ROOM = 4;
-    int ARENA_ROOM = 7;
-    int FORGE_ROOM = 8;
-    int LAVA_POND = 9;
-    int BOSS_ROOM = 16;
+    int RANDOM_EVENT_ROOM = 40;
+    int ARENA_ROOM = 70;
+    int FORGE_ROOM = 80;
+    int LAVA_POND = 90;
+    int BOSS_ROOM = 160;
 
 
     // Statboard Icons
-    int SOUL_ICON = 5;
-    int HEART_ICON = 6;
-    int STATBOARD_BACKGROUND_SCROLL = 18;
+    int SOUL_ICON = 50;
+    int HEART_ICON = 60;
+    int STATBOARD_BACKGROUND_SCROLL = 180;
 
 
     // Hell Asset IDs
-    int WALL_CORNER = 10;
-    int WALL = 11;
-    int PASSAGE = 12;
-    int CENTER = 13;
-    int COGWHEEL = 15;
-    int BAG = 14;
+    int WALL_CORNER = 100;
+    int WALL = 110;
+    int PASSAGE = 120;
+    int CENTER = 130;
+    int COGWHEEL = 150;
+    int BAG = 140;
+    int HELL_LAVA_BG = 101;
 
     // PlayerImage on HellView
     // Default
-    int PLAYER = 19;
+    int PLAYER = 190;
     // Depending on class
-    int WARRIOR = 1;
-    int MAGICIAN = 2;
-    int ROGUE = 3;
+    int WARRIOR = 10;
+    int MAGICIAN = 20;
+    int ROGUE = 30;
 
     // NpcRoom Asset IDs
-    int NPC_ROOM_BUTTON_BG = 17;
-    int SMALL_BUTTON_IMG = 80;
+    int NPC_ROOM_BUTTON_BG = 170;
+    int SMALL_BUTTON_IMG = 800;
 
+    // Entity View
+    int ENTITY_VIEW_BACKGROUND = 400;
 
     // Card Asset IDs
-    int CARD_BACKGROUND_IMAGE_ID = 49;
-    int CARD_DETAIL_BACKGROUND_IMAGE_ID = 50;
-    int HP_ICON = 6;
-    int ATTACK_ICON = 52;
-    int SUMMON_COST_ICON = 53;
-    int MOVEMENT_ICON = 51;
-    int RANK1_ICON = 54;
-    int RANK2_ICON = 55;
-    int RANK3_ICON = 56;
-    int RANK4_ICON = 57;
-    int RANK5_ICON = 58;
-    int RANK6_ICON = 59;
+    int CARD_BACKGROUND_IMAGE_ID = 490;
+    int CARD_DETAIL_BACKGROUND_IMAGE_ID = 500;
+    int HP_ICON = 60;
+    int ATTACK_ICON = 520;
+    int SUMMON_COST_ICON = 530;
+    int MOVEMENT_ICON = 510;
+    int RANK1_ICON = 540;
+    int RANK2_ICON = 550;
+    int RANK3_ICON = 560;
+    int RANK4_ICON = 570;
+    int RANK5_ICON = 580;
+    int RANK6_ICON = 590;
+    int EMPTY_ROOM = -1; // -1 is used to make the loaded asset is null
+
     static int getRankIcon(int rank)
     {
         return switch (rank)
@@ -64,11 +69,11 @@ public interface AssetIds {
     }
 
     //Item AssetIds
-    int HEALTH_POTION = 66;
+    int HEALTH_POTION = 660;
 
     // Arena Asset IDs
-    int ARENA_BG_DEFAULT_ID = 21;
-    int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 23;
+    int ARENA_BG_DEFAULT_ID = 210;
+    int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 230;
 
 
 }

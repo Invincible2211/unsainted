@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.control.manager;
 
-import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
@@ -8,10 +7,8 @@ import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Valuable;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.*;
-
-public class PlayerManager {
-
+public class PlayerManager
+{
     private final static PlayerManager instance = new PlayerManager();
 
     private final Player player = new Player();

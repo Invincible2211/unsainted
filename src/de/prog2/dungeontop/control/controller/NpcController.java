@@ -12,8 +12,8 @@ import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Valuable;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
-public class NpcController {
-
+public class NpcController
+{
     /**
      * Method to buy an upgrade for the rank of the specified card.
      *
@@ -22,7 +22,8 @@ public class NpcController {
      * @throws CardAlreadyMaxRankException Thrown if the card already reached the maximum defined level.
      * @throws NotEnoughSoulsException Thrown if the player doesn't own enough souls for the upgrade.
      */
-    public static void upgradeCard (Card card, int price) throws CardAlreadyMaxRankException, NotEnoughSoulsException {
+    public static void upgradeCard (Card card, int price) throws CardAlreadyMaxRankException, NotEnoughSoulsException
+    {
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 
@@ -47,7 +48,8 @@ public class NpcController {
      * @param price Cost for removing the specified card from the player's deck.
      * @throws NotEnoughSoulsException Thrown if the player doesn't own enough souls to remove the card from his deck.
      */
-    public static void removeCard (Card card, int price) throws NotEnoughSoulsException {
+    public static void removeCard (Card card, int price) throws NotEnoughSoulsException
+    {
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 
@@ -69,7 +71,8 @@ public class NpcController {
      * @throws CardNotFoundException Thrown if the specified item is a card which the player's deck doesn't contain.
      * @throws ItemNotFoundException Thrown if the specified item is an item which the player doesn't possess.
      */
-    public static void sellItem (Valuable item) throws CardNotFoundException, ItemNotFoundException{
+    public static void sellItem (Valuable item) throws CardNotFoundException, ItemNotFoundException
+    {
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 

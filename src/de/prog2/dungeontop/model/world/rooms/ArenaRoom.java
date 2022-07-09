@@ -2,27 +2,27 @@ package de.prog2.dungeontop.model.world.rooms;
 
 import de.prog2.dungeontop.model.world.actions.OpenArenaAction;
 import de.prog2.dungeontop.model.world.arena.Arena;
-
-import java.io.Serializable;
+import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.HellToStringValues;
 
 /**
  * The ArenaRoom is a room, where the player has to fight.
  */
-public class ArenaRoom extends Room implements Serializable
+public class ArenaRoom extends Room
 {
     private final Arena arena;
     private boolean isAlive = true;
     private boolean isBoss = false;
-    public ArenaRoom(Arena arena)
+    public ArenaRoom(Arena arena, boolean isBoss, Room room)
     {
-        super(new OpenArenaAction());
+        super(room, new OpenArenaAction(), isBoss ? AssetIds.BOSS_ROOM : AssetIds.ARENA_ROOM);
         this.arena = arena;
     }
 
-    public ArenaRoom (Arena arena, boolean isBoss)
+    @Override
+    public String toString()
     {
-        this(arena);
-        this.isBoss = isBoss;
+        return isBoss ? HellToStringValues.BOSS_ROOM : HellToStringValues.ARENA_ROOM;
     }
 
     public Arena getArena()

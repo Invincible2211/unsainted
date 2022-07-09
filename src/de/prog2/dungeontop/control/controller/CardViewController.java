@@ -8,7 +8,7 @@ import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.resources.*;
-import de.prog2.dungeontop.resources.views.CardConstants;
+import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.*;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +40,7 @@ public abstract class CardViewController
 
             controller.setScale(scale);
 
-            fillCardViewWithData(card, controller, false);
+            populateCardView(card, controller, false);
 
             GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
         }
@@ -75,7 +75,7 @@ public abstract class CardViewController
 
             controller.setScale(scale);
 
-            fillCardViewWithData(card, controller, true);
+            populateCardView(card, controller, true);
 
             GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
         }
@@ -91,7 +91,7 @@ public abstract class CardViewController
      * @param card The card that is displayed by the card view.
      * @param controller The controller of the card view.
      */
-    private static void fillCardViewWithData(Card card, CardView controller, boolean detail)
+    private static void populateCardView(Card card, CardView controller, boolean detail)
     {
         controller.getBackgroundImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(
                 detail ? AssetIds.CARD_DETAIL_BACKGROUND_IMAGE_ID : AssetIds.CARD_BACKGROUND_IMAGE_ID));
@@ -104,16 +104,16 @@ public abstract class CardViewController
         if(card instanceof EntityCard)
         {
             if(detail)
-                fillEntityCardDetailView((EntityCard)card, (EntityCardDetailView)controller);
+                populateEntityCardDetailView((EntityCard)card, (EntityCardDetailView)controller);
             else
-                fillEntityCardView((EntityCard)card, (EntityCardView)controller);
+                populateEntityCardView((EntityCard)card, (EntityCardView)controller);
         }
         else if(card instanceof SpellCard)
         {
             if(detail)
-                fillSpellCardDetailView((SpellCard) card, (SpellCardDetailView) controller);
+                populateSpellCardDetailView((SpellCard) card, (SpellCardDetailView) controller);
             else
-                fillSpellCardView((SpellCard) card, (SpellCardView) controller);
+                populateSpellCardView((SpellCard) card, (SpellCardView) controller);
         }
 
         controller.setCard(card);
@@ -124,7 +124,7 @@ public abstract class CardViewController
      * @param card The entity card that is displayed by the card view.
      * @param controller The controller of the card view.
      */
-    private static void fillEntityCardView(EntityCard card, EntityCardView controller)
+    private static void populateEntityCardView(EntityCard card, EntityCardView controller)
     {
         Entity entity = card.getEntity();
         // Name
@@ -148,7 +148,7 @@ public abstract class CardViewController
      * @param card The entity card that is displayed by the card view.
      * @param controller The controller of the card view.
      */
-    private static void fillEntityCardDetailView(EntityCard card, EntityCardDetailView controller)
+    private static void populateEntityCardDetailView(EntityCard card, EntityCardDetailView controller)
     {
         Entity entity = card.getEntity();
         // Name
@@ -173,7 +173,7 @@ public abstract class CardViewController
      * @param card The spell card that is displayed by the card view.
      * @param controller The controller of the card view.
      */
-    private static void fillSpellCardView(SpellCard card, SpellCardView controller)
+    private static void populateSpellCardView(SpellCard card, SpellCardView controller)
     {
         Spell spell = card.getSpell();
         // Name
@@ -187,7 +187,7 @@ public abstract class CardViewController
      * @param card The spell card that is displayed by the card view.
      * @param controller The controller of the card view.
      */
-    private static void fillSpellCardDetailView(SpellCard card, SpellCardDetailView controller)
+    private static void populateSpellCardDetailView(SpellCard card, SpellCardDetailView controller)
     {
         Spell spell = card.getSpell();
         // Name
@@ -201,8 +201,8 @@ public abstract class CardViewController
 
     public static void zoomCardView(Node cardView)
     {
-        cardView.setScaleX(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
-        cardView.setScaleY(ViewStrings.ZOOMFACTO_ON_MOUSE_HOVER_CARD);
+        cardView.setScaleX(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD);
+        cardView.setScaleY(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD);
     }
 
     public static void resetZoom(Node cardView)

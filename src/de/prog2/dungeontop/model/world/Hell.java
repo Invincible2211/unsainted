@@ -72,85 +72,22 @@ public class Hell implements Serializable
     public String toString ()
     {
         StringBuilder res = new StringBuilder();
-
-        for (int i = WorldConstants.HELL_SIZE - 1; i >= WorldConstants.LOWEST_COORDINATE; i--)
+        for (int y = WorldConstants.HELL_SIZE * WorldConstants.ROOM_SIZE - 1; y >= WorldConstants.LOWEST_COORDINATE; y--)
         {
-            for (int k = 0; k<3; k++)
+            for (int x = 0; x < width * WorldConstants.HELL_SIZE * WorldConstants.ROOM_SIZE; x++)
             {
-                for (int j = 0; WorldConstants.HELL_SIZE > j; j++)
+                Coordinate c = new Coordinate(x,y);
+                HellComponent component = getHellComponentByCoordinate(c);
+                if (component == null)
                 {
-                    Coordinate currCoordinate = new Coordinate(j, i);
-                    switch(k)
-                    {
-                        case 0:
-                            if (this.getRoomHashMap().containsKey(currCoordinate))
-                            {
-                                res.append(HellToStringValues.TOP_LEFT_CORNER);
-                                res.append(RoomController.hasTopRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ?
-                                        HellToStringValues.ROOM_CENTER : HellToStringValues.HORIZONTAL_WALL);
-                                res.append(HellToStringValues.TOP_RIGHT_CORNER);
-                                break;
-                            }
-                            res.append(HellToStringValues.NO_ROOM);
-                            break;
-                        case 1:
-
-                            if (this.getRoomHashMap().containsKey(currCoordinate))
-                            {
-                                res.append(RoomController.hasLeftRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ?
-                                        HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
-
-                                //res.append(HellToStringValues.ROOM_CENTER);
-                                Room currRoom = getRoomByCoordinate(currCoordinate);
-                                if (currRoom instanceof ArenaRoom)
-                                {
-                                    if (currRoom == this.getBossRoom())
-                                        res.append(HellToStringValues.BOSS_ROOM);
-                                    else
-                                        res.append(HellToStringValues.ARENA_ROOM);
-                                }
-                                if (currRoom instanceof EmptyRoom)
-                                    res.append(HellToStringValues.ROOM_CENTER);
-                                if (currRoom instanceof NPCRoom)
-                                {
-                                    if (currRoom instanceof ForgeRoom)
-                                        res.append(HellToStringValues.FORGE_ROOM);
-                                    else if (currRoom instanceof LavaPondRoom)
-                                        res.append(HellToStringValues.LAVAPOND_ROOM);
-                                    else
-                                        res.append(HellToStringValues.NPC_ROOM);
-                                }
-                                if (currRoom instanceof RandomEventRoom)
-                                    res.append(HellToStringValues.RANDOM_EVENT_ROOM);
-
-                                res.append(RoomController.hasRightRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ?
-                                        HellToStringValues.WHITESPACE : HellToStringValues.VERTICAL_WALL);
-                                break;
-                            }
-                            res.append(HellToStringValues.NO_ROOM);
-                            break;
-                        case 2:
-                            if (this.getRoomHashMap().containsKey(currCoordinate))
-                            {
-                                res.append(HellToStringValues.BOTTOM_LEFT_CORNER);
-                                res.append(RoomController.hasBottomRoom(
-                                        this.getRoomByCoordinate(currCoordinate)) ?
-                                        HellToStringValues.ROOM_CENTER : HellToStringValues.HORIZONTAL_WALL);
-                                res.append(HellToStringValues.BOTTOM_RIGHT_CORNER);
-                                break;
-                            }
-                            res.append(HellToStringValues.NO_ROOM);
-                            break;
-                        default:
-                            GlobalLogger.warning(LoggerStringValues.INDEX_OUT_OF_BOUND);
-                            break;
-                    }
+                    res.append(x % WorldConstants.ROOM_SIZE == 1 ?
+                            HellToStringValues.ROOM_CENTER : HellToStringValues.WHITESPACE);
+                } else
+                {
+                    res.append(component);
                 }
-                res.append(HellToStringValues.LINE_BREAK);
             }
+            res.append(HellToStringValues.LINE_BREAK);
         }
         return res.toString();
     }

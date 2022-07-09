@@ -81,65 +81,78 @@ public class RoomDialogueViewController
     }
 
     /**
-     * Shows the ArenaRoomDialogue for a given room.
-     *
-     * @param room room for which the dialogue shall be shown
+     * Puts the description and the assetId into the HashMap using room as the key.
+     * @param room The room to show the dialogue for
      */
-    public void showStage (Room room)
+    private void handleDialogueStageAttributes(Room room)
     {
-        if (room instanceof EmptyRoom)
-            return;
+        // has the dialogue been shown yet?
+        if (!dialogueStageAttributes.containsKey(room))
+            // mark the room as visited so that it gets the same image and description shown next time
+            dialogueStageAttributes.put(room, getRandomRoomDialogue(room));
+    }
 
-        // open dialogue for an ArenaRoom
-        if (room instanceof ArenaRoom || room instanceof RandomEventRoom)
-        {
-            // has the dialogue been shown yet?
-            if (!dialogueStageAttributes.containsKey(room))
-                // mark the room as visited so that it gets the same image and description shown next time
-                dialogueStageAttributes.put(room, getRandomRoomDialogue(room));
+    /**
+     * Opens the Dialogue for the ForgeRoom.
+     */
+    public void showForgeDialogue()
+    {
+        setDialogueProperties(RoomDialogueConstants.FORGE_ROOM_UPPER_BUTTON,
+                RoomDialogueConstants.FORGE_ROOM_LOWER_BUTTON, RoomDialogueConstants.FORGE_ROOM_DESCRIPTION,
+                RoomDialogueConstants.FORGE_VIEW_ASSET);
+        upperButton.setOnAction(e -> openForge());
 
-            // set the button properties
-            if (room instanceof ArenaRoom)
-            {
-                if (!((ArenaRoom) room).isAlive())
-                    return;
-                if(((ArenaRoom) room).isBoss())
-                {
-                    setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
-                            RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,RoomDialogueConstants.BOSS_ROOM_DESCRIPTION,
-                            RoomDialogueConstants.BOSS_ROOM_VIEW_ASSET);
-                    upperButton.setOnAction(e -> startBattle());
-                }
-                else
-                {
-                    setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
-                            RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
-                            dialogueStageAttributes.get(room).description(), dialogueStageAttributes.get(room).assetId());
-                    upperButton.setOnAction(e -> startBattle());
-                }
-            }
-            else
-            {
-                setDialogueProperties(RoomDialogueConstants.EVENT_ROOM_UPPER_BUTTON,
-                        RoomDialogueConstants.EVENT_ROOM_LOWER_BUTTON,
-                        dialogueStageAttributes.get(room).description(),dialogueStageAttributes.get(room).assetId());
-                upperButton.setOnAction(e -> startRandomEvent());
-            }
-        }
-        else if (room instanceof ForgeRoom)
-        {
-            setDialogueProperties(RoomDialogueConstants.FORGE_ROOM_UPPER_BUTTON,
-                    RoomDialogueConstants.FORGE_ROOM_LOWER_BUTTON, RoomDialogueConstants.FORGE_ROOM_DESCRIPTION,
-                    RoomDialogueConstants.FORGE_VIEW_ASSET);
-            upperButton.setOnAction(e -> openForge());
-        }
-        else if (room instanceof LavaPondRoom)
-        {
-            setDialogueProperties(RoomDialogueConstants.LAVA_POND_UPPER_BUTTON,
-                    RoomDialogueConstants.LAVA_POND_LOWER_BUTTON, RoomDialogueConstants.LAVA_POND_DESCRIPTION,
-                    RoomDialogueConstants.LAVA_POND_VIEW_ASSET);
-            upperButton.setOnAction(e -> openLavaPond());
-        }
+        roomDialogueStage.show();
+    }
+    /**
+     * Opens the Dialogue for the LavaPondRoom.
+     */
+    public void showLavaPondDialogue()
+    {
+        setDialogueProperties(RoomDialogueConstants.LAVA_POND_UPPER_BUTTON,
+                RoomDialogueConstants.LAVA_POND_LOWER_BUTTON, RoomDialogueConstants.LAVA_POND_DESCRIPTION,
+                RoomDialogueConstants.LAVA_POND_VIEW_ASSET);
+        upperButton.setOnAction(e -> openLavaPond());
+
+        roomDialogueStage.show();
+    }
+    /**
+     * Opens the Dialogue for the ArenaRoom.
+     */
+    public void showArenaDialogue(Room room)
+    {
+        handleDialogueStageAttributes(room);
+        setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
+                RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
+                dialogueStageAttributes.get(room).description(), dialogueStageAttributes.get(room).assetId());
+        upperButton.setOnAction(e -> startBattle());
+
+        roomDialogueStage.show();
+    }
+    /**
+     * Opens the Dialogue for the Boss-ArenaRoom.
+     */
+    public void showBossDialogue(Room room)
+    {
+        handleDialogueStageAttributes(room);
+        setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
+                RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,RoomDialogueConstants.BOSS_ROOM_DESCRIPTION,
+                RoomDialogueConstants.BOSS_ROOM_VIEW_ASSET);
+        upperButton.setOnAction(e -> startBattle());
+
+        roomDialogueStage.show();
+    }
+    /**
+     * Opens the Dialogue for the RandomEventRoom.
+     */
+    public void showRandomEventDialogue(Room room)
+    {
+        handleDialogueStageAttributes(room);
+        setDialogueProperties(RoomDialogueConstants.EVENT_ROOM_UPPER_BUTTON,
+                RoomDialogueConstants.EVENT_ROOM_LOWER_BUTTON,
+                dialogueStageAttributes.get(room).description(),dialogueStageAttributes.get(room).assetId());
+        upperButton.setOnAction(e -> startRandomEvent());
+
         roomDialogueStage.show();
     }
 

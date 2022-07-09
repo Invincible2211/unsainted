@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.resources;
 
-public interface HellToStringValues {
+public interface HellToStringValues
+{
     String TOP_LEFT_CORNER = "┌";
     String TOP_RIGHT_CORNER = "┐";
     String BOTTOM_LEFT_CORNER = "└";
