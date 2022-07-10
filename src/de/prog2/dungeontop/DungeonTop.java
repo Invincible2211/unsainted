@@ -15,6 +15,7 @@ import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.model.items.ItemType;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.spells.TestSpell;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -82,7 +83,7 @@ public class DungeonTop extends Application
         //stage.setScene(scene);
 
         //testArenaView();
-        //testSelectHero(primaryStage);
+        testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
@@ -208,16 +209,14 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        Item item = new Item("Potion", "Heals 10 Health", 100, AssetIds.HEALTH_POTION);
-        Inventory inventory = new Inventory();
+        Item item = new Item("Potion", "Heals your hero for 10 Health", 10 ,100, AssetIds.HEALTH_POTION);
         for (int i = 0; i < 8; i++)
         {
-            inventory.addItem(item);
+            PlayerManager.getInstance().getPlayerInventory().addItem(item);
         }
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
-        InventoryController.addItems(fxmlLoader.getController(), inventory.getInventory());
+        InventoryController.addItems(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory().getInventory());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
     }
