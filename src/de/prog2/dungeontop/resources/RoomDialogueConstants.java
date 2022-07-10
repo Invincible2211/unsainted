@@ -40,19 +40,43 @@ public interface RoomDialogueConstants
     String EVENT_ROOM_UPPER_BUTTON = "Abfahrt!";
     String EVENT_ROOM_LOWER_BUTTON = "LEAVE ME ALONE!";
 
+    // Dialogues for the individual Random Event Rooms
     List<RoomDialogueViewController.StageVariable> EVENT_ROOM_DESCRIPTIONS = new LinkedList<>();
+
+    // ID + description + asset id for each individual random event
+    // (used to determine which event to start and which text to display)
+
+    // change souls value event
+    String CHANGE_SOULS_DESC = "Waehrend du einem Goblin hinterher jagst verliert er einen komisch leuchtenden Ball.\n" +
+            "Willst du ihn aufheben?";
+    int CHANGE_SOULS_ASSET = AssetIds.RANDOM_EVENT_ROOM;
+
+    // change hp value event
+    String CHANGE_HP_DESC = "";
+    int CHANGE_HP_ASSET = AssetIds.RANDOM_EVENT_ROOM;
+
+    // Proof of Concept event
+    int POC_EVENT = 999;
+    String POC_EVENT_DESC = "Auch fuer den RandomEventRoom soll es eine Anzahl an unterschiedlichen " +
+            "Asset-Flavourtext-Kombinationen geben. Dies funktioniert wie schon bei den " +
+            "ArenaRooms.";
+    int POC_EVENT_ASSET = AssetIds.RANDOM_EVENT_ROOM;
 
     static void INIT_EVENT_ROOM_DESCRIPTIONS ()
     {
-        // Event 1
-        EVENT_ROOM_DESCRIPTIONS.add(
-                new RoomDialogueViewController.StageVariable(
-                        AssetIds.RANDOM_EVENT_ROOM,
-                        "Auch fuer den RandomEventRoom soll es eine Anzahl an unterschiedlichen " +
-                                "Asset-Flavourtext-Kombinationen geben. Dies funktioniert wie schon bei den " +
-                                "ArenaRooms."
-                )
-        );
+        // change souls value event
+        EVENT_ROOM_DESCRIPTIONS.add( RandomEventConstants.CHANGE_SOULS,
+                new RoomDialogueViewController.StageVariable(CHANGE_SOULS_ASSET, CHANGE_SOULS_DESC));
+
+        // change hp value event
+        EVENT_ROOM_DESCRIPTIONS.add( RandomEventConstants.CHANGE_HP,
+                new RoomDialogueViewController.StageVariable(CHANGE_HP_ASSET, CHANGE_HP_DESC));
+
+        /*
+        // Proof of Concept event
+        EVENT_ROOM_DESCRIPTIONS.add( POC_EVENT,
+                new RoomDialogueViewController.StageVariable(POC_EVENT_ASSET, POC_EVENT_DESC));
+         */
     }
 
     // ForgeRoom Constants

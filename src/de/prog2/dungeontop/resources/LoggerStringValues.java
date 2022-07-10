@@ -202,4 +202,5 @@ public interface LoggerStringValues
     String WAS_SELECTED = " was selected";
     String ENTITY_MOVE_SUCCESSFUL = "Entity moved successfully";
     String ENTITY_MOVE_FAILED = "Entity move failed";
+    String INVALID_EVENT_ID = " is not a valid ID for an event.";
 }
