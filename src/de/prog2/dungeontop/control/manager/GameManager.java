@@ -12,6 +12,7 @@ import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
+import de.prog2.dungeontop.view.HellView;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,7 +32,7 @@ public class GameManager {
 
     private Player opponentPlayer;
 
-    private SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
+    private SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame() == null?new SaveGame():GameSaveFileReader.getInstance().getSaveGame();
 
     /*--------------------------------------------KONSTRUKTOREN-------------------------------------------------------*/
 
@@ -51,6 +52,7 @@ public class GameManager {
     public void startGame()
     {
         SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
+
         if (saveGame == null)
         {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -67,7 +69,12 @@ public class GameManager {
         }
         else
         {
+            PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
             setGameWorld(saveGame.getGameWorld());
+
+            HellView view = new HellView();
+            HellView.setCurrHellView(view.initHellView(gameWorld.getCurrentHell()));
+            DungeonTop.getStage().setScene(HellView.getCurrHellView());
         }
         this.currentState = GameState.RUNNING;
     }

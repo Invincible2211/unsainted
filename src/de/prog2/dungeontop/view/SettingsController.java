@@ -56,7 +56,7 @@ public class SettingsController {
     private void onExitButtonPressed()
     {
         GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
-        Platform.exit();
+        System.exit(0);
     }
 
     @FXML
@@ -69,6 +69,7 @@ public class SettingsController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
         DungeonTop.getStage().setScene(scene);
     }
 

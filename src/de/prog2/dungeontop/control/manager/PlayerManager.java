@@ -12,7 +12,7 @@ public class PlayerManager
 {
     private final static PlayerManager instance = new PlayerManager();
 
-    private final Player player = new Player();
+    private Player player = new Player();
 
     private PlayerManager(){
         initPlayerData();
@@ -111,4 +111,8 @@ public class PlayerManager
 
     public Inventory getPlayerInventory () { return this.getPlayer().getInventory(); }
 
+    public void setPlayer(Player player)
+    {
+        this.player = player;
+    }
 }

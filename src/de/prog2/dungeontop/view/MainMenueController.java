@@ -53,7 +53,7 @@ public class MainMenueController {
     private void onBackToWindowsButtonPressed()
     {
         GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
-        Platform.exit();
+        System.exit(0);
     }
 
     @FXML

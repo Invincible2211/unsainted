@@ -10,7 +10,7 @@ public interface FilePaths
 
     String SAVE_FILE_PATH = "rsc/config/savegame.unsainted";
 
-    String SAVE_FILE_PATH_FOR_CLASSLOADER = "./config/savegame.unsainted";
+    String SAVE_FILE_PATH_FOR_CLASSLOADER = "config/savegame.unsainted";
 
 
 }
