@@ -15,19 +15,19 @@
     <VBox AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" alignment="CENTER">
         <ImageView fx:id="entityImageView" fitHeight="354" fitWidth="340"/>
     </VBox>
-    <!-- HP -->
+    <!-- Attack -->
     <StackPane AnchorPane.leftAnchor="40" AnchorPane.topAnchor="60">
-        <ImageView fx:id="hpImageView" fitHeight="120" fitWidth="120" />
-        <Label fx:id="hpLabel" styleClass="status-label" text="0" style="-fx-font-size: 70"/>
+        <ImageView fx:id="attackImageView" fitHeight="120" fitWidth="120" />
+        <Label fx:id="attackLabel" styleClass="status-label" text="0" style="-fx-font-size: 70"/>
     </StackPane>
     <!-- Movement -->
     <StackPane AnchorPane.leftAnchor="200" AnchorPane.topAnchor="350">
         <ImageView fx:id="movementImageView" fitHeight="120" fitWidth="120" />
         <Label fx:id="movementLabel" styleClass="status-label" text="0" style="-fx-font-size: 70"/>
     </StackPane>
-    <!-- Attack -->
+    <!-- HP -->
     <StackPane AnchorPane.leftAnchor="350" AnchorPane.topAnchor="60">
-        <ImageView fx:id="attackImageView" fitHeight="120" fitWidth="120" />
-        <Label fx:id="attackLabel" styleClass="status-label" text="0" style="-fx-font-size: 70"/>
+        <ImageView fx:id="hpImageView" fitHeight="120" fitWidth="120" />
+        <Label fx:id="hpLabel" styleClass="status-label" text="0" style="-fx-font-size: 70"/>
     </StackPane>
 </AnchorPane>
