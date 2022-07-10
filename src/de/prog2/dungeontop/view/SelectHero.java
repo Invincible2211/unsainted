@@ -18,13 +18,12 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-// TODO Bitte Magic entfernen, was ist das hier?
 public class SelectHero
 {
     private Hero hero;
-    private Hero hero1 = new Hero("Warrior", 12, 2, "Sturdy");
-    private Hero hero2 = new Hero("Mage", 8, 4, "Intelligent");
-    private Hero hero3 = new Hero("Rogue", 10, 3, "Sneaky");
+    private Hero warrior;
+    private Hero mage;
+    private Hero rogue;
 
     @FXML
     private VBox heroText;
@@ -46,8 +45,8 @@ public class SelectHero
     private void onHero1ButtonClicked()
     {
         heroText.setVisible(false);
-        selectHeroFillText(hero1);
-        hero = hero1;
+        selectHeroFillText(warrior);
+        hero = warrior;
         heroText.setVisible(true);
         PlayerManager.getInstance().getPlayer().setHero(hero);
     }
@@ -56,8 +55,8 @@ public class SelectHero
     private void onHero2ButtonClicked()
     {
         heroText.setVisible(false);
-        selectHeroFillText(hero2);
-        hero = hero2;
+        selectHeroFillText(mage);
+        hero = mage;
         heroText.setVisible(true);
         PlayerManager.getInstance().getPlayer().setHero(hero);
     }
@@ -66,8 +65,8 @@ public class SelectHero
     private void onHero3ButtonClicked()
     {
         heroText.setVisible(false);
-        selectHeroFillText(hero3);
-        hero = hero3;
+        selectHeroFillText(rogue);
+        hero = rogue;
         heroText.setVisible(true);
         PlayerManager.getInstance().getPlayer().setHero(hero);
     }
@@ -86,11 +85,11 @@ public class SelectHero
             return;
         }
 
-        if (hero == hero1)
+        if (hero == warrior)
             HellView.setPlayerAssetId(AssetIds.WARRIOR);
-        else if (hero == hero2)
+        else if (hero == mage)
             HellView.setPlayerAssetId(AssetIds.MAGICIAN);
-        else if (hero == hero3)
+        else if (hero == rogue)
             HellView.setPlayerAssetId(AssetIds.ROGUE);
 
         GameManager.getInstance().getGameWorld().initWorld();
@@ -149,5 +148,35 @@ public class SelectHero
     public Text getHeroTalent()
     {
         return heroTalent;
+    }
+
+    public Hero getWarrior()
+    {
+        return warrior;
+    }
+
+    public Hero getMage()
+    {
+        return mage;
+    }
+
+    public Hero getRogue()
+    {
+        return rogue;
+    }
+
+    public void setWarrior(Hero warrior)
+    {
+        this.warrior = warrior;
+    }
+
+    public void setMage(Hero mage)
+    {
+        this.mage = mage;
+    }
+
+    public void setRogue(Hero rogue)
+    {
+        this.rogue = rogue;
     }
 }
