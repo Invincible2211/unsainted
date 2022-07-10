@@ -3,10 +3,11 @@ package de.prog2.dungeontop.model.items;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Inventory
+public class Inventory implements Serializable
 {
     private final List<Item> inventory;
 

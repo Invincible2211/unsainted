@@ -4,7 +4,9 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 
-public abstract class Entity
+import java.io.Serializable;
+
+public abstract class Entity implements Serializable
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private Card card;
