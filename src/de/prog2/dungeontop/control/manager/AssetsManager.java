@@ -37,16 +37,16 @@ public class AssetsManager
      */
     public static File getAssetById (int id)
     {
-        GlobalLogger.log(String.format(LoggerStringValues.STARTED_GET_ASSET_BY_ID, id));
+        GlobalLogger.log(String.format(LoggerStringValues.STARTED_GET_ASSET_BY_ID, id), GlobalLogger.LoggerLevel.NONE);
         //Wurde ein Asset schon einmal geladen, ist dieses fuer weniger Festplattenzugriffe im Arbeitsspeicher geladen.
         if (ASSETS.containsKey(id)){
-            GlobalLogger.log(String.format(LoggerStringValues.ASSET_FOUND, id));
+            GlobalLogger.log(String.format(LoggerStringValues.ASSET_FOUND, id), GlobalLogger.LoggerLevel.NONE);
             return ASSETS.get(id);
         //Assets die noch nicht geladen wurden, werden fuer weitere Zugriffe in den Arbeitsspeicher geladen.
         } else {
             File asset = AssetsFileReader.getInstance().getAssetFile(id);
             ASSETS.put(id, asset);
-            GlobalLogger.log(String.format(LoggerStringValues.ASSET_NOT_FOUND, id));
+            GlobalLogger.log(String.format(LoggerStringValues.ASSET_NOT_FOUND, id), GlobalLogger.LoggerLevel.NONE);
             return asset;
         }
     }

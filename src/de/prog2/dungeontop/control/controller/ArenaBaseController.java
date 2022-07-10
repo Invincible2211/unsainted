@@ -43,6 +43,7 @@ public abstract class ArenaBaseController
        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
 
        setPreferredMeasurements();
+       updatePhaseDisplay();
 
     }
 
@@ -53,15 +54,8 @@ public abstract class ArenaBaseController
      */
     public static void init(ArenaBaseView arenaBaseView, int backGroundAlternativeID)
     {
-        currentArenaBaseView = arenaBaseView;
-        initBattlefield(BattleManager.getInstance().getArena().getHeight(),
-                BattleManager.getInstance().getArena().getWidth());
-        initEgoPoints();
+        init(arenaBaseView);
         setBackgroundImage(backGroundAlternativeID);
-        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
-        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
-        setPreferredMeasurements();
-
     }
 
 
@@ -93,7 +87,7 @@ public abstract class ArenaBaseController
     }
 
     /**
-     * die Aufteilung auf player one und player two soll soaeter dabei helfen DM und Spieler in der Controlle zu unterscheiden
+     * die Aufteilung auf player one und player two soll spaeter dabei helfen DM und Spieler in der Controlle zu unterscheiden
      */
     private static void initEgoPoints ()
     {
@@ -120,6 +114,9 @@ public abstract class ArenaBaseController
         secondHandContainer.setMaxSize(ArenaViewConstants.HAND_PLAYER_X, ArenaViewConstants.HAND_PLAYER_Y);
 
         double handCardScale = ArenaViewConstants.HAND_PLAYER_Y / ArenaViewConstants.CARD_HEIGHT;
+
+        handcontainer.getChildren().clear();
+        secondHandContainer.getChildren().clear();
 
         for (Card card : handOne)
         {
@@ -179,12 +176,14 @@ public abstract class ArenaBaseController
 
     private static void deleteAllMinionsFromArenaView ()
     {
-        for (int x = 0; x < ArenaBaseController.getCurrentArenaBaseView().getBattlefieldGridPane().getColumnCount(); x++) {
-            for (int y = 0; y < ArenaBaseController.getCurrentArenaBaseView().getBattlefieldGridPane().getRowCount(); y++) {
-                getBattleFieldPane(x, y).getChildren().removeAll();
-                GlobalLogger.log(LoggerStringValues.REMOVING_CHILDREN_OF_BATTLEFIELD + x + y);
+        int height = currentArenaBaseView.getBattlefieldGridPane().getRowCount();
+        int width = currentArenaBaseView.getBattlefieldGridPane().getColumnCount();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                getBattleFieldPane(x, y).getChildren().clear();
             }
         }
+        GlobalLogger.log(LoggerStringValues.DELETED_ALL_MINIONS_FROM_ARENA_VIEW, GlobalLogger.LoggerLevel.NONE);
     }
 
     /**
@@ -193,8 +192,8 @@ public abstract class ArenaBaseController
     public static ArenaStackPane getBattleFieldPane(int x, int y)
     {
         for (Node node : currentArenaBaseView.getBattlefieldGridPane().getChildren()) {
-              if (GridPane.getColumnIndex(node) == y && GridPane.getRowIndex(node) == x) {
-                GlobalLogger.log(LoggerStringValues.GOT_NODE_ON_BATTLEFIELD + GridPane.getColumnIndex(node) + GridPane.getRowIndex(node));
+              if (GridPane.getColumnIndex(node) == x && GridPane.getRowIndex(node) == y) {
+                GlobalLogger.log(LoggerStringValues.GOT_NODE_ON_BATTLEFIELD + GridPane.getColumnIndex(node) + GridPane.getRowIndex(node), GlobalLogger.LoggerLevel.NONE);
                 return (ArenaStackPane) node;
             }
         }
@@ -224,6 +223,11 @@ public abstract class ArenaBaseController
                     .getChildren().add(entityView);
 
         }
+    }
+
+    public static void updatePhaseDisplay()
+    {
+        currentArenaBaseView.getPhaseDisplayLabelID().setText(BattleManager.getInstance().getCurrentPhaseAsString());
     }
 
     public static ArenaBaseView getCurrentArenaBaseView ()

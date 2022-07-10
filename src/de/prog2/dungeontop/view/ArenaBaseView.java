@@ -53,12 +53,20 @@ public class ArenaBaseView
     @FXML
     private VBox vBoxEnemyAreaContainer;
 
+    @FXML
+    private Label PhaseDisplayLabelID;
+
     //hier laesst sich drueber streiten ob nicht eigentlich erst ueber den Controller der aufruf am Battlemanager stattfinden sollte.
     @FXML
     private void endTurn(){BattleManager.getInstance().endAPhase();}
 
     //----------------------- Getter ------------------//
 
+
+    public Label getPhaseDisplayLabelID ()
+    {
+        return PhaseDisplayLabelID;
+    }
 
     public VBox getvBoxEnemyAreaContainer ()
     {

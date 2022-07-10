@@ -12,10 +12,10 @@ public abstract class Entity
     private int hp = 0;
     private int attackDamage = 0;
     private int movement = 0;
+    private int maxMovement = 0;
     private int assetId;
     private String talent;
     private Coordinate position;
-    private boolean canMove = false;
     private Player owner = null;
 
 
@@ -33,7 +33,6 @@ public abstract class Entity
     {
         this(name, hp, attackDamage, movement, assetId, owner);
         this.position = position;
-        this.canMove = canMove;
     }
     public Entity(String name, int hp, int attackDamage, String talent)
     {
@@ -104,16 +103,6 @@ public abstract class Entity
         this.card = card;
     }
 
-    public boolean canMove()
-    {
-        return canMove;
-    }
-
-    public void setCanMove(boolean canMove)
-    {
-        this.canMove = canMove;
-    }
-
     public String getName()
     {
         return name;
@@ -137,5 +126,15 @@ public abstract class Entity
     public String getTalent()
     {
         return talent;
+    }
+
+    public int getMaxMovement ()
+    {
+        return maxMovement;
+    }
+
+    public void setMaxMovement (int maxMovement)
+    {
+        this.maxMovement = maxMovement;
     }
 }
