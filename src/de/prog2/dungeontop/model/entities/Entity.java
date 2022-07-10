@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.entities;
 
+import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.Talent;
@@ -12,7 +13,7 @@ public abstract class Entity implements Serializable
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private Card card;
     private String name;
-    private int hp = 0;
+    private SerializableSimpleIntegerProperty hp = new SerializableSimpleIntegerProperty(0);
     private int attackDamage = 0;
     private int movement = 0;
     private int maxMovement = 0;
@@ -26,7 +27,7 @@ public abstract class Entity implements Serializable
     public Entity(String name, int hp, int attackDamage, int movement, int assetId, Player owner)
     {
         this.name = name;
-        this.hp = hp;
+        this.hp = new SerializableSimpleIntegerProperty(hp);
         this.attackDamage = attackDamage;
         this.movement = movement;
         this.assetId = assetId;
@@ -41,7 +42,7 @@ public abstract class Entity implements Serializable
     public Entity(String name, int hp, int attackDamage, int maxMovement, Talent talent)
     {
         this.name = name;
-        this.hp = hp;
+        this.hp = new SerializableSimpleIntegerProperty(hp);
         this.attackDamage = attackDamage;
         this.maxMovement = maxMovement;
         this.talent = talent;
@@ -50,12 +51,22 @@ public abstract class Entity implements Serializable
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getHp()
     {
-        return hp;
+        return hp.getValue();
     }
 
     public void setHp(int hp)
     {
-        this.hp = hp;
+        this.hp.setValue(hp);
+    }
+
+    public SerializableSimpleIntegerProperty getHpProperty ()
+    {
+        return hp;
+    }
+
+    public void setHpProperty (SerializableSimpleIntegerProperty hpProperty)
+    {
+        this.hp = hpProperty;
     }
 
     public int getAttackDamage()

@@ -28,5 +28,6 @@ public interface SelectHeroConstants
     String PLAYER_CLASS = "Klasse: ";
     String PLAYER_HP = "Leben: ";
     String PLAYER_ATK = "Angriff: ";
+    String PLAYER_MAX_MOVES = "Zuege: ";
     String PLAYER_TALENT = "Talent: ";
 }

@@ -52,6 +52,8 @@ public class DungeonTop extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        initialize();
+
         stage = primaryStage;
 
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -63,20 +65,9 @@ public class DungeonTop extends Application
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
         stage.show();
-        //MainMenueController.addMenuebar();
-        // TODO: give the player his goddamn deck
-        Entity harald = new Minion("Harald", 6, 4, 1, 450);
-        Deck deck = new Deck();
-        for (int i = 0; i < 10; i++)
-        {
-            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
-        }
-        PlayerManager.getInstance().getPlayer().setDeck(deck);
 
         //AudioManager.getInstance().playSound(990);
-        SettingsController.initStage();
-        RoomDialogueViewController.initStage();
-        NetworkController.initStage();
+        testDeckCreation();
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
@@ -238,9 +229,21 @@ public class DungeonTop extends Application
         stage.setScene(scene);
     }
 
+    public static void testDeckCreation ()
+    {
+        System.out.println(DeckConstants.GET_RANDOM_DECK());
+    }
+
     public static Stage getStage()
     {
         return stage;
     }
 
+    public static void initialize ()
+    {
+        SettingsController.initStage();
+        RoomDialogueViewController.initStage();
+        NetworkController.initStage();
+        AvailableCards.INIT_AVAILABLE_CARDS();
+    }
 }

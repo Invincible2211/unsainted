@@ -18,4 +18,18 @@ public class SpellCard extends Card
     {
         return spell;
     }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(this.getSpell().getName());
+        builder.append(", Rank: ");
+        builder.append(this.getRank());
+        builder.append(" of ");
+        builder.append(this.getMaxRank());
+
+        return builder.toString();
+    }
 }

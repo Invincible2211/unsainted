@@ -40,6 +40,11 @@ public class ArenaRoom extends Room
         isAlive = alive;
     }
 
+    public void setDefeated ()
+    {
+        isAlive = false;
+    }
+
     public void setIsBoss (boolean isBoss)
     {
         this.isBoss = isBoss;

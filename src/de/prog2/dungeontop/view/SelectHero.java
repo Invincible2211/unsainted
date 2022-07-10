@@ -33,6 +33,8 @@ public class SelectHero
     @FXML
     private Text heroAttack;
     @FXML
+    private Text heroMaxMoves;
+    @FXML
     private Text heroTalent;
 
 
@@ -84,6 +86,7 @@ public class SelectHero
 
         GameManager.getInstance().getGameWorld().initWorld();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
+        PlayerManager.getInstance().getPlayerHpProperty().bindBidirectional(PlayerManager.getInstance().getPlayerHero().getHpProperty());
 
         GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
         GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
@@ -120,6 +123,7 @@ public class SelectHero
         getHeroClass().setText(SelectHeroConstants.PLAYER_CLASS + hero.getName());
         getHeroHealth().setText(SelectHeroConstants.PLAYER_HP + hero.getHp());
         getHeroAttack().setText(SelectHeroConstants.PLAYER_ATK + hero.getAttackDamage());
+        getHeroMaxMoves().setText(SelectHeroConstants.PLAYER_MAX_MOVES + hero.getMaxMovement());
         getHeroTalent().setText(SelectHeroConstants.PLAYER_TALENT + hero.getTalent());
     }
 
@@ -141,5 +145,10 @@ public class SelectHero
     public Text getHeroTalent()
     {
         return heroTalent;
+    }
+
+    public Text getHeroMaxMoves ()
+    {
+        return heroMaxMoves;
     }
 }
