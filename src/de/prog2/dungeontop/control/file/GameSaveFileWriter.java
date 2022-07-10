@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.control.file;
 
 import de.prog2.dungeontop.model.game.SaveGame;
+import de.prog2.dungeontop.resources.FilePaths;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.*;
@@ -22,7 +23,7 @@ public class GameSaveFileWriter {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(game);
-            OutputStream outputStream = new FileOutputStream(new File("rsc/config/savegame.unsainted"));
+            OutputStream outputStream = new FileOutputStream(new File(FilePaths.SAVE_FILE_PATH));
             byteArrayOutputStream.writeTo(outputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);

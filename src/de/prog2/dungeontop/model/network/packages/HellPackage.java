@@ -20,11 +20,6 @@ public class HellPackage extends Package
         this.hell = hell;
     }
 
-    @Override
-    public byte[] getContentAsByteArray() {
-        return SerializationUtils.serialize(this);
-    }
-
     public Hell getHell ()
     {
         return this.hell;
@@ -34,4 +29,5 @@ public class HellPackage extends Package
     {
         return this.playerCoordinate;
     }
+
 }
