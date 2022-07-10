@@ -3,6 +3,7 @@ package de.prog2.dungeontop.control.network;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.network.Package;
 import de.prog2.dungeontop.model.network.packages.HellPackage;
+import de.prog2.dungeontop.model.network.packages.OpenArenaPackage;
 import de.prog2.dungeontop.model.network.packages.PlayerMovementPackage;
 import de.prog2.dungeontop.model.network.packages.PlayerPackage;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -33,6 +34,10 @@ public class NetworkAPI {
         this.sendData(new PlayerPackage(player));
     }
 
+    public void sendOpenArenaPackage() {
+        sendData(new OpenArenaPackage());
+    }
+
     private void sendData(Package data){
         try {
             outStream.write(data.toByteArray());
@@ -40,5 +45,4 @@ public class NetworkAPI {
             throw new RuntimeException(e);
         }
     }
-
 }
