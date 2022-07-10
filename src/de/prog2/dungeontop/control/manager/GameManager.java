@@ -23,7 +23,7 @@ public class GameManager {
     private final static GameManager instance = new GameManager();
 
     private GameState currentState = GameState.MAIN_MENU;
-    private final World gameWorld = new World(WorldConstants.HELL_COUNT);
+    private World gameWorld = new World(WorldConstants.HELL_COUNT);
     private boolean isDM = false;
 
     private SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
@@ -138,4 +138,8 @@ public class GameManager {
         return saveGame;
     }
 
+    public void setGameWorld (World newWorld)
+    {
+        this.gameWorld = newWorld;
+    }
 }
