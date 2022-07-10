@@ -214,7 +214,7 @@ public class BattleManager
 
     /**
      * Places card on Arena tile, then updates it on the View.
-     *
+     * only part of the summoning process as it is modulised for the first and second duellist.
      * @param duellist   who controlls the card
      * @param coordinate where to place new minion
      * @param entityCard the card to place
@@ -237,23 +237,30 @@ public class BattleManager
         return true;
     }
 
+    /**
+     * Hilfsmethode beim Ablauf vom spielen einer Karte.
+     * @param duellist
+     * @param coordinate
+     * @param entityCard
+     * @return
+     */
     private boolean summonCardHelp (Duellist duellist, Coordinate coordinate, EntityCard entityCard)
     {
         //IMPORTANT: tryInstantiate will summon the Minions as sideeffect if it doesnt give false back.
         if (!EntityCardController.tryInstantiate(entityCard, arena, coordinate))
         {
             GlobalLogger.warning(LoggerStringValues.ALREADY_OCCUPIED);
-            return true;
+            return false;
         }
 
         duellist.reduceEgoPoints(entityCard.getSummonCost());
         duellist.removeCardFromHand(entityCard);
-        return false;
+        return true;
     }
 
     /**
-     * HelpMethode
-     * TODO AUslagern in unique attackAction
+     * HelpMethod
+     * TODO: In der Zukunft nach Abgabe: AUslagern in unique attackAction
      * makes the Entity Attack the selexted other
      * @param coordinateOfAttackedEntity
      */
@@ -264,6 +271,10 @@ public class BattleManager
         ArenaBaseController.updateBattlefield(this.getArena());
     }
 
+    /**
+     * HelpMethod zur Uebersichtlichkeit beim bewegen einer Entity
+     * @param direction
+     */
     private void moveUnit (MoveDirection direction)
     {
         EntityController.tryMoveTowards(this.arena, this.arena.getSelectedEntity(), direction);
@@ -272,6 +283,11 @@ public class BattleManager
     }
 
 
+    /**
+     * Hauptmethode fuer die Funktion in der Arena
+     * @param coordinate the clicked tile in the arena.
+     *                   Behavior is dependent on static variables like phase and selectedEntity.
+     */
     public void arenaTilePressed (Coordinate coordinate)
     {
         //if current player has selected a handcard
@@ -300,6 +316,10 @@ public class BattleManager
 
     }
 
+    /**
+     * HelpMethod zur Uebersicht, entscheidet ob ein angriff oder eine Bewegung ausgefuehrt werden soll.
+     * @param coordinate clicked tile in the arena.
+     */
     private void entityAction (Coordinate coordinate)
     {
         //if the tile is not empty, attack the unit
@@ -317,6 +337,10 @@ public class BattleManager
         }
     }
 
+    /**
+     * HelpMethod zu Uebesicht, Uebernimmt die entscheidung ob eine Entity selected wird.
+     * @param coordinate clicked tile in the arena.
+     */
     private void trySelectEntity (Coordinate coordinate)
     {
         if (this.getArena().getEntity(coordinate) != null)
@@ -372,12 +396,16 @@ public class BattleManager
         }
     }
 
+    @Deprecated
     public void arenaTileReleased (Coordinate coordinate)
     {
         //Logik und ueberpruefung ob darf und was passiert
     }
 
-
+    /**
+     * @version 1.0 the only place where a player might get restricted from actions.
+     * @return the currently active player.
+     */
     public Duellist getCurrentActivePlayer ()
     {
         if (getCurrentPhase() == BattlePhase.FIRST_DUELLIST_DRAW ||
