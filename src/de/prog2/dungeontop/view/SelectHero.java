@@ -4,8 +4,8 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
-import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.HeroesConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -21,9 +21,9 @@ import java.io.IOException;
 public class SelectHero
 {
     private Hero hero;
-    private Hero warrior;
-    private Hero mage;
-    private Hero rogue;
+    private Hero warrior = HeroesConstants.warrior;
+    private Hero mage = HeroesConstants.mage;
+    private Hero rogue = HeroesConstants.rogue;
 
     @FXML
     private VBox heroText;
@@ -150,33 +150,4 @@ public class SelectHero
         return heroTalent;
     }
 
-    public Hero getWarrior()
-    {
-        return warrior;
-    }
-
-    public Hero getMage()
-    {
-        return mage;
-    }
-
-    public Hero getRogue()
-    {
-        return rogue;
-    }
-
-    public void setWarrior(Hero warrior)
-    {
-        this.warrior = warrior;
-    }
-
-    public void setMage(Hero mage)
-    {
-        this.mage = mage;
-    }
-
-    public void setRogue(Hero rogue)
-    {
-        this.rogue = rogue;
-    }
 }
