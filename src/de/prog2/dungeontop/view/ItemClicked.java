@@ -27,6 +27,8 @@ public class ItemClicked
     private Text itemDescription;
     @FXML
     private ImageView itemImage;
+    @FXML
+    private Text price;
     private Item item;
 
     public void onReturnButtonClicked()
@@ -37,6 +39,7 @@ public class ItemClicked
     public void onUseItemButtonClicked() throws IOException {
         PlayerManager.getInstance().addHp(getItem().getValue());
         PlayerManager.getInstance().getPlayerInventory().removeItem(getItem());
+        onReturnButtonClicked();
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
         InventoryController.addItems(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory().getInventory());
@@ -63,6 +66,11 @@ public class ItemClicked
     public Button getButton()
     {
         return button;
+    }
+
+    public Text getPrice()
+    {
+        return price;
     }
 
     public void setItem(Item item)
