@@ -23,11 +23,11 @@ import java.io.IOException;
 public class SelectHero
 {
     private final Hero warrior = new Hero(SelectHeroConstants.WARRIOR_NAME, SelectHeroConstants.WARRIOR_HP,
-            SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.ROGUE_TALENT);
+            SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.WARRIOR_MAX_MOVES, SelectHeroConstants.WARRIOR_TALENT);
     private final Hero mage = new Hero(SelectHeroConstants.MAGE_NAME, SelectHeroConstants.MAGE_HP,
-            SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_TALENT);
+            SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_MAX_MOVES, SelectHeroConstants.MAGE_TALENT);
     private final Hero rogue = new Hero(SelectHeroConstants.ROGUE_NAME, SelectHeroConstants.ROGUE_HP,
-            SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_TALENT);
+            SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_MAX_MOVES, SelectHeroConstants.ROGUE_TALENT);
 
     @FXML
     private Text heroClass;
