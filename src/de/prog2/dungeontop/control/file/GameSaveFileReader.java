@@ -4,8 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.model.game.SaveGame;
-import de.prog2.dungeontop.model.savegame.GameSaveData;
-import de.prog2.dungeontop.model.savegame.PlayerSaveData;
 import de.prog2.dungeontop.resources.FilePaths;
 import org.apache.commons.lang3.SerializationUtils;
 
@@ -27,11 +25,11 @@ public class GameSaveFileReader {
     }
 
     private boolean saveFileExists(){
-        return Files.exists(Path.of("rsc/config/savegame.unsainted"));
+        return Files.exists(Path.of(FilePaths.SAVE_FILE_PATH));
     }
 
     private void readSaveFile(){
-        saveGame = (SaveGame) SerializationUtils.deserialize(DungeonTop.class.getClassLoader().getResourceAsStream("./config/savegame.unsainted"));
+        saveGame = (SaveGame) SerializationUtils.deserialize(DungeonTop.class.getClassLoader().getResourceAsStream(FilePaths.SAVE_FILE_PATH_FOR_CLASSLOADER));
     }
 
     public static GameSaveFileReader getInstance() {

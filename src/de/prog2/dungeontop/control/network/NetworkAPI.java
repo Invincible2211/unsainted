@@ -30,8 +30,14 @@ public class NetworkAPI {
     }
 
     private void sendData(Package data){
+        try {
+            outStream.write(data.toByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        /**
         byte[] identifier = data.getIdentifier();
-        byte[] content = data.getContentAsByteArray();
+        byte[] content = data.toByteArray();
         byte dataToSend[] = new byte[identifier.length + content.length];
         System.arraycopy(identifier, 0, dataToSend, 0, identifier.length);
         for (int i = identifier.length; i < dataToSend.length; i++) {
@@ -44,6 +50,7 @@ public class NetworkAPI {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+         **/
     }
 
 
