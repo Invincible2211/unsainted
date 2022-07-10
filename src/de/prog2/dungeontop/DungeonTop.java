@@ -174,7 +174,7 @@ public class DungeonTop extends Application
         Spell testSpell = new TestSpell();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
 //            deck1.pushCard(new SpellCard(testSpell, 5, 3, 1, 2 + i));
             deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
@@ -184,8 +184,8 @@ public class DungeonTop extends Application
         player1.setDeck(deck1);
         Player player2 = new Player(12, 10);
         player2.setDeck(deck2);
-        player1.setHandCardLimit(6);
-        player2.setHandCardLimit(2);
+        player1.setHandCardLimit(2);
+        player2.setHandCardLimit(4);
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
@@ -195,8 +195,7 @@ public class DungeonTop extends Application
 
         BattleManager.getInstance().testPlaceCard();
         BattleManager.getInstance().setCurrentPhase(BattleManager.getInstance().getNextPhaseInCycle());
-        BattleManager.getInstance().getArena().getEntity(0,0).setCanMove(true);
-        ArenaBaseController.updateBattlefield(BattleManager.getInstance().getArena());
+        BattleManager.getInstance().getArena().getEntity(0,0).setMovement(2);
     }
 
     public static void testSelectHero(Stage stage) throws Exception

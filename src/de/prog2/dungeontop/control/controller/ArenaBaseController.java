@@ -13,7 +13,6 @@ import de.prog2.dungeontop.resources.views.EntityConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
-import de.prog2.dungeontop.view.EntityView;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,8 +40,8 @@ public abstract class ArenaBaseController
        setBackgroundImage(AssetIds.ARENA_BG_DEFAULT_ID);
        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
-
        setPreferredMeasurements();
+       updatePhaseDisplay();
 
     }
 
@@ -53,15 +52,8 @@ public abstract class ArenaBaseController
      */
     public static void init(ArenaBaseView arenaBaseView, int backGroundAlternativeID)
     {
-        currentArenaBaseView = arenaBaseView;
-        initBattlefield(BattleManager.getInstance().getArena().getHeight(),
-                BattleManager.getInstance().getArena().getWidth());
-        initEgoPoints();
+        init(arenaBaseView);
         setBackgroundImage(backGroundAlternativeID);
-        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
-        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
-        setPreferredMeasurements();
-
     }
 
 
@@ -93,7 +85,7 @@ public abstract class ArenaBaseController
     }
 
     /**
-     * die Aufteilung auf player one und player two soll soaeter dabei helfen DM und Spieler in der Controlle zu unterscheiden
+     * die Aufteilung auf player one und player two soll spaeter dabei helfen DM und Spieler in der Controlle zu unterscheiden
      */
     private static void initEgoPoints ()
     {
@@ -120,6 +112,9 @@ public abstract class ArenaBaseController
         secondHandContainer.setMaxSize(ArenaViewConstants.HAND_PLAYER_X, ArenaViewConstants.HAND_PLAYER_Y);
 
         double handCardScale = ArenaViewConstants.HAND_PLAYER_Y / ArenaViewConstants.CARD_HEIGHT;
+
+        handcontainer.getChildren().clear();
+        secondHandContainer.getChildren().clear();
 
         for (Card card : handOne)
         {
@@ -183,10 +178,10 @@ public abstract class ArenaBaseController
         int width = currentArenaBaseView.getBattlefieldGridPane().getColumnCount();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                getBattleFieldPane(x, y).getChildren().removeAll();
+                getBattleFieldPane(x, y).getChildren().clear();
             }
         }
-        GlobalLogger.log(LoggerStringValues.DELETED_ALL_MINIONS_FROM_ARENA_VIEW, GlobalLogger.LoggerLevel.DEFAULT);
+        GlobalLogger.log(LoggerStringValues.DELETED_ALL_MINIONS_FROM_ARENA_VIEW, GlobalLogger.LoggerLevel.NONE);
     }
 
     /**
@@ -195,8 +190,8 @@ public abstract class ArenaBaseController
     public static ArenaStackPane getBattleFieldPane(int x, int y)
     {
         for (Node node : currentArenaBaseView.getBattlefieldGridPane().getChildren()) {
-              if (GridPane.getColumnIndex(node) == y && GridPane.getRowIndex(node) == x) {
-                GlobalLogger.log(LoggerStringValues.GOT_NODE_ON_BATTLEFIELD + GridPane.getColumnIndex(node) + GridPane.getRowIndex(node));
+              if (GridPane.getColumnIndex(node) == x && GridPane.getRowIndex(node) == y) {
+                GlobalLogger.log(LoggerStringValues.GOT_NODE_ON_BATTLEFIELD + GridPane.getColumnIndex(node) + GridPane.getRowIndex(node), GlobalLogger.LoggerLevel.NONE);
                 return (ArenaStackPane) node;
             }
         }
@@ -226,6 +221,11 @@ public abstract class ArenaBaseController
                     .getChildren().add(entityView);
 
         }
+    }
+
+    public static void updatePhaseDisplay()
+    {
+        currentArenaBaseView.getPhaseDisplayLabelID().setText(BattleManager.getInstance().getCurrentPhaseAsString());
     }
 
     public static ArenaBaseView getCurrentArenaBaseView ()

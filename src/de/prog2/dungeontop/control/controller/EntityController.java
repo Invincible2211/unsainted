@@ -26,11 +26,11 @@ public class EntityController
             GlobalLogger.log(LoggerStringValues.ENTITY_MOVE_FAILED);
             return false;
         }
-// arena wird geupdated, durch neuladen aller coordinaten etc. dann muss man die nicht raus und reinschmeiSen
+
         arena.removeEntity(entity.getPosition());
         arena.insertEntity(newCoord, entity);
         entity.setPosition(newCoord);
-        setCanMove(entity, false);
+        entity.setMovement(entity.getMovement()-1);
         GlobalLogger.log(LoggerStringValues.ENTITY_MOVE_SUCCESSFUL);
         return true;
     }
@@ -47,14 +47,9 @@ public class EntityController
 
         return arena.getEntity(newCoord) == null && canMove(entity);
     }
-    public static boolean canMove(de.prog2.dungeontop.model.entities.Entity entity)
+    public static boolean canMove(Entity entity)
     {
-        return entity.canMove();
-    }
-
-    public static void setCanMove(de.prog2.dungeontop.model.entities.Entity entity, boolean value)
-    {
-        entity.setCanMove(value);
+        return entity.getMovement() > 0;
     }
 
     public static MoveDirection[] getValidMoveDirections (Arena arena, Entity entity)

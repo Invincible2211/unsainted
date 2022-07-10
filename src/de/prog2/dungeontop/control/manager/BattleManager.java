@@ -124,27 +124,49 @@ public class BattleManager
         return new BattleOutCome(gewinner, damageAnVerlierer);
     }
 
+    //TODO check if match is over
     public void endAPhase ()
     {
-        //IF new reound both players get more egopointsmax and current to max
+        //IF new round both players get more egopointsmax and current to max
         if (getCurrentPhase() == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS) {
-            GlobalLogger.log(LoggerStringValues.NEXT_ROUND_BOTH_PLAYERS_GET_EGOPOINTS);
-            this.getFirstDuellist().egoPointsMax += GameConstants.EGOPOINTS_PER_ROUND_INCREMENT;
-            this.getSecondDuellist().egoPointsMax += GameConstants.EGOPOINTS_PER_ROUND_INCREMENT;
-            this.getFirstDuellist().currentEgoPoints = this.getFirstDuellist().egoPointsMax;
-            this.getSecondDuellist().currentEgoPoints = this.getSecondDuellist().egoPointsMax;
+            newRound();
         }
-
-        //-------------------------------------my test button---------------------------------------------
-        //for tests
-        ArenaBaseController.updateBattlefield(this.getArena());
-
-
-        //set next phase
         setCurrentPhase(getNextPhaseInCycle());
-        //TODO check if match is over
         GlobalLogger.log(LoggerStringValues.CURRENTPHASE_IS_NOW + getCurrentPhase());
+        updateValues();
+    }
+
+    private void updateValues()
+    {
         ArenaBaseController.updateBattlefield(this.getArena());
+        ArenaBaseController.updatePhaseDisplay();
+        ArenaBaseController.updateEgoPoints(
+                this.getFirstDuellist().getCurrentEgoPoints(),
+                this.getSecondDuellist().getCurrentEgoPoints());
+        ArenaBaseController.updatePlayerHands(getFirstDuellist().getHand(), getSecondDuellist().getHand());
+    }
+
+    private void newRound()
+    {
+        GlobalLogger.log(LoggerStringValues.NEXT_ROUND_BOTH_PLAYERS_GET_EGOPOINTS);
+        this.getFirstDuellist().egoPointsMax += GameConstants.EGOPOINTS_PER_ROUND_INCREMENT;
+        this.getSecondDuellist().egoPointsMax += GameConstants.EGOPOINTS_PER_ROUND_INCREMENT;
+        this.getFirstDuellist().setCurrentEgoPoints(this.getFirstDuellist().egoPointsMax);
+        this.getSecondDuellist().setCurrentEgoPoints(this.getSecondDuellist().egoPointsMax);
+        ArenaBaseController.updateEgoPoints(
+                this.getFirstDuellist().getCurrentEgoPoints(),
+                this.getSecondDuellist().getCurrentEgoPoints());
+        this.getFirstDuellist().drawNewDuellistHand();
+        this.getSecondDuellist().drawNewDuellistHand();
+        resetEntityMovement();
+    }
+
+    private void resetEntityMovement ()
+    {
+        arena.getArenaHashmap().forEach((key, value) -> {
+            value.setMovement(value.getMaxMovement());
+        });
+
     }
 
     /**
@@ -184,12 +206,11 @@ public class BattleManager
         ArenaBaseController.updateBattlefield(this.getArena());
     }
 
-
     private void moveUnit (MoveDirection direction)
     {
         EntityController.tryMoveTowards(this.arena, this.arena.getSelectedEntity(), direction);
+        this.getArena().setSelectedEntity(null);
         ArenaBaseController.updateBattlefield(this.getArena());
-
     }
 
     public void testPlaceCard()
@@ -226,30 +247,32 @@ public class BattleManager
                 this.getArena().setSelectedEntity(null);
                 return;
             }
-            //if the tile is empty, move the unit
 
-            //this is where bugs will happen
+            //if the tile is empty, move the unit
             if (this.getArena().getSelectedEntity().getPosition().getX() == coordinate.getX())
             {
+                //if click on itself, deselect unit
+                if (this.getArena().getSelectedEntity().getPosition().getY() == coordinate.getY())
+                {
+                    this.getArena().setSelectedEntity(null);
+                }
+
+                //X ist gleich Y ist unterschiedlich
                 if (this.getArena().getSelectedEntity().getPosition().getY() < coordinate.getY())
                 {
                     moveUnit(MoveDirection.DOWN);
-                    this.getArena().setSelectedEntity(null);
                 } else {
                     moveUnit(MoveDirection.UP);
-                    this.getArena().setSelectedEntity(null);
                 }
             } else {
+                    //X ist unterschiedlich Y ist gleich
                 if (this.getArena().getSelectedEntity().getPosition().getX() < coordinate.getX())
                 {
                     moveUnit(MoveDirection.RIGHT);
-                    this.getArena().setSelectedEntity(null);
                 } else {
                     moveUnit(MoveDirection.LEFT);
-                    this.getArena().setSelectedEntity(null);
                 }
             }
-
         }
     }
 
@@ -259,6 +282,7 @@ public class BattleManager
         //Logik und ueberpruefung ob darf und was passiert
     }
 
+    //TODO check if player is allowed to action by checking if he is currently on his turn
     public Player getCurrentActivePlayer ()
     {
         if (getCurrentPhase() == BattlePhase.FIRST_DUELLIST_DRAW ||
@@ -311,6 +335,11 @@ public class BattleManager
         return currentPhase;
     }
 
+    public String getCurrentPhaseAsString()
+    {
+        return currentPhase.toString();
+    }
+
     public void setCurrentPhase (BattlePhase currentPhase)
     {
         this.currentPhase = currentPhase;
@@ -359,31 +388,37 @@ public class BattleManager
             this.currentEgoPoints = player.getEgo_points();
             this.egoPointsMax = player.getEgo_points();
             this.drawNewDuellistHand();
-
         }
 
         /**
          * will shuffle deck if there are not enough cards to draw
-         * TODO make shure that deck always has at least X amount of cards.
+         * TODO make sure that deck always has at least X amount of cards.
          */
-        private void drawNewDuellistHand ()
+        protected void drawNewDuellistHand ()
         {
-            if (getDeck().getCards().size() < handLimit) {
+            if (getDeck().getCards().size() < this.handLimit) {
                 reStackDeckFromDiscard();
                 DeckController.shuffleDeck(getDeck());
             }
-            getHand().clear();
+            discardHand();
             DeckController.shuffleDeck(getDeck());
-            for (int i = 0; i < handLimit; i++) {
-                Card drawedCard = deck.popCard();
-                hand.add(drawedCard);
-                discardPile.pushCard(drawedCard);
-                GlobalLogger.log(LoggerStringValues.DREW_NEW_HAND);
+            for (int i = 0; i < this.handLimit; i++) {
+                Card drawenCard = deck.popCard();
+                this.getHand().add(drawenCard);
+                GlobalLogger.log(LoggerStringValues.DREW_NEW_CARD + i + "out of" + handLimit);
+            }
+        }
+
+        private void discardHand()
+        {
+            for (int i = 0; i < hand.size(); i++) {
+                removeCardFromHand(hand.get(i));
             }
         }
 
         private void removeCardFromHand (Card card)
         {
+            getDiscardPile().pushCard(card);
             getHand().remove(card);
             GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
         }
@@ -394,6 +429,7 @@ public class BattleManager
             GlobalLogger.log(LoggerStringValues.REDUCED_EGOPOINTS);
         }
         //technically not a try as it is not a boolean
+
         private void tryReduceEgoPoints ()
         {
             if (currentEgoPoints > 0) {
