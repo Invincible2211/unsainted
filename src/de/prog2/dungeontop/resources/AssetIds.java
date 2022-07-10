@@ -70,6 +70,7 @@ public interface AssetIds
 
     //Item AssetIds
     int HEALTH_POTION = 660;
+    int BREAD = 661;
 
     // Arena Asset IDs
     int ARENA_BG_DEFAULT_ID = 210;

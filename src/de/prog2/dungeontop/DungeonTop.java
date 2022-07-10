@@ -22,10 +22,7 @@ import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.rooms.EmptyRoom;
 import de.prog2.dungeontop.model.world.rooms.LavaPondRoom;
-import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.TestConstants;
-import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.resources.WorldConstants;
+import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.*;
 import javafx.application.Application;
@@ -203,10 +200,12 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        Item item = new Item("Potion", "Heals your hero for 10 Health", 10 ,100, AssetIds.HEALTH_POTION);
-        for (int i = 0; i < 8; i++)
+        Item item = ItemConstants.minorPotion;
+        Item item1 = ItemConstants.bread;
+        for (int i = 0; i < 5; i++)
         {
             PlayerManager.getInstance().getPlayerInventory().addItem(item);
+            PlayerManager.getInstance().getPlayerInventory().addItem(item1);
         }
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
