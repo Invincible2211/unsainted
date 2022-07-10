@@ -11,6 +11,7 @@ import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.items.Inventory;
@@ -202,10 +203,16 @@ public class DungeonTop extends Application
     {
         Item item = ItemConstants.minorPotion;
         Item item1 = ItemConstants.bread;
-        for (int i = 0; i < 5; i++)
+        Item weapon = ItemConstants.sword;
+        Item art1 = ItemConstants.necklace;
+        Item art2 = ItemConstants.bracelet;
+        for (int i = 0; i < 2; i++)
         {
             PlayerManager.getInstance().getPlayerInventory().addItem(item);
             PlayerManager.getInstance().getPlayerInventory().addItem(item1);
+            PlayerManager.getInstance().getPlayerInventory().addItem(weapon);
+            PlayerManager.getInstance().getPlayerInventory().addItem(art1);
+            PlayerManager.getInstance().getPlayerInventory().addItem(art2);
         }
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
