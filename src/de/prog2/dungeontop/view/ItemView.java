@@ -21,12 +21,10 @@ public class ItemView
 
     public void itemButtonClicked()
     {
-
         Item selectedItem = getItem();
         AnchorPane rootPane = ItemClickedController.getItemClicked(selectedItem);
         final Scene scene = new Scene(rootPane);
         stage.setScene(scene);
-
         stage.show();
     }
 
