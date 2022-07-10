@@ -8,6 +8,7 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.arena.ArenaStackPane;
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.ColorKeys;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.resources.views.EntityConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
@@ -17,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 
@@ -42,7 +44,6 @@ public abstract class ArenaBaseController
        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
        setPreferredMeasurements();
        updatePhaseDisplay();
-
     }
 
     /**
@@ -59,7 +60,6 @@ public abstract class ArenaBaseController
 
     /**
      * posssibility to automatically rescale the Arena for different resolutions
-
      */
     private static void setPreferredMeasurements()
     {
@@ -97,6 +97,10 @@ public abstract class ArenaBaseController
         egoPointsPlayerOneImageView.setFitWidth(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH);
         egoPointsPlayerTwoImageView.setFitHeight(ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
         egoPointsPlayerTwoImageView.setFitWidth(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH);
+        currentArenaBaseView.getEgopointsPlayerOne().setTextFill(ColorKeys.EGOPOINTS_TEXTCOLOR);
+        currentArenaBaseView.getEgopointsPlayerTwo().setTextFill(ColorKeys.EGOPOINTS_TEXTCOLOR);
+        currentArenaBaseView.getEgopointsPlayerOne().setPrefSize(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH, ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
+        currentArenaBaseView.getEgopointsPlayerTwo().setPrefSize(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH, ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
     }
 
     //TODO BINDING THIS -> binddirectional maybe

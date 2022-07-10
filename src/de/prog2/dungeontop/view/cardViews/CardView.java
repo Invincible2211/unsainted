@@ -6,6 +6,7 @@ import de.prog2.dungeontop.resources.views.CardConstants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -118,4 +119,8 @@ public abstract class CardView
         return backgroundImageView;
     }
 
+    public void mouseRelease (MouseEvent mouseEvent)
+    {
+        getCard().setSelected(!getCard().isSelected());
+    }
 }
