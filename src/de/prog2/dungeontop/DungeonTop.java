@@ -11,6 +11,7 @@ import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.items.Inventory;
@@ -76,7 +77,7 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
-        //testArenaView();
+        testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
@@ -182,6 +183,8 @@ public class DungeonTop extends Application
         player2.setDeck(deck2);
         player1.setHandCardLimit(2);
         player2.setHandCardLimit(4);
+        player1.setHero(new Hero("Warrior", 6, 4, 1, Talent.STURDY));
+        player2.setHero(new Hero("Mage", 6, 4, 1, Talent.INTELLIGENT));
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
