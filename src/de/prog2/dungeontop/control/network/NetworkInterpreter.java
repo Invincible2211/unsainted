@@ -1,13 +1,14 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.network.Package;
 import de.prog2.dungeontop.model.network.packages.HellPackage;
 import de.prog2.dungeontop.model.network.packages.PlayerMovementPackage;
+import de.prog2.dungeontop.model.network.packages.PlayerPackage;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
-import de.prog2.dungeontop.resources.NetworkInterpreterConstants;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.HellView;
@@ -18,7 +19,6 @@ import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.Arrays;
 
 public class NetworkInterpreter extends Thread{
@@ -54,8 +54,8 @@ public class NetworkInterpreter extends Thread{
     }
 
     private void interpret(byte[] data){
-        GlobalLogger.log(String.format(NetworkingConstants.BYTES_TO_INTERPRET, data.length));
         Package dataPackage = (Package) SerializationUtils.deserialize(data);
+        GlobalLogger.log(String.format(NetworkingConstants.BYTES_TO_INTERPRET, data.length));
         if (dataPackage instanceof HellPackage){
             HellPackage hellPackage = (HellPackage) dataPackage;
             // get hell and set current player room
@@ -74,6 +74,10 @@ public class NetworkInterpreter extends Thread{
             KeyCode keyCode = playerMovementPackage.getKeyCode();
             HellView viewInstance = new HellView();
             viewInstance.movePlayer(keyCode);
+        } else if (dataPackage instanceof PlayerPackage){
+            PlayerPackage playerPackage = (PlayerPackage) dataPackage;
+            GameManager.getInstance().setOpponentPlayer(playerPackage.getPlayer());
+            System.out.println(GameManager.getInstance().getOpponentPlayer().getEgo_points());
         }
     }
 

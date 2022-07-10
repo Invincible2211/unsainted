@@ -10,12 +10,11 @@ import java.io.Serializable;
 public class HellPackage extends Package
 {
 
+    String foo = "Hallo";
     private Hell hell;
     private Coordinate playerCoordinate;
 
     public HellPackage(Hell hell, Coordinate playerCoordinate) {
-        super(new byte[]{0,0,0,1});
-
         this.playerCoordinate = playerCoordinate;
         this.hell = hell;
     }

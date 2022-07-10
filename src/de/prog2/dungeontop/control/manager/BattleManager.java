@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.*;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -9,6 +10,7 @@ import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
+import javafx.scene.Scene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +52,7 @@ public class BattleManager
         this.arena = arena;
         this.myArenaBaseView = arenaBaseView;
         statinitialiser();
+        DungeonTop.getStage().setScene(new Scene(arenaBaseView.getBackGroundAnchorPane()));
     }
 
     private void statinitialiser ()

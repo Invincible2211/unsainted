@@ -4,6 +4,7 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.NpcRoomViewConstants;
@@ -126,7 +127,7 @@ public class RoomDialogueViewController
                 RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
                 dialogueStageAttributes.get(room).description(), dialogueStageAttributes.get(room).assetId());
         upperButton.setOnAction(e -> startBattle());
-
+        upperButton.setDisable(!NetManager.getInstance().isConnected());
         roomDialogueStage.show();
     }
     /**

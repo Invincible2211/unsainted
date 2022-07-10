@@ -3,12 +3,15 @@ package de.prog2.dungeontop.control.manager;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.model.game.GameState;
+import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.model.world.World;
+import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.ArenaBaseView;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +28,8 @@ public class GameManager {
     private GameState currentState = GameState.MAIN_MENU;
     private final World gameWorld = new World(WorldConstants.HELL_COUNT);
     private boolean isDM = false;
+
+    private Player opponentPlayer;
 
     private SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
 
@@ -83,6 +88,13 @@ public class GameManager {
      */
     public void beginBattle()
     {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        try {
+            Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BattleManager.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), this.opponentPlayer, PlayerManager.getInstance().getPlayer().getDeck(), opponentPlayer.getDeck(), new Arena(4,4),fxmlLoader.getController());
         this.currentState = GameState.BATTLE;
     }
 
@@ -136,6 +148,14 @@ public class GameManager {
 
     public SaveGame getSaveGame() {
         return saveGame;
+    }
+
+    public void setOpponentPlayer(Player opponentPlayer) {
+        this.opponentPlayer = opponentPlayer;
+    }
+
+    public Player getOpponentPlayer() {
+        return opponentPlayer;
     }
 
 }

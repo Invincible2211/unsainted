@@ -3,10 +3,11 @@ package de.prog2.dungeontop.model.game;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class Card
+public abstract class Card implements Serializable
 {
     private int rank = 1;
     private int price;

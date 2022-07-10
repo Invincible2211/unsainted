@@ -81,7 +81,7 @@ public class DungeonTop extends Application
         NetworkController.initStage();
         //stage.setScene(scene);
 
-        testArenaView();
+        //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
@@ -186,7 +186,6 @@ public class DungeonTop extends Application
         player2.setDeck(deck2);
         player1.setHandCardLimit(2);
         player2.setHandCardLimit(4);
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(4, 4),fxmlLoader.getController());
