@@ -1,12 +1,13 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
-import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.SelectHeroConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
@@ -21,13 +22,13 @@ import java.io.IOException;
 // TODO Bitte Magic entfernen, was ist das hier?
 public class SelectHero
 {
-    private Hero hero;
-    private Hero hero1 = new Hero("Warrior", 12, 2, "Sturdy");
-    private Hero hero2 = new Hero("Mage", 8, 4, "Intelligent");
-    private Hero hero3 = new Hero("Rogue", 10, 3, "Sneaky");
+    private final Hero warrior = new Hero(SelectHeroConstants.WARRIOR_NAME, SelectHeroConstants.WARRIOR_HP,
+            SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.ROGUE_TALENT);
+    private final Hero mage = new Hero(SelectHeroConstants.MAGE_NAME, SelectHeroConstants.MAGE_HP,
+            SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_TALENT);
+    private final Hero rogue = new Hero(SelectHeroConstants.ROGUE_NAME, SelectHeroConstants.ROGUE_HP,
+            SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_TALENT);
 
-    @FXML
-    private VBox heroText;
     @FXML
     private Text heroClass;
     @FXML
@@ -45,31 +46,22 @@ public class SelectHero
     @FXML
     private void onHero1ButtonClicked()
     {
-        heroText.setVisible(false);
-        selectHeroFillText(hero1);
-        hero = hero1;
-        heroText.setVisible(true);
-        PlayerManager.getInstance().getPlayer().setHero(hero);
+        selectHeroFillText(warrior);
+        PlayerManager.getInstance().getPlayer().setHero(warrior);
     }
 
     @FXML
     private void onHero2ButtonClicked()
     {
-        heroText.setVisible(false);
-        selectHeroFillText(hero2);
-        hero = hero2;
-        heroText.setVisible(true);
-        PlayerManager.getInstance().getPlayer().setHero(hero);
+        selectHeroFillText(mage);
+        PlayerManager.getInstance().getPlayer().setHero(mage);
     }
 
     @FXML
     private void onHero3ButtonClicked()
     {
-        heroText.setVisible(false);
-        selectHeroFillText(hero3);
-        hero = hero3;
-        heroText.setVisible(true);
-        PlayerManager.getInstance().getPlayer().setHero(hero);
+        selectHeroFillText(rogue);
+        PlayerManager.getInstance().getPlayer().setHero(rogue);
     }
 
     /**
@@ -79,18 +71,18 @@ public class SelectHero
     @FXML
     private void onConfirmButtonClicked()
     {
-        // TODO: Possibility to choose new game or load game
-        if (hero == null)
+        Hero playerHero = PlayerManager.getInstance().getPlayerHero();
+        if (playerHero == null)
         {
             GlobalLogger.warning(LoggerStringValues.NO_CHAR_SELECTED);
             return;
         }
 
-        if (hero == hero1)
+        if (playerHero == warrior)
             HellView.setPlayerAssetId(AssetIds.WARRIOR);
-        else if (hero == hero2)
+        else if (playerHero == mage)
             HellView.setPlayerAssetId(AssetIds.MAGICIAN);
-        else if (hero == hero3)
+        else if (playerHero == rogue)
             HellView.setPlayerAssetId(AssetIds.ROGUE);
 
         GameManager.getInstance().getGameWorld().initWorld();
@@ -125,10 +117,10 @@ public class SelectHero
 
     public void selectHeroFillText(Hero hero)
     {
-        getHeroClass().setText("Class: " + hero.getName());
-        getHeroHealth().setText("Health: " + hero.getHp());
-        getHeroAttack().setText("Attack: " + hero.getAttackDamage());
-        getHeroTalent().setText("Talent: " + hero.getTalent());
+        getHeroClass().setText(SelectHeroConstants.PLAYER_CLASS + hero.getName());
+        getHeroHealth().setText(SelectHeroConstants.PLAYER_HP + hero.getHp());
+        getHeroAttack().setText(SelectHeroConstants.PLAYER_ATK + hero.getAttackDamage());
+        getHeroTalent().setText(SelectHeroConstants.PLAYER_TALENT + hero.getTalent());
     }
 
     //Get- und Setters

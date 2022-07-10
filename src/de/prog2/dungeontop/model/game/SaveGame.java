@@ -8,6 +8,7 @@ public class SaveGame implements Serializable {
 
     int i = 3;
     World gameWorld;
+    Player player;
 
     public int getI() {
         return i;
@@ -21,5 +22,14 @@ public class SaveGame implements Serializable {
     public void setGameWorld (World gameWorld)
     {
         this.gameWorld = gameWorld;
+    }
+
+    public Player getPlayer ()
+    {
+        return this.player;
+    }
+    public void setPlayer (Player player)
+    {
+        this.player = player;
     }
 }

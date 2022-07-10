@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
@@ -33,6 +34,10 @@ public class PlayerManager
     public int getPlayerHp ()
     {
         return player.getHp();
+    }
+    public Hero getPlayerHero ()
+    {
+        return player.getHero();
     }
 
     public void addHp (int amount)

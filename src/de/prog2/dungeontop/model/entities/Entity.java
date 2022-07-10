@@ -2,6 +2,7 @@ package de.prog2.dungeontop.model.entities;
 
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.model.game.Talent;
 import de.prog2.dungeontop.model.world.Coordinate;
 
 public abstract class Entity
@@ -14,7 +15,7 @@ public abstract class Entity
     private int movement = 0;
     private int maxMovement = 0;
     private int assetId;
-    private String talent;
+    private Talent talent;
     private Coordinate position;
     private Player owner = null;
 
@@ -34,7 +35,7 @@ public abstract class Entity
         this(name, hp, attackDamage, movement, assetId, owner);
         this.position = position;
     }
-    public Entity(String name, int hp, int attackDamage, String talent)
+    public Entity(String name, int hp, int attackDamage, Talent talent)
     {
         this.name = name;
         this.hp = hp;
@@ -123,7 +124,7 @@ public abstract class Entity
         this.assetId = assetId;
     }
 
-    public String getTalent()
+    public Talent getTalent()
     {
         return talent;
     }

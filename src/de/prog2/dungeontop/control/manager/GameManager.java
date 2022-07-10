@@ -2,6 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
+import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.GameState;
 import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.model.world.World;
@@ -45,19 +46,25 @@ public class GameManager {
      */
     public void startGame()
     {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = null;
-        try
+        SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
+        if (saveGame == null)
         {
-            root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SELECT_HERO_FXML));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = null;
+            try
+            {
+                root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SELECT_HERO_FXML));
+            } catch (IOException e)
+            {
+                GlobalLogger.warning(LoggerStringValues.FXML_LOAD_ERROR);
+            }
+            Scene scene = new Scene(root);
+            DungeonTop.getStage().setScene(scene);
         }
-        catch (IOException e)
+        else
         {
-            GlobalLogger.warning(LoggerStringValues.FXML_LOAD_ERROR);
+            setGameWorld(saveGame.getGameWorld());
         }
-        Scene scene = new Scene(root);
-        DungeonTop.getStage().setScene(scene);
-
         this.currentState = GameState.RUNNING;
     }
 
@@ -111,33 +118,26 @@ public class GameManager {
     }
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
-
     public GameState getCurrentState()
     {
         return currentState;
     }
-
     public static GameManager getInstance()
     {
         return instance;
     }
-
     public World getGameWorld() { return this.gameWorld; }
-
     public void setDM ()
     {
         this.isDM = true;
     }
-
     public boolean isDM()
     {
         return this.isDM;
     }
-
     public SaveGame getSaveGame() {
         return saveGame;
     }
-
     public void setGameWorld (World newWorld)
     {
         this.gameWorld = newWorld;
