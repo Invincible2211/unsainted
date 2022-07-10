@@ -36,11 +36,12 @@ public abstract class Entity implements Serializable
         this(name, hp, attackDamage, movement, assetId, owner);
         this.position = position;
     }
-    public Entity(String name, int hp, int attackDamage, String talent)
+    public Entity(String name, int hp, int attackDamage, int maxMovement, String talent)
     {
         this.name = name;
         this.hp = hp;
         this.attackDamage = attackDamage;
+        this.maxMovement = maxMovement;
         this.talent = talent;
     }
 

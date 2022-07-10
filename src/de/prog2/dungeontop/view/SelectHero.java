@@ -4,8 +4,8 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
-import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.HeroesConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -18,13 +18,12 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-// TODO Bitte Magic entfernen, was ist das hier?
 public class SelectHero
 {
     private Hero hero;
-    private Hero hero1 = new Hero("Warrior", 12, 2, "Sturdy");
-    private Hero hero2 = new Hero("Mage", 8, 4, "Intelligent");
-    private Hero hero3 = new Hero("Rogue", 10, 3, "Sneaky");
+    private Hero warrior = HeroesConstants.warrior;
+    private Hero mage = HeroesConstants.mage;
+    private Hero rogue = HeroesConstants.rogue;
 
     @FXML
     private VBox heroText;
@@ -46,8 +45,8 @@ public class SelectHero
     private void onHero1ButtonClicked()
     {
         heroText.setVisible(false);
-        selectHeroFillText(hero1);
-        hero = hero1;
+        selectHeroFillText(warrior);
+        hero = warrior;
         heroText.setVisible(true);
         PlayerManager.getInstance().getPlayer().setHero(hero);
     }
@@ -56,8 +55,8 @@ public class SelectHero
     private void onHero2ButtonClicked()
     {
         heroText.setVisible(false);
-        selectHeroFillText(hero2);
-        hero = hero2;
+        selectHeroFillText(mage);
+        hero = mage;
         heroText.setVisible(true);
         PlayerManager.getInstance().getPlayer().setHero(hero);
     }
@@ -66,8 +65,8 @@ public class SelectHero
     private void onHero3ButtonClicked()
     {
         heroText.setVisible(false);
-        selectHeroFillText(hero3);
-        hero = hero3;
+        selectHeroFillText(rogue);
+        hero = rogue;
         heroText.setVisible(true);
         PlayerManager.getInstance().getPlayer().setHero(hero);
     }
@@ -86,11 +85,11 @@ public class SelectHero
             return;
         }
 
-        if (hero == hero1)
+        if (hero == warrior)
             HellView.setPlayerAssetId(AssetIds.WARRIOR);
-        else if (hero == hero2)
+        else if (hero == mage)
             HellView.setPlayerAssetId(AssetIds.MAGICIAN);
-        else if (hero == hero3)
+        else if (hero == rogue)
             HellView.setPlayerAssetId(AssetIds.ROGUE);
 
         GameManager.getInstance().getGameWorld().initWorld();
@@ -150,4 +149,5 @@ public class SelectHero
     {
         return heroTalent;
     }
+
 }

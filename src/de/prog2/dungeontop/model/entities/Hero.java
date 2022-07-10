@@ -13,9 +13,9 @@ public class Hero extends Entity
         super(name, hp, attackDamage, movement, assetId, owner);
     }
 
-    public Hero(String name, int hp, int attackDamage, String talent)
+    public Hero(String name, int hp, int attackDamage, int maxMovement, String talent)
     {
-        super(name, hp, attackDamage, talent);
+        super(name, hp, attackDamage, maxMovement, talent);
     }
 
 }

@@ -56,6 +56,9 @@ public class BattleManager
         Platform.runLater(() -> DungeonTop.getStage().setScene(new Scene(arenaBaseView.getBackGroundAnchorPane())));
     }
 
+    /**
+     * will instantiate startvalues before the first turn took place
+     */
     private void statinitialiser ()
     {
         ArenaBaseController.init(this.myArenaBaseView);
@@ -66,10 +69,15 @@ public class BattleManager
                 this.getSecondDuellist().getHand());
         this.currentPhase = BattlePhase.START;
         ArenaBaseController.updateEgoPoints(
-                this.getFirstDuellist().currentEgoPoints,
+                this.getFirstDuellist().getCurrentEgoPoints(),
                 this.getSecondDuellist().getCurrentEgoPoints());
     }
 
+    /**
+     * it sets the order of battle phases.
+     * Currently there are too many phases as the planes for the game were big.
+     * @return the next battlephase
+     */
     public BattlePhase getNextPhaseInCycle ()
     {
         switch (this.getCurrentPhase()) {
@@ -128,9 +136,13 @@ public class BattleManager
         return new BattleOutCome(gewinner, damageAnVerlierer);
     }
 
-    //TODO check if match is over
+    /**
+     * will refresh values that get reset on a new round
+     * updates the view with fresh values
+     */
     public void endAPhase ()
     {
+        //TODO check if match is over
         //IF new round both players get more egopointsmax and current to max
         if (getCurrentPhase() == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS) {
             newRound();
@@ -142,6 +154,9 @@ public class BattleManager
         updateValues();
     }
 
+    /**
+     * helpmethode to deselct all cards
+     */
     private void deselectHandCards ()
     {
         if(firstDuellist.hasSelectedCard()) {
@@ -152,7 +167,9 @@ public class BattleManager
         }
     }
 
-    //this should propably be in the ArenaBaseController
+    /**
+     * gives the current ArenaBaseController updated values
+     */
     private void updateValues()
     {
         ArenaBaseController.updateBattlefield(this.getArena());
@@ -163,6 +180,11 @@ public class BattleManager
         ArenaBaseController.updatePlayerHands(getFirstDuellist().getHand(), getSecondDuellist().getHand());
     }
 
+    /**
+     * increases the current egopoints of both players by EGOPOINTS_PER_ROUND_INCEREMENT
+     * and sets the current egopoints to max egopoints
+     * Calls resetEntityMovement
+     */
     private void newRound()
     {
         GlobalLogger.log(LoggerStringValues.NEXT_ROUND_BOTH_PLAYERS_GET_EGOPOINTS);
@@ -178,6 +200,9 @@ public class BattleManager
         resetEntityMovement();
     }
 
+    /**
+     * HelpMethod to reset the movement of all entities at a new round
+     */
     private void resetEntityMovement ()
     {
 
@@ -205,21 +230,33 @@ public class BattleManager
             return false;
         }
         // If the tile is empty, place the card on it.
-        if (!EntityCardController.tryInstantiate(entityCard, arena, coordinate))
-        {
-            GlobalLogger.warning(LoggerStringValues.ALREADY_OCCUPIED);
-            return false;
-        }
-
-        duellist.reduceEgoPoints(entityCard.getSummonCost());
-        duellist.removeCardFromHand(entityCard);
+        if (summonCardHelp(duellist, coordinate, entityCard)) return false;
         deselectHandCards();
-
         GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
         updateValues();
         return true;
     }
 
+    private boolean summonCardHelp (Duellist duellist, Coordinate coordinate, EntityCard entityCard)
+    {
+        //IMPORTANT: tryInstantiate will summon the Minions as sideeffect if it doesnt give false back.
+        if (!EntityCardController.tryInstantiate(entityCard, arena, coordinate))
+        {
+            GlobalLogger.warning(LoggerStringValues.ALREADY_OCCUPIED);
+            return true;
+        }
+
+        duellist.reduceEgoPoints(entityCard.getSummonCost());
+        duellist.removeCardFromHand(entityCard);
+        return false;
+    }
+
+    /**
+     * HelpMethode
+     * TODO AUslagern in unique attackAction
+     * makes the Entity Attack the selexted other
+     * @param coordinateOfAttackedEntity
+     */
     private void attack (Coordinate coordinateOfAttackedEntity)
     {
         this.arena = EntityController.attack(this.getArena().getSelectedEntity(), coordinateOfAttackedEntity, this.arena);
@@ -233,15 +270,6 @@ public class BattleManager
         this.getArena().setSelectedEntity(null);
         ArenaBaseController.updateBattlefield(this.getArena());
     }
-
-//    public void testPlaceCard()
-//    {
-//        this.getFirstDuellist().setCurrentEgoPoints(10);
-//        ArenaBaseController.updateEgoPoints(this.getFirstDuellist().currentEgoPoints, this.getSecondDuellist().currentEgoPoints);
-//        this.tryPlaceEntity(this.getFirstDuellist(), new Coordinate(0, 0), (EntityCard) this.getFirstDuellist().getHand().get(0));
-//        setCurrentPhase(BattlePhase.FIRST_DUELLIST_MINION_ACT);
-//        ArenaBaseController.updateBattlefield(this.getArena());
-//    }
 
 
     public void arenaTilePressed (Coordinate coordinate)
@@ -312,6 +340,10 @@ public class BattleManager
         }
     }
 
+    /**
+     * translates coordinates to a direction and moves the unit
+     * @param coordinate the coordinate to move to
+     */
     private void moveAction (Coordinate coordinate)
     {
         if (this.getArena().getSelectedEntity().getPosition().getX() == coordinate.getX())
@@ -345,7 +377,7 @@ public class BattleManager
         //Logik und ueberpruefung ob darf und was passiert
     }
 
-    //TODO check if player is allowed to action by checking if he is currently on his turn
+
     public Duellist getCurrentActivePlayer ()
     {
         if (getCurrentPhase() == BattlePhase.FIRST_DUELLIST_DRAW ||
