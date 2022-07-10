@@ -10,9 +10,11 @@ public interface ViewStrings
     // Hero Select
     String SELECT_HERO_FXML = "view/selectHero.fxml";
     // Inventory
-    String INVENTORY_FXML = "view/inventory.fxml";
-    String ITEM_VIEW_FXML = "view/itemView.fxml";
-    String ITEM_CLICKED_FXML = "view/itemClicked.fxml";
+    String INVENTORY_FXML = "view/itemViews/inventory.fxml";
+    String ITEM_VIEW_FXML = "view/itemViews/itemView.fxml";
+    String ITEM_CLICKED_FXML = "view/itemViews/itemClicked.fxml";
+    String WEAPON_CLICKED_FXML = "view/itemViews/weaponClicked.fxml";
+    String ARTIFACT_CLICKED_FXML = "view/itemViews/artifactClicked.fxml";
 
     // Arena View
     String ARENA_ROOM_DIALOGUE_FXML = "view/roomDialogueView.fxml";
