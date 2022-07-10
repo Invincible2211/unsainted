@@ -89,6 +89,7 @@ public class SelectHero
 
         GameManager.getInstance().getGameWorld().initWorld();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
+        PlayerManager.getInstance().getPlayerHpProperty().bindBidirectional(PlayerManager.getInstance().getPlayerHero().getHpProperty());
 
         GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
         GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
