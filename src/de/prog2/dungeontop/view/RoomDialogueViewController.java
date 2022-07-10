@@ -127,7 +127,7 @@ public class RoomDialogueViewController
         setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
                 RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
                 dialogueStageAttributes.get(room).description(), dialogueStageAttributes.get(room).assetId());
-        upperButton.setOnAction(e -> startBattle());
+        upperButton.setOnAction(e -> {startBattle();NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage();});
         upperButton.setDisable(!NetManager.getInstance().isConnected());
         roomDialogueStage.show();
     }
@@ -140,8 +140,8 @@ public class RoomDialogueViewController
         setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
                 RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,RoomDialogueConstants.BOSS_ROOM_DESCRIPTION,
                 RoomDialogueConstants.BOSS_ROOM_VIEW_ASSET);
-        upperButton.setOnAction(e -> startBattle());
-
+        upperButton.setOnAction(e -> {startBattle();NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage();});
+        upperButton.setDisable(!NetManager.getInstance().isConnected());
         roomDialogueStage.show();
     }
     /**

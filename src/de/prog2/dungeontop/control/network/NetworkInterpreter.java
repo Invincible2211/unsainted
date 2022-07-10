@@ -65,7 +65,6 @@ public class NetworkInterpreter extends Thread{
             Coordinate playerCoordinate = hellPackage.getPlayerCoordinate();
             Hell hell = hellPackage.getHell();
             PlayerManager.getInstance().getPlayer().setCurrentRoom(hell.getRoomByCoordinate(playerCoordinate));
-
             // create and set HellView
             HellView view = new HellView();
             Scene hellView = view.initHellView(hell);
@@ -79,7 +78,6 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof PlayerPackage){
             PlayerPackage playerPackage = (PlayerPackage) dataPackage;
             GameManager.getInstance().setOpponentPlayer(playerPackage.getPlayer());
-            System.out.println(GameManager.getInstance().getOpponentPlayer().getEgo_points());
         } else if (dataPackage instanceof OpenArenaPackage){
             GameManager.getInstance().beginBattle();
         }

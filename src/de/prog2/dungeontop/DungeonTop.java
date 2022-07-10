@@ -75,15 +75,13 @@ public class DungeonTop extends Application
             deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
         }
         PlayerManager.getInstance().getPlayer().setDeck(deck);
-
-        //AudioManager.getInstance().playSound(990);
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
+        //AudioManager.getInstance().playSound(990);
         //stage.setScene(scene);
-
         //testArenaView();
-        testSelectHero(primaryStage);
+        //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);

@@ -10,6 +10,7 @@ import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class BattleManager
         this.arena = arena;
         this.myArenaBaseView = arenaBaseView;
         statinitialiser();
-        DungeonTop.getStage().setScene(new Scene(arenaBaseView.getBackGroundAnchorPane()));
+        Platform.runLater(() -> DungeonTop.getStage().setScene(new Scene(arenaBaseView.getBackGroundAnchorPane())));
     }
 
     private void statinitialiser ()
