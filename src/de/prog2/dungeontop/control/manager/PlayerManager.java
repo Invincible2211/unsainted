@@ -55,7 +55,6 @@ public class PlayerManager
         return player.getHpProperty();
     }
 
-
     public SimpleIntegerProperty getPlayerSoulsProperty ()
     {
         return player.getSoulsProperty();

@@ -23,4 +23,18 @@ public class EntityCard extends Card
     public void setEntity(Entity entity) {
         this.entity = entity;
     }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(this.getEntity().getName());
+        builder.append(", Rank: ");
+        builder.append(this.getRank());
+        builder.append(" of ");
+        builder.append(this.getMaxRank());
+
+        return  builder.toString();
+    }
 }

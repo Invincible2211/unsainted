@@ -2,6 +2,8 @@ package de.prog2.dungeontop.resources;
 
 public interface AssetIds
 {
+    int EXAMPLE_MINION = 450;
+
     // Room Types
     int RANDOM_EVENT_ROOM = 40;
     int ARENA_ROOM = 70;
