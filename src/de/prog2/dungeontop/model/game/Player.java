@@ -14,7 +14,7 @@ public class Player
 {
     private final SerializableSimpleIntegerProperty soulsProperty;
     private final SerializableSimpleIntegerProperty hpProperty;
-    private int ego_points;
+    private int max_ego_points = GameConstants.MAX_EGO_POINTS;
     private Deck deck;
     private final Inventory inventory = new Inventory();
     private Room currentRoom;
@@ -77,13 +77,13 @@ public class Player
         this.currentRoom = currentRoom;
     }
 
-    public int getEgo_points()
+    public int getMax_ego_points ()
     {
-        return ego_points;
+        return max_ego_points;
     }
-    public void setEgo_points(int ego_points)
+    public void setMax_ego_points (int max_ego_points)
     {
-        this.ego_points = ego_points;
+        this.max_ego_points = max_ego_points;
     }
 
     public Deck getDeck()
