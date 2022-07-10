@@ -10,7 +10,7 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.io.Serializable;
+import java.io.*;
 
 public class Player implements Serializable
 {

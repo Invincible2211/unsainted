@@ -19,7 +19,7 @@ public abstract class NPCRoom extends Room
     public void setFreeActions (int freeActions) { this.freeActions.setValue(freeActions); }
     public void decrementFreeActions () { this.freeActions.setValue(this.freeActions.getValue() - 1); }
     public void increaseFreeActions (int increase) { this.setFreeActions(this.getFreeActions() + increase);}
-    public SimpleIntegerProperty getFreeActionsProperty ()
+    public SerializableSimpleIntegerProperty getFreeActionsProperty ()
     {
         return this.freeActions;
     }
