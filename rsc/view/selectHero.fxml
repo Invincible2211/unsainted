@@ -88,7 +88,7 @@
             onMouseClicked="#onConfirmButtonClicked" prefHeight="100.0" prefWidth="300.0"
             stylesheets="@view/mainmenuestyle.css" text="Bestätigen"/>
     <AnchorPane layoutX="1373.0" layoutY="164.0" prefHeight="526.0" prefWidth="418.0">
-        <VBox fx:id="heroText" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="100.0">
+        <VBox fx:id="heroText" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="80.0">
             <Text fx:id="heroClass" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
                 <font>
                     <Font size="35.0"/>
@@ -100,6 +100,11 @@
                 </font>
             </Text>
             <Text fx:id="heroAttack" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
+                <font>
+                    <Font size="35.0"/>
+                </font>
+            </Text>
+            <Text fx:id="heroMaxMoves" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
                 <font>
                     <Font size="35.0"/>
                 </font>
