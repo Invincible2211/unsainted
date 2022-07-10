@@ -10,7 +10,9 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Player
+import java.io.Serializable;
+
+public class Player implements Serializable
 {
     private final SerializableSimpleIntegerProperty soulsProperty;
     private final SerializableSimpleIntegerProperty hpProperty;

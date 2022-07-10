@@ -10,13 +10,11 @@ public class PlayerMovementPackage extends Package
 
     public PlayerMovementPackage (KeyCode keyCode)
     {
-        super(new byte[]{0,0,1,0});
         this.keyCode = keyCode;
     }
 
-    @Override
-    public byte[] getContentAsByteArray()
-    {
-        return SerializationUtils.serialize(this.keyCode);
+    public KeyCode getKeyCode() {
+        return keyCode;
     }
+
 }

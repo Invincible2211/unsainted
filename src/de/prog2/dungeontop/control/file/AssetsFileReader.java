@@ -35,7 +35,7 @@ public class AssetsFileReader
      */
     private void init()
     {
-        GlobalLogger.log(LoggerStringValues.INIT_ASSET_FILE_READER);
+        GlobalLogger.log(LoggerStringValues.INIT_ASSET_FILE_READER, GlobalLogger.LoggerLevel.NONE);
         File assetFolder = new File(FilePaths.ASSET_FOLDER);
         this.getAssetPaths(assetFolder);
         GlobalLogger.log(LoggerStringValues.INIT_FILE_READER_FINISHED);
@@ -55,7 +55,7 @@ public class AssetsFileReader
                 this.getAssetPaths(asset);
             } else
             {
-                GlobalLogger.log(String.format(LoggerStringValues.ASSET_FILE_NAME, asset.getName()));
+                GlobalLogger.log(String.format(LoggerStringValues.ASSET_FILE_NAME, asset.getName()), GlobalLogger.LoggerLevel.NONE);
                 assetPaths.put(Integer.parseInt(asset.getName().substring(0, FileConstants.ASSET_ID_LENGTH)), asset.getAbsolutePath());
             }
         }

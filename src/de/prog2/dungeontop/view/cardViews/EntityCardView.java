@@ -4,6 +4,7 @@ import de.prog2.dungeontop.resources.views.CardConstants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -104,4 +105,5 @@ public class EntityCardView extends CardView
     {
         return movementImageView;
     }
+
 }

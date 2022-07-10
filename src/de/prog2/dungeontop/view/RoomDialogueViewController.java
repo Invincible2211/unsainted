@@ -1,9 +1,11 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.RandomEventRoomController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.NpcRoomViewConstants;
@@ -21,7 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import de.prog2.dungeontop.resources.RandomEventConstants;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -126,7 +128,7 @@ public class RoomDialogueViewController
                 RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
                 dialogueStageAttributes.get(room).description(), dialogueStageAttributes.get(room).assetId());
         upperButton.setOnAction(e -> startBattle());
-
+        upperButton.setDisable(!NetManager.getInstance().isConnected());
         roomDialogueStage.show();
     }
     /**
@@ -151,7 +153,10 @@ public class RoomDialogueViewController
         setDialogueProperties(RoomDialogueConstants.EVENT_ROOM_UPPER_BUTTON,
                 RoomDialogueConstants.EVENT_ROOM_LOWER_BUTTON,
                 dialogueStageAttributes.get(room).description(),dialogueStageAttributes.get(room).assetId());
-        upperButton.setOnAction(e -> startRandomEvent());
+        upperButton.setOnAction(e -> {
+            ((RandomEventRoom)room).setEventFinished();
+            startRandomEvent();
+        });
 
         roomDialogueStage.show();
     }
@@ -199,7 +204,24 @@ public class RoomDialogueViewController
      */
     private void startRandomEvent()
     {
-        // TODO: Implement method to open a RandomEvent
+        // initialize a random number generator to decide which random event gets chosen
+        Random random = new Random();
+        int eventId = random.nextInt(RoomDialogueConstants.EVENT_ROOM_DESCRIPTIONS.size());
+
+        // definition of the different allowed events
+        switch (eventId)
+        {
+            case RandomEventConstants.CHANGE_SOULS:
+                RandomEventRoomController.changeSoulsEvent();
+                break;
+            case RandomEventConstants.CHANGE_HP:
+                RandomEventRoomController.changeHpEvent();
+                break;
+            default:
+                GlobalLogger.warning(eventId + LoggerStringValues.INVALID_EVENT_ID);
+        }
+
+        hideStage();
         GlobalLogger.log(LoggerStringValues.RANDOM_EVENT_HANDLER);
     }
 
