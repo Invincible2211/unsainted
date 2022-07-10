@@ -52,7 +52,9 @@ public interface RoomDialogueConstants
     int CHANGE_SOULS_ASSET = AssetIds.RANDOM_EVENT_ROOM;
 
     // change hp value event
-    String CHANGE_HP_DESC = "";
+    String CHANGE_HP_DESC = "Du betrittst einen Raum in dessen Mitte sich ein ominoeser Brunnen befindet.\n" +
+            "Neben dem Brunnen liegen ein Haufen Gebeine, sowie ein blutverschmierter Silberbecher.\n" +
+            "Moechtest du den Becher nehmen und aus dem Brunnen trinken?";
     int CHANGE_HP_ASSET = AssetIds.RANDOM_EVENT_ROOM;
 
     // Proof of Concept event

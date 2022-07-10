@@ -93,7 +93,6 @@ public class SelectHero
         else if (hero == hero3)
             HellView.setPlayerAssetId(AssetIds.ROGUE);
 
-        GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
         GameManager.getInstance().getGameWorld().initWorld();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
     }

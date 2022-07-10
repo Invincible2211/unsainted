@@ -21,7 +21,11 @@ public class RandomEventRoomController
         else
         {
             // negative change
-            PlayerManager.getInstance().removeHp(RandomEventConstants.REMOVED_HP_AMOUNT);
+            if ((PlayerManager.getInstance().getPlayerHp() - RandomEventConstants.REMOVED_HP_AMOUNT) <
+                    RandomEventConstants.MIN_HP_AFTER_CHANGE)
+                PlayerManager.getInstance().getPlayer().setHp(RandomEventConstants.MIN_HP_AFTER_CHANGE);
+            else
+                PlayerManager.getInstance().removeHp(RandomEventConstants.REMOVED_HP_AMOUNT);
         }
     }
 
@@ -30,15 +34,19 @@ public class RandomEventRoomController
         Random random = new Random();
         int randomNumber = random.nextInt(RandomEventConstants.RNG_MAX);
 
-        if (randomNumber < RandomEventConstants.RNG_CHANGE_HP_POS)
+        if (randomNumber < RandomEventConstants.RNG_CHANGE_SOULS_POS)
         {
             // positive change
-            PlayerManager.getInstance().addSouls(RandomEventConstants.ADED_SOULS_AMOUNT);
+            PlayerManager.getInstance().addSouls(RandomEventConstants.ADDED_SOULS_AMOUNT);
         }
         else
         {
             // negative change
-            PlayerManager.getInstance().removeSouls(RandomEventConstants.REMOVED_SOULS_AMOUNT);
+            if ((PlayerManager.getInstance().getPlayerSouls() - RandomEventConstants.REMOVED_SOULS_AMOUNT) <
+                    RandomEventConstants.MIN_SOULS_AFTER_CHANGE)
+                PlayerManager.getInstance().getPlayer().setSouls(RandomEventConstants.MIN_SOULS_AFTER_CHANGE);
+            else
+                PlayerManager.getInstance().removeSouls(RandomEventConstants.REMOVED_SOULS_AMOUNT);
         }
     }
 }

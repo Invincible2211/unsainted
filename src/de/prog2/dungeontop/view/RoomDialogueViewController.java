@@ -152,7 +152,10 @@ public class RoomDialogueViewController
         setDialogueProperties(RoomDialogueConstants.EVENT_ROOM_UPPER_BUTTON,
                 RoomDialogueConstants.EVENT_ROOM_LOWER_BUTTON,
                 dialogueStageAttributes.get(room).description(),dialogueStageAttributes.get(room).assetId());
-        upperButton.setOnAction(e -> startRandomEvent());
+        upperButton.setOnAction(e -> {
+            ((RandomEventRoom)room).setEventFinished();
+            startRandomEvent();
+        });
 
         roomDialogueStage.show();
     }
@@ -217,6 +220,7 @@ public class RoomDialogueViewController
                 GlobalLogger.warning(eventId + LoggerStringValues.INVALID_EVENT_ID);
         }
 
+        hideStage();
         GlobalLogger.log(LoggerStringValues.RANDOM_EVENT_HANDLER);
     }
 
