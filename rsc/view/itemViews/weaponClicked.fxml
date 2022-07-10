@@ -11,7 +11,7 @@
    <Button layoutX="211.0" layoutY="330.0" mnemonicParsing="false" onMouseClicked="#onEquipWeaponClicked" prefHeight="54.0" prefWidth="174.0" text="Ausrüsten" />
    <Text fx:id="itemDescription" layoutX="81.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="238.13671875">
       <font>
-         <Font size="20.0" />
+         <Font size="16.0" />
       </font>
    </Text>
    <ImageView fx:id="itemImage" fitHeight="200.0" fitWidth="200.0" layoutX="99.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />

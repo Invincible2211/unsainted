@@ -106,12 +106,12 @@
            </rowConstraints>
          </GridPane>
       </children></AnchorPane>
-   <Text layoutX="1654.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artefakte:" wrappingWidth="159.0233154296875">
+   <Text fill="#d9ff00" layoutX="1654.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artefakte:" wrappingWidth="159.0233154296875">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text layoutX="1654.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waffe:" wrappingWidth="116.623291015625">
+   <Text fill="#d9ff00" layoutX="1654.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waffe:" wrappingWidth="116.623291015625">
       <font>
          <Font size="30.0" />
       </font>
