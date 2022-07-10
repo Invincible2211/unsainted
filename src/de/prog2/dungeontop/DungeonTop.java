@@ -176,8 +176,8 @@ public class DungeonTop extends Application
         for (int i = 0; i < 15; i++)
         {
 //            deck1.pushCard(new SpellCard(testSpell, 5, 3, 1, 2 + i));
-            deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
-            deck2.pushCard(new EntityCard(harald, 5, 3, 1, 1 + i));
+            deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2));
+            deck2.pushCard(new EntityCard(harald, 5, 3, 1, 2));
         }
         Player player1 = new Player(12, 10);
         player1.setDeck(deck1);
@@ -187,13 +187,10 @@ public class DungeonTop extends Application
         player2.setHandCardLimit(4);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
-        BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(4, 4),fxmlLoader.getController());
+        BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
 
-        BattleManager.getInstance().testPlaceCard();
-        BattleManager.getInstance().setCurrentPhase(BattleManager.getInstance().getNextPhaseInCycle());
-        BattleManager.getInstance().getArena().getEntity(0,0).setMovement(2);
     }
 
     public static void testSelectHero(Stage stage) throws Exception
@@ -206,16 +203,14 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        Item item = new Item("Potion", "Heals 10 Health", 100, AssetIds.HEALTH_POTION);
-        Inventory inventory = new Inventory();
+        Item item = new Item("Potion", "Heals your hero for 10 Health", 10 ,100, AssetIds.HEALTH_POTION);
         for (int i = 0; i < 8; i++)
         {
-            inventory.addItem(item);
+            PlayerManager.getInstance().getPlayerInventory().addItem(item);
         }
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
-        InventoryController.addItems(fxmlLoader.getController(), inventory.getInventory());
+        InventoryController.addItems(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory().getInventory());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
     }

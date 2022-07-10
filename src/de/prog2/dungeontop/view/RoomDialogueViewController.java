@@ -103,7 +103,7 @@ public class RoomDialogueViewController
                 RoomDialogueConstants.FORGE_ROOM_LOWER_BUTTON, RoomDialogueConstants.FORGE_ROOM_DESCRIPTION,
                 RoomDialogueConstants.FORGE_VIEW_ASSET);
         upperButton.setOnAction(e -> openForge());
-
+        upperButton.setDisable(false);
         roomDialogueStage.show();
     }
     /**
@@ -115,7 +115,7 @@ public class RoomDialogueViewController
                 RoomDialogueConstants.LAVA_POND_LOWER_BUTTON, RoomDialogueConstants.LAVA_POND_DESCRIPTION,
                 RoomDialogueConstants.LAVA_POND_VIEW_ASSET);
         upperButton.setOnAction(e -> openLavaPond());
-
+        upperButton.setDisable(false);
         roomDialogueStage.show();
     }
     /**
@@ -127,7 +127,7 @@ public class RoomDialogueViewController
         setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
                 RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
                 dialogueStageAttributes.get(room).description(), dialogueStageAttributes.get(room).assetId());
-        upperButton.setOnAction(e -> startBattle());
+        upperButton.setOnAction(e -> {startBattle();NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage();});
         upperButton.setDisable(!NetManager.getInstance().isConnected());
         roomDialogueStage.show();
     }
@@ -140,8 +140,8 @@ public class RoomDialogueViewController
         setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
                 RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,RoomDialogueConstants.BOSS_ROOM_DESCRIPTION,
                 RoomDialogueConstants.BOSS_ROOM_VIEW_ASSET);
-        upperButton.setOnAction(e -> startBattle());
-
+        upperButton.setOnAction(e -> {startBattle();NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage();});
+        upperButton.setDisable(!NetManager.getInstance().isConnected());
         roomDialogueStage.show();
     }
     /**
@@ -157,7 +157,7 @@ public class RoomDialogueViewController
             ((RandomEventRoom)room).setEventFinished();
             startRandomEvent();
         });
-
+        upperButton.setDisable(false);
         roomDialogueStage.show();
     }
 

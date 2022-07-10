@@ -63,15 +63,15 @@ public class PlayerManager
 
     public void addEgoPoints(int amount)
     {
-        player.setEgo_points(player.getEgo_points() + amount);
+        player.setMax_ego_points(player.getMax_ego_points() + amount);
     }
     public void removeEgoPoints(int amount)
     {
-        player.setEgo_points(player.getEgo_points() - amount);
+        player.setMax_ego_points(player.getMax_ego_points() - amount);
     }
     public int getPlayerEgoPoints()
     {
-        return player.getEgo_points();
+        return player.getMax_ego_points();
     }
     public static void removeItem (Valuable item)
     {

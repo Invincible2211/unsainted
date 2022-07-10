@@ -1,10 +1,12 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.network.Package;
 import de.prog2.dungeontop.model.network.packages.HellPackage;
+import de.prog2.dungeontop.model.network.packages.OpenArenaPackage;
 import de.prog2.dungeontop.model.network.packages.PlayerMovementPackage;
 import de.prog2.dungeontop.model.network.packages.PlayerPackage;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -63,7 +65,6 @@ public class NetworkInterpreter extends Thread{
             Coordinate playerCoordinate = hellPackage.getPlayerCoordinate();
             Hell hell = hellPackage.getHell();
             PlayerManager.getInstance().getPlayer().setCurrentRoom(hell.getRoomByCoordinate(playerCoordinate));
-
             // create and set HellView
             HellView view = new HellView();
             Scene hellView = view.initHellView(hell);
@@ -77,7 +78,8 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof PlayerPackage){
             PlayerPackage playerPackage = (PlayerPackage) dataPackage;
             GameManager.getInstance().setOpponentPlayer(playerPackage.getPlayer());
-            System.out.println(GameManager.getInstance().getOpponentPlayer().getEgo_points());
+        } else if (dataPackage instanceof OpenArenaPackage){
+            GameManager.getInstance().beginBattle();
         }
     }
 

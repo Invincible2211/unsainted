@@ -7,13 +7,12 @@ import java.io.*;
 public class SerializableSimpleIntegerProperty extends SimpleIntegerProperty implements Externalizable {
 
     int value;
-    public SerializableSimpleIntegerProperty ()
-    {
-        super();
-    }
     public SerializableSimpleIntegerProperty(int value) {
         super(value);
         this.value = value;
+    }
+
+    public SerializableSimpleIntegerProperty() {
     }
 
     @Override
