@@ -40,7 +40,7 @@ public class InventoryController
         int columns = 0, rows = 0;
         for (Item item : items)
         {
-            Node weaponView = ItemViewController.getItemView(item);
+            Node weaponView = ItemViewController.getEquippedItemView(item);
             inventoryView.getWeaponSlot().add(weaponView, columns, rows);
         }
     }
@@ -55,7 +55,7 @@ public class InventoryController
         int columns = 0, rows = 0;
         for (Item item : items)
         {
-            Node artifactView = ItemViewController.getItemView(item);
+            Node artifactView = ItemViewController.getEquippedItemView(item);
             inventoryView.getArtifactSlot1().add(artifactView, columns, rows);
         }
     }
@@ -70,7 +70,7 @@ public class InventoryController
         int columns = 0, rows = 0;
         for (Item item : items)
         {
-            Node artifactView = ItemViewController.getItemView(item);
+            Node artifactView = ItemViewController.getEquippedItemView(item);
             inventoryView.getArtifactSlot2().add(artifactView, columns, rows);
         }
     }
