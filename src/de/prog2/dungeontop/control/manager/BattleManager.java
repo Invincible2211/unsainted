@@ -136,6 +136,7 @@ public class BattleManager
         updateValues();
     }
 
+    //this should propably be in the ArenaBaseController
     private void updateValues()
     {
         ArenaBaseController.updateBattlefield(this.getArena());
@@ -163,6 +164,7 @@ public class BattleManager
 
     private void resetEntityMovement ()
     {
+
         arena.getArenaHashmap().forEach((key, value) -> {
             value.setMovement(value.getMaxMovement());
         });
@@ -196,6 +198,7 @@ public class BattleManager
         duellist.removeCardFromHand(entityCard);
         ArenaBaseController.updateBattlefield(arena);
         ArenaBaseController.updateEgoPoints(firstDuellist.currentEgoPoints, secondDuellist.currentEgoPoints);
+        ArenaBaseController.updatePlayerHands(firstDuellist.hand, secondDuellist.hand);
         GlobalLogger.log(LoggerStringValues.PLACED_CARD_IN_ARENA);
         return true;
     }
@@ -222,8 +225,24 @@ public class BattleManager
         ArenaBaseController.updateBattlefield(this.getArena());
     }
 
+    //TODO Modularisieren
     public void arenaTilePressed (Coordinate coordinate)
     {
+         if (getCurrentActivePlayer() == getFirstDuellist())
+        {
+            if (getFirstDuellist().hasSelectedCard() == true) {
+                if (getFirstDuellist().getSelectedCard() instanceof EntityCard){
+            tryPlaceEntity(getFirstDuellist(), coordinate, (EntityCard) getFirstDuellist().getSelectedCard());
+            }}
+        }
+        //if the seondduellist has selected a card
+        else if (getSecondDuellist().hasSelectedCard() == true)
+        {
+                 if (getFirstDuellist().getSelectedCard() instanceof EntityCard){
+                     tryPlaceEntity(getFirstDuellist(), coordinate, (EntityCard) getFirstDuellist().getSelectedCard());
+                 }
+        }
+
         //if no entity has been selected yet, try to select one
         if (!this.getArena().hasSelectedUnit())
         {
@@ -283,21 +302,21 @@ public class BattleManager
     }
 
     //TODO check if player is allowed to action by checking if he is currently on his turn
-    public Player getCurrentActivePlayer ()
+    public Duellist getCurrentActivePlayer ()
     {
         if (getCurrentPhase() == BattlePhase.FIRST_DUELLIST_DRAW ||
                 getCurrentPhase() == BattlePhase.FIRST_DUELLIST_PLACE_CARDS ||
                 getCurrentPhase() == BattlePhase.FIRST_DUELLIST_MINION_ACT ||
                 getCurrentPhase() == BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS) {
             GlobalLogger.log(LoggerStringValues.CURRENT_ACTIVE_PLAYER_ONE);
-            return this.getFirstDuellist().getPlayer();
+            return this.getFirstDuellist();
 
         } else if (getCurrentPhase() == BattlePhase.SECOND_DUELLIST_DRAW ||
                 getCurrentPhase() == BattlePhase.SECOND_DUELLIST_PLACE_CARDS ||
                 getCurrentPhase() == BattlePhase.SECOND_DUELLIST_MINION_ACT ||
                 getCurrentPhase() == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS) {
             GlobalLogger.log(LoggerStringValues.CURRENT_ACTIVE_PLAYER_TWO);
-            return this.getSecondDuellist().getPlayer();
+            return this.getSecondDuellist();
         }
         return null;
     }
@@ -454,6 +473,26 @@ public class BattleManager
                 getDeck().getCards().push(card);
             }
             DeckController.shuffleDeck(getDeck());
+        }
+
+        public boolean hasSelectedCard ()
+        {
+            for (Card card : this.getHand()) {
+                if (card.isSelected()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Card getSelectedCard ()
+        {
+            for (Card card : this.getHand()) {
+                if (card.isSelected()) {
+                    return card;
+                }
+            }
+            return null;
         }
 
         public int getCurrentEgoPoints ()

@@ -171,6 +171,7 @@ public class DungeonTop extends Application
     public static void testArenaView() throws Exception
     {
         Entity harald = new Minion("Harald", 6, 4, 1, 450);
+        harald.setMaxMovement(2);
         Spell testSpell = new TestSpell();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
