@@ -1,7 +1,9 @@
 package de.prog2.dungeontop.control.manager;
 
+import com.rits.cloning.Cloner;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.*;
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -12,6 +14,7 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaBaseView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +56,8 @@ public class BattleManager
         this.arena = arena;
         this.myArenaBaseView = arenaBaseView;
         statinitialiser();
+        instantiateHeroes();
+        updateValues();
         Platform.runLater(() -> DungeonTop.getStage().setScene(new Scene(arenaBaseView.getBackGroundAnchorPane())));
     }
 
@@ -125,15 +130,29 @@ public class BattleManager
     }
 
     /**
+     * zu spielbeginn werden die Helden der Spieler in die Ecken gepackt.
+     */
+    private void instantiateHeroes()
+    {
+        Coordinate cornerBottemRight = new Coordinate(getArena().getWidth()-1, getArena().getHeight()-1);
+        Coordinate cornerTopLeft = new Coordinate(0, 0);
+        Cloner cloner = new Cloner();
+        Entity hero = cloner.deepClone(getFirstDuellist().getPlayer().getHero());
+        Entity hero2 = cloner.deepClone(getSecondDuellist().getPlayer().getHero());
+        arena.insertEntity(cornerBottemRight, hero);
+        arena.insertEntity(cornerTopLeft, hero2);
+    }
+
+    /**
      * @param gewinner
-     * @param damageAnVerlierer
+     * @param hpGewinnerLeftOver
      * @return
      */
-    private BattleOutCome endBattle (Player gewinner, int damageAnVerlierer)
+    public BattleOutCome endBattle (Player gewinner, int hpGewinnerLeftOver)
     {
         GlobalLogger.log(LoggerStringValues.BATTLE_HAS_ENDED);
         setCurrentPhase(BattlePhase.END);
-        return new BattleOutCome(gewinner, damageAnVerlierer);
+        return new BattleOutCome(gewinner, hpGewinnerLeftOver);
     }
 
     /**
@@ -250,11 +269,13 @@ public class BattleManager
         if (!EntityCardController.tryInstantiate(entityCard, arena, coordinate))
         {
             GlobalLogger.warning(LoggerStringValues.ALREADY_OCCUPIED);
+            deselectHandCards();
             return false;
         }
 
         duellist.reduceEgoPoints(entityCard.getSummonCost());
         duellist.removeCardFromHand(entityCard);
+        updateValues();
         return true;
     }
 

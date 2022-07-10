@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.control.controller;
 
+import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -73,6 +75,11 @@ public class EntityController
         attacked.setHp(attacked.getHp() - attacker.getAttackDamage());
         if (attacked.getHp() <= 0)
         {
+            if (attacked instanceof Hero)
+            {
+                BattleManager.getInstance().endBattle(attacker.getOwner(), attacker.getOwner().getHero().getHp());
+                GlobalLogger.log(LoggerStringValues.HERO_DIED_GAME_OVER);
+            }
             arena.removeEntity(position);
         }
         //make attacker unable to attack again

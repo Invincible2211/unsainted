@@ -205,4 +205,5 @@ public interface LoggerStringValues
     String INVALID_EVENT_ID = " is not a valid ID for an event.";
     String DELETED_ALL_MINIONS_FROM_ARENA_VIEW = "Deleted all minions from arena view";
     String DREW_NEW_CARD = "Drew new card";
+    String HERO_DIED_GAME_OVER = "Hero died, game over";
 }
