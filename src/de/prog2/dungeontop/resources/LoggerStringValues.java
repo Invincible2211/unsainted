@@ -203,4 +203,6 @@ public interface LoggerStringValues
     String ENTITY_MOVE_SUCCESSFUL = "Entity moved successfully";
     String ENTITY_MOVE_FAILED = "Entity move failed";
     String INVALID_EVENT_ID = " is not a valid ID for an event.";
+    String DELETED_ALL_MINIONS_FROM_ARENA_VIEW = "Deleted all minions from arena view";
+    String DREW_NEW_CARD = "Drew new card";
 }

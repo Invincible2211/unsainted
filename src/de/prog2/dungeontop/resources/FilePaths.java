@@ -8,5 +8,9 @@ public interface FilePaths
 
     String CARDS_FOLDER = "/cards";
 
-    String SAVE_FILE_PATH = "/data/Gamesave.json";
+    String SAVE_FILE_PATH = "rsc/config/savegame.unsainted";
+
+    String SAVE_FILE_PATH_FOR_CLASSLOADER = "./config/savegame.unsainted";
+
+
 }

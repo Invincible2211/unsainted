@@ -4,6 +4,6 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 
 public interface ApplicationConstants {
 
-    GlobalLogger.LoggerLevel LOGGER_LEVEL = GlobalLogger.LoggerLevel.NONE;
+    GlobalLogger.LoggerLevel LOGGER_LEVEL = GlobalLogger.LoggerLevel.DEBUG;
 
 }

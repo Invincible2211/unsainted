@@ -14,9 +14,8 @@ public class PlayerMovementPackage extends Package
         this.keyCode = keyCode;
     }
 
-    @Override
-    public byte[] getContentAsByteArray()
-    {
-        return SerializationUtils.serialize(this.keyCode);
+    public KeyCode getKeyCode() {
+        return keyCode;
     }
+
 }

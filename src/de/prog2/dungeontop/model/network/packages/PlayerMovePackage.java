@@ -13,8 +13,4 @@ public class PlayerMovePackage extends Package {
         this.moveDirection = moveDirection;
     }
 
-    @Override
-    public byte[] getContentAsByteArray() {
-        return SerializationUtils.serialize(moveDirection);
-    }
 }
