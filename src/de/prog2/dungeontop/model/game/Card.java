@@ -13,6 +13,7 @@ public abstract class Card implements Serializable
     private int price;
     private final int maxRank;
     private int summonCost;
+    private boolean selected = false;
 
     public Card(int maxRank, int price, int rank, int summonCost)
     {
@@ -59,5 +60,15 @@ public abstract class Card implements Serializable
     public void setSummonCost(int summonCost)
     {
         this.summonCost = summonCost;
+    }
+
+    public boolean isSelected ()
+    {
+        return selected;
+    }
+
+    public void setSelected (boolean selected)
+    {
+        this.selected = selected;
     }
 }

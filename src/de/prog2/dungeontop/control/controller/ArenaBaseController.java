@@ -7,7 +7,9 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.arena.ArenaStackPane;
+import de.prog2.dungeontop.resources.ApplicationConstants;
 import de.prog2.dungeontop.resources.AssetIds;
+import de.prog2.dungeontop.resources.ColorKeys;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.resources.views.EntityConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
@@ -17,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 
@@ -38,11 +41,11 @@ public abstract class ArenaBaseController
 
        initEgoPoints();
        setBackgroundImage(AssetIds.ARENA_BG_DEFAULT_ID);
-       arenaBaseView.getBackGroundAnchorPane().setPrefSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
-       arenaBaseView.getBackGroundAnchorPane().setMaxSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y);
+       arenaBaseView.getBackGroundAnchorPane().setPrefSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
+       arenaBaseView.getBackGroundAnchorPane().setMaxSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
+
        setPreferredMeasurements();
        updatePhaseDisplay();
-
     }
 
     /**
@@ -59,7 +62,6 @@ public abstract class ArenaBaseController
 
     /**
      * posssibility to automatically rescale the Arena for different resolutions
-
      */
     private static void setPreferredMeasurements()
     {
@@ -80,7 +82,7 @@ public abstract class ArenaBaseController
     {
         Image image = AssetsManager.getImageByAssetId(imageID);
         BackgroundImage myBI= new BackgroundImage(image, BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT,
-                new BackgroundSize(ArenaViewConstants.RESOLUTION_X, ArenaViewConstants.RESOLUTION_Y, false, false, false, false));
+                new BackgroundSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y, false, false, false, false));
         currentArenaBaseView.getBackGroundAnchorPane().setBackground(new Background(myBI));
     }
 
@@ -97,6 +99,10 @@ public abstract class ArenaBaseController
         egoPointsPlayerOneImageView.setFitWidth(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH);
         egoPointsPlayerTwoImageView.setFitHeight(ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
         egoPointsPlayerTwoImageView.setFitWidth(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH);
+        currentArenaBaseView.getEgopointsPlayerOne().setTextFill(ColorKeys.EGOPOINTS_TEXTCOLOR);
+        currentArenaBaseView.getEgopointsPlayerTwo().setTextFill(ColorKeys.EGOPOINTS_TEXTCOLOR);
+        currentArenaBaseView.getEgopointsPlayerOne().setPrefSize(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH, ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
+        currentArenaBaseView.getEgopointsPlayerTwo().setPrefSize(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH, ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
     }
 
     //TODO BINDING THIS -> binddirectional maybe
