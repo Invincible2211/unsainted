@@ -10,7 +10,6 @@ public class PlayerMovementPackage extends Package
 
     public PlayerMovementPackage (KeyCode keyCode)
     {
-        super(new byte[]{0,0,1,0});
         this.keyCode = keyCode;
     }
 

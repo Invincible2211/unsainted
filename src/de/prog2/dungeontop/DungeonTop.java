@@ -171,6 +171,7 @@ public class DungeonTop extends Application
     public static void testArenaView() throws Exception
     {
         Entity harald = new Minion("Harald", 6, 4, 1, 450);
+        harald.setMaxMovement(2);
         Spell testSpell = new TestSpell();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
@@ -186,7 +187,6 @@ public class DungeonTop extends Application
         player2.setDeck(deck2);
         player1.setHandCardLimit(2);
         player2.setHandCardLimit(4);
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
         BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(4, 4),fxmlLoader.getController());

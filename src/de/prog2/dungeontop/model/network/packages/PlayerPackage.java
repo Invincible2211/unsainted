@@ -1,12 +1,17 @@
 package de.prog2.dungeontop.model.network.packages;
 
+import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.network.Package;
 
 public class PlayerPackage extends Package {
 
+    private Player player;
+    public PlayerPackage(Player player) {
+        this.player = player;
+    }
 
-    public PlayerPackage() {
-        super(new byte[]{1,0,0,0});
+    public Player getPlayer() {
+        return player;
     }
 
 }

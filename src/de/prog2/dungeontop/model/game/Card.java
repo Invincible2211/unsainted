@@ -3,15 +3,17 @@ package de.prog2.dungeontop.model.game;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class Card
+public abstract class Card implements Serializable
 {
     private int rank = 1;
     private int price;
     private final int maxRank;
     private int summonCost;
+    private boolean selected = false;
 
     public Card(int maxRank, int price, int rank, int summonCost)
     {
@@ -58,5 +60,15 @@ public abstract class Card
     public void setSummonCost(int summonCost)
     {
         this.summonCost = summonCost;
+    }
+
+    public boolean isSelected ()
+    {
+        return selected;
+    }
+
+    public void setSelected (boolean selected)
+    {
+        this.selected = selected;
     }
 }
