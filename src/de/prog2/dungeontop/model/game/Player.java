@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.game;
 
+import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.Inventory;
@@ -28,7 +29,7 @@ public class Player implements Serializable
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);
         this.hpProperty = new SerializableSimpleIntegerProperty(GameConstants.DEFAULT_PLAYER_MAX_HP);
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
-        this.deck = DeckConstants.GET_RANDOM_DECK();
+        this.deck = DeckController.getRandomDeck();
     }
     public Player (int souls, int healthPoints){
         this.hpProperty = new SerializableSimpleIntegerProperty(healthPoints);

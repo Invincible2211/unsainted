@@ -53,8 +53,14 @@ public class GameManager {
     {
         SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
 
-        if (saveGame == null)
+        if (saveGame == null|| saveGame.getGameWorld() == null ||saveGame.getPlayer() == null)
         {
+            if (saveGame != null)
+                if (saveGame.getPlayer() != null)
+                    PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
+
+            GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
+
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = null;
             try

@@ -1,19 +1,11 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
-import de.prog2.dungeontop.control.controller.EntityViewController;
-import de.prog2.dungeontop.control.controller.InventoryController;
-import de.prog2.dungeontop.control.controller.ShopViewController;
-import de.prog2.dungeontop.control.file.GameSaveFileReader;
-import de.prog2.dungeontop.control.file.GameSaveFileWriter;
-import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.control.controller.*;
 import de.prog2.dungeontop.control.manager.BattleManager;
-import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.*;
-import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.spells.TestSpell;
@@ -27,15 +19,12 @@ import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonTop extends Application
@@ -164,8 +153,8 @@ public class DungeonTop extends Application
         for (int i = 0; i < 15; i++)
         {
 //            deck1.pushCard(new SpellCard(testSpell, 5, 3, 1, 2 + i));
-            deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2));
-            deck2.pushCard(new EntityCard(harald, 5, 3, 1, 2));
+//            deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2));
+//            deck2.pushCard(new EntityCard(harald, 5, 3, 1, 2));
         }
         Player player1 = new Player(12, 10);
         player1.setDeck(deck1);
@@ -211,7 +200,7 @@ public class DungeonTop extends Application
         Deck deck = new Deck();
         for (int i = 0; i < 30; i++)
         {
-            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
+            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i, 0));
         }
 
         LavaPondRoom room = new LavaPondRoom(new EmptyRoom(new Coordinate(0,0), 1));
@@ -224,7 +213,7 @@ public class DungeonTop extends Application
 
     public static void testDeckCreation ()
     {
-        System.out.println(DeckConstants.GET_RANDOM_DECK());
+        System.out.println(DeckController.getRandomDeck());
     }
 
     public static Stage getStage()
@@ -237,6 +226,6 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
-        AvailableCards.INIT_AVAILABLE_CARDS();
+        AvailableCards.INIT_CARD_DATA();
     }
 }

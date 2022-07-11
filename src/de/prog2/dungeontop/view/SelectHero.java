@@ -92,7 +92,6 @@ public class SelectHero
         PlayerManager.getInstance().getPlayerHpProperty().bindBidirectional(PlayerManager.getInstance().getPlayerHero().getHpProperty());
 
         GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
-        GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
     }
 
     /**
@@ -113,12 +112,10 @@ public class SelectHero
      * Der Spieler betritt das Shop.
      */
     @FXML
-    private void onOpenShopButtonClicked() throws  IOException
+    private void onOpenShopButtonClicked()
     {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
-        Scene scene = new Scene(root);
-        DungeonTop.getStage().setScene(scene);
+        NpcRoomView view = new NpcRoomView(null);
+        DungeonTop.getStage().setScene(view.getNpcRoomView());
     }
 
     public void selectHeroFillText(Hero hero)

@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.resources.AvailableCards;
+import de.prog2.dungeontop.resources.DeckConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.model.exceptions.customexceptions.CardAlreadyUnlockedException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotEnoughSoulsException;
@@ -39,11 +41,22 @@ public class ShopManager
         PlayerManager playerManager = PlayerManager.getInstance();
         Player player = playerManager.getPlayer();
 
-        if(CardManager.getLockedCards().contains(toUnlock)){
+        if(CardManager.getInstance().getLockedCards().contains(toUnlock)){
             if(player.getSouls() >= price){
-                CardManager.addUnlockedCard(toUnlock);
                 playerManager.removeSouls(price);
-                CardManager.getLockedCards().remove(toUnlock);
+                CardManager.getInstance().getLockedCards().remove(toUnlock);
+
+                CardManager.getInstance().addUnlockedCard(toUnlock);
+                for (int i = 1; i < DeckConstants.CARD_MAX_RANK; i++)
+                {
+                    for (Card card : AvailableCards.AVAILABLE_CARDS)
+                    {
+                        if (card.getID() == toUnlock.getID() + i)
+                        {
+                            CardManager.getInstance().addUnlockedCard(card);
+                        }
+                    }
+                }
 
                 GlobalLogger.log(LoggerStringValues.CARD_UNLOCKED);
 
