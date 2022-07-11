@@ -241,12 +241,7 @@ public class ArenaController {
                         if (opponent.containsKey(new Coordinate(colIndex,rowIndex))){
                             return;
                         }
-                        for (Node node : arenaGridPane.getChildren()) {
-                            if (node instanceof AnchorPane){
-                                AnchorPane pane1 = (AnchorPane) node;
-                                pane1.setStyle("-fx-background-color: none;");
-                            }
-                        }
+                        removeHighlight();
                         source.setStyle("-fx-background-color: black;");
                         if (colIndex!=0){
                             markField(colIndex-1,rowIndex);
@@ -278,10 +273,15 @@ public class ArenaController {
                             }
                             List<EntityCard> cards = BattleManager2.getInstance().battle(getFriendly().get(new Coordinate(colIndexSelected,rowIndexSelected)),getOpponent().remove(new Coordinate(colIndex,rowIndex)));
                             arenaGridPane.getChildren().remove(source);
+                            opponent.remove(new Coordinate(colIndex,rowIndex));
                             if (!cards.isEmpty()){
                                 getOpponent().put(new Coordinate(colIndex,rowIndex), cards.get(0));
                             } else {
                                 NetManager.getInstance().getNetworkAPI().sendRemoveEntity(new Coordinate(colIndex,rowIndex));
+                                AnchorPane anchorPane = new AnchorPane();
+                                anchorPane.setPrefSize(170*scale, 170*scale);
+                                addEventHandler(anchorPane);
+                                arenaGridPane.add(anchorPane,colIndex,rowIndex);
                             }
                             removeHighlight();
                             setSelected(null);
@@ -334,8 +334,6 @@ public class ArenaController {
         //arenaGridPane.getChildren().remove(targetPane);
         //arenaGridPane.add(pane, target.getX(),target.getY());
         //arenaGridPane.add(targetPane, pos.getX(),pos.getY());
-
-        pane.setStyle("-fx-background-color: black");
         arenaGridPane.getChildren().remove(targetPane);
         arenaGridPane.getChildren().remove(pane);
         arenaGridPane.add(targetPane,pos.getX(),pos.getY());
