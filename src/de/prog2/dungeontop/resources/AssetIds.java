@@ -49,6 +49,11 @@ public interface AssetIds
     int MAGICIAN = 20;
     int ROGUE = 30;
 
+    int WARRIOR_ICO = 610;
+    int ROGUE_ICO = 630;
+    int MAGE_ICO = 640;
+    int DM_ICO = 620;
+
     // NpcRoom Asset IDs
     int NPC_ROOM_BUTTON_BG = 170;
     int SMALL_BUTTON_IMG = 800;

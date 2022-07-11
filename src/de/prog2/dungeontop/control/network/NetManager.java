@@ -5,6 +5,7 @@ import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.network.NetworkConnectionI;
 import de.prog2.dungeontop.resources.NetworkingConstants;
+import de.prog2.dungeontop.resources.SelectHeroConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 public class NetManager extends Thread{
@@ -35,6 +36,10 @@ public class NetManager extends Thread{
         networkAPI = new NetworkAPI(connection.getOutputStream());
         networkInterpreter = new NetworkInterpreter(connection.getInputStream());
         networkInterpreter.start();
+
+        if (GameManager.getInstance().isDM())
+            PlayerManager.getInstance().getPlayer().setHero(SelectHeroConstants.DUNGEON_MASTER);
+
         if (connection instanceof SessionHost)
         {
             networkAPI.sendHellData(GameManager.getInstance().getGameWorld().getCurrentHell(),

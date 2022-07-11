@@ -2,7 +2,10 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.control.file.GameSaveFileWriter;
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.EntityCard;
+import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.resources.AvailableCards;
 import de.prog2.dungeontop.resources.DeckConstants;
 import de.prog2.dungeontop.resources.EntityCardEnum;
@@ -26,6 +29,15 @@ public class CardManager implements Serializable
     {
         GameManager.getInstance().getSaveGame().setCardManager(this);
         GlobalLogger.log(LoggerStringValues.CARD_MANAGER_CREATED);
+    }
+
+    public EntityCard getPlayerCard (Player player)
+    {
+        EntityCard playerCard = new EntityCard(player.getHero(), DeckConstants.PLAYERCARD_MAX_RANK,
+                DeckConstants.PLAYERCARD_PRICE,DeckConstants.PLAYERCARD_RANK, DeckConstants.PLAYERCARD_SUMMON_COST,
+                DeckConstants.PLAYERCARD_ID);
+
+        return playerCard;
     }
 
     /*----------------------------------------------------------------------------------------------------------------*/
