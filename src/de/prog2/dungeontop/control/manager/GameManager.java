@@ -18,6 +18,7 @@ import de.prog2.dungeontop.view.SettingsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
@@ -99,6 +100,16 @@ public class GameManager {
         saveGame.setGameWorld(newWorld);
 
         GameSaveFileWriter.getInstance().saveGame(saveGame);
+
+        Scene scene = new Scene(new AnchorPane());
+        try {
+            scene = new Scene(new FXMLLoader().load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
+        DungeonTop.getStage().setScene(scene);
+
         this.currentState = GameState.END;
     }
 
