@@ -119,6 +119,8 @@ public class ArenaController {
 
     public void placeCardFriendly(EntityCard entityCard, Coordinate coordinate){
         AnchorPane card = createCard(entityCard);
+        AnchorPane test = getNodeFromGridPane(coordinate.getX(), coordinate.getY());
+        arenaGridPane.getChildren().remove(test);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
         friendly.put(coordinate,entityCard);
         NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entityCard, coordinate);
@@ -126,6 +128,8 @@ public class ArenaController {
 
     public void placeCardOpponent(EntityCard entityCard, Coordinate coordinate){
         AnchorPane card = createCard(entityCard);
+        AnchorPane test = getNodeFromGridPane(coordinate.getX(), coordinate.getY());
+        arenaGridPane.getChildren().remove(test);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
         opponent.put(coordinate,entityCard);
     }
@@ -229,7 +233,7 @@ public class ArenaController {
                             friendly.put(new Coordinate(colIndex,rowIndex),friendly.remove(new Coordinate(colIndexSelected,rowIndexSelected)));
                             setSelected(null);
                             removeHighlight();
-                            NetManager.getInstance().getNetworkAPI().sendMoveEntity(new Coordinate(colIndexSelected,rowIndexSelected),new Coordinate(rowIndex,colIndex));
+                            NetManager.getInstance().getNetworkAPI().sendMoveEntity(new Coordinate(colIndexSelected,rowIndexSelected),new Coordinate(colIndex,rowIndex));
                         }
                     }
                 } else {
@@ -312,8 +316,20 @@ public class ArenaController {
     }
 
     public void move(Coordinate pos, Coordinate target) {
+        /*
+        for (int x = 0; x < 6; x++)
+        {
+            for (int y = 0; y < 6; y++)
+            {
+                System.out.println(getNodeFromGridPane(x, y).getChildren());
+            }
+        }
+
+         */
         AnchorPane pane = getNodeFromGridPane(pos.getX(), pos.getY());
+        System.out.println(pane.getChildren().isEmpty());
         AnchorPane targetPane = getNodeFromGridPane(target.getX(), target.getY());
+        System.out.println(targetPane.getChildren().isEmpty());
         //arenaGridPane.getChildren().remove(pane);
         //arenaGridPane.getChildren().remove(targetPane);
         //arenaGridPane.add(pane, target.getX(),target.getY());
