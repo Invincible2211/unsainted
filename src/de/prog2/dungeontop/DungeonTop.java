@@ -6,7 +6,10 @@ import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.control.file.GameSaveFileWriter;
-import de.prog2.dungeontop.control.manager.*;
+import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.control.manager.BattleManager;
+import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.*;
@@ -28,7 +31,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -49,6 +51,8 @@ public class DungeonTop extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        initialize();
+
         stage = primaryStage;
 
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -201,10 +205,16 @@ public class DungeonTop extends Application
     {
         Item item = ItemConstants.minorPotion;
         Item item1 = ItemConstants.bread;
-        for (int i = 0; i < 5; i++)
+        Item weapon = ItemConstants.sword;
+        Item art1 = ItemConstants.necklace;
+        Item art2 = ItemConstants.bracelet;
+        for (int i = 0; i < 2; i++)
         {
             PlayerManager.getInstance().getPlayerInventory().addItem(item);
             PlayerManager.getInstance().getPlayerInventory().addItem(item1);
+            PlayerManager.getInstance().getPlayerInventory().addItem(weapon);
+            PlayerManager.getInstance().getPlayerInventory().addItem(art1);
+            PlayerManager.getInstance().getPlayerInventory().addItem(art2);
         }
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
@@ -230,9 +240,21 @@ public class DungeonTop extends Application
         stage.setScene(scene);
     }
 
+    public static void testDeckCreation ()
+    {
+        System.out.println(DeckConstants.GET_RANDOM_DECK());
+    }
+
     public static Stage getStage()
     {
         return stage;
     }
 
+    public static void initialize ()
+    {
+        SettingsController.initStage();
+        RoomDialogueViewController.initStage();
+        NetworkController.initStage();
+        AvailableCards.INIT_AVAILABLE_CARDS();
+    }
 }

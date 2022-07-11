@@ -8,17 +8,18 @@ public class Item
     private final String name;
     private final String description;
     private int value; // value for heals, etc
-    private ItemType type;
+    private ItemType itemType;
     private int price;
     private final int assetID;
 
-    public Item(String name, String description, int value, int price, int assetID) {
+    public Item(String name, String description, int value, int price, ItemType itemType, int assetID) {
         this.name = name;
         this.description = description;
         this.value = value;
         this.price = price;
+        this.itemType = itemType;
         this.assetID = assetID;
-        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.value, this.price, this.assetID));
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.value, this.price, this.itemType, this.assetID));
     }
 
     public Item(String name, String description, int assetID)
@@ -47,7 +48,7 @@ public class Item
 
     public ItemType getType()
     {
-        return type;
+        return itemType;
     }
 
     public int getValue()

@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
-import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
@@ -14,12 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-// TODO Bitte Magic entfernen, was ist das hier?
 public class SelectHero
 {
     private final Hero warrior = new Hero(SelectHeroConstants.WARRIOR_NAME, SelectHeroConstants.WARRIOR_HP,
@@ -89,6 +86,7 @@ public class SelectHero
 
         GameManager.getInstance().getGameWorld().initWorld();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
+        PlayerManager.getInstance().getPlayerHpProperty().bindBidirectional(PlayerManager.getInstance().getPlayerHero().getHpProperty());
 
         GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
         GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());

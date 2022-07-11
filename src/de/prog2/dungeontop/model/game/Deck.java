@@ -49,4 +49,18 @@ public class Deck implements Serializable
     {
         return cards;
     }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        
+        for(Card card : this.getCards())
+        {
+            builder.append(card);
+            builder.append("\n");
+        }
+
+        return builder.toString();
+    }
 }

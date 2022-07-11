@@ -44,6 +44,7 @@ public abstract class ArenaBaseController
        arenaBaseView.getBackGroundAnchorPane().setPrefSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
        arenaBaseView.getBackGroundAnchorPane().setMaxSize(ApplicationConstants.RESOLUTION_X, ApplicationConstants.RESOLUTION_Y);
 
+       arenaBaseView.getPhaseDisplayLabelID().setTextFill(ColorKeys.PHASEDISPLAY_TEXT_COLOR);
        setPreferredMeasurements();
        updatePhaseDisplay();
     }

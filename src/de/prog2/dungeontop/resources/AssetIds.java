@@ -2,6 +2,8 @@ package de.prog2.dungeontop.resources;
 
 public interface AssetIds
 {
+    int EXAMPLE_MINION = 450;
+
     // Room Types
     int RANDOM_EVENT_ROOM = 40;
     int ARENA_ROOM = 70;
@@ -71,6 +73,9 @@ public interface AssetIds
     //Item AssetIds
     int HEALTH_POTION = 660;
     int BREAD = 661;
+    int SWORD = 662;
+    int NECKLACE = 663;
+    int BRACELET = 664;
 
     // Arena Asset IDs
     int ARENA_BG_DEFAULT_ID = 210;
