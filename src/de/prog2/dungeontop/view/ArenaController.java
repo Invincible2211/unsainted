@@ -278,6 +278,7 @@ public class ArenaController {
                             }
                             List<EntityCard> cards = BattleManager2.getInstance().battle(getFriendly().get(new Coordinate(colIndexSelected,rowIndexSelected)),getOpponent().remove(new Coordinate(colIndex,rowIndex)));
                             arenaGridPane.getChildren().remove(source);
+                            opponent.remove(new Coordinate(colIndex, rowIndex));
                             if (!cards.isEmpty()){
                                 getOpponent().put(new Coordinate(colIndex,rowIndex), cards.get(0));
                             } else {
