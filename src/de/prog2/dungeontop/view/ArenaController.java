@@ -1,17 +1,21 @@
 package de.prog2.dungeontop.view;
 
+import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -65,8 +69,7 @@ public class ArenaController {
 
     @FXML
     private void onSurrender(){
-        BattleManager2.getInstance().endBattle();
-        NetManager.getInstance().getNetworkAPI().sendEndBattlePackage();
+        BattleManager2.getInstance().endBattle(GameManager.getInstance().isDM());
     }
 
     public void initBattle(int width, int height){
@@ -88,6 +91,7 @@ public class ArenaController {
         arenaGridPane.setMaxSize(680, 680);
         arenaGridPane.setLayoutX(370);
         arenaGridPane.setGridLinesVisible(true);
+
         scale = (double)680/(double)height/(double)170;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -117,6 +121,7 @@ public class ArenaController {
         AnchorPane card = createCard(entityCard);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
         friendly.put(coordinate,entityCard);
+        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entityCard, coordinate);
     }
 
     public void placeCardOpponent(EntityCard entityCard, Coordinate coordinate){
@@ -126,7 +131,6 @@ public class ArenaController {
     }
 
     private AnchorPane createCard(EntityCard entityCard){
-        System.out.println(scale);
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefSize(170*scale, 170 * scale);
         anchorPane.setStyle("-fx-background-image: url(assets/490_CardBackground.png);");
@@ -192,7 +196,9 @@ public class ArenaController {
 
     private void markField(int x, int y){
         AnchorPane content = getNodeFromGridPane(x,y);
-        content.setStyle("-fx-background-color: black");
+        if (content!= null){
+            content.setStyle("-fx-background-color: black");
+        }
     }
 
     public AnchorPane getSelected() {
@@ -204,97 +210,81 @@ public class ArenaController {
     }
 
     private void addEventHandler(AnchorPane pane){
-        pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                AnchorPane source = (AnchorPane) event.getSource();
-                AnchorPane selected = getSelected();
-                if (source != null){
-                    Integer colIndex = GridPane.getColumnIndex(source);
-                    Integer rowIndex = GridPane.getRowIndex(source);
-                    if (source.getChildren().isEmpty()){
-                        if (selected != null){
-                            AnchorPane anchorPane = getNodeFromGridPane(colIndex,rowIndex);
-                            Integer colIndexSelected = GridPane.getColumnIndex(selected);
-                            Integer rowIndexSelected = GridPane.getRowIndex(selected);
-                            if (( (colIndex==colIndexSelected+1 && rowIndex==rowIndexSelected)|| (colIndex == colIndexSelected-1 && rowIndex==rowIndexSelected)) || ((rowIndex == rowIndexSelected-1 && colIndex == colIndexSelected)|| (rowIndex == rowIndexSelected+1 && colIndex == colIndexSelected))){
-                                arenaGridPane.getChildren().remove(selected);
-                                arenaGridPane.getChildren().remove(source);
-                                arenaGridPane.add(selected,colIndex,rowIndex);
-                                arenaGridPane.add(anchorPane,colIndexSelected,rowIndexSelected);
-                                friendly.put(new Coordinate(colIndex,rowIndex),friendly.remove(new Coordinate(colIndexSelected,rowIndexSelected)));
-                                setSelected(null);
-                                for (Node node : arenaGridPane.getChildren()) {
-                                    if (node instanceof AnchorPane){
-                                        AnchorPane pane = (AnchorPane) node;
-                                        pane.setStyle("-fx-background-color: none;");
-                                    }
-                                }
+        pane.setOnMouseClicked(event -> {
+            AnchorPane source = (AnchorPane) event.getSource();
+            AnchorPane selected = getSelected();
+            if (source != null){
+                Integer colIndex = GridPane.getColumnIndex(source);
+                Integer rowIndex = GridPane.getRowIndex(source);
+                if (source.getChildren().isEmpty()){
+                    if (selected != null){
+                        AnchorPane anchorPane = getNodeFromGridPane(colIndex,rowIndex);
+                        Integer colIndexSelected = GridPane.getColumnIndex(selected);
+                        Integer rowIndexSelected = GridPane.getRowIndex(selected);
+                        if (( (colIndex==colIndexSelected+1 && rowIndex==rowIndexSelected)|| (colIndex == colIndexSelected-1 && rowIndex==rowIndexSelected)) || ((rowIndex == rowIndexSelected-1 && colIndex == colIndexSelected)|| (rowIndex == rowIndexSelected+1 && colIndex == colIndexSelected))){
+                            arenaGridPane.getChildren().remove(selected);
+                            arenaGridPane.getChildren().remove(source);
+                            arenaGridPane.add(selected,colIndex,rowIndex);
+                            arenaGridPane.add(anchorPane,colIndexSelected,rowIndexSelected);
+                            friendly.put(new Coordinate(colIndex,rowIndex),friendly.remove(new Coordinate(colIndexSelected,rowIndexSelected)));
+                            setSelected(null);
+                            removeHighlight();
+                            NetManager.getInstance().getNetworkAPI().sendMoveEntity(new Coordinate(colIndexSelected,rowIndexSelected),new Coordinate(rowIndex,colIndex));
+                        }
+                    }
+                } else {
+                    if (selected == null){
+                        if (opponent.containsKey(new Coordinate(colIndex,rowIndex))){
+                            return;
+                        }
+                        for (Node node : arenaGridPane.getChildren()) {
+                            if (node instanceof AnchorPane){
+                                AnchorPane pane1 = (AnchorPane) node;
+                                pane1.setStyle("-fx-background-color: none;");
                             }
                         }
+                        source.setStyle("-fx-background-color: black;");
+                        if (colIndex!=0){
+                            markField(colIndex-1,rowIndex);
+                        }
+                        if (colIndex < arenaGridPane.getColumnCount()){
+                            markField(colIndex+1,rowIndex);
+                        }
+                        if (rowIndex!=0){
+                            markField(colIndex,rowIndex-1);
+                        }
+                        if (rowIndex < arenaGridPane.getRowCount()){
+                            markField(colIndex,rowIndex+1);
+                        }
+                        setSelected(source);
                     } else {
-                        if (selected == null){
-                            if (opponent.containsKey(new Coordinate(colIndex,rowIndex))){
-                                return;
-                            }
+                        if (friendly.containsKey(new Coordinate(colIndex,rowIndex))){
                             for (Node node : arenaGridPane.getChildren()) {
                                 if (node instanceof AnchorPane){
-                                    AnchorPane pane = (AnchorPane) node;
-                                    pane.setStyle("-fx-background-color: none;");
+                                    AnchorPane pane1 = (AnchorPane) node;
+                                    pane1.setStyle("-fx-background-color: none;");
                                 }
                             }
-                            source.setStyle("-fx-background-color: black");
-                            if (colIndex!=0){
-                                markField(colIndex-1,rowIndex);
-                            }
-                            if (colIndex < arenaGridPane.getColumnCount()){
-                                markField(colIndex+1,rowIndex);
-                            }
-                            if (rowIndex!=0){
-                                markField(colIndex,rowIndex-1);
-                            }
-                            if (rowIndex < arenaGridPane.getRowCount()){
-                                markField(colIndex,rowIndex+1);
-                            }
-                            setSelected(source);
+                            setSelected(null);
                         } else {
-                            if (friendly.containsKey(new Coordinate(colIndex,rowIndex))){
-                                for (Node node : arenaGridPane.getChildren()) {
-                                    if (node instanceof AnchorPane){
-                                        AnchorPane pane = (AnchorPane) node;
-                                        pane.setStyle("-fx-background-color: none;");
-                                    }
-                                }
-                                setSelected(null);
-                            } else {
-                                Integer colIndexSelected = GridPane.getColumnIndex(selected);
-                                Integer rowIndexSelected = GridPane.getRowIndex(selected);
-                                System.out.println(colIndexSelected +" "+rowIndexSelected+" "+colIndex+" "+rowIndex);
-                                for (Coordinate c:
-                                        friendly.keySet()) {
-                                    System.out.println(c.getX() +" "+c.getY());
-                                }
-                                List<EntityCard> cards = BattleManager2.getInstance().battle(getFriendly().get(new Coordinate(colIndexSelected,rowIndexSelected)),getOpponent().get(new Coordinate(colIndexSelected,rowIndex)));
-                                arenaGridPane.getChildren().remove(selected);
-                                arenaGridPane.getChildren().remove(source);
-                                if (cards.isEmpty()){
-                                    return;
-                                }else {
-                                    for (EntityCard card:
-                                         cards) {
-                                        if (friendly.containsValue(card)){
-                                            placeCardFriendly(card, new Coordinate(colIndexSelected,rowIndexSelected));
-                                        } else {
-                                            placeCardOpponent(card, new Coordinate(colIndexSelected,rowIndex));
-                                        }
-                                    }
-                                }
-                                removeHighlight();
+                            Integer colIndexSelected = GridPane.getColumnIndex(selected);
+                            Integer rowIndexSelected = GridPane.getRowIndex(selected);
+                            for (Coordinate c:
+                                    friendly.keySet()) {
                             }
+                            List<EntityCard> cards = BattleManager2.getInstance().battle(getFriendly().get(new Coordinate(colIndexSelected,rowIndexSelected)),getOpponent().remove(new Coordinate(colIndex,rowIndex)));
+                            arenaGridPane.getChildren().remove(source);
+                            if (!cards.isEmpty()){
+                                getOpponent().put(new Coordinate(colIndex,rowIndex), cards.get(0));
+                            } else {
+                                NetManager.getInstance().getNetworkAPI().sendRemoveEntity(new Coordinate(colIndex,rowIndex));
+                            }
+                            removeHighlight();
+                            setSelected(null);
                         }
                     }
-                    }
-            }
+                }
+                }
         });
     }
 
@@ -318,7 +308,32 @@ public class ArenaController {
     @FXML
     public void initialize()
     {
-        initBattle(8,8);
+
     }
 
+    public void move(Coordinate pos, Coordinate target) {
+        AnchorPane pane = getNodeFromGridPane(pos.getX(), pos.getY());
+        AnchorPane targetPane = getNodeFromGridPane(target.getX(), target.getY());
+        //arenaGridPane.getChildren().remove(pane);
+        //arenaGridPane.getChildren().remove(targetPane);
+        //arenaGridPane.add(pane, target.getX(),target.getY());
+        //arenaGridPane.add(targetPane, pos.getX(),pos.getY());
+
+
+        arenaGridPane.getChildren().remove(targetPane);
+        arenaGridPane.getChildren().remove(pane);
+        arenaGridPane.add(targetPane,pos.getX(),pos.getY());
+        arenaGridPane.add(pane,target.getX(),target.getY());
+        opponent.put(target,opponent.remove(pos));
+    }
+
+    public void remove(Coordinate pos) {
+        friendly.remove(pos);
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefSize(170*scale, 170*scale);
+        addEventHandler(anchorPane);
+        AnchorPane target = getNodeFromGridPane(pos.getX(), pos.getY());
+        arenaGridPane.getChildren().remove(target);
+        arenaGridPane.add(anchorPane,pos.getX(),pos.getY());
+    }
 }

@@ -2,6 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.EntityViewController;
+import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
@@ -23,6 +24,9 @@ import java.util.List;
 public class BattleManager2 {
 
     private Scene scene;
+
+    private Player player1;
+    private Player player2;
     private ArenaController arenaController;
 
     private final static BattleManager2 instance = new BattleManager2();
@@ -45,16 +49,43 @@ public class BattleManager2 {
 
     public void startBattle(Player player1, Player player2){
         Platform.runLater(() -> {
+            this.player1 = player1;
+            this.player2 = player2;
+            arenaController.initBattle(6,6);
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
-            arenaController.placeCardFriendly(new EntityCard(entities.get(0),0,0,0,0), new Coordinate(0,0));
-            arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
+            //TODO Hero und DungeonMaster spawnen
+            if (!GameManager.getInstance().isDM()){
+                arenaController.placeCardFriendly(new EntityCard(entities.get(0),0,0,0,0), new Coordinate(2,1));
+            }  else {
+                arenaController.placeCardFriendly(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(0,3));
+            }
+            //arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
         });
     }
 
-    public void endBattle(){
-        Platform.runLater(() -> DungeonTop.getStage().setScene(HellView.getCurrHellView()));
+    public void endBattle(boolean playerWins){
+        Platform.runLater(() -> {
+            if (playerWins){
+                DungeonTop.getStage().setScene(HellView.getCurrHellView());
+            } else {
+                GameManager.getInstance().endGame();
+            }
+            NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
+        });
+    }
+
+    public void spawnOpponent(EntityCard card, Coordinate pos){
+        arenaController.placeCardOpponent(card, pos);
+    }
+
+    public void move(Coordinate pos, Coordinate target){
+        arenaController.move(pos,target);
+    }
+
+    public void remove(Coordinate pos){
+        arenaController.remove(pos);
     }
 
     public void nextRound(){
@@ -79,11 +110,13 @@ public class BattleManager2 {
         Entity entity2 = card2.getEntity();
         entity2.setHp(entity2.getHp()-entity1.getAttackDamage());
         List<EntityCard> cardList = new ArrayList<>();
-        if (entity1.getHp()>0){
-            cardList.add(card1);
-        }
         if (entity2.getHp()>0){
             cardList.add(card2);
+        }
+        if (player1.getHp()<=0){
+            endBattle(GameManager.getInstance().isDM());
+        } else if (player2.getHp() <= 0){
+            endBattle(!GameManager.getInstance().isDM());
         }
         return cardList;
     }
@@ -107,6 +140,10 @@ public class BattleManager2 {
 
     public void setArenaController(ArenaController arenaController) {
         this.arenaController = arenaController;
+    }
+
+    public Scene getScene() {
+        return scene;
     }
 
 }

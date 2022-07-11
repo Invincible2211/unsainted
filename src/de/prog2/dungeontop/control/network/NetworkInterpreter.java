@@ -79,7 +79,16 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof OpenArenaPackage){
             GameManager.getInstance().beginBattle();
         } else if (dataPackage instanceof EndBattlePackage){
-            BattleManager2.getInstance().endBattle();
+            Platform.runLater(() -> BattleManager2.getInstance().endBattle(((EndBattlePackage)dataPackage).isPlayerWins()));
+        } else if (dataPackage instanceof PlaceEntityPackage){
+            PlaceEntityPackage placeEntityPackage = (PlaceEntityPackage) dataPackage;
+            Platform.runLater(() -> BattleManager2.getInstance().spawnOpponent(placeEntityPackage.getEntityCard(), placeEntityPackage.getCoordinate()));
+        } else if (dataPackage instanceof MoveEntityPackage){
+            MoveEntityPackage moveEntityPackage = (MoveEntityPackage) dataPackage;
+            Platform.runLater(() -> BattleManager2.getInstance().move(moveEntityPackage.getStart(),moveEntityPackage.getTarget()));
+        } else if (dataPackage instanceof RemoveEntityPackage){
+            RemoveEntityPackage removeEntityPackage = (RemoveEntityPackage) dataPackage;
+            Platform.runLater(() -> BattleManager2.getInstance().remove(removeEntityPackage.getCoordinate()));
         }
     }
 

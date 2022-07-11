@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.network;
 
+import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.network.Package;
 import de.prog2.dungeontop.model.network.packages.*;
@@ -35,8 +36,20 @@ public class NetworkAPI {
         sendData(new OpenArenaPackage());
     }
 
-    public void sendEndBattlePackage(){
-        this.sendData(new EndBattlePackage());
+    public void sendEndBattlePackage(boolean playerWins){
+        this.sendData(new EndBattlePackage(playerWins));
+    }
+
+    public void sendMoveEntity(Coordinate start, Coordinate target){
+        this.sendData(new MoveEntityPackage(start, target));
+    }
+
+    public void sendSpawnEntity(EntityCard card, Coordinate position){
+        this.sendData(new PlaceEntityPackage(card,position));
+    }
+
+    public void sendRemoveEntity(Coordinate coordinate){
+        this.sendData(new RemoveEntityPackage(coordinate));
     }
 
     private void sendData(Package data){
