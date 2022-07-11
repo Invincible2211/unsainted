@@ -2,13 +2,11 @@ package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.BattleManager;
+import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.network.Package;
-import de.prog2.dungeontop.model.network.packages.HellPackage;
-import de.prog2.dungeontop.model.network.packages.OpenArenaPackage;
-import de.prog2.dungeontop.model.network.packages.PlayerMovementPackage;
-import de.prog2.dungeontop.model.network.packages.PlayerPackage;
+import de.prog2.dungeontop.model.network.packages.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.NetworkingConstants;
@@ -80,6 +78,8 @@ public class NetworkInterpreter extends Thread{
             GameManager.getInstance().setOpponentPlayer(playerPackage.getPlayer());
         } else if (dataPackage instanceof OpenArenaPackage){
             GameManager.getInstance().beginBattle();
+        } else if (dataPackage instanceof EndBattlePackage){
+            BattleManager2.getInstance().endBattle();
         }
     }
 

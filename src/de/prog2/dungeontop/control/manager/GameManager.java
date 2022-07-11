@@ -101,6 +101,8 @@ public class GameManager {
      */
     public void beginBattle()
     {
+        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), opponentPlayer);
+        /*
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {
             Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
@@ -108,6 +110,9 @@ public class GameManager {
             throw new RuntimeException(e);
         }
         BattleManager.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), this.opponentPlayer, PlayerManager.getInstance().getPlayer().getDeck(), opponentPlayer.getDeck(), new Arena(4,4),fxmlLoader.getController());
+
+
+         */
         this.currentState = GameState.BATTLE;
     }
 
