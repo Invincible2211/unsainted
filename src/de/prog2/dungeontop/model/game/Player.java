@@ -4,6 +4,7 @@ import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.Inventory;
+import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.world.rooms.Room;
 import de.prog2.dungeontop.resources.DeckConstants;
 import de.prog2.dungeontop.resources.GameConstants;
@@ -13,6 +14,8 @@ import de.prog2.dungeontop.resources.LoggerStringValues;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Serializable
 {
@@ -24,6 +27,9 @@ public class Player implements Serializable
     private Room currentRoom;
     private int handCardLimit;
     private Hero hero;
+    private List<Item> weaponSlot = new ArrayList<>();
+    private List<Item> artifactSlot1 = new ArrayList<>();
+    private List<Item> artifactSlot2 = new ArrayList<>();
 
     public Player (){
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);
@@ -124,5 +130,20 @@ public class Player implements Serializable
     public void setHero(Hero hero)
     {
         this.hero = hero;
+    }
+
+    public List<Item> getWeaponSlot()
+    {
+        return weaponSlot;
+    }
+
+    public List<Item> getArtifactSlot1()
+    {
+        return artifactSlot1;
+    }
+
+    public List<Item> getArtifactSlot2()
+    {
+        return artifactSlot2;
     }
 }

@@ -73,6 +73,9 @@ public interface AssetIds
     //Item AssetIds
     int HEALTH_POTION = 660;
     int BREAD = 661;
+    int SWORD = 662;
+    int NECKLACE = 663;
+    int BRACELET = 664;
 
     // Arena Asset IDs
     int ARENA_BG_DEFAULT_ID = 210;

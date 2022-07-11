@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.itemViews.InventoryViewController">
+   <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true">
+      <Image url="@/assets/650_Inventory_Background.jpg" />
+   </ImageView>
+   <Button fx:id="returnButton" mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Zurück" translateX="100.0" translateY="50.0" />
+   <AnchorPane layoutX="100.0" layoutY="195.0" prefHeight="808.0" prefWidth="1403.0" style="-fx-background-color: brown;">
+      <GridPane fx:id="gridPane" hgap="100.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+      </GridPane>
+      <Line endX="212.5" endY="-6.0" layoutX="-13.0" layoutY="7.0" startX="212.5" startY="794.5">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="212.5" endY="-6.0" layoutX="187.0" layoutY="7.0" startX="212.5" startY="794.5">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="212.5" endY="-6.0" layoutX="387.0" layoutY="12.0" startX="212.5" startY="790.5">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="212.5" endY="-6.0" layoutX="587.0" layoutY="7.0" startX="212.5" startY="795.5">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="212.5" endY="-6.0" layoutX="787.0" layoutY="7.0" startX="212.5" startY="794.5">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="212.5" endY="-6.0" layoutX="987.0" layoutY="7.0" startX="212.5" startY="794.5">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="67.0" startX="1355.0" startY="135.0">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="267.0" startX="1355.0" startY="135.0">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="467.0" startX="1355.0" startY="135.0">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="-131.0" startX="1355.0" startY="135.0">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+      <Line endX="-37.0" endY="135.0" layoutX="37.0" layoutY="667.0" startX="1355.0" startY="135.0">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Line>
+   </AnchorPane>
+   <AnchorPane layoutX="1634.0" layoutY="288.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+      <children>
+         <GridPane fx:id="weaponSlot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+         </GridPane>
+      </children></AnchorPane>
+   <AnchorPane layoutX="1634.0" layoutY="558.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+      <children>
+         <GridPane fx:id="artifactSlot1" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+         </GridPane>
+      </children></AnchorPane>
+   <Text fill="#d9ff00" layoutX="1654.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artefakte:" wrappingWidth="159.0233154296875">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
+   <Text fill="#d9ff00" layoutX="1654.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waffe:" wrappingWidth="116.623291015625">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
+   <AnchorPane layoutX="1634.0" layoutY="758.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+      <children>
+         <GridPane fx:id="artifactSlot2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+         </GridPane>
+      </children></AnchorPane>
+</AnchorPane>

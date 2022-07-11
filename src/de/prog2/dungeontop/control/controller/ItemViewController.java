@@ -4,9 +4,10 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.ItemView;
+import de.prog2.dungeontop.view.itemViews.ItemView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 
 public class ItemViewController
 {
@@ -22,6 +23,26 @@ public class ItemViewController
             Node itemView = null;
 
                 itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_VIEW_FXML));
+
+            ItemView controller = loader.getController();
+            fillItemViewWithData(item, controller);
+            return itemView;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Node getEquippedItemView(Item item)
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            Node itemView = null;
+
+            itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.EQUIPPED_ITEM_VIEW_FXML));
 
             ItemView controller = loader.getController();
             fillItemViewWithData(item, controller);

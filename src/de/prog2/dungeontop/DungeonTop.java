@@ -53,9 +53,21 @@ public class DungeonTop extends Application
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
         stage.show();
+        //MainMenueController.addMenuebar();
+        // TODO: give the player his goddamn deck
+        Entity harald = new Minion("Harald", 6, 4, 1, 450);
+        Deck deck = new Deck();
+        for (int i = 0; i < 10; i++)
+        {
+            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
+        }
+        PlayerManager.getInstance().getPlayer().setDeck(deck);
 
         //AudioManager.getInstance().playSound(990);
-        testDeckCreation();
+        SettingsController.initStage();
+        RoomDialogueViewController.initStage();
+        NetworkController.initStage();
+        BattleManager2.getInstance().startBattle(new Player(), new Player());
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
@@ -182,10 +194,16 @@ public class DungeonTop extends Application
     {
         Item item = ItemConstants.minorPotion;
         Item item1 = ItemConstants.bread;
-        for (int i = 0; i < 5; i++)
+        Item weapon = ItemConstants.sword;
+        Item art1 = ItemConstants.necklace;
+        Item art2 = ItemConstants.bracelet;
+        for (int i = 0; i < 2; i++)
         {
             PlayerManager.getInstance().getPlayerInventory().addItem(item);
             PlayerManager.getInstance().getPlayerInventory().addItem(item1);
+            PlayerManager.getInstance().getPlayerInventory().addItem(weapon);
+            PlayerManager.getInstance().getPlayerInventory().addItem(art1);
+            PlayerManager.getInstance().getPlayerInventory().addItem(art2);
         }
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
