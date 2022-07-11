@@ -65,20 +65,10 @@ public class DungeonTop extends Application
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
         stage.show();
-        //MainMenueController.addMenuebar();
-        // TODO: give the player his goddamn deck
-        Entity harald = new Minion("Harald", 6, 4, 1, 450);
-        Deck deck = new Deck();
-        for (int i = 0; i < 10; i++)
-        {
-            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
-        }
-        PlayerManager.getInstance().getPlayer().setDeck(deck);
 
+        //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
-        SettingsController.initStage();
-        RoomDialogueViewController.initStage();
-        NetworkController.initStage();
+
         //BattleManager2.getInstance().startBattle(new Player(), new Player());
         //testArenaView();
         //testSelectHero(primaryStage);
@@ -177,8 +167,8 @@ public class DungeonTop extends Application
         for (int i = 0; i < 15; i++)
         {
 //            deck1.pushCard(new SpellCard(testSpell, 5, 3, 1, 2 + i));
-            deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2));
-            deck2.pushCard(new EntityCard(harald, 5, 3, 1, 2));
+            deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2, 0));
+            deck2.pushCard(new EntityCard(harald, 5, 3, 1, 2, 0));
         }
         Player player1 = new Player(12, 10);
         player1.setDeck(deck1);
@@ -230,7 +220,7 @@ public class DungeonTop extends Application
         Deck deck = new Deck();
         for (int i = 0; i < 30; i++)
         {
-            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
+            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i, 0));
         }
 
         LavaPondRoom room = new LavaPondRoom(new EmptyRoom(new Coordinate(0,0), 1));
@@ -243,7 +233,7 @@ public class DungeonTop extends Application
 
     public static void testDeckCreation ()
     {
-        System.out.println(DeckConstants.GET_RANDOM_DECK());
+        System.out.println(DeckController.getRandomDeck());
     }
 
     public static Stage getStage()
@@ -256,6 +246,6 @@ public class DungeonTop extends Application
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
         NetworkController.initStage();
-        AvailableCards.INIT_AVAILABLE_CARDS();
+        AvailableCards.INIT_CARD_DATA();
     }
 }
