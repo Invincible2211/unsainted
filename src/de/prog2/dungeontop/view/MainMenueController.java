@@ -36,6 +36,17 @@ public class MainMenueController {
     }
 
     /**
+     * Dies ist die Eventmethode, welche ausgefuehrt wird, wenn auf den Shop-Button gedrueckt wird.
+     * Der Shop wird geoeffnet.
+     */
+    @FXML
+    private void onOpenShopButtonPressed ()
+    {
+        NpcRoomView view = new NpcRoomView(null);
+        DungeonTop.getStage().setScene(view.getNpcRoomView());
+    }
+
+    /**
      * Dies ist die Eventmethode, welche ausgefuehrt wird, wenn auf den Settings-Button gedrueckt wird.
      * Die Einstellungen werden eingeblendet.
      */

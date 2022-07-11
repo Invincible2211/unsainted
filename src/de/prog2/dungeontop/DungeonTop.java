@@ -2,6 +2,7 @@ package de.prog2.dungeontop;
 
 import de.prog2.dungeontop.control.controller.*;
 import de.prog2.dungeontop.control.manager.BattleManager;
+import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
@@ -54,20 +55,9 @@ public class DungeonTop extends Application
         stage.sizeToScene();
         stage.show();
         //MainMenueController.addMenuebar();
-        // TODO: give the player his goddamn deck
-        Entity harald = new Minion("Harald", 6, 4, 1, 450);
-        Deck deck = new Deck();
-        for (int i = 0; i < 10; i++)
-        {
-            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i));
-        }
-        PlayerManager.getInstance().getPlayer().setDeck(deck);
 
         //AudioManager.getInstance().playSound(990);
-        SettingsController.initStage();
-        RoomDialogueViewController.initStage();
-        NetworkController.initStage();
-        BattleManager2.getInstance().startBattle(new Player(), new Player());
+        //BattleManager2.getInstance().startBattle(new Player(), new Player());
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);

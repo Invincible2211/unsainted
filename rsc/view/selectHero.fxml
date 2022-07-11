@@ -18,7 +18,7 @@
     </ImageView>
     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked"
             prefHeight="100.0" prefWidth="500.0" stylesheets="@view/mainmenuestyle.css" text="Zurück zu Hauptmenü"
-            translateX="50.0" translateY="50.0"/>
+            layoutX="50.0" layoutY="887.0"/>
     <Text fill="#d2e42c" layoutX="772.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id"
           text="Wählen Sie ihre Klasse aus" wrappingWidth="551.2000122070312">
         <font>
@@ -116,7 +116,4 @@
             </Text>
         </VBox>
     </AnchorPane>
-    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="887.0" mnemonicParsing="false"
-            onMouseClicked="#onOpenShopButtonClicked" prefHeight="100.0" prefWidth="300.0"
-            stylesheets="@view/mainmenuestyle.css" text="Shop"/>
 </AnchorPane>

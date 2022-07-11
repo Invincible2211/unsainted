@@ -104,17 +104,6 @@ public class SelectHero
         DungeonTop.getStage().setScene(scene);
     }
 
-    /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Shop-Button gedrueckt wird.
-     * Der Spieler betritt das Shop.
-     */
-    @FXML
-    private void onOpenShopButtonClicked()
-    {
-        NpcRoomView view = new NpcRoomView(null);
-        DungeonTop.getStage().setScene(view.getNpcRoomView());
-    }
-
     public void selectHeroFillText(Hero hero)
     {
         getHeroClass().setText(SelectHeroConstants.PLAYER_CLASS + hero.getName());

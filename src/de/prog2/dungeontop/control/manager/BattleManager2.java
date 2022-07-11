@@ -48,8 +48,8 @@ public class BattleManager2 {
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
-            arenaController.placeCardFriendly(new EntityCard(entities.get(0),0,0,0,0), new Coordinate(0,0));
-            arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
+            arenaController.placeCardFriendly(new EntityCard(entities.get(0),0,0,0,0, 0), new Coordinate(0,0));
+            arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0, 0), new Coordinate(2,1));
         });
     }
 

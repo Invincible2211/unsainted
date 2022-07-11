@@ -2,6 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
+import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.model.game.GameState;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.SaveGame;
@@ -53,7 +54,8 @@ public class GameManager {
     {
         SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
 
-        if (saveGame == null|| saveGame.getGameWorld() == null ||saveGame.getPlayer() == null)
+        if (saveGame == null|| saveGame.getGameWorld() == null ||
+                saveGame.getPlayer() == null ||saveGame.getPlayer().getHero() == null)
         {
             if (saveGame != null)
                 if (saveGame.getPlayer() != null)
@@ -90,6 +92,13 @@ public class GameManager {
      */
     public void endGame()
     {
+        World newWorld = new World(WorldConstants.HELL_COUNT);
+        PlayerManager.getInstance().getPlayer().setHero(null);
+
+        GameManager.getInstance().setGameWorld(newWorld);
+        saveGame.setGameWorld(newWorld);
+
+        GameSaveFileWriter.getInstance().saveGame(saveGame);
         this.currentState = GameState.END;
     }
 

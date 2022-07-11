@@ -269,7 +269,18 @@ public class NpcRoomView
         {
             try
             {
-                NpcController.upgradeCard(card, NpcRoomViewConstants.DEFAULT_PRICE);
+                // if the room has remaining free actions the next action will cost nothing
+                // otherwise use a defined price
+                if (this.getRoom().getFreeActions() >= NpcRoomViewConstants.FREE_ACTION_COMPARATOR)
+                {
+                    NpcController.upgradeCard(card, NpcRoomViewConstants.FREE_ACTION_PRICE);
+                    this.getRoom().setFreeActions(this.getRoom().getFreeActions() -
+                            NpcRoomViewConstants.FREE_ACTION_DECREMENT);
+                }
+                else
+                {
+                    NpcController.upgradeCard(card, NpcRoomViewConstants.DEFAULT_PRICE);
+                }
             }
             catch(CardAlreadyMaxRankException | NotEnoughSoulsException ex)
             {
