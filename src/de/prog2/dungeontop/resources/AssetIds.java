@@ -2,6 +2,20 @@ package de.prog2.dungeontop.resources;
 
 public interface AssetIds
 {
+    // Minion Asets
+    int ASMODEUS = 401;
+    int AKEPHALOS = 402;
+    int AYNAET = 403;
+    int ASASEL = 404;
+    int BAAL = 405;
+    int BELIAL = 406;
+    int BEELZEBUB = 407;
+    int INCUBUS = 408;
+    int LILITH = 409;
+    int MEDUSA = 410;
+    int SPHINX = 411;
+    int VANTH = 412;
+    int LEGION = 413;
     int EXAMPLE_MINION = 450;
 
     // Room Types
