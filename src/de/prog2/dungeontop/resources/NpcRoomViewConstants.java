@@ -13,6 +13,8 @@ public interface NpcRoomViewConstants
     double SCENE_PREF_WIDTH = 1920;
     double SCENE_PREF_HEIGHT = 1080;
     Insets SCROLL_PANE_PADDING = new Insets(0, 10, 0, 10);
+    boolean SOULS_ICO_PRESERVE_RATIO = false;
+    boolean SOULS_ICO_SMOOTH = false;
 
 
     double CLOSE_BUTTON_BORDER_RADIUS = 10;
@@ -46,6 +48,7 @@ public interface NpcRoomViewConstants
 
     String DISCARD_BUTTON_TEXT = "Discard";
     String UPGRADE_BUTTON_TEXT = "Upgrade";
+    String SHOP_BUTTON_TEXT = "Unlock for ";
     String PRICE_TEXT = "Price: ";
     String SOULS_SUBTITLE = "Souls";
 
@@ -55,4 +58,5 @@ public interface NpcRoomViewConstants
 
     double BUTTON_PREF_WIDTH = 460;
     double BUTTON_PREF_HEIGHT = 120;
+
 }

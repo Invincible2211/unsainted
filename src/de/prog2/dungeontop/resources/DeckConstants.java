@@ -10,19 +10,12 @@ public interface DeckConstants
 {
     int DECK_MAX_NO_OF_CARDS = 35;
     int DECK_MIN_NO_OF_CARDS = 25;
+    int DEFAULT_UNLOCKED_CARDS = 9;
+    int CARD_MAX_RANK = 3;
 
-    public static Deck GET_RANDOM_DECK ()
-    {
-        Deck randomDeck = new Deck();
-        LinkedList<Card> allCards = new LinkedList<>(AvailableCards.AVAILABLE_CARDS);
-        Random random = new Random();
-        int numberOfCards = random.nextInt(DECK_MAX_NO_OF_CARDS-DECK_MIN_NO_OF_CARDS+1);
-
-        for (int i = 0; i < (DECK_MIN_NO_OF_CARDS+numberOfCards); i++)
-        {
-            randomDeck.pushCard(allCards.get(random.nextInt(allCards.size())));
-        }
-
-        return randomDeck;
-    }
+    int PLAYERCARD_PRICE = 0;
+    int PLAYERCARD_MAX_RANK = 0;
+    int PLAYERCARD_RANK = PLAYERCARD_MAX_RANK;
+    int PLAYERCARD_SUMMON_COST = 0;
+    int PLAYERCARD_ID = -1;
 }

@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.game;
 
+import de.prog2.dungeontop.control.manager.CardManager;
 import de.prog2.dungeontop.model.world.World;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ public class SaveGame implements Serializable {
     int i = 3;
     World gameWorld;
     Player player;
+    CardManager cardManager;
 
     public int getI() {
         return i;
@@ -31,5 +33,13 @@ public class SaveGame implements Serializable {
     public void setPlayer (Player player)
     {
         this.player = player;
+    }
+    public CardManager getCardManager ()
+    {
+        return this.cardManager;
+    }
+    public void setCardManager (CardManager cardManager)
+    {
+        this.cardManager = cardManager;
     }
 }

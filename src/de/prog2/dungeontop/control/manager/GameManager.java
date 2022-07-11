@@ -2,6 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
+import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.model.game.GameState;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.SaveGame;
@@ -17,6 +18,7 @@ import de.prog2.dungeontop.view.SettingsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
@@ -53,8 +55,15 @@ public class GameManager {
     {
         SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
 
-        if (saveGame == null)
+        if (saveGame == null|| saveGame.getGameWorld() == null ||
+                saveGame.getPlayer() == null ||saveGame.getPlayer().getHero() == null)
         {
+            if (saveGame != null)
+                if (saveGame.getPlayer() != null)
+                    PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
+
+            GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
+
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = null;
             try
@@ -84,6 +93,23 @@ public class GameManager {
      */
     public void endGame()
     {
+        World newWorld = new World(WorldConstants.HELL_COUNT);
+        PlayerManager.getInstance().getPlayer().setHero(null);
+
+        GameManager.getInstance().setGameWorld(newWorld);
+        saveGame.setGameWorld(newWorld);
+
+        GameSaveFileWriter.getInstance().saveGame(saveGame);
+
+        Scene scene = new Scene(new AnchorPane());
+        try {
+            scene = new Scene(new FXMLLoader().load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
+        DungeonTop.getStage().setScene(scene);
+
         this.currentState = GameState.END;
     }
 

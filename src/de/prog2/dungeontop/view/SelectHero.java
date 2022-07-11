@@ -19,13 +19,6 @@ import java.io.IOException;
 
 public class SelectHero
 {
-    private final Hero warrior = new Hero(SelectHeroConstants.WARRIOR_NAME, SelectHeroConstants.WARRIOR_HP,
-            SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.WARRIOR_MAX_MOVES, SelectHeroConstants.WARRIOR_TALENT);
-    private final Hero mage = new Hero(SelectHeroConstants.MAGE_NAME, SelectHeroConstants.MAGE_HP,
-            SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_MAX_MOVES, SelectHeroConstants.MAGE_TALENT);
-    private final Hero rogue = new Hero(SelectHeroConstants.ROGUE_NAME, SelectHeroConstants.ROGUE_HP,
-            SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_MAX_MOVES, SelectHeroConstants.ROGUE_TALENT);
-
     @FXML
     private Text heroClass;
     @FXML
@@ -45,22 +38,22 @@ public class SelectHero
     @FXML
     private void onHero1ButtonClicked()
     {
-        selectHeroFillText(warrior);
-        PlayerManager.getInstance().getPlayer().setHero(warrior);
+        selectHeroFillText(SelectHeroConstants.WARRIOR);
+        PlayerManager.getInstance().getPlayer().setHero(SelectHeroConstants.WARRIOR);
     }
 
     @FXML
     private void onHero2ButtonClicked()
     {
-        selectHeroFillText(mage);
-        PlayerManager.getInstance().getPlayer().setHero(mage);
+        selectHeroFillText(SelectHeroConstants.MAGE);
+        PlayerManager.getInstance().getPlayer().setHero(SelectHeroConstants.MAGE);
     }
 
     @FXML
     private void onHero3ButtonClicked()
     {
-        selectHeroFillText(rogue);
-        PlayerManager.getInstance().getPlayer().setHero(rogue);
+        selectHeroFillText(SelectHeroConstants.ROGUE);
+        PlayerManager.getInstance().getPlayer().setHero(SelectHeroConstants.ROGUE);
     }
 
     /**
@@ -77,19 +70,20 @@ public class SelectHero
             return;
         }
 
-        if (playerHero == warrior)
+        if (playerHero == SelectHeroConstants.WARRIOR)
             HellView.setPlayerAssetId(AssetIds.WARRIOR);
-        else if (playerHero == mage)
+        else if (playerHero == SelectHeroConstants.MAGE)
             HellView.setPlayerAssetId(AssetIds.MAGICIAN);
-        else if (playerHero == rogue)
+        else if (playerHero == SelectHeroConstants.ROGUE)
             HellView.setPlayerAssetId(AssetIds.ROGUE);
 
         GameManager.getInstance().getGameWorld().initWorld();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
+
+
         PlayerManager.getInstance().getPlayerHpProperty().bindBidirectional(PlayerManager.getInstance().getPlayerHero().getHpProperty());
 
         GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
-        GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
     }
 
     /**
@@ -101,19 +95,6 @@ public class SelectHero
     {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML));
-        Scene scene = new Scene(root);
-        DungeonTop.getStage().setScene(scene);
-    }
-
-    /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Shop-Button gedrueckt wird.
-     * Der Spieler betritt das Shop.
-     */
-    @FXML
-    private void onOpenShopButtonClicked() throws  IOException
-    {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
         Scene scene = new Scene(root);
         DungeonTop.getStage().setScene(scene);
     }

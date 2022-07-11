@@ -8,9 +8,9 @@ public class EntityCard extends Card
 {
     private Entity entity;
 
-    public EntityCard(Entity entity, int maxRank, int price, int rank, int summonCost)
+    public EntityCard(Entity entity, int maxRank, int price, int rank, int summonCost, int ID)
     {
-        super(maxRank, price, rank, summonCost);
+        super(maxRank, price, rank, summonCost, ID);
         this.entity = entity;
         GlobalLogger.log(LoggerStringValues.ENTITYCARD_CREATED);
     }
@@ -18,6 +18,11 @@ public class EntityCard extends Card
     public Entity getEntity()
     {
         return entity;
+    }
+
+    public int getID ()
+    {
+        return super.getID();
     }
 
     public void setEntity(Entity entity) {
