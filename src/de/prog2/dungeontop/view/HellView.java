@@ -129,7 +129,8 @@ public class HellView
 
         inventoryButton.setOnAction(e -> openInventory());
 
-        initPlayerStats(container);
+        if (!GameManager.getInstance().isDM())
+            initPlayerStats(container);
     }
 
     /**
