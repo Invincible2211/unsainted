@@ -335,7 +335,7 @@ public class ArenaController {
         //arenaGridPane.add(pane, target.getX(),target.getY());
         //arenaGridPane.add(targetPane, pos.getX(),pos.getY());
 
-
+        pane.setStyle("-fx-background-color: black");
         arenaGridPane.getChildren().remove(targetPane);
         arenaGridPane.getChildren().remove(pane);
         arenaGridPane.add(targetPane,pos.getX(),pos.getY());

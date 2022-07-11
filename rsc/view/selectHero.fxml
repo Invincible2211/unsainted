@@ -17,7 +17,7 @@
         <Image url="@/assets/600_selectherobg.png"/>
     </ImageView>
     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked"
-            prefHeight="100.0" prefWidth="500.0" stylesheets="@view/mainmenuestyle.css" text="Zurück zu Hauptmenü"
+            prefHeight="100.0" prefWidth="500.0" stylesheets="@/view/mainmenuestyle.css" text="Zurück zu Hauptmenü"
             layoutX="50.0" layoutY="887.0"/>
     <Text fill="#d2e42c" layoutX="772.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id"
           text="Wählen Sie ihre Klasse aus" wrappingWidth="551.2000122070312">
