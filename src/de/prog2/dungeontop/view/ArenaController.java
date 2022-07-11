@@ -229,7 +229,7 @@ public class ArenaController {
                             friendly.put(new Coordinate(colIndex,rowIndex),friendly.remove(new Coordinate(colIndexSelected,rowIndexSelected)));
                             setSelected(null);
                             removeHighlight();
-                            NetManager.getInstance().getNetworkAPI().sendMoveEntity(new Coordinate(colIndexSelected,rowIndexSelected),new Coordinate(rowIndex,colIndex));
+                            NetManager.getInstance().getNetworkAPI().sendMoveEntity(new Coordinate(colIndexSelected,rowIndexSelected),new Coordinate(colIndex,rowIndex));
                         }
                     }
                 } else {
@@ -319,7 +319,7 @@ public class ArenaController {
         //arenaGridPane.add(pane, target.getX(),target.getY());
         //arenaGridPane.add(targetPane, pos.getX(),pos.getY());
 
-
+        pane.setStyle("-fx-background-color: black");
         arenaGridPane.getChildren().remove(targetPane);
         arenaGridPane.getChildren().remove(pane);
         arenaGridPane.add(targetPane,pos.getX(),pos.getY());

@@ -57,9 +57,9 @@ public class BattleManager2 {
             entities.addAll(TestConstants.getTestEntities());
             //TODO Hero und DungeonMaster spawnen
             if (!GameManager.getInstance().isDM()){
-                arenaController.placeCardFriendly(new EntityCard(entities.get(0),0,0,0,0), new Coordinate(2,1));
+                arenaController.placeCardFriendly(new EntityCard(entities.get(0),0,0,0,0,1), new Coordinate(2,1));
             }  else {
-                arenaController.placeCardFriendly(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(0,3));
+                arenaController.placeCardFriendly(new EntityCard(entities.get(1),0,0,0,0,2), new Coordinate(0,3));
             }
             //arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
         });

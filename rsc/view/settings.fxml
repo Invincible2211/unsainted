@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-image: url(assets/920_SettingsBackground.png); -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-image: url(assets/920_SettingsBackground.png); -fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SettingsController">
    <Button id="button" layoutX="300.0" layoutY="443.0" mnemonicParsing="false" onAction="#onSaveButtonPressed" prefHeight="120.0" prefWidth="600.0" stylesheets="@view/mainmenuestyle.css" text="Fertig" />
    <Slider fx:id="volumeSlider" layoutX="148.0" layoutY="385.0" minorTickCount="10" prefHeight="26.0" prefWidth="905.0" snapToTicks="true" style="-fx-background-color: #a39f2a; -fx-background-radius: 14;">
       <padding>

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url(assets/922_ArenaBG.png);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ArenaController">
+<AnchorPane fx:id="root" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url(assets/922_ArenaBG.png);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.ArenaController">
    <children>
       <HBox fx:id="playerCardView" alignment="CENTER" layoutX="500.0" layoutY="880.0" prefHeight="200.0" prefWidth="1420.0" style="-fx-background-color: transparent;" />
       <AnchorPane prefHeight="1080.0" prefWidth="500.0" style="-fx-background-color: gray;">
@@ -25,12 +25,12 @@
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="50.0" layoutY="50.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/530_SummonCost_Icon.png" />
+                  <Image url="@/assets/530_SummonCost_Icon.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1320.0" layoutY="580.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/530_SummonCost_Icon.png" />
+                  <Image url="@/assets/530_SummonCost_Icon.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="50.0" prefHeight="50.0" prefWidth="50.0" text="10">
