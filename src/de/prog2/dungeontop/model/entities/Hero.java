@@ -11,8 +11,6 @@ public class Hero extends Entity
     {
         super(name, hp, attackDamage, movement, assetId, owner);
         this.talent = talent;
-        //this.getHpProperty().bindBidirectional(owner.getHpProperty());
-        owner.getHpProperty().bindBidirectional(this.getHpProperty());
     }
 
     public Hero(String name, int hp, int attackDamage, int maxMovement, Talent talent)

@@ -38,7 +38,10 @@ public class NetManager extends Thread{
         networkInterpreter.start();
 
         if (GameManager.getInstance().isDM())
+        {
             PlayerManager.getInstance().getPlayer().setHero(SelectHeroConstants.DUNGEON_MASTER);
+            PlayerManager.getInstance().getPlayer().getHpProperty().bindBidirectional(PlayerManager.getInstance().getPlayerHero().getHpProperty());
+        }
 
         if (connection instanceof SessionHost)
         {
