@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.CardViewController;
-import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.NpcController;
 import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.control.manager.*;
@@ -17,18 +16,15 @@ import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellViewConstants;
 import de.prog2.dungeontop.resources.NpcRoomViewConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.resources.views.CardConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.skin.ScrollPaneSkin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -139,6 +135,7 @@ public class NpcRoomView
         }
         else
         {
+            // On pressing the close button of the shop (top right corner), the player returns to the main menu
             closeButton.setOnAction(e ->
             {
                 Scene mmScene = new Scene(new AnchorPane());
@@ -156,12 +153,18 @@ public class NpcRoomView
     }
 
     /**
-     * Creates a grid that contains all the cards from the the players deck and buttons depending on the roomtype
+     * Depending on the room, show a grid containing cards, there are two cases which differ considerably:
+     *  1.  The room is one of the types used in the HellView.
+     *      Show the player's deck and a button with a fitting action.
+     *  2.  The room is null. In this case the shop shall be opened.
+     *      Show all locked cards and a button to unlock them.
      */
     private void loadDeck()
     {
         NPCRoom room = this.getRoom();
         Deck deck = null;
+
+        // check whether to use the player's deck or the locked cards
         if (room != null)
             deck = PlayerManager.getInstance().getPlayer().getDeck();
         else
@@ -183,7 +186,7 @@ public class NpcRoomView
         // get the scrollpane and set its content to be the grid
         this.getCardContainer().setContent(grid);
 
-        // get the cards from the players deck
+        // get the cards that shall be shown
         Stack<Card> cardStack = deck.getCards();
         // define the cell used for the first card
         int column = NpcRoomViewConstants.GRID_START_COLUMN, row = NpcRoomViewConstants.GRID_START_ROW;
@@ -353,7 +356,8 @@ public class NpcRoomView
     }
 
     /**
-     * Create a small button to be used in the UI
+     * Create a small button to be used in the UI.
+     * The size matches the size of the statboard, so it is fitting to be used next to it.
      *
      * @param assetId ID of the asset which shall be used for the background of the button
      * @return button which shows the backgroundimage with corner radius and border
@@ -367,10 +371,11 @@ public class NpcRoomView
 
         // set the button style
         smallButton.setBackground(Background.EMPTY);
-        smallButton.setStyle(NpcRoomViewConstants.CLOSE_BUTTON_STYLE);
+        smallButton.setStyle(NpcRoomViewConstants.SMALL_BUTTON_STYLE);
 
         smallButton.setGraphic(buttonImageView);
 
+        // set the size of the button
         buttonImageView.setFitWidth(NpcRoomViewConstants.SMALL_BUTTON_FIT_WIDTH -
                 2 * NpcRoomViewConstants.SMALL_BUTTON_PADDING -
                 2 * NpcRoomViewConstants.SMALL_BUTTON_BORDER_WIDTH);
@@ -397,20 +402,7 @@ public class NpcRoomView
         statboard.setPrefSize(NpcRoomViewConstants.STATBOARD_BG_WIDTH, NpcRoomViewConstants.STATBOARD_BG_HEIGHT);
         statboard.setAlignment(Pos.CENTER);
 
-        statboard.setBackground(
-                new Background(
-                        new BackgroundImage(
-                                AssetsManager.getImageByAssetId(
-                                        AssetIds.STATBOARD_BACKGROUND_SCROLL,
-                                        NpcRoomViewConstants.STATBOARD_BG_WIDTH,
-                                        NpcRoomViewConstants.STATBOARD_BG_HEIGHT,
-                                        HellViewConstants.STAT_BOARD_BG_IMG_PRESERVE_RATIO,
-                                        HellViewConstants.STAT_BOARD_BG_IMG_SMOOTH),
-                                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                                BackgroundSize.DEFAULT
-                        )
-                )
-        );
+        statboard.setBackground(NpcRoomViewConstants.STAT_BOARD_BG);
 
         // create visualization of remaining free actions for this room
         if (room != null)

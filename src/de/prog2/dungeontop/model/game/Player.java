@@ -35,7 +35,7 @@ public class Player implements Serializable
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);
         this.hpProperty = new SerializableSimpleIntegerProperty(GameConstants.DEFAULT_PLAYER_MAX_HP);
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
-        this.deck = DeckController.getRandomDeck();
+        this.deck = DeckController.getRandomDeck(GameConstants.PLAYER_DECK_USE_ALL_CARDS);
     }
     public Player (int souls, int healthPoints){
         this.hpProperty = new SerializableSimpleIntegerProperty(healthPoints);

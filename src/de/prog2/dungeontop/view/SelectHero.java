@@ -32,8 +32,8 @@ public class SelectHero
 
 
     /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Hero-Button gedrueckt wird.
-     * Hero's Werte(Angriffe, usw.) wird jetzt gezeigt.
+     * Dies sind die Eventmethoden, welche ausgefuehrt werden, wenn auf einen der Hero-Button gedrueckt wird.
+     * Anzeige der Hero-Werte(Angriff, usw.) wird in der aktuellen Ansicht aktualisiert.
      */
     @FXML
     private void onHero1ButtonClicked()
@@ -57,12 +57,13 @@ public class SelectHero
     }
 
     /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Confirm-Button gedrueckt wird.
-     * Held-Auswahl wird bestätigt und der Spieler geht zur nächsten Szene (Hell) über
+     * Dies ist die Eventmethode, welche ausgefuehrt wird, wenn auf den Confirm-Button gedrueckt wird.
+     * Helden-Auswahl wird bestaetigt und der Spieler wechselt zur naechsten Szene (Hell)
      */
     @FXML
     private void onConfirmButtonClicked()
     {
+        // get the player's hero and make sure it is not null
         Hero playerHero = PlayerManager.getInstance().getPlayerHero();
         if (playerHero == null)
         {
@@ -70,6 +71,7 @@ public class SelectHero
             return;
         }
 
+        // set the ID for the asset that depicts the hero in the HellView depending on the selected hero
         if (playerHero == SelectHeroConstants.WARRIOR)
             HellView.setPlayerAssetId(AssetIds.WARRIOR);
         else if (playerHero == SelectHeroConstants.MAGE)
@@ -77,18 +79,20 @@ public class SelectHero
         else if (playerHero == SelectHeroConstants.ROGUE)
             HellView.setPlayerAssetId(AssetIds.ROGUE);
 
+        // initialize a new game world and go to the HellView
         GameManager.getInstance().getGameWorld().initWorld();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
 
-
+        // bind the hp of the Player to it's Hero Entity
         PlayerManager.getInstance().getPlayerHpProperty().bindBidirectional(PlayerManager.getInstance().getPlayerHero().getHpProperty());
 
+        // set the gameworld that will be saved upon exiting the game
         GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
     }
 
     /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Return-Button gedrueckt wird.
-     * Der Spieler kehrt zum Hauptmenü zurück.
+     * Dies ist die Eventmethode, welche ausgefuehrt wird, wenn auf den Return-Button gedrueckt wird.
+     * Der Spieler kehrt zum Hauptmenue zurück.
      */
     @FXML
     private void onReturnButtonClicked() throws IOException
@@ -99,6 +103,12 @@ public class SelectHero
         DungeonTop.getStage().setScene(scene);
     }
 
+    /**
+     * Sets the description text of a selected hero.
+     * This includes his base stats, talent and name.
+     *
+     * @param hero Hero for whom the description shall be shown.
+     */
     public void selectHeroFillText(Hero hero)
     {
         getHeroClass().setText(SelectHeroConstants.PLAYER_CLASS + hero.getName());

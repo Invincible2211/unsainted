@@ -1,11 +1,18 @@
 package de.prog2.dungeontop.resources;
 
+import de.prog2.dungeontop.control.manager.AssetsManager;
 import javafx.geometry.Insets;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public interface HellViewConstants
 {
+    // Scene Backgrounds
+    Background BLACK_BG = new Background(new BackgroundFill(Color.BLACK, null, null));
+    Background LAVA_BG_ANIMATED = new Background(new BackgroundImage(AssetsManager.getImageByAssetId(AssetIds.HELL_LAVA_BG),
+            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT));
+
     // tile constants
     int HORIZONTAL_TILES = WorldConstants.HELL_SIZE * WorldConstants.ROOM_SIZE;
     int VERTICAL_TILES = WorldConstants.HELL_SIZE * WorldConstants.ROOM_SIZE;
@@ -17,6 +24,7 @@ public interface HellViewConstants
     // scene constants
     int SCENE_STARTUP_HEIGHT = 1080;
     int SCENE_STARTUP_WIDTH = 1920;
+    Background SCENE_BG = BLACK_BG;
 
     // biggest y coordinate on the canvas
     int TRANSFORM_Y_COORDINATE = WorldConstants.HELL_SIZE * WorldConstants.ROOM_SIZE * ROOM_TILE_HEIGHT;
@@ -25,26 +33,6 @@ public interface HellViewConstants
     double PLAYER_MOVESPEED = ROOM_TILE_FIT_HEIGHT * WorldConstants.ROOM_SIZE;
     double PLAYER_FIT_WIDTH = 200;
     double PLAYER_FIT_HEIGHT = 200;
-
-    // statboard constants
-    int OVERLAY_BUTTON_NUMBER = 2;
-    double PLAYER_STATS_HGAP = 10;
-    double STAT_BOARD_WIDTH_MULTI = 2;
-    int STAT_BOARD_TEXT_SIZE = 18;
-    Font STAT_BOARD_FONT = new Font(STAT_BOARD_TEXT_SIZE);
-    double STAT_BOARD_ICON_WIDTH = 50;
-    double STAT_BOARD_ICON_HEIGHT = 50;
-    Insets STAT_BOARD_ELEMENT_PADDING = new Insets(STAT_BOARD_ICON_HEIGHT/6, STAT_BOARD_ICON_WIDTH,
-            STAT_BOARD_ICON_HEIGHT/6, STAT_BOARD_ICON_WIDTH);
-    Insets STAT_BOARD_ICON_TEXT_DISTANCE = new Insets(0, 25, 0, 25);
-    BackgroundSize STAT_BOARD_BACKGROUND_SIZE =  new BackgroundSize(100, 100,
-            true, true, false, true);
-    boolean STAT_BOARD_BG_IMG_PRESERVE_RATIO = false;
-    boolean STAT_BOARD_BG_IMG_SMOOTH = true;
-
-    String HP_SUBTITLE = "HP";
-    String SOUL_SUBTITLE = "Souls";
-    String EMPTY_STRING = "";
 
     // setting button constants
     double OVERLAY_BUTTON_FIT_HEIGHT = 100;
@@ -67,6 +55,41 @@ public interface HellViewConstants
             "; -fx-background-color: #e0c59f; -fx-border-color: black; -fx-border-width: " + OVERLAY_BUTTON_BORDER_WIDTH +
             "; -fx-background-radius: " + SETTINGS_BG_RADIUS + "; -fx-border-insets: " + SETTINGS_BORDER_INSETS +"; " +
             "-fx-padding: " + OVERLAY_BUTTON_PADDING + ";";
+
+    // statboard constants
+    int OVERLAY_BUTTON_NUMBER = 2;
+    double PLAYER_STATS_HGAP = 10;
+    double STAT_BOARD_WIDTH_MULTI = 2;
+    int STAT_BOARD_TEXT_SIZE = 18;
+    Font STAT_BOARD_FONT = new Font(STAT_BOARD_TEXT_SIZE);
+    double STAT_BOARD_ICON_WIDTH = 50;
+    double STAT_BOARD_ICON_HEIGHT = 50;
+    Insets STAT_BOARD_ELEMENT_PADDING = new Insets(STAT_BOARD_ICON_HEIGHT/6, STAT_BOARD_ICON_WIDTH,
+            STAT_BOARD_ICON_HEIGHT/6, STAT_BOARD_ICON_WIDTH);
+    Insets STAT_BOARD_ICON_TEXT_DISTANCE = new Insets(0, 25, 0, 25);
+    BackgroundSize STAT_BOARD_BACKGROUND_SIZE =  new BackgroundSize(100, 100,
+            true, true, false, true);
+    boolean STAT_BOARD_BG_IMG_PRESERVE_RATIO = false;
+    boolean STAT_BOARD_BG_IMG_SMOOTH = true;
+    double STAT_BOARD_PREF_HEIGHT = OVERLAY_BUTTON_FIT_HEIGHT;
+    double STAT_BOARD_PREF_WIDTH = SCENE_STARTUP_WIDTH  - HellViewConstants.OVERLAY_BUTTON_FIT_WIDTH *
+            HellViewConstants.STAT_BOARD_WIDTH_MULTI * HellViewConstants.OVERLAY_BUTTON_NUMBER;
+
+    Background STAT_BOARD_BG = new Background(new BackgroundImage
+            (
+                    AssetsManager.getImageByAssetId(AssetIds.STATBOARD_BACKGROUND_SCROLL,
+                            STAT_BOARD_PREF_WIDTH, STAT_BOARD_PREF_HEIGHT,
+                            HellViewConstants.STAT_BOARD_BG_IMG_PRESERVE_RATIO,
+                            HellViewConstants.STAT_BOARD_BG_IMG_SMOOTH),
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    HellViewConstants.STAT_BOARD_BACKGROUND_SIZE)
+    );
+
+    String HP_SUBTITLE = "HP";
+    String SOUL_SUBTITLE = "Souls";
+    String EMPTY_STRING = "";
+
+
 
     // container pane constants
     double PANE_WIDTH = HORIZONTAL_TILES * ROOM_TILE_WIDTH;
