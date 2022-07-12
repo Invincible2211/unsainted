@@ -33,7 +33,9 @@ public class ArtifactClicked
         ItemView.hideStage();
     }
 
-    //TODO maybe artifacts instead of increasing health increases maxhealth instead
+    /**
+     * Method to equip Artifact to slot 1
+     */
     public void onEquipArtifactClicked() throws IOException
     {
         if (!PlayerManager.getInstance().getPlayer().getArtifactSlot1().isEmpty())
@@ -62,6 +64,9 @@ public class ArtifactClicked
         onReturnButtonClicked();
     }
 
+    /**
+     * Method to equip Artifact to slot 2
+     */
     public void onEquipArtifactClicked2() throws IOException
     {
         if (!PlayerManager.getInstance().getPlayer().getArtifactSlot2().isEmpty())

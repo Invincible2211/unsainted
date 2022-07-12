@@ -12,6 +12,11 @@ import javafx.scene.layout.AnchorPane;
 
 public class ItemClickedController
 {
+    /**
+     * Initialize the pop-up view for a consumable.
+     * The overlay consists of buttons, images and texts
+     * @param item clicked Item.
+     */
     public static AnchorPane getItemClicked(Item item)
     {
         try
@@ -29,6 +34,11 @@ public class ItemClickedController
         }
     }
 
+    /**
+     * Initialize the pop-up view for a weapon.
+     * The overlay consists of buttons, images and texts
+     * @param item clicked Item.
+     */
     public static AnchorPane getWeaponClicked(Item item)
     {
         try
@@ -46,6 +56,11 @@ public class ItemClickedController
         }
     }
 
+    /**
+     * Initialize the pop-up view for an artifact.
+     * The overlay consists of buttons, images and texts
+     * @param item clicked Item.
+     */
     public static AnchorPane getArtifactClicked(Item item)
     {
         try

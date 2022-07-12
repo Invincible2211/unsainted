@@ -33,6 +33,9 @@ public class WeaponClicked
         ItemView.hideStage();
     }
 
+    /**
+     * Method to equip weapon
+     */
     public void onEquipWeaponClicked() throws IOException
     {
         if(!PlayerManager.getInstance().getPlayer().getWeaponSlot().isEmpty())

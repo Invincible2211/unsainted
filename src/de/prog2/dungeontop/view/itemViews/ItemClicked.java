@@ -33,6 +33,9 @@ public class ItemClicked
         ItemView.hideStage();
     }
 
+    /**
+     * Method for when player uses Consumables
+     */
     public void onUseItemButtonClicked() throws IOException
     {
         PlayerManager.getInstance().addHp(getItem().getValue());
