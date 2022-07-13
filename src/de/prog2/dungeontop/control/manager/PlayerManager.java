@@ -76,7 +76,7 @@ public class PlayerManager
     public static void removeItem (Item item)
     {
         instance.getPlayerInventory().removeItem(item);
-    }
+     }
 
     private void playerDied()
     {
