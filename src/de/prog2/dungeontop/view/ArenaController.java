@@ -1,25 +1,18 @@
 package de.prog2.dungeontop.view;
 
-import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.CardViewController;
-import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.NetManager;
-import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
@@ -27,12 +20,13 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
-public class ArenaController {
-
+public class ArenaController
+{
     private double scale;
 
     private AnchorPane selected = null;
 
+    // TODO change EntityCard to Entity
     private HashMap<Coordinate, EntityCard> friendly = new HashMap<Coordinate, EntityCard>();
     private HashMap<Coordinate, EntityCard> opponent = new HashMap<Coordinate, EntityCard>();
 
@@ -213,83 +207,151 @@ public class ArenaController {
         this.selected = selected;
     }
 
-    private void addEventHandler(AnchorPane pane){
+    private void addEventHandler(AnchorPane pane)
+    {
         pane.setOnMouseClicked(event -> {
+            // TODO What is the difference between pane and source? (Not always the same??)
             AnchorPane source = (AnchorPane) event.getSource();
             AnchorPane selected = getSelected();
-            if (source != null){
-                Integer colIndex = GridPane.getColumnIndex(source);
-                Integer rowIndex = GridPane.getRowIndex(source);
-                if (source.getChildren().isEmpty()){
-                    if (selected != null){
-                        AnchorPane anchorPane = getNodeFromGridPane(colIndex,rowIndex);
-                        Integer colIndexSelected = GridPane.getColumnIndex(selected);
-                        Integer rowIndexSelected = GridPane.getRowIndex(selected);
-                        if (( (colIndex==colIndexSelected+1 && rowIndex==rowIndexSelected)|| (colIndex == colIndexSelected-1 && rowIndex==rowIndexSelected)) || ((rowIndex == rowIndexSelected-1 && colIndex == colIndexSelected)|| (rowIndex == rowIndexSelected+1 && colIndex == colIndexSelected))){
-                            arenaGridPane.getChildren().remove(selected);
-                            arenaGridPane.getChildren().remove(source);
-                            arenaGridPane.add(selected,colIndex,rowIndex);
-                            arenaGridPane.add(anchorPane,colIndexSelected,rowIndexSelected);
-                            friendly.put(new Coordinate(colIndex,rowIndex),friendly.remove(new Coordinate(colIndexSelected,rowIndexSelected)));
-                            setSelected(null);
-                            removeHighlight();
-                            NetManager.getInstance().getNetworkAPI().sendMoveEntity(new Coordinate(colIndexSelected,rowIndexSelected),new Coordinate(colIndex,rowIndex));
-                        }
-                    }
-                } else {
-                    if (selected == null){
-                        if (opponent.containsKey(new Coordinate(colIndex,rowIndex))){
-                            return;
-                        }
-                        removeHighlight();
-                        source.setStyle("-fx-background-color: black;");
-                        if (colIndex!=0){
-                            markField(colIndex-1,rowIndex);
-                        }
-                        if (colIndex < arenaGridPane.getColumnCount()){
-                            markField(colIndex+1,rowIndex);
-                        }
-                        if (rowIndex!=0){
-                            markField(colIndex,rowIndex-1);
-                        }
-                        if (rowIndex < arenaGridPane.getRowCount()){
-                            markField(colIndex,rowIndex+1);
-                        }
-                        setSelected(source);
-                    } else {
-                        if (friendly.containsKey(new Coordinate(colIndex,rowIndex))){
-                            for (Node node : arenaGridPane.getChildren()) {
-                                if (node instanceof AnchorPane){
-                                    AnchorPane pane1 = (AnchorPane) node;
-                                    pane1.setStyle("-fx-background-color: none;");
-                                }
-                            }
-                            setSelected(null);
-                        } else {
-                            Integer colIndexSelected = GridPane.getColumnIndex(selected);
-                            Integer rowIndexSelected = GridPane.getRowIndex(selected);
-                            for (Coordinate c:
-                                    friendly.keySet()) {
-                            }
-                            List<EntityCard> cards = BattleManager2.getInstance().battle(getFriendly().get(new Coordinate(colIndexSelected,rowIndexSelected)),getOpponent().remove(new Coordinate(colIndex,rowIndex)));
-                            arenaGridPane.getChildren().remove(source);
-                            opponent.remove(new Coordinate(colIndex, rowIndex));
-                            if (!cards.isEmpty()){
-                                getOpponent().put(new Coordinate(colIndex,rowIndex), cards.get(0));
-                            } else {
-                                NetManager.getInstance().getNetworkAPI().sendRemoveEntity(new Coordinate(colIndex,rowIndex));
-                                AnchorPane anchorPane = new AnchorPane();
-                                anchorPane.setPrefSize(170*scale, 170*scale);
-                                addEventHandler(anchorPane);
-                                arenaGridPane.add(anchorPane,colIndex,rowIndex);
-                            }
-                            removeHighlight();
-                            setSelected(null);
-                        }
+            if (source == null)
+            {
+                return;
+            }
+            if (source.getChildren().isEmpty()) // if the source is an empty field
+            {
+                handleMoveSelected(source, selected);
+                return;
+            }
+            if (selected == null)
+            {
+                handleSelect(source);
+                return;
+            }
+
+            Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+            if (friendly.containsKey(sourcePos))
+            {
+                for (Node node : arenaGridPane.getChildren())
+                {
+                    if (node instanceof AnchorPane pane1)
+                    {
+                        //pane1.setStyle("-fx-background-color: none;");
                     }
                 }
+                setSelected(null);
+            }
+            else
+            {
+                Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
+                for (Coordinate c : friendly.keySet())
+                {
+                    // TODO: Was soll dieses foreach machen?
                 }
+                List<EntityCard> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
+
+                arenaGridPane.getChildren().remove(source);
+                opponent.remove(sourcePos);
+                if (!cards.isEmpty())
+                {
+                    getOpponent().put(sourcePos, cards.get(0));
+                }
+                else
+                {
+                    NetManager.getInstance().getNetworkAPI().sendRemoveEntity(sourcePos);
+                    AnchorPane anchorPane = new AnchorPane();
+                    anchorPane.setPrefSize(170*scale, 170*scale);
+                    addEventHandler(anchorPane);
+                    arenaGridPane.add(anchorPane, sourcePos.getX(), sourcePos.getY());
+                }
+                removeHighlight();
+                setSelected(null);
+            }
         });
+    }
+
+    /**
+     * Handles the selection of a field.
+     * @param source the field that was clicked
+     */
+    private void handleSelect(AnchorPane source)
+    {
+        Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+        if (opponent.containsKey(sourcePos)){
+            return;
+        }
+        removeHighlight();
+        // TODO: Refactor this mess of ifs
+        source.setStyle("-fx-background-color: black;");
+        if (sourcePos.getX() !=0){
+            markField(sourcePos.getX() -1, sourcePos.getY());
+        }
+        if (sourcePos.getX() < arenaGridPane.getColumnCount()){
+            markField(sourcePos.getX() +1, sourcePos.getY());
+        }
+        if (sourcePos.getY() !=0){
+            markField(sourcePos.getX(), sourcePos.getY() -1);
+        }
+        if (sourcePos.getY() < arenaGridPane.getRowCount()){
+            markField(sourcePos.getX(), sourcePos.getY() +1);
+        }
+        setSelected(source);
+    }
+
+    /**
+     * Handles the move of a selected entity to a new field.
+     * @param source The current field.
+     * @param selected The selected field.
+     */
+    private void handleMoveSelected(AnchorPane source, AnchorPane selected)
+    {
+        Coordinate currentPos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+        Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
+
+        if (selected == null || isOutOfRange(currentPos, selectedPos)) return;
+
+        moveSourceToSelectedField(true, currentPos, selectedPos);
+
+        setSelected(null);
+        removeHighlight();
+        NetManager.getInstance().getNetworkAPI().sendMoveEntity(selectedPos, currentPos);
+    }
+
+    /**
+     * @param friendlyMove True if the friendly entity is moving, false if the opponent is moving.
+     * @param currentPos The current position of the entity.
+     * @param targetPos The target position of the entity.
+     */
+    private void moveSourceToSelectedField(boolean friendlyMove, Coordinate currentPos, Coordinate targetPos)
+    {
+        AnchorPane currentPane = getNodeFromGridPane(currentPos.getX(), currentPos.getY());
+        AnchorPane targetPane  = getNodeFromGridPane(targetPos.getX(), targetPos.getY());
+
+        arenaGridPane.getChildren().remove(targetPane);
+        arenaGridPane.getChildren().remove(currentPane);
+        arenaGridPane.add(targetPane, currentPos.getX(), currentPos.getY());
+        arenaGridPane.add(currentPane, targetPos.getX(), targetPos.getY());
+
+        if (friendlyMove)
+        {
+            friendly.put(currentPos, friendly.remove(targetPos));
+        }
+        else
+        {
+            currentPane.setStyle("-fx-background-color: black");
+            opponent.put(targetPos, opponent.remove(currentPos));
+        }
+    }
+
+    // TODO: Methodennamen passend umbenennen
+    /**
+     * Checks if the selected field is in range of the source field
+     */
+    private boolean isOutOfRange(Coordinate currentPos, Coordinate targetPos)
+    {
+        return (currentPos.getX() != targetPos.getX() + 1 || currentPos.getY() != targetPos.getY()) &&
+                (currentPos.getX() != targetPos.getX() - 1 || currentPos.getY() != targetPos.getY()) &&
+                (currentPos.getY() != targetPos.getY() - 1 || currentPos.getX() != targetPos.getX()) &&
+                (currentPos.getY() != targetPos.getY() + 1 || currentPos.getX() != targetPos.getX());
     }
 
     public HashMap<Coordinate, EntityCard> getFriendly() {
@@ -315,32 +377,9 @@ public class ArenaController {
 
     }
 
-    public void move(Coordinate pos, Coordinate target) {
-        /*
-        for (int x = 0; x < 6; x++)
-        {
-            for (int y = 0; y < 6; y++)
-            {
-                System.out.println(getNodeFromGridPane(x, y).getChildren());
-            }
-        }
-
-         */
-        AnchorPane pane = getNodeFromGridPane(pos.getX(), pos.getY());
-        System.out.println(pane.getChildren().isEmpty());
-        AnchorPane targetPane = getNodeFromGridPane(target.getX(), target.getY());
-        System.out.println(targetPane.getChildren().isEmpty());
-        //arenaGridPane.getChildren().remove(pane);
-        //arenaGridPane.getChildren().remove(targetPane);
-        //arenaGridPane.add(pane, target.getX(),target.getY());
-        //arenaGridPane.add(targetPane, pos.getX(),pos.getY());
-
-        pane.setStyle("-fx-background-color: black");
-        arenaGridPane.getChildren().remove(targetPane);
-        arenaGridPane.getChildren().remove(pane);
-        arenaGridPane.add(targetPane,pos.getX(),pos.getY());
-        arenaGridPane.add(pane,target.getX(),target.getY());
-        opponent.put(target,opponent.remove(pos));
+    public void move(Coordinate pos, Coordinate target)
+    {
+        moveSourceToSelectedField(false, pos, target);
     }
 
     public void remove(Coordinate pos) {
