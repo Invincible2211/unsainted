@@ -133,26 +133,24 @@ public class PlayerManager
     {
         player.getHero().setAttackDamage(player.getHero().getAttackDamage() + item.getValue());
     }
-    public void revertArtAttackBonus()
+    public void revertArtAttackBonus(Item item)
     {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() - player.getArtifactSlots().get(0).getValue());
+        player.getHero().setAttackDamage(player.getHero().getAttackDamage() - item.getValue());
     }
     public void addArtSoulsBonus(Item item)
     {
         player.setSoulArtBonus(player.getSoulArtBonus() + item.getValue());
     }
-    public void revertArtSoulsBonus()
+    public void revertArtSoulsBonus(Item item)
     {
-        player.setSoulArtBonus(player.getSoulArtBonus() + player.getArtifactSlots().get(0).getValue());
+        player.setSoulArtBonus(player.getSoulArtBonus() + item.getValue());
     }
     public void addArtDefenseBonus(Item item)
     {
         player.setDefArtBonus(player.getDefArtBonus() + item.getValue());
     }
-    public void revertArtDefenseBonus()
+    public void revertArtDefenseBonus(Item item)
     {
-        player.setDefArtBonus(player.getDefArtBonus() + player.getArtifactSlots().get(0).getValue());
+        player.setDefArtBonus(player.getDefArtBonus() + item.getValue());
     }
-
-
 }

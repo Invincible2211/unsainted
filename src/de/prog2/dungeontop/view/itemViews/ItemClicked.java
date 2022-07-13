@@ -48,15 +48,15 @@ public class ItemClicked
                 Item item1 = PlayerManager.getInstance().getPlayer().getArtifactSlots().get(0);
                 if (item1.getBonusType().equals(BonusType.SOULS))
                 {
-                    PlayerManager.getInstance().revertArtSoulsBonus();
+                    PlayerManager.getInstance().revertArtSoulsBonus(item1);
                 }
                 else if (item1.getBonusType().equals(BonusType.DEFENSE))
                 {
-                    PlayerManager.getInstance().revertArtDefenseBonus();
+                    PlayerManager.getInstance().revertArtDefenseBonus(item1);
                 }
                 else
                 {
-                    PlayerManager.getInstance().revertArtAttackBonus();
+                    PlayerManager.getInstance().revertArtAttackBonus(item1);
                 }
                 PlayerManager.addItem(PlayerManager.getInstance().getPlayer().getArtifactSlots().get(0));
                 PlayerManager.getInstance().getPlayer().getArtifactSlots().remove(0);
