@@ -18,8 +18,9 @@ public class PlayerManager
         initPlayerData();
     }
 
-    public void addSouls(int amount){
-        player.setSouls(player.getSouls() + amount);
+    public void addSouls(int amount)
+    {
+        player.setSouls((player.getSouls() + amount + (int) Math.floor((float)(amount*player.getSoulArtBonus()/100))));
     }
 
     public void removeSouls(int amount)
@@ -47,7 +48,7 @@ public class PlayerManager
 
     public void removeHp (int amount)
     {
-        player.setHp(player.getHp() - amount);
+        player.setHp(player.getHp() - (amount - (int)Math.floor((float)(amount*player.getDefArtBonus()/100))));
     }
 
     public SimpleIntegerProperty getPlayerHpProperty ()
@@ -72,12 +73,9 @@ public class PlayerManager
     {
         return player.getMax_ego_points();
     }
-    public static void removeItem (Valuable item)
+    public static void removeItem (Item item)
     {
-        if (item instanceof  Item)
-            instance.getPlayer().getInventory().removeItem((Item)item);
-        else if (item instanceof Card)
-            instance.getPlayer().getDeck().removeCard((Card) item);
+        instance.getPlayerInventory().removeItem(item);
     }
 
     private void playerDied()
@@ -113,5 +111,14 @@ public class PlayerManager
     public void setPlayer(Player player)
     {
         this.player = player;
+    }
+
+    public void addEquipAttackBonus()
+    {
+        player.getHero().setAttackDamage(player.getHero().getAttackDamage() + player.getWeaponSlot().get(0).getValue());
+    }
+    public void revertEquipAttackBonus()
+    {
+        player.getHero().setAttackDamage(player.getHero().getAttackDamage() - player.getWeaponSlot().get(0).getValue());
     }
 }
