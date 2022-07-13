@@ -30,12 +30,14 @@ public class Player implements Serializable
     private List<Item> weaponSlot = new ArrayList<>();
     private List<Item> artifactSlot1 = new ArrayList<>();
     private List<Item> artifactSlot2 = new ArrayList<>();
+    private int soulArtBonus = 0;
+    private int defArtBonus = 0;
 
     public Player (){
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);
         this.hpProperty = new SerializableSimpleIntegerProperty(GameConstants.DEFAULT_PLAYER_MAX_HP);
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
-        this.deck = DeckController.getRandomDeck();
+        this.deck = DeckController.getRandomDeck(GameConstants.PLAYER_DECK_USE_ALL_CARDS);
     }
     public Player (int souls, int healthPoints){
         this.hpProperty = new SerializableSimpleIntegerProperty(healthPoints);
@@ -145,5 +147,25 @@ public class Player implements Serializable
     public List<Item> getArtifactSlot2()
     {
         return artifactSlot2;
+    }
+
+    public int getSoulArtBonus()
+    {
+        return soulArtBonus;
+    }
+
+    public void setSoulArtBonus(int soulArtBonus)
+    {
+        this.soulArtBonus = soulArtBonus;
+    }
+
+    public int getDefArtBonus()
+    {
+        return defArtBonus;
+    }
+
+    public void setDefArtBonus(int defArtBonus)
+    {
+        this.defArtBonus = defArtBonus;
     }
 }

@@ -3,31 +3,23 @@ package de.prog2.dungeontop.model.items;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
-public class Item
+public abstract class Item
 {
     private final String name;
     private final String description;
     private int value; // value for heals, etc
-    private ItemType itemType;
+    private BonusType bonusType;
     private int price;
     private final int assetID;
 
-    public Item(String name, String description, int value, int price, ItemType itemType, int assetID) {
+    public Item(String name, String description, int value, int price, BonusType bonusType, int assetID) {
         this.name = name;
         this.description = description;
         this.value = value;
         this.price = price;
-        this.itemType = itemType;
+        this.bonusType = bonusType;
         this.assetID = assetID;
-        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.value, this.price, this.itemType, this.assetID));
-    }
-
-    public Item(String name, String description, int assetID)
-    {
-        this.name = name;
-        this.description = description;
-        this.assetID = assetID;
-        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.value, this.price, this.bonusType, this.assetID));
     }
 
     //Set- and Getters
@@ -46,9 +38,9 @@ public class Item
         return description;
     }
 
-    public ItemType getType()
+    public BonusType getBonusType()
     {
-        return itemType;
+        return bonusType;
     }
 
     public int getValue()

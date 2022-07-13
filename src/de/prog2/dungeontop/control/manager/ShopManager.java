@@ -43,10 +43,11 @@ public class ShopManager
 
         if(CardManager.getInstance().getLockedCards().contains(toUnlock)){
             if(player.getSouls() >= price){
+                // unlock the given card
                 playerManager.removeSouls(price);
                 CardManager.getInstance().getLockedCards().remove(toUnlock);
-
                 CardManager.getInstance().addUnlockedCard(toUnlock);
+                // unlock the other ranks of the unlocked card
                 for (int i = 1; i < DeckConstants.CARD_MAX_RANK; i++)
                 {
                     for (Card card : AvailableCards.AVAILABLE_CARDS)

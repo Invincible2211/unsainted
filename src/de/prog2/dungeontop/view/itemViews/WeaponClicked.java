@@ -3,7 +3,6 @@ package de.prog2.dungeontop.view.itemViews;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
-import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.fxml.FXML;
@@ -33,26 +32,23 @@ public class WeaponClicked
         ItemView.hideStage();
     }
 
+    /**
+     * Method to equip weapon
+     */
     public void onEquipWeaponClicked() throws IOException
     {
         if(!PlayerManager.getInstance().getPlayer().getWeaponSlot().isEmpty())
         {
-            PlayerManager.getInstance().getPlayer().getHero().setAttackDamage(
-                    PlayerManager.getInstance().getPlayer().getHero().getAttackDamage() -
-                    PlayerManager.getInstance().getPlayer().getWeaponSlot().get(0).getValue());
+            PlayerManager.getInstance().revertEquipAttackBonus();
 
             PlayerManager.getInstance().getPlayerInventory().
                     addItem(PlayerManager.getInstance().getPlayer().getWeaponSlot().get(0));
 
             PlayerManager.getInstance().getPlayer().getWeaponSlot().clear();
         }
-        PlayerManager.getInstance().getPlayer().getWeaponSlot().add(getItem());
-        PlayerManager.getInstance().getPlayerInventory().removeItem(getItem());
-
-
-        PlayerManager.getInstance().getPlayer().getHero().setAttackDamage(
-                PlayerManager.getInstance().getPlayer().getHero().getAttackDamage() +
-                        PlayerManager.getInstance().getPlayer().getWeaponSlot().get(0).getValue());
+        PlayerManager.getInstance().getPlayer().getWeaponSlot().add(item);
+        PlayerManager.removeItem(item);
+        PlayerManager.getInstance().addEquipAttackBonus();
 
 
         FXMLLoader fxmlLoader = new FXMLLoader();

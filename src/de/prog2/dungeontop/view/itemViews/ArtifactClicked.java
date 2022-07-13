@@ -3,7 +3,7 @@ package de.prog2.dungeontop.view.itemViews;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
-import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.model.items.BonusType;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.fxml.FXML;
@@ -33,23 +33,44 @@ public class ArtifactClicked
         ItemView.hideStage();
     }
 
-    //TODO maybe artifacts instead of increasing health increases maxhealth instead
+    /**
+     * Method to equip Artifact to slot 1
+     */
     public void onEquipArtifactClicked() throws IOException
     {
         if (!PlayerManager.getInstance().getPlayer().getArtifactSlot1().isEmpty())
         {
-            PlayerManager.getInstance().getPlayer().setHp(PlayerManager.getInstance().
-                    getPlayerHp() - PlayerManager.getInstance().getPlayer().getArtifactSlot1().get(0).getValue());
-
-            PlayerManager.getInstance().getPlayerInventory().addItem
-                    (PlayerManager.getInstance().getPlayer().getArtifactSlot1().get(0));
+            if (item.getBonusType().equals(BonusType.SOULS))
+            {
+                PlayerManager.getInstance().revertArtSoulsBonus1();
+            }
+            else if (item.getBonusType().equals(BonusType.DEFENSE))
+            {
+                PlayerManager.getInstance().revertArtDefenseBonus1();
+            }
+            else
+            {
+                PlayerManager.getInstance().revertArtAttackBonus1();
+            }
+            PlayerManager.addItem(PlayerManager.getInstance().getPlayer().getArtifactSlot1().get(0));
             PlayerManager.getInstance().getPlayer().getArtifactSlot1().clear();
         }
-        PlayerManager.getInstance().getPlayer().getArtifactSlot1().add(getItem());
-        PlayerManager.getInstance().getPlayerInventory().removeItem(getItem());
+        PlayerManager.getInstance().getPlayer().getArtifactSlot1().add(item);
+        PlayerManager.removeItem(item);
 
-        PlayerManager.getInstance().getPlayer().setHp(PlayerManager.getInstance().
-                getPlayerHp() + PlayerManager.getInstance().getPlayer().getArtifactSlot1().get(0).getValue());
+        if (item.getBonusType().equals(BonusType.SOULS))
+        {
+            PlayerManager.getInstance().addArtSoulsBonus1();
+        }
+        else if (item.getBonusType().equals(BonusType.DEFENSE))
+        {
+            PlayerManager.getInstance().addArtDefenseBonus1();
+        }
+        else
+        {
+            PlayerManager.getInstance().addArtAttackBonus1();
+        }
+
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
@@ -62,24 +83,43 @@ public class ArtifactClicked
         onReturnButtonClicked();
     }
 
+    /**
+     * Method to equip Artifact to slot 2
+     */
     public void onEquipArtifactClicked2() throws IOException
     {
         if (!PlayerManager.getInstance().getPlayer().getArtifactSlot2().isEmpty())
         {
-            PlayerManager.getInstance().getPlayer().setHp(PlayerManager.getInstance().
-                    getPlayerHp() - PlayerManager.getInstance().getPlayer().getArtifactSlot2().get(0).getValue());
-
-            PlayerManager.getInstance().getPlayerInventory().addItem
-                    (PlayerManager.getInstance().getPlayer().getArtifactSlot2().get(0));
+            if (item.getBonusType().equals(BonusType.SOULS))
+            {
+                PlayerManager.getInstance().revertArtSoulsBonus2();
+            }
+            else if (item.getBonusType().equals(BonusType.DEFENSE))
+            {
+                PlayerManager.getInstance().revertArtDefenseBonus2();
+            }
+            else
+            {
+                PlayerManager.getInstance().revertArtAttackBonus2();
+            }
+            PlayerManager.addItem(PlayerManager.getInstance().getPlayer().getArtifactSlot2().get(0));
             PlayerManager.getInstance().getPlayer().getArtifactSlot2().clear();
         }
-        PlayerManager.getInstance().getPlayer().getArtifactSlot2().add(getItem());
-        PlayerManager.getInstance().getPlayerInventory().removeItem(getItem());
+        PlayerManager.getInstance().getPlayer().getArtifactSlot2().add(item);
+        PlayerManager.removeItem(item);
 
-
-        PlayerManager.getInstance().getPlayer().setHp(PlayerManager.getInstance().
-                getPlayerHp() + PlayerManager.getInstance().getPlayer().getArtifactSlot2().get(0).getValue());
-
+        if (item.getBonusType().equals(BonusType.SOULS))
+        {
+            PlayerManager.getInstance().addArtSoulsBonus2();
+        }
+        else if (item.getBonusType().equals(BonusType.DEFENSE))
+        {
+            PlayerManager.getInstance().addArtDefenseBonus2();
+        }
+        else
+        {
+            PlayerManager.getInstance().addArtAttackBonus2();
+        }
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));

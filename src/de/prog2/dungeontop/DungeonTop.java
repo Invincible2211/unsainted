@@ -240,7 +240,7 @@ public class DungeonTop extends Application
 
     public static void testDeckCreation ()
     {
-        System.out.println(DeckController.getRandomDeck());
+        System.out.println(DeckController.getRandomDeck(false));
     }
 
     public static Stage getStage()

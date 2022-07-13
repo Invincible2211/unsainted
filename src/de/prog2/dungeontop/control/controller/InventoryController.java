@@ -3,7 +3,6 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.view.itemViews.InventoryViewController;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 
 import java.util.List;
 
