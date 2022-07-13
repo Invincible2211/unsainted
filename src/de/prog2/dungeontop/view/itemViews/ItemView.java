@@ -1,12 +1,11 @@
 package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.control.controller.ItemClickedController;
-import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.ItemType;
+import de.prog2.dungeontop.model.items.Weapon;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,8 +18,6 @@ public class ItemView
     private ImageView itemImage;
     @FXML
     private Label itemName;
-    @FXML
-
     private Item item;
     private static Stage stage = new Stage();
 
@@ -31,12 +28,12 @@ public class ItemView
     public void itemButtonClicked()
     {
         AnchorPane rootPane;
-        if (getItem().getType().equals(ItemType.WAFFE))
+        if (item instanceof Weapon)
         {
             Item selectedItem = getItem();
             rootPane = ItemClickedController.getWeaponClicked(selectedItem);
         }
-        else if (getItem().getType().equals(ItemType.ARTEFAKT))
+        else if (item instanceof Artifact)
         {
             Item selectedItem = getItem();
             rootPane = ItemClickedController.getArtifactClicked(selectedItem);

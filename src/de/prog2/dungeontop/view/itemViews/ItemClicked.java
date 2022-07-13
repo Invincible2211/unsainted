@@ -5,7 +5,6 @@ import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.itemViews.ItemView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,8 +37,8 @@ public class ItemClicked
      */
     public void onUseItemButtonClicked() throws IOException
     {
-        PlayerManager.getInstance().addHp(getItem().getValue());
-        PlayerManager.getInstance().getPlayerInventory().removeItem(getItem());
+        PlayerManager.getInstance().addHp(item.getValue());
+        PlayerManager.getInstance().getPlayerInventory().removeItem(item);
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));

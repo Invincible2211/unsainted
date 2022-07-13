@@ -7,7 +7,6 @@ import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.view.itemViews.ItemView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 
 public class ItemViewController
 {
@@ -35,6 +34,10 @@ public class ItemViewController
         }
     }
 
+    /**
+     * create an ItemView for an equipped item.
+     *
+     */
     public static Node getEquippedItemView(Item item)
     {
         try

@@ -46,8 +46,8 @@ public class WeaponClicked
 
             PlayerManager.getInstance().getPlayer().getWeaponSlot().clear();
         }
-        PlayerManager.getInstance().getPlayer().getWeaponSlot().add(getItem());
-        PlayerManager.removeItem(getItem());
+        PlayerManager.getInstance().getPlayer().getWeaponSlot().add(item);
+        PlayerManager.removeItem(item);
         PlayerManager.getInstance().addEquipAttackBonus();
 
 
