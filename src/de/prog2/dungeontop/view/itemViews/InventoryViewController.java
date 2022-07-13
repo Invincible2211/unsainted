@@ -19,10 +19,7 @@ public class InventoryViewController
     @FXML
     GridPane weaponSlot;
     @FXML
-    GridPane artifactSlot1;
-    @FXML
-    GridPane artifactSlot2;
-
+    GridPane artifactSlots;
 
     public GridPane getGridPane()
     {
@@ -34,14 +31,9 @@ public class InventoryViewController
         return weaponSlot;
     }
 
-    public GridPane getArtifactSlot1()
+    public GridPane getArtifactSlots()
     {
-        return artifactSlot1;
-    }
-
-    public GridPane getArtifactSlot2()
-    {
-        return artifactSlot2;
+        return artifactSlots;
     }
 
     @FXML
