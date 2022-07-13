@@ -7,7 +7,7 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <AnchorPane fx:id="container" maxHeight="866" maxWidth="489" prefHeight="866" prefWidth="489"
-            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@view/cardViews/cardStyle.css"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@/view/cardViews/cardStyle.css"
             fx:controller="de.prog2.dungeontop.view.cardViews.EntityCardDetailView">
     <ImageView fx:id="backgroundImageView" fitHeight="866" fitWidth="489" />
     <!-- Summon Cost -->

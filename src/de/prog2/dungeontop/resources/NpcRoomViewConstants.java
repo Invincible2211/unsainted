@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.resources;
 
+import de.prog2.dungeontop.control.manager.AssetsManager;
 import javafx.geometry.Insets;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
 public interface NpcRoomViewConstants
@@ -13,6 +15,8 @@ public interface NpcRoomViewConstants
     double SCENE_PREF_WIDTH = 1920;
     double SCENE_PREF_HEIGHT = 1080;
     Insets SCROLL_PANE_PADDING = new Insets(0, 10, 0, 10);
+    boolean SOULS_ICO_PRESERVE_RATIO = false;
+    boolean SOULS_ICO_SMOOTH = false;
 
 
     double CLOSE_BUTTON_BORDER_RADIUS = 10;
@@ -25,7 +29,7 @@ public interface NpcRoomViewConstants
     double SMALL_BUTTON_PADDING = 5;
     double SMALL_BUTTON_BORDER_WIDTH = 5;
     boolean SMALL_BUTTON_FOCUS_TRAVERSABLE = false;
-    String CLOSE_BUTTON_STYLE = "-fx-border-radius: "+ CLOSE_BUTTON_BORDER_RADIUS +
+    String SMALL_BUTTON_STYLE = "-fx-border-radius: "+ CLOSE_BUTTON_BORDER_RADIUS +
             "; -fx-background-color: red; -fx-border-color: black; -fx-border-width: " + SMALL_BUTTON_BORDER_WIDTH +
             "; -fx-background-radius: " + CLOSE_BUTTON_BG_RADIUS + "; -fx-border-insets: " + CLOSE_BUTTON_INSETS +"; " +
             "-fx-padding: " + SMALL_BUTTON_PADDING + ";";
@@ -46,6 +50,7 @@ public interface NpcRoomViewConstants
 
     String DISCARD_BUTTON_TEXT = "Discard";
     String UPGRADE_BUTTON_TEXT = "Upgrade";
+    String SHOP_BUTTON_TEXT = "Unlock for ";
     String PRICE_TEXT = "Price: ";
     String SOULS_SUBTITLE = "Souls";
 
@@ -55,4 +60,17 @@ public interface NpcRoomViewConstants
 
     double BUTTON_PREF_WIDTH = 460;
     double BUTTON_PREF_HEIGHT = 120;
+
+    Background STAT_BOARD_BG = new Background(
+            new BackgroundImage(
+                    AssetsManager.getImageByAssetId(
+                            AssetIds.STATBOARD_BACKGROUND_SCROLL,
+                            NpcRoomViewConstants.STATBOARD_BG_WIDTH,
+                            NpcRoomViewConstants.STATBOARD_BG_HEIGHT,
+                            HellViewConstants.STAT_BOARD_BG_IMG_PRESERVE_RATIO,
+                            HellViewConstants.STAT_BOARD_BG_IMG_SMOOTH),
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT
+            )
+    );
 }

@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.model.game;
 
+import de.prog2.dungeontop.control.manager.CardManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
@@ -12,16 +14,18 @@ public abstract class Card implements Serializable
     private int rank = 1;
     private int price;
     private final int maxRank;
+    private final int ID;
     private int summonCost;
     private boolean selected = false;
 
-    public Card(int maxRank, int price, int rank, int summonCost)
+    public Card(int maxRank, int price, int rank, int summonCost, int ID)
     {
         GlobalLogger.log(LoggerStringValues.CARD_CREATED);
         this.maxRank = maxRank;
         this.price = price;
         this.rank = rank;
         this.summonCost = summonCost;
+        this.ID = ID;
     }
 
     public int getRank()
@@ -35,7 +39,19 @@ public abstract class Card implements Serializable
     }
     public void increaseRank()
     {
-        rank = rank < maxRank ? rank + 1 : maxRank;
+        if (this.getRank() >= this.getMaxRank())
+            return;
+        Deck playerDeck = PlayerManager.getInstance().getPlayer().getDeck();
+        playerDeck.removeCard(this);
+        System.out.println("Removed " + this);
+        for (Card card : CardManager.getInstance().getUnlockedCards())
+        {
+            if (this.getID() == (card.getID() - 1))
+            {
+                playerDeck.pushCard(card);
+                System.out.println("Added " + card);
+            }
+        }
     }
 
     public int getMaxRank()
@@ -67,10 +83,16 @@ public abstract class Card implements Serializable
         return selected;
     }
 
+    public int getID ()
+    {
+        return this.ID;
+    }
+
     public void setSelected (boolean selected)
     {
         this.selected = selected;
     }
+
 
     @Override
     public String toString()

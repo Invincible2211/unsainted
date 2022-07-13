@@ -19,13 +19,6 @@ import java.io.IOException;
 
 public class SelectHero
 {
-    private final Hero warrior = new Hero(SelectHeroConstants.WARRIOR_NAME, SelectHeroConstants.WARRIOR_HP,
-            SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.WARRIOR_MAX_MOVES, SelectHeroConstants.WARRIOR_TALENT);
-    private final Hero mage = new Hero(SelectHeroConstants.MAGE_NAME, SelectHeroConstants.MAGE_HP,
-            SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_MAX_MOVES, SelectHeroConstants.MAGE_TALENT);
-    private final Hero rogue = new Hero(SelectHeroConstants.ROGUE_NAME, SelectHeroConstants.ROGUE_HP,
-            SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_MAX_MOVES, SelectHeroConstants.ROGUE_TALENT);
-
     @FXML
     private Text heroClass;
     @FXML
@@ -39,37 +32,38 @@ public class SelectHero
 
 
     /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Hero-Button gedrueckt wird.
-     * Hero's Werte(Angriffe, usw.) wird jetzt gezeigt.
+     * Dies sind die Eventmethoden, welche ausgefuehrt werden, wenn auf einen der Hero-Button gedrueckt wird.
+     * Anzeige der Hero-Werte(Angriff, usw.) wird in der aktuellen Ansicht aktualisiert.
      */
     @FXML
     private void onHero1ButtonClicked()
     {
-        selectHeroFillText(warrior);
-        PlayerManager.getInstance().getPlayer().setHero(warrior);
+        selectHeroFillText(SelectHeroConstants.WARRIOR);
+        PlayerManager.getInstance().getPlayer().setHero(SelectHeroConstants.WARRIOR);
     }
 
     @FXML
     private void onHero2ButtonClicked()
     {
-        selectHeroFillText(mage);
-        PlayerManager.getInstance().getPlayer().setHero(mage);
+        selectHeroFillText(SelectHeroConstants.MAGE);
+        PlayerManager.getInstance().getPlayer().setHero(SelectHeroConstants.MAGE);
     }
 
     @FXML
     private void onHero3ButtonClicked()
     {
-        selectHeroFillText(rogue);
-        PlayerManager.getInstance().getPlayer().setHero(rogue);
+        selectHeroFillText(SelectHeroConstants.ROGUE);
+        PlayerManager.getInstance().getPlayer().setHero(SelectHeroConstants.ROGUE);
     }
 
     /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Confirm-Button gedrueckt wird.
-     * Held-Auswahl wird bestätigt und der Spieler geht zur nächsten Szene (Hell) über
+     * Dies ist die Eventmethode, welche ausgefuehrt wird, wenn auf den Confirm-Button gedrueckt wird.
+     * Helden-Auswahl wird bestaetigt und der Spieler wechselt zur naechsten Szene (Hell)
      */
     @FXML
     private void onConfirmButtonClicked()
     {
+        // get the player's hero and make sure it is not null
         Hero playerHero = PlayerManager.getInstance().getPlayerHero();
         if (playerHero == null)
         {
@@ -77,24 +71,28 @@ public class SelectHero
             return;
         }
 
-        if (playerHero == warrior)
+        // set the ID for the asset that depicts the hero in the HellView depending on the selected hero
+        if (playerHero == SelectHeroConstants.WARRIOR)
             HellView.setPlayerAssetId(AssetIds.WARRIOR);
-        else if (playerHero == mage)
+        else if (playerHero == SelectHeroConstants.MAGE)
             HellView.setPlayerAssetId(AssetIds.MAGICIAN);
-        else if (playerHero == rogue)
+        else if (playerHero == SelectHeroConstants.ROGUE)
             HellView.setPlayerAssetId(AssetIds.ROGUE);
 
+        // initialize a new game world and go to the HellView
         GameManager.getInstance().getGameWorld().initWorld();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
+
+        // bind the hp of the Player to it's Hero Entity
         PlayerManager.getInstance().getPlayerHpProperty().bindBidirectional(PlayerManager.getInstance().getPlayerHero().getHpProperty());
 
+        // set the gameworld that will be saved upon exiting the game
         GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
-        GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
     }
 
     /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Return-Button gedrueckt wird.
-     * Der Spieler kehrt zum Hauptmenü zurück.
+     * Dies ist die Eventmethode, welche ausgefuehrt wird, wenn auf den Return-Button gedrueckt wird.
+     * Der Spieler kehrt zum Hauptmenue zurück.
      */
     @FXML
     private void onReturnButtonClicked() throws IOException
@@ -106,18 +104,11 @@ public class SelectHero
     }
 
     /**
-     * Diese sind die Eventmethode, welche ausgefuehrt wird, wenn auf den Shop-Button gedrueckt wird.
-     * Der Spieler betritt das Shop.
+     * Sets the description text of a selected hero.
+     * This includes his base stats, talent and name.
+     *
+     * @param hero Hero for whom the description shall be shown.
      */
-    @FXML
-    private void onOpenShopButtonClicked() throws  IOException
-    {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
-        Scene scene = new Scene(root);
-        DungeonTop.getStage().setScene(scene);
-    }
-
     public void selectHeroFillText(Hero hero)
     {
         getHeroClass().setText(SelectHeroConstants.PLAYER_CLASS + hero.getName());

@@ -5,4 +5,5 @@ public interface GameConstants {
     int EGOPOINTS_PER_ROUND_INCREMENT = 1;
     int START_EGOPOINTS = 2;
     int MAX_EGO_POINTS = 99;
+    boolean PLAYER_DECK_USE_ALL_CARDS = false;
 }

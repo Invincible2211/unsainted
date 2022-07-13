@@ -2,8 +2,10 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.NpcController;
-import de.prog2.dungeontop.control.manager.AssetsManager;
-import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.file.GameSaveFileWriter;
+import de.prog2.dungeontop.control.manager.*;
+import de.prog2.dungeontop.model.exceptions.customexceptions.CardAlreadyMaxRankException;
+import de.prog2.dungeontop.model.exceptions.customexceptions.CardAlreadyUnlockedException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotEnoughSoulsException;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Deck;
@@ -13,12 +15,15 @@ import de.prog2.dungeontop.model.world.rooms.NPCRoom;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellViewConstants;
 import de.prog2.dungeontop.resources.NpcRoomViewConstants;
+import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.beans.binding.Bindings;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,12 +31,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.Stack;
 
 public class NpcRoomView
 {
-    // TODO: Add Button to close the view
-
     private Scene npcRoomView;
     private ScrollPane cardContainer;
     private NPCRoom room;
@@ -115,39 +119,74 @@ public class NpcRoomView
         AnchorPane.setLeftAnchor(statboard, NpcRoomViewConstants.STATBOARD_LEFT_ANCHOR);
         outerContainer.getChildren().add(statboard);
 
-        // add a button to close the view and return to the hellView
+        // add a button to close the view and return to the hellViewF
         Button closeButton = createSmallButton(AssetIds.SMALL_BUTTON_IMG);
         outerContainer.getChildren().add(closeButton);
         AnchorPane.setTopAnchor(closeButton, NpcRoomViewConstants.STATBOARD_TOP_ANCHOR);
         AnchorPane.setRightAnchor(closeButton, NpcRoomViewConstants.SMALL_BUTTON_FIT_WIDTH *
                 HellViewConstants.HALF);
-        closeButton.setOnAction(e ->
-                {
-                    if(HellView.getCurrHellView() != null)
-                        DungeonTop.getStage().setScene(HellView.getCurrHellView());
-                });
+        if (this.getRoom() != null)
+        {
+            closeButton.setOnAction(e ->
+            {
+                if (HellView.getCurrHellView() != null)
+                    DungeonTop.getStage().setScene(HellView.getCurrHellView());
+            });
+        }
+        else
+        {
+            // On pressing the close button of the shop (top right corner), the player returns to the main menu
+            closeButton.setOnAction(e ->
+            {
+                Scene mmScene = new Scene(new AnchorPane());
+                try {
+                    mmScene = new Scene(new FXMLLoader().load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML)));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
+                DungeonTop.getStage().setScene(mmScene);
+            });
+        }
 
         return scene;
     }
 
     /**
-     * Creates a grid that contains all the cards from the the players deck and buttons depending on the roomtype
+     * Depending on the room, show a grid containing cards, there are two cases which differ considerably:
+     *  1.  The room is one of the types used in the HellView.
+     *      Show the player's deck and a button with a fitting action.
+     *  2.  The room is null. In this case the shop shall be opened.
+     *      Show all locked cards and a button to unlock them.
      */
     private void loadDeck()
     {
-        Deck deck = PlayerManager.getInstance().getPlayer().getDeck();
         NPCRoom room = this.getRoom();
+        Deck deck = null;
+
+        // check whether to use the player's deck or the locked cards
+        if (room != null)
+            deck = PlayerManager.getInstance().getPlayer().getDeck();
+        else
+        {
+            deck = new Deck();
+            for (Card card : CardManager.getInstance().getLockedCards())
+                deck.pushCard(card);
+        }
 
         // create and configure the grid which will contain the cards from the players deck
         GridPane grid = new GridPane();
         grid.setHgap(NpcRoomViewConstants.GRID_HGAP);
         grid.setVgap(NpcRoomViewConstants.GRID_VGAP);
         grid.setPadding(NpcRoomViewConstants.GRID_PADDING);
+        grid.setPrefWidth(NpcRoomViewConstants.SCENE_PREF_WIDTH);
+        grid.setPrefHeight(NpcRoomViewConstants.SCENE_PREF_HEIGHT);
         grid.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+
         // get the scrollpane and set its content to be the grid
         this.getCardContainer().setContent(grid);
 
-        // get the cards from the players deck
+        // get the cards that shall be shown
         Stack<Card> cardStack = deck.getCards();
         // define the cell used for the first card
         int column = NpcRoomViewConstants.GRID_START_COLUMN, row = NpcRoomViewConstants.GRID_START_ROW;
@@ -163,9 +202,11 @@ public class NpcRoomView
 
             // add the corresponding buttons for the different room types
             if (room instanceof LavaPondRoom)
-                this.addLavaPondButtons(entry, card);
+                this.addLavaPondButton(entry, card);
             else if (room instanceof ForgeRoom)
-                this.addForgeButtons(entry, card);
+                this.addForgeButton(entry, card);
+            else
+                this.addShopButton(entry, card);
 
             // add the container element containing the cardView and buttons to the grid
             grid.add(entry, column, row);
@@ -186,9 +227,11 @@ public class NpcRoomView
      * @param container VBox that will contain the button
      * @param card card that will be discarded upon clicking the button
      */
-    private void addLavaPondButtons (VBox container, Card card)
+    private void addLavaPondButton(VBox container, Card card)
     {
         Button discard = createButton(NpcRoomViewConstants.DISCARD_BUTTON_TEXT);
+        discard.setMinHeight(NpcRoomViewConstants.BUTTON_PREF_HEIGHT);
+
         discard.setOnAction(e ->
         {
             try
@@ -220,16 +263,68 @@ public class NpcRoomView
      * @param container VBox that will contain the button
      * @param card card that will be upgraded upon clicking the button
      */
-    private void addForgeButtons (VBox container, Card card)
+    private void addForgeButton(VBox container, Card card)
     {
         Button upgrade = createButton(NpcRoomViewConstants.UPGRADE_BUTTON_TEXT);
+        upgrade.setMinHeight(NpcRoomViewConstants.BUTTON_PREF_HEIGHT);
 
         upgrade.setOnAction(e ->
         {
-            // TODO: Add functionality -> implement method to upgrade cards
-            // Idea being: upgrade card --> reload Grid
+            try
+            {
+                // if the room has remaining free actions the next action will cost nothing
+                // otherwise use a defined price
+                if (this.getRoom().getFreeActions() >= NpcRoomViewConstants.FREE_ACTION_COMPARATOR)
+                {
+                    NpcController.upgradeCard(card, NpcRoomViewConstants.FREE_ACTION_PRICE);
+                    this.getRoom().setFreeActions(this.getRoom().getFreeActions() -
+                            NpcRoomViewConstants.FREE_ACTION_DECREMENT);
+                }
+                else
+                {
+                    NpcController.upgradeCard(card, NpcRoomViewConstants.DEFAULT_PRICE);
+                }
+            }
+            catch(CardAlreadyMaxRankException | NotEnoughSoulsException ex)
+            {
+                ex.printStackTrace();
+            }
+
+            this.loadDeck();
         });
         container.getChildren().add(upgrade);
+    }
+
+    /**
+     * Adds a button to a container which can be used to unlock a card
+     *
+     * @param container VBox that will contain the button
+     * @param card card that will be unlocked upon clicking the button
+     */
+    private void addShopButton (VBox container, Card card)
+    {
+        Image test = AssetsManager.getImageByAssetId(AssetIds.SOUL_ICON, HellViewConstants.STAT_BOARD_ICON_WIDTH,
+                HellViewConstants.STAT_BOARD_ICON_HEIGHT, NpcRoomViewConstants.SOULS_ICO_PRESERVE_RATIO,
+                NpcRoomViewConstants.SOULS_ICO_SMOOTH);
+        Button unlock = createButton(NpcRoomViewConstants.SHOP_BUTTON_TEXT + card.getPrice());
+        unlock.setContentDisplay(ContentDisplay.RIGHT);
+        unlock.setGraphic(new ImageView(test));
+        unlock.setMinHeight(NpcRoomViewConstants.BUTTON_PREF_HEIGHT);
+
+        unlock.setOnAction(e ->
+        {
+            try
+            {
+                ShopManager.getInstance().unlockCard(card, card.getPrice());
+            }
+            catch (CardAlreadyUnlockedException | NotEnoughSoulsException ex)
+            {
+                ex.printStackTrace();
+            }
+            // after unlocking a new card reload the view
+            this.loadDeck();
+        });
+        container.getChildren().add(unlock);
     }
 
     /**
@@ -261,7 +356,8 @@ public class NpcRoomView
     }
 
     /**
-     * Create a small button to be used in the UI
+     * Create a small button to be used in the UI.
+     * The size matches the size of the statboard, so it is fitting to be used next to it.
      *
      * @param assetId ID of the asset which shall be used for the background of the button
      * @return button which shows the backgroundimage with corner radius and border
@@ -275,10 +371,11 @@ public class NpcRoomView
 
         // set the button style
         smallButton.setBackground(Background.EMPTY);
-        smallButton.setStyle(NpcRoomViewConstants.CLOSE_BUTTON_STYLE);
+        smallButton.setStyle(NpcRoomViewConstants.SMALL_BUTTON_STYLE);
 
         smallButton.setGraphic(buttonImageView);
 
+        // set the size of the button
         buttonImageView.setFitWidth(NpcRoomViewConstants.SMALL_BUTTON_FIT_WIDTH -
                 2 * NpcRoomViewConstants.SMALL_BUTTON_PADDING -
                 2 * NpcRoomViewConstants.SMALL_BUTTON_BORDER_WIDTH);
@@ -305,34 +402,23 @@ public class NpcRoomView
         statboard.setPrefSize(NpcRoomViewConstants.STATBOARD_BG_WIDTH, NpcRoomViewConstants.STATBOARD_BG_HEIGHT);
         statboard.setAlignment(Pos.CENTER);
 
-        statboard.setBackground(
-                new Background(
-                        new BackgroundImage(
-                                AssetsManager.getImageByAssetId(
-                                        AssetIds.STATBOARD_BACKGROUND_SCROLL,
-                                        NpcRoomViewConstants.STATBOARD_BG_WIDTH,
-                                        NpcRoomViewConstants.STATBOARD_BG_HEIGHT,
-                                        HellViewConstants.STAT_BOARD_BG_IMG_PRESERVE_RATIO,
-                                        HellViewConstants.STAT_BOARD_BG_IMG_SMOOTH),
-                                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                                BackgroundSize.DEFAULT
-                        )
-                )
-        );
+        statboard.setBackground(NpcRoomViewConstants.STAT_BOARD_BG);
 
         // create visualization of remaining free actions for this room
-        Text freebies = new Text();
-        freebies.textProperty().bind(Bindings.createStringBinding(
-                () -> NpcRoomViewConstants.PRICE_TEXT +
-                        (room.getFreeActions()>=NpcRoomViewConstants.FREE_ACTION_COMPARATOR?
-                                NpcRoomViewConstants.FREE_ACTION_PRICE:this.getPrice()),
-                room.getFreeActionsProperty()
-        ));
+        if (room != null)
+        {
+            Text freebies = new Text();
+            freebies.textProperty().bind(Bindings.createStringBinding(
+                    () -> NpcRoomViewConstants.PRICE_TEXT +
+                            (room.getFreeActions() >= NpcRoomViewConstants.FREE_ACTION_COMPARATOR ?
+                                    NpcRoomViewConstants.FREE_ACTION_PRICE : this.getPrice()),
+                    room.getFreeActionsProperty()
+            ));
 
-        freebies.setFont(NpcRoomViewConstants.STATBOARD_FONT);
-        statboard.getChildren().add(freebies);
-        statboard.setHgap(NpcRoomViewConstants.STATBOARD_HGAP);
-
+            freebies.setFont(NpcRoomViewConstants.STATBOARD_FONT);
+            statboard.getChildren().add(freebies);
+            statboard.setHgap(NpcRoomViewConstants.STATBOARD_HGAP);
+        }
 
         // Create the visualization of player souls
         HBox element = new HBox();

@@ -17,15 +17,15 @@ public interface TestConstants
     {
         ArrayList<Card> cards = new ArrayList<>();
         Entity harald = new Minion("Harald", 12, 5, 2, 450);
-        cards.add(new EntityCard(harald, 6, 99, 5, 3));
+        cards.add(new EntityCard(harald, 6, 99, 5, 3, 0));
         Entity james = new Minion("James", 4, 9, 3, 420);
-        cards.add(new EntityCard(james, 6, 120, 2, 1));
+        cards.add(new EntityCard(james, 6, 120, 2, 1, 0));
         Spell testSpell = new TestSpell();
-        cards.add(new SpellCard(testSpell, 6, 350, 6, 5));
+        cards.add(new SpellCard(testSpell, 6, 350, 6, 5, 0));
         Spell testSpell2 = new TestSpell();
-        cards.add(new SpellCard(testSpell2, 6, 30, 3, 10));
+        cards.add(new SpellCard(testSpell2, 6, 30, 3, 10, 0));
         Entity josef = new Minion("Josef", 10, 3, 6, 460);
-        cards.add(new EntityCard(josef, 6, 70, 4, 2));
+        cards.add(new EntityCard(josef, 6, 70, 4, 2, 0));
         return cards;
     }
     static List<Entity> getTestEntities()
