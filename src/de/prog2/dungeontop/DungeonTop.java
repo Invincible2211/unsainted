@@ -78,7 +78,14 @@ public class DungeonTop extends Application
         //testHellView(scene);
         //testLavaPondView(primaryStage);
         //testHell();
+        //testBattle();
     }
+
+    private void testBattle()
+    {
+        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), new Player());
+    }
+
     public void testHell()
     {
         Hell hell = new Hell(WorldConstants.HELL_SIZE, WorldConstants.HELL_SIZE);

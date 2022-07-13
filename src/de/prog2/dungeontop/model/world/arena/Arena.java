@@ -16,6 +16,7 @@ public class Arena implements Serializable
     private final int width;
     private Entity selectedEntity;
     private final HashMap<Coordinate, Entity> arenaHashmap = new HashMap<>();
+    private final HashMap<Coordinate, Entity> enemyHashmap = new HashMap<>();
     public Arena(int height, int width)
     {
         this.height = height;
