@@ -2,7 +2,6 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
-import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.NetManager;
@@ -10,15 +9,10 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -136,7 +130,7 @@ public class ArenaController
         Entity entity = entityCard.getEntity();
         entity.setCard(entityCard);
 
-        AnchorPane anchorPane = EntityViewController.tempGetEntityView(entity, scale);
+        AnchorPane anchorPane = EntityViewController.getEntityView(entity, scale);
 
         anchorPane.setOnMouseEntered(event -> cardView.getChildren().add(CardViewController.getCardDetailView(entity.getCard(),1)));
         anchorPane.setOnMouseExited(event -> cardView.getChildren().clear());
