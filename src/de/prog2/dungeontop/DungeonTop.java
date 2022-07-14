@@ -78,7 +78,7 @@ public class DungeonTop extends Application
         //testHellView(scene);
         //testLavaPondView(primaryStage);
         //testHell();
-        //testBattle();
+        testBattle();
     }
 
     private void testBattle()

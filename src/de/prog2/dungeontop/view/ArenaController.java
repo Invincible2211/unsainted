@@ -1,22 +1,18 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.control.controller.CardViewController;
-import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.NetManager;
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -128,56 +124,18 @@ public class ArenaController
         opponent.put(coordinate,entityCard);
     }
 
-    private AnchorPane createCard(EntityCard entityCard){
-        AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setPrefSize(170*scale, 170 * scale);
-        anchorPane.setStyle("-fx-background-image: url(assets/490_CardBackground.png);");
-        anchorPane.setStyle("-fx-background-size: cover;");
-        ImageView icon = null;
-        try {
-            icon = new ImageView(new Image(AssetsManager.getAssetById(entityCard.getEntity().getAssetId()).toURI().toURL().toString() ,100*scale, 100 *scale,true,true));
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        icon.setLayoutX(35*scale);
-        icon.setLayoutY(0);
-        ImageView attack = new ImageView(new Image("assets/520_Attack_Icon.png",50*scale, 50 *scale,true,true));
-        attack.setLayoutX(0);
-        attack.setLayoutY(70*scale);
-        attack.setOpacity(0.7);
-        ImageView live = new ImageView(new Image("assets/060_Heart.png",50*scale, 50 *scale,true,true));
-        live.setLayoutX(120*scale);
-        live.setLayoutY(70*scale);
-        live.setOpacity(0.7);
-        ImageView move = new ImageView(new Image("assets/510_Movement_Icon.png",50*scale, 50 *scale,true,true));
-        move.setLayoutX(60*scale);
-        move.setLayoutY(120*scale);
-        move.setOpacity(0.7);
-        anchorPane.getChildren().add(icon);
-        anchorPane.getChildren().add(attack);
-        anchorPane.getChildren().add(live);
-        anchorPane.getChildren().add(move);
-        Label attackL = modifyLabel(new Label(""+ entityCard.getEntity().getAttackDamage()),0,70);
-        Label liveL = modifyLabel(new Label(""+entityCard.getEntity().getHp()),120,70);
-        Label moveL = modifyLabel(new Label(""+entityCard.getEntity().getMovement()), 60,120);
-        anchorPane.getChildren().add(attackL);
-        anchorPane.getChildren().add(liveL);
-        anchorPane.getChildren().add(moveL);
-        anchorPane.setOnMouseEntered(event -> cardView.getChildren().add(CardViewController.getCardDetailView(entityCard,1)));
+    private AnchorPane createCard(EntityCard entityCard)
+    {
+        // this has to be done until the entityCard ist finally replaced with entity
+        Entity entity = entityCard.getEntity();
+        entity.setCard(entityCard);
+
+        AnchorPane anchorPane = EntityViewController.getEntityView(entity, scale);
+
+        anchorPane.setOnMouseEntered(event -> cardView.getChildren().add(CardViewController.getCardDetailView(entity.getCard(),1)));
         anchorPane.setOnMouseExited(event -> cardView.getChildren().clear());
         addEventHandler(anchorPane);
         return anchorPane;
-    }
-
-    private Label modifyLabel(Label label,int x, int y){
-        label.setLayoutX(x*scale);
-        label.setLayoutY(y*scale);
-        label.setPrefSize(50*scale,50*scale);
-        label.setFont(new Font(24*scale));
-        label.setAlignment(Pos.CENTER);
-        label.setStyle("-fx-font-size: "+24*scale+";");
-        label.setStyle("-fx-font-weight: bold;");
-        return label;
     }
 
     private AnchorPane getNodeFromGridPane(int col, int row) {
@@ -235,7 +193,7 @@ public class ArenaController
                 {
                     if (node instanceof AnchorPane pane1)
                     {
-                        //pane1.setStyle("-fx-background-color: none;");
+                        pane1.setStyle("-fx-background-color: none;");
                     }
                 }
                 setSelected(null);
