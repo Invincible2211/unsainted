@@ -17,5 +17,5 @@ public interface ItemConstants
     Item bracelet = new ExtraSoulsArtifact("Armband", "Wenn sie ausgerüstet ist, erhält der Spieler +1 Lebenspunkte", 1, 200, AssetIds.BRACELET);
 
     //Weapon
-    Item sword = new Weapon("Schwert", "Wenn sie ausgerüstet ist, erhält der Spieler +3 Angriff", 3, 500, AssetIds.SWORD);
+    Item sword = new Weapon("Schwert", "Wenn sie ausgerüstet ist, erhält der Spieler +3 Angriff", 5, AssetIds.SWORD, 3);
 }

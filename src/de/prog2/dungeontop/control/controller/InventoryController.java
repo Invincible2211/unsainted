@@ -15,6 +15,7 @@ public class InventoryController
      */
     public static void addItems(InventoryViewController inventoryView, List<Item> items)
     {
+        inventoryView.setHPText();
         int columns = 0, rows = 0;
         for (Item item : items)
         {
