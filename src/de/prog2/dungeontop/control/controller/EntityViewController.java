@@ -6,7 +6,9 @@ import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
+import de.prog2.dungeontop.resources.views.EntityConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.utils.ImageAssetUtils;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.EntityView;
 import javafx.fxml.FXMLLoader;
@@ -25,56 +27,57 @@ public abstract class EntityViewController
     public static AnchorPane tempGetEntityView(Entity entity, double scale)
     {
         AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setPrefSize(170*scale, 170 * scale);
-        anchorPane.setStyle("-fx-background-image: url(assets/490_CardBackground.png);");
-        anchorPane.setStyle("-fx-background-size: cover;");
-        anchorPane.getStylesheets().add("view/entityStyle.css");
-        ImageView icon = null;
-        try {
-            icon = new ImageView(new Image(AssetsManager.getAssetById(entity.getAssetId()).toURI().toURL().toString() ,100*scale, 100 *scale,true,true));
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        anchorPane.setPrefSize(EntityConstants.ENTITY_BASE_SIZE * scale, EntityConstants.ENTITY_BASE_SIZE * scale);
+        //TODO: Bilder für die Entities laden
+        //anchorPane.setStyle("-fx-background-image: url(assets/490_CardBackground.png);");
+        //anchorPane.setStyle("-fx-background-size: cover;");
+        anchorPane.getStylesheets().add(EntityConstants.ENTITY_STYLE);
 
-        icon.setLayoutX(35*scale);
-        icon.setLayoutY(0);
-        ImageView attack = new ImageView(new Image("assets/520_Attack_Icon.png",50*scale, 50 *scale,true,true));
-        attack.setLayoutX(0);
-        attack.setLayoutY(70*scale);
-        attack.setOpacity(0.7);
-        ImageView live = new ImageView(new Image("assets/060_Heart.png",50*scale, 50 *scale,true,true));
-        live.setLayoutX(120*scale);
-        live.setLayoutY(70*scale);
-        live.setOpacity(0.7);
-        ImageView move = new ImageView(new Image("assets/510_Movement_Icon.png",50*scale, 50 *scale,true,true));
-        move.setLayoutX(60*scale);
-        move.setLayoutY(120*scale);
-        move.setOpacity(0.7);
+        ImageView icon = ImageAssetUtils.upsertImageFromAssets(entity.getAssetId(), EntityConstants.ENTITY_IMAGE_SIZE * scale, EntityConstants.ENTITY_IMAGE_SIZE * scale);
+
+        icon.setLayoutX(EntityConstants.ENTITY_IMAGE_X * scale);
+        icon.setLayoutY(EntityConstants.ENTITY_IMAGE_Y * scale);
+        ImageView attack = ImageAssetUtils.upsertImageFromAssets(AssetIds.ATTACK_ICON, EntityConstants.ICON_SIZE * scale, EntityConstants.ICON_SIZE * scale);
+        attack.setLayoutX(EntityConstants.ATTACK_X * scale);
+        attack.setLayoutY(EntityConstants.ATTACK_Y * scale);
+        attack.setOpacity(EntityConstants.ICON_OPACITY);
+        ImageView hp = ImageAssetUtils.upsertImageFromAssets(AssetIds.HEART_ICON, EntityConstants.ICON_SIZE * scale, EntityConstants.ICON_SIZE * scale);
+        hp.setLayoutX(EntityConstants.HP_X * scale);
+        hp.setLayoutY(EntityConstants.HP_Y * scale);
+        hp.setOpacity(EntityConstants.ICON_OPACITY);
+        ImageView move = ImageAssetUtils.upsertImageFromAssets(AssetIds.MOVEMENT_ICON, EntityConstants.ICON_SIZE * scale, EntityConstants.ICON_SIZE * scale);
+        move.setLayoutX(EntityConstants.MOVE_X * scale);
+        move.setLayoutY(EntityConstants.MOVE_Y * scale);
+        move.setOpacity(EntityConstants.ICON_OPACITY);
         anchorPane.getChildren().add(icon);
         anchorPane.getChildren().add(attack);
-        anchorPane.getChildren().add(live);
+        anchorPane.getChildren().add(hp);
         anchorPane.getChildren().add(move);
 
-        Label attackL = modifyLabel(new Label("" + entity.getAttackDamage()),0,70, scale);
-        Label liveL = modifyLabel(new Label("" + entity.getHp()),120,70, scale);
-        Label moveL = modifyLabel(new Label("" + entity.getMovement()), 60,120, scale);
+        Label attackL = modifyLabel(new Label("" + entity.getAttackDamage()), EntityConstants.ATTACK_X, EntityConstants.ATTACK_Y, scale);
+        Label hpL = modifyLabel(new Label("" + entity.getHp()),EntityConstants.HP_X,EntityConstants.HP_Y, scale);
+        Label moveL = modifyLabel(new Label("" + entity.getMovement()), EntityConstants.MOVE_X,EntityConstants.MOVE_Y, scale);
 
         anchorPane.getChildren().add(attackL);
-        anchorPane.getChildren().add(liveL);
+        anchorPane.getChildren().add(hpL);
         anchorPane.getChildren().add(moveL);
 
         return anchorPane;
     }
-    private static Label modifyLabel(Label label, int x, int y, double scale)
+
+    /**
+     * Modifies the label to the given position and size.
+     * @param label The label to modify.
+     * @param x The x layout-position.
+     * @param y The y layout-position.
+     */
+    private static Label modifyLabel(Label label, double x, double y, double scale)
     {
-        label.setLayoutX(x*scale);
-        label.setLayoutY(y*scale);
-        label.setPrefSize(50*scale,50*scale);
-        label.setFont(new Font(24*scale));
-        label.setAlignment(Pos.CENTER);
-        label.setStyle("-fx-font-size: "+24*scale+";");
-        //label.setStyle("-fx-font-weight: bold;");
-        label.getStyleClass().add("status-label");
+        label.setLayoutX(x * scale);
+        label.setLayoutY(y * scale);
+        label.setPrefSize(EntityConstants.ICON_SIZE * scale,EntityConstants.ICON_SIZE * scale);
+        label.setFont(new Font(EntityConstants.LABEL_FONT_SIZE * scale));
+        label.getStyleClass().add(EntityConstants.LABEL_STYLE);
         return label;
     }
 
