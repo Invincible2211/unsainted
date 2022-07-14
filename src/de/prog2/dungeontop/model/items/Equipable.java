@@ -4,4 +4,5 @@ public interface Equipable
 {
     boolean equip();
     boolean unequip();
+    boolean isEquipped();
 }

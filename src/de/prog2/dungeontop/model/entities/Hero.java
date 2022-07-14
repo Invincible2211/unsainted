@@ -46,11 +46,14 @@ public class Hero extends Entity
     public void removeArtifact(Artifact artifact)
     {
         artifacts.remove(artifact);
-        artifactSlots++;
     }
     public boolean hasArtifact(Artifact artifact)
     {
         return artifacts.contains(artifact);
+    }
+    public List<Artifact> getArtifacts()
+    {
+        return artifacts;
     }
     public int getArtifactSize()
     {

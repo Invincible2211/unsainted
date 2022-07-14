@@ -23,4 +23,10 @@ public abstract class Artifact extends Item implements Equipable
     {
         return ItemController.unequipArtifact(PlayerManager.getInstance().getPlayerHero(), this);
     }
+
+    @Override
+    public boolean isEquipped()
+    {
+        return PlayerManager.getInstance().getPlayerHero().hasArtifact(this);
+    }
 }

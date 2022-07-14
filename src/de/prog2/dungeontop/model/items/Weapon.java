@@ -26,6 +26,12 @@ public class Weapon extends Item implements Equipable
         return ItemController.unequipWeapon(hero);
     }
 
+    @Override
+    public boolean isEquipped()
+    {
+        return PlayerManager.getInstance().getPlayerHero().getWeapon() == this;
+    }
+
     public int getAttackDamage()
     {
         return attackDamage;

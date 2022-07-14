@@ -1,20 +1,15 @@
 package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.DungeonTop;
-import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.view.HellView;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 
-public class InventoryViewController
+public class InventoryView
 {
-
     @FXML
     GridPane gridPane;
     @FXML

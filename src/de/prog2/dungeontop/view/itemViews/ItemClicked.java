@@ -2,9 +2,12 @@ package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryController;
+import de.prog2.dungeontop.control.controller.InventoryViewController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.*;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,25 +44,45 @@ public class ItemClicked
      */
     public void onUseItemButtonClicked() throws IOException
     {
-        item.equip();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
-        InventoryController.equipWeapon(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getWeaponSlot());
-        InventoryController.equipArtifact(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getArtifactSlots());
-        InventoryController.addItems(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory().getInventory());
-        Scene scene = new Scene(root);
-        getStage().setScene(scene);
-        onReturnButtonClicked();
+        Equipable item = null;
+        try
+        {
+            item = (Equipable) getItem();
+        }
+        catch (ClassCastException e)
+        {
+            GlobalLogger.warning(e.getMessage());
+        }
+
+        if(item == null)
+        {
+            getItem().equip();
+            reloadInventory();
+            return;
+        }
+        if(item.isEquipped())
+        {
+            item.unequip();
+        }
+        else
+        {
+            item.equip();
+        }
+        reloadInventory();
     }
 
-    public void unEquipButton() throws IOException
+    private void reloadInventory() throws IOException
     {
-        ((Equipable)item).unequip();
+        Hero hero = PlayerManager.getInstance().getPlayerHero();
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
-        InventoryController.equipWeapon(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getWeaponSlot());
-        InventoryController.equipArtifact(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getArtifactSlots());
-        InventoryController.addItems(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory().getInventory());
+        if(hero.getWeapon() != null)
+        {
+            InventoryViewController.equipWeapon(fxmlLoader.getController(), hero.getWeapon());
+        }
+        InventoryViewController.equipArtifact(fxmlLoader.getController(), hero.getArtifacts());
+        InventoryViewController.initInventory(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
         onReturnButtonClicked();

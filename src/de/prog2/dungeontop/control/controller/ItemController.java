@@ -8,10 +8,14 @@ public class ItemController
 {
     public static boolean equipWeapon(Hero hero, Weapon weapon)
     {
-        if (!InventoryController.addItem(hero.getWeapon()))
+        if (hero.getWeapon() != null)
         {
-            return false;
+            if(!unequipWeapon(hero))
+            {
+                return false;
+            }
         }
+        InventoryController.removeItem(weapon);
         hero.setWeapon(weapon);
         return true;
     }
@@ -31,6 +35,7 @@ public class ItemController
         {
             return false;
         }
+        InventoryController.removeItem(artifact);
         hero.addArtifact(artifact);
         return true;
     }

@@ -10,8 +10,8 @@ public interface HellViewConstants
 {
     // Scene Backgrounds
     Background BLACK_BG = new Background(new BackgroundFill(Color.BLACK, null, null));
-    Background LAVA_BG_ANIMATED = new Background(new BackgroundImage(AssetsManager.getImageByAssetId(AssetIds.HELL_LAVA_BG),
-            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT));
+//    Background LAVA_BG_ANIMATED = new Background(new BackgroundImage(AssetsManager.getImageByAssetId(AssetIds.HELL_LAVA_BG),
+//            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT));
 
     // tile constants
     int HORIZONTAL_TILES = WorldConstants.HELL_SIZE * WorldConstants.ROOM_SIZE;
