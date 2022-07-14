@@ -39,7 +39,7 @@ public interface AssetIds
     int CENTER = 130;
     int COGWHEEL = 150;
     int BAG = 140;
-    int HELL_LAVA_BG = 101;
+    int HELL_LAVA_BG = 210;
 
     // PlayerImage on HellView
     // Default

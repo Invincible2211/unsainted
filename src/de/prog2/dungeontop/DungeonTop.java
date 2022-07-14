@@ -72,13 +72,13 @@ public class DungeonTop extends Application
         //BattleManager2.getInstance().startBattle(new Player(), new Player());
         //testArenaView();
         //testSelectHero(primaryStage);
-        //testInventory(primaryStage);
+        testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
         //testHellView(scene);
         //testLavaPondView(primaryStage);
         //testHell();
-        testBattle();
+        //testBattle();
     }
 
     private void testBattle()
