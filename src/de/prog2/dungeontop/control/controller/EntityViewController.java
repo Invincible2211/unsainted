@@ -2,10 +2,12 @@ package de.prog2.dungeontop.control.controller;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.EntityView;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -20,18 +22,20 @@ import java.net.MalformedURLException;
 
 public abstract class EntityViewController
 {
-    public static AnchorPane tempGetEntityView(Entity entity, double scale, AnchorPane cardDetailViewContainer)
+    public static AnchorPane tempGetEntityView(Entity entity, double scale)
     {
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefSize(170*scale, 170 * scale);
         anchorPane.setStyle("-fx-background-image: url(assets/490_CardBackground.png);");
         anchorPane.setStyle("-fx-background-size: cover;");
+        anchorPane.getStylesheets().add("view/entityStyle.css");
         ImageView icon = null;
         try {
             icon = new ImageView(new Image(AssetsManager.getAssetById(entity.getAssetId()).toURI().toURL().toString() ,100*scale, 100 *scale,true,true));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+
         icon.setLayoutX(35*scale);
         icon.setLayoutY(0);
         ImageView attack = new ImageView(new Image("assets/520_Attack_Icon.png",50*scale, 50 *scale,true,true));
@@ -50,18 +54,18 @@ public abstract class EntityViewController
         anchorPane.getChildren().add(attack);
         anchorPane.getChildren().add(live);
         anchorPane.getChildren().add(move);
+
         Label attackL = modifyLabel(new Label("" + entity.getAttackDamage()),0,70, scale);
         Label liveL = modifyLabel(new Label("" + entity.getHp()),120,70, scale);
         Label moveL = modifyLabel(new Label("" + entity.getMovement()), 60,120, scale);
+
         anchorPane.getChildren().add(attackL);
         anchorPane.getChildren().add(liveL);
         anchorPane.getChildren().add(moveL);
-        anchorPane.setOnMouseEntered(event -> cardDetailViewContainer.getChildren().add(CardViewController.getCardDetailView(entity.getCard(),1)));
-        anchorPane.setOnMouseExited(event -> cardDetailViewContainer.getChildren().clear());
-        //addEventHandler(anchorPane);
+
         return anchorPane;
     }
-    private static Label modifyLabel(Label label,int x, int y, double scale)
+    private static Label modifyLabel(Label label, int x, int y, double scale)
     {
         label.setLayoutX(x*scale);
         label.setLayoutY(y*scale);
@@ -69,7 +73,8 @@ public abstract class EntityViewController
         label.setFont(new Font(24*scale));
         label.setAlignment(Pos.CENTER);
         label.setStyle("-fx-font-size: "+24*scale+";");
-        label.setStyle("-fx-font-weight: bold;");
+        //label.setStyle("-fx-font-weight: bold;");
+        label.getStyleClass().add("status-label");
         return label;
     }
 
