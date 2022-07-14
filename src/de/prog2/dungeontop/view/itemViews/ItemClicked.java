@@ -41,62 +41,7 @@ public class ItemClicked
      */
     public void onUseItemButtonClicked() throws IOException
     {
-        if (item instanceof Artifact)
-        {
-            if (PlayerManager.getInstance().getPlayer().getArtifactSlots().size() == 2)
-            {
-                Item item1 = PlayerManager.getInstance().getPlayer().getArtifactSlots().get(0);
-                if (item1.getBonusType().equals(BonusType.SOULS))
-                {
-                    PlayerManager.getInstance().revertArtSoulsBonus();
-                }
-                else if (item1.getBonusType().equals(BonusType.DEFENSE))
-                {
-                    PlayerManager.getInstance().revertArtDefenseBonus();
-                }
-                else
-                {
-                    PlayerManager.getInstance().revertArtAttackBonus();
-                }
-                PlayerManager.addItem(PlayerManager.getInstance().getPlayer().getArtifactSlots().get(0));
-                PlayerManager.getInstance().getPlayer().getArtifactSlots().remove(0);
-            }
-            PlayerManager.getInstance().getPlayer().getArtifactSlots().add(item);
-            PlayerManager.removeItem(item);
-
-            if (item.getBonusType().equals(BonusType.SOULS))
-            {
-                PlayerManager.getInstance().addArtSoulsBonus(item);
-            }
-            else if (item.getBonusType().equals(BonusType.DEFENSE))
-            {
-                PlayerManager.getInstance().addArtDefenseBonus(item);
-            }
-            else
-            {
-                PlayerManager.getInstance().addArtAttackBonus(item);
-            }
-        }
-        else if (item instanceof Weapon)
-        {
-            if(!PlayerManager.getInstance().getPlayer().getWeaponSlot().isEmpty())
-            {
-                PlayerManager.getInstance().revertEquipAttackBonus();
-
-                PlayerManager.getInstance().getPlayerInventory().
-                        addItem(PlayerManager.getInstance().getPlayer().getWeaponSlot().get(0));
-
-                PlayerManager.getInstance().getPlayer().getWeaponSlot().clear();
-            }
-            PlayerManager.getInstance().getPlayer().getWeaponSlot().add(item);
-            PlayerManager.removeItem(item);
-            PlayerManager.getInstance().addEquipAttackBonus();
-        }
-        else
-        {
-        PlayerManager.getInstance().addHp(item.getValue());
-        PlayerManager.getInstance().getPlayerInventory().removeItem(item);
-        }
+        item.use();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));

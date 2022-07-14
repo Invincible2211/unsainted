@@ -22,6 +22,8 @@ public abstract class Item
         GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.value, this.price, this.bonusType, this.assetID));
     }
 
+    public abstract void use();
+
     //Set- and Getters
     public String getName()
     {

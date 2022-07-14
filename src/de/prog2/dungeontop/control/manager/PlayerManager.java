@@ -153,6 +153,4 @@ public class PlayerManager
     {
         player.setDefArtBonus(player.getDefArtBonus() + player.getArtifactSlots().get(0).getValue());
     }
-
-
 }
