@@ -28,7 +28,14 @@ public class InventoryController
             }
         }
     }
+    public static boolean addItem(Item item)
+    {
+        // TODO: Implement
+        return true;
+    }
 
+
+    // TODO Move to InvetntoryViewController
     /**
      * Equip weapon.
      * @param inventoryView The inventory view.

@@ -41,7 +41,7 @@ public class ItemClicked
      */
     public void onUseItemButtonClicked() throws IOException
     {
-        item.use();
+        item.equip();
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
         InventoryController.equipWeapon(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getWeaponSlot());
@@ -54,7 +54,7 @@ public class ItemClicked
 
     public void unEquipButton() throws IOException
     {
-        item.unequip();
+        ((Equipable)item).unequip();
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
         InventoryController.equipWeapon(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getWeaponSlot());

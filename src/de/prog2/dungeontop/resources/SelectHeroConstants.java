@@ -11,9 +11,9 @@ public interface SelectHeroConstants
     int WARRIOR_HP = 12;
     int WARRIOR_ATK = 2;
     int WARRIOR_MAX_MOVES = 1;
-    Talent WARRIOR_TALENT = Talent.STURDY;
+    int WARRIOR_ARTIFACT_SLOTS = 2;
     Hero WARRIOR = new Hero(SelectHeroConstants.WARRIOR_NAME, SelectHeroConstants.WARRIOR_HP,
-            SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.WARRIOR_MAX_MOVES, SelectHeroConstants.WARRIOR_TALENT,
+            SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.WARRIOR_MAX_MOVES, WARRIOR_ARTIFACT_SLOTS,
             AssetIds.WARRIOR_ICO, PlayerManager.getInstance().getPlayer());
 
     // mage
@@ -21,9 +21,9 @@ public interface SelectHeroConstants
     int MAGE_HP = 8;
     int MAGE_ATK = 4;
     int MAGE_MAX_MOVES = 1;
-    Talent MAGE_TALENT = Talent.INTELLIGENT;
+    int MAGE_ARTIFACT_SLOTS = 2;
     Hero MAGE = new Hero(SelectHeroConstants.MAGE_NAME, SelectHeroConstants.MAGE_HP,
-            SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_MAX_MOVES, SelectHeroConstants.MAGE_TALENT,
+            SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_MAX_MOVES, MAGE_ARTIFACT_SLOTS,
             AssetIds.MAGE_ICO, PlayerManager.getInstance().getPlayer());
 
     // rogue
@@ -31,9 +31,9 @@ public interface SelectHeroConstants
     int ROGUE_HP = 10;
     int ROGUE_ATK = 3;
     int ROGUE_MAX_MOVES = 2;
-    Talent ROGUE_TALENT = Talent.SNEAKY;
+    int ROGUE_ARTIFACT_SLOTS = 2;
     Hero ROGUE = new Hero(SelectHeroConstants.ROGUE_NAME, SelectHeroConstants.ROGUE_HP,
-            SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_MAX_MOVES, SelectHeroConstants.ROGUE_TALENT,
+            SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_MAX_MOVES, ROGUE_ARTIFACT_SLOTS,
             AssetIds.MAGE_ICO, PlayerManager.getInstance().getPlayer());
 
     String PLAYER_CLASS = "Klasse: ";
@@ -47,6 +47,6 @@ public interface SelectHeroConstants
     int DM_HP = 1;
     int DM_ATK = 3;
     int DM_MOVES = 1;
-    Talent DM_TALENT = null;
-    Hero DUNGEON_MASTER = new Hero(DUNGEON_MASTER_NAME, DM_HP, DM_ATK, DM_MOVES, DM_TALENT, AssetIds.DM_ICO,PlayerManager.getInstance().getPlayer());
+    int DM_ARTIFACT_SLOTS = 2;
+    Hero DUNGEON_MASTER = new Hero(DUNGEON_MASTER_NAME, DM_HP, DM_ATK, DM_MOVES, DM_ARTIFACT_SLOTS, AssetIds.DM_ICO,PlayerManager.getInstance().getPlayer());
 }

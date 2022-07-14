@@ -24,6 +24,7 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.rooms.EmptyRoom;
 import de.prog2.dungeontop.model.world.rooms.LavaPondRoom;
 import de.prog2.dungeontop.resources.*;
+import de.prog2.dungeontop.resources.items.ItemConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.*;
 import javafx.application.Application;

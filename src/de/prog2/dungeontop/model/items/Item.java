@@ -18,9 +18,7 @@ public abstract class Item
         GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
     }
 
-    public abstract void use();
-
-    public abstract void unequip();
+    public abstract boolean equip();
 
     //Set- and Getters
     public String getName()

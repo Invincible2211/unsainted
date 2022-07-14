@@ -1,8 +1,10 @@
 package de.prog2.dungeontop.model.items;
 
+import de.prog2.dungeontop.control.controller.ItemController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.model.entities.Hero;
 
-public class Weapon extends Item
+public class Weapon extends Item implements Equipable
 {
     int attackDamage = 0;
     public Weapon(String name, String description, int price, int assetID, int attackDamage) {
@@ -11,28 +13,17 @@ public class Weapon extends Item
     }
 
     @Override
-    public void use()
+    public boolean equip()
     {
-        if(!PlayerManager.getInstance().getPlayer().getWeaponSlot().isEmpty())
-        {
-            PlayerManager.getInstance().getPlayerHero().unequipWeapon();
-
-            PlayerManager.getInstance().getPlayerInventory().
-                    addItem(PlayerManager.getInstance().getPlayer().getWeaponSlot().get(0));
-
-            PlayerManager.getInstance().getPlayer().getWeaponSlot().clear();
-        }
-        PlayerManager.getInstance().getPlayer().getWeaponSlot().add(this);
-        PlayerManager.removeItem(this);
-        PlayerManager.getInstance().getPlayerHero().equipWeapon(this);
+        Hero hero = PlayerManager.getInstance().getPlayerHero();
+        return ItemController.equipWeapon(hero, this);
     }
 
     @Override
-    public void unequip()
+    public boolean unequip()
     {
-        PlayerManager.getInstance().getPlayerHero().unequipWeapon();
-        PlayerManager.getInstance().getPlayerInventory().addItem(this);
-        PlayerManager.getInstance().getPlayer().getWeaponSlot().clear();
+        Hero hero = PlayerManager.getInstance().getPlayerHero();
+        return ItemController.unequipWeapon(hero);
     }
 
     public int getAttackDamage()

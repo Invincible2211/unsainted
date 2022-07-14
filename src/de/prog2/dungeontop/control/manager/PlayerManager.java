@@ -114,33 +114,4 @@ public class PlayerManager
     {
         this.player = player;
     }
-
-
-
-
-    /*-----------------------------------------Item-Equip-Methoden------------------------------------------------------*/
-    public void addArtAttackBonus(Item item)
-    {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() + item.getValue());
-    }
-    public void revertArtAttackBonus()
-    {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() - player.getArtifactSlots().get(0).getValue());
-    }
-    public void addArtSoulsBonus(Item item)
-    {
-        player.setSoulArtBonus(player.getSoulArtBonus() + item.getValue());
-    }
-    public void revertArtSoulsBonus()
-    {
-        player.setSoulArtBonus(player.getSoulArtBonus() + player.getArtifactSlots().get(0).getValue());
-    }
-    public void addArtDefenseBonus(Item item)
-    {
-        player.setDefArtBonus(player.getDefArtBonus() + item.getValue());
-    }
-    public void revertArtDefenseBonus()
-    {
-        player.setDefArtBonus(player.getDefArtBonus() + player.getArtifactSlots().get(0).getValue());
-    }
 }

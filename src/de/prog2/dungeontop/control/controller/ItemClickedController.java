@@ -2,7 +2,7 @@ package de.prog2.dungeontop.control.controller;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
-import de.prog2.dungeontop.model.items.Artifacts.Artifact;
+import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.resources.ViewStrings;
