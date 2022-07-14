@@ -15,8 +15,6 @@ public class InventoryViewController
     @FXML
     GridPane gridPane;
     @FXML
-    private Button returnButton;
-    @FXML
     GridPane weaponSlot;
     @FXML
     GridPane artifactSlots;
