@@ -45,9 +45,10 @@ public class ItemViewController
             FXMLLoader loader = new FXMLLoader();
             Node itemView = null;
 
-            itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.EQUIPPED_ITEM_VIEW_FXML));
+            itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_VIEW_FXML));
 
             ItemView controller = loader.getController();
+            controller.getItemName().setText("");
             fillItemViewWithData(item, controller);
             return itemView;
         }

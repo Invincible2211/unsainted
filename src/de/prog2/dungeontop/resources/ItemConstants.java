@@ -1,6 +1,8 @@
 package de.prog2.dungeontop.resources;
 
 import de.prog2.dungeontop.model.items.*;
+import de.prog2.dungeontop.model.items.Artifacts.Artifact;
+import de.prog2.dungeontop.model.items.Consumables.Consumable;
 
 public interface ItemConstants
 {
@@ -13,6 +15,6 @@ public interface ItemConstants
     Item bracelet = new Artifact("Armband", "Wenn sie ausgerüstet ist, erhält der Spieler +1 Lebenspunkte", 1, 200, BonusType.DEFENSE, AssetIds.BRACELET);
 
     //Weapon
-    Item sword = new Weapon("Schwert", "Wenn sie ausgerüstet ist, erhält der Spieler +3 Angriff", 3, 500, BonusType.ATTACK, AssetIds.SWORD);
+    Item sword = new Weapon("Schwert", "Wenn sie ausgerüstet ist, erhält der Spieler +3 Angriff", 3, 500, AssetIds.SWORD);
 
 }

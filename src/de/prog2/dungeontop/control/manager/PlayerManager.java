@@ -2,7 +2,6 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -120,15 +119,6 @@ public class PlayerManager
 
 
     /*-----------------------------------------Item-Equip-Methoden------------------------------------------------------*/
-    public void addEquipAttackBonus()
-    {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() + player.getWeaponSlot().get(0).getValue());
-    }
-    public void revertEquipAttackBonus()
-    {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() - player.getWeaponSlot().get(0).getValue());
-    }
-
     public void addArtAttackBonus(Item item)
     {
         player.getHero().setAttackDamage(player.getHero().getAttackDamage() + item.getValue());

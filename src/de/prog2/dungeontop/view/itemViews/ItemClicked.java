@@ -42,7 +42,19 @@ public class ItemClicked
     public void onUseItemButtonClicked() throws IOException
     {
         item.use();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
+        InventoryController.equipWeapon(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getWeaponSlot());
+        InventoryController.equipArtifact(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getArtifactSlots());
+        InventoryController.addItems(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory().getInventory());
+        Scene scene = new Scene(root);
+        getStage().setScene(scene);
+        onReturnButtonClicked();
+    }
 
+    public void unEquipButton() throws IOException
+    {
+        item.unequip();
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
         InventoryController.equipWeapon(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getWeaponSlot());
