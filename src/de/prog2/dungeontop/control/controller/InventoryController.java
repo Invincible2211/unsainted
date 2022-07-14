@@ -3,7 +3,6 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.view.itemViews.InventoryViewController;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 
 import java.util.List;
 
@@ -46,34 +45,18 @@ public class InventoryController
     }
 
     /**
-     * Equip artifact to slot 1.
+     * Equip artifact to the artifact slots.
      * @param inventoryView The inventory view.
-     * @param items A List of one item (the artifact).
+     * @param items A List of two items (the artifacts).
      */
-    public static void equipArtifact1(InventoryViewController inventoryView, List<Item> items)
+    public static void equipArtifact(InventoryViewController inventoryView, List<Item> items)
     {
         int columns = 0, rows = 0;
         for (Item item : items)
         {
             Node artifactView = ItemViewController.getEquippedItemView(item);
-            inventoryView.getArtifactSlot1().add(artifactView, columns, rows);
+            inventoryView.getArtifactSlots().add(artifactView, columns, rows);
+            ++rows;
         }
     }
-
-    /**
-     * Equip artifact to slot 2.
-     * @param inventoryView The inventory view.
-     * @param items A List of one item (the artifact).
-     */
-    public static void equipArtifact2(InventoryViewController inventoryView, List<Item> items)
-    {
-        int columns = 0, rows = 0;
-        for (Item item : items)
-        {
-            Node artifactView = ItemViewController.getEquippedItemView(item);
-            inventoryView.getArtifactSlot2().add(artifactView, columns, rows);
-        }
-    }
-
-
 }

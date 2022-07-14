@@ -3,16 +3,17 @@ package de.prog2.dungeontop.view.itemViews;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
-import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.model.items.*;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.itemViews.ItemView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static de.prog2.dungeontop.DungeonTop.getStage;
@@ -26,6 +27,8 @@ public class ItemClicked
     private ImageView itemImage;
     @FXML
     private Text price;
+    @FXML
+    private javafx.scene.control.Button useButton;
     private Item item;
 
     public void onReturnButtonClicked()
@@ -33,16 +36,17 @@ public class ItemClicked
         ItemView.hideStage();
     }
 
+    /**
+     * Method for when player uses Consumables or equip Weapon/Artifact
+     */
     public void onUseItemButtonClicked() throws IOException
     {
-        PlayerManager.getInstance().addHp(getItem().getValue());
-        PlayerManager.getInstance().getPlayerInventory().removeItem(getItem());
+        item.use();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
         InventoryController.equipWeapon(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getWeaponSlot());
-        InventoryController.equipArtifact1(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getArtifactSlot1());
-        InventoryController.equipArtifact2(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getArtifactSlot2());
+        InventoryController.equipArtifact(fxmlLoader.getController(), PlayerManager.getInstance().getPlayer().getArtifactSlots());
         InventoryController.addItems(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory().getInventory());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
@@ -73,5 +77,10 @@ public class ItemClicked
     public void setItem(Item item)
     {
         this.item = item;
+    }
+
+    public Button getUseButton()
+    {
+        return useButton;
     }
 }
