@@ -28,21 +28,8 @@ public class ItemView
     public void itemButtonClicked()
     {
         AnchorPane rootPane;
-        if (item instanceof Weapon)
-        {
-            Item selectedItem = getItem();
-            rootPane = ItemClickedController.getWeaponClicked(selectedItem);
-        }
-        else if (item instanceof Artifact)
-        {
-            Item selectedItem = getItem();
-            rootPane = ItemClickedController.getArtifactClicked(selectedItem);
-        }
-        else
-        {
-            Item selectedItem = getItem();
-            rootPane = ItemClickedController.getItemClicked(selectedItem);
-        }
+        Item selectedItem = getItem();
+        rootPane = ItemClickedController.getItemClicked(selectedItem);
         final Scene scene = new Scene(rootPane);
         stage.setScene(scene);
         stage.show();

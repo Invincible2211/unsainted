@@ -2,6 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.Player;
+import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -128,54 +129,30 @@ public class PlayerManager
         player.getHero().setAttackDamage(player.getHero().getAttackDamage() - player.getWeaponSlot().get(0).getValue());
     }
 
-    public void addArtAttackBonus1()
+    public void addArtAttackBonus(Item item)
     {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() + player.getArtifactSlot1().get(0).getValue());
+        player.getHero().setAttackDamage(player.getHero().getAttackDamage() + item.getValue());
     }
-    public void revertArtAttackBonus1()
+    public void revertArtAttackBonus()
     {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() - player.getArtifactSlot1().get(0).getValue());
+        player.getHero().setAttackDamage(player.getHero().getAttackDamage() - player.getArtifactSlots().get(0).getValue());
     }
-    public void addArtSoulsBonus1()
+    public void addArtSoulsBonus(Item item)
     {
-        player.setSoulArtBonus(player.getSoulArtBonus() + player.getArtifactSlot1().get(0).getValue());
+        player.setSoulArtBonus(player.getSoulArtBonus() + item.getValue());
     }
-    public void revertArtSoulsBonus1()
+    public void revertArtSoulsBonus()
     {
-        player.setSoulArtBonus(player.getSoulArtBonus() + player.getArtifactSlot1().get(0).getValue());
+        player.setSoulArtBonus(player.getSoulArtBonus() + player.getArtifactSlots().get(0).getValue());
     }
-    public void addArtDefenseBonus1()
+    public void addArtDefenseBonus(Item item)
     {
-        player.setDefArtBonus(player.getDefArtBonus() + player.getArtifactSlot1().get(0).getValue());
+        player.setDefArtBonus(player.getDefArtBonus() + item.getValue());
     }
-    public void revertArtDefenseBonus1()
+    public void revertArtDefenseBonus()
     {
-        player.setDefArtBonus(player.getDefArtBonus() + player.getArtifactSlot1().get(0).getValue());
+        player.setDefArtBonus(player.getDefArtBonus() + player.getArtifactSlots().get(0).getValue());
     }
 
 
-    public void addArtAttackBonus2()
-    {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() + player.getArtifactSlot2().get(0).getValue());
-    }
-    public void revertArtAttackBonus2()
-    {
-        player.getHero().setAttackDamage(player.getHero().getAttackDamage() - player.getArtifactSlot2().get(0).getValue());
-    }
-    public void addArtSoulsBonus2()
-    {
-        player.setSoulArtBonus(player.getSoulArtBonus() + player.getArtifactSlot2().get(0).getValue());
-    }
-    public void revertArtSoulsBonus2()
-    {
-        player.setSoulArtBonus(player.getSoulArtBonus() + player.getArtifactSlot2().get(0).getValue());
-    }
-    public void addArtDefenseBonus2()
-    {
-        player.setDefArtBonus(player.getDefArtBonus() + player.getArtifactSlot2().get(0).getValue());
-    }
-    public void revertArtDefenseBonus2()
-    {
-        player.setDefArtBonus(player.getDefArtBonus() + player.getArtifactSlot2().get(0).getValue());
-    }
 }

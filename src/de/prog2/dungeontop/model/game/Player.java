@@ -28,8 +28,7 @@ public class Player implements Serializable
     private int handCardLimit;
     private Hero hero;
     private List<Item> weaponSlot = new ArrayList<>();
-    private List<Item> artifactSlot1 = new ArrayList<>();
-    private List<Item> artifactSlot2 = new ArrayList<>();
+    private List<Item> artifactSlots = new ArrayList<>();
     private int soulArtBonus = 0;
     private int defArtBonus = 0;
 
@@ -139,14 +138,9 @@ public class Player implements Serializable
         return weaponSlot;
     }
 
-    public List<Item> getArtifactSlot1()
+    public List<Item> getArtifactSlots()
     {
-        return artifactSlot1;
-    }
-
-    public List<Item> getArtifactSlot2()
-    {
-        return artifactSlot2;
+        return artifactSlots;
     }
 
     public int getSoulArtBonus()
