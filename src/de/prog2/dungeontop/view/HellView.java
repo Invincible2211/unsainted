@@ -1,12 +1,8 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
-import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.controller.InventoryViewController;
-import de.prog2.dungeontop.control.manager.AssetsManager;
-import de.prog2.dungeontop.control.manager.GameManager;
-import de.prog2.dungeontop.control.manager.MovementManager;
-import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.manager.*;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.control.network.NetworkAPI;
 import de.prog2.dungeontop.model.game.MoveDirection;
@@ -32,8 +28,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
@@ -42,6 +36,8 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.UUID;
+
 public class HellView
 {
     // representation of the player on the hell view
@@ -50,6 +46,8 @@ public class HellView
     private boolean isAnimating = HellViewConstants.IS_ANIMATING_DEFAULT_VALUE;
     // currently used HellView
     private static Scene currHellView;
+    // UUID used for the background music
+    private static UUID musicId;
 
     /**
      * Initialize the View for a given hell
@@ -87,6 +85,9 @@ public class HellView
                         if (!GameManager.getInstance().isDM())
                             movePlayer(keyCode);
                 });
+
+        musicId = AudioManager.getInstance().playSound(HellViewConstants.BACKGROUND_MUSIC, true);
+        pauseHellViewBgMusic();
 
         GlobalLogger.log(LoggerStringValues.HELLVIEW_INIT);
         return scene;
@@ -535,6 +536,7 @@ public class HellView
         }
         InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
+        pauseHellViewBgMusic();
         DungeonTop.getStage().setScene(scene);
     }
 
@@ -609,5 +611,56 @@ public class HellView
     public static void setCurrHellView (Scene nextHellView)
     {
         HellView.currHellView = nextHellView;
+    }
+
+    /**
+     * @return ID of the current soundtrack which is getting played in the HellView.
+     */
+    public static UUID getMusicId ()
+    {
+        return musicId;
+    }
+
+    /**
+     * Set the ID of the currently played soundtrack.
+     *
+     * @param id id created by the playSoun method
+     */
+    public static void setMusicId (UUID id)
+    {
+        musicId = id;
+    }
+
+    /**
+     * Resumes the soundtrack playing in the background while the HellView is present.
+     */
+    public static void resumeHellViewBgMusic ()
+    {
+        AudioManager.getInstance().resumeClip(musicId);
+    }
+
+    /**
+     * Pauses the soundtrack playing in the background while the HellView is present.
+     */
+    public static void pauseHellViewBgMusic()
+    {
+        AudioManager.getInstance().pauseClip(musicId);
+    }
+
+    /**
+     * Stops the soundtrack playing in the background while the HellView is present.
+     */
+    public static void stopHellViewBgMusic ()
+    {
+        AudioManager.getInstance().stopSound(musicId);
+    }
+
+    /**
+     * Restarts the background music used for the HellView.
+     */
+    public static void restartHellViewBgMusic ()
+    {
+        AudioManager.getInstance().stopSound(musicId);
+        musicId = AudioManager.getInstance().playSound(HellViewConstants.BACKGROUND_MUSIC, true);
     }
 }

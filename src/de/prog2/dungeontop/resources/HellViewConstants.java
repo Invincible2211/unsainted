@@ -109,4 +109,6 @@ public interface HellViewConstants
 
     // test constants
     int STATBOARD_CHANGE_TEST_VALUE = 10;
+
+    int BACKGROUND_MUSIC = AssetIds.MAP_BG_MUSIC;
 }

@@ -134,7 +134,10 @@ public class NpcRoomView
             closeButton.setOnAction(e ->
             {
                 if (HellView.getCurrHellView() != null)
+                {
                     DungeonTop.getStage().setScene(HellView.getCurrHellView());
+                    HellView.resumeHellViewBgMusic();
+                }
             });
         }
         else
