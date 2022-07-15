@@ -4,6 +4,7 @@ import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.resources.GameConstants;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class PlayerManager
@@ -18,7 +19,7 @@ public class PlayerManager
 
     public void addSouls(int amount)
     {
-        player.setSouls((player.getSouls() + (amount+((int) Math.floor((float)amount*player.getSoulArtBonus()/100)))));
+        player.setSouls((player.getSouls() + (amount+((int) Math.floor((float)amount*player.getSoulArtBonus()/GameConstants.LEVEL_1_EXP_CAP)))));
     }
 
     public void removeSouls(int amount)
