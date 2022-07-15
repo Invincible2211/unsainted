@@ -5,6 +5,7 @@ import de.prog2.dungeontop.model.items.Consumable;
 import de.prog2.dungeontop.model.items.Consumables.HealingConsumable;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
+import de.prog2.dungeontop.model.items.artifacts.DefenseArtifact;
 import de.prog2.dungeontop.model.items.artifacts.ExtraSoulsArtifact;
 import de.prog2.dungeontop.resources.AssetIds;
 
@@ -16,12 +17,11 @@ public interface ItemConstants
     Consumable CHEESE = new HealingConsumable("Käse", "heilt den Spieler um %d Lebenspunkte", 1 ,5, AssetIds.CHEESE);
 
     //Artifacts
-    // TODO change to new Artifact classes
-    Artifact NECKLACE = new ExtraSoulsArtifact("Halskette", "Wenn sie ausgerüstet ist, erhält der Spieler +2 Lebenspunkte", 2, 150, AssetIds.NECKLACE);
-    Artifact BRACELET = new ExtraSoulsArtifact("Armband", "Wenn sie ausgerüstet ist, erhält der Spieler +1 Lebenspunkte", 1, 200, AssetIds.BRACELET);
-    Artifact RING = new ExtraSoulsArtifact("Ring", "Wenn sie ausgerüstet ist, erhält der Spieler +1 Lebenspunkte", 1, 200, AssetIds.RING);
-    Artifact HELMET = new ExtraSoulsArtifact("Helm", "Wenn sie ausgerüstet ist, erhält der Spieler +1 Lebenspunkte", 1, 200, AssetIds.HELMET);
-    Artifact SHIELD = new ExtraSoulsArtifact("Schild", "Wenn sie ausgerüstet ist, erhält der Spieler +1 Lebenspunkte", 1, 200, AssetIds.SHIELD);
+    Artifact NECKLACE = new ExtraSoulsArtifact("Halskette", "Wenn sie ausgerüstet ist, erhält der Spieler 2% extra Souls", 2, 150, AssetIds.NECKLACE);
+    Artifact BRACELET = new ExtraSoulsArtifact("Armband", "Wenn sie ausgerüstet ist, erhält der Spieler 1% extra Souls", 1, 200, AssetIds.BRACELET);
+    Artifact RING = new ExtraSoulsArtifact("Ring", "Wenn sie ausgerüstet ist, erhält der Spieler 1% extra Souls", 1, 200, AssetIds.RING);
+    Artifact HELMET = new DefenseArtifact("Helm", "Wenn sie ausgerüstet ist, erhält der Spieler +1 Verteidigungspunkte", 1, 200, AssetIds.HELMET);
+    Artifact SHIELD = new DefenseArtifact("Schild", "Wenn sie ausgerüstet ist, erhält der Spieler +1 Verteidigungspunkte", 1, 200, AssetIds.SHIELD);
 
     //Weapon
     Weapon SWORD = new Weapon("Schwert", "Wenn sie ausgerüstet ist, erhält der Spieler +3 Angriff", 5, AssetIds.SWORD, 3, 1);

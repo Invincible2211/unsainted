@@ -15,9 +15,18 @@ public class DefenseArtifact extends Artifact {
     }
 
     @Override
-    public void use()
+    public boolean equip()
     {
         PlayerManager.getInstance().getPlayerHero().setDefense
                 (PlayerManager.getInstance().getPlayerHero().getDefense() + defBonus);
+        return super.equip();
+    }
+
+    @Override
+    public boolean unequip()
+    {
+        PlayerManager.getInstance().getPlayerHero().setDefense
+                (PlayerManager.getInstance().getPlayerHero().getDefense() - defBonus);
+        return super.unequip();
     }
 }

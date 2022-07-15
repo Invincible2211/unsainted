@@ -10,8 +10,6 @@ public abstract class Artifact extends Item implements Equippable
         super(name, description, price, assetID);
     }
 
-    public abstract void use();
-
     @Override
     public boolean equip()
     {
