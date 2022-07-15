@@ -95,6 +95,15 @@ public interface AssetIds
     int SWORD = 662;
     int NECKLACE = 663;
     int BRACELET = 664;
+    int BOW = 665;
+    int CROSSBOW = 666;
+    int AXE = 667;
+    int WAND = 668;
+    int CLAW = 669;
+    int RING = 701;
+    int HELMET = 702;
+    int CHEESE = 703;
+    int SHIELD = 704;
 
     // Arena Asset IDs
     int ARENA_BG_DEFAULT_ID = 210;

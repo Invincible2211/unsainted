@@ -14,7 +14,6 @@ import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.model.items.artifacts.ExtraSoulsArtifact;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.spells.TestSpell;
@@ -73,7 +72,7 @@ public class DungeonTop extends Application
         //testBattle();
 
         //testSelectHero(primaryStage);
-        //testInventory(primaryStage);
+        testInventory(primaryStage);
         //testEntityView();
         //testCardView();
         //testCardDetailView();
@@ -84,7 +83,7 @@ public class DungeonTop extends Application
 
     private void testBattle()
     {
-        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), new Player());
+        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), new Player(), new Arena(6,6));
     }
 
     public void testHell()
@@ -213,22 +212,21 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        Item item = ItemConstants.minorPotion;
-        Item item1 = ItemConstants.bread;
-        Item weapon = ItemConstants.sword;
-        Item weapon1 = new Weapon("Test", "1", 1, 662, 1);
-        Item art1 = ItemConstants.necklace;
-        Item art2 = ItemConstants.bracelet;
-        Item art3 = new ExtraSoulsArtifact("Test", "1", 1, 662, 662);
-        Item art4 = new ExtraSoulsArtifact("Test", "1", 1, 662, 662);
-        PlayerManager.getInstance().getPlayerInventory().addItem(weapon);
-        PlayerManager.getInstance().getPlayerInventory().addItem(item);
-        PlayerManager.getInstance().getPlayerInventory().addItem(item1);
-        PlayerManager.getInstance().getPlayerInventory().addItem(art1);
-        PlayerManager.getInstance().getPlayerInventory().addItem(art2);
-        PlayerManager.getInstance().getPlayerInventory().addItem(art3);
-        PlayerManager.getInstance().getPlayerInventory().addItem(art4);
-        PlayerManager.getInstance().getPlayerInventory().addItem(weapon1);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.AXE);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.BREAD);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.HELMET);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.BRACELET);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.BOW);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.CHEESE);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.SWORD);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.NECKLACE);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.MINOR_POTION);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.WAND);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.RING);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.CLAW);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.SHIELD);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.CROSSBOW);
+
         Player player = PlayerManager.getInstance().getPlayer();
         player.setHero(SelectHeroConstants.MAGE);
         PlayerManager.getInstance().setPlayer(player);
