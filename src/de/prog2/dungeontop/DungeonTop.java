@@ -69,10 +69,10 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        //BattleManager2.getInstance().startBattle(new Player(), new Player());
+        BattleManager2.getInstance().startBattle(new Player(), new Player());
         //testArenaView();
         //testSelectHero(primaryStage);
-        testInventory(primaryStage);
+        //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
         //testHellView(scene);

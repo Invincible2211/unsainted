@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
 
@@ -224,6 +225,16 @@ public class ArenaController
                 removeHighlight();
                 setSelected(null);
             }
+        });
+        pane.setOnMousePressed(event->{
+            Coordinate cord = new Coordinate(GridPane.getColumnIndex((Node) event.getSource()), GridPane.getRowIndex((Node) event.getSource()));
+
+            System.out.println("mousepressed event in arenacontroller" + cord.getX() + " " + cord.getY() );
+        });
+        pane.setOnMouseReleased(event->{
+            Coordinate cord = new Coordinate(GridPane.getColumnIndex((Node) event.getSource()), GridPane.getRowIndex((Node) event.getSource()));
+
+            System.out.println("mousereleased event in arenacontroller " + cord.toString());
         });
     }
 

@@ -106,7 +106,8 @@ public class BattleManager2 {
         }
     }
 
-    public List<EntityCard> battle(EntityCard card1, EntityCard card2){
+    public List<EntityCard> battle(EntityCard card1, EntityCard card2)
+    {
         Entity entity1 = card1.getEntity();
         Entity entity2 = card2.getEntity();
         entity2.setHp(entity2.getHp()-entity1.getAttackDamage());
