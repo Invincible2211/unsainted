@@ -1,9 +1,13 @@
 package de.prog2.dungeontop.model.entities;
 
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.Talent;
 import de.prog2.dungeontop.model.items.Artifact;
+import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
+import de.prog2.dungeontop.model.items.artifacts.DefenseArtifact;
+import de.prog2.dungeontop.utils.GlobalLogger;
 
 import javax.swing.text.TabableView;
 import java.util.LinkedList;
@@ -31,6 +35,33 @@ public class Hero extends Entity
             return super.getAttackDamage();
         }
         return super.getAttackDamage() + weapon.getAttackDamage();
+    }
+
+    @Override
+    public int getDefense()
+    {
+        if (artifacts.isEmpty())
+        {
+            return super.getDefense();
+        }
+        else
+        {
+            int def = 0;
+            for (Artifact item: artifacts)
+            {
+                DefenseArtifact item1 = null;
+                try
+                {
+                    item1 = (DefenseArtifact) item;
+                    def = def + item1.getDefBonus();
+                }
+                catch (ClassCastException e)
+                {
+                    GlobalLogger.warning(e.getMessage());
+                }
+            }
+            return getDefense() + def;
+        }
     }
 
     public void setWeapon(Weapon weapon)
