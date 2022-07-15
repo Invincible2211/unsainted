@@ -8,18 +8,30 @@ import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.SelectHeroConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
 public class NetManager extends Thread{
 
     private NetworkConnectionI connection;
-    private NetworkAPI networkAPI;
+    private NetworkAPI networkAPI = new NetworkAPI(new OutputStream() {
+        @Override
+        public void write(int b) throws IOException {
+
+        }
+    });
     private NetworkInterpreter networkInterpreter;
 
-    private static NetManager instance;
+    private static NetManager instance = new NetManager();
 
     protected NetManager(String host){
         connection = host == null ? new SessionHost() : new ClientConnection(host);
         ((Thread) connection).start();
         instance = this;
+    }
+
+    private NetManager(){
+
     }
 
     @Override
@@ -63,7 +75,7 @@ public class NetManager extends Thread{
     }
 
     public boolean isConnected(){
-        return networkAPI != null;
+        return networkInterpreter != null;
     }
 
     public static NetManager getInstance() {
