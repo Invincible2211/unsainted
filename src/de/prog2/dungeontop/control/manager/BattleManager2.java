@@ -64,15 +64,17 @@ public class BattleManager2 {
             entities.addAll(TestConstants.getTestEntities());
             //TODO Hero und DungeonMaster spawnen
             if (!GameManager.getInstance().isDM()){
-                Entity peter = new Minion("Peter",10,4,4,410, 200);
+                Entity peter = new Minion("Peter",10,4,4,410, 211);
                 EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
+                peter.setCard(petercard);
                 Coordinate cord = new Coordinate(2,3);
-                arenaController.placEntityFriendly(peter,cord);
+                arenaController.placeEntityFriendly(peter,cord);
             }  else {
-                Entity peter = new Minion("Peter",10,4,4,410, 200);
+                Entity peter = new Minion("Peter",10,4,4,410, 211);
                 EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
+                peter.setCard(petercard);
                 Coordinate cord = new Coordinate(2,3);
-                arenaController.placEntityFriendly(peter,cord);
+                arenaController.placeEntityFriendly(peter,cord);
             }
             //arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
         });
