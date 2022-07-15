@@ -12,7 +12,9 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class AudioManager
 {
@@ -20,7 +22,7 @@ public class AudioManager
     /*----------------------------------------------ATTRIBUTE---------------------------------------------------------*/
 
     private final static AudioManager instance = new AudioManager();
-    private List<Clip> playingClips = new ArrayList<>();
+    private HashMap<UUID,Clip> playingClips = new HashMap<>();
     private DoubleProperty volume = new SimpleDoubleProperty(AudioDefaultValues.DEFAULT_VOLUME);
 
     /*--------------------------------------------KONSTRUKTOREN-------------------------------------------------------*/
@@ -47,16 +49,20 @@ public class AudioManager
      * Diese Methode spielt einen Sound ab
      * @param soundID die ID des Assets, welches den Sound beinhaltet
      */
-    public void playSound(int soundID)
+    public UUID playSound(int soundID, boolean loop)
     {
+        UUID clipUUID = UUID.randomUUID();
         GlobalLogger.log(String.format(LoggerStringValues.PLAY_SOUND, soundID));
         File soundFile = AssetsManager.getAssetById(soundID);
         try
         {
             final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();
+            if (loop){
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
             clip.open(audioInputStream);
-            playingClips.add(clip);
+            playingClips.put(clipUUID,clip);
             LineListener listener = event ->
             {
                 if (event.getType() != LineEvent.Type.STOP)
@@ -72,6 +78,12 @@ public class AudioManager
         {
             GlobalLogger.warning(e.getMessage());
         }
+        return clipUUID;
+    }
+
+    public void stopSound(UUID clipUUID){
+        Clip clip = playingClips.remove(clipUUID);
+        if (clip != null) clip.stop();
     }
 
     /**
@@ -81,7 +93,7 @@ public class AudioManager
     private void changeVolume(double volumeLevel)
     {
         FloatControl volume;
-        for (Clip c : playingClips)
+        for (Clip c : playingClips.values())
         {
             volume = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
             volume.setValue(20f * (float) Math.log10(volumeLevel/100));

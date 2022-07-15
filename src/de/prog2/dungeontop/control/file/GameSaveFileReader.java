@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.resources.FilePaths;
+import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.File;
@@ -29,7 +30,12 @@ public class GameSaveFileReader {
     }
 
     private void readSaveFile(){
-        saveGame = (SaveGame) SerializationUtils.deserialize(DungeonTop.class.getClassLoader().getResourceAsStream(FilePaths.SAVE_FILE_PATH_FOR_CLASSLOADER));
+        try {
+            saveGame = (SaveGame) SerializationUtils.deserialize(DungeonTop.class.getClassLoader().getResourceAsStream(FilePaths.SAVE_FILE_PATH_FOR_CLASSLOADER));
+        } catch (SerializationException e){
+            File file = new File(FilePaths.SAVE_FILE_PATH_FOR_CLASSLOADER);
+            file.delete();
+        }
     }
 
     public static GameSaveFileReader getInstance() {
