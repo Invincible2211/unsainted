@@ -5,6 +5,7 @@ import de.prog2.dungeontop.model.game.Talent;
 import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Weapon;
 
+import javax.swing.text.TabableView;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,11 +14,13 @@ public class Hero extends Entity
     private Weapon weapon;
     private final List<Artifact> artifacts = new LinkedList<>();
     private int artifactSlots;
+    private final Talent talent;
 
-    public Hero(String name, int hp, int attackDamage, int movement, int artifactSlots, int assetId, Player owner)
+    public Hero(String name, int hp, int attackDamage, int movement, int artifactSlots, Talent talent, int assetId, Player owner)
     {
         super(name, hp, attackDamage, movement, assetId, owner);
         this.artifactSlots = artifactSlots;
+        this.talent = talent;
     }
 
     @Override
@@ -70,4 +73,9 @@ public class Hero extends Entity
         this.artifactSlots = artifactSlots;
     }
 
+    @Override
+    public Talent getTalent()
+    {
+        return talent;
+    }
 }
