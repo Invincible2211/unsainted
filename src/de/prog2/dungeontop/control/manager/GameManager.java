@@ -127,7 +127,7 @@ public class GameManager {
      */
     public void beginBattle(Arena arena)
     {
-        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), opponentPlayer, arena);
+        BattleManager2.getInstance().startBattle(arena);
         /*
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {

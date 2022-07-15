@@ -84,7 +84,7 @@ public class DungeonTop extends Application
 
     private void testBattle()
     {
-        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), new Player(), new Arena(6,6));
+        BattleManager2.getInstance().startBattle(new Arena(6,6));
     }
 
     public void testHell()
@@ -195,7 +195,7 @@ public class DungeonTop extends Application
         player2.setDeck(deck2);
         player1.setHandCardLimit(2);
         player2.setHandCardLimit(4);
-        BattleManager2.getInstance().startBattle(player1,player2);
+        BattleManager2.getInstance().startBattle(new Arena(5));
 
     }
 

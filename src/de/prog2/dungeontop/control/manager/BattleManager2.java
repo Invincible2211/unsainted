@@ -5,10 +5,12 @@ import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.TestConstants;
@@ -53,12 +55,12 @@ public class BattleManager2 {
         scene = new Scene(viewRoot);
     }
 
-    public void startBattle(Player player1, Player player2, Arena arena){
+    public void startBattle(Arena arena){
         Platform.runLater(() -> {
             this.player1 = PlayerManager.getInstance().getPlayer();
             this.player2 = GameManager.getInstance().getOpponentPlayer();
             drawNewHand();
-            System.out.println(player1.getHandCards());
+
             arenaController.initBattle(6,6);
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
