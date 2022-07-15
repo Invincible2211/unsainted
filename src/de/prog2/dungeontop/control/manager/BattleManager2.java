@@ -11,6 +11,7 @@ import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
 import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
@@ -73,6 +74,8 @@ public class BattleManager2 {
     public void endBattle(boolean playerWins){
         Platform.runLater(() -> {
             if (playerWins){
+                if (((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).isBoss())
+                    GameManager.getInstance().getGameWorld().getNextHell();
                 DungeonTop.getStage().setScene(HellView.getCurrHellView());
             } else {
                 GameManager.getInstance().endGame();

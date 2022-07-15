@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.model.world;
 
 import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -74,6 +75,7 @@ public class World implements Serializable
         PlayerManager.getInstance().getPlayer().setCurrentRoom(getCurrentHell().getStartingRoom());
         HellView view = new HellView();
         HellView.setCurrHellView(view.initHellView(getCurrentHell()));
+        NetManager.getInstance().getNetworkAPI().sendHellData(getCurrentHell(), getCurrentHell().getStartingRoom().getCoordinate());
         return getCurrentHell();
     }
 }
