@@ -7,7 +7,6 @@ import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import javafx.fxml.FXML;
@@ -100,24 +99,24 @@ public class ArenaController
         enemyCardView.getChildren().clear();
     }
 
-    public void placeCardFriendly(EntityCard entityCard, Coordinate coordinate){
-        AnchorPane card = createCard(entityCard.getEntity());
+    public void placEntityFriendly (Entity entity, Coordinate coordinate){
+        AnchorPane card = placeEntity(entity);
         AnchorPane test = getNodeFromGridPane(coordinate.getX(), coordinate.getY());
         arenaGridPane.getChildren().remove(test);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
-        currentArena.getFriendly().put(coordinate, entityCard.getEntity());
-        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entityCard.getEntity(), coordinate);
+        currentArena.getFriendly().put(coordinate, entity);
+        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entity, coordinate);
     }
 
-    public void placeCardOpponent(Entity entity, Coordinate coordinate){
-        AnchorPane card = createCard(entity);
+    public void placeEntityOpponent (Entity entity, Coordinate coordinate){
+        AnchorPane card = placeEntity(entity);
         AnchorPane test = getNodeFromGridPane(coordinate.getX(), coordinate.getY());
         arenaGridPane.getChildren().remove(test);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
         currentArena.getOpponent().put(coordinate, entity);
     }
 
-    private AnchorPane createCard(Entity entity)
+    private AnchorPane placeEntity (Entity entity)
     {
         AnchorPane anchorPane = EntityViewController.getEntityView(entity, scale);
         anchorPane.setOnMouseEntered(event -> cardView.getChildren().add(CardViewController.getCardDetailView(entity.getCard(),1)));

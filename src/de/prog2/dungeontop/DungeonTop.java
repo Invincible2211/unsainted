@@ -179,7 +179,9 @@ public class DungeonTop extends Application
     public static void testArenaView() throws Exception
     {
         Entity harald = new Minion("harald", 4, 5, 6, 2, 200);
-       harald.setMaxMovement(2);
+        EntityCard haraldSeineKarte = new EntityCard(harald, 3, 2, 1,2,999);
+        harald.setCard(haraldSeineKarte);
+        harald.setMaxMovement(2);
         Spell testSpell = new TestSpell();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
@@ -234,22 +236,22 @@ public class DungeonTop extends Application
         getStage().setScene(scene);
     }
 
-    public static void testLavaPondView (Stage stage)
-    {
-        Entity harald = new Minion("Harald", 6, 4, 1, 45, 200);
-        Deck deck = new Deck();
-        for (int i = 0; i < 30; i++)
-        {
-            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i, 0));
-        }
-
-        LavaPondRoom room = new LavaPondRoom(new EmptyRoom(new Coordinate(0,0), 1));
-        PlayerManager.getInstance().addSouls(100);
-        PlayerManager.getInstance().getPlayer().setDeck(deck);
-        NpcRoomView view = new NpcRoomView(room);
-        Scene scene = view.getNpcRoomView();
-        stage.setScene(scene);
-    }
+//    public static void testLavaPondView (Stage stage)
+//    {
+//        Entity harald = new Minion("Harald", 6, 4, 1, 45, 200);
+//        Deck deck = new Deck();
+//        for (int i = 0; i < 30; i++)
+//        {
+//            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i, 0));
+//        }
+//
+//        LavaPondRoom room = new LavaPondRoom(new EmptyRoom(new Coordinate(0,0), 1));
+//        PlayerManager.getInstance().addSouls(100);
+//        PlayerManager.getInstance().getPlayer().setDeck(deck);
+//        NpcRoomView view = new NpcRoomView(room);
+//        Scene scene = view.getNpcRoomView();
+//        stage.setScene(scene);
+//    }
 
     public static void testDeckCreation ()
     {
