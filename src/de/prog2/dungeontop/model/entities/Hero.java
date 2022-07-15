@@ -16,9 +16,9 @@ public class Hero extends Entity
     private int artifactSlots;
     private final Talent talent;
 
-    public Hero(String name, int hp, int attackDamage, int movement, int artifactSlots, Talent talent, int assetId, Player owner)
+    public Hero(String name, int hp, int attackDamage, int defense, int movement, int artifactSlots, Talent talent, int assetId, Player owner)
     {
-        super(name, hp, attackDamage, movement, assetId, owner);
+        super(name, hp, attackDamage, defense, movement, assetId, owner);
         this.artifactSlots = artifactSlots;
         this.talent = talent;
     }

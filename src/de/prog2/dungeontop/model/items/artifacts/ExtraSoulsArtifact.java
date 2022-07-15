@@ -16,8 +16,7 @@ public class ExtraSoulsArtifact extends Artifact
     @Override
     public void use()
     {
-        // TODO: implement
-        PlayerManager.getInstance().getPlayer().setSouls(PlayerManager.getInstance().getPlayer().getSouls() + extraSouls);
+        PlayerManager.getInstance().getPlayer().setSoulArtBonus(PlayerManager.getInstance().getPlayer().getSoulArtBonus() + extraSouls);
     }
 
     public int getExtraSouls()

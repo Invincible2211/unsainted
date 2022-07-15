@@ -1,10 +1,12 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.view.HandViewAbstract;
+import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -16,6 +18,21 @@ public class EnemyHandView extends HandViewAbstract {
 
     double handCardScale = ArenaViewConstants.HAND_PLAYER_Y / ArenaViewConstants.CARD_HEIGHT;
 
+    public EnemyHandView() {
+        PlayerManager.getInstance().getPlayer().getHandCards().addListener(new ListChangeListener<Card>() {
+            @Override
+            public void onChanged(Change<? extends Card> c) {
+                updateHand();
+            }
+        });
+    }
+
+    private void updateHand()
+    {
+        removeAll();
+        addCards(currentHandCardsSize);
+    }
+
     public void removeAll ()
     {
         super.getChildren().clear();
@@ -23,6 +40,7 @@ public class EnemyHandView extends HandViewAbstract {
 
     public void addCard()
     {
+        //TODO Jesse hier handrueckenkarte einfuegen anstatt von imageview iv
         ImageView iv = new ImageView();
         iv.maxWidth(ArenaViewConstants.HAND_PLAYER_X / super.getChildren().size());
         iv.maxHeight(ArenaViewConstants.CARD_HEIGHT);

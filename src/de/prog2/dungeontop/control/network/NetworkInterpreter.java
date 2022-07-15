@@ -10,6 +10,7 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -88,6 +89,11 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof RemoveEntityPackage){
             RemoveEntityPackage removeEntityPackage = (RemoveEntityPackage) dataPackage;
             Platform.runLater(() -> BattleManager2.getInstance().remove(removeEntityPackage.getCoordinate()));
+        } else if (dataPackage instanceof EgopointsChangePackage){
+            GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(
+                    GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount());
+        } else if (dataPackage instanceof  HandCardReducePackage){
+            GameManager.getInstance().getOpponentPlayer().getHandCards().remove(GameManager.getInstance().getOpponentPlayer().getHandCards().remove(0));
         }
     }
 

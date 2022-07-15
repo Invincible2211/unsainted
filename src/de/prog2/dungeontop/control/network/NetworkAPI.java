@@ -25,6 +25,11 @@ public class NetworkAPI {
         this.sendData(new HellPackage(hell, playerCoordinate));
     }
 
+    public void sendEgopointsChangePackage(int amount)
+    {
+        this.sendData(new EgopointsChangePackage(amount));
+    }
+
     public void sendPlayerMovementData (KeyCode keyCode)
     {
         this.sendData(new PlayerMovementPackage(keyCode));
@@ -60,5 +65,9 @@ public class NetworkAPI {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void sendHandCardReducePackage() {
+        this.sendData(new HandCardReducePackage());
     }
 }

@@ -4,18 +4,15 @@ import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.Inventory;
-import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.world.rooms.Room;
-import de.prog2.dungeontop.resources.DeckConstants;
 import de.prog2.dungeontop.resources.GameConstants;
-import de.prog2.dungeontop.utils.GlobalLogger;
-
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 public class Player implements Serializable
 {
@@ -27,6 +24,13 @@ public class Player implements Serializable
     private Room currentRoom;
     private int handCardLimit;
     private Hero hero;
+    private Deck discardPile;
+    private SerializableSimpleIntegerProperty currentEgoPoints = new SerializableSimpleIntegerProperty(0);
+    private ObservableList<Card> handCards = new SimpleListProperty<>();
+    private int experiencePoints;
+    private int level;
+    private int expCap = GameConstants.LEVEL_1_EXP_CAP * level;
+    private int soulArtBonus = 0;
 
     public Player (){
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);
@@ -40,9 +44,11 @@ public class Player implements Serializable
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
     }
 
-
-
-
+    public void levelUp()
+    {
+        setExperiencePoints(getExperiencePoints() - getExpCap());
+        setLevel(getLevel() + 1);
+    }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getSouls(){
         GlobalLogger.log(LoggerStringValues.PLAYERSOULS_GET);
@@ -127,5 +133,60 @@ public class Player implements Serializable
     public void setHero(Hero hero)
     {
         this.hero = hero;
+    }
+
+    public Deck getDiscardPile() {
+        return discardPile;
+    }
+
+    public void setDiscardPile(Deck discardPile) {
+        this.discardPile = discardPile;
+    }
+
+    public SerializableSimpleIntegerProperty currentEgoPointsProperty() {
+        return currentEgoPoints;
+    }
+
+    public ObservableList<Card> getHandCards() {
+        return handCards;
+    }
+
+    public void setHandCards(ObservableList<Card> handCards) {
+        this.handCards = handCards;
+    }
+
+    public int getExperiencePoints()
+    {
+        return experiencePoints;
+    }
+
+    public void setExperiencePoints(int experiencePoints)
+    {
+        this.experiencePoints = experiencePoints;
+    }
+
+    public int getLevel()
+    {
+        return level;
+    }
+
+    public void setLevel(int level)
+    {
+        this.level = level;
+    }
+
+    public int getExpCap()
+    {
+        return expCap;
+    }
+
+    public int getSoulArtBonus()
+    {
+        return soulArtBonus;
+    }
+
+    public void setSoulArtBonus(int soulArtBonus)
+    {
+        this.soulArtBonus = soulArtBonus;
     }
 }
