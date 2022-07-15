@@ -48,6 +48,7 @@ public class MainMenueController {
     {
         NpcRoomView view = new NpcRoomView(null);
         DungeonTop.getStage().setScene(view.getNpcRoomView());
+        AudioManager.getInstance().stopSound(mainMenueSoundUUID);
     }
 
     /**
