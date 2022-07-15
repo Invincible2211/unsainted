@@ -32,29 +32,6 @@ public class ItemViewController
     }
 
     /**
-     * create an ItemView for an equipped item.
-     *
-     */
-    public static Node getEquippedItemView(Item item)
-    {
-        try
-        {
-            FXMLLoader loader = new FXMLLoader();
-            Node itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_VIEW_FXML));
-
-            ItemView controller = loader.getController();
-            controller.getItemName().setText("");
-            fillItemViewWithData(item, controller);
-            return itemView;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * Add item to the itemview.
      * @param controller an instance of ItemView, the controller of itemView.fxml
      *

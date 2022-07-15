@@ -2,6 +2,7 @@ package de.prog2.dungeontop.model.world.arena;
 
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
+import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.resources.LoggerStringValues;
@@ -17,10 +18,19 @@ public class Arena implements Serializable
     private Entity selectedEntity;
     private final HashMap<Coordinate, Entity> arenaHashmap = new HashMap<>();
     private final HashMap<Coordinate, Entity> enemyHashmap = new HashMap<>();
+
+    private HashMap<Coordinate, Entity> friendly = new HashMap<>();
+    private HashMap<Coordinate, Entity> opponent = new HashMap<>();
     public Arena(int height, int width)
     {
         this.height = height;
         this.width = width;
+    }
+
+    public Arena (int size)
+    {
+        this.height = size;
+        this.width = size;
     }
 
     public void castSpell(Spell spell, Coordinate coordinate)
@@ -96,4 +106,13 @@ public class Arena implements Serializable
     {
         this.selectedEntity = selectedEntity;
     }
+
+    public HashMap<Coordinate, Entity> getFriendly() {
+        return friendly;
+    }
+
+    public HashMap<Coordinate, Entity> getOpponent() {
+        return opponent;
+    }
+
 }

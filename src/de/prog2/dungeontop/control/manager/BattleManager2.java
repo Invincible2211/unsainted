@@ -52,7 +52,7 @@ public class BattleManager2 {
         scene = new Scene(viewRoot);
     }
 
-    public void startBattle(Player player1, Player player2){
+    public void startBattle(Player player1, Player player2, Arena arena){
         Platform.runLater(() -> {
             this.player1 = PlayerManager.getInstance().getPlayer();
             this.player2 = GameManager.getInstance().getOpponentPlayer();
@@ -64,9 +64,9 @@ public class BattleManager2 {
             entities.addAll(TestConstants.getTestEntities());
             //TODO Hero und DungeonMaster spawnen
             if (!GameManager.getInstance().isDM()){
-                arenaController.placeCardFriendly(new EntityCard(entities.get(0),0,0,0,0, 0), new Coordinate(2,1));
+                arenaController.placeCardFriendly(new EntityCard(new Minion("Harald",10,4,4,410),10,4,4,410,4).getEntity(), new Coordinate(2,1));
             }  else {
-                arenaController.placeCardFriendly(new EntityCard(entities.get(1),0,0,0,0, 0), new Coordinate(0,3));
+                arenaController.placeCardFriendly(new EntityCard(new Minion("Harald",10,4,4,410),10,4,4,410,4).getEntity(), new Coordinate(2,1));
             }
             //arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
         });
@@ -75,6 +75,8 @@ public class BattleManager2 {
     public void endBattle(boolean playerWins){
         Platform.runLater(() -> {
             if (playerWins){
+                if (((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).isBoss())
+                    GameManager.getInstance().getGameWorld().getNextHell();
                 DungeonTop.getStage().setScene(HellView.getCurrHellView());
             } else {
                 GameManager.getInstance().endGame();
@@ -83,7 +85,7 @@ public class BattleManager2 {
         });
     }
 
-    public void spawnOpponent(EntityCard card, Coordinate pos){
+    public void spawnOpponent(Entity card, Coordinate pos){
         arenaController.placeCardOpponent(card, pos);
     }
 
@@ -112,14 +114,12 @@ public class BattleManager2 {
         }
     }
 
-    public List<EntityCard> battle(EntityCard card1, EntityCard card2)
+    public List<Entity> battle(Entity entity1, Entity entity2)
     {
-        Entity entity1 = card1.getEntity();
-        Entity entity2 = card2.getEntity();
         entity2.setHp(entity2.getHp()-entity1.getAttackDamage());
-        List<EntityCard> cardList = new ArrayList<>();
+        List<Entity> cardList = new ArrayList<>();
         if (entity2.getHp()>0){
-            cardList.add(card2);
+            cardList.add(entity2);
         }
         if (player1.getHp()<=0){
             endBattle(GameManager.getInstance().isDM());

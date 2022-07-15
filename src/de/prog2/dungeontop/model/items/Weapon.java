@@ -6,10 +6,13 @@ import de.prog2.dungeontop.model.entities.Hero;
 
 public class Weapon extends Item implements Equippable
 {
-    int attackDamage = 0;
-    public Weapon(String name, String description, int price, int assetID, int attackDamage) {
+    private final int attackDamage;
+    private final int attackRange;
+    public Weapon(String name, String description, int price, int assetID, int attackDamage, int attackRange)
+    {
         super(name, description, price, assetID);
         this.attackDamage = attackDamage;
+        this.attackRange = attackRange;
     }
 
     @Override
@@ -35,5 +38,10 @@ public class Weapon extends Item implements Equippable
     public int getAttackDamage()
     {
         return attackDamage;
+    }
+
+    public int getAttackRange()
+    {
+        return attackRange;
     }
 }

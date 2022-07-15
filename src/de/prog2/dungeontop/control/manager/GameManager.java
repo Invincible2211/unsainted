@@ -125,9 +125,9 @@ public class GameManager {
     /**
      * Das Spiel wird in den Zustand des gestarteten Kampfes gesetzt.
      */
-    public void beginBattle()
+    public void beginBattle(Arena arena)
     {
-        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), opponentPlayer);
+        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), opponentPlayer, arena);
         /*
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {

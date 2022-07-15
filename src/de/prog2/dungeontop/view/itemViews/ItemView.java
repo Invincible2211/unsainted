@@ -25,17 +25,21 @@ public class ItemView
      */
     public void itemButtonClicked()
     {
-        AnchorPane rootPane;
-        Item selectedItem = getItem();
-        rootPane = ItemClickedController.getItemClicked(selectedItem);
-        final Scene scene = new Scene(rootPane);
-        stage.setScene(scene);
+        initItemClicked();
         stage.show();
     }
 
     public static void hideStage()
     {
         stage.hide();
+    }
+
+    public void initItemClicked()
+    {
+        AnchorPane rootPane;
+        rootPane = ItemClickedController.getItemClicked(item);
+        final Scene scene = new Scene(rootPane);
+        stage.setScene(scene);
     }
 
     //Get- und Setters

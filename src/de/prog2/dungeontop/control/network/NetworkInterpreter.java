@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
-import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
@@ -78,12 +77,12 @@ public class NetworkInterpreter extends Thread{
             PlayerPackage playerPackage = (PlayerPackage) dataPackage;
             GameManager.getInstance().setOpponentPlayer(playerPackage.getPlayer());
         } else if (dataPackage instanceof OpenArenaPackage){
-            GameManager.getInstance().beginBattle();
+            GameManager.getInstance().beginBattle(((OpenArenaPackage)dataPackage).getArena());
         } else if (dataPackage instanceof EndBattlePackage){
             Platform.runLater(() -> BattleManager2.getInstance().endBattle(((EndBattlePackage)dataPackage).isPlayerWins()));
         } else if (dataPackage instanceof PlaceEntityPackage){
             PlaceEntityPackage placeEntityPackage = (PlaceEntityPackage) dataPackage;
-            Platform.runLater(() -> BattleManager2.getInstance().spawnOpponent(placeEntityPackage.getEntityCard(), placeEntityPackage.getCoordinate()));
+            Platform.runLater(() -> BattleManager2.getInstance().spawnOpponent(placeEntityPackage.getEntity(), placeEntityPackage.getCoordinate()));
         } else if (dataPackage instanceof MoveEntityPackage){
             MoveEntityPackage moveEntityPackage = (MoveEntityPackage) dataPackage;
             Platform.runLater(() -> BattleManager2.getInstance().move(moveEntityPackage.getStart(),moveEntityPackage.getTarget()));

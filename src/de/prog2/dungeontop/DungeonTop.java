@@ -1,16 +1,19 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.ShopViewController;
-import de.prog2.dungeontop.control.controller.*;
+import de.prog2.dungeontop.control.controller.CardViewController;
+import de.prog2.dungeontop.control.controller.DeckController;
+import de.prog2.dungeontop.control.controller.EntityViewController;
+import de.prog2.dungeontop.control.controller.InventoryViewController;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.entities.Minion;
-import de.prog2.dungeontop.model.game.*;
+import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.Deck;
+import de.prog2.dungeontop.model.game.EntityCard;
+import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.model.items.artifacts.ExtraSoulsArtifact;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.spells.TestSpell;
@@ -25,12 +28,15 @@ import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonTop extends Application
@@ -64,19 +70,21 @@ public class DungeonTop extends Application
         //AudioManager.getInstance().playSound(990);
 
         testArenaView();
+        //testBattle();
+
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
-        //testCardView(primaryStage);
-        //testEntityView(primaryStage);
+        //testEntityView();
+        //testCardView();
+        //testCardDetailView();
         //testHellView(scene);
         //testLavaPondView(primaryStage);
         //testHell();
-        //testBattle();
     }
 
     private void testBattle()
     {
-        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), new Player());
+        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), new Player(), new Arena(6,6));
     }
 
     public void testHell()
@@ -85,8 +93,9 @@ public class DungeonTop extends Application
         HellGenerator.initHell(hell);
         System.out.println(hell);
     }
-    /*
-    public static void testEntityView(Stage primaryStage) throws Exception
+
+    //<editor-fold defaultstate="collapsed" desc="testModularViews">
+    public static void testEntityView()
     {
         List<Entity> entities = TestConstants.getTestEntities();
         entities.addAll(TestConstants.getTestEntities());
@@ -95,7 +104,7 @@ public class DungeonTop extends Application
         for (Entity entity : entities)
         {
             i++;
-            entityViews.add(EntityViewController.getEntityView(entity, 1));//0.1 + 0.05 * (i)));
+            entityViews.add(EntityViewController.getEntityView(entity, 0.2 + 0.1 * (i)));
         }
         HBox hBox = new HBox();
         hBox.setStyle("-fx-background-color: #000000;");
@@ -104,22 +113,33 @@ public class DungeonTop extends Application
             hBox.getChildren().add(entityView);
         }
         Scene scene = new Scene(hBox);
-        scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
-        primaryStage.setScene(scene);
+        getStage().setScene(scene);
     }
-    */
-
-    public static void testCardView(Stage primaryStage) throws Exception
+    public static void testCardView()
     {
         List<Card> cards = TestConstants.getTestCards();
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.SHOP_VIEW_FXML));
-        ShopViewController.addCards(fxmlLoader.getController(), cards);
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(ViewStrings.SHOP_VIEW_CSS);
-        primaryStage.setScene(scene);
+        HBox box = new HBox();
+        for (Card card : cards)
+        {
+            Node cardView = CardViewController.getCardView(card, 1);
+            box.getChildren().add(cardView);
+        }
+        Scene scene = new Scene(box);
+        getStage().setScene(scene);
     }
+    public static void testCardDetailView()
+    {
+        List<Card> cards = TestConstants.getTestCards();
+        HBox box = new HBox();
+        for (Card card : cards)
+        {
+            Node cardView = CardViewController.getCardDetailView(card, 1);
+            box.getChildren().add(cardView);
+        }
+        Scene scene = new Scene(box);
+        getStage().setScene(scene);
+    }
+    //</editor-fold>
 
     public static void testHellView(Scene scene)
     {
@@ -189,22 +209,21 @@ public class DungeonTop extends Application
 
     public static void testInventory(Stage stage) throws Exception
     {
-        Item item = ItemConstants.minorPotion;
-        Item item1 = ItemConstants.bread;
-        Item weapon = ItemConstants.sword;
-        Item weapon1 = new Weapon("Test", "1", 1, 662, 1);
-        Item art1 = ItemConstants.necklace;
-        Item art2 = ItemConstants.bracelet;
-        Item art3 = new ExtraSoulsArtifact("Test", "1", 1, 662, 662);
-        Item art4 = new ExtraSoulsArtifact("Test", "1", 1, 662, 662);
-        PlayerManager.getInstance().getPlayerInventory().addItem(weapon);
-        PlayerManager.getInstance().getPlayerInventory().addItem(item);
-        PlayerManager.getInstance().getPlayerInventory().addItem(item1);
-        PlayerManager.getInstance().getPlayerInventory().addItem(art1);
-        PlayerManager.getInstance().getPlayerInventory().addItem(art2);
-        PlayerManager.getInstance().getPlayerInventory().addItem(art3);
-        PlayerManager.getInstance().getPlayerInventory().addItem(art4);
-        PlayerManager.getInstance().getPlayerInventory().addItem(weapon1);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.AXE);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.BREAD);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.HELMET);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.BRACELET);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.BOW);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.CHEESE);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.SWORD);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.NECKLACE);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.MINOR_POTION);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.WAND);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.RING);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.CLAW);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.SHIELD);
+        PlayerManager.getInstance().getPlayerInventory().addItem(ItemConstants.CROSSBOW);
+
         Player player = PlayerManager.getInstance().getPlayer();
         player.setHero(SelectHeroConstants.MAGE);
         PlayerManager.getInstance().setPlayer(player);
