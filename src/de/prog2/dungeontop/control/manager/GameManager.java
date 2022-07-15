@@ -27,7 +27,7 @@ public class GameManager {
     /*----------------------------------------------ATTRIBUTE---------------------------------------------------------*/
 
     private final static GameManager instance = new GameManager();
-
+    private Player player;
     private GameState currentState = GameState.MAIN_MENU;
     private World gameWorld = new World(WorldConstants.HELL_COUNT);
     private boolean isDM = false;
@@ -125,9 +125,9 @@ public class GameManager {
     /**
      * Das Spiel wird in den Zustand des gestarteten Kampfes gesetzt.
      */
-    public void beginBattle()
+    public void beginBattle(Arena arena)
     {
-        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), opponentPlayer);
+        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), opponentPlayer, arena);
         /*
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {

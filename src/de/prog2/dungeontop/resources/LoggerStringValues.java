@@ -131,7 +131,7 @@ public interface LoggerStringValues
     String ASSET_ID_FOUND = "Die ID des Assets %s wurde gefunden.";
     String BATTLE_HAS_ENDED = "Das Duell wurde Beendet";
     String CARD_REMOVED_FROM_HAND = "Eine Karte aus der Hand genommen";
-    String REDUCED_EGOPOINTS = "Es wurde ein EgoPunkt abgezogen";
+    String REDUCED_EGOPOINTS = "Es wurden Egopunkte vom Spieler abgezogen: ";
     String NO_EGO_TO_REDUCE = "Es konnten keine EgoPunkte abgezogen werden";
 
     String DREW_NEW_HAND = "Neue Hand gezogen!";

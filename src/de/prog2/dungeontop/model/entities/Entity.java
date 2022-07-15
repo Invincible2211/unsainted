@@ -2,6 +2,7 @@ package de.prog2.dungeontop.model.entities;
 
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.Talent;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 public abstract class Entity implements Serializable
 {
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
-    private Card card;
+    private EntityCard card;
     private String name;
     private SerializableSimpleIntegerProperty hp = new SerializableSimpleIntegerProperty(0);
     private int attackDamage = 0;
@@ -101,12 +102,12 @@ public abstract class Entity implements Serializable
         this.owner = owner;
     }
 
-    public Card getCard()
+    public EntityCard getCard()
     {
         return card;
     }
 
-    public void setCard (Card card)
+    public void setCard (EntityCard card)
     {
         this.card = card;
     }

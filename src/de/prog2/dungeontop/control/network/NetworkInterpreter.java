@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
-import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
@@ -11,6 +10,7 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -77,18 +77,23 @@ public class NetworkInterpreter extends Thread{
             PlayerPackage playerPackage = (PlayerPackage) dataPackage;
             GameManager.getInstance().setOpponentPlayer(playerPackage.getPlayer());
         } else if (dataPackage instanceof OpenArenaPackage){
-            GameManager.getInstance().beginBattle();
+            GameManager.getInstance().beginBattle(((OpenArenaPackage)dataPackage).getArena());
         } else if (dataPackage instanceof EndBattlePackage){
             Platform.runLater(() -> BattleManager2.getInstance().endBattle(((EndBattlePackage)dataPackage).isPlayerWins()));
         } else if (dataPackage instanceof PlaceEntityPackage){
             PlaceEntityPackage placeEntityPackage = (PlaceEntityPackage) dataPackage;
-            Platform.runLater(() -> BattleManager2.getInstance().spawnOpponent(placeEntityPackage.getEntityCard(), placeEntityPackage.getCoordinate()));
+            Platform.runLater(() -> BattleManager2.getInstance().spawnOpponent(placeEntityPackage.getEntity(), placeEntityPackage.getCoordinate()));
         } else if (dataPackage instanceof MoveEntityPackage){
             MoveEntityPackage moveEntityPackage = (MoveEntityPackage) dataPackage;
             Platform.runLater(() -> BattleManager2.getInstance().move(moveEntityPackage.getStart(),moveEntityPackage.getTarget()));
         } else if (dataPackage instanceof RemoveEntityPackage){
             RemoveEntityPackage removeEntityPackage = (RemoveEntityPackage) dataPackage;
             Platform.runLater(() -> BattleManager2.getInstance().remove(removeEntityPackage.getCoordinate()));
+        } else if (dataPackage instanceof EgopointsChangePackage){
+            GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(
+                    GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount());
+        } else if (dataPackage instanceof  HandCardReducePackage){
+            GameManager.getInstance().getOpponentPlayer().getHandCards().remove(GameManager.getInstance().getOpponentPlayer().getHandCards().remove(0));
         }
     }
 

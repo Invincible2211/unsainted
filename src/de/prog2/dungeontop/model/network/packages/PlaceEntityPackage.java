@@ -1,16 +1,16 @@
 package de.prog2.dungeontop.model.network.packages;
 
-import de.prog2.dungeontop.model.game.EntityCard;
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.network.Package;
 import de.prog2.dungeontop.model.world.Coordinate;
 
 public class PlaceEntityPackage extends Package {
 
-    private EntityCard entityCard;
+    private Entity entity;
     private Coordinate coordinate;
 
-    public PlaceEntityPackage(EntityCard entityCard, Coordinate coordinate){
-        this.entityCard = entityCard;
+    public PlaceEntityPackage(Entity entity, Coordinate coordinate){
+        this.entity = entity;
         this.coordinate = coordinate;
     }
 
@@ -18,8 +18,8 @@ public class PlaceEntityPackage extends Package {
         return coordinate;
     }
 
-    public EntityCard getEntityCard() {
-        return entityCard;
+    public Entity getEntity() {
+        return entity;
     }
 
 }

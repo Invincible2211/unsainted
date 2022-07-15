@@ -13,6 +13,8 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -28,6 +30,9 @@ public class Player implements Serializable
     private Room currentRoom;
     private int handCardLimit;
     private Hero hero;
+    private Deck discardPile;
+    private SerializableSimpleIntegerProperty currentEgoPoints = new SerializableSimpleIntegerProperty(0);
+    private ObservableList<Card> handCards = new SimpleListProperty<>();
     private int experiencePoints;
     private int level;
     private int expCap = 100 * level;
@@ -133,6 +138,26 @@ public class Player implements Serializable
     public void setHero(Hero hero)
     {
         this.hero = hero;
+    }
+
+    public Deck getDiscardPile() {
+        return discardPile;
+    }
+
+    public void setDiscardPile(Deck discardPile) {
+        this.discardPile = discardPile;
+    }
+
+    public SerializableSimpleIntegerProperty currentEgoPointsProperty() {
+        return currentEgoPoints;
+    }
+
+    public ObservableList<Card> getHandCards() {
+        return handCards;
+    }
+
+    public void setHandCards(ObservableList<Card> handCards) {
+        this.handCards = handCards;
     }
 
     public int getExperiencePoints()
