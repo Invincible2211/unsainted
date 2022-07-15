@@ -232,7 +232,7 @@ public class ArenaController
             System.out.println("mousepressed event in arenacontroller" + cord.getX() + " " + cord.getY() );
         });
         pane.setOnMouseReleased(event->{
-            Coordinate cord = new Coordinate(GridPane.getColumnIndex((Node) event.getSource()), GridPane.getRowIndex((Node) event.getSource()));
+            Coordinate cord = new Coordinate(GridPane.getColumnIndex(event.getPickResult().getIntersectedNode()), GridPane.getRowIndex(event.getPickResult().getIntersectedNode()));
 
             System.out.println("mousereleased event in arenacontroller " + cord.toString());
         });
@@ -249,20 +249,8 @@ public class ArenaController
             return;
         }
         removeHighlight();
-        // TODO: Refactor this mess of ifs
         source.setStyle("-fx-background-color: black;");
-        if (sourcePos.getX() !=0){
-            markField(sourcePos.getX() -1, sourcePos.getY());
-        }
-        if (sourcePos.getX() < arenaGridPane.getColumnCount()){
-            markField(sourcePos.getX() +1, sourcePos.getY());
-        }
-        if (sourcePos.getY() !=0){
-            markField(sourcePos.getX(), sourcePos.getY() -1);
-        }
-        if (sourcePos.getY() < arenaGridPane.getRowCount()){
-            markField(sourcePos.getX(), sourcePos.getY() +1);
-        }
+        markAvailabelFields(sourcePos);
         setSelected(source);
     }
 
@@ -283,6 +271,21 @@ public class ArenaController
         setSelected(null);
         removeHighlight();
         NetManager.getInstance().getNetworkAPI().sendMoveEntity(selectedPos, currentPos);
+    }
+
+    private void markAvailabelFields(Coordinate sourcePos){
+        if (sourcePos.getX() !=0){
+            markField(sourcePos.getX() -1, sourcePos.getY());
+        }
+        if (sourcePos.getX() < arenaGridPane.getColumnCount()){
+            markField(sourcePos.getX() +1, sourcePos.getY());
+        }
+        if (sourcePos.getY() !=0){
+            markField(sourcePos.getX(), sourcePos.getY() -1);
+        }
+        if (sourcePos.getY() < arenaGridPane.getRowCount()){
+            markField(sourcePos.getX(), sourcePos.getY() +1);
+        }
     }
 
     /**
