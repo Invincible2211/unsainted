@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +18,7 @@
       <Image url="@/assets/650_Inventory_Background.jpg" />
    </ImageView>
    <Button mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Zurück" translateX="100.0" translateY="50.0" />
-   <AnchorPane layoutX="100.0" layoutY="195.0" prefHeight="808.0" prefWidth="1403.0" style="-fx-background-color: brown;">
+   <AnchorPane layoutX="100.0" layoutY="195.0" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: brown;">
       <GridPane fx:id="gridPane" hgap="100.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -84,7 +85,7 @@
          </effect>
       </Line>
    </AnchorPane>
-   <AnchorPane layoutX="1654.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+   <AnchorPane layoutX="1654.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: brown;">
       <children>
          <GridPane fx:id="weaponSlot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
            <columnConstraints>
@@ -94,10 +95,13 @@
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
          </GridPane>
-      </children></AnchorPane>
-   <AnchorPane layoutX="1654.0" layoutY="352.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+      </children>
+      <effect>
+         <DropShadow blurType="GAUSSIAN" height="15.0" radius="7.0" width="15.0" />
+      </effect></AnchorPane>
+   <AnchorPane layoutX="1654.0" layoutY="352.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: brown;">
       <children>
-         <GridPane fx:id="artifactSlots" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="200.0">
+         <GridPane fx:id="artifactSlots" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0">
            <columnConstraints>
              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
            </columnConstraints>
@@ -105,7 +109,10 @@
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
          </GridPane>
-      </children></AnchorPane>
+      </children>
+      <effect>
+         <DropShadow height="15.0" radius="7.0" width="15.0" />
+      </effect></AnchorPane>
    <Text fill="#d9ff00" layoutX="1654.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artefakte:" wrappingWidth="159.0233154296875">
       <font>
          <Font size="30.0" />
