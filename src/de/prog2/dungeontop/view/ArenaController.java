@@ -99,7 +99,7 @@ public class ArenaController
         enemyCardView.getChildren().clear();
     }
 
-    public void placEntityFriendly (Entity entity, Coordinate coordinate){
+    public void placeEntityFriendly (Entity entity, Coordinate coordinate){
         AnchorPane card = placeEntity(entity);
         AnchorPane test = getNodeFromGridPane(coordinate.getX(), coordinate.getY());
         arenaGridPane.getChildren().remove(test);
