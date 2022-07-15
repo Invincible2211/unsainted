@@ -2,12 +2,15 @@ package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.control.controller.ItemClickedController;
 import de.prog2.dungeontop.model.items.Item;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class ItemView
@@ -26,6 +29,11 @@ public class ItemView
     public void itemButtonClicked()
     {
         initItemClicked();
+        if (stage.getStyle() != StageStyle.TRANSPARENT)
+        {
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initModality(Modality.APPLICATION_MODAL);
+        }
         stage.show();
     }
 

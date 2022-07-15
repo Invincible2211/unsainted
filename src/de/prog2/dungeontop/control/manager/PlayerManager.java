@@ -73,6 +73,10 @@ public class PlayerManager
         return player.getMax_ego_points();
     }
 
+    public void addExp(int amount)
+    {
+        player.setExperiencePoints(player.getExperiencePoints() + amount);
+    }
 
 
 

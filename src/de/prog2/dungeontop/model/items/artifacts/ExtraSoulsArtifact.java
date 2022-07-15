@@ -14,9 +14,15 @@ public class ExtraSoulsArtifact extends Artifact
     }
 
     @Override
-    public void use()
-    {
+    public boolean equip() {
         PlayerManager.getInstance().getPlayer().setSoulArtBonus(PlayerManager.getInstance().getPlayer().getSoulArtBonus() + extraSouls);
+        return super.equip();
+    }
+
+    @Override
+    public boolean unequip() {
+        PlayerManager.getInstance().getPlayer().setSoulArtBonus(PlayerManager.getInstance().getPlayer().getSoulArtBonus() - extraSouls);
+        return super.unequip();
     }
 
     public int getExtraSouls()
