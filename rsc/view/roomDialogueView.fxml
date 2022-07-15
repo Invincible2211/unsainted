@@ -12,7 +12,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
       prefWidth="1150.0"
       style="-fx-background-color: #e0c59f; -fx-background-radius: 20;-fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 3;"
-      xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="de.prog2.dungeontop.view.RoomDialogueViewController">
    <HBox layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="1050.0">
       <ImageView fx:id="roomImageView" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true"/>
@@ -23,7 +23,7 @@
          <TextArea fx:id="descriptionText" editable="false" focusTraversable="false" mouseTransparent="true"
                    prefHeight="275.0" prefWidth="200.0"
                    style="-fx-text-box-border: transparent; -fx-focus-color: transparent;" styleClass="text-area"
-                   stylesheets="@view/roomDialogueStyle.css" text="PLACEHOLDER" wrapText="true">
+                   stylesheets="@/view/roomDialogueStyle.css" text="PLACEHOLDER" wrapText="true">
             <font>
                <Font size="18"/>
             </font>
@@ -32,13 +32,13 @@
             </VBox.margin>
          </TextArea>
          <Button alignment="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="450.0"
-                 stylesheets="@view/mainmenuestyle.css" fx:id="upperButton">
+                 stylesheets="@/view/mainmenuestyle.css" fx:id="upperButton">
             <VBox.margin>
                <Insets bottom="25.0" left="25.0"/>
             </VBox.margin>
          </Button>
          <Button alignment="CENTER" mnemonicParsing="false" onAction="#hideStage" prefHeight="90.0"
-                 prefWidth="450.0" stylesheets="@view/mainmenuestyle.css" fx:id="lowerButton">
+                 prefWidth="450.0" stylesheets="@/view/mainmenuestyle.css" fx:id="lowerButton">
             <VBox.margin>
                <Insets bottom="25.0" left="25.0"/>
             </VBox.margin>
