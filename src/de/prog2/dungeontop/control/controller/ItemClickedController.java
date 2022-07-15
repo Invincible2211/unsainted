@@ -47,27 +47,30 @@ public class ItemClickedController
         controller.getPrice().setText(String.valueOf(item.getPrice()));
         controller.setItem(item);
 
-        if (item instanceof Artifact)
+        if (item instanceof Artifact || item instanceof Weapon)
         {
-            controller.getEquipButton().setText("Artefakt ausrüsten");
-        }
-        else if (item instanceof Weapon)
-        {
-            controller.getEquipButton().setText("Waffe ausrüsten");
-        }
+            if (item instanceof Artifact)
+            {
+                controller.getEquipButton().setText("Artefakt ausrüsten");
+            }
+            else
+            {
+                controller.getEquipButton().setText("Waffe ausrüsten");
+            }
 
-        Equippable item1 = null;
-        try
-        {
-            item1 = (Equippable) item;
-        }
-        catch (ClassCastException e)
-        {
-            GlobalLogger.warning(e.getMessage());
-        }
-        if(item1.isEquipped())
-        {
-            controller.getEquipButton().setText("Ablegen");
+            Equippable item1 = null;
+            try
+            {
+                item1 = (Equippable) item;
+            }
+            catch (ClassCastException e)
+            {
+                GlobalLogger.warning(e.getMessage());
+            }
+            if(item1.isEquipped())
+            {
+                controller.getEquipButton().setText("Ablegen");
+            }
         }
     }
 }

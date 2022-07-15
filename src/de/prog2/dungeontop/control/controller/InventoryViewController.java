@@ -49,7 +49,7 @@ public class InventoryViewController
      */
     public static void equipWeapon(InventoryView inventoryView, Weapon weapon)
     {
-        Node weaponView = ItemViewController.getEquippedItemView(weapon);
+        Node weaponView = ItemViewController.getItemView(weapon);
         inventoryView.getWeaponSlot().add(weaponView, 0, 0);
     }
 
@@ -62,7 +62,7 @@ public class InventoryViewController
         int columns = 0, rows = 0;
         for (Artifact artifact : artifacts)
         {
-            Node artifactView = ItemViewController.getEquippedItemView(artifact);
+            Node artifactView = ItemViewController.getItemView(artifact);
             inventoryView.getArtifactSlots().add(artifactView, columns, rows);
             ++rows;
         }
