@@ -6,7 +6,7 @@ import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.resources.ViewStrings;
-import de.prog2.dungeontop.view.itemViews.ItemClicked;
+import de.prog2.dungeontop.view.itemViews.ItemClickedView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
@@ -23,7 +23,7 @@ public class ItemClickedController
         {
             FXMLLoader loader = new FXMLLoader();
             AnchorPane itemClicked = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_CLICKED_FXML));
-            ItemClicked controller = loader.getController();
+            ItemClickedView controller = loader.getController();
             fillItem(item, controller);
             return itemClicked;
         }
@@ -38,7 +38,7 @@ public class ItemClickedController
      * Add item to the pop-up view.
      *
      */
-    private static void fillItem(Item item, ItemClicked controller)
+    private static void fillItem(Item item, ItemClickedView controller)
     {
         controller.getItemImage().imageProperty().setValue(AssetsManager.getImageByAssetId(item.getAssetID()));
         controller.getItemDescription().setText(item.getDescription());
@@ -46,11 +46,11 @@ public class ItemClickedController
         controller.setItem(item);
         if (item instanceof Artifact)
         {
-            controller.getUseButton().setText("Artefakt ausrüsten");
+            controller.getEquipButton().setText("Artefakt ausrüsten");
         }
         else if (item instanceof Weapon)
         {
-            controller.getUseButton().setText("Waffe ausrüsten");
+            controller.getEquipButton().setText("Waffe ausrüsten");
         }
     }
 }

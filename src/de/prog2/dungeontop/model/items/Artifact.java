@@ -1,49 +1,32 @@
 package de.prog2.dungeontop.model.items;
 
+import de.prog2.dungeontop.control.controller.ItemController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 
-public class Artifact extends Item
+public abstract class Artifact extends Item implements Equippable
 {
-    public Artifact(String name, String description, int value, int price, BonusType bonusType, int assetID) {
-        super(name, description, value, price, bonusType, assetID);
+    public Artifact(String name, String description, int price, int assetID)
+    {
+        super(name, description, price, assetID);
+    }
+
+    public abstract void use();
+
+    @Override
+    public boolean equip()
+    {
+        return ItemController.equipArtifact(PlayerManager.getInstance().getPlayerHero(), this);
     }
 
     @Override
-    public void use()
+    public boolean unequip()
     {
-        if (PlayerManager.getInstance().getPlayer().getArtifactSlots().size() == 2)
-        {
-            Item item1 = PlayerManager.getInstance().getPlayer().getArtifactSlots().get(0);
-            if (item1.getBonusType().equals(BonusType.SOULS))
-            {
-                PlayerManager.getInstance().revertArtSoulsBonus();
-            }
-            else if (item1.getBonusType().equals(BonusType.DEFENSE))
-            {
-                PlayerManager.getInstance().revertArtDefenseBonus();
-            }
-            else
-            {
-                PlayerManager.getInstance().revertArtAttackBonus();
-            }
-            PlayerManager.addItem(PlayerManager.getInstance().getPlayer().getArtifactSlots().get(0));
-            PlayerManager.getInstance().getPlayer().getArtifactSlots().remove(0);
-        }
-        PlayerManager.getInstance().getPlayer().getArtifactSlots().add(this);
-        PlayerManager.removeItem(this);
-
-        if (this.getBonusType().equals(BonusType.SOULS))
-        {
-            PlayerManager.getInstance().addArtSoulsBonus(this);
-        }
-        else if (this.getBonusType().equals(BonusType.DEFENSE))
-        {
-            PlayerManager.getInstance().addArtDefenseBonus(this);
-        }
-        else
-        {
-            PlayerManager.getInstance().addArtAttackBonus(this);
-        }
+        return ItemController.unequipArtifact(PlayerManager.getInstance().getPlayerHero(), this);
     }
 
+    @Override
+    public boolean isEquipped()
+    {
+        return PlayerManager.getInstance().getPlayerHero().hasArtifact(this);
+    }
 }
