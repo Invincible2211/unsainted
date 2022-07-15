@@ -1,11 +1,13 @@
 package de.prog2.dungeontop.control.network;
 
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.network.Package;
 import de.prog2.dungeontop.model.network.packages.*;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
+import de.prog2.dungeontop.model.world.arena.Arena;
 import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
@@ -32,8 +34,8 @@ public class NetworkAPI {
         this.sendData(new PlayerPackage(player));
     }
 
-    public void sendOpenArenaPackage() {
-        sendData(new OpenArenaPackage());
+    public void sendOpenArenaPackage(Arena arena) {
+        sendData(new OpenArenaPackage(arena));
     }
 
     public void sendEndBattlePackage(boolean playerWins){
@@ -44,7 +46,7 @@ public class NetworkAPI {
         this.sendData(new MoveEntityPackage(start, target));
     }
 
-    public void sendSpawnEntity(EntityCard card, Coordinate position){
+    public void sendSpawnEntity(Entity card, Coordinate position){
         this.sendData(new PlaceEntityPackage(card,position));
     }
 

@@ -8,12 +8,12 @@ import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.arena.Arena;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,10 +22,6 @@ public class ArenaController
     private double scale;
 
     private AnchorPane selected = null;
-
-    // TODO change EntityCard to Entity
-    private HashMap<Coordinate, EntityCard> friendly = new HashMap<Coordinate, EntityCard>();
-    private HashMap<Coordinate, EntityCard> opponent = new HashMap<Coordinate, EntityCard>();
 
     @FXML
     private Label currentPhase;
@@ -58,24 +54,25 @@ public class ArenaController
     @FXML
     AnchorPane root;
 
+    private Arena currentArena;
+
     @FXML
     private void onSurrender(){
         BattleManager2.getInstance().endBattle(GameManager.getInstance().isDM());
     }
 
-    public void initBattle(int width, int height){
+    public void initBattle(Arena arena){
         clear();
+        currentArena = arena;
         arenaGridPane = new GridPane();
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < arena.getWidth(); i++) {
             ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / width);
-            //colConst.setFillWidth(true);
+            colConst.setPercentWidth(100.0 / arena.getWidth());
             arenaGridPane.getColumnConstraints().add(colConst);
         }
-        for (int i = 0; i < height; i++) {
+        for (int i = 0; i < arena.getWidth(); i++) {
             RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / height);
-            //rowConst.setFillHeight(true);
+            rowConst.setPercentHeight(100.0 / arena.getWidth());
             arenaGridPane.getRowConstraints().add(rowConst);
         }
         arenaGridPane.setPrefSize(680, 680);
@@ -83,9 +80,9 @@ public class ArenaController
         arenaGridPane.setLayoutX(370);
         arenaGridPane.setGridLinesVisible(true);
 
-        scale = (double)680/(double)height/(double)170;
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        scale = (double)680/(double)arena.getHeight()/(double)170;
+        for (int i = 0; i < arena.getWidth(); i++) {
+            for (int j = 0; j < arena.getHeight(); j++) {
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane.setPrefSize(170*scale,170*scale);
                 addEventHandler(anchorPane);
@@ -108,31 +105,26 @@ public class ArenaController
 
     }
 
-    public void placeCardFriendly(EntityCard entityCard, Coordinate coordinate){
-        AnchorPane card = createCard(entityCard);
+    public void placeCardFriendly(Entity entity, Coordinate coordinate){
+        AnchorPane card = createCard(entity);
         AnchorPane test = getNodeFromGridPane(coordinate.getX(), coordinate.getY());
         arenaGridPane.getChildren().remove(test);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
-        friendly.put(coordinate,entityCard);
-        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entityCard, coordinate);
+        currentArena.getFriendly().put(coordinate, entity);
+        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entity, coordinate);
     }
 
-    public void placeCardOpponent(EntityCard entityCard, Coordinate coordinate){
-        AnchorPane card = createCard(entityCard);
+    public void placeCardOpponent(Entity entity, Coordinate coordinate){
+        AnchorPane card = createCard(entity);
         AnchorPane test = getNodeFromGridPane(coordinate.getX(), coordinate.getY());
         arenaGridPane.getChildren().remove(test);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
-        opponent.put(coordinate,entityCard);
+        currentArena.getOpponent().put(coordinate, entity);
     }
 
-    private AnchorPane createCard(EntityCard entityCard)
+    private AnchorPane createCard(Entity entity)
     {
-        // this has to be done until the entityCard ist finally replaced with entity
-        Entity entity = entityCard.getEntity();
-        entity.setCard(entityCard);
-
         AnchorPane anchorPane = EntityViewController.getEntityView(entity, scale);
-
         anchorPane.setOnMouseEntered(event -> cardView.getChildren().add(CardViewController.getCardDetailView(entity.getCard(),1)));
         anchorPane.setOnMouseExited(event -> cardView.getChildren().clear());
         addEventHandler(anchorPane);
@@ -169,73 +161,71 @@ public class ArenaController
     private void addEventHandler(AnchorPane pane)
     {
         pane.setOnMouseClicked(event -> {
-            // TODO What is the difference between pane and source? (Not always the same??)
-            AnchorPane source = (AnchorPane) event.getSource();
-            AnchorPane selected = getSelected();
-            if (source == null)
-            {
-                return;
-            }
-            if (source.getChildren().isEmpty()) // if the source is an empty field
-            {
-                handleMoveSelected(source, selected);
-                return;
-            }
-            if (selected == null)
-            {
-                handleSelect(source);
-                return;
-            }
+            handleEvent((AnchorPane) event.getSource());
+        });
+        pane.setOnMousePressed(event->{
 
-            Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-            if (friendly.containsKey(sourcePos))
+            handleEvent((AnchorPane) event.getSource());
+        });
+        pane.setOnMouseReleased(event->{
+            if (isArenaAnchorPane(event.getPickResult().getIntersectedNode())) handleEvent((AnchorPane) event.getPickResult().getIntersectedNode());
+        });
+    }
+
+    private boolean isArenaAnchorPane(Node node){
+        return node instanceof AnchorPane && node != cardView && node != root && node != arenaGrid;
+    }
+
+    private void handleEvent(AnchorPane source){
+        AnchorPane selected = getSelected();
+        if (source == null)
+        {
+            return;
+        }
+        if (source.getChildren().isEmpty()) // if the source is an empty field
+        {
+            handleMoveSelected(source, selected);
+            return;
+        }
+        if (selected == null)
+        {
+            handleSelect(source);
+            return;
+        }
+
+        Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+        if (currentArena.getFriendly().containsKey(sourcePos))
+        {
+            for (Node node : arenaGridPane.getChildren())
             {
-                for (Node node : arenaGridPane.getChildren())
+                if (node instanceof AnchorPane pane1)
                 {
-                    if (node instanceof AnchorPane pane1)
-                    {
-                        pane1.setStyle("-fx-background-color: none;");
-                    }
+                    pane1.setStyle("-fx-background-color: none;");
                 }
-                setSelected(null);
+            }
+            setSelected(null);
+        }
+        else
+        {
+            Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
+            List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
+            arenaGridPane.getChildren().remove(source);
+            currentArena.getOpponent().remove(sourcePos);
+            if (!cards.isEmpty())
+            {
+                getOpponent().put(sourcePos, cards.get(0));
             }
             else
             {
-                Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
-                for (Coordinate c : friendly.keySet())
-                {
-                    // TODO: Was soll dieses foreach machen?
-                }
-                List<EntityCard> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
-
-                arenaGridPane.getChildren().remove(source);
-                opponent.remove(sourcePos);
-                if (!cards.isEmpty())
-                {
-                    getOpponent().put(sourcePos, cards.get(0));
-                }
-                else
-                {
-                    NetManager.getInstance().getNetworkAPI().sendRemoveEntity(sourcePos);
-                    AnchorPane anchorPane = new AnchorPane();
-                    anchorPane.setPrefSize(170*scale, 170*scale);
-                    addEventHandler(anchorPane);
-                    arenaGridPane.add(anchorPane, sourcePos.getX(), sourcePos.getY());
-                }
-                removeHighlight();
-                setSelected(null);
+                NetManager.getInstance().getNetworkAPI().sendRemoveEntity(sourcePos);
+                AnchorPane anchorPane = new AnchorPane();
+                anchorPane.setPrefSize(170*scale, 170*scale);
+                addEventHandler(anchorPane);
+                arenaGridPane.add(anchorPane, sourcePos.getX(), sourcePos.getY());
             }
-        });
-        pane.setOnMousePressed(event->{
-            Coordinate cord = new Coordinate(GridPane.getColumnIndex((Node) event.getSource()), GridPane.getRowIndex((Node) event.getSource()));
-
-            System.out.println("mousepressed event in arenacontroller" + cord.getX() + " " + cord.getY() );
-        });
-        pane.setOnMouseReleased(event->{
-            Coordinate cord = new Coordinate(GridPane.getColumnIndex(event.getPickResult().getIntersectedNode()), GridPane.getRowIndex(event.getPickResult().getIntersectedNode()));
-
-            System.out.println("mousereleased event in arenacontroller " + cord.toString());
-        });
+            removeHighlight();
+            setSelected(null);
+        }
     }
 
     /**
@@ -245,7 +235,7 @@ public class ArenaController
     private void handleSelect(AnchorPane source)
     {
         Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-        if (opponent.containsKey(sourcePos)){
+        if (currentArena.getOpponent().containsKey(sourcePos)){
             return;
         }
         removeHighlight();
@@ -305,12 +295,12 @@ public class ArenaController
 
         if (friendlyMove)
         {
-            friendly.put(currentPos, friendly.remove(targetPos));
+            currentArena.getFriendly().put(currentPos, currentArena.getFriendly().remove(targetPos));
         }
         else
         {
             currentPane.setStyle("-fx-background-color: black");
-            opponent.put(targetPos, opponent.remove(currentPos));
+            currentArena.getOpponent().put(targetPos, currentArena.getOpponent().remove(currentPos));
         }
     }
 
@@ -326,12 +316,12 @@ public class ArenaController
                 (currentPos.getY() != targetPos.getY() + 1 || currentPos.getX() != targetPos.getX());
     }
 
-    public HashMap<Coordinate, EntityCard> getFriendly() {
-        return friendly;
+    public HashMap<Coordinate, Entity> getFriendly() {
+        return currentArena.getFriendly();
     }
 
-    public HashMap<Coordinate, EntityCard> getOpponent() {
-        return opponent;
+    public HashMap<Coordinate, Entity> getOpponent() {
+        return currentArena.getOpponent();
     }
 
     private void removeHighlight(){
@@ -355,7 +345,7 @@ public class ArenaController
     }
 
     public void remove(Coordinate pos) {
-        friendly.remove(pos);
+        currentArena.getFriendly().remove(pos);
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefSize(170*scale, 170*scale);
         addEventHandler(anchorPane);

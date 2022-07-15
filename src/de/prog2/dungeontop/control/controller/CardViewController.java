@@ -11,6 +11,8 @@ import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.*;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 

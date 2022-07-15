@@ -63,7 +63,7 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        BattleManager2.getInstance().startBattle(new Player(), new Player());
+        BattleManager2.getInstance().startBattle(new Player(), new Player(), new Arena(6,6));
         //testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
@@ -77,7 +77,7 @@ public class DungeonTop extends Application
 
     private void testBattle()
     {
-        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), new Player());
+        BattleManager2.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), new Player(), new Arena(6,6));
     }
 
     public void testHell()
