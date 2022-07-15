@@ -67,13 +67,13 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        testArenaView();
+        //testArenaView();
         //testBattle();
 
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testEntityView();
-        //testCardView();
+        testCardView();
         //testCardDetailView();
         //testHellView(scene);
         //testLavaPondView(primaryStage);
@@ -119,7 +119,8 @@ public class DungeonTop extends Application
         HBox box = new HBox();
         for (Card card : cards)
         {
-            Node cardView = CardViewController.getCardView(card, 1);
+            Node cardView = CardViewController.getEnemyCardView(1);
+            //Node cardView = CardViewController.getCardView(card, 1);
             box.getChildren().add(cardView);
         }
         Scene scene = new Scene(box);
@@ -233,22 +234,22 @@ public class DungeonTop extends Application
         getStage().setScene(scene);
     }
 
-//    public static void testLavaPondView (Stage stage)
-//    {
-//        Entity harald = new Minion("Harald", 6, 4, 1, 45, 200);
-//        Deck deck = new Deck();
-//        for (int i = 0; i < 30; i++)
-//        {
-//            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i, 0));
-//        }
-//
-//        LavaPondRoom room = new LavaPondRoom(new EmptyRoom(new Coordinate(0,0), 1));
-//        PlayerManager.getInstance().addSouls(100);
-//        PlayerManager.getInstance().getPlayer().setDeck(deck);
-//        NpcRoomView view = new NpcRoomView(room);
-//        Scene scene = view.getNpcRoomView();
-//        stage.setScene(scene);
-//    }
+    public static void testLavaPondView (Stage stage)
+    {
+        Entity harald = new Minion("Harald", 6, 4, 1,1, 45);
+        Deck deck = new Deck();
+        for (int i = 0; i < 30; i++)
+        {
+            deck.pushCard(new EntityCard(harald, 5, 3, 1, 2 + i, 0));
+        }
+
+        LavaPondRoom room = new LavaPondRoom(new EmptyRoom(new Coordinate(0,0), 1));
+        PlayerManager.getInstance().addSouls(100);
+        PlayerManager.getInstance().getPlayer().setDeck(deck);
+        NpcRoomView view = new NpcRoomView(room);
+        Scene scene = view.getNpcRoomView();
+        stage.setScene(scene);
+    }
 
     public static void testDeckCreation ()
     {

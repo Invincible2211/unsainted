@@ -66,7 +66,6 @@ public abstract class CardViewController
 
             controller.setScale(scale);
             controller.getBackgroundImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.ENEMY_CARD_BACKGROUND));
-            controller.getImageView().setImage(AssetsManager.getImageByAssetId(AssetIds.DM_ICO));
             GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
         }
         catch (Exception e)
