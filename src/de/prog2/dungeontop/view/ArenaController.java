@@ -4,6 +4,7 @@ import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.EntityCard;
@@ -37,10 +38,10 @@ public class ArenaController
     Label labelEgoPointOpponent;
 
     @FXML
-    private HBox playerCardView;
+    private PlayerHandView playerCardView;
 
     @FXML
-    private HBox enemyCardView;
+    private EnemyHandView enemyCardView;
 
     @FXML
     private AnchorPane arenaGrid;
@@ -65,6 +66,8 @@ public class ArenaController
 
     public void initBattle(int width, int height){
         clear();
+        setPlayerCardView(new PlayerHandView());
+        setEnemyCardView(new EnemyHandView());
         arenaGridPane = new GridPane();
         for (int i = 0; i < width; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
@@ -98,14 +101,6 @@ public class ArenaController
     private void clear(){
         playerCardView.getChildren().clear();
         enemyCardView.getChildren().clear();
-    }
-
-    public void setPlayerCardView(List<EntityCard> cardList){
-
-    }
-
-    public void setOpponentCardView(List<EntityCard> cardList){
-
     }
 
     public void placeCardFriendly(EntityCard entityCard, Coordinate coordinate){
@@ -315,6 +310,7 @@ public class ArenaController
     }
 
     // TODO: Methodennamen passend umbenennen
+    //TODO: auf range pruefen anstatt magic number 1
     /**
      * Checks if the selected field is in range of the source field
      */
@@ -346,7 +342,8 @@ public class ArenaController
     @FXML
     public void initialize()
     {
-
+        System.out.println(labelEgoPointsPlayer == null);
+        labelEgoPointsPlayer.textProperty().bind(PlayerManager.getInstance().getPlayer().currentEgoPointsProperty().asString());
     }
 
     public void move(Coordinate pos, Coordinate target)
@@ -362,5 +359,29 @@ public class ArenaController
         AnchorPane target = getNodeFromGridPane(pos.getX(), pos.getY());
         arenaGridPane.getChildren().remove(target);
         arenaGridPane.add(anchorPane,pos.getX(),pos.getY());
+    }
+
+    public PlayerHandView getPlayerCardView() {
+        return playerCardView;
+    }
+
+    public void setPlayerCardView(PlayerHandView playerCardView) {
+        this.playerCardView = playerCardView;
+    }
+
+    public EnemyHandView getEnemyCardView() {
+        return enemyCardView;
+    }
+
+    public void setEnemyCardView(EnemyHandView enemyCardView) {
+        this.enemyCardView = enemyCardView;
+    }
+
+    public Label getLabelEgoPointsPlayer() {
+        return labelEgoPointsPlayer;
+    }
+
+    public Label getLabelEgoPointOpponent() {
+        return labelEgoPointOpponent;
     }
 }

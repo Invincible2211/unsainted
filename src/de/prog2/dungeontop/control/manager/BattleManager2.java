@@ -1,13 +1,17 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.TestConstants;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
@@ -50,8 +54,10 @@ public class BattleManager2 {
 
     public void startBattle(Player player1, Player player2){
         Platform.runLater(() -> {
-            this.player1 = player1;
-            this.player2 = player2;
+            this.player1 = PlayerManager.getInstance().getPlayer();
+            this.player2 = GameManager.getInstance().getOpponentPlayer();
+            drawNewHand();
+            System.out.println(player1.getHandCards());
             arenaController.initBattle(6,6);
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
@@ -121,6 +127,69 @@ public class BattleManager2 {
             endBattle(!GameManager.getInstance().isDM());
         }
         return cardList;
+    }
+
+    public void drawNewHand()
+    {
+        if (player1.getDeck().getCards().size() < player1.getHandCardLimit()) {
+                reStackDeckFromDiscard();
+                DeckController.shuffleDeck(player1.getDeck());
+            }
+            discardHand();
+            DeckController.shuffleDeck(player1.getDeck());
+            for (int i = 0; i < player1.getHandCardLimit(); i++) {
+                Card drawenCard = player1.getDeck().getCards().pop();
+                //TODO sound of get
+                player1.getHandCards().add(drawenCard);
+                GlobalLogger.log(LoggerStringValues.DREW_NEW_CARD + i + "out of" + player1.getHandCardLimit());
+            }
+    }
+
+    public void discardHand ()
+    {
+        player1.getHandCards().clear();
+    }
+
+    public void removeCardFromHand (Card card)
+    {
+        //TODO SOUND einspielen
+        player1.getDiscardPile().pushCard(card);
+        player1.getHandCards().remove(card);
+        NetManager.getInstance().getNetworkAPI().sendHandCardReducePackage();
+        GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
+    }
+
+    public void reduceEgoPoints (int amount)
+    {
+        int egopoints = player1.currentEgoPointsProperty().get();
+        if (egopoints - amount >= 0) {
+            player1.currentEgoPointsProperty().set(egopoints - amount);
+            GlobalLogger.log(LoggerStringValues.REDUCED_EGOPOINTS + amount);
+
+            NetManager.getInstance().getNetworkAPI().sendEgopointsChangePackage(0 - amount);
+        } else {
+            GlobalLogger.log(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
+        }
+    }
+
+    public void reStackDeckFromDiscard ()
+    {
+        //TODO sound abspielen
+        for (Card card : player1.getDiscardPile().getCards()) {
+            player1.getDeck().getCards().push(player1.getDiscardPile().popCard());
+        }
+        DeckController.shuffleDeck(player1.getDeck());
+    }
+
+    public Card getSelectedHandCard()
+    {
+        for (Card card :player1.getHandCards()) {
+            if (card.isSelected())
+            {
+                return card;
+            }
+        }
+        return null;
     }
 
     private enum BattlePhase{

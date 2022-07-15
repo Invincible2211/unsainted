@@ -63,8 +63,7 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        BattleManager2.getInstance().startBattle(new Player(), new Player());
-        //testArenaView();
+        testArenaView();
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testCardView(primaryStage);
@@ -176,11 +175,7 @@ public class DungeonTop extends Application
         player2.setDeck(deck2);
         player1.setHandCardLimit(2);
         player2.setHandCardLimit(4);
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
-        BattleManager.getInstance().startBattle(player1, player2, player1.getDeck(), player2.getDeck(),new Arena(5, 5),fxmlLoader.getController());
-        Scene scene = new Scene(root);
-        getStage().setScene(scene);
+        BattleManager2.getInstance().startBattle(player1,player2);
 
     }
 

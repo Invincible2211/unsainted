@@ -576,7 +576,6 @@ public class BattleManager
                 setCurrentEgoPoints(0);
                 GlobalLogger.log(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
             }
-
         }
 
 
