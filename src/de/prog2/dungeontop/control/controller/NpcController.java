@@ -64,6 +64,7 @@ public class NpcController
         throw new NotEnoughSoulsException();
     }
 
+    // TODO: Remove this method. It is no longer needed.
     /**
      * Sells a valuable item from the player's possession.
      *

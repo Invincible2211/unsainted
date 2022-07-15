@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.itemViews.InventoryViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.itemViews.InventoryView">
    <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true">
       <Image url="@/assets/650_Inventory_Background.jpg" />
    </ImageView>
@@ -84,7 +84,7 @@
          </effect>
       </Line>
    </AnchorPane>
-   <AnchorPane layoutX="1634.0" layoutY="288.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+   <AnchorPane layoutX="1654.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
       <children>
          <GridPane fx:id="weaponSlot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
            <columnConstraints>
@@ -95,7 +95,7 @@
            </rowConstraints>
          </GridPane>
       </children></AnchorPane>
-   <AnchorPane layoutX="1634.0" layoutY="558.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+   <AnchorPane layoutX="1654.0" layoutY="352.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: yellow;">
       <children>
          <GridPane fx:id="artifactSlots" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="200.0">
            <columnConstraints>
@@ -106,12 +106,22 @@
            </rowConstraints>
          </GridPane>
       </children></AnchorPane>
-   <Text fill="#d9ff00" layoutX="1654.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artefakte:" wrappingWidth="159.0233154296875">
+   <Text fill="#d9ff00" layoutX="1654.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artefakte:" wrappingWidth="159.0233154296875">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fill="#d9ff00" layoutX="1654.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waffe:" wrappingWidth="116.623291015625">
+   <Text fill="#d9ff00" layoutX="1654.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waffe:" wrappingWidth="116.623291015625">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
+   <Text fill="#aeff00" layoutX="503.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lebenspunkte:" wrappingWidth="211.02331542968773">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
+   <Text fx:id="healthPoints" fill="#aeff00" layoutX="700.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
       <font>
          <Font size="30.0" />
       </font>
