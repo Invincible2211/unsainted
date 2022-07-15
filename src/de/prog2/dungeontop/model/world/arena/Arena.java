@@ -27,6 +27,12 @@ public class Arena implements Serializable
         this.width = width;
     }
 
+    public Arena (int size)
+    {
+        this.height = size;
+        this.width = size;
+    }
+
     public void castSpell(Spell spell, Coordinate coordinate)
     {
 

@@ -57,6 +57,14 @@ public class World implements Serializable
     }
 
     /**
+     * @return current stage the player is in
+     */
+    public int getCurrentDepth ()
+    {
+        return this.currentHell + 1;
+    }
+
+    /**
      * Changes the current hell to the next one.
      * @return returns the next hell.
      */

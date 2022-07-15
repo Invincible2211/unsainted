@@ -72,7 +72,7 @@ public class DungeonTop extends Application
         //testBattle();
 
         //testSelectHero(primaryStage);
-        testInventory(primaryStage);
+        //testInventory(primaryStage);
         //testEntityView();
         //testCardView();
         //testCardDetailView();
