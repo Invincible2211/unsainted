@@ -6,8 +6,8 @@ import de.prog2.dungeontop.model.entities.Hero;
 
 public class Weapon extends Item implements Equippable
 {
-    int attackDamage = 0;
-    public Weapon(String name, String description, int price, int assetID, int attackDamage) {
+    int attackDamage;
+    public Weapon(String name, String description,int attackDamage, int price, int assetID) {
         super(name, description, price, assetID);
         this.attackDamage = attackDamage;
     }
