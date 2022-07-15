@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class AudioManager
+public class AudioManager extends Thread
 {
 
     /*----------------------------------------------ATTRIBUTE---------------------------------------------------------*/
@@ -43,6 +43,11 @@ public class AudioManager
         });
     }
 
+    @Override
+    public void run() {
+
+    }
+
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
     /**
@@ -52,32 +57,8 @@ public class AudioManager
     public UUID playSound(int soundID, boolean loop)
     {
         UUID clipUUID = UUID.randomUUID();
-        GlobalLogger.log(String.format(LoggerStringValues.PLAY_SOUND, soundID));
-        File soundFile = AssetsManager.getAssetById(soundID);
-        try
-        {
-            final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-            Clip clip = AudioSystem.getClip();
-            if (loop){
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-            }
-            clip.open(audioInputStream);
-            playingClips.put(clipUUID,clip);
-            LineListener listener = event ->
-            {
-                if (event.getType() != LineEvent.Type.STOP)
-                {
-                    return;
-                }
-                System.out.println("removed");
-                playingClips.remove(clip);
-            };
-            clip.addLineListener(listener );
-            clip.start(); //TODO auf Thread auslagern sobald erlaubt
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
-        {
-            GlobalLogger.warning(e.getMessage());
-        }
+        AudioThread audioThread = new AudioThread(soundID,clipUUID,loop);
+        audioThread.start();
         return clipUUID;
     }
 
@@ -134,6 +115,49 @@ public class AudioManager
     public static AudioManager getInstance()
     {
         return instance;
+    }
+
+    private class AudioThread extends Thread{
+
+        private int soundID;
+        private UUID soundUUID;
+
+        private boolean loop;
+
+        public AudioThread(int soundID, UUID soundUUID, boolean loop){
+            this.soundID = soundID;
+            this.soundUUID = soundUUID;
+            this.loop = loop;
+        }
+        @Override
+        public void run() {
+            GlobalLogger.log(String.format(LoggerStringValues.PLAY_SOUND, soundID), GlobalLogger.LoggerLevel.DEFAULT);
+            File soundFile = AssetsManager.getAssetById(soundID);
+            try
+            {
+                final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                LineListener listener = event ->
+                {
+                    if (event.getType() != LineEvent.Type.STOP)
+                    {
+                        return;
+                    }
+                    playingClips.remove(soundUUID);
+                };
+                clip.addLineListener(listener );
+                if (loop){
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                clip.start();
+                playingClips.put(soundUUID,clip);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
+            {
+                GlobalLogger.warning(e.getMessage());
+            }
+        }
+
     }
 
 }

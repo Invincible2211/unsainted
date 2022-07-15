@@ -26,7 +26,7 @@ public class Player implements Serializable
     private Hero hero;
     private Deck discardPile;
     private SerializableSimpleIntegerProperty currentEgoPoints = new SerializableSimpleIntegerProperty(0);
-    private ObservableList<Card> handCards = new SimpleListProperty<>();
+    private transient ObservableList<Card> handCards = new SimpleListProperty<>();
     private int experiencePoints;
     private int level;
     private int expCap = GameConstants.LEVEL_1_EXP_CAP * level;
