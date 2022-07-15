@@ -85,6 +85,11 @@
                     <Font size="35.0" />
                 </font>
             </Text>
+         <Text fx:id="heroDefense" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
+            <font>
+               <Font size="35.0" />
+            </font>
+         </Text>
             <Text fx:id="heroMaxMoves" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
                 <font>
                     <Font size="35.0" />

@@ -21,33 +21,25 @@ public abstract class Entity implements Serializable
     private Talent talent;
     private Coordinate position;
     private Player owner = null;
+    private int defense = 0;
 
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(String name, int hp, int attackDamage, int movement, int assetId, Player owner)
+    public Entity(String name, int hp, int attackDamage, int defense, int movement, int assetId, Player owner)
     {
         this.name = name;
         this.hp = new SerializableSimpleIntegerProperty(hp);
         this.attackDamage = attackDamage;
+        this.defense = defense;
         this.movement = movement;
         this.assetId = assetId;
         this.owner = owner;
     }
-    public Entity(String name, int hp, int attackDamage, int movement, int assetId, Coordinate position, boolean canMove, Player owner)
+    public Entity(String name, int hp, int attackDamage, int defense, int movement, int assetId, Coordinate position, boolean canMove, Player owner)
     {
-        this(name, hp, attackDamage, movement, assetId, owner);
+        this(name, hp, attackDamage, defense, movement, assetId, owner);
         this.position = position;
     }
-
-    public Entity(String name, int hp, int attackDamage, int maxMovement, Talent talent)
-    {
-        this.name = name;
-        this.hp = new SerializableSimpleIntegerProperty(hp);
-        this.attackDamage = attackDamage;
-        this.maxMovement = maxMovement;
-        this.talent = talent;
-    }
-
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getHp()
     {
@@ -152,5 +144,15 @@ public abstract class Entity implements Serializable
     public void setMaxMovement (int maxMovement)
     {
         this.maxMovement = maxMovement;
+    }
+
+    public int getDefense()
+    {
+        return defense;
+    }
+
+    public void setDefense(int defense)
+    {
+        this.defense = defense;
     }
 }
