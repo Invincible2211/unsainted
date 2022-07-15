@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="container" maxHeight="866" maxWidth="489" prefHeight="866" prefWidth="489"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@/view/cardViews/cardStyle.css"
+            fx:controller="de.prog2.dungeontop.view.cardViews.EnemyCardView">
+    <ImageView fx:id="backgroundImageView" fitHeight="866" fitWidth="489" />
+</AnchorPane>

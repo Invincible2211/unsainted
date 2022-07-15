@@ -2,6 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.DeckController;
+import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
@@ -124,7 +125,7 @@ public class BattleManager2 {
 
     public List<Entity> battle(Entity entity1, Entity entity2)
     {
-        entity2.setHp(entity2.getHp()-(entity1.getAttackDamage() - entity2.getDefense()));
+        EntityController.applyDamage(entity2, entity1.getAttackDamage());
         List<Entity> cardList = new ArrayList<>();
         if (entity2.getHp()>0){
             cardList.add(entity2);

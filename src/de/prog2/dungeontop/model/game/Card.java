@@ -92,18 +92,4 @@ public abstract class Card implements Serializable
     {
         this.selected = selected;
     }
-
-
-    @Override
-    public String toString()
-    {
-        StringBuilder builder = new StringBuilder();
-
-        if (this instanceof EntityCard)
-            builder.append(((EntityCard)this).toString());
-        else if (this instanceof SpellCard)
-            builder.append(((SpellCard)this).toString());
-
-        return builder.toString();
-    }
 }

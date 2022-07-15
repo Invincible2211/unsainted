@@ -86,5 +86,12 @@ public class EntityController
         return arena;
     }
 
-
+    public static void applyDamage(Entity entity, int damage)
+    {
+        entity.setHp(entity.getHp() - (damage - entity.getDefense()));
+    }
+    public static void applyHeal(Entity entity, int heal)
+    {
+        entity.setHp(entity.getHp() + heal);
+    }
 }

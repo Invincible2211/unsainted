@@ -2,11 +2,15 @@ package de.prog2.dungeontop.resources;
 
 public interface SpellValues
 {
-    String TEST_SPELL_NAME = "Test Spell";
+    String HEALING_SPELL_NAME = "Healing Spell";
+    String HEALING_SPELL_DESCRIPTION = "Heals all friendly units in a radius of %d by %d.";
+    int HEALING_SPELL_ASSET_ID = 700;
+    int HEALING_SPELL_RADIUS = 0;
+    int HEALING_SPELL_HEAL = 10;
 
-    int TEST_SPELL_ASSET_ID = 700;
-    String TEST_SPELL_DESCRIPTION = """
-            The Test Spell is a mighty spell that does absolutely nothing.
-            It is only used for testing purposes. It is not a spell that can be used in the game.
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\s""";
+    String METEOR_SPELL_NAME = "Meteor";
+    String METEOR_SPELL_DESCRIPTION = "Damages all enemy units in a radius of %d by %d.";
+    int METEOR_SPELL_ASSET_ID = 705;
+    int METEOR_SPELL_RADIUS = 1;
+    int METEOR_SPELL_DAMAGE = 10;
 }
