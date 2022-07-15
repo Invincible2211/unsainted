@@ -110,7 +110,7 @@ public class BattleManager2 {
     {
         Entity entity1 = card1.getEntity();
         Entity entity2 = card2.getEntity();
-        entity2.setHp(entity2.getHp()-entity1.getAttackDamage());
+        entity2.setHp(entity2.getHp()-(entity1.getAttackDamage() - entity2.getDefense()));
         List<EntityCard> cardList = new ArrayList<>();
         if (entity2.getHp()>0){
             cardList.add(card2);
