@@ -18,7 +18,7 @@ public class PlayerManager
 
     public void addSouls(int amount)
     {
-        player.setSouls((player.getSouls() + amount));
+        player.setSouls((player.getSouls() + (amount+((int) Math.floor((float)amount*player.getSoulArtBonus()/100)))));
     }
 
     public void removeSouls(int amount)

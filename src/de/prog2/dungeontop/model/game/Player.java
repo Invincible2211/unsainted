@@ -1,24 +1,18 @@
 package de.prog2.dungeontop.model.game;
 
 import de.prog2.dungeontop.control.controller.DeckController;
-import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.Inventory;
-import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.world.rooms.Room;
-import de.prog2.dungeontop.resources.DeckConstants;
 import de.prog2.dungeontop.resources.GameConstants;
-import de.prog2.dungeontop.utils.GlobalLogger;
-
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 public class Player implements Serializable
 {
@@ -35,7 +29,8 @@ public class Player implements Serializable
     private ObservableList<Card> handCards = new SimpleListProperty<>();
     private int experiencePoints;
     private int level;
-    private int expCap = 100 * level;
+    private int expCap = GameConstants.LEVEL_1_EXP_CAP * level;
+    private int soulArtBonus = 0;
 
     public Player (){
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);
@@ -183,5 +178,15 @@ public class Player implements Serializable
     public int getExpCap()
     {
         return expCap;
+    }
+
+    public int getSoulArtBonus()
+    {
+        return soulArtBonus;
+    }
+
+    public void setSoulArtBonus(int soulArtBonus)
+    {
+        this.soulArtBonus = soulArtBonus;
     }
 }
