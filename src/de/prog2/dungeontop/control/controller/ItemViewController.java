@@ -12,16 +12,13 @@ public class ItemViewController
 {
     /**
      * create an ItemView for an item.
-     *
      */
     public static Node getItemView(Item item)
     {
         try
         {
             FXMLLoader loader = new FXMLLoader();
-            Node itemView = null;
-
-                itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_VIEW_FXML));
+            Node itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_VIEW_FXML));
 
             ItemView controller = loader.getController();
             fillItemViewWithData(item, controller);
@@ -43,11 +40,10 @@ public class ItemViewController
         try
         {
             FXMLLoader loader = new FXMLLoader();
-            Node itemView = null;
-
-            itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.EQUIPPED_ITEM_VIEW_FXML));
+            Node itemView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ITEM_VIEW_FXML));
 
             ItemView controller = loader.getController();
+            controller.getItemName().setText("");
             fillItemViewWithData(item, controller);
             return itemView;
         }

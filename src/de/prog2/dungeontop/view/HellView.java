@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryController;
+import de.prog2.dungeontop.control.controller.InventoryViewController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.MovementManager;
@@ -531,8 +532,7 @@ public class HellView
             GlobalLogger.warning(LoggerStringValues.FXML_LOAD_ERROR);
             return;
         }
-        InventoryController.addItems(fxmlLoader.getController(),
-                PlayerManager.getInstance().getPlayerInventory().getInventory());
+        InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
         DungeonTop.getStage().setScene(scene);
     }

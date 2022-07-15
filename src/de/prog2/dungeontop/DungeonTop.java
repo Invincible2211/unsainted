@@ -1,21 +1,17 @@
 package de.prog2.dungeontop;
 
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
-import de.prog2.dungeontop.control.controller.EntityViewController;
-import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.controller.ShopViewController;
-import de.prog2.dungeontop.control.file.GameSaveFileReader;
-import de.prog2.dungeontop.control.file.GameSaveFileWriter;
-import de.prog2.dungeontop.control.manager.*;
 import de.prog2.dungeontop.control.controller.*;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.*;
-import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.model.items.Weapon;
+import de.prog2.dungeontop.model.items.artifacts.ExtraSoulsArtifact;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.spells.TestSpell;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -24,19 +20,17 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.rooms.EmptyRoom;
 import de.prog2.dungeontop.model.world.rooms.LavaPondRoom;
 import de.prog2.dungeontop.resources.*;
+import de.prog2.dungeontop.resources.items.ItemConstants;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DungeonTop extends Application
@@ -69,10 +63,10 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        //BattleManager2.getInstance().startBattle(new Player(), new Player());
+        BattleManager2.getInstance().startBattle(new Player(), new Player());
         //testArenaView();
         //testSelectHero(primaryStage);
-        testInventory(primaryStage);
+        //testInventory(primaryStage);
         //testCardView(primaryStage);
         //testEntityView(primaryStage);
         //testHellView(scene);
@@ -162,7 +156,6 @@ public class DungeonTop extends Application
 
     /**
      * As we do not know that Unit tests exist and time is short this is where i put magic numbers for testing
-     * @throws Exception
      */
     public static void testArenaView() throws Exception
     {
@@ -204,19 +197,25 @@ public class DungeonTop extends Application
         Item item = ItemConstants.minorPotion;
         Item item1 = ItemConstants.bread;
         Item weapon = ItemConstants.sword;
+        Item weapon1 = new Weapon("Test", "1", 1, 662, 1);
         Item art1 = ItemConstants.necklace;
         Item art2 = ItemConstants.bracelet;
-        for (int i = 0; i < 2; i++)
-        {
-            PlayerManager.getInstance().getPlayerInventory().addItem(item);
-            PlayerManager.getInstance().getPlayerInventory().addItem(item1);
-            PlayerManager.getInstance().getPlayerInventory().addItem(weapon);
-            PlayerManager.getInstance().getPlayerInventory().addItem(art1);
-            PlayerManager.getInstance().getPlayerInventory().addItem(art2);
-        }
+        Item art3 = new ExtraSoulsArtifact("Test", "1", 1, 662, 662);
+        Item art4 = new ExtraSoulsArtifact("Test", "1", 1, 662, 662);
+        PlayerManager.getInstance().getPlayerInventory().addItem(weapon);
+        PlayerManager.getInstance().getPlayerInventory().addItem(item);
+        PlayerManager.getInstance().getPlayerInventory().addItem(item1);
+        PlayerManager.getInstance().getPlayerInventory().addItem(art1);
+        PlayerManager.getInstance().getPlayerInventory().addItem(art2);
+        PlayerManager.getInstance().getPlayerInventory().addItem(art3);
+        PlayerManager.getInstance().getPlayerInventory().addItem(art4);
+        PlayerManager.getInstance().getPlayerInventory().addItem(weapon1);
+        Player player = PlayerManager.getInstance().getPlayer();
+        player.setHero(SelectHeroConstants.MAGE);
+        PlayerManager.getInstance().setPlayer(player);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
-        InventoryController.addItems(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory().getInventory());
+        InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
     }

@@ -1,9 +1,7 @@
 package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.control.controller.ItemClickedController;
-import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.Weapon;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
