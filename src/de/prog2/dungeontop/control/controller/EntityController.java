@@ -88,8 +88,7 @@ public class EntityController
 
     public static void applyDamage(Entity entity, int damage)
     {
-        //TODO: Jason, add verteidigung
-        entity.setHp(entity.getHp() - damage);
+        entity.setHp(entity.getHp() - (damage - entity.getDefense()));
     }
     public static void applyHeal(Entity entity, int heal)
     {
