@@ -156,7 +156,6 @@ public class DungeonTop extends Application
 
     /**
      * As we do not know that Unit tests exist and time is short this is where i put magic numbers for testing
-     * @throws Exception
      */
     public static void testArenaView() throws Exception
     {
@@ -216,7 +215,7 @@ public class DungeonTop extends Application
         PlayerManager.getInstance().setPlayer(player);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
-        InventoryViewController.initInventory(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory());
+        InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
     }

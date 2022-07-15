@@ -27,10 +27,6 @@ public class Player implements Serializable
     private Room currentRoom;
     private int handCardLimit;
     private Hero hero;
-    private List<Item> weaponSlot = new ArrayList<>();
-    private List<Item> artifactSlots = new ArrayList<>();
-    private int soulArtBonus = 0;
-    private int defArtBonus = 0;
 
     public Player (){
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);
@@ -131,35 +127,5 @@ public class Player implements Serializable
     public void setHero(Hero hero)
     {
         this.hero = hero;
-    }
-
-    public List<Item> getWeaponSlot()
-    {
-        return weaponSlot;
-    }
-
-    public List<Item> getArtifactSlots()
-    {
-        return artifactSlots;
-    }
-
-    public int getSoulArtBonus()
-    {
-        return soulArtBonus;
-    }
-
-    public void setSoulArtBonus(int soulArtBonus)
-    {
-        this.soulArtBonus = soulArtBonus;
-    }
-
-    public int getDefArtBonus()
-    {
-        return defArtBonus;
-    }
-
-    public void setDefArtBonus(int defArtBonus)
-    {
-        this.defArtBonus = defArtBonus;
     }
 }

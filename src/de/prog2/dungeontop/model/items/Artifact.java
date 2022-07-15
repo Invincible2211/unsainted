@@ -3,7 +3,7 @@ package de.prog2.dungeontop.model.items;
 import de.prog2.dungeontop.control.controller.ItemController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 
-public abstract class Artifact extends Item implements Equipable
+public abstract class Artifact extends Item implements Equippable
 {
     public Artifact(String name, String description, int price, int assetID)
     {

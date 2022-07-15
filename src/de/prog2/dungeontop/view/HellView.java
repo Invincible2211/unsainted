@@ -532,8 +532,7 @@ public class HellView
             GlobalLogger.warning(LoggerStringValues.FXML_LOAD_ERROR);
             return;
         }
-        InventoryViewController.initInventory(fxmlLoader.getController(),
-                PlayerManager.getInstance().getPlayerInventory());
+        InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
         DungeonTop.getStage().setScene(scene);
     }

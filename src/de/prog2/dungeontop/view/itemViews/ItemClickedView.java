@@ -1,10 +1,7 @@
 package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.DungeonTop;
-import de.prog2.dungeontop.control.controller.InventoryController;
 import de.prog2.dungeontop.control.controller.InventoryViewController;
-import de.prog2.dungeontop.control.manager.PlayerManager;
-import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.*;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -16,13 +13,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
-import java.awt.*;
 import java.io.IOException;
 
 import static de.prog2.dungeontop.DungeonTop.getStage;
 
 
-public class ItemClicked
+public class ItemClickedView
 {
     @FXML
     private Text itemDescription;
@@ -31,23 +27,26 @@ public class ItemClicked
     @FXML
     private Text price;
     @FXML
-    private javafx.scene.control.Button useButton;
+    private javafx.scene.control.Button equipButton;
     private Item item;
 
+    /**
+     * Hides the item popup-view.
+     */
     public void onReturnButtonClicked()
     {
         ItemView.hideStage();
     }
 
     /**
-     * Method for when player uses Consumables or equip Weapon/Artifact
+     * Handles the equip button click.
      */
-    public void onUseItemButtonClicked() throws IOException
+    public void onEquipButtonClicked() throws IOException
     {
-        Equipable item = null;
+        Equippable item = null;
         try
         {
-            item = (Equipable) getItem();
+            item = (Equippable) getItem();
         }
         catch (ClassCastException e)
         {
@@ -57,10 +56,8 @@ public class ItemClicked
         if(item == null)
         {
             getItem().equip();
-            reloadInventory();
-            return;
         }
-        if(item.isEquipped())
+        else if(item.isEquipped())
         {
             item.unequip();
         }
@@ -71,20 +68,17 @@ public class ItemClicked
         reloadInventory();
     }
 
+    /**
+     * Reloads the inventory view.
+     */
     private void reloadInventory() throws IOException
     {
-        Hero hero = PlayerManager.getInstance().getPlayerHero();
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.INVENTORY_FXML));
-        if(hero.getWeapon() != null)
-        {
-            InventoryViewController.equipWeapon(fxmlLoader.getController(), hero.getWeapon());
-        }
-        InventoryViewController.equipArtifact(fxmlLoader.getController(), hero.getArtifacts());
-        InventoryViewController.initInventory(fxmlLoader.getController(), PlayerManager.getInstance().getPlayerInventory());
+        InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
         getStage().setScene(scene);
+        // Hide the popup stage.
         onReturnButtonClicked();
     }
 
@@ -114,8 +108,8 @@ public class ItemClicked
         this.item = item;
     }
 
-    public Button getUseButton()
+    public Button getEquipButton()
     {
-        return useButton;
+        return equipButton;
     }
 }

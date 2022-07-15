@@ -18,7 +18,7 @@ public class PlayerManager
 
     public void addSouls(int amount)
     {
-        player.setSouls((player.getSouls() + amount + (int) Math.floor((float)(amount*player.getSoulArtBonus()/100))));
+        player.setSouls((player.getSouls() + amount));
     }
 
     public void removeSouls(int amount)
@@ -46,7 +46,7 @@ public class PlayerManager
 
     public void removeHp (int amount)
     {
-        player.setHp(player.getHp() - (amount - (int)Math.floor((float)(amount*player.getDefArtBonus()/100))));
+        player.setHp(player.getHp() - amount);
     }
 
     public SimpleIntegerProperty getPlayerHpProperty ()

@@ -4,7 +4,7 @@ import de.prog2.dungeontop.control.controller.ItemController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
 
-public class Weapon extends Item implements Equipable
+public class Weapon extends Item implements Equippable
 {
     int attackDamage = 0;
     public Weapon(String name, String description, int price, int assetID, int attackDamage) {

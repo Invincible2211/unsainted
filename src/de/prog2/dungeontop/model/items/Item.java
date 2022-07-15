@@ -7,10 +7,11 @@ public abstract class Item
 {
     private final String name;
     private final String description;
-    private int price;
+    private final int price;
     private final int assetID;
 
-    public Item(String name, String description, int price, int assetID) {
+    public Item(String name, String description, int price, int assetID)
+    {
         this.name = name;
         this.description = description;
         this.price = price;
