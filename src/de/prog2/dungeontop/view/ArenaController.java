@@ -101,12 +101,12 @@ public class ArenaController
     }
 
     public void placeCardFriendly(EntityCard entityCard, Coordinate coordinate){
-        AnchorPane card = createCard(entityCard);
+        AnchorPane card = createCard(entityCard.getEntity());
         AnchorPane test = getNodeFromGridPane(coordinate.getX(), coordinate.getY());
         arenaGridPane.getChildren().remove(test);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
-        currentArena.getFriendly().put(coordinate, entity);
-        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entity, coordinate);
+        currentArena.getFriendly().put(coordinate, entityCard.getEntity());
+        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entityCard.getEntity(), coordinate);
     }
 
     public void placeCardOpponent(Entity entity, Coordinate coordinate){

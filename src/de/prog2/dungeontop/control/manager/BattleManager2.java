@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.network.NetManager;
@@ -61,15 +62,15 @@ public class BattleManager2 {
             this.player2 = GameManager.getInstance().getOpponentPlayer();
             drawNewHand();
 
-            arenaController.initBattle(6,6);
+            arenaController.initBattle(arena);
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
             //TODO Hero und DungeonMaster spawnen
             if (!GameManager.getInstance().isDM()){
-                arenaController.placeCardFriendly(new EntityCard(new Minion("Harald",10,4,4,410),10,4,4,410,4).getEntity(), new Coordinate(2,1));
+                arenaController.placeCardFriendly(new EntityCard(new Minion("Harald",10,4,4,410, 200),10,4,4,410,4), new Coordinate(2,1));
             }  else {
-                arenaController.placeCardFriendly(new EntityCard(new Minion("Harald",10,4,4,410),10,4,4,410,4).getEntity(), new Coordinate(2,1));
+                arenaController.placeCardFriendly(new EntityCard(new Minion("Harald",10,4,4,410, 200),10,4,4,410,4), new Coordinate(2,1));
             }
             //arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
         });

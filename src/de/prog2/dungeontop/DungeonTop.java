@@ -178,8 +178,8 @@ public class DungeonTop extends Application
      */
     public static void testArenaView() throws Exception
     {
-        Entity harald = new Minion("Harald", 6, 4, 1, 450);
-        harald.setMaxMovement(2);
+        Entity harald = new Minion("harald", 4, 5, 6, 2, 200);
+       harald.setMaxMovement(2);
         Spell testSpell = new TestSpell();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
@@ -236,7 +236,7 @@ public class DungeonTop extends Application
 
     public static void testLavaPondView (Stage stage)
     {
-        Entity harald = new Minion("Harald", 6, 4, 1, 45);
+        Entity harald = new Minion("Harald", 6, 4, 1, 45, 200);
         Deck deck = new Deck();
         for (int i = 0; i < 30; i++)
         {
