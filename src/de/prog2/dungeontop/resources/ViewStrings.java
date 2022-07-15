@@ -18,6 +18,7 @@ public interface ViewStrings
     String ARENA_ROOM_DIALOGUE_FXML = "view/roomDialogueView.fxml";
     String ARENABASE_VIEW = "view/arenaBase.fxml";
     // Card View
+    String ENEMY_CARD_VIEW_FXML = "view/cardViews/enemyCardView.fxml";
     String ENTITY_CARD_VIEW_FXML = "view/cardViews/entityCardView.fxml";
     String ENTITY_CARD_DETAIL_VIEW_FXML = "view/cardViews/entityCardDetailView.fxml";
     String SPELL_CARD_VIEW_FXML = "view/cardViews/spellCardView.fxml";

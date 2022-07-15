@@ -11,8 +11,6 @@ import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.*;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
@@ -44,6 +42,31 @@ public abstract class CardViewController
 
             populateCardView(card, controller, false);
 
+            GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
+        }
+        catch (Exception e)
+        {
+            GlobalLogger.warning(e.getMessage());
+        }
+        return cardView;
+    }
+
+    /**
+     * @param scale The scale of the card view.
+     */
+    public static Node getEnemyCardView(double scale)
+    {
+        Node cardView = null;
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+
+            cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ENEMY_CARD_VIEW_FXML));
+            EnemyCardView controller = loader.getController();
+
+            controller.setScale(scale);
+            controller.getBackgroundImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.ENEMY_CARD_BACKGROUND));
+            controller.getImageView().setImage(AssetsManager.getImageByAssetId(AssetIds.DM_ICO));
             GlobalLogger.log(String.format(LoggerStringValues.CARD_VIEW_CONTROLLER_CREATED_CARD, scale));
         }
         catch (Exception e)
