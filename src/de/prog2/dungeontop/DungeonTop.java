@@ -67,13 +67,13 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        //testArenaView();
+        testArenaView();
         //testBattle();
 
         //testSelectHero(primaryStage);
         //testInventory(primaryStage);
         //testEntityView();
-        testCardView();
+        //testCardView();
         //testCardDetailView();
         //testHellView(scene);
         //testLavaPondView(primaryStage);
@@ -177,24 +177,19 @@ public class DungeonTop extends Application
      */
     public static void testArenaView() throws Exception
     {
-        Entity harald = new Minion("harald", 4, 5, 6, 2, 200);
-        EntityCard haraldSeineKarte = new EntityCard(harald, 3, 2, 1,2,999);
-        harald.setCard(haraldSeineKarte);
-        harald.setMaxMovement(2);
-        Deck deck1 = new Deck();
-        Deck deck2 = new Deck();
+ //       Spell testSpell = new TestSpell();
+
+
         for (int i = 0; i < 15; i++)
         {
+            Entity olafder = new Minion("Bernd der " + i, i, i, i, i, 211);
+            EntityCard christiansKarte = new EntityCard(olafder, i, i, i,i,211);
+            olafder.setCard(christiansKarte);
 //            deck1.pushCard(new SpellCard(testSpell, 5, 3, 1, 2 + i));
-            deck1.pushCard(new EntityCard(harald, 5, 3, 1, 2, 0));
-            deck2.pushCard(new EntityCard(harald, 5, 3, 1, 2, 0));
+            PlayerManager.getInstance().getPlayer().getDeck().pushCard(christiansKarte);
+
         }
-        Player player1 = new Player(12, 10);
-        player1.setDeck(deck1);
-        Player player2 = new Player(12, 10);
-        player2.setDeck(deck2);
-        player1.setHandCardLimit(2);
-        player2.setHandCardLimit(4);
+        PlayerManager.getInstance().getPlayer().setHandCardLimit(5);
         BattleManager2.getInstance().startBattle(new Arena(5));
 
     }
