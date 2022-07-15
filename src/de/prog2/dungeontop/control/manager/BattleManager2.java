@@ -9,6 +9,7 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -118,7 +119,6 @@ public class BattleManager2 {
     {
         entity2.setHp(entity2.getHp()-(entity1.getAttackDamage() - entity2.getDefense()));
         List<Entity> cardList = new ArrayList<>();
-        List<EntityCard> cardList = new ArrayList<>();
         if (entity2.getHp()>0){
             cardList.add(entity2);
         }
