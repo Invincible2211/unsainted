@@ -86,5 +86,13 @@ public class EntityController
         return arena;
     }
 
-
+    public static void applyDamage(Entity entity, int damage)
+    {
+        //TODO: Jason, add verteidigung
+        entity.setHp(entity.getHp() - damage);
+    }
+    public static void applyHeal(Entity entity, int heal)
+    {
+        entity.setHp(entity.getHp() + heal);
+    }
 }

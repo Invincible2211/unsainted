@@ -13,10 +13,8 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.artifacts.ExtraSoulsArtifact;
+import de.prog2.dungeontop.model.spells.DamageSpell;
 import de.prog2.dungeontop.model.spells.Spell;
-import de.prog2.dungeontop.model.spells.TestSpell;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -72,7 +70,7 @@ public class DungeonTop extends Application
         //testBattle();
 
         //testSelectHero(primaryStage);
-        testInventory(primaryStage);
+        //testInventory(primaryStage);
         //testEntityView();
         //testCardView();
         //testCardDetailView();
@@ -179,7 +177,6 @@ public class DungeonTop extends Application
     {
         Entity harald = new Minion("Harald", 6, 4, 1, 450);
         harald.setMaxMovement(2);
-        Spell testSpell = new TestSpell();
         Deck deck1 = new Deck();
         Deck deck2 = new Deck();
         for (int i = 0; i < 15; i++)

@@ -1,5 +1,8 @@
 package de.prog2.dungeontop.model.spells;
 
+import de.prog2.dungeontop.model.world.Coordinate;
+import de.prog2.dungeontop.model.world.arena.Arena;
+
 public abstract class Spell
 {
     private final String name;
@@ -12,6 +15,8 @@ public abstract class Spell
         this.description = description;
         this.assetId = assetId;
     }
+
+    public abstract void cast(Arena arena, Coordinate coordinate);
 
     public String getName()
     {
