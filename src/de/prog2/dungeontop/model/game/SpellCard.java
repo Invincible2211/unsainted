@@ -23,13 +23,8 @@ public class SpellCard extends Card
     public String toString()
     {
         StringBuilder builder = new StringBuilder();
-
         builder.append(this.getSpell().getName());
-        builder.append(", Rank: ");
-        builder.append(this.getRank());
-        builder.append(" of ");
-        builder.append(this.getMaxRank());
-
+        builder.append(super.toString());
         return builder.toString();
     }
 }

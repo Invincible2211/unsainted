@@ -92,4 +92,15 @@ public abstract class Card implements Serializable
     {
         this.selected = selected;
     }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(", Rank: ");
+        builder.append(this.getRank());
+        builder.append(" of ");
+        builder.append(this.getMaxRank());
+        return builder.toString();
+    }
 }
