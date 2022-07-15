@@ -19,8 +19,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class MainMenueController {
+
+    private UUID mainMenueSoundUUID;
 
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
@@ -33,6 +36,7 @@ public class MainMenueController {
     {
         NetController.enable(null);
         GameManager.getInstance().startGame();
+        AudioManager.getInstance().stopSound(mainMenueSoundUUID);
     }
 
     /**
@@ -72,6 +76,12 @@ public class MainMenueController {
         GameManager.getInstance().setDM();
         NetworkController.showNetworkGUI();
     }
+
+    @FXML
+    public void initialize(){
+        mainMenueSoundUUID = AudioManager.getInstance().playSound(990,true);
+    }
+
     public static void addMenuebar(){
         Scene scene = DungeonTop.getStage().getScene();
         Parent root = scene.getRoot();
