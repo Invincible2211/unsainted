@@ -129,6 +129,20 @@ public class AudioManager extends Thread
             this.soundUUID = soundUUID;
             this.loop = loop;
         }
+
+        public void playAfter(int soundID, boolean loop, UUID playAfterSoundUUID){
+            Clip clip = playingClips.get(playAfterSoundUUID);
+            clip.addLineListener(new LineListener() {
+                @Override
+                public void update(LineEvent event) {
+                    if (event.getType() != LineEvent.Type.STOP)
+                    {
+                        return;
+                    }
+                    playSound(soundID, loop);
+                }
+            });
+        }
         @Override
         public void run() {
             GlobalLogger.log(String.format(LoggerStringValues.PLAY_SOUND, soundID), GlobalLogger.LoggerLevel.DEFAULT);
