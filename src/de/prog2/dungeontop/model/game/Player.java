@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.model.game;
 
 import de.prog2.dungeontop.control.controller.DeckController;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.items.Inventory;
@@ -27,6 +28,9 @@ public class Player implements Serializable
     private Room currentRoom;
     private int handCardLimit;
     private Hero hero;
+    private int experiencePoints;
+    private int level;
+    private int expCap = 100 * level;
 
     public Player (){
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);
@@ -40,9 +44,11 @@ public class Player implements Serializable
         GlobalLogger.log(LoggerStringValues.PLAYER_CREATED);
     }
 
-
-
-
+    public void levelUp()
+    {
+        setExperiencePoints(getExperiencePoints() - getExpCap());
+        setLevel(getLevel() + 1);
+    }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getSouls(){
         GlobalLogger.log(LoggerStringValues.PLAYERSOULS_GET);
@@ -127,5 +133,30 @@ public class Player implements Serializable
     public void setHero(Hero hero)
     {
         this.hero = hero;
+    }
+
+    public int getExperiencePoints()
+    {
+        return experiencePoints;
+    }
+
+    public void setExperiencePoints(int experiencePoints)
+    {
+        this.experiencePoints = experiencePoints;
+    }
+
+    public int getLevel()
+    {
+        return level;
+    }
+
+    public void setLevel(int level)
+    {
+        this.level = level;
+    }
+
+    public int getExpCap()
+    {
+        return expCap;
     }
 }

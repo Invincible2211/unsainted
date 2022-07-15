@@ -71,14 +71,9 @@ public class PlayerManager
     {
         return player.getMax_ego_points();
     }
-    public static void removeItem (Item item)
-    {
-        instance.getPlayerInventory().removeItem(item);
-    }
-    public static void addItem (Item item)
-    {
-        instance.getPlayerInventory().addItem(item);
-    }
+
+
+
 
     private void playerDied()
     {
@@ -113,5 +108,13 @@ public class PlayerManager
     public void setPlayer(Player player)
     {
         this.player = player;
+    }
+
+    public void checkLevelUp()
+    {
+        if (player.getExperiencePoints() >= player.getExpCap())
+        {
+            player.levelUp();
+        }
     }
 }
