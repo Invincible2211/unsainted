@@ -38,7 +38,7 @@ public class AudioManager
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
             {
-                changeVolume(newValue.doubleValue());
+                changeVolumeForAll(newValue.doubleValue());
             }
         });
     }
@@ -83,21 +83,45 @@ public class AudioManager
 
     public void stopSound(UUID clipUUID){
         Clip clip = playingClips.remove(clipUUID);
+        if (clip != null){
+            clip.stop();
+            clip.flush();
+            clip.close();
+        }
+    }
+
+    public void pauseClip(UUID clipUUID){
+        Clip clip = playingClips.get(clipUUID);
         if (clip != null) clip.stop();
+    }
+
+    public void resumeClip(UUID clipUUID){
+        Clip clip = playingClips.get(clipUUID);
+        if (clip != null) clip.start();
+    }
+
+    public void changeClipVolume(UUID clipUUID, double volume){
+        Clip clip = playingClips.get(clipUUID);
+        if (clip != null) changeVolume(clip,volume);
     }
 
     /**
      * Hiermit wird die Lautstaerke aller aktuellen Clips auf die neue Lautstaerke gesetzt.
      * @param volumeLevel die neue Lautstaerke
      */
-    private void changeVolume(double volumeLevel)
+    private void changeVolumeForAll(double volumeLevel)
     {
-        FloatControl volume;
         for (Clip c : playingClips.values())
         {
-            volume = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
-            volume.setValue(20f * (float) Math.log10(volumeLevel/100));
+            changeVolume(c, volumeLevel);
         }
+    }
+
+    private void changeVolume(Clip clip,double volumeLevel)
+    {
+        FloatControl volume;
+        volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volume.setValue(20f * (float) Math.log10(volumeLevel/100));
     }
 
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
