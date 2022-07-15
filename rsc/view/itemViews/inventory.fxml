@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,12 +13,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.itemViews.InventoryViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.itemViews.InventoryView">
    <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true">
       <Image url="@/assets/650_Inventory_Background.jpg" />
    </ImageView>
-   <Button fx:id="returnButton" mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Zurück" translateX="100.0" translateY="50.0" />
-   <AnchorPane layoutX="100.0" layoutY="195.0" prefHeight="808.0" prefWidth="1403.0" style="-fx-background-color: brown;">
+   <Button mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@view/mainmenuestyle.css" text="Zurück" translateX="100.0" translateY="50.0" />
+   <AnchorPane layoutX="100.0" layoutY="195.0" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: brown;">
       <GridPane fx:id="gridPane" hgap="100.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -84,7 +85,7 @@
          </effect>
       </Line>
    </AnchorPane>
-   <AnchorPane layoutX="1634.0" layoutY="288.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+   <AnchorPane layoutX="1654.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: brown;">
       <children>
          <GridPane fx:id="weaponSlot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
            <columnConstraints>
@@ -94,10 +95,13 @@
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
          </GridPane>
-      </children></AnchorPane>
-   <AnchorPane layoutX="1634.0" layoutY="558.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+      </children>
+      <effect>
+         <DropShadow blurType="GAUSSIAN" height="15.0" radius="7.0" width="15.0" />
+      </effect></AnchorPane>
+   <AnchorPane layoutX="1654.0" layoutY="352.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: brown;">
       <children>
-         <GridPane fx:id="artifactSlot1" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+         <GridPane fx:id="artifactSlots" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0">
            <columnConstraints>
              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
            </columnConstraints>
@@ -105,26 +109,28 @@
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
          </GridPane>
-      </children></AnchorPane>
-   <Text fill="#d9ff00" layoutX="1654.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artefakte:" wrappingWidth="159.0233154296875">
+      </children>
+      <effect>
+         <DropShadow height="15.0" radius="7.0" width="15.0" />
+      </effect></AnchorPane>
+   <Text fill="#d9ff00" layoutX="1654.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artefakte:" wrappingWidth="159.0233154296875">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fill="#d9ff00" layoutX="1654.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waffe:" wrappingWidth="116.623291015625">
+   <Text fill="#d9ff00" layoutX="1654.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waffe:" wrappingWidth="116.623291015625">
       <font>
          <Font size="30.0" />
       </font>
    </Text>
-   <AnchorPane layoutX="1634.0" layoutY="758.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
-      <children>
-         <GridPane fx:id="artifactSlot2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
-           <columnConstraints>
-             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-           </columnConstraints>
-           <rowConstraints>
-             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-           </rowConstraints>
-         </GridPane>
-      </children></AnchorPane>
+   <Text fill="#aeff00" layoutX="503.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lebenspunkte:" wrappingWidth="211.02331542968773">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
+   <Text fx:id="healthPoints" fill="#aeff00" layoutX="700.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
 </AnchorPane>

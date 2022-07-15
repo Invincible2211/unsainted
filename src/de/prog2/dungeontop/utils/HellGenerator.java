@@ -2,6 +2,7 @@ package de.prog2.dungeontop.utils;
 
 import de.prog2.dungeontop.control.controller.HellController;
 import de.prog2.dungeontop.control.controller.RoomController;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotAValidRoomtypeException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotValidRngRollException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.SpotAlreadyOccupiedException;
@@ -393,8 +394,7 @@ public class HellGenerator
                 currRoom = room;
             }
         }
-        // TODO Check Arena creation
-        ArenaRoom bossRoom = new ArenaRoom(new Arena(ArenaConstants.ARENA_HEIGHT, ArenaConstants.ARENA_WIDTH), true, currRoom);
+        ArenaRoom bossRoom = new ArenaRoom(new Arena(ArenaConstants.ARENA_SIZE_BIG), true, currRoom);
         HellController.replaceRoom(hell, currRoom, bossRoom);
         roomList.remove(currRoom);
         roomList.add(bossRoom);
@@ -480,8 +480,9 @@ public class HellGenerator
                 switch(type)
                 {
                     case ARENA_ROOM:
-                        // TODO add new Arena instead of null
-                        ArenaRoom arenaRoom = new ArenaRoom(null, false, currRoom);
+                        ArenaRoom arenaRoom = new ArenaRoom(
+                                new Arena(GameManager.getInstance().getGameWorld().getCurrentDepth() < ArenaConstants.ARENA_SIZE_BREAKPOINT ? ArenaConstants.ARENA_SIZE_SMALL : ArenaConstants.ARENA_SIZE_MEDIUM)
+                                , false, currRoom);
                         HellController.replaceRoom(hell, currRoom, arenaRoom);
                         roomList.remove(currRoom);
                         roomList.add(arenaRoom);

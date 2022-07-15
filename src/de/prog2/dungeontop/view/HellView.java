@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryController;
+import de.prog2.dungeontop.control.controller.InventoryViewController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.MovementManager;
@@ -49,7 +50,6 @@ public class HellView
     private boolean isAnimating = HellViewConstants.IS_ANIMATING_DEFAULT_VALUE;
     // currently used HellView
     private static Scene currHellView;
-    private static int playerAssetId = AssetIds.PLAYER;
 
     /**
      * Initialize the View for a given hell
@@ -65,12 +65,7 @@ public class HellView
         AnchorPane container = new AnchorPane(pane);
 
         // Set the background that is seen between the rooms
-        pane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-        /*
-        // TODO: Find usable asset for animated lava background and use it to replace the black BackgroundFill
-        pane.setBackground(new Background(new BackgroundImage(AssetsManager.getImageByAssetId(AssetIds.HELL_LAVA_BG),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        */
+        pane.setBackground(HellViewConstants.SCENE_BG);
 
         Scene scene = new Scene(container, HellViewConstants.SCENE_STARTUP_WIDTH, HellViewConstants.SCENE_STARTUP_HEIGHT);
 
@@ -225,7 +220,7 @@ public class HellView
                 continue;
             }
 
-            // draw the image of the room
+            // draw the image of the room (e.g. anvil for the forge)
             canvas.getGraphicsContext2D().drawImage
             (
                     currRoomImage,
@@ -291,7 +286,9 @@ public class HellView
 
         // Initialize the visual representation for the player
         Player player = PlayerManager.getInstance().getPlayer();
-        Image playerImage = AssetsManager.getImageByAssetId(playerAssetId);
+        Image playerImage = AssetsManager.getImageByAssetId(
+                PlayerManager.getInstance().getPlayer().getHero().getAssetId()
+        );
         playerView = new ImageView(playerImage);
         playerView.setFitHeight(HellViewConstants.PLAYER_FIT_HEIGHT);
         playerView.setFitWidth(HellViewConstants.PLAYER_FIT_WIDTH);
@@ -487,21 +484,12 @@ public class HellView
         ));
 
         // set the Background on which the stats will be shown
-        playerStats.setBackground(new Background(new BackgroundImage
-                (
-                        AssetsManager.getImageByAssetId(AssetIds.STATBOARD_BACKGROUND_SCROLL,
-                                playerStats.getPrefWidth(), playerStats.getPrefHeight(),
-                                HellViewConstants.STAT_BOARD_BG_IMG_PRESERVE_RATIO,
-                                HellViewConstants.STAT_BOARD_BG_IMG_SMOOTH),
-                        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                        HellViewConstants.STAT_BOARD_BACKGROUND_SIZE)
-        ));
+        playerStats.setBackground(HellViewConstants.STAT_BOARD_BG);
 
         // spacing between the statboard elements and alignment
         playerStats.setHgap(HellViewConstants.PLAYER_STATS_HGAP);
         playerStats.setAlignment(Pos.CENTER);
 
-        // bind the player stats to the player;
         AnchorPane.setLeftAnchor(playerStats, HellViewConstants.OVERLAY_BUTTON_FIT_WIDTH
                 * HellViewConstants.OVERLAY_BUTTON_X_OFFSET_MULTI);
 
@@ -545,8 +533,7 @@ public class HellView
             GlobalLogger.warning(LoggerStringValues.FXML_LOAD_ERROR);
             return;
         }
-        InventoryController.addItems(fxmlLoader.getController(),
-                PlayerManager.getInstance().getPlayerInventory().getInventory());
+        InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
         DungeonTop.getStage().setScene(scene);
     }
@@ -570,7 +557,7 @@ public class HellView
                 valueProperty
         ));
 
-        // create the container element and add is to the statboard
+        // create the container element and add it to the statboard
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
         container.setPadding(HellViewConstants.STAT_BOARD_ELEMENT_PADDING);
@@ -622,25 +609,5 @@ public class HellView
     public static void setCurrHellView (Scene nextHellView)
     {
         HellView.currHellView = nextHellView;
-    }
-
-    /**
-     * Getter for the AssetId of the selected class
-     *
-     * @return AssetId to be used when rendering the HellView
-     */
-    public static int getPlayerAssetId ()
-    {
-        return HellView.playerAssetId;
-    }
-
-    /**
-     * Setter for the AssetId of the image which shall be used to represent the player on the HellView
-     *
-     * @param playerAssetId ID of the Image asset that shall be used for the HellView
-     */
-    public static void setPlayerAssetId (final int playerAssetId)
-    {
-        HellView.playerAssetId = playerAssetId;
     }
 }

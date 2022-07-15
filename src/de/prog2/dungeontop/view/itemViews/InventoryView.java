@@ -1,28 +1,23 @@
 package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.DungeonTop;
-import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.view.HellView;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 
-public class InventoryViewController
+public class InventoryView
 {
     @FXML
     GridPane gridPane;
     @FXML
-    private Button returnButton;
-    @FXML
     GridPane weaponSlot;
     @FXML
-    GridPane artifactSlot1;
+    GridPane artifactSlots;
     @FXML
-    GridPane artifactSlot2;
-
+    Text healthPoints;
 
     public GridPane getGridPane()
     {
@@ -34,16 +29,19 @@ public class InventoryViewController
         return weaponSlot;
     }
 
-    public GridPane getArtifactSlot1()
+    public GridPane getArtifactSlots()
     {
-        return artifactSlot1;
+        return artifactSlots;
     }
 
-    public GridPane getArtifactSlot2()
+    public Text getHealthPoints()
     {
-        return artifactSlot2;
+        return healthPoints;
     }
-
+    public void setHPText()
+    {
+        getHealthPoints().setText(String.valueOf(PlayerManager.getInstance().getPlayerHp()));
+    }
     @FXML
     private void onReturnButtonClicked()
     {

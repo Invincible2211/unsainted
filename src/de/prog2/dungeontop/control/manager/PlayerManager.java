@@ -1,11 +1,10 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.model.entities.Hero;
-import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.Valuable;
+import de.prog2.dungeontop.resources.GameConstants;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class PlayerManager
@@ -18,8 +17,9 @@ public class PlayerManager
         initPlayerData();
     }
 
-    public void addSouls(int amount){
-        player.setSouls(player.getSouls() + amount);
+    public void addSouls(int amount)
+    {
+        player.setSouls((player.getSouls() + (amount+((int) Math.floor((float)amount*player.getSoulArtBonus()/GameConstants.LEVEL_1_EXP_CAP)))));
     }
 
     public void removeSouls(int amount)
@@ -72,13 +72,9 @@ public class PlayerManager
     {
         return player.getMax_ego_points();
     }
-    public static void removeItem (Valuable item)
-    {
-        if (item instanceof  Item)
-            instance.getPlayer().getInventory().removeItem((Item)item);
-        else if (item instanceof Card)
-            instance.getPlayer().getDeck().removeCard((Card) item);
-    }
+
+
+
 
     private void playerDied()
     {
@@ -113,5 +109,13 @@ public class PlayerManager
     public void setPlayer(Player player)
     {
         this.player = player;
+    }
+
+    public void checkLevelUp()
+    {
+        if (player.getExperiencePoints() >= player.getExpCap())
+        {
+            player.levelUp();
+        }
     }
 }

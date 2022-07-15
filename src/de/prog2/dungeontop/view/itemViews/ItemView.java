@@ -1,12 +1,9 @@
 package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.control.controller.ItemClickedController;
-import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.ItemType;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,8 +16,6 @@ public class ItemView
     private ImageView itemImage;
     @FXML
     private Label itemName;
-    @FXML
-
     private Item item;
     private static Stage stage = new Stage();
 
@@ -30,30 +25,21 @@ public class ItemView
      */
     public void itemButtonClicked()
     {
-        AnchorPane rootPane;
-        if (getItem().getType().equals(ItemType.WAFFE))
-        {
-            Item selectedItem = getItem();
-            rootPane = ItemClickedController.getWeaponClicked(selectedItem);
-        }
-        else if (getItem().getType().equals(ItemType.ARTEFAKT))
-        {
-            Item selectedItem = getItem();
-            rootPane = ItemClickedController.getArtifactClicked(selectedItem);
-        }
-        else
-        {
-            Item selectedItem = getItem();
-            rootPane = ItemClickedController.getItemClicked(selectedItem);
-        }
-        final Scene scene = new Scene(rootPane);
-        stage.setScene(scene);
+        initItemClicked();
         stage.show();
     }
 
     public static void hideStage()
     {
         stage.hide();
+    }
+
+    public void initItemClicked()
+    {
+        AnchorPane rootPane;
+        rootPane = ItemClickedController.getItemClicked(item);
+        final Scene scene = new Scene(rootPane);
+        stage.setScene(scene);
     }
 
     //Get- und Setters
