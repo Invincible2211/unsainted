@@ -50,7 +50,6 @@ public class HellView
     private boolean isAnimating = HellViewConstants.IS_ANIMATING_DEFAULT_VALUE;
     // currently used HellView
     private static Scene currHellView;
-    private static int playerAssetId = AssetIds.PLAYER;
 
     /**
      * Initialize the View for a given hell
@@ -287,7 +286,9 @@ public class HellView
 
         // Initialize the visual representation for the player
         Player player = PlayerManager.getInstance().getPlayer();
-        Image playerImage = AssetsManager.getImageByAssetId(playerAssetId);
+        Image playerImage = AssetsManager.getImageByAssetId(
+                PlayerManager.getInstance().getPlayer().getHero().getAssetId()
+        );
         playerView = new ImageView(playerImage);
         playerView.setFitHeight(HellViewConstants.PLAYER_FIT_HEIGHT);
         playerView.setFitWidth(HellViewConstants.PLAYER_FIT_WIDTH);
@@ -608,25 +609,5 @@ public class HellView
     public static void setCurrHellView (Scene nextHellView)
     {
         HellView.currHellView = nextHellView;
-    }
-
-    /**
-     * Getter for the AssetId of the selected class
-     *
-     * @return AssetId to be used when rendering the HellView
-     */
-    public static int getPlayerAssetId ()
-    {
-        return HellView.playerAssetId;
-    }
-
-    /**
-     * Setter for the AssetId of the image which shall be used to represent the player on the HellView
-     *
-     * @param playerAssetId ID of the Image asset that shall be used for the HellView
-     */
-    public static void setPlayerAssetId (final int playerAssetId)
-    {
-        HellView.playerAssetId = playerAssetId;
     }
 }

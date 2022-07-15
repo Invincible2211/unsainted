@@ -71,14 +71,6 @@ public class SelectHero
             return;
         }
 
-        // set the ID for the asset that depicts the hero in the HellView depending on the selected hero
-        if (playerHero == SelectHeroConstants.WARRIOR)
-            HellView.setPlayerAssetId(AssetIds.WARRIOR);
-        else if (playerHero == SelectHeroConstants.MAGE)
-            HellView.setPlayerAssetId(AssetIds.MAGICIAN);
-        else if (playerHero == SelectHeroConstants.ROGUE)
-            HellView.setPlayerAssetId(AssetIds.ROGUE);
-
         // initialize a new game world and go to the HellView
         GameManager.getInstance().getGameWorld().initWorld();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());

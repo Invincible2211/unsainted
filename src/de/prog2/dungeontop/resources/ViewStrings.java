@@ -22,9 +22,6 @@ public interface ViewStrings
     String ENTITY_CARD_DETAIL_VIEW_FXML = "view/cardViews/entityCardDetailView.fxml";
     String SPELL_CARD_VIEW_FXML = "view/cardViews/spellCardView.fxml";
     String SPELL_CARD_DETAIL_VIEW_FXML = "view/cardViews/spellCardDetailView.fxml";
-    // Shop View
-    String SHOP_VIEW_FXML = "view/shopView.fxml";
-    String SHOP_VIEW_CSS = "view/shopView.css";
     // Network View
     String NETWORK_FXML = "view/network.fxml";
 }

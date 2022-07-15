@@ -3,9 +3,11 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.model.items.Artifact;
+import de.prog2.dungeontop.model.items.Equippable;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.itemViews.ItemClickedView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -44,13 +46,31 @@ public class ItemClickedController
         controller.getItemDescription().setText(item.getDescription());
         controller.getPrice().setText(String.valueOf(item.getPrice()));
         controller.setItem(item);
-        if (item instanceof Artifact)
+
+        if (item instanceof Artifact || item instanceof Weapon)
         {
-            controller.getEquipButton().setText("Artefakt ausrüsten");
-        }
-        else if (item instanceof Weapon)
-        {
-            controller.getEquipButton().setText("Waffe ausrüsten");
+            if (item instanceof Artifact)
+            {
+                controller.getEquipButton().setText("Artefakt ausrüsten");
+            }
+            else
+            {
+                controller.getEquipButton().setText("Waffe ausrüsten");
+            }
+
+            Equippable item1 = null;
+            try
+            {
+                item1 = (Equippable) item;
+            }
+            catch (ClassCastException e)
+            {
+                GlobalLogger.warning(e.getMessage());
+            }
+            if(item1.isEquipped())
+            {
+                controller.getEquipButton().setText("Ablegen");
+            }
         }
     }
 }

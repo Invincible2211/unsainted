@@ -39,7 +39,7 @@ public interface SelectHeroConstants
     Talent ROGUE_TALENT = Talent.SNEAKY;
     Hero ROGUE = new Hero(SelectHeroConstants.ROGUE_NAME, SelectHeroConstants.ROGUE_HP,
             SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_MAX_MOVES, ROGUE_ARTIFACT_SLOTS,
-            ROGUE_TALENT, AssetIds.MAGE_ICO, PlayerManager.getInstance().getPlayer());
+            ROGUE_TALENT, AssetIds.ROGUE_ICO, PlayerManager.getInstance().getPlayer());
 
     String PLAYER_CLASS = "Klasse: ";
     String PLAYER_HP = "Leben: ";

@@ -9,8 +9,6 @@ import java.io.Serializable;
 
 public class HellPackage extends Package
 {
-
-    String foo = "Hallo";
     private Hell hell;
     private Coordinate playerCoordinate;
 
