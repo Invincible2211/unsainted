@@ -67,6 +67,8 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
+        testEndGameDialogue();
+
         //testArenaView();
         //testBattle();
 
@@ -248,7 +250,7 @@ public class DungeonTop extends Application
 
     public static void testEndGameDialogue ()
     {
-        boolean playerWon = false;
+        boolean playerWon = true;
         GameEndViewController.getInstance().showGameEndDialogue(playerWon);
     }
 
