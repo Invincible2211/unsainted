@@ -14,52 +14,11 @@ import javafx.scene.image.ImageView;
 
 import java.util.List;
 
-public class EnemyHandView extends HandViewAbstract {
-
-    private int currentHandCardsSize = 0;
-
-    double handCardScale = ArenaViewConstants.HAND_PLAYER_Y / ArenaViewConstants.CARD_HEIGHT;
-
-    public EnemyHandView() {
-        PlayerManager.getInstance().getPlayer().getHandCards().addListener(new ListChangeListener<Card>() {
-            @Override
-            public void onChanged(Change<? extends Card> c) {
-                updateHand();
-            }
-        });
-    }
-
-    private void updateHand()
+public class EnemyHandView extends PlayerHandView
+{
+    @Override
+    protected void addCard(Card card)
     {
-        removeAll();
-        addCards(currentHandCardsSize);
-    }
-
-    public void removeAll ()
-    {
-        super.getChildren().clear();
-    }
-
-    public void addCard()
-    {
-        //TODO Jesse hier handrueckenkarte einfuegen anstatt von imageview iv
-        //Node cardView = CardViewController.getEnemtyCardView(1);
-        //this.getChildren().add(iv);
-    }
-
-    public void addCards (int amount)
-    {
-        for (int i = 0; i < amount; i++) {
-         addCard();
-        }
-    }
-
-    public void removeCard()
-    {
-        super.getChildren().remove(super.getChildren().stream().findAny());
-    }
-
-    public int getCurrentHandCardsSize() {
-        return super.getChildren().size();
+        getChildren().add(CardViewController.getEnemyCardView(handCardScale));
     }
 }

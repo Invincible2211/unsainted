@@ -9,7 +9,9 @@ import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.TestConstants;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -63,8 +65,7 @@ public class ArenaController
 
     public void initBattle(Arena arena){
         clear();
-        setPlayerCardView(new PlayerHandView());
-        setEnemyCardView(new EnemyHandView());
+
         currentArena = arena;
         arenaGridPane = new GridPane();
         for (int i = 0; i < arena.getWidth(); i++) {
@@ -331,7 +332,13 @@ public class ArenaController
     @FXML
     public void initialize()
     {
-        System.out.println(labelEgoPointsPlayer == null);
+//        I complain to my Quietscheentschen
+//
+//        About world, full of greedy Menschen;
+//
+//        Kapitalism is bad for working class,
+//
+//        Python gives my Quietschentchen to Arbeitsmarkt pass.
         labelEgoPointsPlayer.textProperty().bind(PlayerManager.getInstance().getPlayer().currentEgoPointsProperty().asString());
     }
 
@@ -354,16 +361,8 @@ public class ArenaController
         return playerCardView;
     }
 
-    public void setPlayerCardView(PlayerHandView playerCardView) {
-        this.playerCardView = playerCardView;
-    }
-
     public EnemyHandView getEnemyCardView() {
         return enemyCardView;
-    }
-
-    public void setEnemyCardView(EnemyHandView enemyCardView) {
-        this.enemyCardView = enemyCardView;
     }
 
     public Label getLabelEgoPointsPlayer() {
