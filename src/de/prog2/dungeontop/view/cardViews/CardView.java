@@ -4,6 +4,7 @@ import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.resources.views.CardConstants;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,10 +29,26 @@ public abstract class CardView
     protected StackPane summonCostContainer;
     @FXML
     protected StackPane rankContainer;
+    private AnchorPane detailViewContainer;
     @FXML
-    private void mouseEntered() {CardViewController.zoomCardView(container);}
+    private void mouseEntered()
+    {
+        CardViewController.zoomCardView(container);
+        if(detailViewContainer != null)
+        {
+            detailViewContainer.getChildren().add(CardViewController.getCardDetailView(card, 1));
+        }
+    }
     @FXML
-    private void mouseExited() {CardViewController.resetZoom(container);}
+    private void mouseExited()
+    {
+        CardViewController.resetZoom(container);
+        if(detailViewContainer != null)
+        {
+            detailViewContainer.getChildren().clear();
+        }
+
+    }
 
     /**
      * Sets the scale of the card view.
@@ -122,5 +139,15 @@ public abstract class CardView
     public void mouseRelease (MouseEvent mouseEvent)
     {
         getCard().setSelected(!getCard().isSelected());
+    }
+
+    public AnchorPane getDetailViewContainer()
+    {
+        return detailViewContainer;
+    }
+
+    public void setDetailViewContainer(AnchorPane detailViewContainer)
+    {
+        this.detailViewContainer = detailViewContainer;
     }
 }

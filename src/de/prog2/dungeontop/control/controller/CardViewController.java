@@ -13,15 +13,21 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 
 public abstract class CardViewController
 {
+    public static Node getCardView(Card card, double scale)
+    {
+        return getCardView(card, scale, null);
+    }
     /**
      * @param card  The card that is displayed by the card view.
      * @param scale The scale of the card view. 1 makes the cardView have an height of 866 px.
      * @return The Node that is controlled by this controller.
      */
-    public static Node getCardView(Card card, double scale)
+    public static Node getCardView(Card card, double scale, AnchorPane cardDetailViewContainer)
     {
         Node cardView = null;
         try
@@ -39,6 +45,10 @@ public abstract class CardViewController
             CardView controller = loader.getController();
 
             controller.setScale(scale);
+            if(cardDetailViewContainer != null)
+            {
+                controller.setDetailViewContainer(cardDetailViewContainer);
+            }
 
             populateCardView(card, controller, false);
 
@@ -227,11 +237,15 @@ public abstract class CardViewController
     {
         cardView.setScaleX(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD);
         cardView.setScaleY(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD);
+
+        cardView.translateYProperty().set(cardView.getTranslateY() - 40);
     }
 
     public static void resetZoom(Node cardView)
     {
         cardView.setScaleX(1);
         cardView.setScaleY(1);
+
+        cardView.translateYProperty().set(cardView.getTranslateY() + 40);
     }
 }

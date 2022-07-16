@@ -52,6 +52,7 @@ public class DungeonTop extends Application
     public void start(Stage primaryStage) throws Exception
     {
         initialize();
+
         stage = primaryStage;
 
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -246,6 +247,12 @@ public class DungeonTop extends Application
         stage.setScene(scene);
     }
 
+    public static void testEndGameDialogue ()
+    {
+        boolean playerWon = false;
+        GameEndViewController.getInstance().showGameEndDialogue(playerWon);
+    }
+
     public static void testDeckCreation ()
     {
         System.out.println(DeckController.getRandomDeck(false));
@@ -260,6 +267,7 @@ public class DungeonTop extends Application
     {
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
+        GameEndViewController.initStage();
         NetworkController.initStage();
         AvailableCards.INIT_CARD_DATA();
     }

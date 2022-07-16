@@ -12,6 +12,7 @@ public class EntityCard extends Card
     {
         super(maxRank, price, rank, summonCost, ID);
         this.entity = entity;
+        entity.setCard(this);
         GlobalLogger.log(LoggerStringValues.ENTITYCARD_CREATED);
     }
 
@@ -33,13 +34,8 @@ public class EntityCard extends Card
     public String toString()
     {
         StringBuilder builder = new StringBuilder();
-
         builder.append(this.getEntity().getName());
-        builder.append(", Rank: ");
-        builder.append(this.getRank());
-        builder.append(" of ");
-        builder.append(this.getMaxRank());
-
+        builder.append(super.toString());
         return  builder.toString();
     }
 }

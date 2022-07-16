@@ -9,6 +9,8 @@ import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.view.handViews.EnemyHandView;
+import de.prog2.dungeontop.view.handViews.PlayerHandView;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -63,8 +65,7 @@ public class ArenaController
 
     public void initBattle(Arena arena){
         clear();
-        setPlayerCardView(new PlayerHandView());
-        setEnemyCardView(new EnemyHandView());
+
         currentArena = arena;
         arenaGridPane = new GridPane();
         for (int i = 0; i < arena.getWidth(); i++) {
@@ -157,11 +158,11 @@ public class ArenaController
         pane.setOnMouseClicked(event -> {
             handleEvent((AnchorPane) event.getSource());
         });
-        pane.setOnMousePressed(event->{
+        pane.setOnMousePressed(event-> {
 
             handleEvent((AnchorPane) event.getSource());
         });
-        pane.setOnMouseReleased(event->{
+        pane.setOnMouseReleased(event-> {
             if (isArenaAnchorPane(event.getPickResult().getIntersectedNode())) handleEvent((AnchorPane) event.getPickResult().getIntersectedNode());
         });
     }
@@ -170,7 +171,8 @@ public class ArenaController
         return node instanceof AnchorPane && node != cardView && node != root && node != arenaGrid;
     }
 
-    private void handleEvent(AnchorPane source){
+    private void handleEvent(AnchorPane source)
+    {
         AnchorPane selected = getSelected();
         if (source == null)
         {
@@ -331,7 +333,13 @@ public class ArenaController
     @FXML
     public void initialize()
     {
-        System.out.println(labelEgoPointsPlayer == null);
+//        I complain to my Quietscheentschen
+//
+//        About world, full of greedy Menschen;
+//
+//        Kapitalism is bad for working class,
+//
+//        Python gives my Quietschentchen to Arbeitsmarkt pass.
         labelEgoPointsPlayer.textProperty().bind(PlayerManager.getInstance().getPlayer().currentEgoPointsProperty().asString());
     }
 
@@ -354,16 +362,8 @@ public class ArenaController
         return playerCardView;
     }
 
-    public void setPlayerCardView(PlayerHandView playerCardView) {
-        this.playerCardView = playerCardView;
-    }
-
     public EnemyHandView getEnemyCardView() {
         return enemyCardView;
-    }
-
-    public void setEnemyCardView(EnemyHandView enemyCardView) {
-        this.enemyCardView = enemyCardView;
     }
 
     public Label getLabelEgoPointsPlayer() {
@@ -372,5 +372,8 @@ public class ArenaController
 
     public Label getLabelEgoPointOpponent() {
         return labelEgoPointOpponent;
+    }
+    public AnchorPane getCardDetailViewContainer() {
+        return cardView;
     }
 }

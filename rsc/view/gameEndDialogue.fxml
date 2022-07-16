@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1150.0" style="-fx-background-color: #e0c59f; -fx-background-radius: 20;-fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.GameEndViewController">
+   <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="1050.0">
+      <children>
+         <ImageView fx:id="gameResultImage" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+         <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
+            <TextArea fx:id="resultMessageText" editable="false" focusTraversable="false" maxWidth="650.0" minHeight="50.0" minWidth="650.0" mouseTransparent="true" prefHeight="51.0" prefWidth="650.0" style="-fx-text-box-border: transparent; -fx-focus-color: transparent; -fx-font-weight: bold;" styleClass="text-area" stylesheets="@/view/gameEndDialogueStyle.css" text="PLACEHOLDER" wrapText="true">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <Button fx:id="startNewgameButton" alignment="CENTER" mnemonicParsing="false" onAction="#onStartNewGameButton" prefHeight="120.0" prefWidth="450.0" stylesheets="@/view/mainmenuestyle.css" text="Neues Spiel">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="25.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="backToMenuButton" alignment="CENTER" mnemonicParsing="false" onAction="#onBackToMenu" prefHeight="120.0" prefWidth="450.0" stylesheets="@/view/mainmenuestyle.css" text="Zurueck zum Hauptmenue">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="25.0" />
+               </VBox.margin>
+            </Button>
+         </VBox>
+      </children>
+   </VBox>
+</Pane>
