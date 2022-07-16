@@ -6,6 +6,7 @@ import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Equippable;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
+import de.prog2.dungeontop.resources.items.ItemConstants;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.itemViews.ItemClickedView;
@@ -51,11 +52,11 @@ public class ItemClickedViewController
         {
             if (item instanceof Artifact)
             {
-                controller.getEquipButton().setText("Artefakt ausrüsten");
+                controller.getEquipButton().setText(ItemConstants.EQUIP_ARTIFACT);
             }
             else
             {
-                controller.getEquipButton().setText("Waffe ausrüsten");
+                controller.getEquipButton().setText(ItemConstants.EQUIP_WEAPON);
             }
 
             Equippable item1 = null;
@@ -69,7 +70,7 @@ public class ItemClickedViewController
             }
             if(item1.isEquipped())
             {
-                controller.getEquipButton().setText("Ablegen");
+                controller.getEquipButton().setText(ItemConstants.UNEQUIP_ITEM);
             }
         }
     }

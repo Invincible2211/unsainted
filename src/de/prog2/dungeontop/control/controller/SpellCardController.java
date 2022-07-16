@@ -6,6 +6,7 @@ import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 
+@Deprecated
 public class SpellCardController
 {
     /**
@@ -19,7 +20,7 @@ public class SpellCardController
     {
         Cloner cloner = new Cloner();
         Spell spell = cloner.deepClone(card.getSpell());
-        arena.castSpell(spell, coordinate);
+        spell.cast(arena, coordinate);
         return true;
     }
 }

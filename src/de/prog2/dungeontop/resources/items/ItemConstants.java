@@ -11,6 +11,15 @@ import de.prog2.dungeontop.resources.AssetIds;
 
 public interface ItemConstants
 {
+    // ItemController
+    int INVENTORY_SLOTS = 28;
+    int INVENTORY_COLUMNS = 7;
+
+    // ItemClicked
+    String EQUIP_ARTIFACT = "Artefakt ausrüsten";
+    String EQUIP_WEAPON = "Waffe ausrüsten";
+    String UNEQUIP_ITEM = "Ablegen";
+
     //Consumables
     Consumable MINOR_POTION = new HealingConsumable("Gesundheitstrank", "heilt den Spieler um %d Lebenspunkte", 5 ,50, AssetIds.HEALTH_POTION);
     Consumable BREAD = new HealingConsumable("Brot", "heilt den Spieler um %d Lebenspunkte", 1 ,5, AssetIds.BREAD);

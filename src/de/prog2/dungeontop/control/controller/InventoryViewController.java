@@ -6,6 +6,7 @@ import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
+import de.prog2.dungeontop.resources.items.ItemConstants;
 import de.prog2.dungeontop.view.itemViews.InventoryView;
 import javafx.scene.Node;
 
@@ -28,7 +29,7 @@ public class InventoryViewController
             Node itemView = ItemViewController.getItemView(item);
             inventoryView.getGridPane().add(itemView, columns, rows);
             columns++;
-            if (columns == 7)
+            if (columns == ItemConstants.INVENTORY_COLUMNS)
             {
                 columns = 0;
                 rows++;

@@ -3,6 +3,7 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.items.Inventory;
 import de.prog2.dungeontop.model.items.Item;
+import de.prog2.dungeontop.resources.items.ItemConstants;
 
 public class InventoryController
 {
@@ -13,7 +14,7 @@ public class InventoryController
     public static boolean addItem(Item item)
     {
         Inventory inventory = PlayerManager.getInstance().getPlayerInventory();
-        if(inventory.getItems().size() >= 28)
+        if(inventory.getItems().size() >= ItemConstants.INVENTORY_SLOTS)
         {
             return false;
         }

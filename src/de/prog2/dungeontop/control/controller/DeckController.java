@@ -5,7 +5,6 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.resources.AvailableCards;
 import de.prog2.dungeontop.resources.DeckConstants;
-import de.prog2.dungeontop.resources.views.CardConstants;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -42,7 +41,6 @@ public class DeckController
      *
      * @param useAllCards true if the deck shall be created from all available cards,
      *                    false if it shall be created from the unlocked cards only
-     * @return
      */
     public static Deck getRandomDeck (boolean useAllCards)
     {

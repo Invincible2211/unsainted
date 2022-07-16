@@ -6,6 +6,7 @@ import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 
+@Deprecated
 public class EntityCardController
 {
     /**
