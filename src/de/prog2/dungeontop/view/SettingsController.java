@@ -5,9 +5,7 @@ import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.IPChecker;
-import de.prog2.dungeontop.resources.HellViewConstants;
-import de.prog2.dungeontop.resources.NetworkingConstants;
-import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -49,6 +47,8 @@ public class SettingsController {
 
     @FXML
     AnchorPane root;
+
+    private double volume = AudioDefaultValues.DEFAULT_VOLUME;
 
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
@@ -146,6 +146,17 @@ public class SettingsController {
         StringSelection selection = new StringSelection(content);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, selection);
+    }
+
+    @FXML
+    private void mute(){
+        if (volumeSlider.getValue()!=0){
+            volume = volumeSlider.getValue();
+            volumeSlider.setValue(0);
+        } else {
+            volumeSlider.setValue(volume);
+        }
+
     }
 
 }

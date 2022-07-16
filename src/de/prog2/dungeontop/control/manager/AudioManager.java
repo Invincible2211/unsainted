@@ -44,7 +44,6 @@ public class AudioManager
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
     public UUID playSoundOnScene(int soundID, Scene scene, boolean loop){
-        System.out.println(scene.toString());
         UUID uuid = playSound(soundID,loop);
         pauseClip(uuid);
         sceneSounds.put(scene,uuid);
@@ -95,7 +94,6 @@ public class AudioManager
     public void changeClipVolumeWhilePlayingSound(int soundID, UUID clipUUID, double volume){
         Clip clip = playingClips.get(clipUUID);
         double oldVolume = getVolume(clip);
-        System.out.println(oldVolume);
         changeVolume(clip,volume);
         UUID uuid = playSound(soundID,false);
         Clip newClip = playingClips.get(uuid);
@@ -107,7 +105,6 @@ public class AudioManager
             {
                 return;
             }
-            System.out.println(oldVolume);
             changeVolume(playingClips.get(clipUUID),oldVolume);
         });
     }
@@ -118,6 +115,7 @@ public class AudioManager
      */
     private void changeVolumeForAll(double volumeLevel)
     {
+        System.out.println(volumeLevel);
         for (Clip c : playingClips.values())
         {
             changeVolume(c, volumeLevel);
@@ -128,7 +126,7 @@ public class AudioManager
     {
         FloatControl volume;
         volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volume.shift(20 * (float) Math.log10(getVolume(clip)/100), 20 * (float) Math.log10(volumeLevel/100),5);
+        volume.shift(20 * (float) Math.log10(getVolume(clip)/100), 20 * (float) Math.log10(volumeLevel/100),50);
     }
 
     private double getVolume(Clip clip){
@@ -159,12 +157,10 @@ public class AudioManager
 
     public void addListener(){
         DungeonTop.getStage().sceneProperty().addListener((observable, oldValue, newValue) -> {
-            changeVolumeForAll(volume.get());
-            System.out.println(oldValue.toString());
-            System.out.println(newValue.toString());
             pauseClip(sceneSounds.get(oldValue));
             resetClip(sceneSounds.get(oldValue));
             resumeClip(sceneSounds.get(newValue));
+            changeVolumeForAll(volume.get());
         });
     }
 

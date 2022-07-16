@@ -13,7 +13,7 @@
          <Insets left="10.0" right="10.0" />
       </padding>
    </Slider>
-   <Label layoutX="32.0" layoutY="352.0" prefHeight="93.0" prefWidth="93.0" style="-fx-background-image: url(assets/910_SoundICO.png); -fx-background-size: cover;" />
+   <Label layoutX="32.0" layoutY="352.0" onMouseClicked="#mute" prefHeight="93.0" prefWidth="93.0" style="-fx-background-image: url(assets/910_SoundICO.png); -fx-background-size: cover;" />
    <Label id="label" fx:id="ipLabel" contentDisplay="CENTER" layoutX="986.0" layoutY="14.0" onMouseClicked="#onIPLabelClicked" prefHeight="40.0" prefWidth="200.0" stylesheets="@/view/settings.css" textAlignment="CENTER" />
    <Button id="button" layoutX="148.0" layoutY="236.0" mnemonicParsing="false" onAction="#onExitButtonPressed" prefHeight="80.0" prefWidth="400.0" stylesheets="@/view/mainmenuestyle.css" text="Spiel Verlassen" />
    <Button id="button" layoutX="653.0" layoutY="236.0" mnemonicParsing="false" onAction="#onMMButtonPressed" prefHeight="80.0" prefWidth="400.0" stylesheets="@/view/mainmenuestyle.css" text="Zurück zum Hauptmenü" />
