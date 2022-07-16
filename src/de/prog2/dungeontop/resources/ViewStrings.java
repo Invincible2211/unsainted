@@ -25,4 +25,6 @@ public interface ViewStrings
     String SPELL_CARD_DETAIL_VIEW_FXML = "view/cardViews/spellCardDetailView.fxml";
     // Network View
     String NETWORK_FXML = "view/network.fxml";
+    // Game Ended Dialogue
+    String GAME_END_DIALOGUE_VIEW_FXML = "view/gameEndDialogue.fxml";
 }

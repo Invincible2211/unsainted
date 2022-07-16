@@ -113,4 +113,8 @@ public interface AssetIds
     // Music
     int MAP_BG_MUSIC = 992;
 
+    // Game End Dialogue
+    int PLAYER_LOSES = 1;
+    int PLAYER_WINS = 2;
+
 }

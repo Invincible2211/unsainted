@@ -1,0 +1,11 @@
+.text-area{
+    -fx-background-color: #ad987a;
+}
+
+.text-area .content {
+    -fx-background-color: #ffeab5;
+}
+
+.text-area .text {
+    -fx-text-alignment: center;
+}

@@ -64,10 +64,12 @@ public class DungeonTop extends Application
         stage.sizeToScene();
         stage.show();
 
+        testEndGameDialogue();
+
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        testArenaView();
+        //testArenaView();
         //testBattle();
 
         //testSelectHero(primaryStage);
@@ -246,6 +248,12 @@ public class DungeonTop extends Application
         stage.setScene(scene);
     }
 
+    public static void testEndGameDialogue ()
+    {
+        boolean playerWon = false;
+        GameEndViewController.getInstance().showGameEndDialogue(playerWon);
+    }
+
     public static void testDeckCreation ()
     {
         System.out.println(DeckController.getRandomDeck(false));
@@ -260,6 +268,7 @@ public class DungeonTop extends Application
     {
         SettingsController.initStage();
         RoomDialogueViewController.initStage();
+        GameEndViewController.initStage();
         NetworkController.initStage();
         AvailableCards.INIT_CARD_DATA();
     }
