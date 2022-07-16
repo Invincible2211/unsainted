@@ -7,9 +7,9 @@ public class HealingConsumable extends Consumable
 {
     private final int healingAmount;
 
-    public HealingConsumable(String name, String description, int healingAmount, int price, int assetID)
+    public HealingConsumable(String name, String description, int healingAmount, int assetID)
     {
-        super(name, String.format(description, healingAmount), price, assetID);
+        super(name, String.format(description, healingAmount), assetID);
         this.healingAmount = healingAmount;
     }
 

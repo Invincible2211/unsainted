@@ -5,9 +5,9 @@ import de.prog2.dungeontop.control.manager.PlayerManager;
 
 public abstract class Artifact extends Item implements Equippable
 {
-    public Artifact(String name, String description, int price, int assetID)
+    public Artifact(String name, String description, int assetID)
     {
-        super(name, description, price, assetID);
+        super(name, description, assetID);
     }
 
     @Override

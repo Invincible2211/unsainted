@@ -25,8 +25,6 @@ public class ItemClickedView
     @FXML
     private ImageView itemImage;
     @FXML
-    private Text price;
-    @FXML
     private javafx.scene.control.Button equipButton;
     private Item item;
 
@@ -96,11 +94,6 @@ public class ItemClickedView
     public ImageView getItemImage()
     {
         return itemImage;
-    }
-
-    public Text getPrice()
-    {
-        return price;
     }
 
     public void setItem(Item item)
