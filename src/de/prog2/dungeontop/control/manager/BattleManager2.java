@@ -19,6 +19,7 @@ import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,6 +28,7 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class BattleManager2 {
@@ -59,9 +61,9 @@ public class BattleManager2 {
         Platform.runLater(() -> {
             this.player1 = PlayerManager.getInstance().getPlayer();
             this.player2 = GameManager.getInstance().getOpponentPlayer();
-            drawNewHand();
 
             arenaController.initBattle(arena);
+            drawNewHand();
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
@@ -79,6 +81,14 @@ public class BattleManager2 {
                 Coordinate cord = new Coordinate(2,3);
                 arenaController.placeEntityFriendly(peter,cord);
             }
+//            Waschmaschinen nehmt euch in Acht!
+//
+//            Dreckigen Code schreib ich mit Python
+//
+//            Ihr könnt zwar kein UTF-8
+//
+//            Aber den Text trotzdem einseifen
+
             //arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
         });
     }
@@ -148,12 +158,16 @@ public class BattleManager2 {
             }
             discardHand();
             DeckController.shuffleDeck(player1.getDeck());
+            List<Card> hand = new LinkedList<>();
             for (int i = 0; i < player1.getHandCardLimit(); i++) {
-                Card drawenCard = player1.getDeck().getCards().pop();
+                //hand.add(DeckController.drawCard(player1.getDeck());
+
+                Card drawenCard = DeckController.drawCard(player1.getDeck());
                 //TODO sound of get
                 player1.getHandCards().add(drawenCard);
                 GlobalLogger.log(LoggerStringValues.DREW_NEW_CARD + i + "out of" + player1.getHandCardLimit());
             }
+
     }
 
     public void discardHand ()
