@@ -64,7 +64,7 @@ public class DungeonTop extends Application
         stage.sizeToScene();
         stage.show();
 
-        testEndGameDialogue();
+        //testEndGameDialogue();
 
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);

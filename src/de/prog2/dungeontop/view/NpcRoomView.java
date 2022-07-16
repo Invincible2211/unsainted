@@ -344,8 +344,12 @@ public class NpcRoomView
     private static Button createButton(String text)
     {
         Button button = new Button();
+        button.setStyle("-fx-font-family: Hombre;");
         button.setAlignment(Pos.CENTER);
         button.setPrefSize(NpcRoomViewConstants.BUTTON_PREF_WIDTH, NpcRoomViewConstants.BUTTON_PREF_HEIGHT);
+
+        button.setOnMouseExited(e -> button.setStyle(NpcRoomViewConstants.BUTTON_NORMAL_STYLE));
+        button.setOnMouseEntered(e -> button.setStyle(NpcRoomViewConstants.BUTTON_HOVER_STYLE));
 
         button.setBackground(
                 new Background(
