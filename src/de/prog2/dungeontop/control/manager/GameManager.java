@@ -53,14 +53,12 @@ public class GameManager {
      */
     public void startGame()
     {
-        SaveGame saveGame = GameSaveFileReader.getInstance().getSaveGame();
-
-        if (saveGame == null|| saveGame.getGameWorld() == null ||
+        if (saveGame.getGameWorld() == null ||
                 saveGame.getPlayer() == null ||saveGame.getPlayer().getHero() == null)
         {
-            if (saveGame != null)
-                if (saveGame.getPlayer() != null)
-                    PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
+
+            if (saveGame.getPlayer() != null)
+                PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
 
             GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
 
@@ -83,6 +81,7 @@ public class GameManager {
 
             HellView view = new HellView();
             HellView.setCurrHellView(view.initHellView(gameWorld.getCurrentHell()));
+            HellView.resumeHellViewBgMusic();
             DungeonTop.getStage().setScene(HellView.getCurrHellView());
         }
         this.currentState = GameState.RUNNING;

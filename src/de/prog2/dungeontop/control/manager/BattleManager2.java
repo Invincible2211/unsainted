@@ -97,7 +97,14 @@ public class BattleManager2 {
         Platform.runLater(() -> {
             if (playerWins){
                 if (((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).isBoss())
+                {
                     GameManager.getInstance().getGameWorld().getNextHell();
+                    HellView.restartHellViewBgMusic();
+                }
+                else
+                {
+                    HellView.resumeHellViewBgMusic();
+                }
                 DungeonTop.getStage().setScene(HellView.getCurrHellView());
             } else {
                 GameManager.getInstance().endGame();

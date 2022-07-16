@@ -37,6 +37,7 @@ public class MainMenueController {
         NetController.enable(null);
         GameManager.getInstance().startGame();
         AudioManager.getInstance().stopSound(mainMenueSoundUUID);
+        AudioManager.getInstance().playSound(996,false);
     }
 
     /**
@@ -76,6 +77,7 @@ public class MainMenueController {
     private void onPlayAsDungeonMasterButtonPressed(){
         GameManager.getInstance().setDM();
         NetworkController.showNetworkGUI();
+        AudioManager.getInstance().playSound(995,false);
     }
 
     @FXML

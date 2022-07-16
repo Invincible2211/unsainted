@@ -75,6 +75,7 @@ public class SelectHero
 
         // initialize a new game world and go to the HellView
         GameManager.getInstance().getGameWorld().initWorld();
+        HellView.resumeHellViewBgMusic();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
 
         // bind the hp of the Player to it's Hero Entity

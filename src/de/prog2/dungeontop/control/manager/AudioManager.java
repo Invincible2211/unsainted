@@ -73,12 +73,20 @@ public class AudioManager extends Thread
 
     public void pauseClip(UUID clipUUID){
         Clip clip = playingClips.get(clipUUID);
-        if (clip != null) clip.stop();
+        if (clip != null)
+        {
+            System.out.println("Pause Clip");
+            clip.stop();
+        }
     }
 
     public void resumeClip(UUID clipUUID){
         Clip clip = playingClips.get(clipUUID);
-        if (clip != null) clip.start();
+        if (clip != null)
+        {
+            System.out.println("Resume Clip");
+            clip.start();
+        }
     }
 
     public void changeClipVolume(UUID clipUUID, double volume){
@@ -129,6 +137,20 @@ public class AudioManager extends Thread
             this.soundUUID = soundUUID;
             this.loop = loop;
         }
+
+        public void playAfter(int soundID, boolean loop, UUID playAfterSoundUUID){
+            Clip clip = playingClips.get(playAfterSoundUUID);
+            clip.addLineListener(new LineListener() {
+                @Override
+                public void update(LineEvent event) {
+                    if (event.getType() != LineEvent.Type.CLOSE)
+                    {
+                        return;
+                    }
+                    playSound(soundID, loop);
+                }
+            });
+        }
         @Override
         public void run() {
             GlobalLogger.log(String.format(LoggerStringValues.PLAY_SOUND, soundID), GlobalLogger.LoggerLevel.DEFAULT);
@@ -140,7 +162,7 @@ public class AudioManager extends Thread
                 clip.open(audioInputStream);
                 LineListener listener = event ->
                 {
-                    if (event.getType() != LineEvent.Type.STOP)
+                    if (event.getType() != LineEvent.Type.CLOSE)
                     {
                         return;
                     }

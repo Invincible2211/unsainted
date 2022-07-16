@@ -45,6 +45,7 @@ public class InventoryView
     @FXML
     private void onReturnButtonClicked()
     {
+        HellView.resumeHellViewBgMusic();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
     }
 }

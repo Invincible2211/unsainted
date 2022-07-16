@@ -110,5 +110,7 @@ public interface AssetIds
     int ARENA_BG_DEFAULT_ID = 210;
     int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 230;
 
+    // Music
+    int MAP_BG_MUSIC = 992;
 
 }

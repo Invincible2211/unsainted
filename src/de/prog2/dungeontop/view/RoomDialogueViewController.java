@@ -3,12 +3,10 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.RandomEventRoomController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
-import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.resources.NpcRoomViewConstants;
 import de.prog2.dungeontop.resources.RoomDialogueConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -231,6 +229,7 @@ public class RoomDialogueViewController
     {
         NpcRoomView view = new NpcRoomView((NPCRoom) PlayerManager.getInstance().getPlayer().getCurrentRoom());
         DungeonTop.getStage().setScene(view.createNpcRoomView());
+        HellView.pauseHellViewBgMusic();
         hideStage();
         GlobalLogger.log(LoggerStringValues.OPEN_FORGE_HANDLER);
     }
@@ -242,6 +241,7 @@ public class RoomDialogueViewController
     {
         NpcRoomView view = new NpcRoomView((NPCRoom) PlayerManager.getInstance().getPlayer().getCurrentRoom());
         DungeonTop.getStage().setScene(view.createNpcRoomView());
+        HellView.pauseHellViewBgMusic();
         hideStage();
         GlobalLogger.log(LoggerStringValues.OPEN_LAVAPOND_HANDLER);
     }

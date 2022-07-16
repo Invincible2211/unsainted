@@ -5,6 +5,7 @@ import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.IPChecker;
+import de.prog2.dungeontop.resources.HellViewConstants;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -69,6 +70,7 @@ public class SettingsController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        HellView.stopHellViewBgMusic();
         GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
         DungeonTop.getStage().setScene(scene);
     }

@@ -33,6 +33,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.Stack;
+import java.util.UUID;
 
 public class NpcRoomView
 {
@@ -41,12 +42,15 @@ public class NpcRoomView
     private NPCRoom room;
     private int price = NpcRoomViewConstants.DEFAULT_PRICE;
 
+    private UUID audioUUID;
+
     // *-------------------------------------- Constructors --------------------------------------------------------* //
 
     public NpcRoomView (NPCRoom room)
     {
         this.room = room;
         this.npcRoomView = createNpcRoomView();
+        audioUUID = AudioManager.getInstance().playSound(991,true);
     }
 
     // *-------------------------------------- Getter & Setter -----------------------------------------------------* //
@@ -130,7 +134,10 @@ public class NpcRoomView
             closeButton.setOnAction(e ->
             {
                 if (HellView.getCurrHellView() != null)
+                {
                     DungeonTop.getStage().setScene(HellView.getCurrHellView());
+                    HellView.resumeHellViewBgMusic();
+                }
             });
         }
         else
@@ -146,6 +153,7 @@ public class NpcRoomView
                 }
                 GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
                 DungeonTop.getStage().setScene(mmScene);
+                AudioManager.getInstance().stopSound(audioUUID);
             });
         }
 
