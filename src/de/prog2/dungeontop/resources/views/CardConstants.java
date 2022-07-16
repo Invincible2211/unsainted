@@ -34,4 +34,8 @@ public interface CardConstants
     String NAME_FONT_SIZE_STYLE = "-fx-font-size: %d px;";
     double ENTITY_IMAGE_OFFSET_Y = ENTITY_IMAGE_HEIGHT/2d;
     double ENTITY_IMAGE_TOP_ANCHOR = 60 + ENTITY_IMAGE_HEIGHT;
+    // Zoom
+    double ZOOM_FACTOR = 1.5d;
+    double NO_ZOOM_FACTOR = 1d;
+    double ZOOM_TRANSLATE_Y = 40;
 }

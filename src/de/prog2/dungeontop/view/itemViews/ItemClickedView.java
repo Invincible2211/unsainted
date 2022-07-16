@@ -3,7 +3,7 @@ package de.prog2.dungeontop.view.itemViews;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryViewController;
 import de.prog2.dungeontop.model.items.*;
-import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

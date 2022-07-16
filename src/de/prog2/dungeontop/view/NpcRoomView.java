@@ -15,7 +15,7 @@ import de.prog2.dungeontop.model.world.rooms.NPCRoom;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellViewConstants;
 import de.prog2.dungeontop.resources.NpcRoomViewConstants;
-import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;

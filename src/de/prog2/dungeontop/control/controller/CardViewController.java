@@ -8,12 +8,12 @@ import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.resources.*;
-import de.prog2.dungeontop.resources.views.ArenaViewConstants;
+import de.prog2.dungeontop.resources.views.CardConstants;
+import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 
 public abstract class CardViewController
@@ -233,19 +233,25 @@ public abstract class CardViewController
         controller.getSpellImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(spell.getAssetId()));
     }
 
+    /**
+     * Zooms the card view in and moves it a tiny bit up.
+     */
     public static void zoomCardView(Node cardView)
     {
-        cardView.setScaleX(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD);
-        cardView.setScaleY(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD);
+        cardView.setScaleX(CardConstants.ZOOM_FACTOR);
+        cardView.setScaleY(CardConstants.ZOOM_FACTOR);
 
-        cardView.translateYProperty().set(cardView.getTranslateY() - 40);
+        cardView.translateYProperty().set(cardView.getTranslateY() - CardConstants.ZOOM_TRANSLATE_Y);
     }
 
+    /**
+     * Resets the applied zoom of the methed above.
+     */
     public static void resetZoom(Node cardView)
     {
-        cardView.setScaleX(1);
-        cardView.setScaleY(1);
+        cardView.setScaleX(CardConstants.NO_ZOOM_FACTOR);
+        cardView.setScaleY(CardConstants.NO_ZOOM_FACTOR);
 
-        cardView.translateYProperty().set(cardView.getTranslateY() + 40);
+        cardView.translateYProperty().set(cardView.getTranslateY() + CardConstants.ZOOM_TRANSLATE_Y);
     }
 }

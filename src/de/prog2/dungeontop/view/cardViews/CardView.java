@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view.cardViews;
 
 import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.resources.views.CardConstants;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -36,7 +37,7 @@ public abstract class CardView
         CardViewController.zoomCardView(container);
         if(detailViewContainer != null)
         {
-            detailViewContainer.getChildren().add(CardViewController.getCardDetailView(card, 1));
+            detailViewContainer.getChildren().add(CardViewController.getCardDetailView(card, ArenaViewConstants.CARD_DETAIL_VIEW_SCALE));
         }
     }
     @FXML

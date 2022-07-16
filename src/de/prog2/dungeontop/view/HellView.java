@@ -12,6 +12,7 @@ import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.hellComponents.HellComponent;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.*;
+import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;

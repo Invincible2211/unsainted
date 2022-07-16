@@ -8,7 +8,7 @@ import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.RoomDialogueConstants;
-import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

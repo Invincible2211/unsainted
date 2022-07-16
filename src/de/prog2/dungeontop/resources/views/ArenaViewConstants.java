@@ -4,6 +4,7 @@ import de.prog2.dungeontop.resources.ApplicationConstants;
 
 public interface ArenaViewConstants
 {
+    //old
     double EGOPOINTS_BACKGROUND_HEIGHT = ApplicationConstants.RESOLUTION_X * 0.02;
     double EGOPOINTS_BACKGROUND_WIDTH = ApplicationConstants.RESOLUTION_Y * 0.05;
     double HAND_PLAYER_X = ApplicationConstants.RESOLUTION_X * 0.8;
@@ -16,5 +17,9 @@ public interface ArenaViewConstants
     double BATTLEFIELD_HGAP_DEFAULT = 5;
     double BATTLEFIELD_VGAP_DEFAULT = 5;
     double BATTLEFIELD_CELL_MIN_SIZE_MODIFIER = 0.5;
-    double ZOOMFACTOR_ON_MOUSE_HOVER_CARD = 1.5;
+
+    //new
+
+    double CARD_DETAIL_VIEW_SCALE = 1;
+    double HAND_CARD_SCALE = (HAND_PLAYER_Y / (CardConstants.CARD_BASE_HEIGHT * 0.75d)) / 1.2;
 }

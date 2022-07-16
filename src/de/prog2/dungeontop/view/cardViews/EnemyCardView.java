@@ -6,6 +6,6 @@ public class EnemyCardView extends CardView
     @Override
     protected void setAnchorScale(double scale)
     {
-        return;
+        // Do nothing because enemyCards should not have any information displayed.
     }
 }

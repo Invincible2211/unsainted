@@ -6,20 +6,20 @@ import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Equippable;
 import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
-import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.itemViews.ItemClickedView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public class ItemClickedController
+public class ItemClickedViewController
 {
     /**
      * Initialize the pop-up view for a consumable.
      * The overlay consists of buttons, images and texts
      * @param item clicked Item.
      */
-    public static AnchorPane getItemClicked(Item item)
+    public static AnchorPane getItemClickedView(Item item)
     {
         try
         {

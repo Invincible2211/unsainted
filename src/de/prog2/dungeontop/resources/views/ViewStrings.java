@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.resources;
+package de.prog2.dungeontop.resources.views;
 
 public interface ViewStrings
 {
@@ -10,7 +10,7 @@ public interface ViewStrings
     // Hero Select
     String SELECT_HERO_FXML = "view/selectHero.fxml";
     // Inventory
-    String INVENTORY_FXML = "view/itemViews/inventory.fxml";
+    String INVENTORY_FXML = "view/itemViews/inventoryView.fxml";
     String ITEM_VIEW_FXML = "view/itemViews/itemView.fxml";
     String ITEM_CLICKED_FXML = "view/itemViews/itemClickedView.fxml";
 

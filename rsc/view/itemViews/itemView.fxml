@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.itemViews.ItemView">
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.prog2.dungeontop.view.itemViews.ItemView">
    <Button layoutX="5.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#itemButtonClicked" prefHeight="190.0" prefWidth="190.0">
       <graphic>
          <ImageView fx:id="itemImage" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true"/>
