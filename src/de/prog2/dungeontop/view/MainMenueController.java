@@ -9,13 +9,17 @@ import de.prog2.dungeontop.control.network.NetController;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -24,6 +28,9 @@ import java.util.UUID;
 public class MainMenueController {
 
     private UUID mainMenueSoundUUID;
+
+    @FXML
+    private AnchorPane root;
 
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
@@ -36,7 +43,6 @@ public class MainMenueController {
     {
         NetController.enable(null);
         GameManager.getInstance().startGame();
-        AudioManager.getInstance().stopSound(mainMenueSoundUUID);
         AudioManager.getInstance().playSound(996,false);
     }
 
@@ -49,7 +55,6 @@ public class MainMenueController {
     {
         NpcRoomView view = new NpcRoomView(null);
         DungeonTop.getStage().setScene(view.getNpcRoomView());
-        AudioManager.getInstance().stopSound(mainMenueSoundUUID);
     }
 
     /**
@@ -77,12 +82,19 @@ public class MainMenueController {
     private void onPlayAsDungeonMasterButtonPressed(){
         GameManager.getInstance().setDM();
         NetworkController.showNetworkGUI();
-        AudioManager.getInstance().playSound(995,false);
+        AudioManager.getInstance().changeClipVolumeWhilePlayingSound(995,mainMenueSoundUUID,20);
     }
 
     @FXML
     public void initialize(){
-        mainMenueSoundUUID = AudioManager.getInstance().playSound(990,true);
+        Platform.runLater(() -> AudioManager.getInstance().playSoundOnScene(990,root.getScene(),true));
+        for (Node n:
+             root.getChildren()) {
+            if (n instanceof Button){
+                n.setOnMouseEntered(event -> AudioManager.getInstance().playSound(999, false));
+                n.setOnMousePressed(event -> AudioManager.getInstance().playSound(998, false));
+            }
+        }
     }
 
     public static void addMenuebar(){

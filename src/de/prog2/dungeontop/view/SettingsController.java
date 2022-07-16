@@ -9,12 +9,18 @@ import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -39,6 +45,9 @@ public class SettingsController {
 
     @FXML
     private Label ipLabel;
+
+    @FXML
+    AnchorPane root;
 
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
@@ -81,6 +90,13 @@ public class SettingsController {
     {
         volumeSlider.valueProperty().bindBidirectional(AudioManager.getInstance().getVolume());
         ipLabel.setText(String.format(NetworkingConstants.SETTINGS_IP_LABEL, IPChecker.getLocalIPAdress()));
+        for (Node n:
+                root.getChildren()) {
+            if (n instanceof Button || n instanceof Label){
+                n.setOnMouseEntered(event -> AudioManager.getInstance().playSound(999, false));
+                n.setOnMousePressed(event -> AudioManager.getInstance().playSound(998, false));
+            }
+        }
     }
 
     /**
@@ -88,6 +104,7 @@ public class SettingsController {
      */
     public static void showSettings()
     {
+        DungeonTop.getStage().getScene().getRoot().setEffect(new GaussianBlur());
         settingsStage.show();
     }
 
@@ -96,6 +113,7 @@ public class SettingsController {
      */
     public static void hideSettings()
     {
+        DungeonTop.getStage().getScene().getRoot().setEffect(null);
         settingsStage.hide();
     }
 
