@@ -1,7 +1,5 @@
 package de.prog2.dungeontop.control.file;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.resources.FilePaths;
@@ -9,8 +7,6 @@ import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 

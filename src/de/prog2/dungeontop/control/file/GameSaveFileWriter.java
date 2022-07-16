@@ -3,7 +3,6 @@ package de.prog2.dungeontop.control.file;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.resources.FilePaths;
-import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.*;
 
