@@ -11,9 +11,9 @@
       <children>
          <ImageView fx:id="gameResultImage" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
          <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
-            <TextArea fx:id="resultMessageText" editable="false" focusTraversable="false" maxWidth="650.0" minHeight="50.0" minWidth="650.0" mouseTransparent="true" prefHeight="51.0" prefWidth="650.0" style="-fx-text-box-border: transparent; -fx-focus-color: transparent; -fx-font-weight: bold;" styleClass="text-area" stylesheets="@/view/gameEndDialogueStyle.css" text="PLACEHOLDER" wrapText="true">
+            <TextArea fx:id="resultMessageText" editable="false" focusTraversable="false" maxWidth="850.0" minHeight="50.0" minWidth="650.0" mouseTransparent="true" prefHeight="50.0" prefWidth="650.0" style="-fx-text-box-border: transparent; -fx-focus-color: transparent; -fx-font-weight: bold;" styleClass="text-area" stylesheets="@/view/gameEndDialogueStyle.css" text="PLACEHOLDER" wrapText="true">
                <font>
-                  <Font size="19.0" />
+                  <Font size="24.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
