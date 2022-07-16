@@ -8,7 +8,7 @@ public interface ViewStrings
     // Settings
     String SETTINGS_FXML = "view/settings.fxml";
     // Hero Select
-    String SELECT_HERO_FXML = "view/selectHero.fxml";
+    String SELECT_HERO_FXML = "view/selectHeroView.fxml";
     // Inventory
     String INVENTORY_FXML = "view/itemViews/inventoryView.fxml";
     String ITEM_VIEW_FXML = "view/itemViews/itemView.fxml";

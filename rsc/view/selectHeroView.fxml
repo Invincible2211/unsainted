@@ -10,19 +10,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SelectHero">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.SelectHeroView">
     <ImageView fitHeight="1080.0" fitWidth="1920.0" opacity="0.85" pickOnBounds="true">
         <Image url="@/assets/600_selectherobg.png" />
     </ImageView>
-    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="887.0" mnemonicParsing="false" onMouseClicked="#onReturnButtonClicked" prefHeight="100.0" prefWidth="500.0" stylesheets="@/view/mainmenuestyle.css" text="Zurück zu Hauptmenü" />
-    <Text fill="#d2e42c" layoutX="772.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Wählen Sie ihre Klasse aus" wrappingWidth="551.2000122070312">
+    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="887.0" mnemonicParsing="false"
+            onMouseClicked="#onReturnButtonClicked" prefHeight="100.0" prefWidth="500.0"
+            stylesheets="@/view/mainmenuestyle.css" text="Zurück zu Hauptmenü" />
+    <Text fill="#d2e42c" layoutX="772.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          styleClass="text-id" text="Wählen Sie ihre Klasse aus" wrappingWidth="551.2000122070312">
         <font>
             <Font size="37.0" />
         </font>
     </Text>
     <HBox alignment="CENTER" layoutX="171.0" layoutY="278.0" prefHeight="600.0" prefWidth="900.0" spacing="200.0">
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero1ButtonClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@/view/selectHeroStyle.css">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    mnemonicParsing="false" onMouseClicked="#onHero1ButtonClicked" prefHeight="200.0" prefWidth="200.0"
+                    stylesheets="@/view/selectHeroStyle.css">
                 <graphic>
                     <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                         <Image url="@/assets/610_WARRIOR.png" />
@@ -32,44 +39,56 @@
                     <Font size="35.0" />
                 </font>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Warrior" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0"
+                   text="Warrior" textFill="WHITE">
                 <font>
                     <Font size="28.0" />
                 </font>
             </Label>
         </VBox>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero2ButtonClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@/view/selectHeroStyle.css">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    mnemonicParsing="false" onMouseClicked="#onHero2ButtonClicked" prefHeight="200.0" prefWidth="200.0"
+                    stylesheets="@/view/selectHeroStyle.css">
                 <graphic>
                     <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                         <Image url="@/assets/640_WIZARD.png" />
                     </ImageView>
                 </graphic>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Mage" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0"
+                   text="Mage" textFill="WHITE">
                 <font>
                     <Font size="28.0" />
                 </font>
             </Label>
         </VBox>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onHero3ButtonClicked" prefHeight="200.0" prefWidth="200.0" stylesheets="@/view/selectHeroStyle.css">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    mnemonicParsing="false" onMouseClicked="#onHero3ButtonClicked" prefHeight="200.0" prefWidth="200.0"
+                    stylesheets="@/view/selectHeroStyle.css">
                 <graphic>
                     <ImageView fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
                         <Image url="@/assets/630_ROGUE.png" />
                     </ImageView>
                 </graphic>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Rogue" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0"
+                   text="Rogue" textFill="WHITE">
                 <font>
                     <Font size="28.0" />
                 </font>
             </Label>
         </VBox>
     </HBox>
-    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1500.0" layoutY="887.0" mnemonicParsing="false" onMouseClicked="#onConfirmButtonClicked" prefHeight="100.0" prefWidth="300.0" stylesheets="@/view/mainmenuestyle.css" text="Bestätigen" />
+    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1500.0" layoutY="887.0" mnemonicParsing="false"
+            onMouseClicked="#onConfirmButtonClicked" prefHeight="100.0" prefWidth="300.0"
+            stylesheets="@/view/mainmenuestyle.css" text="Bestätigen" />
     <AnchorPane layoutX="1373.0" layoutY="164.0" prefHeight="526.0" prefWidth="418.0">
-        <VBox fx:id="heroText" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="80.0">
+        <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="80.0">
             <Text fx:id="heroClass" fill="#d2e42c" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id">
                 <font>
                     <Font size="35.0" />

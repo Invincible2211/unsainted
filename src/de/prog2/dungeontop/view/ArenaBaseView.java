@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-
+@Deprecated
 public class ArenaBaseView
 {
 

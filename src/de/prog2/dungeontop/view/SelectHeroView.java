@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class SelectHero
+public class SelectHeroView
 {
     @FXML
     private Text heroClass;
