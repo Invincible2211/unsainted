@@ -149,7 +149,7 @@ public interface LoggerStringValues
     String CARD_CREATED = "Es wurde eine Card erstellt!";
     String MINION_CREATED = "Ein Minion wurde erstellt";
     //<editor-fold defaultstate="collapsed" desc="Items">
-    String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Description: %s, Preis: %d Souls, AssetID = %d.";
+    String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Description: %s, AssetID = %d.";
     String INVENTORY_CREATED = "Inventar wurde erstellt.";
     String ITEM_ADDED = "%s wurde ins Inventar hinzugefuegt.";
     //</editor-fold>

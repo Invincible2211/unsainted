@@ -6,9 +6,9 @@ public class DefenseArtifact extends Artifact
 {
     private final int defense;
 
-    public DefenseArtifact(String name, String description, int defense, int price, int assetID)
+    public DefenseArtifact(String name, String description, int defense, int assetID)
     {
-        super(name, description, price, assetID);
+        super(name, description, assetID);
         this.defense = defense;
 
     }

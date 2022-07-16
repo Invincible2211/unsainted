@@ -94,7 +94,7 @@ public class EntityController
 
     public static void applyDamage(Entity entity, int damage)
     {
-        entity.setHp(entity.getHp() - (damage - entity.getDefense()));
+        entity.setHp(entity.getHp() - (Math.max(damage - entity.getDefense(), 0)));
     }
     public static void applyHeal(Entity entity, int heal)
     {

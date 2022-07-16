@@ -1,7 +1,9 @@
 package de.prog2.dungeontop.view.cardViews;
 
 import de.prog2.dungeontop.control.controller.CardViewController;
+import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.resources.views.CardConstants;
 import javafx.fxml.FXML;
@@ -35,6 +37,8 @@ public abstract class CardView
     private void mouseEntered()
     {
         CardViewController.zoomCardView(container);
+        //TODO: Add better sound effect than buttonclick . This sounds weird.
+        AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false);
         if(detailViewContainer != null)
         {
             detailViewContainer.getChildren().add(CardViewController.getCardDetailView(card, ArenaViewConstants.CARD_DETAIL_VIEW_SCALE));

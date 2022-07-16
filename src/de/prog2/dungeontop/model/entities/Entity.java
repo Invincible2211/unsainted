@@ -1,10 +1,8 @@
 package de.prog2.dungeontop.model.entities;
 
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
-import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.game.Talent;
 import de.prog2.dungeontop.model.world.Coordinate;
 
 import java.io.Serializable;
@@ -17,9 +15,9 @@ public abstract class Entity implements Serializable
     private SerializableSimpleIntegerProperty hp;
     private int attackDamage = 0;
     private int movement = 0;
-    private int maxMovement = 0;
+    private final int maxMovement;
     private int assetId;
-    private Talent talent;
+    private final Talent talent;
     private Coordinate position;
     private Player owner = null;
     private int defense = 0;
@@ -27,14 +25,15 @@ public abstract class Entity implements Serializable
 
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int assetId, Player owner)
+    public Entity(String name, int hp, int attackDamage, int defense, int attackRange, int movement, Talent talent, int assetId, Player owner)
     {
         this.name = name;
         this.hp = new SerializableSimpleIntegerProperty(hp);
         this.attackDamage = attackDamage;
         this.defense = defense;
         this.attackRange = attackRange;
-        this.movement = movement;
+        this.maxMovement = movement;
+        this.talent = talent;
         this.assetId = assetId;
         this.owner = owner;
     }
@@ -137,11 +136,6 @@ public abstract class Entity implements Serializable
     public int getMaxMovement ()
     {
         return maxMovement;
-    }
-
-    public void setMaxMovement (int maxMovement)
-    {
-        this.maxMovement = maxMovement;
     }
 
     public int getDefense()
