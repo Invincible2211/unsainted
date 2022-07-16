@@ -344,12 +344,18 @@ public class NpcRoomView
     private static Button createButton(String text)
     {
         Button button = new Button();
-        button.setStyle("-fx-font-family: Hombre;");
+        button.setStyle(NpcRoomViewConstants.BUTTON_FONT_STYLE);
         button.setAlignment(Pos.CENTER);
         button.setPrefSize(NpcRoomViewConstants.BUTTON_PREF_WIDTH, NpcRoomViewConstants.BUTTON_PREF_HEIGHT);
 
+        // set situational button style and play sounds on hover/click
         button.setOnMouseExited(e -> button.setStyle(NpcRoomViewConstants.BUTTON_NORMAL_STYLE));
-        button.setOnMouseEntered(e -> button.setStyle(NpcRoomViewConstants.BUTTON_HOVER_STYLE));
+        button.setOnMouseEntered(e ->
+                {
+                    AudioManager.getInstance().playSound(AssetIds.MOUSE_HOVER_SOUND, false);
+                    button.setStyle(NpcRoomViewConstants.BUTTON_HOVER_STYLE);
+                });
+        button.setOnMousePressed(event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
 
         button.setBackground(
                 new Background(

@@ -1,0 +1,31 @@
+.label{
+    -fx-background-radius: 9;
+    -fx-background-color: gray;
+    -fx-border-color: black;
+    -fx-border-width: 4;
+    -fx-border-radius: 7;
+}
+
+.label:hover{
+    -fx-background-color: gray;
+    -fx-background-radius: 6;
+    -fx-border-color: black;
+    -fx-border-width: 6;
+    -fx-border-radius: 4;
+}
+
+.button{
+    -fx-background-image: url(button-background.png);
+    -fx-background-color: transparent;
+    -fx-background-size: cover;
+    -fx-font-family: Hombre;
+    -fx-font-size: 24pt;
+}
+
+.button:hover{
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+    -fx-background-size: cover;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.3;
+}

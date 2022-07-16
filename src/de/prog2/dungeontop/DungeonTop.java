@@ -4,6 +4,8 @@ import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.InventoryViewController;
+import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -61,9 +63,7 @@ public class DungeonTop extends Application
         stage.getIcons().add(new Image(ViewStrings.MAIN_MENUE_ICO));
         stage.sizeToScene();
         stage.show();
-
-        //testEndGameDialogue();
-
+        AudioManager.getInstance().addListener();
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 

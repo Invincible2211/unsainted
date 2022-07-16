@@ -3,6 +3,7 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.GameEndDialogueConstants;
@@ -23,6 +24,12 @@ import java.io.IOException;
 
 public class GameEndViewController
 {
+    @FXML
+    public Button startNewgameButton;
+
+    @FXML
+    public Button backToMenuButton;
+
     @FXML
     private ImageView gameResultImage;
 
@@ -60,6 +67,11 @@ public class GameEndViewController
         }
         final Scene settingsScene = new Scene(rootPane, Color.TRANSPARENT);
         gameEndStage.setScene(settingsScene);
+
+        instance.startNewgameButton.setOnMouseEntered(event -> AudioManager.getInstance().playSound(AssetIds.MOUSE_HOVER_SOUND, false));
+        instance.startNewgameButton.setOnMousePressed(event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
+        instance.backToMenuButton.setOnMouseEntered(event -> AudioManager.getInstance().playSound(AssetIds.MOUSE_HOVER_SOUND, false));
+        instance.backToMenuButton.setOnMousePressed(event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
     }
 
     /**

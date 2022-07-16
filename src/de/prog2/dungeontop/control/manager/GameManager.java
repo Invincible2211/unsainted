@@ -52,8 +52,7 @@ public class GameManager {
      */
     public void startGame()
     {
-        if (saveGame.getGameWorld() == null ||
-                saveGame.getPlayer() == null ||saveGame.getPlayer().getHero() == null)
+        if (saveGame.getGameWorld() == null || saveGame.getPlayer() == null ||saveGame.getPlayer().getHero() == null)
         {
 
             if (saveGame.getPlayer() != null)
@@ -91,11 +90,13 @@ public class GameManager {
      */
     public void endGame()
     {
+        /*
         World newWorld = new World(WorldConstants.HELL_COUNT);
         PlayerManager.getInstance().getPlayer().setHero(null);
+         */
 
-        GameManager.getInstance().setGameWorld(newWorld);
-        saveGame.setGameWorld(newWorld);
+        GameManager.getInstance().setGameWorld(null);
+        saveGame.setGameWorld(null);
 
         GameSaveFileWriter.getInstance().saveGame(saveGame);
 
