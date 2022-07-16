@@ -43,13 +43,11 @@ public abstract class Card implements Serializable
             return;
         Deck playerDeck = PlayerManager.getInstance().getPlayer().getDeck();
         playerDeck.removeCard(this);
-        System.out.println("Removed " + this);
         for (Card card : CardManager.getInstance().getUnlockedCards())
         {
             if (this.getID() == (card.getID() - 1))
             {
                 playerDeck.pushCard(card);
-                System.out.println("Added " + card);
             }
         }
     }

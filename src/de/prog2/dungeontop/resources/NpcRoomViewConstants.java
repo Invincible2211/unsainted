@@ -76,4 +76,5 @@ public interface NpcRoomViewConstants
 
     String BUTTON_NORMAL_STYLE = "-fx-font-weight: normal; -fx-font-size: 24; -fx-scale-x: 1; -fx-scale-y: 1;";
     String BUTTON_HOVER_STYLE = "-fx-font-weight: bold; -fx-font-size: 30; -fx-scale-x: 1.1; -fx-scale-y: 1.3;";
+    String BUTTON_FONT_STYLE = "-fx-font-family: Hombre;";
 }

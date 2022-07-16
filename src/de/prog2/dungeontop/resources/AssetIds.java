@@ -110,11 +110,12 @@ public interface AssetIds
     int ARENA_BG_DEFAULT_ID = 210;
     int BATTLEFIELDGRIDPANE_BACKGROUND_IMAGEID = 230;
 
-    // Music
-    int MAP_BG_MUSIC = 992;
-
     // Game End Dialogue
     int PLAYER_LOSES = 1;
     int PLAYER_WINS = 2;
 
+    // Audio Assets
+    int MAP_BG_MUSIC = 992;
+    int MOUSE_HOVER_SOUND = 999;
+    int BUTTON_CLICK_SOUND = 998;
 }

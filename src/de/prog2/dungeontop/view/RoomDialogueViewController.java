@@ -3,12 +3,11 @@ package de.prog2.dungeontop.view;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.RandomEventRoomController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
+import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.world.rooms.*;
-import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.resources.RoomDialogueConstants;
-import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import de.prog2.dungeontop.resources.RandomEventConstants;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -78,6 +77,11 @@ public class RoomDialogueViewController
         }
         final Scene settingsScene = new Scene(rootPane, Color.TRANSPARENT);
         roomDialogueStage.setScene(settingsScene);
+
+        instance.upperButton.setOnMouseEntered(event -> AudioManager.getInstance().playSound(AssetIds.MOUSE_HOVER_SOUND, false));
+        instance.upperButton.setOnMousePressed(event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
+        instance.lowerButton.setOnMouseEntered(event -> AudioManager.getInstance().playSound(AssetIds.MOUSE_HOVER_SOUND, false));
+        instance.lowerButton.setOnMousePressed(event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
     }
 
     /**
