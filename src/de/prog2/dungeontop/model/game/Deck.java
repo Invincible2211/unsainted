@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.model.game;
 
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.io.Serializable;
@@ -13,11 +14,6 @@ public class Deck implements Serializable
     public Deck()
     {
         this.cards = new Stack<>();
-        GlobalLogger.log(LoggerStringValues.DECK_CREATED);
-    }
-    public Deck(Stack<Card> deck)
-    {
-        this.cards = deck;
         GlobalLogger.log(LoggerStringValues.DECK_CREATED);
     }
 
@@ -58,7 +54,7 @@ public class Deck implements Serializable
         for(Card card : this.getCards())
         {
             builder.append(card);
-            builder.append("\n");
+            builder.append(StringValues.NEW_LINE);
         }
 
         return builder.toString();

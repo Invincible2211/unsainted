@@ -26,11 +26,11 @@ public class Player implements Serializable
     private int handCardLimit;
     private Hero hero;
     private Deck discardPile;
-    private SerializableSimpleIntegerProperty currentEgoPoints = new SerializableSimpleIntegerProperty(0);
+    private final SerializableSimpleIntegerProperty currentEgoPoints = new SerializableSimpleIntegerProperty(0);
     private transient ObservableList<Card> handCards = FXCollections.observableArrayList();
     private int experiencePoints;
     private int level;
-    private int expCap = GameConstants.LEVEL_1_EXP_CAP * level;
+    private final int expCap = GameConstants.LEVEL_1_EXP_CAP * level;
     private int soulArtBonus = 0;
 
     public Player (){

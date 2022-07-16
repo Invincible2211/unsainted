@@ -5,16 +5,11 @@ import de.prog2.dungeontop.model.world.World;
 
 import java.io.Serializable;
 
-public class SaveGame implements Serializable {
-
-    int i = 3;
+public class SaveGame implements Serializable
+{
     World gameWorld;
     Player player;
     CardManager cardManager;
-
-    public int getI() {
-        return i;
-    }
 
     public World getGameWorld ()
     {

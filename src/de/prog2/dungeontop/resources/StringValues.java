@@ -4,4 +4,5 @@ public interface StringValues
 {
     //Coordinate
     String COORDINATE = "X: %d, Y: %d";
+    String NEW_LINE = "\n";
 }
