@@ -1,4 +1,4 @@
-package de.prog2.dungeontop.view;
+package de.prog2.dungeontop.view.handViews;
 
 import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.manager.PlayerManager;
