@@ -9,9 +9,8 @@ import javafx.scene.layout.HBox;
 
 import java.util.List;
 
-public abstract class HandViewAbstract extends HBox {
-    private int currentHandCardsSize = 0;
-
+public abstract class HandViewAbstract extends HBox
+{
     public HandViewAbstract() {
         PlayerManager.getInstance().getPlayer().getHandCards().addListener(new ListChangeListener<Card>()
         {
@@ -31,7 +30,8 @@ public abstract class HandViewAbstract extends HBox {
         }
     }
 
-    double handCardScale = ArenaViewConstants.HAND_PLAYER_Y / ArenaViewConstants.CARD_HEIGHT;
+    // TODO remove this magic number
+    double handCardScale = ArenaViewConstants.HAND_PLAYER_Y / ArenaViewConstants.CARD_HEIGHT / 1.2;
 
     public void removeAll ()
     {
@@ -47,16 +47,5 @@ public abstract class HandViewAbstract extends HBox {
         {
             addCard(card);
         }
-    }
-
-    @Deprecated
-    private void removeCard(Card card)
-    {
-        super.getChildren().get(super.getChildren().indexOf(card));
-    }
-
-    @Deprecated
-    public int getCurrentHandCardsSize() {
-        return super.getChildren().size();
     }
 }

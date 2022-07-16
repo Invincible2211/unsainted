@@ -237,11 +237,15 @@ public abstract class CardViewController
     {
         cardView.setScaleX(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD);
         cardView.setScaleY(ArenaViewConstants.ZOOMFACTOR_ON_MOUSE_HOVER_CARD);
+
+        cardView.translateYProperty().set(cardView.getTranslateY() - 40);
     }
 
     public static void resetZoom(Node cardView)
     {
         cardView.setScaleX(1);
         cardView.setScaleY(1);
+
+        cardView.translateYProperty().set(cardView.getTranslateY() + 40);
     }
 }
