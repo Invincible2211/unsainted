@@ -4,6 +4,7 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.RandomEventRoomController;
 import de.prog2.dungeontop.control.manager.AssetsManager;
 import de.prog2.dungeontop.control.manager.AudioManager;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.world.rooms.*;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -107,8 +109,9 @@ public class RoomDialogueViewController
                 RoomDialogueConstants.FORGE_VIEW_ASSET);
         upperButton.setOnAction(e -> openForge());
         upperButton.setDisable(false);
-        roomDialogueStage.show();
+        showRoomDialogue();
     }
+
     /**
      * Opens the Dialogue for the LavaPondRoom.
      */
@@ -119,7 +122,7 @@ public class RoomDialogueViewController
                 RoomDialogueConstants.LAVA_POND_VIEW_ASSET);
         upperButton.setOnAction(e -> openLavaPond());
         upperButton.setDisable(false);
-        roomDialogueStage.show();
+        showRoomDialogue();
     }
     /**
      * Opens the Dialogue for the ArenaRoom.
@@ -130,9 +133,9 @@ public class RoomDialogueViewController
         setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
                 RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,
                 dialogueStageAttributes.get(room).description(), dialogueStageAttributes.get(room).assetId());
-        upperButton.setOnAction(e -> {startBattle();NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage(((ArenaRoom) room).getArena());});
+        upperButton.setOnAction(e -> startBattle((ArenaRoom) room));
         upperButton.setDisable(!NetManager.getInstance().isConnected());
-        roomDialogueStage.show();
+        showRoomDialogue();
     }
     /**
      * Opens the Dialogue for the Boss-ArenaRoom.
@@ -143,9 +146,9 @@ public class RoomDialogueViewController
         setDialogueProperties(RoomDialogueConstants.ARENA_ROOM_UPPER_BUTTON,
                 RoomDialogueConstants.ARENA_ROOM_LOWER_BUTTON,RoomDialogueConstants.BOSS_ROOM_DESCRIPTION,
                 RoomDialogueConstants.BOSS_ROOM_VIEW_ASSET);
-        upperButton.setOnAction(e -> {startBattle();NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage(((ArenaRoom) room).getArena());});
+        upperButton.setOnAction(e -> startBattle((ArenaRoom) room));
         upperButton.setDisable(!NetManager.getInstance().isConnected());
-        roomDialogueStage.show();
+        showRoomDialogue();
     }
     /**
      * Opens the Dialogue for the RandomEventRoom.
@@ -161,7 +164,7 @@ public class RoomDialogueViewController
             startRandomEvent();
         });
         upperButton.setDisable(false);
-        roomDialogueStage.show();
+        showRoomDialogue();
     }
 
     /**
@@ -189,16 +192,24 @@ public class RoomDialogueViewController
     @FXML
     private void hideStage ()
     {
+        DungeonTop.getStage().getScene().getRoot().setEffect(null);
         roomDialogueStage.hide();
+    }
+
+    private void showRoomDialogue()
+    {
+        DungeonTop.getStage().getScene().getRoot().setEffect(new GaussianBlur());
+        roomDialogueStage.show();
     }
 
     /**
      * Start the battle for the ArenaRoom.
      */
-    private void startBattle ()
+    private void startBattle (ArenaRoom room)
     {
         hideStage();
         GlobalLogger.log(LoggerStringValues.START_BATTLE_HANDLER);
+        NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage((room).getArena());
     }
 
     /**
@@ -233,6 +244,7 @@ public class RoomDialogueViewController
     private void openForge ()
     {
         NpcRoomView view = new NpcRoomView((NPCRoom) PlayerManager.getInstance().getPlayer().getCurrentRoom());
+        DungeonTop.getStage().getScene().getRoot().setEffect(null);
         DungeonTop.getStage().setScene(view.createNpcRoomView());
         HellView.pauseHellViewBgMusic();
         hideStage();
@@ -245,6 +257,7 @@ public class RoomDialogueViewController
     private void openLavaPond ()
     {
         NpcRoomView view = new NpcRoomView((NPCRoom) PlayerManager.getInstance().getPlayer().getCurrentRoom());
+        DungeonTop.getStage().getScene().getRoot().setEffect(null);
         DungeonTop.getStage().setScene(view.createNpcRoomView());
         HellView.pauseHellViewBgMusic();
         hideStage();

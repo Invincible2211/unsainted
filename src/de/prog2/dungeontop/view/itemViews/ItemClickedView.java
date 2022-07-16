@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -28,11 +29,18 @@ public class ItemClickedView
     private javafx.scene.control.Button equipButton;
     private Item item;
 
+    @FXML
+    private void initialize()
+    {
+        DungeonTop.getStage().getScene().getRoot().setEffect(new GaussianBlur());
+    }
     /**
      * Hides the item popup-view.
      */
+    @FXML
     public void onReturnButtonClicked()
     {
+        DungeonTop.getStage().getScene().getRoot().setEffect(null);
         ItemView.hideStage();
     }
 
