@@ -2,6 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.resources.AudioDefaultValues;
+import de.prog2.dungeontop.resources.FilePaths;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.application.Platform;
@@ -9,11 +10,12 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.stage.WindowEvent;
 
 import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -126,7 +128,6 @@ public class AudioManager
      */
     private void changeVolumeForAll(double volumeLevel)
     {
-        System.out.println(volumeLevel);
         for (Clip c : playingClips.values())
         {
             changeVolume(c, volumeLevel);

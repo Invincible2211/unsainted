@@ -18,19 +18,13 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
-import javafx.beans.Observable;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class BattleManager2 {
 
@@ -39,6 +33,10 @@ public class BattleManager2 {
     private Player player1;
     private Player player2;
     private ArenaController arenaController;
+
+    private boolean isStarting;
+
+    private UUID musicId;
 
     private final static BattleManager2 instance = new BattleManager2();
 
@@ -62,9 +60,11 @@ public class BattleManager2 {
         Platform.runLater(() -> {
             this.player1 = PlayerManager.getInstance().getPlayer();
             this.player2 = GameManager.getInstance().getOpponentPlayer();
-
+            Double random = Math.random();
+            musicId = AudioManager.getInstance().playSound(random < 0.3 ? 984 : random < 0.6 ? 983 : 982, true);
             arenaController.initBattle(arena);
             drawNewHand();
+            //TODO isStarting durch random Bestimmen, Dm ein package schicken
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
@@ -82,6 +82,7 @@ public class BattleManager2 {
                 Coordinate cord = new Coordinate(2,3);
                 arenaController.placeEntityFriendly(peter,cord);
             }
+            battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
         });
     }
 
@@ -101,6 +102,7 @@ public class BattleManager2 {
             } else {
                 GameManager.getInstance().endGame();
             }
+            AudioManager.getInstance().stopSound(musicId);
             NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
         });
     }
@@ -118,7 +120,34 @@ public class BattleManager2 {
     }
 
     public void nextRound(){
-
+        //TODO Buttons sperren wenn nicht dran
+        switch (battlePhase){
+            case FIRST_DUELLIST_DRAW -> {
+                battlePhase = BattlePhase.SECOND_DUELLIST_DRAW;
+            }
+            case SECOND_DUELLIST_DRAW -> {
+                battlePhase = BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
+            }
+            case FIRST_DUELLIST_PLACE_CARDS -> {
+                battlePhase = BattlePhase.SECOND_DUELLIST_PLACE_CARDS;
+            }
+            case SECOND_DUELLIST_PLACE_CARDS -> {
+                battlePhase = BattlePhase.FIRST_DUELLIST_MINION_ACT;
+            }
+            case FIRST_DUELLIST_MINION_ACT -> {
+                battlePhase = BattlePhase.SECOND_DUELLIST_MINION_ACT;
+            }
+            case SECOND_DUELLIST_MINION_ACT -> {
+                battlePhase = BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS;
+            }
+            case FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
+                battlePhase = BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS;
+            }
+            case SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
+                battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
+            }
+        }
+        arenaController.setPhaseLabel(battlePhase.toString());
     }
 
     public boolean entityAttack(){

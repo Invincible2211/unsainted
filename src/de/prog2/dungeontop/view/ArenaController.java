@@ -50,7 +50,7 @@ public class ArenaController
 
     @FXML
     private void onNextRound(){
-
+        BattleManager2.getInstance().nextRound();
     }
 
     @FXML
@@ -93,6 +93,10 @@ public class ArenaController
             }
         }
         arenaGrid.getChildren().add(arenaGridPane);
+    }
+
+    public void setPhaseLabel(String text){
+        currentPhase.setText(text);
     }
 
     private void clear(){

@@ -29,3 +29,24 @@
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.3;
 }
+
+.slider .track {
+    -fx-pref-height:20;
+    -fx-background-color: #e2caa3;
+    -fx-background-radius: 5;
+}
+
+.slider:vertical .track {
+    -fx-pref-width:30;
+}
+
+.slider .thumb {
+    -fx-pref-height: 30;
+    -fx-pref-width: 30;
+    -fx-background-color: black;
+}
+
+.slider {
+    -fx-background-color: #b28c64;
+    -fx-background-radius: 10;
+}

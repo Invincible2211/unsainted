@@ -21,7 +21,7 @@ import java.util.UUID;
 
 public class MainMenueController {
 
-    private UUID mainMenueSoundUUID;
+    private static UUID mainMenueSoundUUID;
 
     @FXML
     private AnchorPane root;
@@ -76,7 +76,7 @@ public class MainMenueController {
     private void onPlayAsDungeonMasterButtonPressed(){
         GameManager.getInstance().setDM();
         NetworkController.showNetworkGUI();
-        AudioManager.getInstance().changeClipVolumeWhilePlayingSound(995,mainMenueSoundUUID,20);
+        AudioManager.getInstance().changeClipVolumeWhilePlayingSound(995,mainMenueSoundUUID,10);
     }
 
     @FXML
@@ -115,6 +115,10 @@ public class MainMenueController {
         menuBar.getMenus().add(settings);
         menuBar.getMenus().add(exit);
         ((AnchorPane) root).getChildren().add(menuBar);
+    }
+
+    public static UUID getMainMenueSoundUUID() {
+        return mainMenueSoundUUID;
     }
 
 }
