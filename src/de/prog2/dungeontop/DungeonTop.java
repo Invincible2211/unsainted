@@ -4,7 +4,6 @@ import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.InventoryViewController;
-import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
@@ -13,8 +12,6 @@ import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.spells.DamageSpell;
-import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -22,6 +19,7 @@ import de.prog2.dungeontop.model.world.rooms.EmptyRoom;
 import de.prog2.dungeontop.model.world.rooms.LavaPondRoom;
 import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.resources.items.ItemConstants;
+import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.*;
 import javafx.application.Application;
@@ -184,7 +182,7 @@ public class DungeonTop extends Application
 
         for (int i = 0; i < 15; i++)
         {
-            Entity olafder = new Minion("Bernd der " + i, i, i, i, i, 211);
+            Entity olafder = new Minion("Bernd der " + i, i, i, i, i, i, 211);
             EntityCard christiansKarte = new EntityCard(olafder, i, i, i,i,211);
             olafder.setCard(christiansKarte);
 //            deck1.pushCard(new SpellCard(testSpell, 5, 3, 1, 2 + i));
@@ -233,7 +231,7 @@ public class DungeonTop extends Application
 
     public static void testLavaPondView (Stage stage)
     {
-        Entity harald = new Minion("Harald", 6, 4, 1,1, 45);
+        Entity harald = new Minion("Harald", 6, 4, 1,1, 1, 45);
         Deck deck = new Deck();
         for (int i = 0; i < 30; i++)
         {
