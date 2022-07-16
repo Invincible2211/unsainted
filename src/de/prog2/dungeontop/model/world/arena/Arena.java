@@ -2,13 +2,11 @@ package de.prog2.dungeontop.model.world.arena;
 
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
-import de.prog2.dungeontop.model.game.EntityCard;
-import de.prog2.dungeontop.model.spells.Spell;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Arena implements Serializable
@@ -16,11 +14,11 @@ public class Arena implements Serializable
     private final int height;
     private final int width;
     private Entity selectedEntity;
+    @Deprecated
     private final HashMap<Coordinate, Entity> arenaHashmap = new HashMap<>();
-    private final HashMap<Coordinate, Entity> enemyHashmap = new HashMap<>();
 
-    private HashMap<Coordinate, Entity> friendly = new HashMap<>();
-    private HashMap<Coordinate, Entity> opponent = new HashMap<>();
+    private final HashMap<Coordinate, Entity> friendly = new HashMap<>();
+    private final HashMap<Coordinate, Entity> opponent = new HashMap<>();
     public Arena(int height, int width)
     {
         this.height = height;
@@ -31,11 +29,6 @@ public class Arena implements Serializable
     {
         this.height = size;
         this.width = size;
-    }
-
-    public void castSpell(Spell spell, Coordinate coordinate)
-    {
-
     }
 
     public HashMap<Coordinate, Entity> getArenaHashmap()
@@ -53,6 +46,7 @@ public class Arena implements Serializable
         return arenaHashmap.get(new Coordinate(x, y));
     }
 
+    @Deprecated
     public void insertEntity (Coordinate coordinate, Entity entity)
     {
         this.arenaHashmap.put(coordinate, entity);
@@ -60,20 +54,19 @@ public class Arena implements Serializable
         GlobalLogger.log(LoggerStringValues.ARENA_ENTITY_INSERTED_MESSAGE + coordinate.toString());
     }
 
+    @Deprecated
     public void removeEntity (Coordinate coordinate)
     {
         this.arenaHashmap.remove(coordinate);
     }
 
+    @Deprecated
     public boolean hasSelectedUnit()
     {
-        if (this.selectedEntity == null)
-        {
-            return false;
-        }
-        return true;
+        return this.selectedEntity != null;
     }
 
+    @Deprecated
     public Entity[] getAllMinions ()
     {
         return this.arenaHashmap.values().stream()
@@ -114,5 +107,4 @@ public class Arena implements Serializable
     public HashMap<Coordinate, Entity> getOpponent() {
         return opponent;
     }
-
 }

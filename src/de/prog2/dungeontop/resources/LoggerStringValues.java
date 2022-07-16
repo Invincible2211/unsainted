@@ -148,10 +148,11 @@ public interface LoggerStringValues
     String CARD_CONTAIN_IN_DECK = "Es wurde gesucht ob eine Karte im Deck ist!:";
     String CARD_CREATED = "Es wurde eine Card erstellt!";
     String MINION_CREATED = "Ein Minion wurde erstellt";
-    // Items
+    //<editor-fold defaultstate="collapsed" desc="Items">
     String ITEM_CREATED = "Ein Item wurde erstellt. Name: %s, Description: %s, Preis: %d Souls, AssetID = %d.";
     String INVENTORY_CREATED = "Inventar wurde erstellt.";
     String ITEM_ADDED = "%s wurde ins Inventar hinzugefuegt.";
+    //</editor-fold>
     String RANK_ONE_SAMIRA_BEING_CREATED = "a one Star Samira is being created";
     String RANK_TWO_SAMIRA_BEING_CREATED = "a two Star Samira is being created";
     String RANK_THREE_SAMIRA_BEING_CREATED = "a three Star Samira is being created";
@@ -159,27 +160,31 @@ public interface LoggerStringValues
     String PLACED_CARD_IN_ARENA = "Placed entity in arena from battlemanager";
     String NOT_ENOUGH_EGOPOINTS = "Duellist does not have neough egopoints to play this minion";
     String ALREADY_OCCUPIED = "This position is already occupied";
-    
-    //Battlefield
+    //<editor-fold defaultstate="collapsed" desc="Battlefield">
     String RETURN_NODE_ON_BATTLEFIELD = "return the node: ";
     String COULD_NOT_FIND_NODE_ON_BATTLEFIELD = "could not find the node on the battlefield with x: %d and y: %d.";
     String CURRENTPHASE_IS_NOW = "Phase wurde geaendert auf: ";
-
-    //Shop View
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Shop View">
     String SHOP_VIEW_STARTED_ADDING_CARDS = "ShopView started adding cards.";
     String SHOP_VIEW_ADDED_CARD = "ShopView added card: ";
-    // CardViewController
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="CardViewController">
     String CARD_VIEW_CONTROLLER_CREATED_CARD = "CardViewController created a card with a scale of %1.1f.";
-    // EntityViewController
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="EntityViewController">
     String ENTITY_VIEW_CONTROLLER_CREATED_ENTITY = "EntityViewController created an entity with a scale of %1.1f.";
-    // HellController
+    //</editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="HellController">
     String HELL_CONTROLLER_WARNING_ROOM_INSIDE_BOUNDS = "HellController warning: Room inside bounds == %b";
     String HELL_CONTROLLER_WARNING_ROOM_COORDINATES = "HellController warning: Room coordinates are: x: %d, y: %d";
     String ADDING_CELL_TO_VIEW_BATTLFIELD = "Adding battlefield cell to gridpane";
     String GOT_NODE_ON_BATTLEFIELD = "got node on battlefield";
     String REMOVING_CELL_FROM_VIEW_BATTLFIELD = "removed everything on a stackpanenode on the battlefield";
-    // FXMLLoader
+    //    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="FXMLLoader">
     String FXML_LOAD_ERROR = "Failed to load FXML File!";
+    //</editor-fold>
     // SelectHeroView
     String NO_CHAR_SELECTED = "No character to play with has been selected!";
     String ARENA_TILE_HAS_BEEN_CLICKED = "ClickEvent detected";

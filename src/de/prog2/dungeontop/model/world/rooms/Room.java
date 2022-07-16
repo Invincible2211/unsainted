@@ -17,7 +17,7 @@ public abstract class Room implements Serializable
     private int distanceFromStart = 0;
     private final int assetId;
 
-    private Action action = new DefaultAction();
+    private Action action;
 
     public Room (Coordinate coordinate, int distanceFromStart, Action action, int assetId)
     {

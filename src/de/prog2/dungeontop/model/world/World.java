@@ -7,7 +7,6 @@ import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.HellView;
-import javafx.scene.Scene;
 
 import java.io.Serializable;
 import java.util.HashMap;

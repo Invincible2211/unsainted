@@ -5,8 +5,6 @@ import de.prog2.dungeontop.model.world.actions.DefaultAction;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellToStringValues;
 
-import java.io.Serializable;
-
 /**
  * The EmptyRoom is a room without any actions.
  */

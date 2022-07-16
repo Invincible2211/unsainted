@@ -12,9 +12,10 @@ import javafx.scene.layout.StackPane;
 
 import javax.naming.ldap.Control;
 
+@Deprecated
 public class ArenaStackPane extends StackPane
 {
-    Coordinate coordinate = new Coordinate(0, 0);
+    Coordinate coordinate;
     private boolean isSelected = false;
 
     public ArenaStackPane (Coordinate coordinate)

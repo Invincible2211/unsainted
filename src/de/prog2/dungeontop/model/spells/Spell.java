@@ -16,6 +16,9 @@ public abstract class Spell
         this.assetId = assetId;
     }
 
+    /**
+     * applies the spell effecto to the coordinate on the arena
+     */
     public abstract void cast(Arena arena, Coordinate coordinate);
 
     public String getName()

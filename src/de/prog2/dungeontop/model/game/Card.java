@@ -6,8 +6,6 @@ import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
 
 public abstract class Card implements Serializable
 {
@@ -36,22 +34,6 @@ public abstract class Card implements Serializable
     public void setRank(int rank)
     {
         this.rank = rank;
-    }
-    public void increaseRank()
-    {
-        if (this.getRank() >= this.getMaxRank())
-            return;
-        Deck playerDeck = PlayerManager.getInstance().getPlayer().getDeck();
-        playerDeck.removeCard(this);
-        System.out.println("Removed " + this);
-        for (Card card : CardManager.getInstance().getUnlockedCards())
-        {
-            if (this.getID() == (card.getID() - 1))
-            {
-                playerDeck.pushCard(card);
-                System.out.println("Added " + card);
-            }
-        }
     }
 
     public int getMaxRank()

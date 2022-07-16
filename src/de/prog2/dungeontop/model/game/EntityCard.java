@@ -33,9 +33,6 @@ public class EntityCard extends Card
     @Override
     public String toString()
     {
-        StringBuilder builder = new StringBuilder();
-        builder.append(this.getEntity().getName());
-        builder.append(super.toString());
-        return  builder.toString();
+        return this.getEntity().getName() + super.toString();
     }
 }

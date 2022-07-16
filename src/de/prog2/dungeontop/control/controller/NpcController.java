@@ -25,7 +25,7 @@ public class NpcController
 
         if(card.getMaxRank() > card.getRank()){
             if( player.getSouls() >= price){
-                card.increaseRank();
+                CardController.increaseRank(card);
                 playerManager.removeSouls(price);
 
                 GlobalLogger.log(LoggerStringValues.CARD_RANK_INCREASED);

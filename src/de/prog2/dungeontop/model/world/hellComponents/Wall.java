@@ -3,8 +3,6 @@ package de.prog2.dungeontop.model.world.hellComponents;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.HellToStringValues;
 
-import java.io.Serializable;
-
 /**
  * Represents a wall of a room between two corners
  */

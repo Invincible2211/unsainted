@@ -1,12 +1,10 @@
 package de.prog2.dungeontop.model.world;
 
-import de.prog2.dungeontop.control.controller.RoomController;
 import de.prog2.dungeontop.model.world.hellComponents.HellComponent;
-import de.prog2.dungeontop.model.world.rooms.*;
+import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
+import de.prog2.dungeontop.model.world.rooms.Room;
 import de.prog2.dungeontop.resources.HellToStringValues;
-import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.WorldConstants;
-import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.io.Serializable;
 import java.util.HashMap;

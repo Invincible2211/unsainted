@@ -17,6 +17,8 @@ public interface WorldConstants
     int MAXIMUM_ROOM_COUNT = MINIMUM_ROOM_COUNT + 5;
     int HELL_COUNT = 7;
 
+    int NPC_ROOM_FREE_ACTIONS = 1;
+
     /**
      * Holds all the different Rotations for the HellComponents
      */

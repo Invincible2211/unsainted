@@ -2,14 +2,14 @@ package de.prog2.dungeontop.model.world.rooms;
 
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.world.actions.Action;
-import javafx.beans.property.SimpleIntegerProperty;
+import de.prog2.dungeontop.resources.WorldConstants;
 
 /**
  * Represents the different peaceful Action-Rooms
  */
 public abstract class NPCRoom extends Room
 {
-    private final SerializableSimpleIntegerProperty freeActions = new SerializableSimpleIntegerProperty(1);
+    private final SerializableSimpleIntegerProperty freeActions = new SerializableSimpleIntegerProperty(WorldConstants.NPC_ROOM_FREE_ACTIONS);
     public NPCRoom (Room room, Action action, int assetId)
     {
         super(room, action, assetId);

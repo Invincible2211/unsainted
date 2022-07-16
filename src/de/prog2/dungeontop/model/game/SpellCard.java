@@ -22,9 +22,6 @@ public class SpellCard extends Card
     @Override
     public String toString()
     {
-        StringBuilder builder = new StringBuilder();
-        builder.append(this.getSpell().getName());
-        builder.append(super.toString());
-        return builder.toString();
+        return this.getSpell().getName() + super.toString();
     }
 }
