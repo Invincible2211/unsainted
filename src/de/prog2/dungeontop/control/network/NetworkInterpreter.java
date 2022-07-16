@@ -10,7 +10,6 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
-import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
 import javafx.scene.Scene;

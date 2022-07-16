@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.file.AssetsFileReader;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.scene.image.Image;
@@ -59,7 +60,7 @@ public class AssetsManager
      */
     public static Image getImageByAssetId (int id)
     {
-        if(id < 0) return null;
+        if(id < AssetIds.ASSET_ID_START) return null;
 
         Image image = null;
         try

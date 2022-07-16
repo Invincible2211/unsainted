@@ -3,7 +3,6 @@ package de.prog2.dungeontop.control.manager;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
-import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.resources.GameConstants;
 import javafx.beans.property.SimpleIntegerProperty;
 

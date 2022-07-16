@@ -2,6 +2,7 @@ package de.prog2.dungeontop.resources;
 
 public interface AssetIds
 {
+    int ASSET_ID_START = 0;
     // Minion Asets
     int ASMODEUS = 401;
     int AKEPHALOS = 402;

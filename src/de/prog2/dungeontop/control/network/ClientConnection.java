@@ -3,7 +3,6 @@ package de.prog2.dungeontop.control.network;
 import de.prog2.dungeontop.model.network.NetworkConnectionI;
 import de.prog2.dungeontop.resources.NetworkData;
 import de.prog2.dungeontop.resources.NetworkingConstants;
-import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.io.IOException;

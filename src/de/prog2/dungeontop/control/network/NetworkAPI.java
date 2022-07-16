@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.model.entities.Entity;
-import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.network.Package;
 import de.prog2.dungeontop.model.network.packages.*;
