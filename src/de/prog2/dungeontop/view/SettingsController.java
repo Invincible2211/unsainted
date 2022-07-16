@@ -81,6 +81,7 @@ public class SettingsController {
         }
         HellView.stopHellViewBgMusic();
         GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
+
         DungeonTop.getStage().setScene(scene);
     }
 

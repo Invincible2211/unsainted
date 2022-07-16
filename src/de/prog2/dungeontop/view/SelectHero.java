@@ -4,10 +4,8 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
-import de.prog2.dungeontop.resources.AssetIds;
-import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.resources.SelectHeroConstants;
-import de.prog2.dungeontop.resources.ViewStrings;
+import de.prog2.dungeontop.model.world.World;
+import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,6 +72,8 @@ public class SelectHero
         }
 
         // initialize a new game world and go to the HellView
+        if (GameManager.getInstance().getGameWorld() == null)
+            GameManager.getInstance().setGameWorld(new World(WorldConstants.HELL_COUNT));
         GameManager.getInstance().getGameWorld().initWorld();
         HellView.resumeHellViewBgMusic();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
