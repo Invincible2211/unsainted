@@ -81,7 +81,8 @@ public class MainMenueController {
 
     @FXML
     public void initialize(){
-        Platform.runLater(() -> AudioManager.getInstance().playSoundOnScene(990,root.getScene(),true));
+        Platform.runLater(() ->
+        mainMenueSoundUUID = AudioManager.getInstance().playSoundOnScene(990,root.getScene(),true));
         for (Node n:
              root.getChildren()) {
             if (n instanceof Button){
