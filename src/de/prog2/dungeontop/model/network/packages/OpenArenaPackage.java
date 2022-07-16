@@ -5,7 +5,7 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 
 public class OpenArenaPackage extends Package {
 
-    private Arena arena;
+    private final Arena arena;
 
     public OpenArenaPackage(Arena arena){
         this.arena = arena;

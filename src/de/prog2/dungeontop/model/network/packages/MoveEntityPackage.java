@@ -5,8 +5,8 @@ import de.prog2.dungeontop.model.world.Coordinate;
 
 public class MoveEntityPackage extends Package {
 
-    private Coordinate start;
-    private Coordinate target;
+    private final Coordinate start;
+    private final Coordinate target;
 
     public MoveEntityPackage(Coordinate start, Coordinate target){
         this.start = start;

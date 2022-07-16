@@ -5,7 +5,7 @@ import de.prog2.dungeontop.model.world.Coordinate;
 
 public class RemoveEntityPackage extends Package {
 
-    private Coordinate coordinate;
+    private final Coordinate coordinate;
 
     public RemoveEntityPackage(Coordinate coordinate){
         this.coordinate = coordinate;

@@ -6,8 +6,8 @@ import de.prog2.dungeontop.model.world.Coordinate;
 
 public class PlaceEntityPackage extends Package {
 
-    private Entity entity;
-    private Coordinate coordinate;
+    private final Entity entity;
+    private final Coordinate coordinate;
 
     public PlaceEntityPackage(Entity entity, Coordinate coordinate){
         this.entity = entity;

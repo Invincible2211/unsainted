@@ -6,9 +6,7 @@ import java.io.Serializable;
 
 public abstract class Package implements Serializable
 {
-
     public byte[] toByteArray() {
         return SerializationUtils.serialize(this);
     }
-
 }

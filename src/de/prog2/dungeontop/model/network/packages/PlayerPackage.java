@@ -5,7 +5,7 @@ import de.prog2.dungeontop.model.network.Package;
 
 public class PlayerPackage extends Package {
 
-    private Player player;
+    private final Player player;
     public PlayerPackage(Player player) {
         this.player = player;
     }
