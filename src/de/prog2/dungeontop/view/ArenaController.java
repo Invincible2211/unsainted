@@ -9,9 +9,9 @@ import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.resources.TestConstants;
+import de.prog2.dungeontop.view.handViews.EnemyHandView;
+import de.prog2.dungeontop.view.handViews.PlayerHandView;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -158,11 +158,11 @@ public class ArenaController
         pane.setOnMouseClicked(event -> {
             handleEvent((AnchorPane) event.getSource());
         });
-        pane.setOnMousePressed(event->{
+        pane.setOnMousePressed(event-> {
 
             handleEvent((AnchorPane) event.getSource());
         });
-        pane.setOnMouseReleased(event->{
+        pane.setOnMouseReleased(event-> {
             if (isArenaAnchorPane(event.getPickResult().getIntersectedNode())) handleEvent((AnchorPane) event.getPickResult().getIntersectedNode());
         });
     }
@@ -171,7 +171,8 @@ public class ArenaController
         return node instanceof AnchorPane && node != cardView && node != root && node != arenaGrid;
     }
 
-    private void handleEvent(AnchorPane source){
+    private void handleEvent(AnchorPane source)
+    {
         AnchorPane selected = getSelected();
         if (source == null)
         {
@@ -371,5 +372,8 @@ public class ArenaController
 
     public Label getLabelEgoPointOpponent() {
         return labelEgoPointOpponent;
+    }
+    public AnchorPane getCardDetailViewContainer() {
+        return cardView;
     }
 }

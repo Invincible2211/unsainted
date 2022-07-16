@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -249,4 +250,7 @@ public class BattleManager2 {
         return scene;
     }
 
+    public AnchorPane getCardDetailViewContainer() {
+        return arenaController.getCardDetailViewContainer();
+    }
 }
