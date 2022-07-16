@@ -19,6 +19,7 @@ public class EntityController
      * Initiates the movement towards the selected direction
      * @return returns if the move was successful
      */
+    @Deprecated
     public static boolean tryMoveTowards(Arena arena, Entity entity, MoveDirection direction)
     {
         Coordinate newCoord = CoordinateUtils.getCoordinateFromMoveDirection(entity.getPosition(), direction);
@@ -43,17 +44,21 @@ public class EntityController
      * @param direction the desired direction
      * @return returns if nextPosition doesn't exist or is already occupied
      */
+    @Deprecated
     public static boolean isValidMove(Arena arena, Entity entity, MoveDirection direction)
     {
         Coordinate newCoord = CoordinateUtils.getCoordinateFromMoveDirection(entity.getPosition(), direction);
 
         return arena.getEntity(newCoord) == null && canMove(entity);
     }
+
+    @Deprecated
     public static boolean canMove(Entity entity)
     {
         return entity.getMovement() > 0;
     }
 
+    @Deprecated
     public static MoveDirection[] getValidMoveDirections (Arena arena, Entity entity)
     {
         var results = new ArrayList<MoveDirection>();
@@ -69,6 +74,7 @@ public class EntityController
         return results.toArray(ar);
     }
 
+    @Deprecated
     public static Arena attack (Entity attacker, Coordinate position, Arena arena)
     {
         Entity attacked = arena.getEntity(position);

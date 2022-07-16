@@ -82,15 +82,6 @@ public class BattleManager2 {
                 Coordinate cord = new Coordinate(2,3);
                 arenaController.placeEntityFriendly(peter,cord);
             }
-//            Waschmaschinen nehmt euch in Acht!
-//
-//            Dreckigen Code schreib ich mit Python
-//
-//            Ihr könnt zwar kein UTF-8
-//
-//            Aber den Text trotzdem einseifen
-
-            //arenaController.placeCardOpponent(new EntityCard(entities.get(1),0,0,0,0), new Coordinate(2,1));
         });
     }
 
@@ -198,8 +189,7 @@ public class BattleManager2 {
         if (egopoints - amount >= 0) {
             player1.currentEgoPointsProperty().set(egopoints - amount);
             GlobalLogger.log(LoggerStringValues.REDUCED_EGOPOINTS + amount);
-
-            NetManager.getInstance().getNetworkAPI().sendEgopointsChangePackage(0 - amount);
+            NetManager.getInstance().getNetworkAPI().sendEgopointsChangePackage(Math.negateExact(amount));
         } else {
             GlobalLogger.log(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
         }
