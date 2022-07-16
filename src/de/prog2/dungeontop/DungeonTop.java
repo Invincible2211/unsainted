@@ -67,9 +67,9 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        testEndGameDialogue();
+        //testEndGameDialogue();
 
-        //testArenaView();
+        testArenaView();
         //testBattle();
 
         //testSelectHero(primaryStage);
@@ -80,7 +80,6 @@ public class DungeonTop extends Application
         //testHellView(scene);
         //testLavaPondView(primaryStage);
         //testHell();
-        //testEndGameDialogue();
     }
 
     private void testBattle()

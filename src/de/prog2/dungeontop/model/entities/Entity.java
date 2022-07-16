@@ -1,10 +1,8 @@
 package de.prog2.dungeontop.model.entities;
 
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
-import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.game.Talent;
 import de.prog2.dungeontop.model.world.Coordinate;
 
 import java.io.Serializable;

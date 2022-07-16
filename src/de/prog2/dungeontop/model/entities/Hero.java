@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.model.entities;
 
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.game.Talent;
 import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.model.items.artifacts.DefenseArtifact;
