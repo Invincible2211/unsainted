@@ -3,13 +3,9 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.model.exceptions.customexceptions.CardAlreadyMaxRankException;
-import de.prog2.dungeontop.model.exceptions.customexceptions.CardNotFoundException;
-import de.prog2.dungeontop.model.exceptions.customexceptions.ItemNotFoundException;
 import de.prog2.dungeontop.model.exceptions.customexceptions.NotEnoughSoulsException;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.items.Item;
-import de.prog2.dungeontop.model.items.Valuable;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 public class NpcController
@@ -62,42 +58,5 @@ public class NpcController
             return;
         }
         throw new NotEnoughSoulsException();
-    }
-
-    // TODO: Remove this method. It is no longer needed.
-    /**
-     * Sells a valuable item from the player's possession.
-     *
-     * @param item Item or Card which shall be sold.
-     * @throws CardNotFoundException Thrown if the specified item is a card which the player's deck doesn't contain.
-     * @throws ItemNotFoundException Thrown if the specified item is an item which the player doesn't possess.
-     */
-    public static void sellItem (Valuable item) throws CardNotFoundException, ItemNotFoundException
-    {
-        PlayerManager playerManager = PlayerManager.getInstance();
-        Player player = playerManager.getPlayer();
-
-        if(item instanceof Card)
-        {
-            if(player.getDeck().containsCard((Card) item)){
-                playerManager.addSouls(((Card) item).getPrice());
-                player.getDeck().removeCard((Card) item);
-
-                GlobalLogger.log(LoggerStringValues.CARD_FROM_DECK_SOLD);
-
-                return;
-            }
-            throw new CardNotFoundException();
-        } else if (item instanceof Item) {
-            if(player.getInventory().containsItem((Item) item)){
-                playerManager.addSouls(((Item) item).getPrice());
-                player.getInventory().removeItem((Item) item);
-
-                GlobalLogger.log(LoggerStringValues.ITEM_SOLD);
-
-                return;
-            }
-            throw new ItemNotFoundException();
-        }
     }
 }
