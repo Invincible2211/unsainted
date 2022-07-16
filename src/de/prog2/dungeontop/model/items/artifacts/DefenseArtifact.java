@@ -1,21 +1,20 @@
 package de.prog2.dungeontop.model.items.artifacts;
 
-import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.items.Artifact;
 
-public class DefenseArtifact extends Artifact {
+public class DefenseArtifact extends Artifact
+{
+    private final int defense;
 
-    private int defBonus;
-
-    public DefenseArtifact(String name, String description, int defBonus, int price, int assetID)
+    public DefenseArtifact(String name, String description, int defense, int price, int assetID)
     {
         super(name, description, price, assetID);
-        this.defBonus = defBonus;
+        this.defense = defense;
 
     }
 
-    public int getDefBonus()
+    public int getDefense()
     {
-        return defBonus;
+        return defense;
     }
 }

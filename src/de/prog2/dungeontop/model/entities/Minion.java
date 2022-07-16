@@ -1,20 +1,18 @@
 package de.prog2.dungeontop.model.entities;
 
-import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 public class Minion extends Entity
 {
-    private Minion(String name, int hp, int attackDamage, int defense, int movement, int assetId, Player owner)
+    private Minion(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int assetId, Player owner)
     {
-        super(name, hp, attackDamage, defense, movement, assetId, owner);
+        super(name, hp, attackDamage, defense, attackRange, movement, assetId, owner);
         GlobalLogger.log(LoggerStringValues.MINION_CREATED);
     }
-    public Minion(String name, int hp, int attackDamage, int defense, int movement, int assetId)
+    public Minion(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int assetId)
     {
-        this(name, hp, attackDamage, defense, movement, assetId, null);
+        this(name, hp, attackDamage, defense, attackRange, movement, assetId, null);
     }
 }

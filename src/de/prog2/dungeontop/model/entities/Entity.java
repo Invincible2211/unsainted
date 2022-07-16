@@ -14,7 +14,7 @@ public abstract class Entity implements Serializable
     /*---------------------------------------------ATTRIBUTES---------------------------------------------------------*/
     private EntityCard card;
     private String name;
-    private SerializableSimpleIntegerProperty hp = new SerializableSimpleIntegerProperty(0);
+    private SerializableSimpleIntegerProperty hp;
     private int attackDamage = 0;
     private int movement = 0;
     private int maxMovement = 0;
@@ -23,23 +23,20 @@ public abstract class Entity implements Serializable
     private Coordinate position;
     private Player owner = null;
     private int defense = 0;
+    private int attackRange = 0;
 
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(String name, int hp, int attackDamage, int defense, int movement, int assetId, Player owner)
+    public Entity(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int assetId, Player owner)
     {
         this.name = name;
         this.hp = new SerializableSimpleIntegerProperty(hp);
         this.attackDamage = attackDamage;
         this.defense = defense;
+        this.attackRange = attackRange;
         this.movement = movement;
         this.assetId = assetId;
         this.owner = owner;
-    }
-    public Entity(String name, int hp, int attackDamage, int defense, int movement, int assetId, Coordinate position, boolean canMove, Player owner)
-    {
-        this(name, hp, attackDamage, defense, movement, assetId, owner);
-        this.position = position;
     }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getHp()
@@ -155,5 +152,15 @@ public abstract class Entity implements Serializable
     public void setDefense(int defense)
     {
         this.defense = defense;
+    }
+
+    public int getAttackRange()
+    {
+        return attackRange;
+    }
+
+    public void setAttackRange(int attackRange)
+    {
+        this.attackRange = attackRange;
     }
 }

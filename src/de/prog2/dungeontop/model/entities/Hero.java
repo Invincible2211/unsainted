@@ -1,15 +1,11 @@
 package de.prog2.dungeontop.model.entities;
 
-import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.Talent;
 import de.prog2.dungeontop.model.items.Artifact;
-import de.prog2.dungeontop.model.items.Item;
 import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.model.items.artifacts.DefenseArtifact;
-import de.prog2.dungeontop.utils.GlobalLogger;
 
-import javax.swing.text.TabableView;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,9 +16,9 @@ public class Hero extends Entity
     private int artifactSlots;
     private final Talent talent;
 
-    public Hero(String name, int hp, int attackDamage, int defense, int movement, int artifactSlots, Talent talent, int assetId, Player owner)
+    public Hero(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int artifactSlots, Talent talent, int assetId, Player owner)
     {
-        super(name, hp, attackDamage, defense, movement, assetId, owner);
+        super(name, hp, attackDamage, defense, attackRange, movement, assetId, owner);
         this.artifactSlots = artifactSlots;
         this.talent = talent;
     }
@@ -44,24 +40,26 @@ public class Hero extends Entity
         {
             return super.getDefense();
         }
-        else
+
+        int def = 0;
+        for (Artifact artifact: artifacts)
         {
-            int def = 0;
-            for (Artifact item: artifacts)
+            if(artifact instanceof DefenseArtifact defenseArtifact)
             {
-                DefenseArtifact item1 = null;
-                try
-                {
-                    item1 = (DefenseArtifact) item;
-                    def = def + item1.getDefBonus();
-                }
-                catch (ClassCastException e)
-                {
-                    GlobalLogger.warning(e.getMessage());
-                }
+                def += defenseArtifact.getDefense();
             }
-            return getDefense() + def;
         }
+        return super.getDefense() + def;
+    }
+
+    @Override
+    public int getAttackRange()
+    {
+        if (weapon == null)
+        {
+            return super.getAttackRange();
+        }
+        return super.getAttackRange() + weapon.getAttackRange();
     }
 
     public void setWeapon(Weapon weapon)
