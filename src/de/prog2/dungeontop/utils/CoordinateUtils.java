@@ -3,8 +3,10 @@ package de.prog2.dungeontop.utils;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.world.Coordinate;
 
+@Deprecated
 public abstract class CoordinateUtils
 {
+    @Deprecated
     public static Coordinate getCoordinateFromMoveDirection(Coordinate origin, MoveDirection direction)
     {
         //finding this costed my sanity for a day. In the Battlefield of the Arena the Y axes is inverted as the gridpane is.

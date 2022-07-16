@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
+@Deprecated
 public abstract class ArenaBaseController
 {
 

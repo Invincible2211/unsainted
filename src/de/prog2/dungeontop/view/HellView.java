@@ -14,6 +14,7 @@ import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.utils.MyMath;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -317,13 +318,13 @@ public class HellView
 
         // bind the camera to the player
         camera.xProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(playerView.getX() - scene.getWidth() * HellViewConstants.HALF,
+                () -> MyMath.clamp(playerView.getX() - scene.getWidth() * HellViewConstants.HALF,
                         HellViewConstants.X_ZERO, HellViewConstants.PANE_WIDTH - scene.getWidth()),
                 playerView.xProperty(), scene.widthProperty()
         ));
 
         camera.yProperty().bind(Bindings.createDoubleBinding(
-                () -> clampRange(playerView.getY() - scene.getHeight() * HellViewConstants.HALF,
+                () -> MyMath.clamp(playerView.getY() - scene.getHeight() * HellViewConstants.HALF,
                         HellViewConstants.X_ZERO, HellViewConstants.PANE_HEIGHT - scene.getHeight()),
                 playerView.yProperty(), scene.heightProperty()
         ));
@@ -333,31 +334,6 @@ public class HellView
         pane.translateYProperty().bind(camera.yProperty().multiply(-HellViewConstants.OFFSET_ONE));
 
         GlobalLogger.log(LoggerStringValues.CAM_INIT_END);
-    }
-
-    /**
-     * Restrict the value of a double to a specified range
-     * (see "https://en.wikipedia.org/wiki/Clamping_(graphics)")
-     *
-     * @param value Value that shall be restricted to the given range
-     * @param min   lower boundary of the range
-     * @param max   upper boundary of the range
-     * @return nearest available value
-     */
-    private double clampRange(double value, double min, double max)
-    {
-        // the lowest allowed value should never be lower than the biggest allowed value
-        if (min > max)
-        {
-            GlobalLogger.warning(LoggerStringValues.CLAMPING_FAILURE);
-            return 0.0;
-        }
-
-        if (value < min)
-            return min;
-        if (value > max)
-            return max;
-        return value;
     }
 
     /**
