@@ -77,11 +77,6 @@ public class SelectHeroView
             return;
         }
 
-        //TODO NOT TESTDECK
-        for (Card card :TestConstants.getTestCards()) {
-            PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
-        }
-        PlayerManager.getInstance().getPlayer().setHandCardLimit(playerHero.getHandCardLimit());
         PlayerManager.getInstance().getPlayer().setDeck(DeckController.getRandomDeck(false));
         // initialize a new game world and go to the HellView
         if (GameManager.getInstance().getGameWorld() == null)

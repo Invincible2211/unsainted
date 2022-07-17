@@ -211,4 +211,6 @@ public interface LoggerStringValues
     String DELETED_ALL_MINIONS_FROM_ARENA_VIEW = "Deleted all minions from arena view";
     String DREW_NEW_CARD = "Drew new card";
     String HERO_DIED_GAME_OVER = "Hero died, game over";
+    String SET_EGOPOINTS = "Set egopoints";
+    String SET_EGOPOINTS_TO_MAX = "Set egopoints to max";
 }

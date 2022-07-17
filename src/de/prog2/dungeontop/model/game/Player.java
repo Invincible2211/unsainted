@@ -32,6 +32,7 @@ public class Player implements Serializable
     private int level;
     private final int expCap = GameConstants.LEVEL_1_EXP_CAP * level;
     private int soulArtBonus = 0;
+    private int startEgoPointsMax = GameConstants.START_EGOPOINTS;
 
     public Player (){
         this.soulsProperty = new SerializableSimpleIntegerProperty(0);

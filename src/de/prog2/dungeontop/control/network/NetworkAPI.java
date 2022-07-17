@@ -81,4 +81,8 @@ public class NetworkAPI {
     public void sendAttackPackage(Entity attack,  Coordinate target){
         this.sendData(new AttackPackage(attack,target));
     }
+
+    public void sendEgoPointsSetPackage (int amount) {
+        this.sendData(new EgoPointsSetPackage(amount));
+    }
 }
