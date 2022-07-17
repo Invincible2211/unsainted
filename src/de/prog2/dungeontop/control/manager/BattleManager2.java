@@ -150,6 +150,7 @@ public class BattleManager2 {
         arenaController.setPhaseLabel(battlePhase.toString());
     }
 
+    @Deprecated
     public boolean entityAttack(){
         return false; //TODO
     }
@@ -198,6 +199,7 @@ public class BattleManager2 {
 
     }
 
+    //Karten muessen in den discard pile und nicht einfach weggelegt werden
     public void discardHand ()
     {
         player1.getHandCards().clear();
