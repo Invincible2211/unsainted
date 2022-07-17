@@ -7,20 +7,6 @@ import javafx.scene.layout.HBox;
 
 public abstract class HandViewAbstract extends HBox
 {
-    public HandViewAbstract()
-    {
-        PlayerManager.getInstance().getPlayer().getHandCards().addListener((ListChangeListener<Card>) c -> updateHand());
-    }
-
-    private void updateHand()
-    {
-        removeAll();
-        for (Card card : PlayerManager.getInstance().getPlayer().getHandCards())
-        {
-            addCard(card);
-        }
-    }
-
     public void removeAll ()
     {
         getChildren().clear();
