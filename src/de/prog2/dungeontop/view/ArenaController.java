@@ -544,8 +544,7 @@ public class ArenaController
     public void clearField ()
     {
         for (Node node : arenaGridPane.getChildren()) {
-            if (node instanceof AnchorPane){
-                AnchorPane pane = (AnchorPane) node;
+            if (node instanceof AnchorPane pane){
                 pane.setStyle("-fx-background-color: none;");
             }
         }
