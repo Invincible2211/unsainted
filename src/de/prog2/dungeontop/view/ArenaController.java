@@ -56,6 +56,7 @@ public class ArenaController
     private void onNextRound(){
         BattleManager2.getInstance().nextRound();
         NetManager.getInstance().getNetworkAPI().sendNextRoundPackage();
+        removeHighlight();
     }
 
     @FXML
@@ -182,6 +183,9 @@ public class ArenaController
 
     private void handleEvent(AnchorPane source)
     {
+        if (!BattleManager2.getInstance().isTurn()){
+            return;
+        }
         AnchorPane selected = getSelected();
         if (source == null)
         {
