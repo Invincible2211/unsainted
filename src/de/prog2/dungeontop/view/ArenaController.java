@@ -251,18 +251,20 @@ public class ArenaController
         {
 
             Card card = BattleManager2.getInstance().getSelectedHandCard();
-            if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost())
-            {
-                removeHighlight();
-                Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-                if (card instanceof SpellCard)
+            if (card != null){
+                if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost())
                 {
-                    SpellCard spellCard = (SpellCard) card;
-                    spellCard.getSpell().cast(currentArena, sourcePos);
-                    BattleManager2.getInstance().removeCardFromHand(card);
+                    removeHighlight();
+                    Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+                    if (card instanceof SpellCard)
+                    {
+                        SpellCard spellCard = (SpellCard) card;
+                        spellCard.getSpell().cast(currentArena, sourcePos);
+                        BattleManager2.getInstance().removeCardFromHand(card);
+                    }
                 }
+                return;
             }
-            return;
         }
         if (selected == null)
         {
@@ -273,13 +275,7 @@ public class ArenaController
         Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
         if (currentArena.getFriendly().containsKey(sourcePos))
         {
-            for (Node node : arenaGridPane.getChildren())
-            {
-                if (node instanceof AnchorPane pane1)
-                {
-                    pane1.setStyle("-fx-background-color: none;");
-                }
-            }
+            removeHighlight();
             setSelected(null);
         }
         else
@@ -288,7 +284,7 @@ public class ArenaController
             if (!isOutOfRange(selectedPos, sourcePos, getFriendly().get(selectedPos).getAttackRange()) && getFriendly().get(selectedPos).getMovement() > 0)
             {
                 System.out.println("Hallo");
-                List<Coordinate> targets = collectTargets(sourcePos,selectedPos);
+                List<Coordinate> targets = collectTargets(selectedPos,sourcePos);
                 List<Entity> targetedEntities = new ArrayList<>();
                 HashMap<Entity,Coordinate> oldCoordinates = new HashMap<>();
                 for (Coordinate coordinate :
@@ -326,17 +322,22 @@ public class ArenaController
     }
 
     private List<Coordinate> collectTargets(Coordinate sourcePos, Coordinate selectedPos) {
+        System.out.println(sourcePos +" " +selectedPos);
         List<Coordinate> targets = new ArrayList<>();
         if (isX(sourcePos, selectedPos)){
+            System.out.println(getDifferenz(sourcePos.getX(),selectedPos.getX()));
             for (int i = 0; i < getDifferenz(sourcePos.getX(),selectedPos.getX()); i++) {
-                Coordinate coordinate = new Coordinate(sourcePos.getX()>selectedPos.getX() ? selectedPos.getX() + i : sourcePos.getX() + i,selectedPos.getY());
+                Coordinate coordinate = new Coordinate(sourcePos.getX()>selectedPos.getX() ? selectedPos.getX() + i : sourcePos.getX() + i+1,selectedPos.getY());
+                System.out.println(coordinate);
                 if (getOpponent().get(coordinate) != null){
                     targets.add(coordinate);
                 }
             }
         } else {
             for (int i = 0; i < getDifferenz(sourcePos.getY(),selectedPos.getY()); i++) {
-                Coordinate coordinate = new Coordinate(selectedPos.getY(),sourcePos.getY()>selectedPos.getY() ? selectedPos.getY() + i : sourcePos.getY() + i);
+                System.out.println(getDifferenz(sourcePos.getY(),selectedPos.getY()));
+                Coordinate coordinate = new Coordinate(selectedPos.getX(),sourcePos.getY()>selectedPos.getY() ? selectedPos.getY() + i : sourcePos.getY() + i+1);
+                System.out.println(coordinate);
                 if (getOpponent().get(coordinate) != null){
                     targets.add(coordinate);
                 }
@@ -442,6 +443,9 @@ public class ArenaController
      */
     private boolean isOutOfRange(Coordinate currentPos, Coordinate targetPos, int range)
     {
+        if (isX(currentPos,targetPos)&& currentPos.getY() != targetPos.getY()){
+            return true;
+        }
         if (isX(currentPos,targetPos)){
             return !(currentPos.getX() > targetPos.getX() ? currentPos.getX() - range >= targetPos.getX() : currentPos.getX() + range >= targetPos.getX());
         } else {
