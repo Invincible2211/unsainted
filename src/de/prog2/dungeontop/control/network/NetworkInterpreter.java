@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
@@ -106,6 +107,8 @@ public class NetworkInterpreter extends Thread{
             Platform.runLater(() -> BattleManager2.getInstance().battle(attackPackage.getAttack(), BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget())));
         } else if (dataPackage instanceof HandCardIncreasedPackage){
             Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().addOne());
+        } else if(dataPackage instanceof ChangeEntityHpPackage){
+            Platform.runLater(() -> EntityController.applyDamage(((ChangeEntityHpPackage)dataPackage).getEntity(), ((ChangeEntityHpPackage)dataPackage).getAmount()));
         }
     }
 
