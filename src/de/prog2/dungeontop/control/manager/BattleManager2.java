@@ -163,6 +163,7 @@ public class BattleManager2 {
                     HellView.resumeHellViewBgMusic();
                 }
                 DungeonTop.getStage().setScene(HellView.getCurrHellView());
+
             } else {
                 GameManager.getInstance().endGame();
             }
