@@ -104,6 +104,8 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof AttackPackage){
             AttackPackage attackPackage = (AttackPackage) dataPackage;
             Platform.runLater(() -> BattleManager2.getInstance().battle(attackPackage.getAttack(), BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget())));
+        } else if (dataPackage instanceof HandCardIncreasedPackage){
+            Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().addOne());
         }
     }
 

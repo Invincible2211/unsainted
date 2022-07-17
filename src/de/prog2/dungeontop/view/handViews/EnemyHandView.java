@@ -3,6 +3,7 @@ package de.prog2.dungeontop.view.handViews;
 import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
+import javafx.scene.layout.AnchorPane;
 
 public class EnemyHandView extends PlayerHandView
 {
@@ -15,5 +16,9 @@ public class EnemyHandView extends PlayerHandView
     public void removeOne()
     {
         getChildren().remove(0);
+    }
+
+    public void addOne() {
+        getChildren().add(new AnchorPane());
     }
 }
