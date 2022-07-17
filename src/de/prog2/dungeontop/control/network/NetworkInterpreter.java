@@ -93,6 +93,10 @@ public class NetworkInterpreter extends Thread{
                     GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount());
         } else if (dataPackage instanceof  HandCardReducePackage){
             GameManager.getInstance().getOpponentPlayer().getHandCards().remove(GameManager.getInstance().getOpponentPlayer().getHandCards().remove(0));
+        } else if (dataPackage instanceof NextPhasePackage){
+            BattleManager2.getInstance().nextRound();
+        } else if (dataPackage instanceof PlayerBeginnPackage){
+            BattleManager2.getInstance().setStarting(!((PlayerBeginnPackage)dataPackage).isPlayerStarts());
         }
     }
 

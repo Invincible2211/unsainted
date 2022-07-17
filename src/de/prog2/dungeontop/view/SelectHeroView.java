@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class SelectHeroView
 {
@@ -32,7 +34,6 @@ public class SelectHeroView
     private Text heroMaxMoves;
     @FXML
     private Text heroTalent;
-
 
     /**
      * Dies sind die Eventmethoden, welche ausgefuehrt werden, wenn auf einen der Hero-Button gedrueckt wird.
@@ -86,6 +87,7 @@ public class SelectHeroView
 
         // set the gameworld that will be saved upon exiting the game
         GameManager.getInstance().getSaveGame().setGameWorld(GameManager.getInstance().getGameWorld());
+        AudioManager.getInstance().stopSound(MainMenueController.getHeroSelectionSoundUUID());
     }
 
     /**
