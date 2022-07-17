@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import org.apache.commons.lang3.SerializationUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -279,29 +280,72 @@ public class ArenaController
         else
         {
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
-            if (!isOutOfRange(selectedPos, sourcePos) && getFriendly().get(sourcePos).getMovement() > 0)
+            if (!isOutOfRange(selectedPos, sourcePos, getFriendly().get(selectedPos).getAttackRange()) && getFriendly().get(selectedPos).getMovement() > 0)
             {
-
-                List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
+                System.out.println("Hallo");
+                List<Coordinate> targets = collectTargets(sourcePos,selectedPos);
+                List<Entity> targetedEntities = new ArrayList<>();
+                HashMap<Entity,Coordinate> oldCoordinates = new HashMap<>();
+                for (Coordinate coordinate :
+                        targets) {
+                    Entity e = getOpponent().remove(coordinate);
+                    targetedEntities.add(e);
+                    oldCoordinates.put(e,coordinate);
+                }
+                List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), targetedEntities);
                 if (!cards.isEmpty())
                 {
-                    getOpponent().put(sourcePos, cards.get(0));
-                    NetManager.getInstance().getNetworkAPI().sendAttackPackage(getFriendly().get(selectedPos), invertCoordinate(sourcePos));
+                    for (Entity e:
+                         cards) {
+                        getOpponent().put(oldCoordinates.get(e), e);
+                        NetManager.getInstance().getNetworkAPI().sendAttackPackage(getFriendly().get(selectedPos), invertCoordinate(oldCoordinates.get(e)));
+                    }
                 }
                 else
                 {
-                    arenaGridPane.getChildren().remove(source);
-                    currentArena.getOpponent().remove(sourcePos);
-                    NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(sourcePos));
-                    AnchorPane anchorPane = new AnchorPane();
-                    anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
-                    addEventHandler(anchorPane);
-                    arenaGridPane.add(anchorPane, sourcePos.getX(), sourcePos.getY());
+                    for (Coordinate c:
+                         targets) {
+                        currentArena.getOpponent().remove(c);
+                        arenaGridPane.getChildren().remove(getNodeFromGridPane(c.getX(),c.getY()));
+                        NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(c));
+                        AnchorPane anchorPane = new AnchorPane();
+                        anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
+                        addEventHandler(anchorPane);
+                        arenaGridPane.add(anchorPane, c.getX(), c.getY());
+                    }
                 }
                 removeHighlight();
                 setSelected(null);
             }
         }
+    }
+
+    private List<Coordinate> collectTargets(Coordinate sourcePos, Coordinate selectedPos) {
+        List<Coordinate> targets = new ArrayList<>();
+        if (isX(sourcePos, selectedPos)){
+            for (int i = 0; i < getDifferenz(sourcePos.getX(),selectedPos.getX()); i++) {
+                Coordinate coordinate = new Coordinate(sourcePos.getX()>selectedPos.getX() ? selectedPos.getX() + i : sourcePos.getX() + i,selectedPos.getY());
+                if (getOpponent().get(coordinate) != null){
+                    targets.add(coordinate);
+                }
+            }
+        } else {
+            for (int i = 0; i < getDifferenz(sourcePos.getY(),selectedPos.getY()); i++) {
+                Coordinate coordinate = new Coordinate(selectedPos.getY(),sourcePos.getY()>selectedPos.getY() ? selectedPos.getY() + i : sourcePos.getY() + i);
+                if (getOpponent().get(coordinate) != null){
+                    targets.add(coordinate);
+                }
+            }
+        }
+        return targets;
+    }
+
+    private boolean isX(Coordinate sourcePos, Coordinate selectedPos) {
+        return sourcePos.getX() != selectedPos.getX();
+    }
+
+    private int getDifferenz(int a, int b){
+        return a > b ? a-b :b-a;
     }
 
     /**
@@ -334,7 +378,7 @@ public class ArenaController
             Coordinate currentPos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
 
-            if (selected == null || isOutOfRange(currentPos, selectedPos)) return;
+            if (selected == null || isOutOfRange(currentPos, selectedPos, 1)) return;
             if (getFriendly().get(selectedPos).getMovement() > 0){
                 getFriendly().get(selectedPos).setMovement(getFriendly().get(selectedPos).getMovement()-1);
                 moveSourceToSelectedField(true, currentPos, selectedPos);
@@ -391,12 +435,12 @@ public class ArenaController
     /**
      * Checks if the selected field is in range of the source field
      */
-    private boolean isOutOfRange(Coordinate currentPos, Coordinate targetPos)
+    private boolean isOutOfRange(Coordinate currentPos, Coordinate targetPos, int range)
     {
-        return (currentPos.getX() != targetPos.getX() + 1 || currentPos.getY() != targetPos.getY()) &&
-                (currentPos.getX() != targetPos.getX() - 1 || currentPos.getY() != targetPos.getY()) &&
-                (currentPos.getY() != targetPos.getY() - 1 || currentPos.getX() != targetPos.getX()) &&
-                (currentPos.getY() != targetPos.getY() + 1 || currentPos.getX() != targetPos.getX());
+        return (currentPos.getX() >= targetPos.getX() + range && currentPos.getY() == targetPos.getY()) ||
+                (currentPos.getX() >= targetPos.getX() - range && currentPos.getY() == targetPos.getY()) ||
+                (currentPos.getY() >= targetPos.getY() + range && currentPos.getX() == targetPos.getX()) ||
+                (currentPos.getX() >= targetPos.getX() - range && currentPos.getX() == targetPos.getX());
     }
 
     private Coordinate invertCoordinate(Coordinate coordinate){
