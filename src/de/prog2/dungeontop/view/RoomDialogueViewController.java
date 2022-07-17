@@ -2,10 +2,7 @@ package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.RandomEventRoomController;
-import de.prog2.dungeontop.control.manager.AssetsManager;
-import de.prog2.dungeontop.control.manager.AudioManager;
-import de.prog2.dungeontop.control.manager.GameManager;
-import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.manager.*;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.world.rooms.*;
 import de.prog2.dungeontop.resources.*;
@@ -209,6 +206,7 @@ public class RoomDialogueViewController
     {
         hideStage();
         GlobalLogger.log(LoggerStringValues.START_BATTLE_HANDLER);
+        BattleManager2.getInstance().startBattle(room.getArena());
         NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage((room).getArena());
     }
 

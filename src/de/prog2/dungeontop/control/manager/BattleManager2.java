@@ -88,17 +88,19 @@ public class BattleManager2 {
             battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
             processButton();
             processLabel();
+            instantiateHeroes(arena);
         });
     }
 
+    private void instantiateHeroes (Arena arena)
+    {
+        Coordinate cornerBottemRight = new Coordinate(arena.getWidth(), arena.getHeight());
+        Entity hero = player1.getHero();
+        arenaController.placeEntityFriendly(hero, cornerBottemRight);
+    }
+
     private void processButton(){
-        if (isStarting && (battlePhase == BattlePhase.FIRST_DUELLIST_DRAW || battlePhase == BattlePhase.FIRST_DUELLIST_PLACE_CARDS || battlePhase == BattlePhase.FIRST_DUELLIST_MINION_ACT|| battlePhase == BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS)){
-            arenaController.getNextPhaseButton().setDisable(false);
-        } else if (!isStarting && (battlePhase == BattlePhase.SECOND_DUELLIST_DRAW || battlePhase == BattlePhase.SECOND_DUELLIST_PLACE_CARDS || battlePhase == BattlePhase.SECOND_DUELLIST_MINION_ACT|| battlePhase == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)){
-            arenaController.getNextPhaseButton().setDisable(false);
-        } else {
-            arenaController.getNextPhaseButton().setDisable(true);
-        }
+        arenaController.getNextPhaseButton().setDisable(!isTurn());
     }
 
     private void processLabel(){
@@ -317,6 +319,16 @@ public class BattleManager2 {
             }
         }
         return null;
+    }
+
+    public boolean isTurn() {
+        if (isStarting && (battlePhase == BattlePhase.FIRST_DUELLIST_DRAW || battlePhase == BattlePhase.FIRST_DUELLIST_PLACE_CARDS || battlePhase == BattlePhase.FIRST_DUELLIST_MINION_ACT|| battlePhase == BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS)){
+            return true;
+        } else if (!isStarting && (battlePhase == BattlePhase.SECOND_DUELLIST_DRAW || battlePhase == BattlePhase.SECOND_DUELLIST_PLACE_CARDS || battlePhase == BattlePhase.SECOND_DUELLIST_MINION_ACT|| battlePhase == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private enum BattlePhase{

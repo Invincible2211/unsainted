@@ -68,7 +68,7 @@ public class DungeonTop extends Application
 
         //testEndGameDialogue();
 
-        testArenaView();
+        //testArenaView();
         //testBattle();
 
         //testSelectHero(primaryStage);
@@ -178,7 +178,6 @@ public class DungeonTop extends Application
      */
     public static void testArenaView() throws Exception
     {
- //       Spell testSpell = new TestSpell();
 
 
         for (int i = 0; i < 15; i++)
