@@ -2,6 +2,7 @@ package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.controller.InventoryViewController;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.items.*;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -27,6 +28,8 @@ public class ItemClickedView
     private ImageView itemImage;
     @FXML
     private javafx.scene.control.Button equipButton;
+    @FXML
+    private Button deleteButton;
     private Item item;
 
     @FXML
@@ -74,6 +77,12 @@ public class ItemClickedView
         reloadInventory();
     }
 
+    public void onDeleteItemClicked() throws IOException
+    {
+        PlayerManager.getInstance().getPlayerInventory().removeItem(item);
+        reloadInventory();
+    }
+
     /**
      * Reloads the inventory view.
      */
@@ -112,5 +121,10 @@ public class ItemClickedView
     public Button getEquipButton()
     {
         return equipButton;
+    }
+
+    public Button getDeleteButton()
+    {
+        return deleteButton;
     }
 }
