@@ -442,10 +442,11 @@ public class ArenaController
      */
     private boolean isOutOfRange(Coordinate currentPos, Coordinate targetPos, int range)
     {
-        return (currentPos.getX() >= targetPos.getX() + range && currentPos.getY() == targetPos.getY()) ||
-                (currentPos.getX() >= targetPos.getX() - range && currentPos.getY() == targetPos.getY()) ||
-                (currentPos.getY() >= targetPos.getY() + range && currentPos.getX() == targetPos.getX()) ||
-                (currentPos.getX() >= targetPos.getX() - range && currentPos.getX() == targetPos.getX());
+        if (isX(currentPos,targetPos)){
+            return !(currentPos.getX() > targetPos.getX() ? currentPos.getX() - range >= targetPos.getX() : currentPos.getX() + range >= targetPos.getX());
+        } else {
+            return !(currentPos.getY() > targetPos.getY() ? currentPos.getY() - range >= targetPos.getY() : currentPos.getY() + range >= targetPos.getY());
+        }
     }
 
     private Coordinate invertCoordinate(Coordinate coordinate){
