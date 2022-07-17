@@ -228,24 +228,28 @@ public class ArenaController
         else
         {
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
-            List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
-            if (!cards.isEmpty())
+            if (!isOutOfRange(selectedPos, sourcePos))
             {
-                System.out.println(cards.get(0).getHp() + " " + cards.get(0).getDefense());
-                getOpponent().put(sourcePos, cards.get(0));
+
+                List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
+                if (!cards.isEmpty())
+                {
+                    System.out.println(cards.get(0).getHp() + " " + cards.get(0).getDefense());
+                    getOpponent().put(sourcePos, cards.get(0));
+                }
+                else
+                {
+                    arenaGridPane.getChildren().remove(source);
+                    currentArena.getOpponent().remove(sourcePos);
+                    NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(sourcePos));
+                    AnchorPane anchorPane = new AnchorPane();
+                    anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
+                    addEventHandler(anchorPane);
+                    arenaGridPane.add(anchorPane, sourcePos.getX(), sourcePos.getY());
+                }
+                removeHighlight();
+                setSelected(null);
             }
-            else
-            {
-                arenaGridPane.getChildren().remove(source);
-                currentArena.getOpponent().remove(sourcePos);
-                NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(sourcePos));
-                AnchorPane anchorPane = new AnchorPane();
-                anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
-                addEventHandler(anchorPane);
-                arenaGridPane.add(anchorPane, sourcePos.getX(), sourcePos.getY());
-            }
-            removeHighlight();
-            setSelected(null);
         }
     }
 
@@ -272,16 +276,19 @@ public class ArenaController
      */
     private void handleMoveSelected(AnchorPane source, AnchorPane selected)
     {
-        Coordinate currentPos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-        Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
+        if (BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_MINION_ACT || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_MINION_ACT)
+        {
+            Coordinate currentPos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+            Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
 
-        if (selected == null || isOutOfRange(currentPos, selectedPos)) return;
+            if (selected == null || isOutOfRange(currentPos, selectedPos)) return;
 
-        moveSourceToSelectedField(true, currentPos, selectedPos);
+            moveSourceToSelectedField(true, currentPos, selectedPos);
 
-        setSelected(null);
-        removeHighlight();
-        NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
+            setSelected(null);
+            removeHighlight();
+            NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
+        }
     }
 
     private void markAvailabelFields(Coordinate sourcePos){
