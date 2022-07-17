@@ -15,7 +15,6 @@ import java.util.List;
 
 public interface TestConstants
 {
-
     static List<Card> getTestCards()
     {
         ArrayList<Card> cards = new ArrayList<>();

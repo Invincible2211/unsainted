@@ -91,9 +91,13 @@ public class EntityController
         return arena;
     }
 
-    public static void applyDamage(Entity entity, int damage)
+    /**
+     * @return returns, if entity is still alive
+     */
+    public static boolean applyDamage(Entity entity, int damage)
     {
         entity.setHp(entity.getHp() - (Math.max(damage - entity.getDefense(), 0)));
+        return entity.getHp() > 0;
     }
     public static void applyHeal(Entity entity, int heal)
     {

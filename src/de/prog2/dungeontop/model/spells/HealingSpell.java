@@ -1,9 +1,11 @@
 package de.prog2.dungeontop.model.spells;
 
 import de.prog2.dungeontop.control.controller.EntityController;
+import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.utils.ArenaUtils;
 
 public class HealingSpell extends Spell
 {
@@ -29,6 +31,7 @@ public class HealingSpell extends Spell
                 if (entity != null)
                 {
                     EntityController.applyHeal(arena.getFriendly().get(c), heal);
+                    //TODO: Fynn sendet changeHP
                 }
             }
         }

@@ -5,6 +5,8 @@ import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.TestConstants;
+import de.prog2.dungeontop.utils.ArenaUtils;
 
 public class DamageSpell extends Spell
 {
@@ -29,7 +31,13 @@ public class DamageSpell extends Spell
                 Entity entity = arena.getOpponent().get(c);
                 if (entity != null)
                 {
-                    EntityController.applyDamage(arena.getOpponent().get(c), damage);
+                    if (EntityController.applyDamage(arena.getOpponent().get(c), damage))
+                    {
+                        //TODO: Fynn sendet changeHP
+                        return;
+                    }
+                    NetManager.getInstance().getNetworkAPI().sendRemoveEntity(ArenaUtils.invertCoordinate(arena, c));
+                    arena.getOpponent().remove(c);
                 }
             }
         }
