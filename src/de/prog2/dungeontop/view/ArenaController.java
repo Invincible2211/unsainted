@@ -185,6 +185,7 @@ public class ArenaController
         pane.setOnMouseClicked(event -> {
             handleEvent((AnchorPane) event.getSource());
         });
+        /*
         pane.setOnMousePressed(event-> {
 
             handleEvent((AnchorPane) event.getSource());
@@ -192,6 +193,8 @@ public class ArenaController
         pane.setOnMouseReleased(event-> {
             if (isArenaAnchorPane(event.getPickResult().getIntersectedNode())) handleEvent((AnchorPane) event.getPickResult().getIntersectedNode());
         });
+
+         */
     }
 
     private boolean isArenaAnchorPane(Node node){
@@ -295,21 +298,19 @@ public class ArenaController
             for (Coordinate coordinate :
                     targets) {
                 Entity e = getOpponent().remove(coordinate);
-                targetedEntities.add(e);
-                oldCoordinates.put(e,coordinate);
+                if (e != null)
+                {
+                    targetedEntities.add(e);
+                    oldCoordinates.put(e, coordinate);
+                }
             }
             List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), targetedEntities);
             if (!cards.isEmpty())
             {
                 for (Entity e:
                         cards) {
-                    getOpponent().put(oldCoordinates.remove(e), e);
+                    getOpponent().put(oldCoordinates.get(e), e);
                     NetManager.getInstance().getNetworkAPI().sendAttackPackage(getFriendly().get(selectedPos), invertCoordinate(oldCoordinates.get(e)));
-                }
-                for (Entity e:
-                        oldCoordinates.keySet()) {
-                    Coordinate coordinate = oldCoordinates.get(e);
-                    removeNetity(coordinate);
                 }
             }
             else
@@ -459,9 +460,9 @@ public class ArenaController
             return true;
         }
         if (isX(currentPos,targetPos)){
-            return !(currentPos.getX() > targetPos.getX() ? currentPos.getX() - range >= targetPos.getX() : currentPos.getX() + range >= targetPos.getX());
+            return !(getDifferenz(targetPos.getX(), currentPos.getX()) <= range);
         } else {
-            return !(currentPos.getY() > targetPos.getY() ? currentPos.getY() - range >= targetPos.getY() : currentPos.getY() + range >= targetPos.getY());
+            return !(getDifferenz(targetPos.getY(), currentPos.getY()) <= range);
         }
     }
 
