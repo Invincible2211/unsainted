@@ -105,40 +105,6 @@ public abstract class CardViewController
             if(card instanceof EntityCard)
             {
                 cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ENTITY_CARD_DETAIL_VIEW_FXML));
-                /*
-                for ( Node node : cardView.getChildrenUnmodifiable())
-                {
-                    if (node.getId().equals("hpContainer"))
-                    {
-                        System.out.println("hpContainer");
-                        for (Node labelWhere : ((StackPane)node).getChildren())
-                        {
-                            if (labelWhere instanceof Label)
-                            {
-                                ((Label)labelWhere).textProperty().bind(Bindings.createStringBinding(
-                                        () -> "" + ((EntityCard)card).getEntity().getHp(),
-                                        ((EntityCard)card).getEntity().getHpProperty()
-                                ));
-                            }
-                        }
-                    }
-
-                    else if (node.getId().equals("movementContainer"))
-                    {
-                        System.out.println("movementContainer");
-                        for (Node labelWhere : ((StackPane)node).getChildren())
-                        {
-                            if (labelWhere instanceof Label)
-                            {
-                                ((Label)labelWhere).textProperty().bind(Bindings.createStringBinding(
-                                        () -> "" + ((EntityCard)card).getEntity().getMovement(),
-                                        ((EntityCard)card).getEntity().getMovementProperty()
-                                ));
-                            }
-                        }
-                    }
-                }
-                */
             }
             else if(card instanceof SpellCard)
             {
