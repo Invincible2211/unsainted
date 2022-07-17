@@ -286,12 +286,13 @@ public class ArenaController
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
 
             if (selected == null || isOutOfRange(currentPos, selectedPos)) return;
-
-            moveSourceToSelectedField(true, currentPos, selectedPos);
-
-            setSelected(null);
-            removeHighlight();
-            NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
+            if (getFriendly().get(selectedPos).getMovement() > 0){
+                getFriendly().get(selectedPos).setMovement(getFriendly().get(selectedPos).getMovement()-1);
+                moveSourceToSelectedField(true, currentPos, selectedPos);
+                setSelected(null);
+                removeHighlight();
+                NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
+            }
         }
     }
 
