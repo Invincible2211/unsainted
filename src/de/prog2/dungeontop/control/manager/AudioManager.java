@@ -93,7 +93,7 @@ public class AudioManager
         if (clip != null) changeVolume(clip,volume);
     }
 
-    public void changeClipVolumeWhilePlayingSound(int soundID, UUID clipUUID, double volume){
+    public UUID changeClipVolumeWhilePlayingSound(int soundID, UUID clipUUID, double volume){
         Clip clip = playingClips.get(clipUUID);
         double oldVolume = getVolume(clip);
         changeVolume(clip,volume);
@@ -109,17 +109,21 @@ public class AudioManager
             }
             changeVolume(playingClips.get(clipUUID),oldVolume);
         });
+        return uuid;
     }
 
-    public void playAfter(int soundID, boolean loop, UUID playAfterSoundUUID){
+    public UUID playAfter(int soundID, boolean loop, UUID playAfterSoundUUID){
         Clip clip = playingClips.get(playAfterSoundUUID);
+        UUID soundUUID = UUID.randomUUID();
         clip.addLineListener(event -> {
-            if (event.getType() != LineEvent.Type.CLOSE)
+            if (event.getType() != LineEvent.Type.STOP)
             {
                 return;
             }
-            playSound(soundID, loop);
+            AudioThread audioThread = new AudioThread(soundID,soundUUID,loop);
+            audioThread.start();
         });
+        return soundUUID;
     }
 
     /**

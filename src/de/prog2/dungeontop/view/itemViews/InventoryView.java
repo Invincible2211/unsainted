@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.view.itemViews;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.view.HellView;
 import javafx.fxml.FXML;
@@ -47,5 +48,6 @@ public class InventoryView
     {
         HellView.resumeHellViewBgMusic();
         DungeonTop.getStage().setScene(HellView.getCurrHellView());
+        AudioManager.getInstance().stopSound(HellView.getInventorySoundId());
     }
 }

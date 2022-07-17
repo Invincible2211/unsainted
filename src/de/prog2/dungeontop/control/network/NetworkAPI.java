@@ -69,4 +69,12 @@ public class NetworkAPI {
     public void sendHandCardReducePackage() {
         this.sendData(new HandCardReducePackage());
     }
+
+    public void sendNextRoundPackage() {
+        this.sendData(new NextPhasePackage());
+    }
+
+    public void sendStartBattle(boolean isStarting) {
+        this.sendData(new PlayerBeginnPackage(isStarting));
+    }
 }

@@ -13,6 +13,7 @@ import de.prog2.dungeontop.view.handViews.EnemyHandView;
 import de.prog2.dungeontop.view.handViews.PlayerHandView;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
@@ -49,8 +50,12 @@ public class ArenaController
     private GridPane arenaGridPane;
 
     @FXML
+    private Button nextPhaseButton;
+
+    @FXML
     private void onNextRound(){
         BattleManager2.getInstance().nextRound();
+        NetManager.getInstance().getNetworkAPI().sendNextRoundPackage();
     }
 
     @FXML
@@ -110,7 +115,7 @@ public class ArenaController
         arenaGridPane.getChildren().remove(test);
         arenaGridPane.add(card, coordinate.getX(), coordinate.getY());
         currentArena.getFriendly().put(coordinate, entity);
-        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entity, coordinate);
+        NetManager.getInstance().getNetworkAPI().sendSpawnEntity(entity, invertCoordinate(coordinate));
     }
 
     public void placeEntityOpponent (Entity entity, Coordinate coordinate){
@@ -217,7 +222,7 @@ public class ArenaController
             }
             else
             {
-                NetManager.getInstance().getNetworkAPI().sendRemoveEntity(sourcePos);
+                NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(sourcePos));
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane.setPrefSize(170*scale, 170*scale);
                 addEventHandler(anchorPane);
@@ -260,7 +265,7 @@ public class ArenaController
 
         setSelected(null);
         removeHighlight();
-        NetManager.getInstance().getNetworkAPI().sendMoveEntity(selectedPos, currentPos);
+        NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
     }
 
     private void markAvailabelFields(Coordinate sourcePos){
@@ -315,6 +320,10 @@ public class ArenaController
                 (currentPos.getX() != targetPos.getX() - 1 || currentPos.getY() != targetPos.getY()) &&
                 (currentPos.getY() != targetPos.getY() - 1 || currentPos.getX() != targetPos.getX()) &&
                 (currentPos.getY() != targetPos.getY() + 1 || currentPos.getX() != targetPos.getX());
+    }
+
+    private Coordinate invertCoordinate(Coordinate coordinate){
+        return new Coordinate(currentArena.getWidth() - coordinate.getX(), currentArena.getHeight() - coordinate.getY());
     }
 
     public HashMap<Coordinate, Entity> getFriendly() {
@@ -380,4 +389,9 @@ public class ArenaController
     public AnchorPane getCardDetailViewContainer() {
         return cardView;
     }
+
+    public Button getNextPhaseButton() {
+        return nextPhaseButton;
+    }
+
 }

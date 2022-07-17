@@ -22,6 +22,7 @@ import java.util.UUID;
 public class MainMenueController {
 
     private static UUID mainMenueSoundUUID;
+    private static UUID heroSelectionSoundUUID;
 
     @FXML
     private AnchorPane root;
@@ -37,7 +38,12 @@ public class MainMenueController {
     {
         NetController.enable(null);
         GameManager.getInstance().startGame();
-        AudioManager.getInstance().playSound(996,false);
+        UUID uuid = AudioManager.getInstance().playSound(996,false);
+        if (GameManager.getInstance().getSaveGame() == null){
+            Platform.runLater(() -> {
+                heroSelectionSoundUUID = AudioManager.getInstance().playAfter(997,true,uuid);
+            });
+        }
     }
 
     /**
@@ -75,8 +81,9 @@ public class MainMenueController {
     @FXML
     private void onPlayAsDungeonMasterButtonPressed(){
         GameManager.getInstance().setDM();
-        NetworkController.showNetworkGUI();
-        AudioManager.getInstance().changeClipVolumeWhilePlayingSound(995,mainMenueSoundUUID,10);
+        AudioManager.getInstance().pauseClip(mainMenueSoundUUID);
+        UUID uuid = AudioManager.getInstance().playSound(995,false);
+        Platform.runLater(()-> NetworkController.showNetworkGUI(uuid,mainMenueSoundUUID));
     }
 
     @FXML
@@ -121,4 +128,7 @@ public class MainMenueController {
         return mainMenueSoundUUID;
     }
 
+    public static UUID getHeroSelectionSoundUUID() {
+        return heroSelectionSoundUUID;
+    }
 }
