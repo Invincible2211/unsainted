@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.model.entities;
 
+import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
@@ -36,6 +37,8 @@ public abstract class Entity implements Serializable
         this.talent = talent;
         this.assetId = assetId;
         this.owner = owner;
+
+        EntityController.handleTalent(this, talent);
     }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getHp()
