@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.model.spells;
 
 import de.prog2.dungeontop.control.controller.EntityController;
+import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -36,8 +37,7 @@ public class DamageSpell extends Spell
                         NetManager.getInstance().getNetworkAPI().sendChangeEntityHpPackage(ArenaUtils.invertCoordinate(arena, c), damage);
                         return;
                     }
-                    NetManager.getInstance().getNetworkAPI().sendRemoveEntity(ArenaUtils.invertCoordinate(arena, c));
-                    arena.getOpponent().remove(c);
+                    BattleManager2.getInstance().getArenaController().removeEntityInCoordinate(c);
                 }
             }
         }

@@ -174,6 +174,9 @@ public class BattleManager2 {
     public Entity getEntityAtPosition(Coordinate coordinate){
         return arenaController.getFriendly().get(coordinate);
     }
+    public Entity getOpponentEntityAtPosition(Coordinate coordinate){
+        return arenaController.getOpponent().get(coordinate);
+    }
 
     public void spawnOpponent(Entity card, Coordinate pos){
         arenaController.placeEntityOpponent(card, pos);

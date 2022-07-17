@@ -14,6 +14,7 @@ import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
+import de.prog2.dungeontop.utils.ArenaUtils;
 import de.prog2.dungeontop.view.handViews.EnemyHandView;
 import de.prog2.dungeontop.view.handViews.PlayerHandView;
 import javafx.application.Platform;
@@ -306,9 +307,7 @@ public class ArenaController
                 {
                     for (Coordinate c:
                          targets) {
-                        currentArena.getOpponent().remove(c);
-                        arenaGridPane.getChildren().remove(getNodeFromGridPane(c.getX(),c.getY()));
-                        NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(c));
+                        removeEntityInCoordinate(c);
                         AnchorPane anchorPane = new AnchorPane();
                         anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
                         addEventHandler(anchorPane);
@@ -319,6 +318,13 @@ public class ArenaController
                 setSelected(null);
             }
         }
+    }
+
+    public void removeEntityInCoordinate(Coordinate c)
+    {
+        currentArena.getOpponent().remove(c);
+        arenaGridPane.getChildren().remove(getNodeFromGridPane(c.getX(), c.getY()));
+        NetManager.getInstance().getNetworkAPI().sendRemoveEntity(ArenaUtils.invertCoordinate(currentArena, c));
     }
 
     private List<Coordinate> collectTargets(Coordinate sourcePos, Coordinate selectedPos) {

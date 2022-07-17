@@ -27,7 +27,7 @@ public class HealingSpell extends Spell
             for (int y = coordinate.getY() - radius; y <= coordinate.getY() + radius; y++)
             {
                 Coordinate c = new Coordinate(x, y);
-                Entity entity = arena.getOpponent().get(c);
+                Entity entity = arena.getFriendly().get(c);
                 if (entity != null)
                 {
                     EntityController.applyHeal(arena.getFriendly().get(c), heal);
