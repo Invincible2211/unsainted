@@ -230,9 +230,9 @@ public class BattleManager2 {
         GlobalLogger.log(LoggerStringValues.NEXT_ROUND_BOTH_PLAYERS_GET_EGOPOINTS);
         player1.setMax_ego_points(player1.getMax_ego_points() + GameConstants.EGOPOINTS_PER_ROUND_INCREMENT);
         player2.setMax_ego_points(player2.getMax_ego_points() + GameConstants.EGOPOINTS_PER_ROUND_INCREMENT);
-        player1.currentEgoPointsProperty().setValue(player1.getMax_ego_points());
-        player2.currentEgoPointsProperty().setValue(player2.getMax_ego_points());
+        drawNewHand();
         resetEntityMovement();
+        setCurrentEgoPointsToMax();
     }
 
     private void resetEntityMovement() {

@@ -95,6 +95,7 @@ public class NetworkInterpreter extends Thread{
                     GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount());
         } else if (dataPackage instanceof  HandCardReducePackage){
             Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().removeOne());
+            System.out.println("reduce hand card");
         } else if (dataPackage instanceof NextPhasePackage){
             Platform.runLater(() -> BattleManager2.getInstance().nextPhase());
         } else if (dataPackage instanceof PlayerBeginnPackage){

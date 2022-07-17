@@ -13,4 +13,9 @@ public abstract class HandViewAbstract extends HBox
     }
 
     protected abstract void addCard(Card card);
+
+    public void removeOne()
+    {
+        getChildren().remove(0);
+    }
 }

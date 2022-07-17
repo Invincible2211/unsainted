@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
+import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Inventory;
@@ -66,6 +67,7 @@ public class PlayerManager
     public void removeEgoPoints(int amount)
     {
         player.currentEgoPointsProperty().setValue(player.currentEgoPointsProperty().get()-amount);
+        NetManager.getInstance().getNetworkAPI().sendEgopointsChangePackage(amount);
     }
     public int getPlayerEgoPoints()
     {

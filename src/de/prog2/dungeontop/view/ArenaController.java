@@ -396,13 +396,7 @@ public class ArenaController
     @FXML
     public void initialize()
     {
-//        I complain to my Quietscheentschen
-//
-//        About world, full of greedy Menschen;
-//
-//        Kapitalism is bad for working class,
-//
-//        Python gives my Quietschentchen to Arbeitsmarkt pass.
+        labelEgoPointOpponent.textProperty().bind(GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().asString());
         labelEgoPointsPlayer.textProperty().bind(PlayerManager.getInstance().getPlayer().currentEgoPointsProperty().asString());
     }
 
