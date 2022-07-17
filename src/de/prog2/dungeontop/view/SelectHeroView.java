@@ -77,7 +77,7 @@ public class SelectHeroView
             GlobalLogger.warning(LoggerStringValues.NO_CHAR_SELECTED);
             return;
         }
-        
+
         PlayerManager.getInstance().getPlayer().setDeck(DeckController.getRandomDeck(false));
         PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.PLAYER_HANDCARDLIMIT);
         // initialize a new game world and go to the HellView

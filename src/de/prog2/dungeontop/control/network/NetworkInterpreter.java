@@ -97,6 +97,8 @@ public class NetworkInterpreter extends Thread{
             Platform.runLater(() -> BattleManager2.getInstance().nextPhase());
         } else if (dataPackage instanceof PlayerBeginnPackage){
             BattleManager2.getInstance().setStarting(!((PlayerBeginnPackage)dataPackage).isPlayerStarts());
+        }else if (dataPackage instanceof EgoPointsSetPackage){
+            GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(((EgoPointsSetPackage)dataPackage).getAmount());
         }
     }
 

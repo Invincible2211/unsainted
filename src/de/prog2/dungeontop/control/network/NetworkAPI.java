@@ -77,4 +77,8 @@ public class NetworkAPI {
     public void sendStartBattle(boolean isStarting) {
         this.sendData(new PlayerBeginnPackage(isStarting));
     }
+
+    public void sendEgoPointsSetPackage (int amount) {
+        this.sendData(new EgoPointsSetPackage(amount));
+    }
 }

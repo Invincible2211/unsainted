@@ -83,7 +83,13 @@ public class BattleManager2 {
             processButton();
             processLabel();
             instantiateHeroes(arena);
+            setStartstats();
         });
+    }
+
+    private void setStartstats ()
+    {
+
     }
 
     private void instantiateHeroes (Arena arena)
@@ -297,7 +303,7 @@ public class BattleManager2 {
         GlobalLogger.log(LoggerStringValues.CARD_REMOVED_FROM_HAND);
     }
 
-    public void reduceEgoPoints (int amount)
+    public void reduceCurrentEgoPoints (int amount)
     {
         int egopoints = player1.currentEgoPointsProperty().get();
         if (egopoints - amount >= 0) {
@@ -307,6 +313,20 @@ public class BattleManager2 {
         } else {
             GlobalLogger.log(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
         }
+    }
+
+    public void setCurrentEgoPoints (int amount)
+    {
+        player1.currentEgoPointsProperty().set(amount);
+        NetManager.getInstance().getNetworkAPI().sendEgopointsChangePackage(amount);
+        GlobalLogger.log(LoggerStringValues.SET_EGOPOINTS + amount);
+    }
+
+    public void setCurrentEgoPointsToMax ()
+    {
+        player1.currentEgoPointsProperty().set(player1.getMax_ego_points());
+        NetManager.getInstance().getNetworkAPI().sendEgoPointsSetPackage(player1.getMax_ego_points());
+        GlobalLogger.log(LoggerStringValues.SET_EGOPOINTS_TO_MAX);
     }
 
     public void reStackDeckFromDiscard ()
