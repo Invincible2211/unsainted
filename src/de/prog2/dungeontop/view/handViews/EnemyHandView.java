@@ -11,4 +11,9 @@ public class EnemyHandView extends PlayerHandView
     {
         getChildren().add(CardViewController.getEnemyCardView(ArenaViewConstants.HAND_CARD_SCALE));
     }
+
+    public void removeOne()
+    {
+        getChildren().remove(0);
+    }
 }

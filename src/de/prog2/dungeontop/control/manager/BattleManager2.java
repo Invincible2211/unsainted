@@ -401,4 +401,8 @@ public class BattleManager2 {
         return battlePhase;
     }
 
+    public ArenaController getArenaController ()
+    {
+        return arenaController;
+    }
 }

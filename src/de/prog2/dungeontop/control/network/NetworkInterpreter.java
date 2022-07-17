@@ -10,7 +10,9 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
+import de.prog2.dungeontop.view.handViews.EnemyHandView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -92,7 +94,7 @@ public class NetworkInterpreter extends Thread{
             GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(
                     GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount());
         } else if (dataPackage instanceof  HandCardReducePackage){
-            GameManager.getInstance().getOpponentPlayer().getHandCards().remove(GameManager.getInstance().getOpponentPlayer().getHandCards().remove(0));
+            Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().removeOne());
         } else if (dataPackage instanceof NextPhasePackage){
             Platform.runLater(() -> BattleManager2.getInstance().nextPhase());
         } else if (dataPackage instanceof PlayerBeginnPackage){
