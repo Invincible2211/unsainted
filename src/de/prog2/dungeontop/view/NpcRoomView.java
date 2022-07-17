@@ -136,6 +136,7 @@ public class NpcRoomView
                 if (HellView.getCurrHellView() != null)
                 {
                     DungeonTop.getStage().setScene(HellView.getCurrHellView());
+                    AudioManager.getInstance().stopSound(audioUUID);
                     HellView.resumeHellViewBgMusic();
                 }
             });

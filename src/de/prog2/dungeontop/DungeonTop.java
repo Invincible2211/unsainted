@@ -67,7 +67,7 @@ public class DungeonTop extends Application
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
-        testEndGameDialogue();
+        //testEndGameDialogue();
 
         //testArenaView();
         //testBattle();
