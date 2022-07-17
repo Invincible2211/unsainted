@@ -239,6 +239,25 @@ public class ArenaController
                 return;
             }
         }
+        if (BattleManager2.getInstance().isTurn() && (
+                BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_PLACE_CARDS
+                        || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_PLACE_CARDS
+                        || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS
+                        || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)){
+            if (BattleManager2.getInstance().getSelectedHandCard() != null){
+                Card card = BattleManager2.getInstance().getSelectedHandCard();
+                if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost()){
+                    removeHighlight();
+                    Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+                    if (card instanceof SpellCard) {
+                        SpellCard spellCard = (SpellCard) card;
+                        spellCard.getSpell().cast(currentArena,sourcePos);
+                        BattleManager2.getInstance().removeCardFromHand(card);
+                    }
+                }
+                return;
+            }
+        }
         if (selected == null)
         {
             handleSelect(source);
