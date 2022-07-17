@@ -342,7 +342,7 @@ public class BattleManager2 {
     public void reStackDeckFromDiscard ()
     {
         //TODO sound abspielen
-        for (Card card : player1.getDiscardPile().getCards()) {
+        for (int i = 0; i < player1.getDiscardPile().getCards().size();i++) {
             player1.getDeck().getCards().push(player1.getDiscardPile().popCard());
         }
         DeckController.shuffleDeck(player1.getDeck());

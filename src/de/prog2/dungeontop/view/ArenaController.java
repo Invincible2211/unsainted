@@ -10,6 +10,7 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Talent;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
+import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
@@ -21,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import org.apache.commons.lang3.SerializationUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -217,14 +219,16 @@ public class ArenaController
                     if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost()){
                         removeHighlight();
                         PlayerManager.getInstance().removeEgoPoints(card.getSummonCost());
+                        Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
                         if (card instanceof EntityCard){
                             EntityCard entityCard = (EntityCard) card;
-                            Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
                             entityCard.getEntity().setMovement(entityCard.getEntity().getTalent() == Talent.SPEEDKNOT ? entityCard.getEntity().getMaxMovement() : 0);
-                            placeEntityFriendly(entityCard.getEntity(), sourcePos);
+                            placeEntityFriendly(SerializationUtils.clone(entityCard.getEntity()), sourcePos);
                             BattleManager2.getInstance().removeCardFromHand(card);
                         } else {
-                            //TODO Spell casten
+                            SpellCard spellCard = (SpellCard) card;
+                            spellCard.getSpell().cast(currentArena,sourcePos);
+                            BattleManager2.getInstance().removeCardFromHand(card);
                         }
                     }
                     return;
@@ -256,7 +260,7 @@ public class ArenaController
         else
         {
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
-            if (!isOutOfRange(selectedPos, sourcePos))
+            if (!isOutOfRange(selectedPos, sourcePos) && getFriendly().get(sourcePos).getMovement() > 0)
             {
 
                 List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
