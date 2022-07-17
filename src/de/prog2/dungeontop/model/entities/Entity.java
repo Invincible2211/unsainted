@@ -152,4 +152,8 @@ public abstract class Entity implements Serializable
     {
         this.attackRange = attackRange;
     }
+
+    public void resetMovement() {
+        movement.setValue(maxMovement);
+    }
 }

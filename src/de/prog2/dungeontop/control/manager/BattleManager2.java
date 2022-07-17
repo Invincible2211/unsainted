@@ -26,6 +26,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class BattleManager2 {
 
@@ -248,6 +250,12 @@ public class BattleManager2 {
     }
 
     private void resetEntityMovement() {
+        arenaController.getFriendly().values().forEach(new Consumer<Entity>() {
+            @Override
+            public void accept(Entity entity) {
+                entity.resetMovement();
+            }
+        });
     }
 
     @Deprecated

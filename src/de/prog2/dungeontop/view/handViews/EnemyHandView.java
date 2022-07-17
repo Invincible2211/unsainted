@@ -15,7 +15,9 @@ public class EnemyHandView extends PlayerHandView
 
     public void removeOne()
     {
-        getChildren().remove(0);
+        if (!getChildren().isEmpty()){
+            getChildren().remove(0);
+        }
     }
 
     public void addOne() {
