@@ -207,6 +207,7 @@ public class RoomDialogueViewController
         hideStage();
         GlobalLogger.log(LoggerStringValues.START_BATTLE_HANDLER);
         BattleManager2.getInstance().startBattle(room.getArena());
+        HellView.pauseHellViewBgMusic();
         NetManager.getInstance().getNetworkAPI().sendOpenArenaPackage((room).getArena());
     }
 

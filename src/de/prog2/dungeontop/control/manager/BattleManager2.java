@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.control.network.NetManager;
@@ -12,6 +13,7 @@ import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
+import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -62,29 +64,23 @@ public class BattleManager2 {
             this.player2 = GameManager.getInstance().getOpponentPlayer();
             Double random = Math.random();
             musicId = AudioManager.getInstance().playSound(random < 0.25 ? 984 : random < 0.5 ? 983 : random < 0.75 ? 982 : 985, true);
-            if (random>0.5){
-                isStarting = true;
+            if (!GameManager.getInstance().isDM()){
+                if (random>0.5){
+                    isStarting = true;
+                }
+                NetManager.getInstance().getNetworkAPI().sendStartBattle(isStarting);
             }
-            NetManager.getInstance().getNetworkAPI().sendStartBattle(isStarting);
             arenaController.initBattle(arena);
             drawNewHand();
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
             //TODO Hero und DungeonMaster spawnen
-            if (!GameManager.getInstance().isDM()){
-                Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
-                EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
-                peter.setCard(petercard);
-                Coordinate cord = new Coordinate(2,3);
-                arenaController.placeEntityFriendly(peter,cord);
-            }  else {
-                Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
-                EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
-                peter.setCard(petercard);
-                Coordinate cord = new Coordinate(2,3);
-                arenaController.placeEntityFriendly(peter,cord);
-            }
+            Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
+            EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
+            peter.setCard(petercard);
+            Coordinate cord = new Coordinate(0,0);
+            arenaController.placeEntityFriendly(peter,cord);
             battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
             processButton();
             processLabel();
@@ -186,7 +182,7 @@ public class BattleManager2 {
         arenaController.remove(pos);
     }
 
-    public void nextRound(){
+    public void nextPhase(){
         switch (battlePhase){
             case FIRST_DUELLIST_DRAW -> {
                 battlePhase = BattlePhase.SECOND_DUELLIST_DRAW;
@@ -211,10 +207,24 @@ public class BattleManager2 {
             }
             case SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
                 battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
+                newRound();
             }
         }
         processButton();
         processLabel();
+    }
+    
+    private void newRound(){
+        GlobalLogger.log(LoggerStringValues.NEXT_ROUND_BOTH_PLAYERS_GET_EGOPOINTS);
+        player1.setMax_ego_points(player1.getMax_ego_points() + GameConstants.EGOPOINTS_PER_ROUND_INCREMENT);
+        player2.setMax_ego_points(player2.getMax_ego_points() + GameConstants.EGOPOINTS_PER_ROUND_INCREMENT);
+        player1.currentEgoPointsProperty().setNewValue(player1.getMax_ego_points());
+        player2.currentEgoPointsProperty().setNewValue(player2.getMax_ego_points());
+        drawNewHand();
+        resetEntityMovement();
+    }
+
+    private void resetEntityMovement() {
     }
 
     @Deprecated
