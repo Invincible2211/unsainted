@@ -5,6 +5,7 @@ import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.network.Package;
 import de.prog2.dungeontop.model.network.packages.*;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -21,7 +22,9 @@ import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class NetworkInterpreter extends Thread{
 
@@ -104,7 +107,7 @@ public class NetworkInterpreter extends Thread{
             Platform.runLater(() -> GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(((EgoPointsSetPackage)dataPackage).getAmount()));
         } else if (dataPackage instanceof AttackPackage){
             AttackPackage attackPackage = (AttackPackage) dataPackage;
-            Platform.runLater(() -> BattleManager2.getInstance().battle(attackPackage.getAttack(), BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget())));
+            Platform.runLater(() -> BattleManager2.getInstance().battle(attackPackage.getAttack(), List.of(new Entity[]{BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget())})));
         } else if (dataPackage instanceof HandCardIncreasedPackage){
             Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().addOne());
         } else if(dataPackage instanceof ChangeEntityHpPackage){
