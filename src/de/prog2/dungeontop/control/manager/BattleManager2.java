@@ -79,7 +79,7 @@ public class BattleManager2 {
             Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
             EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
             peter.setCard(petercard);
-            Coordinate cord = new Coordinate(0, arena.getHeight()-1);
+            Coordinate cord = new Coordinate(0,arena.getHeight()-1);
             arenaController.placeEntityFriendly(peter,cord);
             battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
             processButton();
