@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.control.network;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.control.manager.BattleManager2;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
@@ -13,7 +14,6 @@ import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
-import de.prog2.dungeontop.view.handViews.EnemyHandView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -21,7 +21,6 @@ import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -109,6 +108,8 @@ public class NetworkInterpreter extends Thread{
             Platform.runLater(() -> BattleManager2.getInstance().battle(attackPackage.getAttack(), List.of(new Entity[]{BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget())})));
         } else if (dataPackage instanceof HandCardIncreasedPackage){
             Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().addOne());
+        } else if(dataPackage instanceof ChangeEntityHpByCoordinatePackage){
+            Platform.runLater(() -> EntityController.applyDamage(BattleManager2.getInstance().getEntityAtPosition(((ChangeEntityHpByCoordinatePackage)dataPackage).getCoordinate()), ((ChangeEntityHpByCoordinatePackage)dataPackage).getAmount()));
         }
     }
 

@@ -24,6 +24,10 @@ public class NetworkAPI {
         this.sendData(new HellPackage(hell, playerCoordinate));
     }
 
+    public void sendChangeEntityHpPackage(Coordinate coordinate, int amount){
+        this.sendData(new ChangeEntityHpByCoordinatePackage(coordinate, amount));
+    }
+
     public void sendEgopointsAddPackage (int amount)
     {
         this.sendData(new EgopointsChangePackage(amount));
