@@ -50,7 +50,7 @@ public class NpcRoomView
     {
         this.room = room;
         this.npcRoomView = createNpcRoomView();
-        audioUUID = AudioManager.getInstance().playSound(991,true);
+        audioUUID = AudioManager.getInstance().playSound(AssetIds.SHOP_BG_MUSIC,true);
     }
 
     // *-------------------------------------- Getter & Setter -----------------------------------------------------* //

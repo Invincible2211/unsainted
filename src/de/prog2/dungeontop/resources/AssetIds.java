@@ -116,6 +116,7 @@ public interface AssetIds
     int PLAYER_WINS = 2;
 
     // Audio Assets
+    int SHOP_BG_MUSIC = 991;
     int MAP_BG_MUSIC = 992;
     int MOUSE_HOVER_SOUND = 999;
     int BUTTON_CLICK_SOUND = 998;
