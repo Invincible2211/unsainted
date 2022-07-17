@@ -272,16 +272,19 @@ public class ArenaController
      */
     private void handleMoveSelected(AnchorPane source, AnchorPane selected)
     {
-        Coordinate currentPos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-        Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
+        if (BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_MINION_ACT || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_MINION_ACT)
+        {
+            Coordinate currentPos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+            Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
 
-        if (selected == null || isOutOfRange(currentPos, selectedPos)) return;
+            if (selected == null || isOutOfRange(currentPos, selectedPos)) return;
 
-        moveSourceToSelectedField(true, currentPos, selectedPos);
+            moveSourceToSelectedField(true, currentPos, selectedPos);
 
-        setSelected(null);
-        removeHighlight();
-        NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
+            setSelected(null);
+            removeHighlight();
+            NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
+        }
     }
 
     private void markAvailabelFields(Coordinate sourcePos){

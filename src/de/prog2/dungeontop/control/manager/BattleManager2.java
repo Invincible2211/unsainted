@@ -104,25 +104,25 @@ public class BattleManager2 {
                     arenaController.setPhaseLabel("Dein Gegner zieht seine Karten");
                 }
                 case SECOND_DUELLIST_DRAW -> {
-                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
+                    arenaController.setPhaseLabel("Du ziehst deine Karten");
                 }
                 case FIRST_DUELLIST_PLACE_CARDS -> {
                     arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
                 }
                 case SECOND_DUELLIST_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Du kannst deine Minions bewegen und mit ihnen angreifen");
+                    arenaController.setPhaseLabel("Du kanst deine Karten platzieren");
                 }
                 case FIRST_DUELLIST_MINION_ACT -> {
                     arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
                 }
                 case SECOND_DUELLIST_MINION_ACT -> {
-                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
+                    arenaController.setPhaseLabel("Du kannst deine Minions bewegen und mit ihnen angreifen");
                 }
                 case FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
                     arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
                 }
                 case SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Du ziehst deine Karten");
+                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
                 }
             }
         } else {
@@ -131,25 +131,25 @@ public class BattleManager2 {
                     arenaController.setPhaseLabel("Du ziehst deine Karten");
                 }
                 case SECOND_DUELLIST_DRAW -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
+                    arenaController.setPhaseLabel("Dein Gegner zieht seine Karten");
                 }
                 case FIRST_DUELLIST_PLACE_CARDS -> {
                     arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
                 }
                 case SECOND_DUELLIST_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
                 }
                 case FIRST_DUELLIST_MINION_ACT -> {
                     arenaController.setPhaseLabel("Du kannst deine Minions bewegen und mit ihnen angreifen");
                 }
                 case SECOND_DUELLIST_MINION_ACT -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
                 }
                 case FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
                     arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
                 }
                 case SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Dein Gegner zieht seine Karten");
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
                 }
             }
         }
@@ -339,7 +339,7 @@ public class BattleManager2 {
         }
     }
 
-    private enum BattlePhase{
+    public enum BattlePhase{
         FIRST_DUELLIST_DRAW, //where first duellist draws cards
         FIRST_DUELLIST_PLACE_CARDS, //first duellist can place cards on arena
         SECOND_DUELLIST_DRAW, //where second duellist draws cards
@@ -370,4 +370,9 @@ public class BattleManager2 {
     public void setStarting(boolean starting) {
         isStarting = starting;
     }
+
+    public BattlePhase getBattlePhase() {
+        return battlePhase;
+    }
+
 }
