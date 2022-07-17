@@ -1,7 +1,6 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
-import de.prog2.dungeontop.control.controller.ArenaBaseController;
 import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.control.network.NetManager;
@@ -75,7 +74,6 @@ public class BattleManager2 {
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
-            //TODO Hero und DungeonMaster spawnen
             Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
             EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
             peter.setCard(petercard);
@@ -226,8 +224,8 @@ public class BattleManager2 {
         GlobalLogger.log(LoggerStringValues.NEXT_ROUND_BOTH_PLAYERS_GET_EGOPOINTS);
         player1.setMax_ego_points(player1.getMax_ego_points() + GameConstants.EGOPOINTS_PER_ROUND_INCREMENT);
         player2.setMax_ego_points(player2.getMax_ego_points() + GameConstants.EGOPOINTS_PER_ROUND_INCREMENT);
-        player1.currentEgoPointsProperty().setNewValue(player1.getMax_ego_points());
-        player2.currentEgoPointsProperty().setNewValue(player2.getMax_ego_points());
+        player1.currentEgoPointsProperty().setValue(player1.getMax_ego_points());
+        player2.currentEgoPointsProperty().setValue(player2.getMax_ego_points());
         drawNewHand();
         resetEntityMovement();
     }
