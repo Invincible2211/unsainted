@@ -72,13 +72,13 @@ public class BattleManager2 {
             }
             arenaController.initBattle(arena);
             DungeonTop.getStage().setScene(scene);
-            List<Entity> entities = TestConstants.getTestEntities();
-            entities.addAll(TestConstants.getTestEntities());
-            Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
-            EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
-            peter.setCard(petercard);
-            Coordinate cord = new Coordinate(0,arena.getHeight()-1);
-            arenaController.placeEntityFriendly(peter,cord);
+            //List<Entity> entities = TestConstants.getTestEntities();
+            //entities.addAll(TestConstants.getTestEntities());
+            //Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
+            //EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
+            //peter.setCard(petercard);
+            //Coordinate cord = new Coordinate(0,arena.getHeight()-1);
+            //arenaController.placeEntityFriendly(peter,cord);
             battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
             processButton();
             processLabel();
