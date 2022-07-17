@@ -25,7 +25,7 @@ public class Player implements Serializable
     private Room currentRoom;
     private int handCardLimit;
     private Hero hero;
-    private Deck discardPile;
+    private Deck discardPile = new Deck();
     private final SerializableSimpleIntegerProperty currentEgoPoints = new SerializableSimpleIntegerProperty(0);
     private transient ObservableList<Card> handCards = FXCollections.observableArrayList();
     private int experiencePoints;

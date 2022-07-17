@@ -7,6 +7,8 @@ import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
@@ -204,6 +206,20 @@ public class ArenaController
         }
         if (source.getChildren().isEmpty()) // if the source is an empty field
         {
+            if (BattleManager2.getInstance().getSelectedHandCard() != null){
+                Card card = BattleManager2.getInstance().getSelectedHandCard();
+                if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost()){
+                    removeHighlight();
+                    PlayerManager.getInstance().removeEgoPoints(card.getSummonCost());
+                    if (card instanceof EntityCard){
+                        EntityCard entityCard = (EntityCard) card;
+                        Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+                        placeEntityFriendly(entityCard.getEntity(), sourcePos);
+                        BattleManager2.getInstance().removeCardFromHand(card);
+                    }
+                }
+                return;
+            }
             if (selected != null){
                 handleMoveSelected(source, selected);
                 return;
@@ -266,9 +282,11 @@ public class ArenaController
             return;
         }
         removeHighlight();
-        source.setStyle("-fx-background-color: black;");
-        markAvailabelFields(sourcePos);
-        setSelected(source);
+        if (getFriendly().containsKey(sourcePos)){
+            source.setStyle("-fx-background-color: black;");
+            markAvailabelFields(sourcePos);
+            setSelected(source);
+        }
     }
 
     /**
@@ -284,12 +302,13 @@ public class ArenaController
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
 
             if (selected == null || isOutOfRange(currentPos, selectedPos)) return;
-
-            moveSourceToSelectedField(true, currentPos, selectedPos);
-
-            setSelected(null);
-            removeHighlight();
-            NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
+            if (getFriendly().get(selectedPos).getMovement() > 0){
+                getFriendly().get(selectedPos).setMovement(getFriendly().get(selectedPos).getMovement()-1);
+                moveSourceToSelectedField(true, currentPos, selectedPos);
+                setSelected(null);
+                removeHighlight();
+                NetManager.getInstance().getNetworkAPI().sendMoveEntity(invertCoordinate(selectedPos), invertCoordinate(currentPos));
+            }
         }
     }
 
