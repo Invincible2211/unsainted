@@ -234,12 +234,8 @@ public class BattleManager2 {
     }
 
     private void resetEntityMovement() {
-        arenaController.getFriendly().values().forEach(new Consumer<Entity>() {
-            @Override
-            public void accept(Entity entity) {
-                entity.resetMovement();
-            }
-        });
+        arenaController.getFriendly().values().forEach(Entity::resetMovement);
+        arenaController.getOpponent().values().forEach(Entity::resetMovement);
     }
 
     @Deprecated
@@ -256,12 +252,15 @@ public class BattleManager2 {
         }
     }
 
-    public List<Entity> battle(Entity entity1, Entity entity2)
+    public List<Entity> battle(Entity entity1, List<Entity> targets)
     {
-        EntityController.applyDamage(entity2, entity1.getAttackDamage());
         List<Entity> combatants = new ArrayList<>();
-        if (entity2.getHp()>0){
-            combatants.add(entity2);
+        for (Entity e:
+             targets) {
+            EntityController.applyDamage(e, entity1.getAttackDamage());
+            if (e.getHp()>0){
+                combatants.add(e);
+            }
         }
         if (player1.getHp()<=0){
             endBattle(GameManager.getInstance().isDM());
