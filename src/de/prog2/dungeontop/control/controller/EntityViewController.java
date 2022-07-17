@@ -4,10 +4,13 @@ import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.views.EntityConstants;
 import de.prog2.dungeontop.utils.ImageAssetUtils;
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+
+import javax.naming.Binding;
 
 public abstract class EntityViewController
 {
@@ -48,6 +51,17 @@ public abstract class EntityViewController
         Label attackL = modifyLabel(new Label("" + entity.getAttackDamage()), EntityConstants.ATTACK_X, EntityConstants.ATTACK_Y, scale);
         Label hpL = modifyLabel(new Label("" + entity.getHp()),EntityConstants.HP_X,EntityConstants.HP_Y, scale);
         Label moveL = modifyLabel(new Label("" + entity.getMovement()), EntityConstants.MOVE_X,EntityConstants.MOVE_Y, scale);
+
+        // bind stats from entity to it's view
+        hpL.textProperty().bind(Bindings.createStringBinding(
+                () -> "" + entity.getHp(),
+                entity.getHpProperty()
+        ));
+
+        moveL.textProperty().bind(Bindings.createStringBinding(
+                () -> "" + entity.getMovement(),
+                entity.getMovementProperty()
+        ));
 
         anchorPane.getChildren().add(attackL);
         anchorPane.getChildren().add(hpL);

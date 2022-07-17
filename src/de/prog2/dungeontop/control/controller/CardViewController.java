@@ -12,9 +12,14 @@ import de.prog2.dungeontop.resources.views.CardConstants;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.cardViews.*;
+import javafx.beans.binding.Bindings;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 public abstract class CardViewController
 {
@@ -92,7 +97,7 @@ public abstract class CardViewController
      */
     public static Node getCardDetailView(Card card, double scale)
     {
-        Node cardView = null;
+        Parent cardView = null;
         try
         {
             FXMLLoader loader = new FXMLLoader();
@@ -100,6 +105,40 @@ public abstract class CardViewController
             if(card instanceof EntityCard)
             {
                 cardView = loader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ENTITY_CARD_DETAIL_VIEW_FXML));
+                /*
+                for ( Node node : cardView.getChildrenUnmodifiable())
+                {
+                    if (node.getId().equals("hpContainer"))
+                    {
+                        System.out.println("hpContainer");
+                        for (Node labelWhere : ((StackPane)node).getChildren())
+                        {
+                            if (labelWhere instanceof Label)
+                            {
+                                ((Label)labelWhere).textProperty().bind(Bindings.createStringBinding(
+                                        () -> "" + ((EntityCard)card).getEntity().getHp(),
+                                        ((EntityCard)card).getEntity().getHpProperty()
+                                ));
+                            }
+                        }
+                    }
+
+                    else if (node.getId().equals("movementContainer"))
+                    {
+                        System.out.println("movementContainer");
+                        for (Node labelWhere : ((StackPane)node).getChildren())
+                        {
+                            if (labelWhere instanceof Label)
+                            {
+                                ((Label)labelWhere).textProperty().bind(Bindings.createStringBinding(
+                                        () -> "" + ((EntityCard)card).getEntity().getMovement(),
+                                        ((EntityCard)card).getEntity().getMovementProperty()
+                                ));
+                            }
+                        }
+                    }
+                }
+                */
             }
             else if(card instanceof SpellCard)
             {
@@ -165,10 +204,14 @@ public abstract class CardViewController
         controller.getEntityNameLabel().setText(entity.getName());
 
         // HP
-        controller.getHpLabel().setText(entity.getHp() + "");
+        controller.getHpLabel().textProperty().bind(Bindings.createStringBinding(
+                () -> "" + entity.getHp(), entity.getHpProperty()
+        ));
         controller.getHpImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.HP_ICON));
         // Movement
-        controller.getMovementLabel().setText(entity.getMovement() + "");
+        controller.getMovementLabel().textProperty().bind(Bindings.createStringBinding(
+                () -> "" + card.getEntity().getMovement(), card.getEntity().getMovementProperty()
+        ));
         controller.getMovementImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.MOVEMENT_ICON));
         // Attack
         controller.getAttackLabel().setText(entity.getAttackDamage() + "");
@@ -189,10 +232,14 @@ public abstract class CardViewController
         controller.getEntityNameLabel().setText(entity.getName());
 
         // HP
-        controller.getHpLabel().setText(entity.getHp() + "");
+        controller.getHpLabel().textProperty().bind(Bindings.createStringBinding(
+                () -> "" + entity.getHp(), entity.getHpProperty()
+        ));
         controller.getHpImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.HP_ICON));
         // Movement
-        controller.getMovementLabel().setText(entity.getMovement() + "");
+        controller.getMovementLabel().textProperty().bind(Bindings.createStringBinding(
+                () -> "" + card.getEntity().getMovement(), card.getEntity().getMovementProperty()
+        ));
         controller.getMovementImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.MOVEMENT_ICON));
         // Attack
         controller.getAttackLabel().setText(entity.getAttackDamage() + "");

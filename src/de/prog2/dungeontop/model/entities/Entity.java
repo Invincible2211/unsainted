@@ -14,7 +14,7 @@ public abstract class Entity implements Serializable
     private String name;
     private SerializableSimpleIntegerProperty hp;
     private int attackDamage = 0;
-    private int movement = 0;
+    private SerializableSimpleIntegerProperty movement;
     private final int maxMovement;
     private int assetId;
     private final Talent talent;
@@ -28,6 +28,7 @@ public abstract class Entity implements Serializable
     {
         this.name = name;
         this.hp = new SerializableSimpleIntegerProperty(hp);
+        this.movement = new SerializableSimpleIntegerProperty(movement);
         this.attackDamage = attackDamage;
         this.defense = defense;
         this.attackRange = attackRange;
@@ -70,12 +71,16 @@ public abstract class Entity implements Serializable
 
     public int getMovement()
     {
-        return movement;
+        return movement.getValue();
     }
 
     public void setMovement(int movement)
     {
-        this.movement = movement;
+        this.movement.setValue(movement);
+    }
+    public SerializableSimpleIntegerProperty getMovementProperty ()
+    {
+        return this.movement;
     }
 
     public Coordinate getPosition()

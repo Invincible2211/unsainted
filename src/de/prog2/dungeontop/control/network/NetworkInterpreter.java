@@ -101,7 +101,7 @@ public class NetworkInterpreter extends Thread{
             GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(((EgoPointsSetPackage)dataPackage).getAmount());
         } else if (dataPackage instanceof AttackPackage){
             AttackPackage attackPackage = (AttackPackage) dataPackage;
-            BattleManager2.getInstance().battle(attackPackage.getAttack(), BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget()));
+            Platform.runLater(() -> BattleManager2.getInstance().battle(attackPackage.getAttack(), BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget())));
         }
     }
 
