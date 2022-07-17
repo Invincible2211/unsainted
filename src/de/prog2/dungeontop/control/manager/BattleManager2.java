@@ -163,6 +163,7 @@ public class BattleManager2 {
                     HellView.resumeHellViewBgMusic();
                 }
                 DungeonTop.getStage().setScene(HellView.getCurrHellView());
+
             } else {
                 GameManager.getInstance().endGame();
             }
@@ -271,6 +272,18 @@ public class BattleManager2 {
             endBattle(!GameManager.getInstance().isDM());
         }
         return combatants;
+    }
+
+    public void applyDamage(Coordinate coordinate, int damage){
+        EntityController.applyDamage(getEntityAtPosition(coordinate),damage);
+        if (getEntityAtPosition(coordinate).getHp()<=0){
+            arenaController.remove(coordinate);
+        }
+        if (player1.getHp()<=0){
+            endBattle(GameManager.getInstance().isDM());
+        } else if (player2.getHp() <= 0){
+            endBattle(!GameManager.getInstance().isDM());
+        }
     }
 
     public void drawNewHand()
