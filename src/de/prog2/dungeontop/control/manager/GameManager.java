@@ -130,6 +130,7 @@ public class GameManager {
     public void beginBattle(Arena arena)
     {
         BattleManager2.getInstance().startBattle(arena);
+        HellView.pauseHellViewBgMusic();
         /*
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {
