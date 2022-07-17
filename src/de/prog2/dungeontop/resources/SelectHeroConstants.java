@@ -66,5 +66,6 @@ public interface SelectHeroConstants
     Hero DUNGEON_MASTER = new Hero(DUNGEON_MASTER_NAME, DM_HP, DM_ATK, DM_DEF, 1, DM_MOVES,
             DM_ARTIFACT_SLOTS, DM_TALENT, AssetIds.DM_ICO);
     EntityCard DM_CARD = new EntityCard(DUNGEON_MASTER, 0,0,0,0,-1);
+
     int PLAYER_HANDCARDLIMIT = 5;
 }

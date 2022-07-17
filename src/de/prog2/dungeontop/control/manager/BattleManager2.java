@@ -252,16 +252,16 @@ public class BattleManager2 {
     public List<Entity> battle(Entity entity1, Entity entity2)
     {
         EntityController.applyDamage(entity2, entity1.getAttackDamage());
-        List<Entity> cardList = new ArrayList<>();
+        List<Entity> combatants = new ArrayList<>();
         if (entity2.getHp()>0){
-            cardList.add(entity2);
+            combatants.add(entity2);
         }
         if (player1.getHp()<=0){
             endBattle(GameManager.getInstance().isDM());
         } else if (player2.getHp() <= 0){
             endBattle(!GameManager.getInstance().isDM());
         }
-        return cardList;
+        return combatants;
     }
 
     public void drawNewHand()

@@ -228,12 +228,12 @@ public class ArenaController
         else
         {
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
-            List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
+            List<Entity> combatants = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
             arenaGridPane.getChildren().remove(source);
             currentArena.getOpponent().remove(sourcePos);
-            if (!cards.isEmpty())
+            if (!combatants.isEmpty())
             {
-                getOpponent().put(sourcePos, cards.get(0));
+                getOpponent().put(sourcePos, combatants.get(0));
             }
             else
             {

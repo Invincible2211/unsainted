@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
@@ -76,11 +77,8 @@ public class SelectHeroView
             GlobalLogger.warning(LoggerStringValues.NO_CHAR_SELECTED);
             return;
         }
-
-        //TODO NOT TESTDECK
-        for (Card card :TestConstants.getTestCards()) {
-            PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
-        }
+        
+        PlayerManager.getInstance().getPlayer().setDeck(DeckController.getRandomDeck(false));
         PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.PLAYER_HANDCARDLIMIT);
         // initialize a new game world and go to the HellView
         if (GameManager.getInstance().getGameWorld() == null)
