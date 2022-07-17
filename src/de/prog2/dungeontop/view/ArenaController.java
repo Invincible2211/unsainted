@@ -9,6 +9,7 @@ import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.view.handViews.EnemyHandView;
 import de.prog2.dungeontop.view.handViews.PlayerHandView;
 import javafx.fxml.FXML;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class ArenaController
 {
-    private double scale;
+    private double tilepercentScale;
 
     private AnchorPane selected = null;
 
@@ -73,6 +74,11 @@ public class ArenaController
         clear();
 
         currentArena = arena;
+        setupBattlefield(arena);
+    }
+
+    private void setupBattlefield (Arena arena)
+    {
         arenaGridPane = new GridPane();
         for (int i = 0; i < arena.getWidth(); i++) {
             ColumnConstraints colConst = new ColumnConstraints();
@@ -84,16 +90,20 @@ public class ArenaController
             rowConst.setPercentHeight(100.0 / arena.getWidth());
             arenaGridPane.getRowConstraints().add(rowConst);
         }
-        arenaGridPane.setPrefSize(680, 680);
-        arenaGridPane.setMaxSize(680, 680);
-        arenaGridPane.setLayoutX(370);
+
+        arenaGridPane.setPrefSize(ArenaViewConstants.BATTLEFIELD_SIZE_X,ArenaViewConstants.BATTLEFIELD_SIZE_Y);
+        arenaGridPane.setMaxSize(ArenaViewConstants.BATTLEFIELD_SIZE_X,ArenaViewConstants.BATTLEFIELD_SIZE_Y);
+        arenaGridPane.setLayoutX(ArenaViewConstants.BATTLEFIELD_X_SIDE_OFFSET);
         arenaGridPane.setGridLinesVisible(true);
 
-        scale = (double)680/(double)arena.getHeight()/(double)170;
+        tilepercentScale = ArenaViewConstants.BATTLEFIELD_SIZE_X/(double) arena.getHeight()/ArenaViewConstants.BATTLEFIELD_TILE_TARGET_SIZE;
+        double prefwith = ArenaViewConstants.BATTLEFIELD_TILE_TARGET_SIZE* tilepercentScale;
+        double prefheight = ArenaViewConstants.BATTLEFIELD_TILE_TARGET_SIZE* tilepercentScale;
+
         for (int i = 0; i < arena.getWidth(); i++) {
             for (int j = 0; j < arena.getHeight(); j++) {
                 AnchorPane anchorPane = new AnchorPane();
-                anchorPane.setPrefSize(170*scale,170*scale);
+                anchorPane.setPrefSize(prefwith,prefheight);
                 addEventHandler(anchorPane);
                 arenaGridPane.add(anchorPane,i,j);
             }
@@ -129,7 +139,7 @@ public class ArenaController
 
     private AnchorPane placeEntity (Entity entity)
     {
-        AnchorPane anchorPane = EntityViewController.getEntityView(entity, scale);
+        AnchorPane anchorPane = EntityViewController.getEntityView(entity, tilepercentScale);
         anchorPane.setOnMouseEntered(event -> cardView.getChildren().add(CardViewController.getCardDetailView(entity.getCard(),1)));
         anchorPane.setOnMouseExited(event -> cardView.getChildren().clear());
         addEventHandler(anchorPane);
@@ -228,7 +238,7 @@ public class ArenaController
             {
                 NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(sourcePos));
                 AnchorPane anchorPane = new AnchorPane();
-                anchorPane.setPrefSize(170*scale, 170*scale);
+                anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
                 addEventHandler(anchorPane);
                 arenaGridPane.add(anchorPane, sourcePos.getX(), sourcePos.getY());
             }
@@ -368,7 +378,7 @@ public class ArenaController
     public void remove(Coordinate pos) {
         currentArena.getFriendly().remove(pos);
         AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setPrefSize(170*scale, 170*scale);
+        anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
         addEventHandler(anchorPane);
         AnchorPane target = getNodeFromGridPane(pos.getX(), pos.getY());
         arenaGridPane.getChildren().remove(target);
