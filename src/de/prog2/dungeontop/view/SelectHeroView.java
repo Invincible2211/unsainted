@@ -7,6 +7,7 @@ import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.SelectHeroConstants;
@@ -76,7 +77,7 @@ public class SelectHeroView
             GlobalLogger.warning(LoggerStringValues.NO_CHAR_SELECTED);
             return;
         }
-
+        PlayerManager.getInstance().getPlayer().setHandCardLimit(playerHero.getHandCardLimit());
         PlayerManager.getInstance().getPlayer().setDeck(DeckController.getRandomDeck(false));
         // initialize a new game world and go to the HellView
         if (GameManager.getInstance().getGameWorld() == null)
