@@ -206,19 +206,25 @@ public class ArenaController
         }
         if (source.getChildren().isEmpty()) // if the source is an empty field
         {
-            if (BattleManager2.getInstance().getSelectedHandCard() != null){
-                Card card = BattleManager2.getInstance().getSelectedHandCard();
-                if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost()){
-                    removeHighlight();
-                    PlayerManager.getInstance().removeEgoPoints(card.getSummonCost());
-                    if (card instanceof EntityCard){
-                        EntityCard entityCard = (EntityCard) card;
-                        Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-                        placeEntityFriendly(entityCard.getEntity(), sourcePos);
-                        BattleManager2.getInstance().removeCardFromHand(card);
+            if (BattleManager2.getInstance().isTurn() && (
+                    BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_PLACE_CARDS
+            || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_PLACE_CARDS
+            || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS
+            || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)){
+                if (BattleManager2.getInstance().getSelectedHandCard() != null){
+                    Card card = BattleManager2.getInstance().getSelectedHandCard();
+                    if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost()){
+                        removeHighlight();
+                        PlayerManager.getInstance().removeEgoPoints(card.getSummonCost());
+                        if (card instanceof EntityCard){
+                            EntityCard entityCard = (EntityCard) card;
+                            Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+                            placeEntityFriendly(entityCard.getEntity(), sourcePos);
+                            BattleManager2.getInstance().removeCardFromHand(card);
+                        }
                     }
+                    return;
                 }
-                return;
             }
             if (selected != null){
                 handleMoveSelected(source, selected);

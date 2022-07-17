@@ -65,11 +65,11 @@ public class PlayerManager
     }
     public void removeEgoPoints(int amount)
     {
-        player.setMax_ego_points(player.getMax_ego_points() - amount);
+        player.currentEgoPointsProperty().setValue(player.currentEgoPointsProperty().get()-amount);
     }
     public int getPlayerEgoPoints()
     {
-        return player.getMax_ego_points();
+        return player.currentEgoPointsProperty().get();
     }
 
     public void addExp(int amount)
