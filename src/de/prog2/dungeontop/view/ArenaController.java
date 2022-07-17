@@ -204,8 +204,10 @@ public class ArenaController
         }
         if (source.getChildren().isEmpty()) // if the source is an empty field
         {
-            handleMoveSelected(source, selected);
-            return;
+            if (selected == null){
+                handleMoveSelected(source, selected);
+                return;
+            }
         }
         if (selected == null)
         {

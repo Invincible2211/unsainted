@@ -77,4 +77,8 @@ public class NetworkAPI {
     public void sendStartBattle(boolean isStarting) {
         this.sendData(new PlayerBeginnPackage(isStarting));
     }
+
+    public void sendAttackPackage(Entity attack,  Coordinate target){
+        this.sendData(new AttackPackage(attack,target));
+    }
 }
