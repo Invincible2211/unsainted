@@ -157,12 +157,13 @@ public class BattleManager2 {
                 {
                     GameManager.getInstance().getGameWorld().getNextHell();
                     HellView.restartHellViewBgMusic();
+                    NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
+                    return;
                 }
-                else
-                {
+                    arenaController.clearField();
                     HellView.resumeHellViewBgMusic();
-                }
-                DungeonTop.getStage().setScene(HellView.getCurrHellView());
+                    //TODO: setscene auf belohnung aussuchen etc.
+                    DungeonTop.getStage().setScene(HellView.getCurrHellView());
 
             } else {
                 GameManager.getInstance().endGame();
@@ -265,11 +266,6 @@ public class BattleManager2 {
             if (e.getHp()>0){
                 combatants.add(e);
             }
-        }
-        if (player1.getHp()<=0){
-            endBattle(GameManager.getInstance().isDM());
-        } else if (player2.getHp() <= 0){
-            endBattle(!GameManager.getInstance().isDM());
         }
         return combatants;
     }

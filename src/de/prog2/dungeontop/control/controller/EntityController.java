@@ -109,7 +109,6 @@ public class EntityController
                 GlobalLogger.log(LoggerStringValues.HERO_DIED_GAME_OVER);
             }
             BattleManager2.getInstance().getArenaController().remove(entity.getPosition());
-
         }
         return entity.getHp() > 0;
     }

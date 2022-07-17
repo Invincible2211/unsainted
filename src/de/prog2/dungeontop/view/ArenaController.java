@@ -532,6 +532,7 @@ public class ArenaController
     public Label getLabelEgoPointOpponent() {
         return labelEgoPointOpponent;
     }
+
     public AnchorPane getCardDetailViewContainer() {
         return cardView;
     }
@@ -540,4 +541,17 @@ public class ArenaController
         return nextPhaseButton;
     }
 
+    public void clearField ()
+    {
+        for (Node node : arenaGridPane.getChildren()) {
+            if (node instanceof AnchorPane){
+                AnchorPane pane = (AnchorPane) node;
+                pane.setStyle("-fx-background-color: none;");
+            }
+        }
+        currentArena.getArenaHashmap().clear();
+        currentArena.getOpponent().clear();
+        currentArena.getFriendly().clear();
+        GameManager.getInstance().getOpponentPlayer().getHero().setHp(GameManager.getInstance().getOpponentPlayer().getHero().getCard().getEntity().getHp());
+    }
 }
