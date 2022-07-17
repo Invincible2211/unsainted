@@ -74,7 +74,7 @@ public class BattleManager2 {
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
-            Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
+            Entity peter = new Minion("Peter",10,4,4, 3,410, 211);
             EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
             peter.setCard(petercard);
             Coordinate cord = new Coordinate(0,arena.getHeight()-1);
@@ -269,6 +269,18 @@ public class BattleManager2 {
             endBattle(!GameManager.getInstance().isDM());
         }
         return combatants;
+    }
+
+    public void applyDamage(Coordinate coordinate, int damage){
+        EntityController.applyDamage(getEntityAtPosition(coordinate),damage);
+        if (getEntityAtPosition(coordinate).getHp()<=0){
+            arenaController.remove(coordinate);
+        }
+        if (player1.getHp()<=0){
+            endBattle(GameManager.getInstance().isDM());
+        } else if (player2.getHp() <= 0){
+            endBattle(!GameManager.getInstance().isDM());
+        }
     }
 
     public void drawNewHand()
