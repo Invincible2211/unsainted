@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.resources;
 
-import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 

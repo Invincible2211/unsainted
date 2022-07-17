@@ -63,7 +63,7 @@ public class NetManager extends Thread{
         }
         try {
             // TODO: remove magic number
-            sleep(10000);
+            sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

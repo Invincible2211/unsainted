@@ -175,9 +175,10 @@ public abstract class CardViewController
         ));
         controller.getHpImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.HP_ICON));
         // Movement
-        controller.getMovementLabel().textProperty().bind(Bindings.createStringBinding(
-                () -> "" + card.getEntity().getMovement(), card.getEntity().getMovementProperty()
-        ));
+        controller.getMovementLabel().setText(entity.getMaxMovement() + "");
+//        controller.getMovementLabel().textProperty().bind(Bindings.createStringBinding(
+//                () -> "" + card.getEntity().getMaxMovement(), card.getEntity().getMovementProperty()
+//        ));
         controller.getMovementImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.MOVEMENT_ICON));
         // Attack
         controller.getAttackLabel().setText(entity.getAttackDamage() + "");
@@ -203,9 +204,10 @@ public abstract class CardViewController
         ));
         controller.getHpImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.HP_ICON));
         // Movement
-        controller.getMovementLabel().textProperty().bind(Bindings.createStringBinding(
-                () -> "" + card.getEntity().getMovement(), card.getEntity().getMovementProperty()
-        ));
+        controller.getAttackLabel().setText(entity.getAttackDamage() + "");
+//        controller.getMovementLabel().textProperty().bind(Bindings.createStringBinding(
+//                () -> "" + card.getEntity().getMovement(), card.getEntity().getMovementProperty()
+//        ));
         controller.getMovementImageView().imageProperty().setValue(AssetsManager.getImageByAssetId(AssetIds.MOVEMENT_ICON));
         // Attack
         controller.getAttackLabel().setText(entity.getAttackDamage() + "");

@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.model.spells;
 
 import de.prog2.dungeontop.control.controller.EntityController;
+import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 
@@ -24,7 +25,11 @@ public class HealingSpell extends Spell
             for (int y = coordinate.getY() - radius; y <= coordinate.getY() + radius; y++)
             {
                 Coordinate c = new Coordinate(x, y);
-                EntityController.applyHeal(arena.getFriendly().get(c), heal);
+                Entity entity = arena.getOpponent().get(c);
+                if (entity != null)
+                {
+                    EntityController.applyHeal(arena.getFriendly().get(c), heal);
+                }
             }
         }
     }
