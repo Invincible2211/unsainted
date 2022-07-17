@@ -5,9 +5,11 @@ import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
+import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.SelectHeroConstants;
+import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -75,6 +77,10 @@ public class SelectHeroView
             return;
         }
 
+        //TODO NOT TESTDECK
+        for (Card card :TestConstants.getTestCards()) {
+            PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
+        }
         // initialize a new game world and go to the HellView
         if (GameManager.getInstance().getGameWorld() == null)
             GameManager.getInstance().setGameWorld(new World(WorldConstants.HELL_COUNT));
@@ -117,6 +123,7 @@ public class SelectHeroView
         getHeroDefense().setText(SelectHeroConstants.PLAYER_DEF + hero.getDefense());
         getHeroMaxMoves().setText(SelectHeroConstants.PLAYER_MAX_MOVES + hero.getMaxMovement());
         getHeroTalent().setText(SelectHeroConstants.PLAYER_TALENT + hero.getTalent());
+
     }
 
     //Get- und Setters
