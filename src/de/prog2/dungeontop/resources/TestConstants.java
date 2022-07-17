@@ -3,6 +3,7 @@ package de.prog2.dungeontop.resources;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
+import de.prog2.dungeontop.model.game.Deck;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.model.spells.DamageSpell;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public interface TestConstants
 {
+
     static List<Card> getTestCards()
     {
         ArrayList<Card> cards = new ArrayList<>();

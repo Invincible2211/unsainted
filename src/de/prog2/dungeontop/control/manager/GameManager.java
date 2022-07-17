@@ -3,12 +3,14 @@ package de.prog2.dungeontop.control.manager;
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
 import de.prog2.dungeontop.control.file.GameSaveFileWriter;
+import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.GameState;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -129,18 +131,12 @@ public class GameManager {
      */
     public void beginBattle(Arena arena)
     {
-        BattleManager2.getInstance().startBattle(arena);
-        /*
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        try {
-            Parent root = fxmlLoader.load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.ARENABASE_VIEW));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (isDM()){
+            for (Card card : TestConstants.getTestCards()) {
+                PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
+            }
         }
-        BattleManager.getInstance().startBattle(PlayerManager.getInstance().getPlayer(), this.opponentPlayer, PlayerManager.getInstance().getPlayer().getDeck(), opponentPlayer.getDeck(), new Arena(4,4),fxmlLoader.getController());
-
-
-         */
+        BattleManager2.getInstance().startBattle(arena);
         this.currentState = GameState.BATTLE;
     }
 
