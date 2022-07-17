@@ -220,7 +220,7 @@ public class ArenaController
                         if (card instanceof EntityCard){
                             EntityCard entityCard = (EntityCard) card;
                             Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-                            entityCard.getEntity().setMovement(entityCard.getEntity().getTalent() == Talent.SPEEDKNOT ? 0 : entityCard.getEntity().getMaxMovement());
+                            entityCard.getEntity().setMovement(entityCard.getEntity().getTalent() == Talent.SPEEDKNOT ? entityCard.getEntity().getMaxMovement() : 0);
                             placeEntityFriendly(entityCard.getEntity(), sourcePos);
                             BattleManager2.getInstance().removeCardFromHand(card);
                         } else {
