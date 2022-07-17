@@ -295,8 +295,9 @@ public class BattleManager2 {
     
     public void discardHand ()
     {
-        for (Card card : player1.getHandCards()) {
-        removeCardFromHand(card);
+        for (Iterator<Card> cardIterator = player1.getHandCards().iterator(); cardIterator.hasNext();) {
+            Card card = cardIterator.next();
+            removeCardFromHand(card);
         }
     }
 
