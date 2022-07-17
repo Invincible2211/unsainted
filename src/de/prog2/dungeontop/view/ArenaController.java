@@ -281,44 +281,56 @@ public class ArenaController
         else
         {
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
-            if (!isOutOfRange(selectedPos, sourcePos, getFriendly().get(selectedPos).getAttackRange()) && getFriendly().get(selectedPos).getMovement() > 0)
-            {
-                System.out.println("Hallo");
-                List<Coordinate> targets = collectTargets(selectedPos,sourcePos);
-                List<Entity> targetedEntities = new ArrayList<>();
-                HashMap<Entity,Coordinate> oldCoordinates = new HashMap<>();
-                for (Coordinate coordinate :
-                        targets) {
-                    Entity e = getOpponent().remove(coordinate);
-                    targetedEntities.add(e);
-                    oldCoordinates.put(e,coordinate);
-                }
-                List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), targetedEntities);
-                if (!cards.isEmpty())
-                {
-                    for (Entity e:
-                         cards) {
-                        getOpponent().put(oldCoordinates.get(e), e);
-                        NetManager.getInstance().getNetworkAPI().sendAttackPackage(getFriendly().get(selectedPos), invertCoordinate(oldCoordinates.get(e)));
-                    }
-                }
-                else
-                {
-                    for (Coordinate c:
-                         targets) {
-                        currentArena.getOpponent().remove(c);
-                        arenaGridPane.getChildren().remove(getNodeFromGridPane(c.getX(),c.getY()));
-                        NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(c));
-                        AnchorPane anchorPane = new AnchorPane();
-                        anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
-                        addEventHandler(anchorPane);
-                        arenaGridPane.add(anchorPane, c.getX(), c.getY());
-                    }
-                }
-                removeHighlight();
-                setSelected(null);
-            }
+            battle(selectedPos, sourcePos);
         }
+    }
+
+    private void battle(Coordinate selectedPos, Coordinate sourcePos){
+        if (!isOutOfRange(selectedPos, sourcePos, getFriendly().get(selectedPos).getAttackRange()) && getFriendly().get(selectedPos).getMovement() > 0)
+        {
+            System.out.println("Hallo");
+            List<Coordinate> targets = collectTargets(selectedPos,sourcePos);
+            List<Entity> targetedEntities = new ArrayList<>();
+            HashMap<Entity,Coordinate> oldCoordinates = new HashMap<>();
+            for (Coordinate coordinate :
+                    targets) {
+                Entity e = getOpponent().remove(coordinate);
+                targetedEntities.add(e);
+                oldCoordinates.put(e,coordinate);
+            }
+            List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), targetedEntities);
+            if (!cards.isEmpty())
+            {
+                for (Entity e:
+                        cards) {
+                    getOpponent().put(oldCoordinates.remove(e), e);
+                    NetManager.getInstance().getNetworkAPI().sendAttackPackage(getFriendly().get(selectedPos), invertCoordinate(oldCoordinates.get(e)));
+                }
+                for (Entity e:
+                        oldCoordinates.keySet()) {
+                    Coordinate coordinate = oldCoordinates.get(e);
+                    removeNetity(coordinate);
+                }
+            }
+            else
+            {
+                for (Coordinate c:
+                        targets) {
+                    removeNetity(c);
+                }
+            }
+            removeHighlight();
+            setSelected(null);
+        }
+    }
+
+    private void removeNetity(Coordinate coordinate) {
+        arenaGridPane.getChildren().remove(getNodeFromGridPane(coordinate.getX(),coordinate.getY()));
+        NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(coordinate));
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
+        addEventHandler(anchorPane);
+        arenaGridPane.add(anchorPane, coordinate.getX(), coordinate.getY());
     }
 
     private List<Coordinate> collectTargets(Coordinate sourcePos, Coordinate selectedPos) {
