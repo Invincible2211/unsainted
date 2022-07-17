@@ -120,8 +120,8 @@ public class DungeonTop extends Application
         HBox box = new HBox();
         for (Card card : cards)
         {
-            Node cardView = CardViewController.getEnemyCardView(1);
-            //Node cardView = CardViewController.getCardView(card, 1);
+            //Node cardView = CardViewController.getEnemyCardView(1);
+            Node cardView = CardViewController.getCardView(card, 1);
             box.getChildren().add(cardView);
         }
         Scene scene = new Scene(box);

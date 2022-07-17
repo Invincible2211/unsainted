@@ -1,7 +1,9 @@
 package de.prog2.dungeontop.resources;
 
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.entities.Talent;
+import de.prog2.dungeontop.model.game.EntityCard;
 
 public interface SelectHeroConstants
 {
@@ -17,7 +19,7 @@ public interface SelectHeroConstants
             SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.WARRIOR_DEF, 1,
             SelectHeroConstants.WARRIOR_MAX_MOVES, WARRIOR_ARTIFACT_SLOTS,
             WARRIOR_TALENT, AssetIds.WARRIOR_ICO);
-
+    EntityCard WARRIOR_CARD = new EntityCard(WARRIOR, 0,0,0,0,-1);
     // mage
     String MAGE_NAME = "Magier";
     int MAGE_HP = 8;
@@ -30,6 +32,7 @@ public interface SelectHeroConstants
             SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_DEF, 1,
             SelectHeroConstants.MAGE_MAX_MOVES, MAGE_ARTIFACT_SLOTS,
             MAGE_TALENT, AssetIds.MAGE_ICO);
+    EntityCard MAGE_CARD = new EntityCard(MAGE, 0,0,0,0,-1);
 
     // rogue
     String ROGUE_NAME = "Schurke";
@@ -43,6 +46,7 @@ public interface SelectHeroConstants
             SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_DEF, 1,
             SelectHeroConstants.ROGUE_MAX_MOVES, ROGUE_ARTIFACT_SLOTS,
             ROGUE_TALENT, AssetIds.ROGUE_ICO);
+    EntityCard ROGUE_CARD = new EntityCard(ROGUE, 0,0,0,0,-1);
 
     String PLAYER_CLASS = "Klasse: ";
     String PLAYER_HP = "Leben: ";
@@ -60,10 +64,7 @@ public interface SelectHeroConstants
     int DM_ARTIFACT_SLOTS = 2;
     Talent DM_TALENT = Talent.SNEAKY;
     Hero DUNGEON_MASTER = new Hero(DUNGEON_MASTER_NAME, DM_HP, DM_ATK, DM_DEF, 1, DM_MOVES,
-<<<<<<< HEAD
             DM_ARTIFACT_SLOTS, DM_TALENT, AssetIds.DM_ICO);
-=======
-            DM_ARTIFACT_SLOTS, DM_TALENT, AssetIds.DM_ICO,PlayerManager.getInstance().getPlayer());
+    EntityCard DM_CARD = new EntityCard(DUNGEON_MASTER, 0,0,0,0,-1);
     int PLAYER_HANDCARDLIMIT = 5;
->>>>>>> origin/main
 }

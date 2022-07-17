@@ -1,13 +1,11 @@
 package de.prog2.dungeontop.control.controller;
 
-import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.entities.Talent;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
-
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.CoordinateUtils;
 import de.prog2.dungeontop.utils.GlobalLogger;
