@@ -135,7 +135,6 @@ public class NpcRoomView
             {
                 if (HellView.getCurrHellView() != null)
                 {
-                    AudioManager.getInstance().stopSound(audioUUID);
                     DungeonTop.getStage().setScene(HellView.getCurrHellView());
                     AudioManager.getInstance().stopSound(audioUUID);
                     HellView.resumeHellViewBgMusic();
