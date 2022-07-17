@@ -70,6 +70,7 @@ public class ItemClickedViewController
             if(item1.isEquipped())
             {
                 controller.getEquipButton().setText(ItemConstants.UNEQUIP_ITEM);
+                controller.getDeleteButton().setVisible(false);
             }
         }
     }

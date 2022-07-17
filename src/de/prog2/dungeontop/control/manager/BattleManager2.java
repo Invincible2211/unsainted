@@ -84,7 +84,15 @@ public class BattleManager2 {
             battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
             processButton();
             processLabel();
+            instantiateHeroes(arena);
         });
+    }
+
+    private void instantiateHeroes (Arena arena)
+    {
+        Coordinate cornerBottemRight = new Coordinate(arena.getWidth(), arena.getHeight());
+        Entity hero = player1.getHero();
+        arenaController.placeEntityFriendly(hero, cornerBottemRight);
     }
 
     private void processButton(){
