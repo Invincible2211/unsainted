@@ -292,11 +292,12 @@ public class BattleManager2 {
             }
 
     }
-
-    //Karten muessen in den discard pile und nicht einfach weggelegt werden
+    
     public void discardHand ()
     {
-        player1.getHandCards().clear();
+        for (Card card : player1.getHandCards()) {
+        removeCardFromHand(card);
+        }
     }
 
     public void removeCardFromHand (Card card)
