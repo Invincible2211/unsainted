@@ -28,7 +28,7 @@ public abstract class Entity implements Serializable
     {
         this.name = name;
         this.hp = new SerializableSimpleIntegerProperty(hp);
-        this.movement = new SerializableSimpleIntegerProperty(movement);
+        this.movement = new SerializableSimpleIntegerProperty(0);
         this.attackDamage = attackDamage;
         this.defense = defense;
         this.attackRange = attackRange;
@@ -36,7 +36,7 @@ public abstract class Entity implements Serializable
         this.talent = talent;
         this.assetId = assetId;
 
-        EntityController.handleTalent(this, talent);
+        //EntityController.handleTalent(this, talent);
     }
     /*-----------------------------------------GETTER AND SETTER------------------------------------------------------*/
     public int getHp()

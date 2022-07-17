@@ -91,8 +91,8 @@ public class NetworkInterpreter extends Thread{
             RemoveEntityPackage removeEntityPackage = (RemoveEntityPackage) dataPackage;
             Platform.runLater(() -> BattleManager2.getInstance().remove(removeEntityPackage.getCoordinate()));
         } else if (dataPackage instanceof EgopointsChangePackage){
-            GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(
-                    GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount());
+            Platform.runLater(() -> GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(
+                    GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount()));
         } else if (dataPackage instanceof  HandCardReducePackage){
             Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().removeOne());
         } else if (dataPackage instanceof NextPhasePackage){
@@ -100,7 +100,7 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof PlayerBeginnPackage){
             BattleManager2.getInstance().setStarting(!((PlayerBeginnPackage)dataPackage).isPlayerStarts());
         }else if (dataPackage instanceof EgoPointsSetPackage){
-            GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(((EgoPointsSetPackage)dataPackage).getAmount());
+            Platform.runLater(() -> GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(((EgoPointsSetPackage)dataPackage).getAmount()));
         } else if (dataPackage instanceof AttackPackage){
             AttackPackage attackPackage = (AttackPackage) dataPackage;
             Platform.runLater(() -> BattleManager2.getInstance().battle(attackPackage.getAttack(), BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget())));
