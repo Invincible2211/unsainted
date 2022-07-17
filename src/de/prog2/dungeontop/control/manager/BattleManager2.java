@@ -61,10 +61,13 @@ public class BattleManager2 {
             this.player1 = PlayerManager.getInstance().getPlayer();
             this.player2 = GameManager.getInstance().getOpponentPlayer();
             Double random = Math.random();
-            musicId = AudioManager.getInstance().playSound(random < 0.3 ? 984 : random < 0.6 ? 983 : 982, true);
+            musicId = AudioManager.getInstance().playSound(random < 0.25 ? 984 : random < 0.5 ? 983 : random < 0.75 ? 982 : 985, true);
+            if (random>0.5){
+                isStarting = true;
+            }
+            NetManager.getInstance().getNetworkAPI().sendStartBattle(isStarting);
             arenaController.initBattle(arena);
             drawNewHand();
-            //TODO isStarting durch random Bestimmen, Dm ein package schicken
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
@@ -83,7 +86,77 @@ public class BattleManager2 {
                 arenaController.placeEntityFriendly(peter,cord);
             }
             battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
+            processButton();
+            processLabel();
         });
+    }
+
+    private void processButton(){
+        if (isStarting && (battlePhase == BattlePhase.FIRST_DUELLIST_DRAW || battlePhase == BattlePhase.FIRST_DUELLIST_PLACE_CARDS || battlePhase == BattlePhase.FIRST_DUELLIST_MINION_ACT|| battlePhase == BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS)){
+            arenaController.getNextPhaseButton().setDisable(false);
+        } else if (!isStarting && (battlePhase == BattlePhase.SECOND_DUELLIST_DRAW || battlePhase == BattlePhase.SECOND_DUELLIST_PLACE_CARDS || battlePhase == BattlePhase.SECOND_DUELLIST_MINION_ACT|| battlePhase == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)){
+            arenaController.getNextPhaseButton().setDisable(false);
+        } else {
+            arenaController.getNextPhaseButton().setDisable(true);
+        }
+    }
+
+    private void processLabel(){
+        if (!isStarting){
+            switch (battlePhase){
+                case FIRST_DUELLIST_DRAW -> {
+                    arenaController.setPhaseLabel("Dein Gegner zieht seine Karten");
+                }
+                case SECOND_DUELLIST_DRAW -> {
+                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
+                }
+                case FIRST_DUELLIST_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
+                }
+                case SECOND_DUELLIST_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Du kannst deine Minions bewegen und mit ihnen angreifen");
+                }
+                case FIRST_DUELLIST_MINION_ACT -> {
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
+                }
+                case SECOND_DUELLIST_MINION_ACT -> {
+                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
+                }
+                case FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
+                }
+                case SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Du ziehst deine Karten");
+                }
+            }
+        } else {
+            switch (battlePhase){
+                case FIRST_DUELLIST_DRAW -> {
+                    arenaController.setPhaseLabel("Du ziehst deine Karten");
+                }
+                case SECOND_DUELLIST_DRAW -> {
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
+                }
+                case FIRST_DUELLIST_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
+                }
+                case SECOND_DUELLIST_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
+                }
+                case FIRST_DUELLIST_MINION_ACT -> {
+                    arenaController.setPhaseLabel("Du kannst deine Minions bewegen und mit ihnen angreifen");
+                }
+                case SECOND_DUELLIST_MINION_ACT -> {
+                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
+                }
+                case FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
+                }
+                case SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Dein Gegner zieht seine Karten");
+                }
+            }
+        }
     }
 
     public void endBattle(boolean playerWins){
@@ -120,7 +193,6 @@ public class BattleManager2 {
     }
 
     public void nextRound(){
-        //TODO Buttons sperren wenn nicht dran
         switch (battlePhase){
             case FIRST_DUELLIST_DRAW -> {
                 battlePhase = BattlePhase.SECOND_DUELLIST_DRAW;
@@ -147,7 +219,8 @@ public class BattleManager2 {
                 battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
             }
         }
-        arenaController.setPhaseLabel(battlePhase.toString());
+        processButton();
+        processLabel();
     }
 
     @Deprecated
@@ -247,7 +320,6 @@ public class BattleManager2 {
     }
 
     private enum BattlePhase{
-        START, //at threading maybe wait for connections, Decide Beginner
         FIRST_DUELLIST_DRAW, //where first duellist draws cards
         FIRST_DUELLIST_PLACE_CARDS, //first duellist can place cards on arena
         SECOND_DUELLIST_DRAW, //where second duellist draws cards
@@ -255,8 +327,8 @@ public class BattleManager2 {
         FIRST_DUELLIST_MINION_ACT, // first duellist can move and attack minions on field
         SECOND_DUELLIST_MINION_ACT, // second duellist can move and attack minions on field
         FIRST_DUELLIST_SECOND_PLACE_CARDS, // first duellist can place cards with leftover mana, minions placed here cant attck this round
-        SECOND_DUELLIST_SECOND_PLACE_CARDS, //second duellist can place cards with leftover mana, minions placed here cant attck this round
-        END // choose treasure, get exp, skulls, etc. and go back to overworld
+        SECOND_DUELLIST_SECOND_PLACE_CARDS; //second duellist can place cards with leftover mana, minions placed here cant attck this round
+
     }
 
     public static BattleManager2 getInstance() {
@@ -273,5 +345,9 @@ public class BattleManager2 {
 
     public AnchorPane getCardDetailViewContainer() {
         return arenaController.getCardDetailViewContainer();
+    }
+
+    public void setStarting(boolean starting) {
+        isStarting = starting;
     }
 }

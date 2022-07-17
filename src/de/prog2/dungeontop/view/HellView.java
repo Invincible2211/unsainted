@@ -50,6 +50,7 @@ public class HellView
     private static Scene currHellView;
     // UUID used for the background music
     private static UUID musicId;
+    private static UUID inventorySoundId;
 
     /**
      * Initialize the View for a given hell
@@ -514,6 +515,7 @@ public class HellView
         InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
         pauseHellViewBgMusic();
+        inventorySoundId = AudioManager.getInstance().playSound(986,true);
         DungeonTop.getStage().setScene(scene);
     }
 
@@ -639,5 +641,9 @@ public class HellView
     {
         AudioManager.getInstance().stopSound(musicId);
         musicId = AudioManager.getInstance().playSound(HellViewConstants.BACKGROUND_MUSIC, true);
+    }
+
+    public static UUID getInventorySoundId() {
+        return inventorySoundId;
     }
 }

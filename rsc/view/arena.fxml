@@ -18,7 +18,7 @@
 
       <Button layoutX="20.0" layoutY="1010.0" mnemonicParsing="false" onAction="#onSurrender" prefHeight="40.0"
               prefWidth="200.0" text="Aufgeben" stylesheets="@/view/arena.css" styleClass="button"/>
-      <Button layoutX="270.0" layoutY="1010.0" mnemonicParsing="false" onAction="#onNextRound" prefHeight="40.0"
+      <Button fx:id="nextPhaseButton" layoutX="270.0" layoutY="1010.0" mnemonicParsing="false" onAction="#onNextRound" prefHeight="40.0"
               prefWidth="200.0" text="Nächste Runde" stylesheets="@/view/arena.css" styleClass="button"/>
       <AnchorPane fx:id="cardView" layoutX="6.0" layoutY="10.0" prefHeight="866.0" prefWidth="489.0"
                   style="-fx-background-color: transparent;"/>
