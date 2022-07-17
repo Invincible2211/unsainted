@@ -81,6 +81,7 @@ public class SelectHeroView
         for (Card card :TestConstants.getTestCards()) {
             PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
         }
+        PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.PLAYER_HANDCARDLIMIT);
         // initialize a new game world and go to the HellView
         if (GameManager.getInstance().getGameWorld() == null)
             GameManager.getInstance().setGameWorld(new World(WorldConstants.HELL_COUNT));

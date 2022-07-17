@@ -10,6 +10,7 @@ import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.SelectHeroConstants;
 import de.prog2.dungeontop.resources.TestConstants;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
@@ -136,6 +137,7 @@ public class GameManager {
                 PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
             }
         }
+        PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.PLAYER_HANDCARDLIMIT);
         BattleManager2.getInstance().startBattle(arena);
         this.currentState = GameState.BATTLE;
     }
