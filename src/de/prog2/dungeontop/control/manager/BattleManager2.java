@@ -72,7 +72,6 @@ public class BattleManager2 {
                 NetManager.getInstance().getNetworkAPI().sendStartBattle(isStarting);
             }
             arenaController.initBattle(arena);
-            drawNewHand();
             DungeonTop.getStage().setScene(scene);
             List<Entity> entities = TestConstants.getTestEntities();
             entities.addAll(TestConstants.getTestEntities());
@@ -115,23 +114,17 @@ public class BattleManager2 {
                 case SECOND_DUELLIST_DRAW -> {
                     arenaController.setPhaseLabel("Du ziehst deine Karten");
                 }
-                case FIRST_DUELLIST_PLACE_CARDS -> {
+                case FIRST_DUELLIST_PLACE_CARDS, FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
                     arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
                 }
-                case SECOND_DUELLIST_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Du kanst deine Karten platzieren");
+                case SECOND_DUELLIST_PLACE_CARDS, SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
+                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
                 }
                 case FIRST_DUELLIST_MINION_ACT -> {
                     arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
                 }
                 case SECOND_DUELLIST_MINION_ACT -> {
                     arenaController.setPhaseLabel("Du kannst deine Minions bewegen und mit ihnen angreifen");
-                }
-                case FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
-                }
-                case SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
                 }
             }
         } else {
@@ -142,10 +135,10 @@ public class BattleManager2 {
                 case SECOND_DUELLIST_DRAW -> {
                     arenaController.setPhaseLabel("Dein Gegner zieht seine Karten");
                 }
-                case FIRST_DUELLIST_PLACE_CARDS -> {
+                case FIRST_DUELLIST_PLACE_CARDS, FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
                     arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
                 }
-                case SECOND_DUELLIST_PLACE_CARDS -> {
+                case SECOND_DUELLIST_PLACE_CARDS, SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
                     arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
                 }
                 case FIRST_DUELLIST_MINION_ACT -> {
@@ -153,12 +146,6 @@ public class BattleManager2 {
                 }
                 case SECOND_DUELLIST_MINION_ACT -> {
                     arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
-                }
-                case FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
-                }
-                case SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
                 }
             }
         }
@@ -211,7 +198,7 @@ public class BattleManager2 {
             }
             case SECOND_DUELLIST_DRAW -> {
                 battlePhase = BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
-                if (!isStarting){
+                if (isStarting){
                     drawNewHand();
                 }
             }
@@ -245,7 +232,6 @@ public class BattleManager2 {
         player2.setMax_ego_points(player2.getMax_ego_points() + GameConstants.EGOPOINTS_PER_ROUND_INCREMENT);
         player1.currentEgoPointsProperty().setValue(player1.getMax_ego_points());
         player2.currentEgoPointsProperty().setValue(player2.getMax_ego_points());
-        drawNewHand();
         resetEntityMovement();
     }
 
