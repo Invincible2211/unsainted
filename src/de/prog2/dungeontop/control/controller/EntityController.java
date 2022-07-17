@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.control.controller;
 
+import de.prog2.dungeontop.control.manager.BattleManager2;
+import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.entities.Talent;
@@ -9,6 +11,7 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.CoordinateUtils;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.ArenaController;
 
 import java.util.ArrayList;
 
@@ -76,6 +79,7 @@ public class EntityController
     @Deprecated
     public static Arena attack (Entity attacker, Coordinate position, Arena arena)
     {
+        System.out.println("this shall never be visible to you or you use the wrong Battlemanager");
         Entity attacked = arena.getEntity(position);
         attacked.setHp(attacked.getHp() - attacker.getAttackDamage());
         if (attacked.getHp() <= 0)
@@ -97,6 +101,16 @@ public class EntityController
     public static boolean applyDamage(Entity entity, int damage)
     {
         entity.setHp(entity.getHp() - (Math.max(damage - entity.getDefense(), 0)));
+        if (entity.getHp() <= 0)
+        {
+            if (entity instanceof Hero)
+            {
+                BattleManager2.getInstance().endBattle(!GameManager.getInstance().isDM());
+                GlobalLogger.log(LoggerStringValues.HERO_DIED_GAME_OVER);
+            }
+            BattleManager2.getInstance().getArenaController().remove(entity.getPosition());
+
+        }
         return entity.getHp() > 0;
     }
     public static void applyHeal(Entity entity, int heal)
