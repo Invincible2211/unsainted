@@ -64,10 +64,11 @@ public class PlayerManager
     {
         player.setMax_ego_points(player.getMax_ego_points() + amount);
     }
+
     public void removeEgoPoints(int amount)
     {
         player.currentEgoPointsProperty().setValue(player.currentEgoPointsProperty().get()-amount);
-        NetManager.getInstance().getNetworkAPI().sendEgopointsChangePackage(amount);
+        NetManager.getInstance().getNetworkAPI().sendEgopointsAddPackage(Math.negateExact(amount));
     }
     public int getPlayerEgoPoints()
     {

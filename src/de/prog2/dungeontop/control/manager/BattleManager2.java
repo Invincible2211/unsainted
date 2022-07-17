@@ -26,7 +26,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class BattleManager2 {
@@ -320,7 +319,7 @@ public class BattleManager2 {
         if (egopoints - amount >= 0) {
             player1.currentEgoPointsProperty().set(egopoints - amount);
             GlobalLogger.log(LoggerStringValues.REDUCED_EGOPOINTS + amount);
-            NetManager.getInstance().getNetworkAPI().sendEgopointsChangePackage(Math.negateExact(amount));
+            NetManager.getInstance().getNetworkAPI().sendEgopointsAddPackage(Math.negateExact(amount));
         } else {
             GlobalLogger.log(LoggerStringValues.NOT_ENOUGH_EGOPOINTS);
         }
@@ -329,7 +328,7 @@ public class BattleManager2 {
     public void setCurrentEgoPoints (int amount)
     {
         player1.currentEgoPointsProperty().set(amount);
-        NetManager.getInstance().getNetworkAPI().sendEgopointsChangePackage(amount);
+        NetManager.getInstance().getNetworkAPI().sendEgopointsAddPackage(amount);
         GlobalLogger.log(LoggerStringValues.SET_EGOPOINTS + amount);
     }
 

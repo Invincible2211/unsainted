@@ -24,7 +24,7 @@ public class NetworkAPI {
         this.sendData(new HellPackage(hell, playerCoordinate));
     }
 
-    public void sendEgopointsChangePackage(int amount)
+    public void sendEgopointsAddPackage (int amount)
     {
         this.sendData(new EgopointsChangePackage(amount));
     }
