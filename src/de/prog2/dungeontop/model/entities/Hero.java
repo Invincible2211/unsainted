@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.model.entities;
 
-import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.items.Artifact;
 import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.model.items.artifacts.DefenseArtifact;
@@ -14,9 +13,9 @@ public class Hero extends Entity
     private final List<Artifact> artifacts = new LinkedList<>();
     private int artifactSlots;
 
-    public Hero(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int artifactSlots, Talent talent, int assetId, Player owner)
+    public Hero(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int artifactSlots, Talent talent, int assetId)
     {
-        super(name, hp, attackDamage, defense, attackRange, movement, talent, assetId, owner);
+        super(name, hp, attackDamage, defense, attackRange, movement, talent, assetId);
         this.artifactSlots = artifactSlots;
     }
 

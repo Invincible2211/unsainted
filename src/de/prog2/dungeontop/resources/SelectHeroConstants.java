@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.resources;
 
-import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Hero;
 import de.prog2.dungeontop.model.entities.Talent;
 
@@ -17,7 +16,7 @@ public interface SelectHeroConstants
     Hero WARRIOR = new Hero(SelectHeroConstants.WARRIOR_NAME, SelectHeroConstants.WARRIOR_HP,
             SelectHeroConstants.WARRIOR_ATK, SelectHeroConstants.WARRIOR_DEF, 1,
             SelectHeroConstants.WARRIOR_MAX_MOVES, WARRIOR_ARTIFACT_SLOTS,
-            WARRIOR_TALENT, AssetIds.WARRIOR_ICO, PlayerManager.getInstance().getPlayer());
+            WARRIOR_TALENT, AssetIds.WARRIOR_ICO);
 
     // mage
     String MAGE_NAME = "Magier";
@@ -30,7 +29,7 @@ public interface SelectHeroConstants
     Hero MAGE = new Hero(SelectHeroConstants.MAGE_NAME, SelectHeroConstants.MAGE_HP,
             SelectHeroConstants.MAGE_ATK, SelectHeroConstants.MAGE_DEF, 1,
             SelectHeroConstants.MAGE_MAX_MOVES, MAGE_ARTIFACT_SLOTS,
-            MAGE_TALENT, AssetIds.MAGE_ICO, PlayerManager.getInstance().getPlayer());
+            MAGE_TALENT, AssetIds.MAGE_ICO);
 
     // rogue
     String ROGUE_NAME = "Schurke";
@@ -43,7 +42,7 @@ public interface SelectHeroConstants
     Hero ROGUE = new Hero(SelectHeroConstants.ROGUE_NAME, SelectHeroConstants.ROGUE_HP,
             SelectHeroConstants.ROGUE_ATK, SelectHeroConstants.ROGUE_DEF, 1,
             SelectHeroConstants.ROGUE_MAX_MOVES, ROGUE_ARTIFACT_SLOTS,
-            ROGUE_TALENT, AssetIds.ROGUE_ICO, PlayerManager.getInstance().getPlayer());
+            ROGUE_TALENT, AssetIds.ROGUE_ICO);
 
     String PLAYER_CLASS = "Klasse: ";
     String PLAYER_HP = "Leben: ";
@@ -61,5 +60,5 @@ public interface SelectHeroConstants
     int DM_ARTIFACT_SLOTS = 2;
     Talent DM_TALENT = Talent.SNEAKY;
     Hero DUNGEON_MASTER = new Hero(DUNGEON_MASTER_NAME, DM_HP, DM_ATK, DM_DEF, 1, DM_MOVES,
-            DM_ARTIFACT_SLOTS, DM_TALENT, AssetIds.DM_ICO,PlayerManager.getInstance().getPlayer());
+            DM_ARTIFACT_SLOTS, DM_TALENT, AssetIds.DM_ICO);
 }

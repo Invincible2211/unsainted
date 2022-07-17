@@ -84,7 +84,7 @@ public class EntityController
         {
             if (attacked instanceof Hero)
             {
-                BattleManager.getInstance().endBattle(attacker.getOwner(), attacker.getOwner().getHero().getHp());
+                //BattleManager.getInstance().endBattle(attacker.getOwner(), attacker.getOwner().getHero().getHp());
                 GlobalLogger.log(LoggerStringValues.HERO_DIED_GAME_OVER);
             }
             arena.removeEntity(position);

@@ -3,7 +3,6 @@ package de.prog2.dungeontop.model.entities;
 import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.game.EntityCard;
-import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 
 import java.io.Serializable;
@@ -20,13 +19,12 @@ public abstract class Entity implements Serializable
     private int assetId;
     private final Talent talent;
     private Coordinate position;
-    private Player owner = null;
     private int defense = 0;
     private int attackRange = 0;
 
 
     /*--------------------------------------------CONSTRUCTORS--------------------------------------------------------*/
-    public Entity(String name, int hp, int attackDamage, int defense, int attackRange, int movement, Talent talent, int assetId, Player owner)
+    public Entity(String name, int hp, int attackDamage, int defense, int attackRange, int movement, Talent talent, int assetId)
     {
         this.name = name;
         this.hp = new SerializableSimpleIntegerProperty(hp);
@@ -36,7 +34,6 @@ public abstract class Entity implements Serializable
         this.maxMovement = movement;
         this.talent = talent;
         this.assetId = assetId;
-        this.owner = owner;
 
         EntityController.handleTalent(this, talent);
     }
@@ -89,16 +86,6 @@ public abstract class Entity implements Serializable
     public void setPosition(Coordinate position)
     {
         this.position = position;
-    }
-
-    public Player getOwner()
-    {
-        return owner;
-    }
-
-    public void setOwner(Player owner)
-    {
-        this.owner = owner;
     }
 
     public EntityCard getCard()
