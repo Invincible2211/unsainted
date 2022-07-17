@@ -228,15 +228,16 @@ public class ArenaController
         else
         {
             Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selected), GridPane.getRowIndex(selected));
-            List<Entity> combatants = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
-            arenaGridPane.getChildren().remove(source);
-            currentArena.getOpponent().remove(sourcePos);
-            if (!combatants.isEmpty())
+            List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
+            if (!cards.isEmpty())
             {
-                getOpponent().put(sourcePos, combatants.get(0));
+                System.out.println(cards.get(0).getHp() + " " + cards.get(0).getDefense());
+                getOpponent().put(sourcePos, cards.get(0));
             }
             else
             {
+                arenaGridPane.getChildren().remove(source);
+                currentArena.getOpponent().remove(sourcePos);
                 NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(sourcePos));
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
