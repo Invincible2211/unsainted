@@ -12,11 +12,13 @@ public class Hero extends Entity
     private Weapon weapon;
     private final List<Artifact> artifacts = new LinkedList<>();
     private int artifactSlots;
+    private int handCardLimit;
 
-    public Hero(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int artifactSlots, Talent talent, int assetId)
+    public Hero(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int artifactSlots, int handCardLimit, Talent talent, int assetId)
     {
         super(name, hp, attackDamage, defense, attackRange, movement, talent, assetId);
         this.artifactSlots = artifactSlots;
+        this.handCardLimit = handCardLimit;
     }
 
     @Override
@@ -96,5 +98,15 @@ public class Hero extends Entity
     public void setArtifactSlots(int artifactSlots)
     {
         this.artifactSlots = artifactSlots;
+    }
+
+    public int getHandCardLimit()
+    {
+        return handCardLimit;
+    }
+
+    public void setHandCardLimit(int handCardLimit)
+    {
+        this.handCardLimit = handCardLimit;
     }
 }

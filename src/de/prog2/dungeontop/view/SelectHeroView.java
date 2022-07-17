@@ -1,6 +1,7 @@
 package de.prog2.dungeontop.view;
 
 import de.prog2.dungeontop.DungeonTop;
+import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
@@ -20,7 +21,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.util.UUID;
 
 public class SelectHeroView
 {
@@ -81,7 +81,8 @@ public class SelectHeroView
         for (Card card :TestConstants.getTestCards()) {
             PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
         }
-        PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.PLAYER_HANDCARDLIMIT);
+        PlayerManager.getInstance().getPlayer().setHandCardLimit(playerHero.getHandCardLimit());
+        PlayerManager.getInstance().getPlayer().setDeck(DeckController.getRandomDeck(false));
         // initialize a new game world and go to the HellView
         if (GameManager.getInstance().getGameWorld() == null)
             GameManager.getInstance().setGameWorld(new World(WorldConstants.HELL_COUNT));
