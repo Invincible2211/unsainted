@@ -68,7 +68,7 @@ public class DungeonTop extends Application
 
         //testEndGameDialogue();
 
-        testArenaView();
+        //testArenaView();
         //testBattle();
 
         //testSelectHero(primaryStage);
