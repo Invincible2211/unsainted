@@ -21,7 +21,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.util.UUID;
 
 public class SelectHeroView
 {
@@ -77,9 +76,13 @@ public class SelectHeroView
             GlobalLogger.warning(LoggerStringValues.NO_CHAR_SELECTED);
             return;
         }
-        
+
+        //TODO NOT TESTDECK
+        for (Card card :TestConstants.getTestCards()) {
+            PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
+        }
+        PlayerManager.getInstance().getPlayer().setHandCardLimit(playerHero.getHandCardLimit());
         PlayerManager.getInstance().getPlayer().setDeck(DeckController.getRandomDeck(false));
-        PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.PLAYER_HANDCARDLIMIT);
         // initialize a new game world and go to the HellView
         if (GameManager.getInstance().getGameWorld() == null)
             GameManager.getInstance().setGameWorld(new World(WorldConstants.HELL_COUNT));
