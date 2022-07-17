@@ -266,9 +266,11 @@ public class ArenaController
             return;
         }
         removeHighlight();
-        source.setStyle("-fx-background-color: black;");
-        markAvailabelFields(sourcePos);
-        setSelected(source);
+        if (getFriendly().containsKey(sourcePos)){
+            source.setStyle("-fx-background-color: black;");
+            markAvailabelFields(sourcePos);
+            setSelected(source);
+        }
     }
 
     /**
