@@ -89,7 +89,8 @@ public class BattleManager2 {
 
     private void setStartstats ()
     {
-
+        this.player1.currentEgoPointsProperty().set(player1.getStartEgoPointsMax());
+        NetManager.getInstance().getNetworkAPI().sendEgoPointsSetPackage(player1.getStartEgoPointsMax());
     }
 
     private void instantiateHeroes (Arena arena)

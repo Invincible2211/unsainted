@@ -191,4 +191,14 @@ public class Player implements Serializable
     {
         this.soulArtBonus = soulArtBonus;
     }
+
+    public int getStartEgoPointsMax ()
+    {
+        return startEgoPointsMax;
+    }
+
+    public void setStartEgoPointsMax (int startEgoPointsMax)
+    {
+        this.startEgoPointsMax = startEgoPointsMax;
+    }
 }
