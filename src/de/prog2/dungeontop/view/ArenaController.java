@@ -204,7 +204,7 @@ public class ArenaController
         }
         if (source.getChildren().isEmpty()) // if the source is an empty field
         {
-            if (selected == null){
+            if (selected != null){
                 handleMoveSelected(source, selected);
                 return;
             }
@@ -236,8 +236,8 @@ public class ArenaController
                 List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), getOpponent().remove(sourcePos));
                 if (!cards.isEmpty())
                 {
-                    System.out.println(cards.get(0).getHp() + " " + cards.get(0).getDefense());
                     getOpponent().put(sourcePos, cards.get(0));
+                    NetManager.getInstance().getNetworkAPI().sendAttackPackage(getFriendly().get(selectedPos), invertCoordinate(sourcePos));
                 }
                 else
                 {
