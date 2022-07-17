@@ -45,7 +45,6 @@ public class ItemClickedViewController
     {
         controller.getItemImage().imageProperty().setValue(AssetsManager.getImageByAssetId(item.getAssetID()));
         controller.getItemDescription().setText(item.getDescription());
-        controller.getPrice().setText(String.valueOf(item.getPrice()));
         controller.setItem(item);
 
         if (item instanceof Artifact || item instanceof Weapon)

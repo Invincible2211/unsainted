@@ -2,6 +2,7 @@ package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.resources.AudioDefaultValues;
+import de.prog2.dungeontop.resources.FilePaths;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.application.Platform;
@@ -9,11 +10,12 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.stage.WindowEvent;
 
 import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,13 +45,6 @@ public class AudioManager
 
     /*----------------------------------------------METHODEN----------------------------------------------------------*/
 
-    public UUID playSoundOnScene(int soundID, Scene scene, boolean loop){
-        UUID uuid = playSound(soundID,loop);
-        pauseClip(uuid);
-        sceneSounds.put(scene,uuid);
-        return uuid;
-    }
-
     /**
      * Diese Methode spielt einen Sound ab
      * @param soundID die ID des Assets, welches den Sound beinhaltet
@@ -60,6 +55,13 @@ public class AudioManager
         AudioThread audioThread = new AudioThread(soundID,clipUUID,loop);
         audioThread.start();
         return clipUUID;
+    }
+
+    public UUID playSoundOnScene(int soundID, Scene scene, boolean loop){
+        UUID uuid = playSound(soundID,loop);
+        pauseClip(uuid);
+        sceneSounds.put(scene,uuid);
+        return uuid;
     }
 
     public void stopSound(UUID clipUUID){
@@ -76,14 +78,14 @@ public class AudioManager
         if (clip != null) clip.stop();
     }
 
-    public void resetClip(UUID clipUUID){
-        Clip clip = playingClips.get(clipUUID);
-        if (clip != null) clip.setMicrosecondPosition(0);
-    }
-
     public void resumeClip(UUID clipUUID){
         Clip clip = playingClips.get(clipUUID);
         if (clip != null) clip.start();
+    }
+
+    public void resetClip(UUID clipUUID){
+        Clip clip = playingClips.get(clipUUID);
+        if (clip != null) clip.setMicrosecondPosition(0);
     }
 
     public void changeClipVolume(UUID clipUUID, double volume){
@@ -91,7 +93,7 @@ public class AudioManager
         if (clip != null) changeVolume(clip,volume);
     }
 
-    public void changeClipVolumeWhilePlayingSound(int soundID, UUID clipUUID, double volume){
+    public UUID changeClipVolumeWhilePlayingSound(int soundID, UUID clipUUID, double volume){
         Clip clip = playingClips.get(clipUUID);
         double oldVolume = getVolume(clip);
         changeVolume(clip,volume);
@@ -107,6 +109,21 @@ public class AudioManager
             }
             changeVolume(playingClips.get(clipUUID),oldVolume);
         });
+        return uuid;
+    }
+
+    public UUID playAfter(int soundID, boolean loop, UUID playAfterSoundUUID){
+        Clip clip = playingClips.get(playAfterSoundUUID);
+        UUID soundUUID = UUID.randomUUID();
+        clip.addLineListener(event -> {
+            if (event.getType() != LineEvent.Type.STOP)
+            {
+                return;
+            }
+            AudioThread audioThread = new AudioThread(soundID,soundUUID,loop);
+            audioThread.start();
+        });
+        return soundUUID;
     }
 
     /**
@@ -115,7 +132,6 @@ public class AudioManager
      */
     private void changeVolumeForAll(double volumeLevel)
     {
-        System.out.println(volumeLevel);
         for (Clip c : playingClips.values())
         {
             changeVolume(c, volumeLevel);
@@ -144,17 +160,6 @@ public class AudioManager
         return instance;
     }
 
-    public void playAfter(int soundID, boolean loop, UUID playAfterSoundUUID){
-        Clip clip = playingClips.get(playAfterSoundUUID);
-        clip.addLineListener(event -> {
-            if (event.getType() != LineEvent.Type.CLOSE)
-            {
-                return;
-            }
-            playSound(soundID, loop);
-        });
-    }
-
     public void addListener(){
         DungeonTop.getStage().sceneProperty().addListener((observable, oldValue, newValue) -> {
             pauseClip(sceneSounds.get(oldValue));
@@ -179,7 +184,7 @@ public class AudioManager
 
         @Override
         public void run() {
-            GlobalLogger.log(String.format(LoggerStringValues.PLAY_SOUND, soundID), GlobalLogger.LoggerLevel.DEFAULT);
+            GlobalLogger.log(String.format(LoggerStringValues.PLAY_SOUND, soundID), GlobalLogger.LoggerLevel.DEBUG);
             File soundFile = AssetsManager.getAssetById(soundID);
             try
             {
@@ -200,6 +205,7 @@ public class AudioManager
                 }
                 clip.start();
                 playingClips.put(soundUUID,clip);
+                changeVolume(clip,volume.get());
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
             {
                 GlobalLogger.warning(e.getMessage());

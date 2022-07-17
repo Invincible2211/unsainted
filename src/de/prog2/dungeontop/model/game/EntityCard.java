@@ -21,11 +21,6 @@ public class EntityCard extends Card
         return entity;
     }
 
-    public int getID ()
-    {
-        return super.getID();
-    }
-
     public void setEntity(Entity entity) {
         this.entity = entity;
     }

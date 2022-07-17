@@ -8,9 +8,9 @@ public class Weapon extends Item implements Equippable
 {
     private final int attackDamage;
     private final int attackRange;
-    public Weapon(String name, String description, int price, int assetID, int attackDamage, int attackRange)
+    public Weapon(String name, String description, int assetID, int attackDamage, int attackRange)
     {
-        super(name, description, price, assetID);
+        super(name, description, assetID);
         this.attackDamage = attackDamage;
         this.attackRange = attackRange;
     }

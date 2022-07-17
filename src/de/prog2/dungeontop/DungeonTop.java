@@ -4,10 +4,7 @@ import de.prog2.dungeontop.control.controller.CardViewController;
 import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.controller.EntityViewController;
 import de.prog2.dungeontop.control.controller.InventoryViewController;
-import de.prog2.dungeontop.control.manager.AudioManager;
-import de.prog2.dungeontop.control.manager.BattleManager;
-import de.prog2.dungeontop.control.manager.BattleManager2;
-import de.prog2.dungeontop.control.manager.PlayerManager;
+import de.prog2.dungeontop.control.manager.*;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
 import de.prog2.dungeontop.model.game.Card;
@@ -25,6 +22,7 @@ import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.HellGenerator;
 import de.prog2.dungeontop.view.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -64,12 +62,13 @@ public class DungeonTop extends Application
         stage.sizeToScene();
         stage.show();
         AudioManager.getInstance().addListener();
+
         //MainMenueController.addMenuebar();
         //AudioManager.getInstance().playSound(990);
 
         //testEndGameDialogue();
 
-        //testArenaView();
+        testArenaView();
         //testBattle();
 
         //testSelectHero(primaryStage);

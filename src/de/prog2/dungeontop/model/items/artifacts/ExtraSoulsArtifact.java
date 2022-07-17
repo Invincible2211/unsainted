@@ -7,9 +7,9 @@ public class ExtraSoulsArtifact extends Artifact
 {
     private final int extraSouls;
 
-    public ExtraSoulsArtifact(String name, String description, int extraSouls, int price, int assetID)
+    public ExtraSoulsArtifact(String name, String description, int extraSouls, int assetID)
     {
-        super(name, description, price, assetID);
+        super(name, description, assetID);
         this.extraSouls = extraSouls;
     }
 

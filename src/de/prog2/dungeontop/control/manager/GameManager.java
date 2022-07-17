@@ -12,7 +12,9 @@ import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import de.prog2.dungeontop.view.GameEndViewController;
 import de.prog2.dungeontop.view.HellView;
+import de.prog2.dungeontop.view.MainMenueController;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -108,7 +110,8 @@ public class GameManager {
         }
         GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
         DungeonTop.getStage().setScene(scene);
-
+        GameEndViewController.getInstance().showGameEndDialogue(false);
+        AudioManager.getInstance().changeClipVolumeWhilePlayingSound(993, MainMenueController.getMainMenueSoundUUID(),20);
         this.currentState = GameState.END;
     }
 

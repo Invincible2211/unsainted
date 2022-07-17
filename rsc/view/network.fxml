@@ -8,18 +8,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(assets/921NWBG.png); -fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 20; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.NetworkController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(assets/921NWBG.png); -fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 20; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.prog2.dungeontop.view.NetworkController">
    <Button layoutX="136.0" layoutY="134.0" mnemonicParsing="false" onAction="#onConnectButtonPressed" prefHeight="66.0" prefWidth="331.0" stylesheets="@/view/mainmenuestyle.css" text="Verbinden" />
    <TextField fx:id="partnerIP" layoutX="226.0" layoutY="200.0" promptText="IP-Adresse Host" />
    <Label fx:id="info" layoutX="226.0" layoutY="229.0" prefHeight="17.0" prefWidth="149.0" />
-   <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: transparent;">
+   <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: transparent;" stylesheets="@/view/network.css">
      <menus>
          <Menu disable="true" mnemonicParsing="false" text="                                                                       " />
-       <Menu mnemonicParsing="false" text="Einstellungen">
+       <Menu mnemonicParsing="false" style="-fx-background-radius: 7; -fx-background-color: darkgray" text="Einstellungen">
             <items>
-               <MenuItem mnemonicParsing="false" onAction="#openSettings" text="Einstellungen öffnen" />
-               <MenuItem mnemonicParsing="false" onAction="#onBackToMM" text="Zurück zum Hauptmenü" />
+               <MenuItem mnemonicParsing="false" onAction="#openSettings" style="-fx-background-radius: 7; -fx-background-color: darkgray" styleClass="context-menu" text="Einstellungen öffnen" />
+               <MenuItem mnemonicParsing="false" onAction="#onBackToMM" style="-fx-background-radius: 7; -fx-background-color: darkgray" styleClass="context-menu" text="Zurück zum Hauptmenü" />
             </items>
        </Menu>
      </menus>

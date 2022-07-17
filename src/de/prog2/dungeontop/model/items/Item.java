@@ -7,16 +7,14 @@ public abstract class Item
 {
     private final String name;
     private final String description;
-    private final int price;
     private final int assetID;
 
-    public Item(String name, String description, int price, int assetID)
+    public Item(String name, String description, int assetID)
     {
         this.name = name;
         this.description = description;
-        this.price = price;
         this.assetID = assetID;
-        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.price, this.assetID));
+        GlobalLogger.log(String.format(LoggerStringValues.ITEM_CREATED, this.name, this.description, this.assetID));
     }
 
     public abstract boolean equip();
@@ -25,11 +23,6 @@ public abstract class Item
     public String getName()
     {
         return name;
-    }
-
-    public int getPrice()
-    {
-        return price;
     }
 
     public String getDescription()

@@ -3,6 +3,7 @@ package de.prog2.dungeontop.control.controller;
 import de.prog2.dungeontop.control.manager.BattleManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Hero;
+import de.prog2.dungeontop.model.entities.Talent;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
@@ -94,10 +95,24 @@ public class EntityController
 
     public static void applyDamage(Entity entity, int damage)
     {
-        entity.setHp(entity.getHp() - (damage - entity.getDefense()));
+        entity.setHp(entity.getHp() - (Math.max(damage - entity.getDefense(), 0)));
     }
     public static void applyHeal(Entity entity, int heal)
     {
         entity.setHp(entity.getHp() + heal);
+    }
+
+    public static void resetMovement(Entity entity)
+    {
+        entity.setMovement(entity.getMaxMovement());
+    }
+
+    public static void handleTalent(Entity entity, Talent talent)
+    {
+        switch (talent)
+        {
+            case SPEEDKNOT -> resetMovement(entity);
+            // TODO: implement the other talents
+        }
     }
 }
