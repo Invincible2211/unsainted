@@ -94,7 +94,7 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof  HandCardReducePackage){
             GameManager.getInstance().getOpponentPlayer().getHandCards().remove(GameManager.getInstance().getOpponentPlayer().getHandCards().remove(0));
         } else if (dataPackage instanceof NextPhasePackage){
-            BattleManager2.getInstance().nextRound();
+            Platform.runLater(() -> BattleManager2.getInstance().nextPhase());
         } else if (dataPackage instanceof PlayerBeginnPackage){
             BattleManager2.getInstance().setStarting(!((PlayerBeginnPackage)dataPackage).isPlayerStarts());
         }

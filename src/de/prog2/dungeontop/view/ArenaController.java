@@ -12,6 +12,7 @@ import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.view.handViews.EnemyHandView;
 import de.prog2.dungeontop.view.handViews.PlayerHandView;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -55,7 +56,7 @@ public class ArenaController
 
     @FXML
     private void onNextRound(){
-        BattleManager2.getInstance().nextRound();
+        BattleManager2.getInstance().nextPhase();
         NetManager.getInstance().getNetworkAPI().sendNextRoundPackage();
         removeHighlight();
     }
@@ -112,7 +113,7 @@ public class ArenaController
     }
 
     public void setPhaseLabel(String text){
-        currentPhase.setText(text);
+        Platform.runLater(() -> currentPhase.setText(text));
     }
 
     private void clear(){
@@ -337,7 +338,7 @@ public class ArenaController
     }
 
     private Coordinate invertCoordinate(Coordinate coordinate){
-        return new Coordinate(currentArena.getWidth() - coordinate.getX(), currentArena.getHeight() - coordinate.getY());
+        return new Coordinate(currentArena.getWidth() -1 - coordinate.getX(), currentArena.getHeight() -1 - coordinate.getY());
     }
 
     public HashMap<Coordinate, Entity> getFriendly() {
