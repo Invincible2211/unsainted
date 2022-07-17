@@ -7,6 +7,7 @@ import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.control.network.NetManager;
 import de.prog2.dungeontop.model.entities.Entity;
+import de.prog2.dungeontop.model.entities.Talent;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -219,8 +220,11 @@ public class ArenaController
                         if (card instanceof EntityCard){
                             EntityCard entityCard = (EntityCard) card;
                             Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+                            entityCard.getEntity().setMovement(entityCard.getEntity().getTalent() == Talent.SPEEDKNOT ? 0 : entityCard.getEntity().getMaxMovement());
                             placeEntityFriendly(entityCard.getEntity(), sourcePos);
                             BattleManager2.getInstance().removeCardFromHand(card);
+                        } else {
+                            //TODO Spell casten
                         }
                     }
                     return;
@@ -290,7 +294,7 @@ public class ArenaController
         removeHighlight();
         if (getFriendly().containsKey(sourcePos)){
             source.setStyle("-fx-background-color: black;");
-            markAvailabelFields(sourcePos);
+            //markAvailabelFields(sourcePos);
             setSelected(source);
         }
     }

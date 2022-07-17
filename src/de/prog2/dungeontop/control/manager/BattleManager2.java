@@ -198,7 +198,7 @@ public class BattleManager2 {
             }
             case SECOND_DUELLIST_DRAW -> {
                 battlePhase = BattlePhase.FIRST_DUELLIST_PLACE_CARDS;
-                if (isStarting){
+                if (!isStarting){
                     drawNewHand();
                 }
             }
