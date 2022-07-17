@@ -31,7 +31,7 @@ public class HealingSpell extends Spell
                 if (entity != null)
                 {
                     EntityController.applyHeal(arena.getFriendly().get(c), heal);
-                    //TODO: Fynn sendet changeHP
+                    NetManager.getInstance().getNetworkAPI().sendChangeEntityHpPackage(ArenaUtils.invertCoordinate(arena, c), -heal);
                 }
             }
         }

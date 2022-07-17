@@ -33,7 +33,7 @@ public class DamageSpell extends Spell
                 {
                     if (EntityController.applyDamage(arena.getOpponent().get(c), damage))
                     {
-                        //TODO: Fynn sendet changeHP
+                        NetManager.getInstance().getNetworkAPI().sendChangeEntityHpPackage(ArenaUtils.invertCoordinate(arena, c), damage);
                         return;
                     }
                     NetManager.getInstance().getNetworkAPI().sendRemoveEntity(ArenaUtils.invertCoordinate(arena, c));
