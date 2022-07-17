@@ -60,5 +60,10 @@ public interface SelectHeroConstants
     int DM_ARTIFACT_SLOTS = 2;
     Talent DM_TALENT = Talent.SNEAKY;
     Hero DUNGEON_MASTER = new Hero(DUNGEON_MASTER_NAME, DM_HP, DM_ATK, DM_DEF, 1, DM_MOVES,
+<<<<<<< HEAD
             DM_ARTIFACT_SLOTS, DM_TALENT, AssetIds.DM_ICO);
+=======
+            DM_ARTIFACT_SLOTS, DM_TALENT, AssetIds.DM_ICO,PlayerManager.getInstance().getPlayer());
+    int PLAYER_HANDCARDLIMIT = 5;
+>>>>>>> origin/main
 }

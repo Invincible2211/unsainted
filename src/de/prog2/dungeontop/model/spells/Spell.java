@@ -3,7 +3,9 @@ package de.prog2.dungeontop.model.spells;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 
-public abstract class Spell
+import java.io.Serializable;
+
+public abstract class Spell implements Serializable
 {
     private final String name;
     private final String description;
