@@ -210,25 +210,29 @@ public class ArenaController
         }
         if (source.getChildren().isEmpty()) // if the source is an empty field
         {
-            if (BattleManager2.getInstance().isTurn() && (
-                    BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_PLACE_CARDS
-            || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_PLACE_CARDS
-            || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS
-            || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)){
-                if (BattleManager2.getInstance().getSelectedHandCard() != null){
+            if (BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_PLACE_CARDS
+                    || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_PLACE_CARDS
+                    || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS
+                    || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)
+            {
+                if (BattleManager2.getInstance().getSelectedHandCard() != null)
+                {
                     Card card = BattleManager2.getInstance().getSelectedHandCard();
-                    if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost()){
+                    if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost())
+                    {
                         removeHighlight();
                         PlayerManager.getInstance().removeEgoPoints(card.getSummonCost());
                         Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-                        if (card instanceof EntityCard){
+                        if (card instanceof EntityCard)
+                        {
                             EntityCard entityCard = (EntityCard) card;
                             entityCard.getEntity().setMovement(entityCard.getEntity().getTalent() == Talent.SPEEDKNOT ? entityCard.getEntity().getMaxMovement() : 0);
                             placeEntityFriendly(SerializationUtils.clone(entityCard.getEntity()), sourcePos);
                             BattleManager2.getInstance().removeCardFromHand(card);
-                        } else {
+                        } else
+                        {
                             SpellCard spellCard = (SpellCard) card;
-                            spellCard.getSpell().cast(currentArena,sourcePos);
+                            spellCard.getSpell().cast(currentArena, sourcePos);
                             BattleManager2.getInstance().removeCardFromHand(card);
                         }
                     }
@@ -240,24 +244,25 @@ public class ArenaController
                 return;
             }
         }
-        if (BattleManager2.getInstance().isTurn() && (
-                BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_PLACE_CARDS
-                        || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_PLACE_CARDS
-                        || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS
-                        || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)){
-            if (BattleManager2.getInstance().getSelectedHandCard() != null){
-                Card card = BattleManager2.getInstance().getSelectedHandCard();
-                if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost()){
-                    removeHighlight();
-                    Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
-                    if (card instanceof SpellCard) {
-                        SpellCard spellCard = (SpellCard) card;
-                        spellCard.getSpell().cast(currentArena,sourcePos);
-                        BattleManager2.getInstance().removeCardFromHand(card);
-                    }
+        if (BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_PLACE_CARDS
+                || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_PLACE_CARDS
+                || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.FIRST_DUELLIST_SECOND_PLACE_CARDS
+                || BattleManager2.getInstance().getBattlePhase() == BattleManager2.BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS)
+        {
+
+            Card card = BattleManager2.getInstance().getSelectedHandCard();
+            if (PlayerManager.getInstance().getPlayerEgoPoints() >= card.getSummonCost())
+            {
+                removeHighlight();
+                Coordinate sourcePos = new Coordinate(GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+                if (card instanceof SpellCard)
+                {
+                    SpellCard spellCard = (SpellCard) card;
+                    spellCard.getSpell().cast(currentArena, sourcePos);
+                    BattleManager2.getInstance().removeCardFromHand(card);
                 }
-                return;
             }
+            return;
         }
         if (selected == null)
         {
