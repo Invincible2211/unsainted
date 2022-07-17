@@ -137,7 +137,7 @@ public class GameManager {
                 PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
             }
         }
-        PlayerManager.getInstance().getPlayer().setHandCardLimit(5);
+        PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.DM_HAND_CARD_LIMIT);
         BattleManager2.getInstance().startBattle(arena);
         HellView.pauseHellViewBgMusic();
         this.currentState = GameState.BATTLE;
