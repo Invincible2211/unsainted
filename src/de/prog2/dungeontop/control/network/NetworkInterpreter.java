@@ -137,7 +137,6 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof GameEndPackage) {
             GameManager.getInstance().endGame(true);
         }
-        System.out.println(dataPackage.getClass());
     }
 
 }
