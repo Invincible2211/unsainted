@@ -87,6 +87,7 @@ public class ArenaController
 
     private void setupBattlefield (Arena arena)
     {
+        arenaGrid.getChildren().remove(arenaGridPane);
         arenaGridPane = new GridPane();
         for (int i = 0; i < arena.getWidth(); i++) {
             ColumnConstraints colConst = new ColumnConstraints();
@@ -186,16 +187,6 @@ public class ArenaController
         pane.setOnMouseClicked(event -> {
             handleEvent((AnchorPane) event.getSource());
         });
-        /*
-        pane.setOnMousePressed(event-> {
-
-            handleEvent((AnchorPane) event.getSource());
-        });
-        pane.setOnMouseReleased(event-> {
-            if (isArenaAnchorPane(event.getPickResult().getIntersectedNode())) handleEvent((AnchorPane) event.getPickResult().getIntersectedNode());
-        });
-
-         */
     }
 
     private boolean isArenaAnchorPane(Node node){
@@ -543,11 +534,6 @@ public class ArenaController
         if (arenaGridPane == null)
         {
             return;
-        }
-        for (Node node : arenaGridPane.getChildren()) {
-            if (node instanceof AnchorPane pane){
-                pane.setStyle("-fx-background-color: none;");
-            }
         }
         currentArena.getArenaHashmap().clear();
         currentArena.getOpponent().clear();
