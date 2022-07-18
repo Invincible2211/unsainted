@@ -551,7 +551,7 @@ public class ArenaController
         currentArena.getArenaHashmap().clear();
         currentArena.getOpponent().clear();
         currentArena.getFriendly().clear();
-        if (GameManager.getInstance().isDM()){
+        if (!GameManager.getInstance().isDM()){
             GameManager.getInstance().getOpponentPlayer().getHero().setHp((int) (10+(Math.random() * 100)*30));
         }
     }
