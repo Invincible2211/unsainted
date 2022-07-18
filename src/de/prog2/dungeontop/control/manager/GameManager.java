@@ -62,7 +62,6 @@ public class GameManager {
             if (saveGame.getPlayer() != null)
             {
                 PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
-                PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
             }
 
             GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
@@ -123,12 +122,8 @@ public class GameManager {
      */
     public void beginBattle(Arena arena)
     {
-        if (isDM()){
-//            for (Card card : TestConstants.getTestCards()) {
-//                PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
-//            }
-        }
         PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.DM_HAND_CARD_LIMIT);
+        PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
         BattleManager2.getInstance().startBattle(arena);
         HellView.pauseHellViewBgMusic();
         this.currentState = GameState.BATTLE;
