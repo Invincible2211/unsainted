@@ -62,6 +62,7 @@ public class GameManager {
             if (saveGame.getPlayer() != null)
             {
                 PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
+                PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
             }
 
             GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
