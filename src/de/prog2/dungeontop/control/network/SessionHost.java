@@ -22,18 +22,19 @@ public class SessionHost extends Thread implements NetworkConnectionI {
 
     @Override
     public void run() {
+        Socket clientConnection = null;
         try {
             ServerSocket serverSocket = new ServerSocket(NetworkData.DEFAULT_PORT);
-            Socket clientConnection = serverSocket.accept();
+            clientConnection = serverSocket.accept();
             inputStream = clientConnection.getInputStream();
             outputStream = clientConnection.getOutputStream();
-            while (true){
-                if(!clientConnection.isConnected()){
-                    clientConnection.close();
-                    NetManager.getInstance().reset();
-                }
-            }
         } catch (IOException e) {
+            try {
+                clientConnection.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            NetManager.getInstance().reset();
             GlobalLogger.warning(e.getMessage());
         }
     }
