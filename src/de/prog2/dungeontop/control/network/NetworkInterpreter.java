@@ -114,6 +114,8 @@ public class NetworkInterpreter extends Thread{
                     EntityController.applyHeal(entity, -changeEntityPackage.getAmount());
             });
 
+        } else if (dataPackage instanceof GameEndPackage) {
+            GameManager.getInstance().endGame(true);
         }
         System.out.println(dataPackage.getClass());
     }

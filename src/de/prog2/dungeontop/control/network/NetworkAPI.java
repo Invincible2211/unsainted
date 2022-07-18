@@ -53,6 +53,11 @@ public class NetworkAPI {
         this.sendData(new EndBattlePackage(playerWins));
     }
 
+    public void sendGameEndPackage ()
+    {
+        this.sendData(new GameEndPackage());
+    }
+
     public void sendMoveEntity(Coordinate start, Coordinate target){
         this.sendData(new MoveEntityPackage(start, target));
     }
