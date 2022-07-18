@@ -432,7 +432,6 @@ public class HellView
                 //RoomDialogueViewController.getInstance().showStage(PlayerManager.getInstance().getPlayer().getCurrentRoom());
             }
         });
-
         GlobalLogger.log(LoggerStringValues.MOVED_PLAYER + key);
     }
 

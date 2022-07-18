@@ -149,21 +149,28 @@ public class BattleManager2 {
     }
 
     public void endBattle(boolean playerWins, boolean sendPackage){
-        ((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).setAlive(false);
+        if (PlayerManager.getInstance().getPlayer().getCurrentRoom() instanceof  ArenaRoom)
+            ((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).setAlive(false);
         Platform.runLater(() -> {
             if (playerWins){
-                if (((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).isBoss())
+                if (!GameManager.getInstance().isDM() && PlayerManager.getInstance().getPlayer().getCurrentRoom() == GameManager.getInstance().getGameWorld().getCurrentHell().getBossRoom())
                 {
+                    if (GameManager.getInstance().getGameWorld().getCurrentDepth() == 7)
+                    {
+                        GameManager.getInstance().endGame(true);
+                        NetManager.getInstance().getNetworkAPI().sendGameEndPackage();
+                        return;
+                    }
                     GameManager.getInstance().getGameWorld().getNextHell();
                     HellView.restartHellViewBgMusic();
+                    DungeonTop.getStage().setScene(HellView.getCurrHellView());
                     NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
                     return;
                 }
                     HellView.resumeHellViewBgMusic();
-                    DungeonTop.getStage().setScene(HellView.getCurrHellView());
 
             } else {
-                GameManager.getInstance().endGame();
+                GameManager.getInstance().endGame(false);
             }
             if (sendPackage){
                 NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
@@ -187,8 +194,8 @@ public class BattleManager2 {
         arenaController.move(pos,target);
     }
 
-    public void remove(Coordinate pos){
-        arenaController.remove(pos);
+    public void remove(Coordinate pos, boolean isPackage){
+        arenaController.remove(pos, isPackage);
     }
 
     public void nextPhase(){
@@ -256,8 +263,8 @@ public class BattleManager2 {
         List<Entity> combatants = new ArrayList<>();
         for (Entity e:
              targets) {
-            EntityController.applyDamage(e, entity1.getAttackDamage());
-            if (e.getHp()>0){
+            if(EntityController.applyDamage(e, entity1.getAttackDamage()))
+            {
                 combatants.add(e);
             }
         }
@@ -267,7 +274,7 @@ public class BattleManager2 {
     public void applyDamage(Coordinate coordinate, int damage){
         EntityController.applyDamage(getEntityAtPosition(coordinate),damage);
         if (getEntityAtPosition(coordinate).getHp()<=0){
-            remove(coordinate);
+            remove(coordinate, false);
         }
         if (player1.getHp()<=0){
             endBattle(GameManager.getInstance().isDM(),true);
