@@ -8,6 +8,7 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -16,25 +17,23 @@ public class SessionHost extends Thread implements NetworkConnectionI {
     private InputStream inputStream;
     private OutputStream outputStream;
 
+    ServerSocket serverSocket;
+    Socket clientConnection;
+
     protected SessionHost(){
         GlobalLogger.log(NetworkingConstants.WAITTNG);
     }
 
     @Override
     public void run() {
-        Socket clientConnection = null;
         try {
-            ServerSocket serverSocket = new ServerSocket(NetworkData.DEFAULT_PORT);
+            serverSocket = new ServerSocket();
+            serverSocket.setReuseAddress(true);
+            serverSocket.bind(new InetSocketAddress(NetworkData.DEFAULT_PORT));
             clientConnection = serverSocket.accept();
             inputStream = clientConnection.getInputStream();
             outputStream = clientConnection.getOutputStream();
         } catch (IOException e) {
-            try {
-                clientConnection.close();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            NetManager.getInstance().reset();
             GlobalLogger.warning(e.getMessage());
         }
     }
@@ -50,6 +49,16 @@ public class SessionHost extends Thread implements NetworkConnectionI {
     @Override
     public boolean isConnected() {
         return inputStream != null && outputStream != null;
+    }
+
+    @Override
+    public void close(){
+        try {
+            serverSocket.close();
+            clientConnection.close();
+        } catch (IOException | NullPointerException e) {
+
+        }
     }
 
 }

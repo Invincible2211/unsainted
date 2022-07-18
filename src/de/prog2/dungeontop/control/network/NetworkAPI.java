@@ -74,7 +74,7 @@ public class NetworkAPI {
         try {
             outStream.write(data.toByteArray());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+
         }
     }
 
@@ -101,4 +101,5 @@ public class NetworkAPI {
     public void sendHandCardIncreasedPackage() {
         sendData(new HandCardIncreasedPackage());
     }
+
 }
