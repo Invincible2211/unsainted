@@ -12,6 +12,9 @@ import javafx.scene.input.KeyCode;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * This class ist responsible for sending the packages to the other Computer.
+ */
 public class NetworkAPI {
 
     private OutputStream outStream;

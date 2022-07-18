@@ -124,4 +124,5 @@ public interface AssetIds
     int MUSIC_OPTION_TWO = 984;
     int MUSIC_OPTION_THREE = 985;
     int MUSIC_OPTION_FOUR = 982;
+    int INVENTORY_MUSIC = 986;
 }

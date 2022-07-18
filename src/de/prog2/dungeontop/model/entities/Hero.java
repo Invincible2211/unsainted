@@ -11,7 +11,7 @@ public class Hero extends Entity
 {
     private Weapon weapon;
     private final List<Artifact> artifacts = new LinkedList<>();
-    private int artifactSlots;
+    private final int artifactSlots;
     private int handCardLimit;
 
     public Hero(String name, int hp, int attackDamage, int defense, int attackRange, int movement, int artifactSlots, int handCardLimit, Talent talent, int assetId)
@@ -93,11 +93,6 @@ public class Hero extends Entity
     public int getArtifactSlots()
     {
         return artifactSlots;
-    }
-
-    public void setArtifactSlots(int artifactSlots)
-    {
-        this.artifactSlots = artifactSlots;
     }
 
     public int getHandCardLimit()

@@ -1,12 +1,11 @@
 package de.prog2.dungeontop.model.data;
 
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.*;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 public class SerializableSimpleIntegerProperty extends SimpleIntegerProperty implements Externalizable {
 

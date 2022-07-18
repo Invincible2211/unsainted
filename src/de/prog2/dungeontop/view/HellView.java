@@ -515,7 +515,7 @@ public class HellView
         InventoryViewController.initInventory(fxmlLoader.getController());
         Scene scene = new Scene(root);
         pauseHellViewBgMusic();
-        inventorySoundId = AudioManager.getInstance().playSound(986,true);
+        inventorySoundId = AudioManager.getInstance().playSound(AssetIds.INVENTORY_MUSIC,true);
         DungeonTop.getStage().setScene(scene);
     }
 

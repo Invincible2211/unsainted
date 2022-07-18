@@ -4,7 +4,7 @@ import de.prog2.dungeontop.model.network.Package;
 
 public class PlayerBeginnPackage extends Package {
 
-    private boolean playerStarts;
+    private final boolean playerStarts;
 
     public PlayerBeginnPackage(boolean playerStarts) {
         this.playerStarts = playerStarts;

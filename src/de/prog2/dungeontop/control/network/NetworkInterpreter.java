@@ -12,7 +12,6 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.Hell;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
-import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -24,6 +23,9 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class ist responsible for interpreting the packages send by the other Computer.
+ */
 public class NetworkInterpreter extends Thread{
 
     private InputStream inStream;
