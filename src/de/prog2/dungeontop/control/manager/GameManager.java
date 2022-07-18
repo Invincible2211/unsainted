@@ -95,7 +95,7 @@ public class GameManager {
     /**
      * Das Spiel wird in den Zustand des beendeten Spiels gesetzt.
      */
-    public void endGame()
+    public void endGame(boolean playerWins)
     {
         if (isDM){
             System.exit(0);
@@ -103,7 +103,7 @@ public class GameManager {
             GameManager.getInstance().setGameWorld(null);
             saveGame.setGameWorld(null);
             GameSaveFileWriter.getInstance().saveGame(saveGame);
-            GameEndViewController.getInstance().showGameEndDialogue(false);
+            GameEndViewController.getInstance().showGameEndDialogue(playerWins);
             AudioManager.getInstance().changeClipVolumeWhilePlayingSound(AssetIds.MUSIC_OPTION_ONE, MainMenueController.getMainMenueSoundUUID(), GameConstants.USUAL_NICE_VOLUME);
             this.currentState = GameState.END;
         }
