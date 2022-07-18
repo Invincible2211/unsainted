@@ -23,11 +23,18 @@ public class ClientConnection extends Thread implements NetworkConnectionI
     @Override
     public void run() {
         GlobalLogger.log(String.format(NetworkingConstants.NETWORK_CONNECTING_TO, ip));
+        Socket socket = null;
         try {
-            Socket socket = new Socket(ip, NetworkData.DEFAULT_PORT);
+            socket = new Socket(ip, NetworkData.DEFAULT_PORT);
             inputStream = socket.getInputStream();
             outputStream = socket.getOutputStream();
         } catch (IOException e) {
+            try {
+                socket.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            NetManager.getInstance().reset();
             GlobalLogger.warning(e.getMessage());
         }
     }

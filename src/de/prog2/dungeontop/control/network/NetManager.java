@@ -86,4 +86,11 @@ public class NetManager extends Thread
         return instance;
     }
 
+    protected void reset(){
+        connection = null;
+        if (!GameManager.getInstance().isDM()){
+            connection = new SessionHost();
+        }
+    }
+
 }
