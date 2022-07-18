@@ -12,9 +12,7 @@ import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
-import de.prog2.dungeontop.resources.GameConstants;
-import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.resources.TestConstants;
+import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
@@ -58,12 +56,16 @@ public class BattleManager2 {
         scene = new Scene(viewRoot);
     }
 
+    /**
+     * Diese Methode startet einen neuen Kampf
+     * @param arena für die MaSe der neuen Arena
+     */
     public void startBattle(Arena arena){
         Platform.runLater(() -> {
             this.player1 = PlayerManager.getInstance().getPlayer();
             this.player2 = GameManager.getInstance().getOpponentPlayer();
             Double random = Math.random();
-            musicId = AudioManager.getInstance().playSound(random < 0.25 ? 984 : random < 0.5 ? 983 : random < 0.75 ? 982 : 985, true);
+            musicId = AudioManager.getInstance().playSound(random < 0.25 ? AssetIds.MUSIC_OPTION_ONE : random < 0.5 ? AssetIds.MUSIC_OPTION_TWO : random < 0.75 ? AssetIds.MUSIC_OPTION_THREE : AssetIds.MUSIC_OPTION_FOUR, true);
             if (!GameManager.getInstance().isDM()){
                 if (random>0.5){
                     isStarting = true;
@@ -72,13 +74,6 @@ public class BattleManager2 {
             }
             arenaController.initBattle(arena);
             DungeonTop.getStage().setScene(scene);
-            //List<Entity> entities = TestConstants.getTestEntities();
-            //entities.addAll(TestConstants.getTestEntities());
-            //Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
-            //EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
-            //peter.setCard(petercard);
-            //Coordinate cord = new Coordinate(0,arena.getHeight()-1);
-            //arenaController.placeEntityFriendly(peter,cord);
             battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
             processButton();
             processLabel();
@@ -108,43 +103,43 @@ public class BattleManager2 {
         if (!isStarting){
             switch (battlePhase){
                 case FIRST_DUELLIST_DRAW -> {
-                    arenaController.setPhaseLabel("Dein Gegner zieht seine Karten");
+                    arenaController.setPhaseLabel(StringValues.FIRST_DUELLIST_DRAW_LABELTEXT);
                 }
                 case SECOND_DUELLIST_DRAW -> {
-                    arenaController.setPhaseLabel("Du ziehst deine Karten");
+                    arenaController.setPhaseLabel(StringValues.SECOND_DUELLIST_DRAW_LABELTEXT);
                 }
                 case FIRST_DUELLIST_PLACE_CARDS, FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
+                    arenaController.setPhaseLabel(StringValues.FIRST_DUELLIST_PLACE_CARDS_LABELTEXT);
                 }
                 case SECOND_DUELLIST_PLACE_CARDS, SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
+                    arenaController.setPhaseLabel(StringValues.SECOND_DUELLIST_PLACE_CARDS_LABELTEXT);
                 }
                 case FIRST_DUELLIST_MINION_ACT -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
+                    arenaController.setPhaseLabel(StringValues.FIRST_DUELLIST_MINION_ACT_LABELTEXT);
                 }
                 case SECOND_DUELLIST_MINION_ACT -> {
-                    arenaController.setPhaseLabel("Du kannst deine Minions bewegen und mit ihnen angreifen");
+                    arenaController.setPhaseLabel(StringValues.SECOND_DUELLIST_MINION_ACT_LABELTEXT);
                 }
             }
         } else {
             switch (battlePhase){
                 case FIRST_DUELLIST_DRAW -> {
-                    arenaController.setPhaseLabel("Du ziehst deine Karten");
+                    arenaController.setPhaseLabel(StringValues.FIRST_DUELLIST_DRAW_LABELTEXT_SELF);
                 }
                 case SECOND_DUELLIST_DRAW -> {
-                    arenaController.setPhaseLabel("Dein Gegner zieht seine Karten");
+                    arenaController.setPhaseLabel(StringValues.SECOND_DUELLIST_DRAW_LABELTEXT_SELF);
                 }
                 case FIRST_DUELLIST_PLACE_CARDS, FIRST_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Du kannst deine Karten platzieren");
+                    arenaController.setPhaseLabel(StringValues.FIRST_DUELLIST_PLACE_CARDS_LABELTEXT_SELF);
                 }
                 case SECOND_DUELLIST_PLACE_CARDS, SECOND_DUELLIST_SECOND_PLACE_CARDS -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Karten platzieren");
+                    arenaController.setPhaseLabel(StringValues.SECOND_DUELLIST_PLACE_CARDS_LABELTEXT_SELF);
                 }
                 case FIRST_DUELLIST_MINION_ACT -> {
-                    arenaController.setPhaseLabel("Du kannst deine Minions bewegen und mit ihnen angreifen");
+                    arenaController.setPhaseLabel(StringValues.FIRST_DUELLIST_MINION_ACT_LABELTEXT_SELF);
                 }
                 case SECOND_DUELLIST_MINION_ACT -> {
-                    arenaController.setPhaseLabel("Dein Gegner kann seine Minions bewegen und mit ihnen angreifen");
+                    arenaController.setPhaseLabel(StringValues.SECOND_DUELLIST_MINION_ACT_LABELTEXT_SELF);
                 }
             }
         }

@@ -7,4 +7,6 @@ public interface GameConstants {
     int START_EGOPOINTS = 2;
     int MAX_EGO_POINTS = 99;
     boolean PLAYER_DECK_USE_ALL_CARDS = false;
+    double USUAL_NICE_VOLUME = 20d;
+    long SLEEPTIMER_TIME_IN_MILLISECONDS = 3000l;
 }

@@ -79,7 +79,8 @@ public class ArenaController
     }
 
     public void initBattle(Arena arena){
-        clear();
+        clearHands();
+        clearField();
 
         currentArena = arena;
         setupBattlefield(arena);
@@ -123,7 +124,7 @@ public class ArenaController
         Platform.runLater(() -> currentPhase.setText(text));
     }
 
-    private void clear(){
+    private void clearHands (){
         playerCardView.getChildren().clear();
         enemyCardView.getChildren().clear();
     }

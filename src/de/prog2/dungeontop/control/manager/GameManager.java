@@ -9,11 +9,8 @@ import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.game.SaveGame;
 import de.prog2.dungeontop.model.world.World;
 import de.prog2.dungeontop.model.world.arena.Arena;
-import de.prog2.dungeontop.resources.LoggerStringValues;
-import de.prog2.dungeontop.resources.SelectHeroConstants;
-import de.prog2.dungeontop.resources.TestConstants;
+import de.prog2.dungeontop.resources.*;
 import de.prog2.dungeontop.resources.views.ViewStrings;
-import de.prog2.dungeontop.resources.WorldConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.GameEndViewController;
 import de.prog2.dungeontop.view.HellView;
@@ -114,7 +111,7 @@ public class GameManager {
         GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
         DungeonTop.getStage().setScene(scene);
         GameEndViewController.getInstance().showGameEndDialogue(false);
-        AudioManager.getInstance().changeClipVolumeWhilePlayingSound(993, MainMenueController.getMainMenueSoundUUID(),20);
+        AudioManager.getInstance().changeClipVolumeWhilePlayingSound(AssetIds.MUSIC_OPTION_ONE, MainMenueController.getMainMenueSoundUUID(),GameConstants.USUAL_NICE_VOLUME);
         this.currentState = GameState.END;
     }
 
