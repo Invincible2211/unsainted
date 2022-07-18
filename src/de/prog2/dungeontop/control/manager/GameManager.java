@@ -97,7 +97,6 @@ public class GameManager {
      */
     public void endGame(boolean playerWins)
     {
-        // TODO: CWOZ  CONEKZIONE
         if (isDM){
             System.exit(0);
         } else {

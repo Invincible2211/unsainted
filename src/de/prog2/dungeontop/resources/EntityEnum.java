@@ -2,6 +2,7 @@ package de.prog2.dungeontop.resources;
 
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.entities.Minion;
+import de.prog2.dungeontop.model.entities.Talent;
 
 public enum EntityEnum
 {
@@ -21,14 +22,14 @@ public enum EntityEnum
     AYNAET_R3 (new Minion("Aynaet", 6, 3, 0, 1, 1, AssetIds.AYNAET)),
 
     // Asasel
-    ASASEL_R1 (new Minion("Asasel", 3, 1, 0, 1, 1, AssetIds.ASASEL)),
-    ASASEL_R2 (new Minion("Asasel", 4, 2, 0, 1, 1, AssetIds.ASASEL)),
-    ASASEL_R3 (new Minion("Asasel", 6, 3, 0, 1, 1, AssetIds.ASASEL)),
+    ASASEL_R1 (new Minion("Asasel", 3, 1, 0, 1, 1, Talent.SPEEDKNOT, AssetIds.ASASEL)),
+    ASASEL_R2 (new Minion("Asasel", 4, 2, 0, 1, 1, Talent.SPEEDKNOT, AssetIds.ASASEL)),
+    ASASEL_R3 (new Minion("Asasel", 6, 3, 0, 1, 1, Talent.SPEEDKNOT, AssetIds.ASASEL)),
 
     // Baal
-    BAAL_R1 (new Minion("Baal", 3, 1, 0, 1, 1, AssetIds.BAAL)),
-    BAAL_R2 (new Minion("Baal", 4, 2, 0, 1, 1, AssetIds.BAAL)),
-    BAAL_R3 (new Minion("Baal", 6, 3, 0, 1, 1, AssetIds.BAAL)),
+    BAAL_R1 (new Minion("Baal", 3, 1, 0, 1, 1, Talent.SPEEDKNOT,AssetIds.BAAL)),
+    BAAL_R2 (new Minion("Baal", 4, 2, 0, 1, 1, Talent.SPEEDKNOT,AssetIds.BAAL)),
+    BAAL_R3 (new Minion("Baal", 6, 3, 0, 1, 1, Talent.SPEEDKNOT,AssetIds.BAAL)),
 
     // Belial
     BELIAL_R1 (new Minion("Belial", 3, 1, 0, 1, 1, AssetIds.BELIAL)),
@@ -36,9 +37,9 @@ public enum EntityEnum
     BELIAL_R3 (new Minion("Belial", 6, 3, 0, 1, 1, AssetIds.BELIAL)),
 
     // Beelzebub
-    BEELZEBUB_R1 (new Minion("Beelzebub", 3, 1, 1, 0, 1, AssetIds.BEELZEBUB)),
-    BEELZEBUB_R2 (new Minion("Beelzebub", 4, 2, 1, 0, 1, AssetIds.BEELZEBUB)),
-    BEELZEBUB_R3 (new Minion("Beelzebub", 6, 3, 1, 0, 1, AssetIds.BEELZEBUB)),
+    BEELZEBUB_R1 (new Minion("Beelzebub", 3, 1, 1, 1, 1, AssetIds.BEELZEBUB)),
+    BEELZEBUB_R2 (new Minion("Beelzebub", 4, 2, 1, 1, 1, AssetIds.BEELZEBUB)),
+    BEELZEBUB_R3 (new Minion("Beelzebub", 6, 3, 1, 1, 1, AssetIds.BEELZEBUB)),
 
     // Incubus
     INCUBUS_R1 (new Minion("Incubus", 3, 1, 0, 1, 1, AssetIds.INCUBUS)),
