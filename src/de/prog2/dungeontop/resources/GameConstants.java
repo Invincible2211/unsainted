@@ -9,4 +9,6 @@ public interface GameConstants {
     boolean PLAYER_DECK_USE_ALL_CARDS = false;
     double USUAL_NICE_VOLUME = 20d;
     long SLEEPTIMER_TIME_IN_MILLISECONDS = 3000l;
+    int RANDOM_HP_REG_MAX = 30;
+    int HP_REG_BASE_HP = 10;
 }
