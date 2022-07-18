@@ -84,7 +84,7 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof OpenArenaPackage){
             GameManager.getInstance().beginBattle(((OpenArenaPackage)dataPackage).getArena());
         } else if (dataPackage instanceof EndBattlePackage){
-            Platform.runLater(() -> BattleManager2.getInstance().endBattle(((EndBattlePackage)dataPackage).isPlayerWins()));
+            Platform.runLater(() -> BattleManager2.getInstance().endBattle(((EndBattlePackage)dataPackage).isPlayerWins(),false));
         } else if (dataPackage instanceof PlaceEntityPackage){
             PlaceEntityPackage placeEntityPackage = (PlaceEntityPackage) dataPackage;
             Platform.runLater(() -> BattleManager2.getInstance().spawnOpponent(placeEntityPackage.getEntity(), placeEntityPackage.getCoordinate()));
@@ -113,6 +113,7 @@ public class NetworkInterpreter extends Thread{
         } else if(dataPackage instanceof ChangeEntityHpByCoordinatePackage){
             Platform.runLater(() -> BattleManager2.getInstance().applyDamage(((ChangeEntityHpByCoordinatePackage)dataPackage).getCoordinate(), ((ChangeEntityHpByCoordinatePackage)dataPackage).getAmount()));
         }
+        System.out.println(dataPackage.getClass());
     }
 
 }

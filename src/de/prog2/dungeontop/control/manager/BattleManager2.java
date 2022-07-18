@@ -21,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
 import java.util.*;
@@ -145,7 +146,7 @@ public class BattleManager2 {
         }
     }
 
-    public void endBattle(boolean playerWins){
+    public void endBattle(boolean playerWins, boolean sendPackage){
         Platform.runLater(() -> {
             if (playerWins){
                 if (((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).isBoss())
@@ -163,8 +164,10 @@ public class BattleManager2 {
             } else {
                 GameManager.getInstance().endGame();
             }
+            if (sendPackage){
+                NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
+            }
             AudioManager.getInstance().stopSound(musicId);
-            NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
         });
     }
 
@@ -266,9 +269,9 @@ public class BattleManager2 {
             arenaController.remove(coordinate);
         }
         if (player1.getHp()<=0){
-            endBattle(GameManager.getInstance().isDM());
+            endBattle(GameManager.getInstance().isDM(),true);
         } else if (player2.getHp() <= 0){
-            endBattle(!GameManager.getInstance().isDM());
+            endBattle(!GameManager.getInstance().isDM(),true);
         }
     }
 

@@ -75,15 +75,14 @@ public class ArenaController
 
     @FXML
     private void onSurrender(){
-        BattleManager2.getInstance().endBattle(GameManager.getInstance().isDM());
+        BattleManager2.getInstance().endBattle(GameManager.getInstance().isDM(),true);
     }
 
     public void initBattle(Arena arena){
         clearHands();
-        clearField();
-
         currentArena = arena;
         setupBattlefield(arena);
+        clearField();
     }
 
     private void setupBattlefield (Arena arena)
