@@ -8,9 +8,32 @@ import de.prog2.dungeontop.model.items.Weapon;
 import de.prog2.dungeontop.model.items.artifacts.DefenseArtifact;
 import de.prog2.dungeontop.model.items.artifacts.ExtraSoulsArtifact;
 import de.prog2.dungeontop.resources.AssetIds;
+import org.apache.commons.lang3.SerializationUtils;
 
 public interface ItemConstants
 {
+    static Item getRandomItem()
+    {
+        int random = (int) (Math.random() * 13);
+        return switch (random)
+        {
+            default -> SerializationUtils.clone(MINOR_POTION);
+            case 1 -> SerializationUtils.clone(BREAD);
+            case 2 -> SerializationUtils.clone(CHEESE);
+            case 3 -> SerializationUtils.clone(NECKLACE);
+            case 4 -> SerializationUtils.clone(BRACELET);
+            case 5 -> SerializationUtils.clone(RING);
+            case 6 -> SerializationUtils.clone(HELMET);
+            case 7 -> SerializationUtils.clone(SHIELD);
+            case 8 -> SerializationUtils.clone(SWORD);
+            case 9 -> SerializationUtils.clone(AXE);
+            case 10 -> SerializationUtils.clone(BOW);
+            case 11 -> SerializationUtils.clone(CLAW);
+            case 12 -> SerializationUtils.clone(CROSSBOW);
+            case 13 -> SerializationUtils.clone(WAND);
+        };
+    }
+
     // ItemController
     int INVENTORY_SLOTS = 28;
     int INVENTORY_COLUMNS = 7;

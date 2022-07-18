@@ -3,7 +3,9 @@ package de.prog2.dungeontop.model.items;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
-public abstract class Item
+import java.io.Serializable;
+
+public abstract class Item implements Serializable
 {
     private final String name;
     private final String description;
