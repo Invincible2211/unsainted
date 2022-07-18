@@ -128,7 +128,6 @@ public class EntityController
         switch (talent)
         {
             case SPEEDKNOT -> resetMovement(entity);
-            // TODO: implement the other talents
         }
     }
 }

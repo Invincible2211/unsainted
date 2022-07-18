@@ -395,7 +395,6 @@ public class HellView
                 break;
 
             // Cases to manipulate playerstats by a keystroke to test the statboard
-            // TODO: Once we got mechanics in the game that change the values on their own remove this
             case PLUS:
                 PlayerManager.getInstance().addSouls(HellViewConstants.STATBOARD_CHANGE_TEST_VALUE);
                 PlayerManager.getInstance().addHp(HellViewConstants.STATBOARD_CHANGE_TEST_VALUE);

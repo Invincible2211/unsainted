@@ -66,7 +66,6 @@ public class NetManager extends Thread
             GlobalLogger.log(NetworkingConstants.SENDS_HELL_DATA);
         }
         try {
-            // TODO: remove magic number
             sleep(GameConstants.SLEEPTIMER_TIME_IN_MILLISECONDS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
