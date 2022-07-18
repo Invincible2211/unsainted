@@ -123,6 +123,7 @@ public class GameManager {
     public void beginBattle(Arena arena)
     {
         PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.DM_HAND_CARD_LIMIT);
+        PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
         BattleManager2.getInstance().startBattle(arena);
         HellView.pauseHellViewBgMusic();
         this.currentState = GameState.BATTLE;

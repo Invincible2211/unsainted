@@ -63,7 +63,6 @@ public class BattleManager2 {
      * @param arena für die MaSe der neuen Arena
      */
     public void startBattle(Arena arena){
-        PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
         Platform.runLater(() -> {
             this.player1 = PlayerManager.getInstance().getPlayer();
             this.player2 = GameManager.getInstance().getOpponentPlayer();
