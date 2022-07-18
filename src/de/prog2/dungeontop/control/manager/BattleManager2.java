@@ -13,6 +13,7 @@ import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
 import de.prog2.dungeontop.resources.*;
+import de.prog2.dungeontop.utils.ArenaUtils;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
@@ -158,7 +159,6 @@ public class BattleManager2 {
                     NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
                     return;
                 }
-                    arenaController.clearField();
                     HellView.resumeHellViewBgMusic();
                     DungeonTop.getStage().setScene(HellView.getCurrHellView());
 
@@ -267,7 +267,7 @@ public class BattleManager2 {
     public void applyDamage(Coordinate coordinate, int damage){
         EntityController.applyDamage(getEntityAtPosition(coordinate),damage);
         if (getEntityAtPosition(coordinate).getHp()<=0){
-            arenaController.remove(coordinate);
+            remove(coordinate);
         }
         if (player1.getHp()<=0){
             endBattle(GameManager.getInstance().isDM(),true);
