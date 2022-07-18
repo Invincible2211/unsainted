@@ -80,10 +80,9 @@ public class ArenaController
 
     public void initBattle(Arena arena){
         clearHands();
-        clearField();
-
         currentArena = arena;
         setupBattlefield(arena);
+        clearField();
     }
 
     private void setupBattlefield (Arena arena)
