@@ -162,7 +162,6 @@ public class BattleManager
      */
     public void endAPhase ()
     {
-        //TODO check if match is over
         //IF new round both players get more egopointsmax and current to max
         if (getCurrentPhase() == BattlePhase.SECOND_DUELLIST_SECOND_PLACE_CARDS) {
             newRound();
@@ -282,7 +281,6 @@ public class BattleManager
 
     /**
      * HelpMethod
-     * TODO: In der Zukunft nach Abgabe: AUslagern in unique attackAction
      * makes the Entity Attack the selexted other
      * @param coordinateOfAttackedEntity
      */
@@ -537,7 +535,6 @@ public class BattleManager
 
         /**
          * will shuffle deck if there are not enough cards to draw
-         * TODO make sure that deck always has at least X amount of cards.
          */
         protected void drawNewDuellistHand ()
         {
