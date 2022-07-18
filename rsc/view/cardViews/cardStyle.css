@@ -10,3 +10,7 @@
     -fx-effect: dropshadow( one-pass-box, #000, 10, 1.0, 0, 0);
     -fx-font-weight: bold;
 }
+.description-label{
+    -fx-font-size: 20;
+    -fx-font-family: Hombre;
+}

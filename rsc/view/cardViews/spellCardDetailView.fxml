@@ -30,8 +30,8 @@
         </center>
     </BorderPane>
     <!-- Description -->
-    <VBox AnchorPane.topAnchor="400" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" fx:id="descriptionContainer">
-        <Label fx:id="descriptionLabel" text="description" />
+    <VBox AnchorPane.topAnchor="400" AnchorPane.leftAnchor="0" alignment="CENTER" AnchorPane.rightAnchor="0" fx:id="descriptionContainer">
+        <Label fx:id="descriptionLabel" text="description" styleClass="description-label" wrapText="true"/>
     </VBox>
 
     <!-- Rank -->
