@@ -87,7 +87,7 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof MoveEntityPackage moveEntityPackage){
             Platform.runLater(() -> BattleManager2.getInstance().move(moveEntityPackage.getStart(),moveEntityPackage.getTarget()));
         } else if (dataPackage instanceof RemoveEntityPackage removeEntityPackage){
-            Platform.runLater(() -> BattleManager2.getInstance().remove(removeEntityPackage.getCoordinate()));
+            Platform.runLater(() -> BattleManager2.getInstance().remove(removeEntityPackage.getCoordinate(), true));
         } else if (dataPackage instanceof EgopointsChangePackage){
             Platform.runLater(() -> GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(
                     GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount()));
