@@ -105,7 +105,7 @@ public abstract class ArenaBaseController
         currentArenaBaseView.getEgopointsPlayerOne().setPrefSize(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH, ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
         currentArenaBaseView.getEgopointsPlayerTwo().setPrefSize(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH, ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
     }
-    
+
     public static void updatePlayerHands (List<Card> handOne, List<Card> handTwo)
     {
         HBox handcontainer = currentArenaBaseView.getPlayerHandHBox();
