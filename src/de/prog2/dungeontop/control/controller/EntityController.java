@@ -108,7 +108,8 @@ public class EntityController
                 BattleManager2.getInstance().endBattle(!GameManager.getInstance().isDM());
                 GlobalLogger.log(LoggerStringValues.HERO_DIED_GAME_OVER);
             }
-            BattleManager2.getInstance().getArenaController().remove(entity.getPosition());
+            BattleManager2.getInstance().getArenaController().remove(BattleManager2.getInstance().getCoordinateFromEntity(entity));
+
         }
         return entity.getHp() > 0;
     }
