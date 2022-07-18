@@ -17,6 +17,7 @@ import de.prog2.dungeontop.view.HellView;
 import de.prog2.dungeontop.view.MainMenueController;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -59,7 +60,10 @@ public class GameManager {
         {
 
             if (saveGame.getPlayer() != null)
+            {
                 PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
+                PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
+            }
 
             GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
 

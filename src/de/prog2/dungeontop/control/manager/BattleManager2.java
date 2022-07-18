@@ -92,7 +92,7 @@ public class BattleManager2 {
     private void instantiateHeroes (Arena arena)
     {
         Coordinate cornerBottemRight = new Coordinate(arena.getWidth()-1, arena.getHeight()-1);
-        Entity hero = player1.getHero();
+        Entity hero = SerializationUtils.clone(player1.getHero());
         arenaController.placeEntityFriendly(hero, cornerBottemRight);
     }
 
