@@ -213,4 +213,6 @@ public interface LoggerStringValues
     String HERO_DIED_GAME_OVER = "Hero died, game over";
     String SET_EGOPOINTS = "Set egopoints";
     String SET_EGOPOINTS_TO_MAX = "Set egopoints to max";
+    String PLAYER_WON_BATTLE = "Player won battle";
+    String PLAYER_LOST_BATTLE = "Player lost battle";
 }

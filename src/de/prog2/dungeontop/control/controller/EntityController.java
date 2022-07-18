@@ -8,12 +8,14 @@ import de.prog2.dungeontop.model.entities.Talent;
 import de.prog2.dungeontop.model.game.MoveDirection;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.CoordinateUtils;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaController;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class EntityController
 {
@@ -107,6 +109,10 @@ public class EntityController
             {
                 BattleManager2.getInstance().endBattle(!GameManager.getInstance().isDM(),true);
                 GlobalLogger.log(LoggerStringValues.HERO_DIED_GAME_OVER);
+                Random random = new Random();
+                if (!GameManager.getInstance().isDM()){
+                    GameManager.getInstance().getOpponentPlayer().getHero().setHp((random.nextInt(GameConstants.RANDOM_HP_REG_MAX) + GameConstants.HP_REG_BASE_HP));
+                }
             }
             BattleManager2.getInstance().getArenaController().remove(BattleManager2.getInstance().getCoordinateFromEntity(entity), false);
 

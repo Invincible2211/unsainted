@@ -1,5 +1,7 @@
 package de.prog2.dungeontop.control.network;
 
+import de.prog2.dungeontop.control.manager.GameManager;
+import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.network.Package;
@@ -49,7 +51,8 @@ public class NetworkAPI {
         sendData(new OpenArenaPackage(arena));
     }
 
-    public void sendEndBattlePackage(boolean playerWins){
+    public void sendEndBattlePackage(boolean playerWins)
+    {
         this.sendData(new EndBattlePackage(playerWins));
     }
 

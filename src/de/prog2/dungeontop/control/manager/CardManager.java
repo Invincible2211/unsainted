@@ -43,4 +43,16 @@ public class CardManager implements Serializable
     {
         CardManager.instance = instance;
     }
+
+    public void endBattle(boolean playerWins)
+    {
+        if (playerWins)
+        {
+            GlobalLogger.log(LoggerStringValues.PLAYER_WON_BATTLE);
+        }
+        else
+        {
+            GlobalLogger.log(LoggerStringValues.PLAYER_LOST_BATTLE);
+        }
+    }
 }

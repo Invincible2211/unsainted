@@ -94,8 +94,18 @@ public class BattleManager2 {
     private void instantiateHeroes (Arena arena)
     {
         Coordinate cornerBottemRight = new Coordinate(arena.getWidth()-1, arena.getHeight()-1);
-        Entity hero = SerializationUtils.clone(player1.getHero());
-        arenaController.placeEntityFriendly(hero, cornerBottemRight);
+        if (GameManager.getInstance().isDM())
+        {
+            Entity hero = SerializationUtils.clone(player1.getHero());
+            arenaController.placeEntityFriendly(hero, cornerBottemRight);
+        }
+        else
+        {
+            Entity hero = PlayerManager.getInstance().getPlayerHero();
+            arenaController.placeEntityFriendly(hero, cornerBottemRight);
+        }
+
+
     }
 
     private void processButton(){
@@ -148,13 +158,16 @@ public class BattleManager2 {
         }
     }
 
-    public void endBattle(boolean playerWins, boolean sendPackage){
+    public void endBattle(boolean playerWins, boolean sendPackage)
+    {
         if (PlayerManager.getInstance().getPlayer().getCurrentRoom() instanceof  ArenaRoom)
             ((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).setAlive(false);
         Platform.runLater(() -> {
             if (playerWins){
                 if (!GameManager.getInstance().isDM() && PlayerManager.getInstance().getPlayer().getCurrentRoom() == GameManager.getInstance().getGameWorld().getCurrentHell().getBossRoom())
                 {
+                        GameManager.getInstance().getOpponentPlayer().getHero().setHp(GameConstants.HP_REG_BASE_HP);
+
                     if (GameManager.getInstance().getGameWorld().getCurrentDepth() == 7)
                     {
                         GameManager.getInstance().endGame(true);
@@ -163,17 +176,19 @@ public class BattleManager2 {
                     }
                     GameManager.getInstance().getGameWorld().getNextHell();
                     HellView.restartHellViewBgMusic();
-                    DungeonTop.getStage().setScene(HellView.getCurrHellView());
-                    NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
                     return;
                 }
-                    HellView.resumeHellViewBgMusic();
+                PlayerManager.getInstance().getPlayerHero().setHp(GameConstants.HP_REG_BASE_HP);
+                HellView.resumeHellViewBgMusic();
+                DungeonTop.getStage().setScene(HellView.getCurrHellView());
+
 
             } else {
                 GameManager.getInstance().endGame(false);
             }
             if (sendPackage){
                 NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
+
             }
             AudioManager.getInstance().stopSound(musicId);
         });
