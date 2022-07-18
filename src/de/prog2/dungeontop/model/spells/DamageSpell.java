@@ -37,7 +37,8 @@ public class DamageSpell extends Spell
                         NetManager.getInstance().getNetworkAPI().sendChangeEntityHpPackage(ArenaUtils.invertCoordinate(arena, c), damage);
                         return;
                     }
-                    BattleManager2.getInstance().getArenaController().removeEntityInCoordinate(c);
+                    NetManager.getInstance().getNetworkAPI().sendRemoveEntity(ArenaUtils.invertCoordinate(arena, c));
+                    BattleManager2.getInstance().remove(c);
                 }
             }
         }

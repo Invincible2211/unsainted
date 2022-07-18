@@ -290,44 +290,43 @@ public class ArenaController
         }
     }
 
-    private void battle(Coordinate selectedPos, Coordinate sourcePos){
-        if (!isOutOfRange(selectedPos, sourcePos, getFriendly().get(selectedPos).getAttackRange()) && getFriendly().get(selectedPos).getMovement() > 0)
-        {
+    private void battle(Coordinate selectedPos, Coordinate sourcePos) {
+        if (!isOutOfRange(selectedPos, sourcePos, getFriendly().get(selectedPos).getAttackRange()) && getFriendly().get(selectedPos).getMovement() > 0) {
             System.out.println("Hallo");
-            List<Coordinate> targets = collectTargets(selectedPos,sourcePos);
+            List<Coordinate> targets = collectTargets(selectedPos, sourcePos);
             List<Entity> targetedEntities = new ArrayList<>();
-            HashMap<Entity,Coordinate> oldCoordinates = new HashMap<>();
+            HashMap<Entity, Coordinate> oldCoordinates = new HashMap<>();
             for (Coordinate coordinate :
                     targets) {
                 Entity e = getOpponent().remove(coordinate);
-                if (e != null)
-                {
+                if (e != null) {
                     targetedEntities.add(e);
                     oldCoordinates.put(e, coordinate);
+                    if (e != null) {
+                        targetedEntities.add(e);
+                        oldCoordinates.put(e, coordinate);
+                    }
                 }
-            }
-            List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), targetedEntities);
-            if (!cards.isEmpty())
-            {
-                for (Entity e:
-                        cards) {
-                    getOpponent().put(oldCoordinates.get(e), e);
-                    NetManager.getInstance().getNetworkAPI().sendAttackPackage(getFriendly().get(selectedPos), invertCoordinate(oldCoordinates.get(e)));
+                List<Entity> cards = BattleManager2.getInstance().battle(getFriendly().get(selectedPos), targetedEntities);
+                if (!cards.isEmpty()) {
+                    for (Entity ent :
+                            cards) {
+                        getOpponent().put(oldCoordinates.get(ent), ent);
+                        NetManager.getInstance().getNetworkAPI().sendAttackPackage(getFriendly().get(selectedPos), invertCoordinate(oldCoordinates.get(ent)));
+                    }
+                } else {
+                    for (Coordinate c :
+                            targets) {
+                        removeEntity(c);
+                    }
                 }
+                removeHighlight();
+                setSelected(null);
             }
-            else
-            {
-                for (Coordinate c:
-                        targets) {
-                    removeNetity(c);
-                }
-            }
-            removeHighlight();
-            setSelected(null);
         }
     }
 
-    private void removeNetity(Coordinate coordinate) {
+    private void removeEntity(Coordinate coordinate) {
         arenaGridPane.getChildren().remove(getNodeFromGridPane(coordinate.getX(),coordinate.getY()));
         NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(coordinate));
         AnchorPane anchorPane = new AnchorPane();
@@ -552,6 +551,8 @@ public class ArenaController
         currentArena.getArenaHashmap().clear();
         currentArena.getOpponent().clear();
         currentArena.getFriendly().clear();
-        GameManager.getInstance().getOpponentPlayer().getHero().setHp(GameManager.getInstance().getOpponentPlayer().getHero().getCard().getEntity().getHp());
+        if (!GameManager.getInstance().isDM()){
+            GameManager.getInstance().getOpponentPlayer().getHero().setHp((int) (10+(Math.random() * 100)*30));
+        }
     }
 }
