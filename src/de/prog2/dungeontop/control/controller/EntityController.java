@@ -105,7 +105,7 @@ public class EntityController
         {
             if (entity instanceof Hero)
             {
-                BattleManager2.getInstance().endBattle(!GameManager.getInstance().isDM());
+                BattleManager2.getInstance().endBattle(!GameManager.getInstance().isDM(),true);
                 GlobalLogger.log(LoggerStringValues.HERO_DIED_GAME_OVER);
             }
             BattleManager2.getInstance().getArenaController().remove(BattleManager2.getInstance().getCoordinateFromEntity(entity));
