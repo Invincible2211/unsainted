@@ -18,6 +18,7 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -158,7 +159,6 @@ public class BattleManager2 {
                     return;
                 }
                     HellView.resumeHellViewBgMusic();
-                    //TODO: setscene auf belohnung aussuchen etc.
                     DungeonTop.getStage().setScene(HellView.getCurrHellView());
 
             } else {
@@ -288,7 +288,6 @@ public class BattleManager2 {
                 //hand.add(DeckController.drawCard(player1.getDeck());
 
                 Card drawenCard = DeckController.drawCard(player1.getDeck());
-                //TODO sound of get
                 player1.getHandCards().add(drawenCard);
                 NetManager.getInstance().getNetworkAPI().sendHandCardIncreasedPackage();
                 GlobalLogger.log(LoggerStringValues.DREW_NEW_CARD + i + "out of" + player1.getHandCardLimit());
@@ -310,7 +309,7 @@ public class BattleManager2 {
 
     public void removeCardFromHand (Card card)
     {
-        //TODO SOUND einspielen
+
         player1.getDiscardPile().pushCard(card);
         player1.getHandCards().remove(card);
         NetManager.getInstance().getNetworkAPI().sendHandCardReducePackage();
@@ -345,7 +344,6 @@ public class BattleManager2 {
 
     public void reStackDeckFromDiscard ()
     {
-        //TODO sound abspielen
         for (int i = 0; i < player1.getDiscardPile().getCards().size();i++) {
             player1.getDeck().getCards().push(player1.getDiscardPile().popCard());
         }
@@ -388,6 +386,11 @@ public class BattleManager2 {
     public Coordinate getCoordinateFromEntity (Entity entity)
     {
         for (Coordinate coordinate : arenaController.getOpponent().keySet())
+        {
+            if (arenaController.getOpponent().get(coordinate) == entity)
+                return coordinate;
+        }
+        for (Coordinate coordinate : arenaController.getFriendly().keySet())
         {
             if (arenaController.getOpponent().get(coordinate) == entity)
                 return coordinate;

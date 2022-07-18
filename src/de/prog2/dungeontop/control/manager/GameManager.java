@@ -97,27 +97,12 @@ public class GameManager {
      */
     public void endGame()
     {
-        /*
-        World newWorld = new World(WorldConstants.HELL_COUNT);
-        PlayerManager.getInstance().getPlayer().setHero(null);
-         */
-
         if (isDM){
             System.exit(0);
         } else {
             GameManager.getInstance().setGameWorld(null);
             saveGame.setGameWorld(null);
-
             GameSaveFileWriter.getInstance().saveGame(saveGame);
-
-            Scene scene = new Scene(new AnchorPane());
-            try {
-                scene = new Scene(new FXMLLoader().load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML)));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
-            DungeonTop.getStage().setScene(scene);
             GameEndViewController.getInstance().showGameEndDialogue(false);
             AudioManager.getInstance().changeClipVolumeWhilePlayingSound(AssetIds.MUSIC_OPTION_ONE, MainMenueController.getMainMenueSoundUUID(), GameConstants.USUAL_NICE_VOLUME);
             this.currentState = GameState.END;
@@ -138,12 +123,8 @@ public class GameManager {
      */
     public void beginBattle(Arena arena)
     {
-        if (isDM()){
-//            for (Card card : TestConstants.getTestCards()) {
-//                PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
-//            }
-        }
         PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.DM_HAND_CARD_LIMIT);
+        PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
         BattleManager2.getInstance().startBattle(arena);
         HellView.pauseHellViewBgMusic();
         this.currentState = GameState.BATTLE;

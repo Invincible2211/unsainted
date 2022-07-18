@@ -13,6 +13,7 @@ import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
+import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
 import de.prog2.dungeontop.utils.ArenaUtils;
 import de.prog2.dungeontop.view.handViews.EnemyHandView;
@@ -28,6 +29,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class ArenaController
 {
@@ -282,7 +284,6 @@ public class ArenaController
 
     private void battle(Coordinate selectedPos, Coordinate sourcePos) {
         if (!isOutOfRange(selectedPos, sourcePos, getFriendly().get(selectedPos).getAttackRange()) && getFriendly().get(selectedPos).getMovement() > 0) {
-            System.out.println("Hallo");
             List<Coordinate> targets = collectTargets(selectedPos, sourcePos);
             List<Entity> targetedEntities = new ArrayList<>();
             HashMap<Entity, Coordinate> oldCoordinates = new HashMap<>();
@@ -320,7 +321,7 @@ public class ArenaController
         arenaGridPane.getChildren().remove(getNodeFromGridPane(coordinate.getX(),coordinate.getY()));
         NetManager.getInstance().getNetworkAPI().sendRemoveEntity(invertCoordinate(coordinate));
         AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
+        anchorPane.setPrefSize(ArenaViewConstants.BATTLEFIELD_TILE_TARGET_SIZE* tilepercentScale, ArenaViewConstants.BATTLEFIELD_TILE_TARGET_SIZE* tilepercentScale);
         addEventHandler(anchorPane);
         arenaGridPane.add(anchorPane, coordinate.getX(), coordinate.getY());
     }
@@ -498,7 +499,7 @@ public class ArenaController
     public void remove(Coordinate pos) {
         currentArena.getFriendly().remove(pos);
         AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setPrefSize(170* tilepercentScale, 170* tilepercentScale);
+        anchorPane.setPrefSize(ArenaViewConstants.BATTLEFIELD_TILE_TARGET_SIZE* tilepercentScale, ArenaViewConstants.BATTLEFIELD_TILE_TARGET_SIZE* tilepercentScale);
         addEventHandler(anchorPane);
         AnchorPane target = getNodeFromGridPane(pos.getX(), pos.getY());
         arenaGridPane.getChildren().remove(target);
@@ -538,8 +539,10 @@ public class ArenaController
         currentArena.getArenaHashmap().clear();
         currentArena.getOpponent().clear();
         currentArena.getFriendly().clear();
+        Random random = new Random();
         if (!GameManager.getInstance().isDM()){
-            GameManager.getInstance().getOpponentPlayer().getHero().setHp((int) (10+(Math.random() * 100)*30));
+            GameManager.getInstance().getOpponentPlayer().getHero().setHp((random.nextInt(GameConstants.RANDOM_HP_REG_MAX) + GameConstants.HP_REG_BASE_HP));
+
         }
     }
 }

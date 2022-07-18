@@ -37,7 +37,6 @@ public abstract class CardView
     private void mouseEntered()
     {
         CardViewController.zoomCardView(container);
-        //TODO: Add better sound effect than buttonclick . This sounds weird.
         AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false);
         if(detailViewContainer != null)
         {

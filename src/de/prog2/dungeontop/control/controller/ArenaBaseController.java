@@ -29,7 +29,6 @@ public abstract class ArenaBaseController
 
     private static ArenaBaseView currentArenaBaseView;
 
-    //TODO the ArenabaseView to replace the parameter in every method as static variable
     /**
      * creates a default arena
      * @param arenaBaseView the view to be used
@@ -107,8 +106,6 @@ public abstract class ArenaBaseController
         currentArenaBaseView.getEgopointsPlayerTwo().setPrefSize(ArenaViewConstants.EGOPOINTS_BACKGROUND_WIDTH, ArenaViewConstants.EGOPOINTS_BACKGROUND_HEIGHT);
     }
 
-    //TODO BINDING THIS -> binddirectional maybe
-    //TODO Nicht die skalierung aendern sondern die Ueberlappung bei groSen Haenden
     public static void updatePlayerHands (List<Card> handOne, List<Card> handTwo)
     {
         HBox handcontainer = currentArenaBaseView.getPlayerHandHBox();
@@ -171,7 +168,7 @@ public abstract class ArenaBaseController
                 ArenaStackPane stackPane = new ArenaStackPane(new Coordinate(x,y));
                 stackPane.setBackground(new Background(myBI));;
                 GlobalLogger.log(LoggerStringValues.ADDING_CELL_TO_VIEW_BATTLFIELD);
-//                stackPane.setPrefSize(size, size); TODO they shall only be Square even with uneven resolution
+
                 stackPane.setMinSize(size * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER, size * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER);
                 stackPane.setMaxSize(size * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER, size * ArenaViewConstants.BATTLEFIELD_CELL_MIN_SIZE_MODIFIER);
 
