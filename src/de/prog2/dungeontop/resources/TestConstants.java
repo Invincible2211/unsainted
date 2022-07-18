@@ -26,6 +26,22 @@ public interface TestConstants
                 String.format(SpellValues.HEALING_SPELL_DESCRIPTION, SpellValues.HEALING_SPELL_RADIUS, SpellValues.HEALING_SPELL_HEAL),
                 SpellValues.HEALING_SPELL_ASSET_ID, SpellValues.HEALING_SPELL_HEAL, 1);
         cards.add(new SpellCard(healingSpell, 6, 350, 6, 1, 0));
+        HealingSpell healingSpell1 = new HealingSpell(SpellValues.HEALING_SPELL_NAME,
+                String.format(SpellValues.HEALING_SPELL_DESCRIPTION, SpellValues.HEALING_SPELL_RADIUS, SpellValues.HEALING_SPELL_HEAL),
+                SpellValues.HEALING_SPELL_ASSET_ID, SpellValues.HEALING_SPELL_HEAL, 1);
+        cards.add(new SpellCard(healingSpell1, 6, 350, 6, 1, 0));
+        HealingSpell healingSpell2 = new HealingSpell(SpellValues.HEALING_SPELL_NAME,
+                String.format(SpellValues.HEALING_SPELL_DESCRIPTION, SpellValues.HEALING_SPELL_RADIUS, SpellValues.HEALING_SPELL_HEAL),
+                SpellValues.HEALING_SPELL_ASSET_ID, SpellValues.HEALING_SPELL_HEAL, 1);
+        cards.add(new SpellCard(healingSpell2, 6, 350, 6, 1, 0));
+        HealingSpell healingSpell3 = new HealingSpell(SpellValues.HEALING_SPELL_NAME,
+                String.format(SpellValues.HEALING_SPELL_DESCRIPTION, SpellValues.HEALING_SPELL_RADIUS, SpellValues.HEALING_SPELL_HEAL),
+                SpellValues.HEALING_SPELL_ASSET_ID, SpellValues.HEALING_SPELL_HEAL, 1);
+        cards.add(new SpellCard(healingSpell3, 6, 350, 6, 1, 0));
+        HealingSpell healingSpell4 = new HealingSpell(SpellValues.HEALING_SPELL_NAME,
+                String.format(SpellValues.HEALING_SPELL_DESCRIPTION, SpellValues.HEALING_SPELL_RADIUS, SpellValues.HEALING_SPELL_HEAL),
+                SpellValues.HEALING_SPELL_ASSET_ID, SpellValues.HEALING_SPELL_HEAL, 1);
+        cards.add(new SpellCard(healingSpell4, 6, 350, 6, 1, 0));
         Spell testSpell2 = new DamageSpell(SpellValues.METEOR_SPELL_NAME,
                 String.format(SpellValues.METEOR_SPELL_DESCRIPTION, SpellValues.METEOR_SPELL_RADIUS, SpellValues.METEOR_SPELL_DAMAGE),
                 SpellValues.METEOR_SPELL_ASSET_ID, SpellValues.METEOR_SPELL_DAMAGE, 1);

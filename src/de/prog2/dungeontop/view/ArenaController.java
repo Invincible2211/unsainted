@@ -14,6 +14,7 @@ import de.prog2.dungeontop.model.game.SpellCard;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.resources.views.ArenaViewConstants;
+import de.prog2.dungeontop.utils.ArenaUtils;
 import de.prog2.dungeontop.view.handViews.EnemyHandView;
 import de.prog2.dungeontop.view.handViews.PlayerHandView;
 import javafx.application.Platform;
@@ -334,6 +335,13 @@ public class ArenaController
         arenaGridPane.add(anchorPane, coordinate.getX(), coordinate.getY());
     }
 
+    public void removeEntityInCoordinate(Coordinate c)
+    {
+        currentArena.getOpponent().remove(c);
+        arenaGridPane.getChildren().remove(getNodeFromGridPane(c.getX(), c.getY()));
+        NetManager.getInstance().getNetworkAPI().sendRemoveEntity(ArenaUtils.invertCoordinate(currentArena, c));
+    }
+
     private List<Coordinate> collectTargets(Coordinate sourcePos, Coordinate selectedPos) {
         System.out.println(sourcePos +" " +selectedPos);
         List<Coordinate> targets = new ArrayList<>();
@@ -524,6 +532,7 @@ public class ArenaController
     public Label getLabelEgoPointOpponent() {
         return labelEgoPointOpponent;
     }
+
     public AnchorPane getCardDetailViewContainer() {
         return cardView;
     }
@@ -532,4 +541,16 @@ public class ArenaController
         return nextPhaseButton;
     }
 
+    public void clearField ()
+    {
+        for (Node node : arenaGridPane.getChildren()) {
+            if (node instanceof AnchorPane pane){
+                pane.setStyle("-fx-background-color: none;");
+            }
+        }
+        currentArena.getArenaHashmap().clear();
+        currentArena.getOpponent().clear();
+        currentArena.getFriendly().clear();
+        GameManager.getInstance().getOpponentPlayer().getHero().setHp(GameManager.getInstance().getOpponentPlayer().getHero().getCard().getEntity().getHp());
+    }
 }

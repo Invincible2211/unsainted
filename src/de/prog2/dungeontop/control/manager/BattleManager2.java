@@ -73,13 +73,13 @@ public class BattleManager2 {
             }
             arenaController.initBattle(arena);
             DungeonTop.getStage().setScene(scene);
-            List<Entity> entities = TestConstants.getTestEntities();
-            entities.addAll(TestConstants.getTestEntities());
-            Entity peter = new Minion("Peter",10,4,4, 3,410, 211);
-            EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
-            peter.setCard(petercard);
-            Coordinate cord = new Coordinate(0,arena.getHeight()-1);
-            arenaController.placeEntityFriendly(peter,cord);
+            //List<Entity> entities = TestConstants.getTestEntities();
+            //entities.addAll(TestConstants.getTestEntities());
+            //Entity peter = new Minion("Peter",10,4,4, 1,410, 211);
+            //EntityCard petercard = new EntityCard(peter,10,4,4,410,4);
+            //peter.setCard(petercard);
+            //Coordinate cord = new Coordinate(0,arena.getHeight()-1);
+            //arenaController.placeEntityFriendly(peter,cord);
             battlePhase = BattlePhase.FIRST_DUELLIST_DRAW;
             processButton();
             processLabel();
@@ -158,12 +158,13 @@ public class BattleManager2 {
                 {
                     GameManager.getInstance().getGameWorld().getNextHell();
                     HellView.restartHellViewBgMusic();
+                    NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
+                    return;
                 }
-                else
-                {
+                    arenaController.clearField();
                     HellView.resumeHellViewBgMusic();
-                }
-                DungeonTop.getStage().setScene(HellView.getCurrHellView());
+                    //TODO: setscene auf belohnung aussuchen etc.
+                    DungeonTop.getStage().setScene(HellView.getCurrHellView());
 
             } else {
                 GameManager.getInstance().endGame();
@@ -175,6 +176,9 @@ public class BattleManager2 {
 
     public Entity getEntityAtPosition(Coordinate coordinate){
         return arenaController.getFriendly().get(coordinate);
+    }
+    public Entity getOpponentEntityAtPosition(Coordinate coordinate){
+        return arenaController.getOpponent().get(coordinate);
     }
 
     public void spawnOpponent(Entity card, Coordinate pos){
@@ -263,11 +267,6 @@ public class BattleManager2 {
             if (e.getHp()>0){
                 combatants.add(e);
             }
-        }
-        if (player1.getHp()<=0){
-            endBattle(GameManager.getInstance().isDM());
-        } else if (player2.getHp() <= 0){
-            endBattle(!GameManager.getInstance().isDM());
         }
         return combatants;
     }

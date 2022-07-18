@@ -1,21 +1,15 @@
 package de.prog2.dungeontop.control.manager;
 
 import de.prog2.dungeontop.control.file.GameSaveFileReader;
-import de.prog2.dungeontop.control.file.GameSaveFileWriter;
-import de.prog2.dungeontop.model.entities.Entity;
 import de.prog2.dungeontop.model.game.Card;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.game.Player;
-import de.prog2.dungeontop.resources.AvailableCards;
 import de.prog2.dungeontop.resources.DeckConstants;
-import de.prog2.dungeontop.resources.EntityCardEnum;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 public class CardManager implements Serializable
 {

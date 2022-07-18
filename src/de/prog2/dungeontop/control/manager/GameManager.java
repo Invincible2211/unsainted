@@ -133,9 +133,9 @@ public class GameManager {
     public void beginBattle(Arena arena)
     {
         if (isDM()){
-            for (Card card : TestConstants.getTestCards()) {
-                PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
-            }
+//            for (Card card : TestConstants.getTestCards()) {
+//                PlayerManager.getInstance().getPlayer().getDeck().pushCard(card);
+//            }
         }
         PlayerManager.getInstance().getPlayer().setHandCardLimit(SelectHeroConstants.DM_HAND_CARD_LIMIT);
         BattleManager2.getInstance().startBattle(arena);

@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.resources;
 
-import de.prog2.dungeontop.control.controller.DeckController;
 import de.prog2.dungeontop.control.manager.CardManager;
 import de.prog2.dungeontop.model.game.Card;
 
@@ -11,9 +10,10 @@ public interface AvailableCards
 {
     HashSet<Card> AVAILABLE_CARDS = new HashSet<>();
 
-    public static void INIT_CARD_DATA()
+    static void INIT_CARD_DATA()
     {
         Arrays.asList(EntityCardEnum.values()).forEach(e -> AvailableCards.AVAILABLE_CARDS.add(e.getValue()));
+        Arrays.asList(SpellCardEnum.values()).forEach(e -> AvailableCards.AVAILABLE_CARDS.add(e.getSpellCard()));
 
         // init unlocked cards
         if (CardManager.getInstance().getUnlockedCards().size() == 0)
@@ -22,6 +22,13 @@ public interface AvailableCards
             {
                 CardManager.getInstance().addUnlockedCard(Arrays.asList(EntityCardEnum.values()).get(i).getValue());
             }
+            CardManager.getInstance().addUnlockedCard(SpellCardEnum.HEALING_SPELL_R1_CARD.getSpellCard());
+            CardManager.getInstance().addUnlockedCard(SpellCardEnum.HEALING_SPELL_R2_CARD.getSpellCard());
+            CardManager.getInstance().addUnlockedCard(SpellCardEnum.HEALING_SPELL_R3_CARD.getSpellCard());
+
+            CardManager.getInstance().addUnlockedCard(SpellCardEnum.METEOR_SPELL_R1_CARD.getSpellCard());
+            CardManager.getInstance().addUnlockedCard(SpellCardEnum.METEOR_SPELL_R2_CARD.getSpellCard());
+            CardManager.getInstance().addUnlockedCard(SpellCardEnum.METEOR_SPELL_R3_CARD.getSpellCard());
         }
 
         // init locked cards
