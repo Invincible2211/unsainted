@@ -12,6 +12,7 @@ import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.world.Coordinate;
 import de.prog2.dungeontop.model.world.arena.Arena;
 import de.prog2.dungeontop.model.world.rooms.ArenaRoom;
+import de.prog2.dungeontop.resources.ArenaConstants;
 import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.LoggerStringValues;
 import de.prog2.dungeontop.resources.TestConstants;
@@ -391,6 +392,16 @@ public class BattleManager2 {
         FIRST_DUELLIST_SECOND_PLACE_CARDS, // first duellist can place cards with leftover mana, minions placed here cant attck this round
         SECOND_DUELLIST_SECOND_PLACE_CARDS; //second duellist can place cards with leftover mana, minions placed here cant attck this round
 
+    }
+
+    public Coordinate getCoordinateFromEntity (Entity entity)
+    {
+        for (Coordinate coordinate : arenaController.getOpponent().keySet())
+        {
+            if (arenaController.getOpponent().get(coordinate) == entity)
+                return coordinate;
+        }
+        return null;
     }
 
     public static BattleManager2 getInstance() {
