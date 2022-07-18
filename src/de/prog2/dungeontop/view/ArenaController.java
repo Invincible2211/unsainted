@@ -457,8 +457,6 @@ public class ArenaController
         }
     }
 
-    // TODO: Methodennamen passend umbenennen
-    //TODO: auf range pruefen anstatt magic number 1
     /**
      * Checks if the selected field is in range of the source field
      */
@@ -543,6 +541,10 @@ public class ArenaController
 
     public void clearField ()
     {
+        if (arenaGridPane == null)
+        {
+            return;
+        }
         for (Node node : arenaGridPane.getChildren()) {
             if (node instanceof AnchorPane pane){
                 pane.setStyle("-fx-background-color: none;");

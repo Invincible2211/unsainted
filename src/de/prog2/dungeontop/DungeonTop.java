@@ -76,7 +76,7 @@ public class DungeonTop extends Application
         //testInventory(primaryStage);
         //testEntityView();
         //testCardView();
-        testCardDetailView();
+        //testCardDetailView();
         //testHellView(scene);
         //testLavaPondView(primaryStage);
         //testHell();

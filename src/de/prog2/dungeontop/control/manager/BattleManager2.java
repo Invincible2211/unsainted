@@ -238,11 +238,6 @@ public class BattleManager2 {
         arenaController.getOpponent().values().forEach(Entity::resetMovement);
     }
 
-    @Deprecated
-    public boolean entityAttack(){
-        return false; //TODO
-    }
-
     public boolean placeCard(Coordinate coordinate, EntityCard entityCard){
         if (entityCoordinateHashMap.containsKey(coordinate)){
             return false;

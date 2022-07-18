@@ -22,9 +22,6 @@ public abstract class EntityViewController
     {
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefSize(EntityConstants.ENTITY_BASE_SIZE * scale, EntityConstants.ENTITY_BASE_SIZE * scale);
-        //TODO: Bilder für die Entities laden
-        //anchorPane.setStyle("-fx-background-image: url(assets/490_CardBackground.png);");
-        //anchorPane.setStyle("-fx-background-size: cover;");
         anchorPane.getStylesheets().add(EntityConstants.ENTITY_STYLE);
 
         ImageView icon = ImageAssetUtils.upsertImageFromAssets(entity.getAssetId(), EntityConstants.ENTITY_IMAGE_SIZE * scale, EntityConstants.ENTITY_IMAGE_SIZE * scale);
