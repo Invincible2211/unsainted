@@ -98,8 +98,8 @@ public class SettingsController {
         for (Node n:
                 root.getChildren()) {
             if (n instanceof Button || n instanceof Label){
-                n.setOnMouseEntered(event -> AudioManager.getInstance().playSound(999, false));
-                n.setOnMousePressed(event -> AudioManager.getInstance().playSound(998, false));
+                n.setOnMouseEntered(event -> AudioManager.getInstance().playSound(AssetIds.MOUSE_HOVER_SOUND, false));
+                n.setOnMousePressed(event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
             }
         }
     }

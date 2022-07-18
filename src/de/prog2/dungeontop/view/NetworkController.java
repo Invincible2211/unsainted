@@ -4,6 +4,7 @@ import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.network.NetController;
 import de.prog2.dungeontop.model.world.actions.Action;
+import de.prog2.dungeontop.resources.AssetIds;
 import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
 import javafx.application.Platform;
@@ -47,7 +48,7 @@ public class NetworkController {
     public static void showNetworkGUI(UUID parentMusicID, UUID mainMusicID){
         soundUUID = parentMusicID;
         musicUUID = mainMusicID;
-        Platform.runLater(() -> soundUUID = AudioManager.getInstance().playAfter(981, true, parentMusicID));
+        Platform.runLater(() -> soundUUID = AudioManager.getInstance().playAfter(AssetIds.DM_SELECTED, true, parentMusicID));
         DungeonTop.getStage().getScene().getRoot().setEffect(new GaussianBlur());
         networkStage.show();
     }
@@ -81,10 +82,10 @@ public class NetworkController {
             if (n instanceof MenuBar){
                 MenuBar menuBar = (MenuBar) n;
                 Menu menu = menuBar.getMenus().get(1);
-                menu.addEventHandler(ActionEvent.ANY, event -> AudioManager.getInstance().playSound(998, false));
+                menu.addEventHandler(ActionEvent.ANY, event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
                 for (MenuItem item:
                         menu.getItems()) {
-                    item.addEventHandler(ActionEvent.ANY, event -> AudioManager.getInstance().playSound(998, false));
+                    item.addEventHandler(ActionEvent.ANY, event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
                 }
 
             }

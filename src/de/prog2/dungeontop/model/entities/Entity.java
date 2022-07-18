@@ -1,6 +1,5 @@
 package de.prog2.dungeontop.model.entities;
 
-import de.prog2.dungeontop.control.controller.EntityController;
 import de.prog2.dungeontop.model.data.SerializableSimpleIntegerProperty;
 import de.prog2.dungeontop.model.game.EntityCard;
 import de.prog2.dungeontop.model.world.Coordinate;
@@ -14,7 +13,7 @@ public abstract class Entity implements Serializable
     private String name;
     private SerializableSimpleIntegerProperty hp;
     private int attackDamage = 0;
-    private SerializableSimpleIntegerProperty movement;
+    private final SerializableSimpleIntegerProperty movement;
     private final int maxMovement;
     private int assetId;
     private final Talent talent;

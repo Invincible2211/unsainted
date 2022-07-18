@@ -5,8 +5,8 @@ import de.prog2.dungeontop.model.world.Coordinate;
 
 public class ChangeEntityHpByCoordinatePackage extends Package
 {
-    private Coordinate coordinate;
-    private int amount;
+    private final Coordinate coordinate;
+    private final int amount;
 
     public ChangeEntityHpByCoordinatePackage (Coordinate coordinate, int amount)
     {

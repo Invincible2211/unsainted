@@ -8,8 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
+/**
+ * This class is used to get the local of public IP address.
+ */
 public class IPChecker {
 
+    /**
+     * This method is used to get the public IP address.
+     */
     public static String getPublicIPAdress(){
         String ip = "";
         try {
@@ -22,6 +28,9 @@ public class IPChecker {
         return ip;
     }
 
+    /**
+     * This method is used to get the local IP address.
+     */
     public static String getLocalIPAdress(){
         String ip = null;
         try(final DatagramSocket socket = new DatagramSocket()){
@@ -32,7 +41,4 @@ public class IPChecker {
         }
         return ip;
     }
-
-
-
 }

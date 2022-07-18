@@ -12,8 +12,11 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class NetManager extends Thread{
-
+/**
+ * This class is responsible for managing all the networking.
+ */
+public class NetManager extends Thread
+{
     private NetworkConnectionI connection;
     private NetworkAPI networkAPI = new NetworkAPI(new OutputStream() {
         @Override

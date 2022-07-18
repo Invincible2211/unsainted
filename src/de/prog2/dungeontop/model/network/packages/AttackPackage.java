@@ -6,9 +6,9 @@ import de.prog2.dungeontop.model.world.Coordinate;
 
 public class AttackPackage extends Package {
 
-    private Entity attack;
+    private final Entity attack;
     private Entity defender;
-    private Coordinate target;
+    private final Coordinate target;
 
     public AttackPackage(Entity attack, Coordinate target){
         this.attack = attack;
