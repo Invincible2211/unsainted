@@ -17,6 +17,7 @@ import de.prog2.dungeontop.view.HellView;
 import de.prog2.dungeontop.view.MainMenueController;
 import de.prog2.dungeontop.view.SettingsController;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -59,7 +60,10 @@ public class GameManager {
         {
 
             if (saveGame.getPlayer() != null)
+            {
                 PlayerManager.getInstance().setPlayer(saveGame.getPlayer());
+                PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
+            }
 
             GameManager.getInstance().getSaveGame().setPlayer(PlayerManager.getInstance().getPlayer());
 
@@ -93,27 +97,12 @@ public class GameManager {
      */
     public void endGame()
     {
-        /*
-        World newWorld = new World(WorldConstants.HELL_COUNT);
-        PlayerManager.getInstance().getPlayer().setHero(null);
-         */
-
         if (isDM){
             System.exit(0);
         } else {
             GameManager.getInstance().setGameWorld(null);
             saveGame.setGameWorld(null);
-
             GameSaveFileWriter.getInstance().saveGame(saveGame);
-
-            Scene scene = new Scene(new AnchorPane());
-            try {
-                scene = new Scene(new FXMLLoader().load(DungeonTop.class.getClassLoader().getResourceAsStream(ViewStrings.MAIN_MENUE_FXML)));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            GameSaveFileWriter.getInstance().saveGame(GameManager.getInstance().getSaveGame());
-            DungeonTop.getStage().setScene(scene);
             GameEndViewController.getInstance().showGameEndDialogue(false);
             AudioManager.getInstance().changeClipVolumeWhilePlayingSound(AssetIds.MUSIC_OPTION_ONE, MainMenueController.getMainMenueSoundUUID(), GameConstants.USUAL_NICE_VOLUME);
             this.currentState = GameState.END;
