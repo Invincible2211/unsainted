@@ -149,21 +149,28 @@ public class BattleManager2 {
     }
 
     public void endBattle(boolean playerWins, boolean sendPackage){
-        ((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).setAlive(false);
+        if (PlayerManager.getInstance().getPlayer().getCurrentRoom() instanceof  ArenaRoom)
+            ((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).setAlive(false);
         Platform.runLater(() -> {
             if (playerWins){
-                if (((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).isBoss())
+                if (!GameManager.getInstance().isDM() && PlayerManager.getInstance().getPlayer().getCurrentRoom() == GameManager.getInstance().getGameWorld().getCurrentHell().getBossRoom())
                 {
+                    if (GameManager.getInstance().getGameWorld().getCurrentDepth() == 7)
+                    {
+                        GameManager.getInstance().endGame(true);
+                        NetManager.getInstance().getNetworkAPI().sendGameEndPackage();
+                        return;
+                    }
                     GameManager.getInstance().getGameWorld().getNextHell();
                     HellView.restartHellViewBgMusic();
+                    DungeonTop.getStage().setScene(HellView.getCurrHellView());
                     NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
                     return;
                 }
                     HellView.resumeHellViewBgMusic();
-                    DungeonTop.getStage().setScene(HellView.getCurrHellView());
 
             } else {
-                GameManager.getInstance().endGame();
+                GameManager.getInstance().endGame(false);
             }
             if (sendPackage){
                 NetManager.getInstance().getNetworkAPI().sendEndBattlePackage(playerWins);
