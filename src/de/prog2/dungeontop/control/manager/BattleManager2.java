@@ -17,6 +17,7 @@ import de.prog2.dungeontop.utils.GlobalLogger;
 import de.prog2.dungeontop.view.ArenaController;
 import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -62,6 +63,7 @@ public class BattleManager2 {
      * @param arena für die MaSe der neuen Arena
      */
     public void startBattle(Arena arena){
+        PlayerManager.getInstance().getPlayer().setHandCards(FXCollections.observableArrayList());
         Platform.runLater(() -> {
             this.player1 = PlayerManager.getInstance().getPlayer();
             this.player2 = GameManager.getInstance().getOpponentPlayer();
@@ -388,6 +390,11 @@ public class BattleManager2 {
     public Coordinate getCoordinateFromEntity (Entity entity)
     {
         for (Coordinate coordinate : arenaController.getOpponent().keySet())
+        {
+            if (arenaController.getOpponent().get(coordinate) == entity)
+                return coordinate;
+        }
+        for (Coordinate coordinate : arenaController.getFriendly().keySet())
         {
             if (arenaController.getOpponent().get(coordinate) == entity)
                 return coordinate;
