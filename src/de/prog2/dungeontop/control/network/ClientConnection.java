@@ -16,6 +16,8 @@ public class ClientConnection extends Thread implements NetworkConnectionI
     private InputStream inputStream;
     private OutputStream outputStream;
 
+    Socket socket = null;
+
     protected ClientConnection(String ip){
         this.ip = ip;
     }
@@ -23,19 +25,19 @@ public class ClientConnection extends Thread implements NetworkConnectionI
     @Override
     public void run() {
         GlobalLogger.log(String.format(NetworkingConstants.NETWORK_CONNECTING_TO, ip));
-        Socket socket = null;
-        try {
-            socket = new Socket(ip, NetworkData.DEFAULT_PORT);
-            inputStream = socket.getInputStream();
-            outputStream = socket.getOutputStream();
-        } catch (IOException e) {
+        while (!isConnected()){
             try {
-                socket.close();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                socket = new Socket(ip, NetworkData.DEFAULT_PORT);
+                inputStream = socket.getInputStream();
+                outputStream = socket.getOutputStream();
+            } catch (IOException e) {
+                GlobalLogger.warning(e.getMessage());
             }
-            NetManager.getInstance().reset();
-            GlobalLogger.warning(e.getMessage());
+            try {
+                sleep(10000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -50,6 +52,15 @@ public class ClientConnection extends Thread implements NetworkConnectionI
     @Override
     public boolean isConnected() {
         return inputStream != null && outputStream != null;
+    }
+
+    @Override
+    public void close(){
+        try {
+            socket.close();
+        } catch (IOException | NullPointerException e) {
+
+        }
     }
 
 }

@@ -16,6 +16,7 @@ import de.prog2.dungeontop.view.HellView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
@@ -49,7 +50,16 @@ public class NetworkInterpreter extends Thread{
                     GlobalLogger.log(String.format(NetworkingConstants.RECEIVED_DATA, recievedData.length));
                 }
             } catch (IOException e) {
-                GlobalLogger.warning(e.getMessage());
+                inStream = new InputStream() {
+                    @Override
+                    public int read() throws IOException {
+                        return 0;
+                    }
+                };
+                String host = NetManager.getInstance().getHost();
+                NetManager.getInstance().close();
+                NetManager.getInstance().stop();
+                NetController.enable(host);
             }
             if (recievedData.length != 0){
                 GlobalLogger.log(NetworkingConstants.INTERPRETING_DATA);
@@ -58,10 +68,20 @@ public class NetworkInterpreter extends Thread{
         }
     }
 
-    private void interpret(byte[] data){
-        Package dataPackage = (Package) SerializationUtils.deserialize(data);
+    private void interpret(byte[] data) {
+        Package temp = null;
+        try {
+            temp = (Package) SerializationUtils.deserialize(data);
+        } catch (SerializationException e) {
+
+        }
+        if (temp == null){
+            return;
+        }
+        Package dataPackage = temp;
         GlobalLogger.log(String.format(NetworkingConstants.BYTES_TO_INTERPRET, data.length));
-        if (dataPackage instanceof HellPackage hellPackage){
+        if (dataPackage instanceof HellPackage) {
+            HellPackage hellPackage = (HellPackage) dataPackage;
             // get hell and set current player room
             // this is needed to prevent asynch behaviour
             Coordinate playerCoordinate = hellPackage.getPlayerCoordinate();
@@ -72,43 +92,43 @@ public class NetworkInterpreter extends Thread{
             Scene hellView = view.initHellView(hell);
             HellView.setCurrHellView(hellView);
             Platform.runLater(() -> DungeonTop.getStage().setScene(hellView));
-        } else if (dataPackage instanceof PlayerMovementPackage playerMovementPackage){
+        } else if (dataPackage instanceof PlayerMovementPackage playerMovementPackage) {
             KeyCode keyCode = playerMovementPackage.getKeyCode();
             HellView viewInstance = new HellView();
             viewInstance.movePlayer(keyCode);
-        } else if (dataPackage instanceof PlayerPackage playerPackage){
+        } else if (dataPackage instanceof PlayerPackage playerPackage) {
             GameManager.getInstance().setOpponentPlayer(playerPackage.getPlayer());
-        } else if (dataPackage instanceof OpenArenaPackage){
-            GameManager.getInstance().beginBattle(((OpenArenaPackage)dataPackage).getArena());
-        } else if (dataPackage instanceof EndBattlePackage){
-            Platform.runLater(() -> BattleManager2.getInstance().endBattle(((EndBattlePackage)dataPackage).isPlayerWins(),false));
-        } else if (dataPackage instanceof PlaceEntityPackage placeEntityPackage){
+        } else if (dataPackage instanceof OpenArenaPackage) {
+            GameManager.getInstance().beginBattle(((OpenArenaPackage) dataPackage).getArena());
+        } else if (dataPackage instanceof EndBattlePackage) {
+            Platform.runLater(() -> BattleManager2.getInstance().endBattle(((EndBattlePackage) dataPackage).isPlayerWins(), false));
+        } else if (dataPackage instanceof PlaceEntityPackage placeEntityPackage) {
             Platform.runLater(() -> BattleManager2.getInstance().spawnOpponent(placeEntityPackage.getEntity(), placeEntityPackage.getCoordinate()));
-        } else if (dataPackage instanceof MoveEntityPackage moveEntityPackage){
-            Platform.runLater(() -> BattleManager2.getInstance().move(moveEntityPackage.getStart(),moveEntityPackage.getTarget()));
-        } else if (dataPackage instanceof RemoveEntityPackage removeEntityPackage){
+        } else if (dataPackage instanceof MoveEntityPackage moveEntityPackage) {
+            Platform.runLater(() -> BattleManager2.getInstance().move(moveEntityPackage.getStart(), moveEntityPackage.getTarget()));
+        } else if (dataPackage instanceof RemoveEntityPackage removeEntityPackage) {
             Platform.runLater(() -> BattleManager2.getInstance().remove(removeEntityPackage.getCoordinate(), true));
-        } else if (dataPackage instanceof EgopointsChangePackage){
+        } else if (dataPackage instanceof EgopointsChangePackage) {
             Platform.runLater(() -> GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(
-                    GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage)dataPackage).getAmount()));
-        } else if (dataPackage instanceof  HandCardReducePackage){
+                    GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().get() + ((EgopointsChangePackage) dataPackage).getAmount()));
+        } else if (dataPackage instanceof HandCardReducePackage) {
             Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().removeOne());
-        } else if (dataPackage instanceof NextPhasePackage){
+        } else if (dataPackage instanceof NextPhasePackage) {
             Platform.runLater(() -> BattleManager2.getInstance().nextPhase());
-        } else if (dataPackage instanceof PlayerBeginnPackage){
-            BattleManager2.getInstance().setStarting(!((PlayerBeginnPackage)dataPackage).isPlayerStarts());
-        }else if (dataPackage instanceof EgoPointsSetPackage){
-            Platform.runLater(() -> GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(((EgoPointsSetPackage)dataPackage).getAmount()));
-        } else if (dataPackage instanceof AttackPackage attackPackage){
+        } else if (dataPackage instanceof PlayerBeginnPackage) {
+            BattleManager2.getInstance().setStarting(!((PlayerBeginnPackage) dataPackage).isPlayerStarts());
+        } else if (dataPackage instanceof EgoPointsSetPackage) {
+            Platform.runLater(() -> GameManager.getInstance().getOpponentPlayer().currentEgoPointsProperty().set(((EgoPointsSetPackage) dataPackage).getAmount()));
+        } else if (dataPackage instanceof AttackPackage attackPackage) {
             Platform.runLater(() -> BattleManager2.getInstance().battle(attackPackage.getAttack(), List.of(new Entity[]{BattleManager2.getInstance().getEntityAtPosition(attackPackage.getTarget())})));
-        } else if (dataPackage instanceof HandCardIncreasedPackage){
+        } else if (dataPackage instanceof HandCardIncreasedPackage) {
             Platform.runLater(() -> BattleManager2.getInstance().getArenaController().getEnemyCardView().addOne());
-        } else if(dataPackage instanceof ChangeEntityHpByCoordinatePackage changeEntityPackage){
+        } else if (dataPackage instanceof ChangeEntityHpByCoordinatePackage changeEntityPackage) {
             Platform.runLater(() ->
             {
                 boolean isDamage = changeEntityPackage.getAmount() >= 0;
                 Entity entity = BattleManager2.getInstance().getOpponentEntityAtPosition(changeEntityPackage.getCoordinate());
-                if(isDamage)
+                if (isDamage)
                     EntityController.applyDamage(entity, changeEntityPackage.getAmount());
                 else
                     EntityController.applyHeal(entity, -changeEntityPackage.getAmount());
@@ -117,7 +137,6 @@ public class NetworkInterpreter extends Thread{
         } else if (dataPackage instanceof GameEndPackage) {
             GameManager.getInstance().endGame(true);
         }
-        System.out.println(dataPackage.getClass());
     }
 
 }

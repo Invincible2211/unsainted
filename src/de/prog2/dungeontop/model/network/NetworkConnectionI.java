@@ -11,4 +11,5 @@ public interface NetworkConnectionI {
 
     boolean isConnected();
 
+    void close();
 }

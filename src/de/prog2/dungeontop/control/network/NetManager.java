@@ -1,5 +1,6 @@
 package de.prog2.dungeontop.control.network;
 
+import de.prog2.dungeontop.DungeonTop;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.game.Player;
@@ -7,7 +8,11 @@ import de.prog2.dungeontop.model.network.NetworkConnectionI;
 import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.SelectHeroConstants;
+import de.prog2.dungeontop.resources.views.ViewStrings;
 import de.prog2.dungeontop.utils.GlobalLogger;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -17,6 +22,7 @@ import java.io.OutputStream;
  */
 public class NetManager extends Thread
 {
+    private String host;
     private NetworkConnectionI connection;
     private NetworkAPI networkAPI = new NetworkAPI(new OutputStream() {
         @Override
@@ -29,6 +35,7 @@ public class NetManager extends Thread
     private static NetManager instance = new NetManager();
 
     protected NetManager(String host){
+        this.host = host;
         connection = host == null ? new SessionHost() : new ClientConnection(host);
         ((Thread) connection).start();
         instance = this;
@@ -86,11 +93,13 @@ public class NetManager extends Thread
         return instance;
     }
 
-    protected void reset(){
-        connection = null;
-        if (!GameManager.getInstance().isDM()){
-            connection = new SessionHost();
-        }
+
+    protected String getHost() {
+        return host;
+    }
+
+    protected void close(){
+        connection.close();
     }
 
 }
