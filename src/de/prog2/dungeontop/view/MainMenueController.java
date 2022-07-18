@@ -5,6 +5,7 @@ import de.prog2.dungeontop.control.file.GameSaveFileWriter;
 import de.prog2.dungeontop.control.manager.AudioManager;
 import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.network.NetController;
+import de.prog2.dungeontop.resources.AssetIds;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -38,10 +39,10 @@ public class MainMenueController {
     {
         NetController.enable(null);
         GameManager.getInstance().startGame();
-        UUID uuid = AudioManager.getInstance().playSound(996,false);
+        UUID uuid = AudioManager.getInstance().playSound(AssetIds.SELECT_PLAY,false);
         if (GameManager.getInstance().getSaveGame() == null){
             Platform.runLater(() -> {
-                heroSelectionSoundUUID = AudioManager.getInstance().playAfter(997,true,uuid);
+                heroSelectionSoundUUID = AudioManager.getInstance().playAfter(AssetIds.SELECT_HERO_BGM,true,uuid);
             });
         }
     }
@@ -82,19 +83,19 @@ public class MainMenueController {
     private void onPlayAsDungeonMasterButtonPressed(){
         GameManager.getInstance().setDM();
         AudioManager.getInstance().pauseClip(mainMenueSoundUUID);
-        UUID uuid = AudioManager.getInstance().playSound(995,false);
+        UUID uuid = AudioManager.getInstance().playSound(AssetIds.SELECT_DM,false);
         Platform.runLater(()-> NetworkController.showNetworkGUI(uuid,mainMenueSoundUUID));
     }
 
     @FXML
     public void initialize(){
         Platform.runLater(() ->
-        mainMenueSoundUUID = AudioManager.getInstance().playSoundOnScene(990,root.getScene(),true));
+        mainMenueSoundUUID = AudioManager.getInstance().playSoundOnScene(AssetIds.MM_BGM,root.getScene(),true));
         for (Node n:
              root.getChildren()) {
             if (n instanceof Button){
-                n.setOnMouseEntered(event -> AudioManager.getInstance().playSound(999, false));
-                n.setOnMousePressed(event -> AudioManager.getInstance().playSound(998, false));
+                n.setOnMouseEntered(event -> AudioManager.getInstance().playSound(AssetIds.MOUSE_HOVER_SOUND, false));
+                n.setOnMousePressed(event -> AudioManager.getInstance().playSound(AssetIds.BUTTON_CLICK_SOUND, false));
             }
         }
     }
