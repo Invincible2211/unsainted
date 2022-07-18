@@ -88,6 +88,9 @@ public class NetManager extends Thread
 
     protected void reset(){
         connection = null;
+        if (!GameManager.getInstance().isDM()){
+            connection = new SessionHost();
+        }
     }
 
 }
