@@ -46,9 +46,9 @@ public enum EntityEnum
     INCUBUS_R3 (new Minion("Incubus", 6, 3, 0, 1, 1, AssetIds.INCUBUS)),
 
     // Lilith
-    LILITH_R1 (new Minion("Lilith", 3, 1, 0, 1, 1, AssetIds.LILITH)),
-    LILITH_R2 (new Minion("Lilith", 4, 2, 0, 1, 1, AssetIds.LILITH)),
-    LILITH_R3 (new Minion("Lilith", 6, 3, 0, 1, 1, AssetIds.LILITH)),
+    LILITH_R1 (new Minion("Lilith", 3, 1, 0, 2, 1, AssetIds.LILITH)),
+    LILITH_R2 (new Minion("Lilith", 4, 2, 0, 2, 1, AssetIds.LILITH)),
+    LILITH_R3 (new Minion("Lilith", 6, 3, 0, 2, 1, AssetIds.LILITH)),
 
     // Medusa
     MEDUSA_R1 (new Minion("Medusa", 3, 1, 0, 1, 1, AssetIds.MEDUSA)),
