@@ -27,4 +27,5 @@ public interface ViewStrings
     String NETWORK_FXML = "view/network.fxml";
     // Game Ended Dialogue
     String GAME_END_DIALOGUE_VIEW_FXML = "view/gameEndDialogue.fxml";
+    String REWARDS_VIEW = "view/rewards.fxml";
 }
