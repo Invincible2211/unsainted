@@ -120,4 +120,8 @@ public interface AssetIds
     int MAP_BG_MUSIC = 992;
     int MOUSE_HOVER_SOUND = 999;
     int BUTTON_CLICK_SOUND = 998;
+    int MUSIC_OPTION_ONE = 983;
+    int MUSIC_OPTION_TWO = 984;
+    int MUSIC_OPTION_THREE = 985;
+    int MUSIC_OPTION_FOUR = 982;
 }

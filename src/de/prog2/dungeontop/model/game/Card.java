@@ -3,6 +3,7 @@ package de.prog2.dungeontop.model.game;
 import de.prog2.dungeontop.control.manager.CardManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.resources.LoggerStringValues;
+import de.prog2.dungeontop.resources.StringValues;
 import de.prog2.dungeontop.utils.GlobalLogger;
 
 import java.io.Serializable;
@@ -79,9 +80,9 @@ public abstract class Card implements Serializable
     public String toString()
     {
         StringBuilder builder = new StringBuilder();
-        builder.append(", Rank: ");
+        builder.append(StringValues.RANK);
         builder.append(this.getRank());
-        builder.append(" of ");
+        builder.append(StringValues.OF);
         builder.append(this.getMaxRank());
         return builder.toString();
     }

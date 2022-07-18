@@ -4,6 +4,7 @@ import de.prog2.dungeontop.control.manager.GameManager;
 import de.prog2.dungeontop.control.manager.PlayerManager;
 import de.prog2.dungeontop.model.game.Player;
 import de.prog2.dungeontop.model.network.NetworkConnectionI;
+import de.prog2.dungeontop.resources.GameConstants;
 import de.prog2.dungeontop.resources.NetworkingConstants;
 import de.prog2.dungeontop.resources.SelectHeroConstants;
 import de.prog2.dungeontop.utils.GlobalLogger;
@@ -63,7 +64,7 @@ public class NetManager extends Thread{
         }
         try {
             // TODO: remove magic number
-            sleep(3000);
+            sleep(GameConstants.SLEEPTIMER_TIME_IN_MILLISECONDS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
