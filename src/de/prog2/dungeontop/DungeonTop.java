@@ -33,6 +33,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DungeonTop extends Application
@@ -75,7 +76,7 @@ public class DungeonTop extends Application
         //testInventory(primaryStage);
         //testEntityView();
         //testCardView();
-        //testCardDetailView();
+        testCardDetailView();
         //testHellView(scene);
         //testLavaPondView(primaryStage);
         //testHell();
@@ -129,7 +130,7 @@ public class DungeonTop extends Application
     }
     public static void testCardDetailView()
     {
-        List<Card> cards = TestConstants.getTestCards();
+        List<Card> cards = new LinkedList<>(CardManager.getInstance().getUnlockedCards());
         HBox box = new HBox();
         for (Card card : cards)
         {

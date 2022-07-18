@@ -387,6 +387,16 @@ public class BattleManager2 {
 
     }
 
+    public Coordinate getCoordinateFromEntity (Entity entity)
+    {
+        for (Coordinate coordinate : arenaController.getOpponent().keySet())
+        {
+            if (arenaController.getOpponent().get(coordinate) == entity)
+                return coordinate;
+        }
+        return null;
+    }
+
     public static BattleManager2 getInstance() {
         return instance;
     }
