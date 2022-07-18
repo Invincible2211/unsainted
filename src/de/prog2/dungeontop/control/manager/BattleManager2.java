@@ -148,6 +148,7 @@ public class BattleManager2 {
     }
 
     public void endBattle(boolean playerWins, boolean sendPackage){
+        ((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).setAlive(false);
         Platform.runLater(() -> {
             if (playerWins){
                 if (((ArenaRoom)PlayerManager.getInstance().getPlayer().getCurrentRoom()).isBoss())
