@@ -27,6 +27,12 @@ public class SessionHost extends Thread implements NetworkConnectionI {
             Socket clientConnection = serverSocket.accept();
             inputStream = clientConnection.getInputStream();
             outputStream = clientConnection.getOutputStream();
+            while (true){
+                if(!clientConnection.isConnected()){
+                    clientConnection.close();
+                    NetManager.getInstance().reset();
+                }
+            }
         } catch (IOException e) {
             GlobalLogger.warning(e.getMessage());
         }

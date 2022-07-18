@@ -27,6 +27,12 @@ public class ClientConnection extends Thread implements NetworkConnectionI
             Socket socket = new Socket(ip, NetworkData.DEFAULT_PORT);
             inputStream = socket.getInputStream();
             outputStream = socket.getOutputStream();
+            while (true){
+                if(!socket.isConnected()){
+                    socket.close();
+                    NetManager.getInstance().reset();
+                }
+            }
         } catch (IOException e) {
             GlobalLogger.warning(e.getMessage());
         }
